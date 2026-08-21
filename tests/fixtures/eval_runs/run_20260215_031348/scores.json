@@ -1,0 +1,77 @@
+{
+  "profile": {
+    "completeness": 75,
+    "precision": 65,
+    "usefulness": 70,
+    "overall": 70,
+    "missing": [
+      "Multi-timezone indicator in active_hours",
+      "Accurate response_time_avg (< 2h)",
+      "Correct default_tone (semi-formal)",
+      "Correct average_response_length (medium-long)",
+      "Full active hours range (08:00-20:00)"
+    ],
+    "incorrect": [
+      "default_tone: 'casual' should be 'semi-formal'",
+      "signature structure: has 'signature_en' instead of 'signature', with signature=null",
+      "greeting_styles: incorrect formality mapping and placeholder format ({first_name} vs [Name])",
+      "closing_styles: incorrect formality mapping (casual='J.' vs 'Cheers, / J.')",
+      "active_hours: '08:00-18:30' should be '08:00-20:00 (multi-timezone)'",
+      "response_time_avg: '< 4h' should be '< 2h'",
+      "average_response_length: 'medium' should be 'medium-long'"
+    ],
+    "details": "The system correctly identified basic profile information (user_email, user_name, languages, signature content) but has several issues: (1) Signature structure mismatch - ground truth has 'signature' object, system has 'signature_en' and null 'signature', (2) Default tone misidentified as 'casual' instead of 'semi-formal', (3) Greeting/closing styles have different formatting and incorrect casualness ordering, (4) Active hours shortened to 08:00-18:30 vs 08:00-20:00, missing multi-timezone note, (5) Response time doubled from <2h to <4h, (6) Average response length downgraded from 'medium-long' to 'medium'. The signature content itself is accurate, and core behavioral patterns (uses_first_name, uses_emoji) are correct."
+  },
+  "knowledge": {
+    "completeness": 78,
+    "precision": 92,
+    "usefulness": 85,
+    "overall": 85,
+    "missing": [
+      "Contact: noreply@outlook.com (Microsoft Outlook - automated)",
+      "Contact: notifications@slack.com (Slack - automated)",
+      "Contact: calendar@strategyco.com (StrategyCo Calendar - automated)",
+      "Terminology: 'Deliverable' definition",
+      "Terminology: 'Deck' definition",
+      "Terminology: 'Stakeholder' definition",
+      "Terminology: 'Offramp' definition",
+      "Terminology: 'Boil the ocean' definition",
+      "Terminology: 'Pre-read' definition",
+      "Terminology: 'War room' definition",
+      "Terminology: 'Strawman' definition (has 'Target-state strawman' but not base term)",
+      "Terminology: 'RAG status' definition",
+      "Terminology: 'Bubble chart' definition",
+      "Terminology: 'Pipeline' definition (mentioned in context but not defined)",
+      "Terminology: 'Utilisation' definition",
+      "Project status: 'pipeline' (IndustrieWerke marked as 'proposal' instead)",
+      "Project status: 'early-stage' (Nippon marked as 'discussion' - semantically similar)"
+    ],
+    "incorrect": [
+      "David Chen type: listed as 'colleague' instead of 'direct_report'",
+      "Missing job titles: Several contacts have 'title: null' when titles exist in ground truth (Anika Patel - Associate, Ben Crawford - Senior Consultant, Wei Lin - Consultant, David Chen - Analyst, Emma Phillips - PA/Executive Assistant, Jennifer Walsh - VP Operations)",
+      "Jennifer Walsh tone: marked as 'formal' instead of 'semi-formal'",
+      "Project structure: System created 6 projects vs ground truth's 4 - this is more granular rather than incorrect, but shows different interpretation (e.g., 'Singtel Customer Experience' and 'Q2 Pipeline' are separate projects vs being part of broader pipeline discussion)",
+      "Project keywords: Some deviation in keyword choices - system uses more granular/operational terms where ground truth uses higher-level concepts"
+    ],
+    "details": "The system captured 11 of 14 contacts (79%) with good detail on topics and interaction patterns. Missing 3 automated contacts (Microsoft Outlook, Slack, StrategyCo Calendar) which are less critical for email drafting. Contact information is mostly accurate with correct names, emails, types, and tones. Projects section shows excellent understanding but differs structurally - system created 6 granular projects vs ground truth's 4 higher-level projects, which actually provides MORE useful context. The system added a helpful 'frequent_topics' section not in ground truth. Terminology overlap is ~60% with system providing more granular consulting terms that would be useful for email drafting. Minor precision issues: some titles missing (marked null), and David Chen incorrectly classified as 'colleague' vs 'direct_report'."
+  },
+  "rules": {
+    "completeness": 75,
+    "precision": 85,
+    "usefulness": 88,
+    "overall": 83,
+    "missing": [
+      "consultant_frameworks rule (McKinsey 7S, RACI matrix, 2x2 prioritisation)",
+      "action_items rule (explicit next steps with dates, owners, decision gates)",
+      "auto_reply_patterns (OOO auto-reply: do not respond)"
+    ],
+    "incorrect": [
+      "gratitude_opening_external rule not explicitly in ground truth (inferred)",
+      "subject_line_brevity rule not in ground truth (inferred)",
+      "no_emoji_usage rule not in ground truth (inferred)",
+      "encouragement_peer_communication rule not in ground truth (inferred)"
+    ],
+    "details": "Contact rules are 100% complete and accurate. General rules capture most core patterns (75%) but miss 3 important rules: consultant frameworks, action items with governance, and auto-reply patterns. System inferred additional rules (gratitude openings, subject lines, no emoji, encouragement) that aren't in ground truth but are plausible from the writing style. The contact rule closings are expanded to show actual signature text rather than '+ full signature' which is more actionable. Overall highly usable for email generation with minor gaps."
+  },
+  "overall": 79
+}

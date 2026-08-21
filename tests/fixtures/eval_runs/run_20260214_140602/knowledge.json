@@ -1,0 +1,331 @@
+{
+  "contacts": [
+    {
+      "email": "pierre.durand@techcorp.fr",
+      "name": "Pierre Durand",
+      "type": "colleague",
+      "company": "TechCorp",
+      "title": "Lead Technique",
+      "preferred_language": "fr",
+      "preferred_tone": "casual",
+      "interaction_count": 27,
+      "topics": [
+        "projet Alpha",
+        "API v2",
+        "GraphQL",
+        "architecture technique",
+        "code review",
+        "streaming CSV"
+      ]
+    },
+    {
+      "email": "lucas.bernard@techcorp.fr",
+      "name": "Lucas Bernard",
+      "type": "direct_report",
+      "company": "TechCorp",
+      "title": "Développeur",
+      "preferred_language": "fr",
+      "preferred_tone": "casual",
+      "interaction_count": 15,
+      "topics": [
+        "objectifs Q1",
+        "API v2",
+        "code review",
+        "export streaming",
+        "GraphQL",
+        "congés"
+      ]
+    },
+    {
+      "email": "camille.roux@techcorp.fr",
+      "name": "Camille Roux",
+      "type": "colleague",
+      "company": "TechCorp",
+      "title": "Responsable Sécurité",
+      "preferred_language": "fr",
+      "preferred_tone": "casual",
+      "interaction_count": 11,
+      "topics": [
+        "audit sécurité",
+        "vulnérabilités",
+        "WAF",
+        "API v2",
+        "projet Beta"
+      ]
+    },
+    {
+      "email": "marie.leclerc@clientcorp.com",
+      "name": "Marie Leclerc",
+      "type": "client",
+      "company": "ClientCorp SA",
+      "title": "Directrice des Achats",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 8,
+      "topics": [
+        "proposition commerciale",
+        "projet Beta",
+        "budget",
+        "contrat",
+        "kick-off"
+      ]
+    },
+    {
+      "email": "nicolas.moreau@techcorp.fr",
+      "name": "Nicolas Moreau",
+      "type": "manager",
+      "company": "TechCorp",
+      "title": "Directeur Financier",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 7,
+      "topics": [
+        "budget Q1",
+        "validation budgétaire",
+        "recrutement",
+        "WAF"
+      ]
+    },
+    {
+      "email": "ceo@techcorp.fr",
+      "name": "Marc Dupont",
+      "type": "manager",
+      "company": "TechCorp",
+      "title": "CEO",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 6,
+      "topics": [
+        "résultats annuels",
+        "budget division digitale",
+        "rapport mensuel",
+        "stratégie"
+      ]
+    },
+    {
+      "email": "sarah.jones@globaltech.com",
+      "name": "Sarah Jones",
+      "type": "partner",
+      "company": "GlobalTech Inc.",
+      "title": "Senior Solutions Architect",
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 5,
+      "topics": [
+        "partnership",
+        "integration technique",
+        "API",
+        "architecture"
+      ]
+    },
+    {
+      "email": "john.smith@globaltech.com",
+      "name": "John Smith",
+      "type": "partner",
+      "company": "GlobalTech Inc.",
+      "title": "VP Business Development",
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 4,
+      "topics": [
+        "partnership Q1 2026",
+        "cloud migration",
+        "API integration"
+      ]
+    },
+    {
+      "email": "amelie.petit@fournisseur.fr",
+      "name": "Amelie Petit",
+      "type": "supplier",
+      "company": "Maintenance Pro SARL",
+      "title": "Responsable Comptes Clés",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 4,
+      "topics": [
+        "contrat maintenance",
+        "SLA",
+        "support weekend",
+        "renouvellement"
+      ]
+    },
+    {
+      "email": "david.kim@partnertech.co.kr",
+      "name": "David Kim",
+      "type": "partner",
+      "company": "PartnerTech Co., Ltd.",
+      "title": "Integration Lead",
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 4,
+      "topics": [
+        "integration technique",
+        "JSON-LD",
+        "mTLS",
+        "API versioning"
+      ]
+    },
+    {
+      "email": "claire.fontaine@clientcorp.com",
+      "name": "Claire Fontaine",
+      "type": "client",
+      "company": "ClientCorp SA",
+      "title": "Chef de projet IT",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 4,
+      "topics": [
+        "projet Beta",
+        "kick-off",
+        "JIRA",
+        "collaboration",
+        "demo Alpha"
+      ]
+    },
+    {
+      "email": "contact@prospect-startup.io",
+      "name": "Thomas Renard",
+      "type": "prospect",
+      "company": "ProspectStartup",
+      "title": "CTO",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 3,
+      "topics": [
+        "salon Tech Paris",
+        "fintech",
+        "PSD2",
+        "conformité"
+      ]
+    },
+    {
+      "email": "elena.volkov@eupartner.de",
+      "name": "Elena Volkov",
+      "type": "partner",
+      "company": "EUPartner GmbH",
+      "title": "Business Development Director",
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 3,
+      "topics": [
+        "expansion marché EU",
+        "DACH",
+        "GDPR",
+        "distribution"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Projet Alpha",
+      "description": "Projet interne principal avec migration API REST vers GraphQL, système d'authentification OAuth2, exports streaming CSV",
+      "contacts": [
+        "pierre.durand@techcorp.fr",
+        "lucas.bernard@techcorp.fr",
+        "camille.roux@techcorp.fr"
+      ],
+      "status": "active",
+      "keywords": [
+        "API v2",
+        "GraphQL",
+        "OAuth2",
+        "streaming CSV",
+        "audit sécurité",
+        "WAF",
+        "export timeout"
+      ]
+    },
+    {
+      "name": "Projet Beta",
+      "description": "Nouveau projet signé avec ClientCorp, démarrage mars 2026, budget 85k EUR, maintenance 12 mois incluse",
+      "contacts": [
+        "marie.leclerc@clientcorp.com",
+        "claire.fontaine@clientcorp.com",
+        "lucas.bernard@techcorp.fr",
+        "pierre.durand@techcorp.fr"
+      ],
+      "status": "active",
+      "keywords": [
+        "ClientCorp",
+        "kick-off",
+        "full-stack",
+        "JIRA partagé",
+        "commercial"
+      ]
+    },
+    {
+      "name": "Partnership GlobalTech",
+      "description": "Partenariat avec GlobalTech pour projet de migration cloud et intégration API",
+      "contacts": [
+        "john.smith@globaltech.com",
+        "sarah.jones@globaltech.com",
+        "pierre.durand@techcorp.fr"
+      ],
+      "status": "active",
+      "keywords": [
+        "cloud migration",
+        "API integration",
+        "partnership Q1 2026"
+      ]
+    },
+    {
+      "name": "Integration PartnerTech",
+      "description": "Intégration technique avec PartnerTech utilisant JSON-LD, mTLS, tests Postman",
+      "contacts": [
+        "david.kim@partnertech.co.kr",
+        "pierre.durand@techcorp.fr"
+      ],
+      "status": "active",
+      "keywords": [
+        "JSON-LD",
+        "mTLS",
+        "Postman",
+        "staging environment",
+        "semantic versioning"
+      ]
+    },
+    {
+      "name": "Expansion marché EU",
+      "description": "Collaboration avec EUPartner pour expansion dans la région DACH (Allemagne, Autriche, Suisse)",
+      "contacts": [
+        "elena.volkov@eupartner.de"
+      ],
+      "status": "active",
+      "keywords": [
+        "DACH",
+        "GDPR",
+        "DPA",
+        "AWS Frankfurt",
+        "distribution channels"
+      ]
+    }
+  ],
+  "terminology": {
+    "WAF": "Web Application Firewall",
+    "SLA": "Service Level Agreement",
+    "mTLS": "Mutual TLS (Transport Layer Security)",
+    "PKCE": "Proof Key for Code Exchange (OAuth2)",
+    "JSON-LD": "JSON for Linked Data",
+    "PSD2": "Payment Services Directive 2 (directive européenne fintech)",
+    "DACH": "Deutschland, Austria, Confoederatio Helvetica (Allemagne, Autriche, Suisse)",
+    "DPA": "Data Processing Agreement",
+    "GDPR": "General Data Protection Regulation",
+    "POC": "Proof of Concept",
+    "CSP": "Content Security Policy",
+    "Rate limiting": "Limitation du nombre de requêtes API par unité de temps",
+    "Burst": "Pics temporaires de trafic autorisés au-delà du rate limit",
+    "Chunked transfer encoding": "Encodage de transfert HTTP par morceaux pour streaming"
+  },
+  "frequent_topics": [
+    "API v2 et migration GraphQL",
+    "Audit sécurité et vulnérabilités",
+    "Gestion budgétaire Q1 2026",
+    "Projet Beta avec ClientCorp",
+    "Recrutement développeur senior",
+    "Partenariats internationaux",
+    "Intégrations techniques",
+    "Planning et sprints",
+    "Conformité et sécurité (GDPR, PSD2)",
+    "Infrastructure cloud et DevOps"
+  ]
+}

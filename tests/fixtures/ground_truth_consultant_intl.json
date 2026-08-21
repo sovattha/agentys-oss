@@ -1,0 +1,306 @@
+{
+  "description": "Expected outputs from the onboarding KB analysis of test_emails_consultant_intl.json",
+  "expected_profile": {
+    "user_email": "james.conseil@strategyco.com",
+    "user_name": "James Conseil",
+    "signature": {
+      "name": "James Conseil",
+      "title": "Senior Consultant",
+      "company": "StrategyCo"
+    },
+    "tone": {
+      "default_tone": "semi-formal",
+      "greeting_styles": {
+        "formal_en": "Dear [Name],",
+        "semi_formal_en": "Hi [Name],",
+        "casual_en": "[Name],"
+      },
+      "closing_styles": {
+        "formal_en": "Best regards,",
+        "semi_formal_en": "Best,",
+        "casual_en": "Cheers, / J."
+      },
+      "uses_emoji": false,
+      "average_response_length": "medium-long"
+    },
+    "languages": [
+      "en"
+    ],
+    "preferred_name": "James",
+    "addressing": null,
+    "language_variant": "en-US"
+  },
+  "expected_contacts": [
+    {
+      "email": "r.hayes@strategyco.com",
+      "name": "Richard Hayes",
+      "company": "StrategyCo",
+      "title": "Managing Partner",
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 10
+    },
+    {
+      "email": "a.patel@strategyco.com",
+      "name": "Anika Patel",
+      "company": "StrategyCo",
+      "title": "Associate",
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "interaction_count": 11
+    },
+    {
+      "email": "b.crawford@strategyco.com",
+      "name": "Ben Crawford",
+      "company": "StrategyCo",
+      "title": "Senior Consultant",
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "interaction_count": 8
+    },
+    {
+      "email": "w.lin@strategyco.sg",
+      "name": "Wei Lin",
+      "company": "StrategyCo",
+      "title": "Consultant",
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "interaction_count": 6
+    },
+    {
+      "email": "m.torres@acmecorp.com",
+      "name": "Michael Torres",
+      "company": "AcmeCorp",
+      "title": "Chief Financial Officer",
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "interaction_count": 8
+    },
+    {
+      "email": "j.walsh@acmecorp.com",
+      "name": "Jennifer Walsh",
+      "company": "AcmeCorp",
+      "title": "VP Operations",
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 6
+    },
+    {
+      "email": "i.moreau@luxegroup.fr",
+      "name": "Isabelle Moreau",
+      "company": "LuxeGroup",
+      "title": "Chief Human Resources Officer",
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "interaction_count": 7
+    },
+    {
+      "email": "k.weber@industriewerke.de",
+      "name": "Klaus Weber",
+      "company": "IndustrieWerke AG",
+      "title": "VP Corporate Strategy",
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "interaction_count": 4
+    },
+    {
+      "email": "t.yamamoto@nipponpartners.jp",
+      "name": "Takeshi Yamamoto",
+      "company": "Nippon Partners Co., Ltd.",
+      "title": "Director, International Business Development",
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "interaction_count": 4
+    },
+    {
+      "email": "e.phillips@strategyco.com",
+      "name": "Emma Phillips",
+      "company": "StrategyCo",
+      "title": "PA/Executive Assistant",
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "interaction_count": 8
+    },
+    {
+      "email": "noreply@outlook.com",
+      "name": "Microsoft Outlook",
+      "company": null,
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": null,
+      "interaction_count": 4
+    },
+    {
+      "email": "notifications@slack.com",
+      "name": "Slack",
+      "company": null,
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": null,
+      "interaction_count": 2
+    },
+    {
+      "email": "calendar@strategyco.com",
+      "name": "StrategyCo Calendar",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": null,
+      "interaction_count": 4
+    },
+    {
+      "email": "d.chen@strategyco.com",
+      "name": "David Chen",
+      "company": "StrategyCo",
+      "title": "Analyst",
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "interaction_count": 3
+    }
+  ],
+  "expected_rules": {
+    "contact_rules": [
+      {
+        "contact_email": "m.torres@acmecorp.com",
+        "tone": "formal",
+        "language": "en",
+        "greeting": "Dear Michael,",
+        "closing": "Best regards, + full signature"
+      },
+      {
+        "contact_email": "j.walsh@acmecorp.com",
+        "tone": "formal",
+        "language": "en",
+        "greeting": "Dear Jennifer,",
+        "closing": "Best regards, + full signature"
+      },
+      {
+        "contact_email": "i.moreau@luxegroup.fr",
+        "tone": "formal",
+        "language": "en",
+        "greeting": "Dear Isabelle,",
+        "closing": "Best regards, + full signature"
+      },
+      {
+        "contact_email": "k.weber@industriewerke.de",
+        "tone": "formal",
+        "language": "en",
+        "greeting": "Dear Klaus,",
+        "closing": "Best regards, + full signature"
+      },
+      {
+        "contact_email": "t.yamamoto@nipponpartners.jp",
+        "tone": "formal",
+        "language": "en",
+        "greeting": "Dear Takeshi,",
+        "closing": "Best regards, + full signature"
+      },
+      {
+        "contact_email": "r.hayes@strategyco.com",
+        "tone": "semi-formal",
+        "language": "en",
+        "greeting": "Hi Richard, / Richard,",
+        "closing": "Cheers, J. / J."
+      },
+      {
+        "contact_email": "a.patel@strategyco.com",
+        "tone": "casual",
+        "language": "en",
+        "greeting": "Anika,",
+        "closing": "J."
+      },
+      {
+        "contact_email": "b.crawford@strategyco.com",
+        "tone": "casual",
+        "language": "en",
+        "greeting": "Ben,",
+        "closing": "Cheers, J. / J."
+      },
+      {
+        "contact_email": "w.lin@strategyco.sg",
+        "tone": "casual",
+        "language": "en",
+        "greeting": "Wei,",
+        "closing": "Cheers, J. / J."
+      },
+      {
+        "contact_email": "e.phillips@strategyco.com",
+        "tone": "casual",
+        "language": "en",
+        "greeting": "Hi Emma,",
+        "closing": "Thanks, J. / Cheers, J."
+      },
+      {
+        "contact_email": "d.chen@strategyco.com",
+        "tone": "casual",
+        "language": "en",
+        "greeting": "David,",
+        "closing": "J."
+      }
+    ],
+    "general_rules": [
+      {
+        "name": "formal_clients",
+        "description": "Use 'Dear' greeting and full signature with clients and prospects",
+        "trigger": "Email to client or prospect contacts (AcmeCorp, LuxeGroup, IndustrieWerke, Nippon Partners)",
+        "action": "Use 'Dear [FirstName],' greeting, formal language, 'Best regards,' closing, and full signature block"
+      },
+      {
+        "name": "casual_colleagues",
+        "description": "Use first name only or 'Hi', sign 'J.' or 'Cheers' with colleagues",
+        "trigger": "Email to internal StrategyCo colleagues (Anika, Ben, Wei, David, Emma)",
+        "action": "Use '[FirstName],' or 'Hi [FirstName],' greeting, casual language, sign off with 'J.' or 'Cheers, J.', no signature block"
+      },
+      {
+        "name": "semi_formal_partner",
+        "description": "Use 'Hi' greeting with the Managing Partner, semiformal tone",
+        "trigger": "Email to Richard Hayes (Managing Partner)",
+        "action": "Use 'Hi Richard,' or 'Richard,' greeting, professional but not overly formal language, sign off with 'Cheers, J.' or 'J.'"
+      },
+      {
+        "name": "structured_updates",
+        "description": "Use numbered lists and bullet points for analytical content and status updates",
+        "trigger": "Status reports, client presentations, analytical emails, pipeline updates",
+        "action": "Structure content with numbered lists, clear sections, and quantified metrics"
+      },
+      {
+        "name": "consultant_frameworks",
+        "description": "Reference structured frameworks in analytical work",
+        "trigger": "Analytical or strategic content (operating model, cost analysis, strategy)",
+        "action": "Use consulting frameworks like McKinsey 7S, RACI matrix, 2x2 prioritisation, impact vs effort"
+      },
+      {
+        "name": "action_items",
+        "description": "End client emails with clear next steps and governance",
+        "trigger": "Client-facing emails after meetings or decisions",
+        "action": "Include explicit next steps with dates, owners, and decision gates"
+      },
+      {
+        "name": "full_signature_external",
+        "description": "Use full signature block for external/formal emails",
+        "trigger": "Formal emails to clients, prospects, or partners",
+        "action": "Append 'James Conseil\\nSenior Consultant\\nStrategyCo | London'"
+      },
+      {
+        "name": "no_signature_internal",
+        "description": "No signature block for internal casual emails",
+        "trigger": "Internal emails to StrategyCo colleagues",
+        "action": "Sign with 'J.' only, no signature block"
+      }
+    ],
+    "forbidden_phrases": []
+  },
+  "expected_statistics": {
+    "total_emails": 85,
+    "sent_emails": 45,
+    "received_emails": 40,
+    "threads": 51,
+    "english_emails": 85,
+    "french_emails": 0,
+    "emails_with_signature": 16,
+    "emails_with_attachments": 14,
+    "unique_contacts": 14,
+    "internal_contacts": 7,
+    "external_contacts": 7
+  }
+}

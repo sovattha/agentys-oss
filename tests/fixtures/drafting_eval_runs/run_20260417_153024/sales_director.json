@@ -1,0 +1,223 @@
+{
+  "aggregate": {
+    "critic": {
+      "coherence": 90,
+      "tone": 83,
+      "completeness": 80,
+      "errors": 88,
+      "conciseness": 91,
+      "emotional_intelligence": 68,
+      "overall": 82
+    },
+    "judge": {
+      "faithfulness": 78,
+      "completeness": 78,
+      "tone_match": 74,
+      "conciseness": 79,
+      "overall": 78
+    }
+  },
+  "cases": [
+    {
+      "case_id": "msg-002",
+      "subject": "Re: Planning visites semaine 2",
+      "draft": "15h30 c'est parfait pour Mme Moreau, go.\n\nMerci pour les Laurent 👍\n",
+      "elapsed_draft_s": 5.27,
+      "critic": {
+        "coherence": 95,
+        "tone": 90,
+        "completeness": 90,
+        "errors": 95,
+        "conciseness": 97,
+        "over_commitment": 95,
+        "emotional_intelligence": 80,
+        "overall": 91,
+        "decision": "valid",
+        "suggestions": [
+          "RAS"
+        ]
+      },
+      "judge": {
+        "faithfulness": 95,
+        "completeness": 90,
+        "tone_match": 98,
+        "conciseness": 97,
+        "overall": 95,
+        "strengths": [
+          "Ton parfaitement adapté : décontracté, direct, miroir exact du style de l'échange",
+          "Confirmation claire du changement d'horaire pour Mme Moreau",
+          "Accusé de réception des Laurent sans sur-expliquer",
+          "Longueur minimale et proportionnée à la demande"
+        ],
+        "weaknesses": [
+          "Ne mentionne pas la visite Appart Confluence (jeudi 16h) initialement demandée — mais l'email de Samira n'en parle pas non plus, donc pas vraiment une omission critique",
+          "Le mot 'go' est très familier mais cohérent avec le registre"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-005",
+      "subject": "Re: Villa Caluire - Confirmation visite mardi",
+      "draft": "Parfait pour la venue de votre mari, à mardi donc.\n\nConcernant vos questions :\n\n- Garage double : [À confirmer]\n- Desserte en transports : [À confirmer]\n\nJe me renseigne auprès du propriétaire et vous reviens avec les informations avant mardi.\n",
+      "elapsed_draft_s": 9.45,
+      "critic": {
+        "coherence": 88,
+        "tone": 78,
+        "completeness": 82,
+        "errors": 90,
+        "conciseness": 85,
+        "over_commitment": 52,
+        "emotional_intelligence": 70,
+        "overall": 77,
+        "decision": "valid",
+        "suggestions": [
+          "Confirmer délai réaliste",
+          "Éviter promesse délai"
+        ]
+      },
+      "judge": {
+        "faithfulness": 95,
+        "completeness": 72,
+        "tone_match": 62,
+        "conciseness": 78,
+        "overall": 78,
+        "strengths": [
+          "Aucune information inventée : les deux questions sont honnêtement marquées '[À confirmer]' plutôt que fabriquées",
+          "Engagement clair à fournir les réponses avant mardi, ce qui est actionnable",
+          "Brouillon court et sans remplissage inutile"
+        ],
+        "weaknesses": [
+          "Ton trop décontracté ('Parfait pour la venue de votre mari, à mardi donc.') pour un contexte immobilier formel entre un directeur commercial et une cliente — l'historique montre un registre 'Bonjour Madame / Bien cordialement'",
+          "Absence de salutation d'ouverture ('Bonjour Madame Moreau') et de formule de clôture ('Cordialement, Karim Mandat') pourtant présentes dans l'historique",
+          "Les deux questions sont adressées mais sans réponse effective — l'utilité immédiate pour la cliente est nulle (bien que honnête)",
+          "Manque la signature professionnelle (nom, titre, coordonnées) systématiquement utilisée dans les échanges précédents"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-008",
+      "subject": "Re: Tes objectifs janvier",
+      "draft": "Ok, c'est pas mal. Fais en sorte de closer Villeurbanne, on en a besoin.\n\n9h c'est bon pour moi.\n",
+      "elapsed_draft_s": 9.84,
+      "critic": {
+        "coherence": 88,
+        "tone": 85,
+        "completeness": 80,
+        "errors": 95,
+        "conciseness": 92,
+        "over_commitment": 90,
+        "emotional_intelligence": 62,
+        "overall": 84,
+        "decision": "valid",
+        "suggestions": [
+          "Encourager Julien",
+          "Valider les mandats"
+        ]
+      },
+      "judge": {
+        "faithfulness": 95,
+        "completeness": 90,
+        "tone_match": 92,
+        "conciseness": 88,
+        "overall": 91,
+        "strengths": [
+          "Ton informel et direct, parfaitement cohérent avec l'échange entre collègues (Karim → Julien)",
+          "Confirme le RDV 9h sans ambiguïté",
+          "Réponse courte et proportionnée à un message bref"
+        ],
+        "weaknesses": [
+          "N'exploite pas l'opportunité de demander un récap ou un point sur les prospects en cours, ce qui aurait été utile avant le meeting",
+          "Le mandat studio rue Garibaldi est mentionné dans l'email entrant mais pas du tout acté/reconnu dans le brouillon"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-010",
+      "subject": "Estimation appartement Croix-Rousse",
+      "draft": "Votre appartement présente de beaux atouts pour une estimation : surface généreuse, traversant, avec ascenseur et travaux récents.\n\nPour l'estimation, je suis disponible [À confirmer : créneaux disponibles]. Indiquez-moi vos disponibilités sur les prochains jours, je m'adapte à votre agenda.\n\nPrévoyez environ 45 minutes pour la visite.\n",
+      "elapsed_draft_s": 12.8,
+      "critic": {
+        "coherence": 82,
+        "tone": 72,
+        "completeness": 60,
+        "errors": 88,
+        "conciseness": 85,
+        "over_commitment": 78,
+        "emotional_intelligence": 55,
+        "overall": 74,
+        "decision": "reject",
+        "suggestions": [
+          "Ajouter formule salutation",
+          "Reconnaître projet Ardèche",
+          "Proposer créneaux concrets"
+        ]
+      },
+      "judge": {
+        "faithfulness": 72,
+        "completeness": 60,
+        "tone_match": 45,
+        "conciseness": 78,
+        "overall": 64,
+        "strengths": [
+          "Aucune information inventée : pas de date fabriquée, pas de prix, pas de nom inexistant",
+          "La durée de 45 minutes est une information professionnellement plausible, non présentée comme un fait fourni par le client",
+          "Demande les disponibilités du client, ce qui est approprié dans ce contexte"
+        ],
+        "weaknesses": [
+          "Pas de formule d'appel : l'email commence sans salutation ('Monsieur et Madame Laurent'), ce qui est une omission grave en contexte immobilier formel",
+          "Pas de signature : aucun nom, titre, coordonnées — indispensable dans un email professionnel de ce secteur",
+          "La question explicite 'À quelle date pourriez-vous passer ?' n'est pas réellement adressée : le brouillon demande les disponibilités du client mais sans proposer un créneau concret ni s'engager sur une date, ce qui esquive la demande",
+          "Ton trop désinvolte et fragmenté pour un premier contact professionnel formel (courrier signé 'M. et Mme Laurent', formule 'Cordialement')",
+          "Absence d'accusé de réception de la demande et du contexte de vente (rapprochement familial Ardèche) — manque de chaleur relationnelle attendue dans l'immobilier",
+          "Pas de mention d'estimation gratuite ou sans engagement, argument commercial standard absent"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-018",
+      "subject": "Re: Diagnostics T4 Croix-Rousse - 34 rue Hénon",
+      "draft": "Mardi 14 à 9h, c'est parfait.\n\nTarif OK pour 450€ HT, je te confirme le mandat signé d'ici lundi.\n\nLe digicode de l'immeuble est [À confirmer], je te l'envoie dès que j'ai l'info du propriétaire.\n",
+      "elapsed_draft_s": 11.98,
+      "critic": {
+        "coherence": 95,
+        "tone": 92,
+        "completeness": 88,
+        "errors": 72,
+        "conciseness": 95,
+        "over_commitment": 62,
+        "emotional_intelligence": 75,
+        "overall": 82,
+        "decision": "valid",
+        "suggestions": [
+          "Supprimer mandat non-demandé",
+          "Préciser délai digicode"
+        ]
+      },
+      "judge": {
+        "faithfulness": 35,
+        "completeness": 78,
+        "tone_match": 75,
+        "conciseness": 55,
+        "overall": 61,
+        "strengths": [
+          "Confirme explicitement le créneau mardi 14 à 9h proposé par Éric",
+          "Accuse réception du tarif 450€ HT sans le contester ni l'ignorer",
+          "Ton globalement adapté à l'échange professionnel décontracté (tutoyage implicite, formulation directe)"
+        ],
+        "weaknesses": [
+          "Engagement inventé 'je te confirme le mandat signé d'ici lundi' : aucune mention d'un délai ou d'une validation de mandat dans l'échange — deadline fabriquée",
+          "Introduction d'un digicode non mentionné dans la conversation, même avec un placeholder : ajoute une information non sollicitée et crée une attente non fondée",
+          "Longueur disproportionnée par rapport à la simplicité de la réponse attendue (deux faits à confirmer)"
+        ],
+        "hallucinations": [
+          "'je te confirme le mandat signé d'ici lundi' — aucun délai de confirmation de mandat n'est évoqué dans l'email entrant ni dans l'historique",
+          "'Le digicode de l'immeuble est [À confirmer]' — le digicode n'est mentionné nulle part dans la conversation ; son existence même est une supposition non étayée"
+        ]
+      }
+    }
+  ]
+}

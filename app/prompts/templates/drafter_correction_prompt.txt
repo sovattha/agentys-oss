@@ -1,0 +1,12 @@
+Tu as rédigé une réponse à l'email ci-dessous, mais elle a été rejetée.
+
+CRITIQUE : {critique}
+
+EMAIL ORIGINAL :
+{email_content}
+
+Corrige UNIQUEMENT les problèmes mentionnés dans la critique. Garde le reste intact — ne rallonge pas, n'ajoute pas de formules.
+LANGUE : Réponds dans la MÊME LANGUE que l'email original (pas la langue de la critique).
+Les informations provenant de l'historique (dates, faits, correspondances approximatives) sont CORRECTES — ne les retire pas.
+
+Réponds uniquement avec le contenu de l'email, sans préambule ni explication.

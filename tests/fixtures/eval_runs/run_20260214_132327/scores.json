@@ -1,0 +1,79 @@
+{
+  "profile": {
+    "completeness": 75,
+    "precision": 70,
+    "usefulness": 72,
+    "overall": 72,
+    "missing": [
+      "signature_en (English signature variant)",
+      "tone.greeting_styles (structured dictionary with formal_fr, semi_formal_fr, casual_fr, formal_en, semi_formal_en templates)",
+      "tone.closing_styles (structured dictionary with language-specific closing templates)"
+    ],
+    "incorrect": [
+      "active_hours: '08:00-17:00' (should be '08:00-18:00')",
+      "response_time_avg: 'Same day or within 24 hours...' (should be '< 1h')",
+      "tone.greeting_style and tone.closing_style: free-form text instead of structured template dictionaries"
+    ],
+    "details": "The system captured most core profile elements correctly: user email, name, signature (French version), default tone, language use, and general communication patterns. However, it's missing the English signature variant (signature_en), lacks the structured greeting_styles/closing_styles dictionaries that provide language-specific templates, and has incorrect active hours (08:00-17:00 vs 08:00-18:00). The tone information is present but less structured - using free-form text descriptions rather than the templated format in ground truth, which reduces programmatic usefulness. The response_time_avg is descriptive but less precise than the ground truth's '< 1h' metric."
+  },
+  "knowledge": {
+    "completeness": 75,
+    "precision": 70,
+    "usefulness": 78,
+    "overall": 74,
+    "missing": [
+      "Contact type 'colleague' for Pierre Durand (misclassified as direct_report)",
+      "Tone 'casual' for Camille Roux (marked as 'professional')",
+      "Tone 'semi-formal' for multiple contacts (marked as 'professional')",
+      "Project: 'Partenariat EUPartner' (named 'EU Market Expansion')",
+      "Project: 'Migration Cloud' (missing entirely)",
+      "Several specific topics from ground truth like 'demo', 'recrutement', 'conges', 'objectifs Q1', 'pentest', 'kick-off', 'contrat', 'resultats annuels', 'rapport mensuel', 'renouvellement', 'fintech', etc."
+    ],
+    "incorrect": [
+      "Pierre Durand: type should be 'colleague' not 'direct_report'",
+      "Camille Roux: interaction_count 11 vs 6 (ground truth)",
+      "Pierre Durand: interaction_count 27 vs 20 (ground truth)",
+      "Lucas Bernard: interaction_count 15 vs 10 (ground truth)",
+      "Nicolas Moreau: interaction_count 7 vs 4, tone 'formal' vs 'semi-formal'",
+      "Marc Dupont: interaction_count 6 vs 4 (ground truth)",
+      "Marie Leclerc: interaction_count 8 vs 6 (ground truth)",
+      "John Smith: tone 'professional' vs 'semi-formal' (ground truth)",
+      "Sarah Jones: interaction_count 5 vs 4 (ground truth)",
+      "Multiple contacts: tone marked as 'professional' when ground truth specifies 'casual' or 'semi-formal'",
+      "Added 12 contacts not in ground truth: equipe-digitale@techcorp.fr, recrutement@techcorp.fr, it-support@techcorp.fr, support@cloudprovider.com, hr@techcorp.fr, all-managers@techcorp.fr, noreply@jira.techcorp.fr, rh.formation@techcorp.fr, juridique@techcorp.fr, newsletter@techwatch.io, noreply@github.com, compta@techcorp.fr",
+      "Lucas Bernard: title 'Developer' not in ground truth (null)",
+      "Claire Fontaine: tone 'professional' vs 'semi-formal' (ground truth)"
+    ],
+    "details": "The system successfully identified all 13 major contacts from ground truth with correct names, emails, companies, and titles. However, it misclassified Pierre Durand's relationship type (direct_report vs colleague), and had inconsistent tone classifications (using 'professional' instead of 'casual'/'semi-formal'). Interaction counts are inflated across most contacts (e.g., Pierre: 27 vs 20, Camille: 11 vs 6). The system added 12 additional contacts (team emails, automated systems, newsletters) not in ground truth - while some may be valid, they dilute precision. Projects are well-captured with 5/5 matched, though naming differs slightly (e.g., 'Partenariat GlobalTech' vs 'GlobalTech Partnership'). Terminology section is good with 10/10 terms captured plus 2 additional valid terms. Topics are generally accurate but sometimes more verbose than ground truth. The addition of 'frequent_topics' array is useful. Overall, the output would be helpful for email drafting but needs refinement on relationship types, tone consistency, and interaction count accuracy."
+  },
+  "rules": {
+    "completeness": 65,
+    "precision": 55,
+    "usefulness": 60,
+    "overall": 60,
+    "missing": [
+      "john.smith@globaltech.com contact rule (semi-formal, en)",
+      "Auto-reply pattern: Conge/absence acknowledgment",
+      "Auto-reply pattern: JIRA notification forwarding",
+      "general_rule: structured_updates (status reports with numbered lists and bullet points)",
+      "general_rule: cc_relevant_people (cross-functional CC guidance with specific examples)",
+      "general_rule: action_items (client email next steps with 'Actions a suivre' section)"
+    ],
+    "incorrect": [
+      "pierre.durand@techcorp.fr: tone='semi-formal' (should be 'casual') - CRITICAL: daily team member",
+      "nicolas.moreau@techcorp.fr: tone='formal' (should be 'semi-formal')",
+      "contact@prospect-startup.io: tone='formal' (should be 'semi-formal')",
+      "claire.fontaine@clientcorp.com: tone='formal' (should be 'semi-formal')",
+      "ceo@techcorp.fr: tone='formal' (should be 'semi-formal')",
+      "equipe-digitale@techcorp.fr: not in ground truth (hallucinated contact)",
+      "recrutement@techcorp.fr: not in ground truth (hallucinated contact)",
+      "it-support@techcorp.fr: not in ground truth (hallucinated contact)",
+      "Contact rules embed full signatures (should use general rules for dynamic signature logic)",
+      "General rules over-segmented: vouvoiement split into 3 separate rules (externe, hierarchie) vs 1 unified rule in GT",
+      "General rules over-segmented: tutoiement_equipe_proche vs broader tutoiement_equipe in GT",
+      "Missing specific rule names from GT: structured_updates, cc_relevant_people, action_items replaced with more generic equivalents"
+    ],
+    "details": "COMPLETENESS: System found 10/13 ground truth contacts (77%), missing john.smith@globaltech.com and adding 3 hallucinated contacts (equipe-digitale, recrutement, it-support). Found 12/12 general rules conceptually but with different categorizations. Missing 2 auto_reply_patterns entirely (0/2). Overall ~65% complete.\n\nPRECISION: Major tone mismatches hurt precision significantly. Pierre marked 'semi-formal' vs 'casual' in GT. Nicolas marked 'formal' vs 'semi-formal'. prospect-startup marked 'formal' vs 'semi-formal'. Claire marked 'formal' vs 'semi-formal'. CEO marked 'formal' vs 'semi-formal'. These tone errors would produce wrong formality levels in generated emails. Greeting variations are acceptable but tone errors affect email quality. Rules are conceptually sound but over-segmented (e.g., vouvoiement split into 3 rules vs 1 in GT). Signatures hardcoded in contact rules rather than handled dynamically via general rules. ~55% precision due to tone errors and structural issues.\n\nUSEFULNESS: Would produce mostly functional drafts but with wrong formality level for 5 key contacts: Pierre (too formal - critical for daily team communication), Nicolas (too formal), prospect-startup (too formal), Claire (too formal), and CEO (too formal). Missing auto-reply patterns reduces automation value. Over-detailed contact rules with hardcoded signatures reduce maintainability and flexibility. Language detection works correctly. Greeting/closing patterns mostly correct. ~60% useful - functional baseline but needs correction for key contacts to be production-ready."
+  },
+  "overall": 69
+}

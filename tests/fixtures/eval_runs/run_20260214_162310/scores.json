@@ -1,0 +1,32 @@
+{
+  "profile": {
+    "completeness": 100,
+    "precision": 100,
+    "usefulness": 100,
+    "overall": 100,
+    "missing": [],
+    "incorrect": [],
+    "details": ""
+  },
+  "knowledge": {
+    "completeness": 90,
+    "precision": 90,
+    "usefulness": 90,
+    "overall": 90,
+    "missing": [
+      "greffe@tc-paris.justice.fr"
+    ],
+    "incorrect": [],
+    "details": ""
+  },
+  "rules": {
+    "completeness": 100,
+    "precision": 100,
+    "usefulness": 100,
+    "overall": 100,
+    "missing": [],
+    "incorrect": [],
+    "details": ""
+  },
+  "overall": 97
+}

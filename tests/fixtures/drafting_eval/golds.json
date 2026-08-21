@@ -1,0 +1,92 @@
+[
+  {
+    "case_id": "msg-012",
+    "gold_body": "Monsieur le Directeur Général,\n\nJ'accuse réception de la lettre de mission signée et vous en remercie.\n\nNous engageons immédiatement les travaux de due diligence. Mme Fontaine prendra contact avec Mme Vernier dans les prochaines heures pour organiser l'accès à la data room.\n\nJe vous tiendrai informé de l'avancement des travaux par un rapport hebdomadaire.\n\nJe vous prie d'agréer, Monsieur le Directeur Général, l'expression de mes salutations distinguées.\n\nMarc-Antoine Barreau\nAvocat au Barreau de Paris\nDumont & Associés\n24 rue du Faubourg Saint-Honoré, 75008 Paris\nTél. +33 1 42 65 78 90\n\nCe message et ses pièces jointes sont confidentiels et destinés exclusivement à leur destinataire. Si vous n'êtes pas le destinataire de ce message, merci de le supprimer et d'en informer l'expéditeur.",
+    "rationale": "PROVISIONAL — copied from reference_reply (real human reply). Run2b human edit pending.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-001",
+    "gold_body": "Monsieur Dumont,\n\nJe vous remercie pour cette initiative que je considère tout à fait pertinente au regard de l'évolution du cabinet.\n\nJe m'engage à vous remettre la note demandée dans les délais impartis. Je me permets de solliciter l'assistance d'Élise Fontaine pour la collecte des données relatives à la répartition actuelle des dossiers.\n\nSauf objection de votre part, je proposerai une structure articulée autour de trois pôles :\n1. Fusions-acquisitions et droit des sociétés\n2. Contentieux commercial et arbitrage\n3. Conformité et droit européen\n\nBien cordialement,\n\nMarc-Antoine Barreau\nAvocat au Barreau de Paris\nDumont & Associés\n24 rue du Faubourg Saint-Honoré, 75008 Paris\nTél. +33 1 42 65 78 90\n\nCe message et ses pièces jointes sont confidentiels et destinés exclusivement à leur destinataire. Si vous n'êtes pas le destinataire de ce message, merci de le supprimer et d'en informer l'expéditeur.",
+    "rationale": "PROVISIONAL — copied from reference_reply (real human reply). Run2b human edit pending.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-007",
+    "gold_body": "Chère Madame Fontaine,\n\nOui, je vous confirme que l'analyse doit inclure les contrats de travail des dirigeants, ainsi que les éventuelles clauses de non-concurrence et les golden parachutes.\n\nPar ailleurs, je vous prie de porter une attention particulière aux engagements hors bilan.\n\nBien cordialement,\n\nMarc-Antoine Barreau\nAvocat au Barreau de Paris\nDumont & Associés\n24 rue du Faubourg Saint-Honoré, 75008 Paris\nTél. +33 1 42 65 78 90\n\nCe message et ses pièces jointes sont confidentiels et destinés exclusivement à leur destinataire. Si vous n'êtes pas le destinataire de ce message, merci de le supprimer et d'en informer l'expéditeur.",
+    "rationale": "PROVISIONAL — copied from reference_reply (real human reply). Run2b human edit pending.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-008",
+    "gold_body": "9h c'est bon. Prépare-moi un récap de tes prospects en cours stp",
+    "rationale": "PROVISIONAL — copied from reference_reply (real human reply). Run2b human edit pending.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-002",
+    "gold_body": "Monsieur le Directeur Général,\n\nJe vous remercie de la confiance que vous accordez au cabinet Dumont & Associés pour cette opération.\n\nVeuillez trouver ci-joint notre lettre de mission détaillant :\n1. Le périmètre de notre intervention (due diligence juridique, rédaction du protocole d'accord, accompagnement jusqu'au closing)\n2. L'équipe dédiée (moi-même, assisté de Mme Élise Fontaine, collaboratrice senior)\n3. Le calendrier prévisionnel de la due diligence (4 semaines)\n4. Nos conditions d'honoraires\n\nSous réserve de votre accord, nous pouvons engager les travaux dès réception de la documentation de la société cible.\n\nJe vous prie d'agréer, Monsieur le Directeur Général, l'expression de mes salutations distinguées.\n\nMarc-Antoine Barreau\nAvocat au Barreau de Paris\nDumont & Associés\n24 rue du Faubourg Saint-Honoré, 75008 Paris\nTél. +33 1 42 65 78 90\n\nCe message et ses pièces jointes sont confidentiels et destinés exclusivement à leur destinataire. Si vous n'êtes pas le destinataire de ce message, merci de le supprimer et d'en informer l'expéditeur.",
+    "rationale": "PROVISIONAL — copied from reference_reply (real human reply). Run2b human edit pending.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-078",
+    "gold_body": "Top 👍",
+    "rationale": "PROVISIONAL — copied from reference_reply (real human reply). Run2b human edit pending.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-076",
+    "gold_body": "Hi Marcus,\n\nPerfect, we're aligned. End of February for signing works great for us.\n\nI'll have our lawyer prepare the definitive docs and send them over next week.\n\nExcited to make this official 🚀\n\nPriya",
+    "rationale": "PROVISIONAL — copied from reference_reply (real human reply). Run2b human edit pending.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-002",
+    "gold_body": "Hi Richard,\n\nQuick update on AcmeCorp:\n\n- Phase 1 diagnostic is complete. We identified $18M in quick wins across procurement and facilities.\n- Michael Torres (their CFO) has signed off on the next phase.\n- We'll need Ben on the operating model workstream starting mid-Jan.\n\nHappy to walk you through the details on Monday.\n\nCheers,\nJ.",
+    "rationale": "PROVISIONAL — copied from reference_reply (real human reply). Run2b human edit pending.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-008",
+    "gold_body": "Chère Maître,\n\nNous venons de recevoir la convocation devant le Conseil de Prud'hommes de Paris concernant le licenciement pour faute grave de M. Jean-Marc Renault, ancien Responsable Middle Office.\n\nPour rappel, les faits reprochés :\n- Manquements graves aux procédures de contrôle interne (3 incidents documentés)\n- Non-respect des limites d'engagement (dépassement de 2,3M€ sur opérations de change)\n- Falsification d'un rapport de risques\n\nL'audience de conciliation est fixée au 15 mars 2026.\n\nLe demandeur réclame environ 150 000€ au total (dommages et intérêts, indemnités de licenciement et de préavis).\n\nPourrions-nous convenir d'un rendez-vous cette semaine pour examiner le dossier et définir notre stratégie ?\n\nJe vous transmets en pièce jointe la convocation et le dossier disciplinaire.\n\nCordialement,\n\nCatherine Carrière\nDirectrice des Ressources Humaines\nBanque Centrale de Paris\nTél. 01 44 XX XX XX\n\nCe message peut contenir des informations confidentielles.",
+    "rationale": "PROVISIONAL — copied from reference_reply (real human reply). Run2b human edit pending.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-027",
+    "gold_body": "Merci JP, je regarde la plaquette et la grille ce soir.\n\nDispo mardi ou jeudi prochain pour un rdv. Tu préfères chez vous ou chez nous ?\n\nKarim",
+    "rationale": "PROVISIONAL — copied from reference_reply (real human reply). Run2b human edit pending.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-002",
+    "gold_body": "Parfait 15h30 ça marche 👍",
+    "rationale": "PROVISIONAL — copied from reference_reply (real human reply). Run2b human edit pending.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-070",
+    "gold_body": "This is incredible, Sarah! Index and Accel in the room 😱 perfect\n\nWe'll be there for AV check at 13h. Deck will be in your inbox by Feb 13 as promised.\n\nThanks for putting this together!\n\nPriya",
+    "rationale": "PROVISIONAL — copied from reference_reply (real human reply). Run2b human edit pending.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-004",
+    "gold_body": "Hi Marcus,\n\nThanks for the call today. Really excited about the alignment on vision.\n\nAs discussed, here's what we'll send over this week:\n- Updated data room with Jan metrics\n- Customer reference list (5 enterprise accounts)\n- Technical architecture overview\n\nRe: board composition, we're open to discussing a board seat for Sequoia. Arjun and I will chat and come back to you.\n\nLooking forward to moving fast on this 💪\n\nPriya",
+    "rationale": "PROVISIONAL — copied from reference_reply (real human reply). Run2b human edit pending.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-022",
+    "gold_body": "Hi Sarah,\n\nAmazing, we're in! Confirming our participation 🙏\n\n14:30 slot works perfectly. We'll have the deck ready by Feb 13.\n\nQuick question - is there an investor list we could see in advance? Would love to prep targeted talking points.\n\nThanks!\nPriya",
+    "rationale": "PROVISIONAL — copied from reference_reply (real human reply). Run2b human edit pending.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-004",
+    "gold_body": "Dear Michael,\n\nThank you for the detailed feedback on the Phase 2 proposal.\n\nI have incorporated your comments and would like to highlight the following adjustments:\n\n1. Timeline: We have compressed the operating model redesign from 12 to 10 weeks, as requested.\n2. Resource allocation: An additional analyst will be assigned to the procurement workstream.\n3. Governance: We propose fortnightly steering committee meetings with your leadership team.\n\nI have also taken Jennifer's point about change management into account — we will embed a dedicated change lead from Week 3.\n\nPlease find the revised scope document attached. I would welcome the opportunity to walk through it at your convenience.\n\nBest regards,\nJames Conseil\nSenior Consultant\nStrategyCo | London",
+    "rationale": "PROVISIONAL — copied from reference_reply (real human reply). Run2b human edit pending.",
+    "edge_cases_handled": []
+  }
+]

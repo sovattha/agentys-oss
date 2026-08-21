@@ -1,0 +1,37 @@
+/* ============================================================================
+   CONFIRMATION DIALOG — Styled via shadcn/ui Dialog
+   ============================================================================ */
+
+.confirmation-dialog {
+  background: var(--surface-primary) !important;
+  border: 1px solid var(--border-default) !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--shadow-xl) !important;
+  padding: var(--space-6) !important;
+  max-width: 400px !important;
+}
+
+.confirmation-dialog-title {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-lg, 18px);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: var(--leading-tight, 1.25);
+}
+
+.confirmation-dialog-message {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: var(--leading-normal, 1.5);
+}
+
+.confirmation-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+/* Buttons migrated to the shared <Button> component (ui/button.tsx):
+   variant="outline" for cancel, variant="default"/"destructive" for confirm. */

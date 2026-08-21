@@ -1,0 +1,117 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "p.dumont@dumont-associes.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Dumont,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "e.fontaine@dumont-associes.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Chère Madame Fontaine,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "h.castellan@nexus-group.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur le Directeur Général,",
+      "closing": "l'expression de mes salutations distinguées"
+    },
+    {
+      "contact_email": "jl.garnier@sarl-garnier.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Garnier,",
+      "closing": "l'expression de mes salutations distinguées"
+    },
+    {
+      "contact_email": "n.vernier@nexus-group.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Madame Vernier,",
+      "closing": "l'expression de mes salutations distinguées"
+    },
+    {
+      "contact_email": "m.leroux@dumont-associes.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Leroux,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "greffe@tc-paris.justice.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Madame, Monsieur,",
+      "closing": "l'expression de mes salutations distinguées"
+    },
+    {
+      "contact_email": "f.braun@braun-partner.de",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Cher Maître Braun,",
+      "closing": "l'expression de mes salutations distinguées"
+    },
+    {
+      "contact_email": "s.renard@notaire-renard.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Chère Maître,",
+      "closing": "l'expression de mes sentiments les plus distingués"
+    },
+    {
+      "contact_email": "d.perrin@perrin-avocats.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Cher Maître,",
+      "closing": "l'expression de mes sentiments les plus distingués"
+    }
+  ],
+  "general_rules": [
+    {
+      "description": "Utiliser systématiquement le vouvoiement avec tous les contacts externes et internes, y compris les collaborateurs"
+    },
+    {
+      "description": "Adopter une formalité juridique constante : salutation formelle (Monsieur/Madame/Maître) + fermeture avec formule de politesse complète"
+    },
+    {
+      "description": "Structurer les emails par listes numérotées avec points et sous-points pour clarifier les demandes, observations ou étapes procédurales"
+    },
+    {
+      "description": "Inclure systématiquement la signature complète (nom, titre, cabinet, adresse, téléphone) dans tous les emails externes et internes"
+    },
+    {
+      "description": "Utiliser un vocabulaire juridique spécialisé sans simplification : termes techniques du droit des affaires, procédure civile et RGPD considérés comme acquis"
+    },
+    {
+      "description": "Adapter la formule de fermeture selon le destinataire : 'Bien cordialement' pour les collaborateurs internes, 'l'expression de mes salutations distinguées' pour les clients et tiers externes, 'l'expression de mes sentiments les plus distingués' pour les confrères et notaires"
+    },
+    {
+      "description": "Rédiger des emails longs et détaillés avec contexte complet, références légales et justifications, jamais de messages ultra-courts"
+    },
+    {
+      "description": "Utiliser le français exclusivement dans la correspondance, même avec des contacts allemands (Maître Braun)"
+    },
+    {
+      "description": "Inclure des références précises aux articles de code (Code civil, Code de procédure civile, RGPD) et aux décisions jurisprudentielles dans les analyses juridiques"
+    },
+    {
+      "description": "Employer un jargon juridique spécialisé en fusions-acquisitions et droit des affaires : due diligence, garantie actif/passif (GAP), clauses de changement de contrôle, earn-out, closing, conditions suspensives, déclarations et garanties du cédant"
+    }
+  ],
+  "forbidden_phrases": []
+}

@@ -1,0 +1,92 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   MILESTONE TOAST — Slide-in notification
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.milestone-toasts-container {
+  position: fixed;
+  top: 72px;
+  right: 20px;
+  z-index: var(--z-notification);
+  width: 320px;
+}
+
+.milestone-toast {
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg, 12px);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  animation: mtSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin-bottom: 8px;
+  position: relative;
+  overflow: hidden;
+}
+@keyframes mtSlideIn {
+  from { transform: translateX(120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.milestone-toast.exiting {
+  animation: mtSlideOut 0.3s ease forwards;
+}
+@keyframes mtSlideOut {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(120%); opacity: 0; }
+}
+
+.mt-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md, 8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  flex-shrink: 0;
+  background: var(--accent-primary-subtle);
+}
+
+.mt-content {
+  flex: 1;
+  min-width: 0;
+}
+.mt-title {
+  font-size: var(--font-size-sm, 0.8125rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.mt-desc {
+  font-size: var(--font-size-xs, 0.6875rem);
+  color: var(--text-muted);
+  line-height: var(--leading-normal);
+}
+
+.mt-close {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 2px;
+  color: var(--text-placeholder);
+  font-size: var(--font-size-lg);
+  line-height: var(--leading-none);
+  flex-shrink: 0;
+  transition: color 0.1s;
+}
+
+.mt-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: var(--accent-primary);
+  border-radius: 0 0 var(--radius-lg, 12px) var(--radius-lg, 12px);
+  animation: mtProgress 5s linear forwards;
+}
+@keyframes mtProgress {
+  from { width: 100%; }
+  to { width: 0%; }
+}

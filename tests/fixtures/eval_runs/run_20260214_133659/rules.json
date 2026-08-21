@@ -1,0 +1,183 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "pierre.durand@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Pierre,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "lucas.bernard@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "greeting": "Salut Lucas,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "camille.roux@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "greeting": "Camille,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "marie.leclerc@clientcorp.com",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Madame Leclerc,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "sarah.jones@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi Sarah,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "nicolas.moreau@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Nicolas,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "ceo@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Marc,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "amelie.petit@fournisseur.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Madame Petit,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "contact@prospect-startup.io",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Thomas,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "david.kim@partnertech.co.kr",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi David,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "elena.volkov@eupartner.de",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Elena,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "claire.fontaine@clientcorp.com",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Claire,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "john.smith@globaltech.com",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Hi John,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "support@cloudprovider.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi,",
+      "closing": "Regards,"
+    }
+  ],
+  "general_rules": [
+    {
+      "name": "signature_formal",
+      "description": "Use full signature block for external and formal contacts",
+      "trigger": "Email to external clients, suppliers, or formal business contacts",
+      "action": "Add full signature: Sophie Martin\\nChef de projet - Division Digitale\\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "name": "signature_casual",
+      "description": "Use first name only for casual internal contacts",
+      "trigger": "Email to direct team members (Lucas, Camille) with casual tone",
+      "action": "Sign with just 'Sophie' or 'Sophi'"
+    },
+    {
+      "name": "tutoiement_equipe",
+      "description": "Use tu form with direct team members",
+      "trigger": "Email to Lucas or Camille (casual contacts)",
+      "action": "Use tu form, casual greetings (Salut), first name only closing"
+    },
+    {
+      "name": "vouvoiement_clients",
+      "description": "Use vous form with external clients and formal contacts",
+      "trigger": "Email to external clients, suppliers, or formal business partners",
+      "action": "Use vous form, formal greetings (Bonjour Madame/Monsieur)"
+    },
+    {
+      "name": "vouvoiement_management",
+      "description": "Use vous form with management and semi-formal internal contacts",
+      "trigger": "Email to CEO, finance, and senior internal contacts like Pierre, Nicolas",
+      "action": "Use vous form with semi-formal tone"
+    },
+    {
+      "name": "language_switch",
+      "description": "Switch to English for international partners",
+      "trigger": "Email to contacts with non-French domains (.com, .co.kr, .de)",
+      "action": "Write entire email in English"
+    },
+    {
+      "name": "structured_updates",
+      "description": "Use numbered lists and bullet points for status reports",
+      "trigger": "Status updates, sprint planning, action items, meeting recaps",
+      "action": "Structure content with numbered lists, bullet points, clear sections"
+    },
+    {
+      "name": "action_items_section",
+      "description": "End client emails with Actions à suivre section",
+      "trigger": "Client meeting recaps and project status emails",
+      "action": "Add 'Actions à suivre :' section at end with clear next steps"
+    },
+    {
+      "name": "cc_relevant_people",
+      "description": "CC technical leads and stakeholders on technical discussions",
+      "trigger": "Technical questions, partnership discussions, client technical topics",
+      "action": "CC Pierre Durand for technical matters, relevant team members for their expertise"
+    },
+    {
+      "name": "concise_acknowledgments",
+      "description": "Keep quick acknowledgments very brief",
+      "trigger": "Simple confirmations, ticket closures, absence acknowledgments",
+      "action": "Write 1-2 sentence responses without full signature"
+    },
+    {
+      "name": "detailed_technical_proposals",
+      "description": "Provide structured technical proposals with numbered options",
+      "trigger": "Technical problem-solving, architecture decisions, implementation choices",
+      "action": "Present numbered options with clear pros/cons, ask for input"
+    },
+    {
+      "name": "professional_reminders",
+      "description": "Keep team reminders friendly but structured",
+      "trigger": "Team-wide announcements, meeting reminders, process changes",
+      "action": "Use clear subject lines, bullet points, friendly tone while maintaining authority"
+    }
+  ],
+  "forbidden_phrases": [],
+  "auto_reply_patterns": [
+    "Absence/congé acknowledgment: Short casual response (Pas de souci, profite bien! Sophie)",
+    "VPN/IT issue resolution: Brief confirmation ticket can be closed",
+    "Quick agreement on technical point: Single sentence confirmation (OK pour X, on le met dans sprint Y. Sophie)",
+    "Meeting time confirmation: Single sentence confirmation with name"
+  ]
+}

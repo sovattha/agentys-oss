@@ -1,0 +1,42 @@
+{
+  "provider": "wordpress",
+  "brand_name": "",
+  "custom_reply_instructions": "",
+  "admin_notification_email": "",
+  "webhook_url": "",
+  "auto_approve": false,
+  "notify_user_by_email": true,
+  "password_policy": {
+    "min_length": 12,
+    "require_uppercase": true,
+    "require_numbers": true,
+    "require_special": false
+  },
+  "rate_limits": {
+    "max_per_hour": 20,
+    "max_per_day": 100
+  },
+  "allowed_domains": [],
+  "providers": {
+    "wordpress": {
+      "site_url": "https://example.com",
+      "username": "admin",
+      "app_password": "abcd efgh ijkl mnop"
+    },
+    "shopify": {
+      "shop_domain": "",
+      "admin_api_token": ""
+    },
+    "custom": {
+      "base_url": "",
+      "auth_type": "none",
+      "auth_credentials": {},
+      "endpoints": {},
+      "success_codes": [
+        200,
+        201,
+        204
+      ]
+    }
+  }
+}

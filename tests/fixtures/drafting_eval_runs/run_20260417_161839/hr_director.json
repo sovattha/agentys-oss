@@ -1,0 +1,222 @@
+{
+  "aggregate": {
+    "critic": {
+      "coherence": 89,
+      "tone": 86,
+      "completeness": 79,
+      "errors": 70,
+      "conciseness": 88,
+      "emotional_intelligence": 66,
+      "overall": 78
+    },
+    "judge": {
+      "faithfulness": 91,
+      "completeness": 83,
+      "tone_match": 85,
+      "conciseness": 85,
+      "overall": 86
+    }
+  },
+  "cases": [
+    {
+      "case_id": "msg-003",
+      "subject": "NAO 2026 - Revendications CGT",
+      "draft": "Nous avons bien reçu les revendications de la CGT-BCP pour la NAO 2026.\n\nVos six points ainsi que la demande d'inscription des conditions de travail au service clientèle à l'ordre du jour sont enregistrés et transmis à l'équipe de direction en vue de la préparation des séances de négociation.\n\nUne convocation précisant la date, l'heure et le lieu de la première réunion vous sera adressée dans les prochains jours.\n",
+      "elapsed_draft_s": 11.51,
+      "critic": {
+        "coherence": 90,
+        "tone": 85,
+        "completeness": 82,
+        "errors": 72,
+        "conciseness": 88,
+        "over_commitment": 60,
+        "emotional_intelligence": 55,
+        "overall": 76,
+        "decision": "valid",
+        "suggestions": [
+          "Délai plus prudent",
+          "Accusé sans promesse"
+        ]
+      },
+      "judge": {
+        "faithfulness": 90,
+        "completeness": 85,
+        "tone_match": 82,
+        "conciseness": 88,
+        "overall": 86,
+        "strengths": [
+          "Aucune information inventée : les six revendications et la demande d'inscription des conditions de travail sont correctement résumées sans déformation",
+          "Accusé de réception explicite et structuré couvrant l'intégralité des points soulevés par le délégué",
+          "Promesse de convocation concrète (date, heure, lieu) qui répond directement à l'attente exprimée en fin d'email entrant",
+          "Longueur parfaitement proportionnée : trois paragraphes courts, aucun remplissage ni redondance"
+        ],
+        "weaknesses": [
+          "« dans les prochains jours » reste vague ; un horizon indicatif (ex. « d'ici la fin de la semaine » ou « sous 8 jours ») renforcerait la crédibilité de l'engagement",
+          "Le ton 'Nous' institutionnel est cohérent avec la communication RH, mais aucun signal de considération sérieuse des revendications (même neutre) n'est donné, ce qui peut laisser le délégué avec un sentiment de réponse purement bureaucratique",
+          "La référence indique que l'action attendue était possiblement un transfert interne vers la direction générale, non un accusé de réception au syndicat — le brouillon adresse un cas d'usage différent, ce qui n'est pas une erreur factuelle mais un possible écart d'intention"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-008",
+      "subject": "[CONFIDENTIEL] Licenciement M. Renault - Saisine Prud'hommes",
+      "draft": "Bien reçu pour la convocation.\n\nJe prends contact avec Maître Tessier dès aujourd'hui pour organiser une réunion de préparation avant l'audience du 15 mars.\n\nSur le fond, je suis d'accord que le dossier disciplinaire est solide. Pour consolider les preuves, il faudra rassembler :\n\n- Les échanges écrits documentant les manquements retenus\n- Les comptes-rendus des entretiens préalables\n- Les éventuels témoignages de collègues ou managers directs\n\nPeux-tu me confirmer que l'ensemble du dossier RH est disponible et archivé de ton côté ? Je veux m'assurer que Maître Tessier dispose de tout avant notre premier échange.\n",
+      "elapsed_draft_s": 18.65,
+      "critic": {
+        "coherence": 90,
+        "tone": 85,
+        "completeness": 82,
+        "errors": 88,
+        "conciseness": 82,
+        "over_commitment": 72,
+        "emotional_intelligence": 68,
+        "overall": 81,
+        "decision": "valid",
+        "suggestions": [
+          "Confirmer disponibilité dossier",
+          "Ton plus neutre"
+        ]
+      },
+      "judge": {
+        "faithfulness": 86,
+        "completeness": 80,
+        "tone_match": 90,
+        "conciseness": 72,
+        "overall": 83,
+        "strengths": [
+          "Respect strict du registre 'tu' utilisé par Antoine — miroir de formalité parfait entre collègues",
+          "Les deux actions recommandées par Antoine (contact Maître Tessier, consolidation des preuves) sont toutes deux adressées explicitement",
+          "Aucune information inventée : pas de dates, montants ou faits absents de l'email entrant",
+          "La question de clôture sur la disponibilité du dossier RH est pertinente et actionnable"
+        ],
+        "weaknesses": [
+          "La liste des pièces à rassembler (échanges écrits, comptes-rendus d'entretiens préalables, témoignages) est générique et potentiellement condescendante envers Antoine Mercier, juriste social qui maîtrise ces éléments — elle n'apporte pas de valeur ajoutée dans une réponse interne",
+          "Les montants revendiqués (108 000€, 24 500€, 18 000€) ne sont pas repris, même brièvement, alors qu'ils constituent un enjeu financier central que Catherine devrait explicitement accuser réception",
+          "Le ton du corps est légèrement plus formel que celui d'Antoine (formulations assez structurées vs email direct et bref d'Antoine)"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-010",
+      "subject": "Re: [CONFIDENTIEL] Licenciement contesté - M. Renault - Prud'hommes",
+      "draft": "Jeudi 15 janvier à 14h30 me convient. Antoine Mercier, notre juriste interne, sera présent.\n\nD'ici là, nous rassemblerons les éléments que vous mentionnez :\n\n- Les rapports d'audit interne documentant les trois incidents\n- Les attestations des collègues témoins\n- L'intégralité du dossier de procédure disciplinaire, y compris les pièces relatives à l'entretien préalable et à la notification\n\nSur la question transactionnelle, votre fourchette de 40-50 000€ nous semble un point de départ raisonnable si le dossier tient à l'examen. Nous en discuterons après revue des pièces.\n\nÀ jeudi,\n",
+      "elapsed_draft_s": 31.73,
+      "critic": {
+        "coherence": 92,
+        "tone": 88,
+        "completeness": 85,
+        "errors": 72,
+        "conciseness": 92,
+        "over_commitment": 80,
+        "emotional_intelligence": 78,
+        "overall": 83,
+        "decision": "valid",
+        "suggestions": [
+          "Vérifier trois incidents",
+          "Confirmer juriste disponible"
+        ]
+      },
+      "judge": {
+        "faithfulness": 90,
+        "completeness": 88,
+        "tone_match": 80,
+        "conciseness": 88,
+        "overall": 87,
+        "strengths": [
+          "Confirmation explicite du rendez-vous (date, heure) et de la présence d'Antoine Mercier — répond directement à la question de Maître Tessier",
+          "Reprise fidèle des trois catégories de pièces demandées, avec précision sur l'entretien préalable et la notification (valeur ajoutée sans invention)",
+          "Position transactionnelle mesurée et conditionnelle ('si le dossier tient à l'examen'), cohérente avec la prudence de Tessier ('voyons d'abord les pièces')",
+          "Aucune information inventée : montants, noms, dates et faits tous ancrés dans l'historique"
+        ],
+        "weaknesses": [
+          "Ton légèrement en deçà du registre attendu entre DRH et avocat au barreau : 'nous semble un point de départ raisonnable' frôle le familier dans une relation juridique sensible ; un tour plus soutenu ('paraît constituer une base de discussion appropriée') serait plus exact",
+          "Le brouillon répond à Maître Tessier mais ne prévoit pas la coordination interne avec Antoine Mercier (lui signifier la date, lui lister les préparatifs) — cet email interne, suggéré par la réponse de référence, reste à rédiger",
+          "Mention des 'trois incidents' : cohérente avec l'historique, mais leur attribution explicite comme 'documentés' dans ce contexte ajoute une assurance que Tessier n'a pas encore vérifiée — légère sur-certitude"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-013",
+      "subject": "Re: Planning entretiens annuels - Janvier 2026",
+      "draft": "Pas de problème pour le décalage de la Direction des Risques à la semaine du 27. Le nouveau calendrier serait alors :\n\n1. Direction des Risques (F. Delacroix) - semaine du 27 janvier\n2. Service Clientèle - semaine du 3 février\n3. Back Office - semaine du 10 février\n4. Front Office - semaine du 17 février\n\nCela reste compatible avec la clôture de campagne fin février.\n\nBien noté pour les dossiers : priorité aux agents de maîtrise et employés pour que tout soit prêt avant les premières convocations.\n\nJ'attends le planning consolidé vendredi.\n",
+      "elapsed_draft_s": 17.95,
+      "critic": {
+        "coherence": 85,
+        "tone": 88,
+        "completeness": 72,
+        "errors": 35,
+        "conciseness": 88,
+        "over_commitment": 45,
+        "emotional_intelligence": 70,
+        "overall": 69,
+        "decision": "reject",
+        "suggestions": [
+          "Retirer planning inventé",
+          "Vérifier dates sources"
+        ]
+      },
+      "judge": {
+        "faithfulness": 95,
+        "completeness": 93,
+        "tone_match": 86,
+        "conciseness": 90,
+        "overall": 92,
+        "strengths": [
+          "Le nouveau calendrier décalé est restitué intégralement et correctement calculé (27 jan → 3 fév → 10 fév → 17 fév)",
+          "La compatibilité avec la clôture fin février est vérifiée et explicitée — rassure sans inventer de date butoir précise",
+          "Les trois points de Marine (décalage, dossiers, planning vendredi) sont tous adressés",
+          "Structure claire avec liste numérotée, cohérente avec le style de Catherine dans l'email initial"
+        ],
+        "weaknesses": [
+          "Le ton est légèrement plus formel et développé que celui de Catherine dans l'historique : son email original est direct et fonctionnel ('Pourrais-tu...', 'Merci de...'), le brouillon ajoute une couche de reformulation explicative ('Bien noté pour les dossiers') qui n'est pas dans sa voix habituelle",
+          "La phrase sur les agents de maîtrise/employés paraphrase Marine sans ajouter d'instruction concrète — la référence dit 'priorise les services qui passent en premier', ce qui est plus actionnable",
+          "L'acquittement du planning vendredi ('J'attends le planning consolidé vendredi') est passif ; Catherine pourrait confirmer ou ajuster l'échéance si nécessaire"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-015",
+      "subject": "Recrutement Analyste Risques Senior - Besoin urgent",
+      "draft": "Bien reçu. Je lance le recrutement sur la base du profil transmis.\n\nQuelques points à confirmer pour affiner la recherche :\n\n• Le poste est-il ouvert à des profils avec préavis (1 à 3 mois) ?\n• Sourcing privilégié : cabinet, job boards, ou les deux en parallèle ?\n• Le variable est-il plafonné ou discrétionnaire ?\n\nLa semaine du 27 janvier est notée pour les premiers entretiens.\n",
+      "elapsed_draft_s": 37.83,
+      "critic": {
+        "coherence": 88,
+        "tone": 82,
+        "completeness": 72,
+        "errors": 85,
+        "conciseness": 92,
+        "over_commitment": 80,
+        "emotional_intelligence": 60,
+        "overall": 79,
+        "decision": "valid",
+        "suggestions": [
+          "Accuser urgence départ",
+          "Ton légèrement froid"
+        ]
+      },
+      "judge": {
+        "faithfulness": 92,
+        "completeness": 70,
+        "tone_match": 85,
+        "conciseness": 88,
+        "overall": 84,
+        "strengths": [
+          "Aucune information inventée : tout ce qui est affirmé (profil, semaine du 27 janvier) est directement issu de l'email entrant",
+          "Ton parfaitement calibré : registre tu/vous respecté, vocabulaire professionnel et direct en miroir de François Delacroix",
+          "Les trois questions de clarification sont toutes pertinentes et actionnables (préavis, sourcing, variable)",
+          "Corps très concis, sans remplissage ni répétition"
+        ],
+        "weaknesses": [
+          "La demande principale (lancer le recrutement) est certes acquittée, mais le brouillon ne propose aucune étape concrète d'action — il subordonne implicitement le démarrage aux réponses aux trois questions, alors que le processus pourrait être amorcé en parallèle",
+          "Absence d'accusé de réception de la date de départ de Mme Chartier (28 février) qui pourtant conditionne l'urgence signalée par le client",
+          "Aucun horizon de réponse ni délai proposé pour les retours des questions posées, ce qui laisse l'email en attente sans engagement temporel"
+        ],
+        "hallucinations": []
+      }
+    }
+  ]
+}

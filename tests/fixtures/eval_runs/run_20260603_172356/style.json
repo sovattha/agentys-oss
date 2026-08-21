@@ -1,0 +1,149 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "pierre.durand@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Salut l'equipe, / Pierre,",
+      "closing": "Sophie / Merci,"
+    },
+    {
+      "contact_email": "lucas.bernard@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Salut Lucas,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "camille.roux@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Camille,",
+      "closing": "Sophie / Merci,"
+    },
+    {
+      "contact_email": "marie.leclerc@clientcorp.com",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Madame Leclerc, bonjour Claire,",
+      "closing": "Cordialement, / Restant a votre disposition,"
+    },
+    {
+      "contact_email": "sarah.jones@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi Sarah,",
+      "closing": "Best regards, / Best,"
+    },
+    {
+      "contact_email": "nicolas.moreau@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Nicolas,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "ceo@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Marc,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "amelie.petit@fournisseur.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Madame Petit, / Bonjour Amelie,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "contact@prospect-startup.io",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Thomas,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "david.kim@partnertech.co.kr",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi David,",
+      "closing": "Best regards, / Best,"
+    },
+    {
+      "contact_email": "elena.volkov@eupartner.de",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Elena,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "john.smith@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi John,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "claire.fontaine@clientcorp.com",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Claire,",
+      "closing": "Cordialement, / A jeudi !"
+    },
+    {
+      "contact_email": "support@cloudprovider.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi,",
+      "closing": "Regards,"
+    }
+  ],
+  "general_rules": [
+    {
+      "description": "Tutoyer l'equipe interne (collegues pairs et juniors) avec salutations informelles (Salut + prenom) ou directes (prenom seul)"
+    },
+    {
+      "description": "Vouvoyer les contacts externes (clients, fournisseurs, prospects) et les superieurs hierarchiques avec salutations formelles (Bonjour + titre/nom)"
+    },
+    {
+      "description": "Utiliser le francais pour tous les contacts internes et externes francophones ; passer a l'anglais pour les partenaires internationaux (GlobalTech, PartnerTech, EUPartner)"
+    },
+    {
+      "description": "Inclure la signature complete (nom, titre, entreprise, telephone) dans les emails formels vers clients/fournisseurs/direction ; signature minimale (prenom seul ou rien) pour collegues internes"
+    },
+    {
+      "description": "Structurer les emails longs avec listes numerotees ou a puces pour les points d'action, les metriques ou les recapitulatifs de reunion"
+    },
+    {
+      "description": "Utiliser le jargon technique SaaS/cloud sans definition (ARR, NPS, ROI, SLA, mTLS, GraphQL, OAuth2, PKCE, WAF, DPA, GDPR) - l'utilisateur considere ces termes comme acquis par ses interlocuteurs"
+    },
+    {
+      "description": "Joindre systematiquement les documents en piece jointe (specs, budgets, propositions, contrats) plutot que de les inclure dans le corps du message"
+    },
+    {
+      "description": "Proposer des creneaux de reunion avec horaires precis et format (visioconference, salle physique) plutot que de demander une disponibilite ouverte"
+    },
+    {
+      "description": "Recapituler les points abordes et les actions a suivre (avec responsables) dans les emails de suivi post-reunion ou de validation"
+    },
+    {
+      "description": "Utiliser des formules de politesse progressives : 'Merci,' ou 'Merci de...' pour les demandes directes aux collegues ; 'Restant a votre disposition' ou 'Dans l'attente de votre retour' pour les clients formels"
+    }
+  ],
+  "forbidden_phrases": []
+}

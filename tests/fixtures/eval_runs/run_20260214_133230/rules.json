@@ -1,0 +1,183 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "pierre.durand@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Pierre,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "lucas.bernard@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "greeting": "Salut Lucas,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "marie.leclerc@clientcorp.com",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Madame Leclerc,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "camille.roux@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Merci Camille,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "sarah.jones@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi Sarah,",
+      "closing": "Best,"
+    },
+    {
+      "contact_email": "nicolas.moreau@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Nicolas,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "ceo@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Marc,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "amelie.petit@fournisseur.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Madame Petit,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "contact@prospect-startup.io",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Thomas,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "david.kim@partnertech.co.kr",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi David,",
+      "closing": "Best,"
+    },
+    {
+      "contact_email": "elena.volkov@eupartner.de",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Elena,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "claire.fontaine@clientcorp.com",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Claire,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "john.smith@globaltech.com",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Hi John,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "support@cloudprovider.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi,",
+      "closing": "Regards,"
+    }
+  ],
+  "general_rules": [
+    {
+      "name": "signature_formal",
+      "description": "Use full signature block with title and phone for external clients, suppliers, and C-suite",
+      "trigger": "External email or formal internal communication (CEO, finance, suppliers, prospects)",
+      "action": "End with 'Sophie Martin | Chef de projet - Division Digitale | TechCorp | +33 6 12 34 56 78'"
+    },
+    {
+      "name": "signature_casual",
+      "description": "Use first name only for direct team members in casual exchanges",
+      "trigger": "Internal email to direct reports or team members in casual tone",
+      "action": "Sign with just 'Sophie' or 'Sophi'"
+    },
+    {
+      "name": "language_switch_english",
+      "description": "Switch to English for international partners and non-French contacts",
+      "trigger": "Email to .com, .co.kr, .de domains or international companies",
+      "action": "Write entire email in English with appropriate English greetings"
+    },
+    {
+      "name": "structured_updates",
+      "description": "Use numbered lists and clear sections for status reports, planning, and updates",
+      "trigger": "Sprint planning, status updates, meeting recaps, multi-point emails",
+      "action": "Structure with numbered lists, clear sections (Completed/In progress/Blocker), and bullet points"
+    },
+    {
+      "name": "cc_relevant_people",
+      "description": "CC technical lead Pierre for architecture discussions and client technical questions",
+      "trigger": "External client questions about technical aspects or complex integrations",
+      "action": "Add Pierre Durand in CC with explicit mention in email body"
+    },
+    {
+      "name": "action_items_section",
+      "description": "End client emails and meeting recaps with explicit 'Actions à suivre' section",
+      "trigger": "Client demos, meeting recaps, project updates with follow-up tasks",
+      "action": "Add 'Actions à suivre:' section with clear bullet points"
+    },
+    {
+      "name": "vouvoiement_external",
+      "description": "Use formal 'vous' form with external clients, suppliers, prospects, and senior management",
+      "trigger": "Email to external contacts or C-suite (CEO, external clients, suppliers)",
+      "action": "Use 'vous', 'votre', formal phrasing"
+    },
+    {
+      "name": "tutoiement_team",
+      "description": "Use casual 'tu' form with direct team members (Pierre, Lucas, Camille)",
+      "trigger": "Internal email to direct reports and close colleagues",
+      "action": "Use 'tu', 'ton', casual phrasing"
+    },
+    {
+      "name": "professional_title_external",
+      "description": "Use professional titles (Madame, Monsieur) for initial contact with external formal contacts",
+      "trigger": "First or early emails to external clients, suppliers, or formal business contacts",
+      "action": "Address as 'Madame [LastName]' or 'Monsieur [LastName]'"
+    },
+    {
+      "name": "concise_acknowledgments",
+      "description": "Keep simple acknowledgments extremely brief",
+      "trigger": "Confirming receipt, simple agreements, quick status updates to team",
+      "action": "2-3 lines max, just 'Parfait', 'OK', 'Merci' + action confirmation"
+    },
+    {
+      "name": "technical_precision",
+      "description": "Be specific and technical when discussing implementations with dev team",
+      "trigger": "Code reviews, technical discussions, architecture decisions with developers",
+      "action": "Use precise technical terms, mention file names, line numbers, specific technologies"
+    },
+    {
+      "name": "follow_up_questions",
+      "description": "End emails with clear next-step questions when coordination needed",
+      "trigger": "Planning discussions, proposal reviews, scheduling needs",
+      "action": "End with specific question like 'Cette date vous convient-elle ?' or 'Ton avis ?'"
+    }
+  ],
+  "forbidden_phrases": [],
+  "auto_reply_patterns": [
+    "VPN/IT support tickets: brief confirmation when issue resolved ('Merci, ça fonctionne')",
+    "Simple absence acknowledgment: 'Pas de souci, c'est noté. Profite bien !'",
+    "Quick agreement on technical decisions: 'Parfait, on part là-dessus' or 'OK pour [decision]'",
+    "Sprint completion acknowledgment: 'Super ! Si tu finis tôt, [next task suggestion]'"
+  ]
+}

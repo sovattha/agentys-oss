@@ -1,0 +1,286 @@
+{
+  "description": "Expected outputs from the onboarding KB analysis of test_emails_hr_director.json",
+  "expected_profile": {
+    "user_email": "c.carriere@bcp-banque.fr",
+    "user_name": "Catherine Carrière",
+    "signature": {
+      "name": "Catherine Carrière",
+      "title": "Directrice des Ressources Humaines",
+      "company": "Banque Centrale de Paris"
+    },
+    "tone": {
+      "default_tone": "formal",
+      "greeting_styles": {
+        "formal_fr": "Monsieur le Directeur Général, / Madame, / Monsieur,",
+        "semi_formal_fr": "Bonjour [Prénom],"
+      },
+      "closing_styles": {
+        "formal_fr": "Cordialement,",
+        "semi_formal_fr": "Bien cordialement,"
+      },
+      "uses_emoji": false,
+      "average_response_length": "medium-long"
+    },
+    "languages": [
+      "fr"
+    ],
+    "preferred_name": "Catherine",
+    "addressing": "vous",
+    "language_variant": "fr-FR"
+  },
+  "expected_contacts": [
+    {
+      "email": "g.montfort@bcp-banque.fr",
+      "name": "Gérard Montfort",
+      "company": "Banque Centrale de Paris",
+      "title": "Directeur Général",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 12
+    },
+    {
+      "email": "v.sanchez@bcp-banque.fr",
+      "name": "Valérie Sanchez",
+      "company": "Banque Centrale de Paris",
+      "title": "Responsable Paie",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 12
+    },
+    {
+      "email": "a.mercier@bcp-banque.fr",
+      "name": "Antoine Mercier",
+      "company": "Banque Centrale de Paris",
+      "title": "Juriste social",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 11
+    },
+    {
+      "email": "m.petit@bcp-banque.fr",
+      "name": "Marine Petit",
+      "company": "Banque Centrale de Paris",
+      "title": "Assistante RH",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 10
+    },
+    {
+      "email": "b.lefevre@cgt-bcp.fr",
+      "name": "Bruno Lefèvre",
+      "company": "CGT-BCP",
+      "title": "Délégué syndical CGT",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 8
+    },
+    {
+      "email": "s.morel@cgt-bcp.fr",
+      "name": "Sylvie Morel",
+      "company": "CGT-BCP",
+      "title": "Secrétaire du CSE",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 7
+    },
+    {
+      "email": "c.tessier@tessier-avocats.fr",
+      "name": "Maître Caroline Tessier",
+      "company": "Cabinet Tessier & Associés",
+      "title": "Avocat au Barreau de Paris",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 6
+    },
+    {
+      "email": "f.delacroix@bcp-banque.fr",
+      "name": "François Delacroix",
+      "company": "Banque Centrale de Paris",
+      "title": "Directeur des Risques",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 6
+    },
+    {
+      "email": "m.dubois@bcp-banque.fr",
+      "name": "Marie Dubois",
+      "company": null,
+      "title": "Candidate Responsable Conformité",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 5
+    },
+    {
+      "email": "i.fontaine@formapro.fr",
+      "name": "Isabelle Fontaine",
+      "company": "FormaPro",
+      "title": "Directrice Commerciale",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 4
+    },
+    {
+      "email": "p.laurent@medecine-travail.fr",
+      "name": "Dr. Philippe Laurent",
+      "company": "Service de Santé au Travail Interentreprises",
+      "title": "Médecin du travail",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 3
+    }
+  ],
+  "expected_rules": {
+    "contact_rules": [
+      {
+        "contact_email": "g.montfort@bcp-banque.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Monsieur le Directeur Général,",
+        "closing": "Cordialement,"
+      },
+      {
+        "contact_email": "v.sanchez@bcp-banque.fr",
+        "tone": "semi-formal",
+        "language": "fr",
+        "greeting": "Bonjour Valérie,",
+        "closing": "Bien cordialement,"
+      },
+      {
+        "contact_email": "a.mercier@bcp-banque.fr",
+        "tone": "semi-formal",
+        "language": "fr",
+        "greeting": "Bonjour Antoine,",
+        "closing": "Bien cordialement,"
+      },
+      {
+        "contact_email": "m.petit@bcp-banque.fr",
+        "tone": "semi-formal",
+        "language": "fr",
+        "greeting": "Bonjour Marine,",
+        "closing": "Bien cordialement,"
+      },
+      {
+        "contact_email": "f.delacroix@bcp-banque.fr",
+        "tone": "semi-formal",
+        "language": "fr",
+        "greeting": "Bonjour François,",
+        "closing": "Bien cordialement,"
+      },
+      {
+        "contact_email": "b.lefevre@cgt-bcp.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Monsieur Lefèvre,",
+        "closing": "Cordialement,"
+      },
+      {
+        "contact_email": "s.morel@cgt-bcp.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Madame Morel,",
+        "closing": "Cordialement,"
+      },
+      {
+        "contact_email": "c.tessier@tessier-avocats.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Chère Maître,",
+        "closing": "Cordialement,"
+      },
+      {
+        "contact_email": "p.laurent@medecine-travail.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Docteur Laurent,",
+        "closing": "Cordialement,"
+      },
+      {
+        "contact_email": "i.fontaine@formapro.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Madame Fontaine,",
+        "closing": "Cordialement,"
+      },
+      {
+        "contact_email": "m.dubois@bcp-banque.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Madame Dubois,",
+        "closing": "Cordialement,"
+      }
+    ],
+    "general_rules": [
+      {
+        "name": "confidentiel_marker",
+        "description": "Ajouter [CONFIDENTIEL] dans l'objet pour les emails contenant des données sensibles (salaires, primes, procédures disciplinaires, contentieux)",
+        "trigger": "Email contenant des informations salariales, disciplinaires, médicales ou contentieuses",
+        "action": "Préfixer l'objet avec [CONFIDENTIEL]"
+      },
+      {
+        "name": "bcc_avocat",
+        "description": "Mettre l'avocate externe en BCC sur les emails internes relatifs au contentieux",
+        "trigger": "Email interne concernant le dossier Prud'hommes ou contentieux sensible",
+        "action": "Ajouter c.tessier@tessier-avocats.fr en BCC"
+      },
+      {
+        "name": "bcc_direction",
+        "description": "Mettre le DG en BCC sur les réponses aux syndicats sur des sujets sensibles",
+        "trigger": "Réponse aux délégués syndicaux sur des sujets potentiellement conflictuels",
+        "action": "Ajouter g.montfort@bcp-banque.fr en BCC"
+      },
+      {
+        "name": "forward_with_context",
+        "description": "Transférer les emails pertinents avec une note de contexte et des instructions",
+        "trigger": "Email reçu nécessitant l'action ou l'information d'un collègue",
+        "action": "Transférer avec résumé, points de vigilance et demande d'action spécifique"
+      },
+      {
+        "name": "signature_complete",
+        "description": "Utiliser systématiquement la signature complète avec mention de confidentialité",
+        "trigger": "Tout email envoyé",
+        "action": "Apposer la signature complète incluant titre, entreprise, téléphone et mention de confidentialité"
+      },
+      {
+        "name": "vouvoiement_externe",
+        "description": "Utiliser le vouvoiement avec tous les interlocuteurs externes et les représentants syndicaux",
+        "trigger": "Email à un contact externe, un avocat, un médecin du travail, un organisme de formation, un candidat ou un délégué syndical",
+        "action": "Maintenir le vouvoiement et le ton formel"
+      },
+      {
+        "name": "tutoiement_equipe_rh",
+        "description": "Utiliser le tutoiement avec les membres de l'équipe RH interne (Valérie, Antoine, Marine, François)",
+        "trigger": "Email à un collègue interne de confiance",
+        "action": "Utiliser le tutoiement et un ton semi-formel"
+      },
+      {
+        "name": "structured_emails",
+        "description": "Structurer les emails avec des listes numérotées et des points clairs",
+        "trigger": "Email contenant plusieurs sujets, demandes ou actions",
+        "action": "Utiliser des listes numérotées, des titres de section si nécessaire"
+      },
+      {
+        "name": "cc_juridique_nao",
+        "description": "Mettre le juriste social en CC sur les communications NAO et contentieuses",
+        "trigger": "Email relatif à la NAO ou au contentieux impliquant des aspects juridiques",
+        "action": "Ajouter a.mercier@bcp-banque.fr en CC"
+      }
+    ],
+    "forbidden_phrases": []
+  },
+  "expected_statistics": {
+    "total_emails": 70,
+    "sent_emails": 35,
+    "received_emails": 35,
+    "threads": 28,
+    "french_emails": 70,
+    "english_emails": 0,
+    "emails_with_signature": 69,
+    "emails_with_attachments": 21,
+    "emails_with_bcc": 3,
+    "forwarded_emails": 4,
+    "confidentiel_subjects": 20,
+    "unique_contacts": 11,
+    "internal_contacts": 5,
+    "external_contacts": 6
+  }
+}

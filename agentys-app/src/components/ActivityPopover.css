@@ -1,0 +1,139 @@
+/* ============================================================================
+   ACTIVITY POPOVER — Hover detail panel for background activities
+   ============================================================================ */
+
+.activity-popover {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+  min-width: 200px;
+  max-width: 280px;
+  padding: var(--space-3);
+  background: var(--surface-elevated, var(--surface-primary));
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  z-index: 100;
+  animation: popoverFadeIn 0.15s ease-out;
+}
+
+@keyframes popoverFadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(4px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ============================================================================
+   HEADER
+   ============================================================================ */
+
+.activity-popover__header {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ============================================================================
+   LIST
+   ============================================================================ */
+
+.activity-popover__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-height: 240px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-default) transparent;
+}
+
+.activity-popover__list::-webkit-scrollbar { width: 4px; }
+.activity-popover__list::-webkit-scrollbar-track { background: transparent; }
+.activity-popover__list::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 99px;
+}
+
+.activity-popover__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* ============================================================================
+   DOT — Color-coded by activity type
+   ============================================================================ */
+
+.activity-popover__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+  background: var(--accent-primary);
+}
+
+.activity-popover__dot[data-type="sync"] {
+  background: var(--accent-primary);
+}
+
+.activity-popover__dot[data-type="draft"] {
+  background: #8b5cf6;
+}
+
+.activity-popover__dot[data-type="critique"] {
+  background: #22c55e;
+}
+
+.activity-popover__dot[data-type="classify"] {
+  background: #f59e0b;
+}
+
+.activity-popover__dot[data-type="learning"] {
+  background: #ec4899;
+}
+
+.activity-popover__dot[data-type="cleanup"],
+.activity-popover__dot[data-type="followup"] {
+  background: var(--text-muted);
+}
+
+/* ============================================================================
+   LABEL
+   ============================================================================ */
+
+.activity-popover__label {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================================================
+   PROGRESS BAR
+   ============================================================================ */
+
+.activity-popover__progress {
+  width: 40px;
+  height: 3px;
+  background: var(--surface-secondary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.activity-popover__progress-bar {
+  height: 100%;
+  background: var(--accent-primary);
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease-out;
+}

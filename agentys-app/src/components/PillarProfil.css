@@ -1,0 +1,46 @@
+.pillar-profil {
+  padding: 0;
+}
+
+.pillar-profil-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pillar-profil-preview {
+  margin-top: 20px;
+  padding: 14px 18px;
+  background: color-mix(in srgb, var(--accent-primary) 8%, var(--bg-secondary));
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 15%, var(--border-default));
+  border-radius: var(--radius-md, 10px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pillar-profil-preview--empty {
+  background: var(--bg-secondary);
+  border-color: var(--border-default);
+}
+
+.pillar-profil-preview-label {
+  font-size: var(--font-size-xs, 0.68rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+}
+
+.pillar-profil-preview-value {
+  font-size: var(--font-size-sm, 0.82rem);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.pillar-profil-preview--empty .pillar-profil-preview-value {
+  color: var(--text-placeholder);
+  font-style: italic;
+  font-weight: 400;
+}
+

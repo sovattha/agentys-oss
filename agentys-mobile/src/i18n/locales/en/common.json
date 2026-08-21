@@ -1,0 +1,15 @@
+{
+  "cancel": "Cancel",
+  "ok": "OK",
+  "close": "Close",
+  "back": "Back",
+  "retry": "Retry",
+  "send": "send",
+  "loading": "Loading",
+  "error": "Error",
+  "continue": "Continue",
+  "delete": "Delete",
+  "failed": "Failed",
+  "and": " and ",
+  "toastDismissHint": "Tap to dismiss"
+}

@@ -1,0 +1,61 @@
+{
+  "profile": {
+    "completeness": 95,
+    "precision": 95,
+    "usefulness": 95,
+    "overall": 95,
+    "missing": [],
+    "incorrect": [
+      "active_hours: '08:00-17:00' (should be '08:00-18:00' - missing last hour of workday)",
+      "response_time_avg: '< 2h' (should be '< 1h' - less responsive timing)"
+    ],
+    "details": "The system output is nearly perfect, matching the ground truth on all major fields including user identity, both language signatures, tone settings, greeting/closing styles, and language preferences. Only two minor discrepancies exist: active_hours shows '08:00-17:00' instead of '08:00-18:00' (1 hour difference), and response_time_avg shows '< 2h' instead of '< 1h'. These are small behavioral preference differences that have minimal impact on email draft generation quality. All structural elements, signature formatting, tone rules, and language-specific greetings are correctly captured."
+  },
+  "knowledge": {
+    "completeness": 85,
+    "precision": 88,
+    "usefulness": 90,
+    "overall": 88,
+    "missing": [
+      "Pierre Durand topics: 'demo', 'recrutement', 'PartnerTech' (has 'architecture technique' but not exact match)",
+      "Lucas Bernard topics: 'conges', 'sprint', 'projet Alpha'",
+      "Camille Roux topics: 'pentest' (has 'vulnerabilites' but missing pentest specifically)",
+      "Marie Leclerc topics: 'kick-off'",
+      "Nicolas Moreau topics: 'validation achat WAF' phrased differently",
+      "Terminology: 'Sprint', 'Daily', 'Retro' definitions",
+      "Ground truth project 'Migration Cloud' is missing entirely from system output",
+      "Ground truth project 'Partenariat GlobalTech' vs system 'GlobalTech Partnership' (semantic match but different naming)"
+    ],
+    "incorrect": [
+      "Lucas Bernard title: system shows 'Developer', ground truth shows null (hallucinated title)",
+      "Marc Dupont title: 'CEO' vs 'PDG' (semantically same but different term/language)",
+      "Project 'Projet Alpha' contacts: system includes 'claire.fontaine@clientcorp.com', ground truth has 'marie.leclerc@clientcorp.com' instead",
+      "System creates 'PartnerTech Integration' as separate project; ground truth only mentions PartnerTech as topic under Pierre Durand",
+      "Some topic variations that don't exactly match (e.g., 'integration technique' vs 'technical integration', 'mutual TLS' vs 'mTLS')",
+      "Added 'frequent_topics' array not requested in ground truth (though helpful for usefulness)"
+    ],
+    "details": "The system output captures most contacts (13/13 present, though 1 added that wasn't requested), all major projects with reasonable descriptions, and comprehensive terminology. Key strengths: accurate contact details, relationship types, tone preferences, and interaction counts. Minor gaps: some topics missing from contacts (e.g., 'demo', 'recrutement', 'pentest' for specific contacts), and a few title discrepancies. The output adds helpful context (frequent_topics section) and expands terminology with useful definitions. Overall, this would generate high-quality, contextually appropriate email drafts."
+  },
+  "rules": {
+    "completeness": 88,
+    "precision": 82,
+    "usefulness": 85,
+    "overall": 85,
+    "missing": [
+      "pierre.durand: 'Salut Pierre,' greeting variant",
+      "pierre.durand: '(name only or none)' closing instruction",
+      "nicolas.moreau: 'Sophie Martin' closing variant",
+      "auto_reply: 'JIRA notification: forward to relevant team member with action item'"
+    ],
+    "incorrect": [
+      "pierre.durand: 'Bonjour Pierre,' greeting not in ground truth",
+      "pierre.durand: 'Salut l'equipe,' greeting not in ground truth",
+      "pierre.durand: 'Sophie / Sophi' closing contradicts '(name only or none)'",
+      "contact@prospect-startup.io: 'Au plaisir,' closing not in ground truth",
+      "auto_reply: 'Probleme IT/VPN' pattern not in ground truth",
+      "auto_reply: 'Ticket support externe' pattern not in ground truth (GT has JIRA instead)"
+    ],
+    "details": "The system captured all 14 contacts and 8 general rules correctly. However, there are minor deviations: (1) Pierre Durand's greeting includes 'Bonjour Pierre' not in GT and 'Salut l'equipe' instead of 'Salut Pierre', plus closing shows 'Sophie/Sophi' instead of 'name only or none'; (2) Nicolas Moreau missing 'Sophie Martin' closing variant; (3) contact@prospect-startup.io has extra 'Au plaisir' closing not in GT; (4) Auto-reply patterns are completely different - GT mentions JIRA notifications but system has IT/VPN problems. General rules are accurate and detailed. Overall very usable for drafting emails with high fidelity to communication style."
+  },
+  "overall": 89
+}

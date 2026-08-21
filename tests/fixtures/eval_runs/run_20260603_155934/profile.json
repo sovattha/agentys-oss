@@ -1,0 +1,29 @@
+{
+  "user_email": "james.conseil@strategyco.com",
+  "user_name": "James Conseil",
+  "preferred_name": "James",
+  "profession": "management consultant",
+  "signature": {
+    "name": "James Conseil",
+    "title": "Senior Consultant",
+    "company": "StrategyCo"
+  },
+  "tone": {
+    "default_tone": "formal",
+    "addressing": null,
+    "greeting_styles": {
+      "formal_en": "Dear {first_name},",
+      "semi_formal_en": "Hi {first_name},"
+    },
+    "closing_styles": {
+      "formal_en": "Best regards,",
+      "semi_formal_en": "Cheers,"
+    },
+    "average_response_length": "medium-long"
+  },
+  "languages": [
+    "en"
+  ],
+  "language_variant": "en-GB",
+  "profession_confirmed": false
+}

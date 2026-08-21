@@ -1,0 +1,183 @@
+# Agentys - Build and Release Workflow
+# Builds DMG (macOS), MSI/NSIS (Windows), AppImage/deb (Linux)
+
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install backend dependencies
+        run: pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Backend release checks
+        run: |
+          python scripts/check_alembic_model_drift.py
+          pytest \
+            tests/db/test_alembic_schema_contract.py \
+            tests/api/test_privacy_api.py \
+            tests/audit_fixes/test_q_13_admin_llm_stats.py \
+            tests/audit_fixes/test_q_17_admin_cost_cap.py \
+            -q
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Enable corepack (yarn 4)
+        run: corepack enable
+
+      - name: Install frontend dependencies
+        working-directory: agentys-app
+        run: yarn install --immutable
+
+      - name: Frontend TypeScript check
+        working-directory: agentys-app
+        run: yarn tsc -b --noEmit
+
+  create-release:
+    needs: quality-gate
+    runs-on: ubuntu-latest
+    outputs:
+      release_id: ${{ steps.create-release.outputs.id }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Create Release
+        id: create-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Agentys ${{ github.ref_name }}
+          draft: true
+          prerelease: false
+          body: |
+            ## Agentys ${{ github.ref_name }}
+
+            ### Installation
+
+            | Platform | Download |
+            |----------|----------|
+            | macOS (Intel) | `Agentys_x64.dmg` |
+            | macOS (Apple Silicon) | `Agentys_aarch64.dmg` |
+            | Windows | `Agentys_x64-setup.exe` or `Agentys_x64.msi` |
+            | Linux | `Agentys_amd64.AppImage` or `Agentys_amd64.deb` |
+
+            ### What's New
+
+            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
+
+  build-tauri:
+    needs: create-release
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # macOS Intel
+          - platform: macos-latest
+            target: x86_64-apple-darwin
+            args: --target x86_64-apple-darwin
+          # macOS Apple Silicon
+          - platform: macos-latest
+            target: aarch64-apple-darwin
+            args: --target aarch64-apple-darwin
+          # Windows
+          - platform: windows-latest
+            target: x86_64-pc-windows-msvc
+            args: ''
+          # Linux
+          - platform: ubuntu-22.04
+            target: x86_64-unknown-linux-gnu
+            args: ''
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Enable corepack (yarn 4)
+        run: corepack enable
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Install Linux dependencies
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libwebkit2gtk-4.1-dev \
+            libappindicator3-dev \
+            librsvg2-dev \
+            patchelf \
+            libssl-dev \
+            libgtk-3-dev
+
+      - name: Install frontend dependencies
+        working-directory: agentys-app
+        run: yarn install --immutable
+
+      - name: Compute app version
+        shell: bash
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+          else
+            PKG_VERSION=$(node -p "require('./agentys-app/package.json').version")
+            VERSION="${PKG_VERSION}-dev.${GITHUB_SHA:0:7}"
+          fi
+          echo "VITE_APP_VERSION=${VERSION}" >> "$GITHUB_ENV"
+          echo "Computed VITE_APP_VERSION=${VERSION}"
+
+      - name: Build Tauri app
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VITE_APP_VERSION: ${{ env.VITE_APP_VERSION }}
+        with:
+          projectPath: agentys-app
+          releaseId: ${{ needs.create-release.outputs.release_id }}
+          args: ${{ matrix.args }}
+
+  publish-release:
+    needs: [create-release, build-tauri]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish Release
+        uses: actions/github-script@v9
+        with:
+          script: |
+            await github.rest.repos.updateRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: ${{ needs.create-release.outputs.release_id }},
+              draft: false
+            })

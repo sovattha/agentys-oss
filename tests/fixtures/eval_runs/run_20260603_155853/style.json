@@ -1,0 +1,125 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "g.montfort@bcp-banque.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur le Directeur Général,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "v.sanchez@bcp-banque.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Bonjour Valérie,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "m.petit@bcp-banque.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Bonjour Marine,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "b.lefevre@cgt-bcp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Lefèvre,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "a.mercier@bcp-banque.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Bonjour Antoine,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "f.delacroix@bcp-banque.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Bonjour François,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "c.tessier@tessier-avocats.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Chère Maître,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "i.fontaine@formapro.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Madame Fontaine,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "m.dubois@bcp-banque.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Madame Dubois,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "s.morel@cgt-bcp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Madame Morel,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "p.laurent@medecine-travail.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Docteur Laurent,",
+      "closing": "Cordialement,"
+    }
+  ],
+  "general_rules": [
+    {
+      "description": "Tutoyer les collègues internes de même niveau (équipe RH, managers opérationnels) avec salutation « Bonjour [Prénom] » et closing « Bien cordialement »"
+    },
+    {
+      "description": "Vouvoyer la hiérarchie (DG), les partenaires externes (avocats, prestataires, syndicats) et les candidats/nouveaux salariés avec salutation formelle et closing « Cordialement »"
+    },
+    {
+      "description": "Structurer les emails importants (NAO, contentieux, recrutement) avec numérotation des points et sous-points pour clarté administrative"
+    },
+    {
+      "description": "Inclure systématiquement la signature complète (titre, entreprise, téléphone, mention confidentialité) dans les emails formels et vers l'externe"
+    },
+    {
+      "description": "Utiliser le marqueur [CONFIDENTIEL] en objet pour les dossiers sensibles (paie, contentieux, négociations syndicales, recrutement)"
+    },
+    {
+      "description": "Demander explicitement les actions attendues avec formules « Peux-tu... », « Merci de... », « Pourrais-tu... » auprès des collaborateurs internes"
+    },
+    {
+      "description": "Justifier les décisions RH par des références légales, réglementaires ou contractuelles (convention collective, délais légaux, avis médical) dans les communications formelles"
+    },
+    {
+      "description": "Utiliser le jargon RH/bancaire sans définition : NAO, CSE, LCB-FT, RGPD, ACPR, Bâle III/IV, KYC, masse salariale, turnover, convention collective, faute grave, reclassement, procédure disciplinaire"
+    },
+    {
+      "description": "Transférer les documents sources (avis médical, revendications syndicales, devis) en bloc « Message transféré » plutôt que de les résumer"
+    },
+    {
+      "description": "Proposer des délais précis et des calendriers détaillés (semaines, dates) pour les processus RH (entretiens, recrutement, formation, négociation)"
+    }
+  ],
+  "forbidden_phrases": []
+}

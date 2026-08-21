@@ -1,0 +1,458 @@
+.pillar-context-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent-primary) 8%, transparent) 0%,
+    color-mix(in srgb, var(--accent-primary) 3%, transparent) 100%);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+
+.pillar-context-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--accent-primary);
+  opacity: 0.7;
+}
+
+.pillar-context-banner p {
+  margin: 0;
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--text-tertiary);
+  line-height: 1.45;
+}
+
+.pillar-section-header {
+  margin: 0 0 14px;
+  display: block;
+}
+
+.pillar-section-title {
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  line-height: 1.2;
+  display: block;
+}
+
+.pillar-section-subtitle {
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  display: block;
+  margin-top: 4px;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+.pillar-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pillar-field-label {
+  font-size: var(--font-size-xs, 0.72rem);
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: 0.01em;
+}
+
+.pillar-field-input {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md, 8px);
+  padding: 10px 12px;
+  min-height: 38px;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm, 0.82rem);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.pillar-field-input:focus {
+  border-color: var(--accent-primary);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent-primary) 10%, transparent),
+    0 0 12px color-mix(in srgb, var(--accent-primary) 6%, transparent);
+}
+
+.pillar-field-input:disabled,
+.pillar-field-select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: color-mix(in srgb, var(--bg-secondary) 60%, transparent);
+}
+
+.pillar-field-select {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md, 8px);
+  padding: 10px 12px;
+  min-height: 38px;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm, 0.82rem);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+
+.pillar-field-select:focus {
+  border-color: var(--accent-primary);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent-primary) 10%, transparent),
+    0 0 12px color-mix(in srgb, var(--accent-primary) 6%, transparent);
+}
+
+.pillar-field-hint {
+  font-size: var(--font-size-2xs, 0.68rem);
+  color: var(--text-placeholder);
+  line-height: 1.3;
+}
+
+.pillar-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.pillar-empty-state {
+  text-align: center;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border: 1px dashed color-mix(in srgb, var(--accent-primary) 15%, var(--border-default));
+  border-radius: var(--radius-xl, 16px);
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent-primary) 4%, transparent) 0%,
+    color-mix(in srgb, var(--accent-primary) 1%, transparent) 100%);
+  animation: slideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.pillar-empty-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg, 14px);
+  background: color-mix(in srgb, var(--accent-primary) 10%, var(--bg-secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-primary);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: pillarEmptyFloat 3.5s ease-in-out infinite;
+  box-shadow:
+    0 2px 10px color-mix(in srgb, var(--accent-primary) 10%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--accent-primary) 15%, transparent);
+}
+
+@keyframes pillarEmptyFloat {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.9; }
+  50%      { transform: translateY(-4px) scale(1.02); opacity: 1; }
+}
+
+.pillar-empty-title {
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+}
+
+.pillar-empty-hint {
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--text-placeholder);
+  max-width: 340px;
+  line-height: 1.5;
+}
+
+/* ── Per-section color variants ── */
+.pillar-empty-faq .pillar-empty-icon {
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 8%, transparent);
+}
+
+.pillar-empty-tech .pillar-empty-icon {
+  color: var(--info, #3b82f6);
+  background: color-mix(in srgb, var(--info, #3b82f6) 8%, transparent);
+}
+
+.pillar-empty-learned .pillar-empty-icon {
+  color: var(--accent-secondary, #d97706);
+  background: color-mix(in srgb, var(--accent-secondary, #d97706) 8%, transparent);
+}
+
+.pillar-delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-placeholder);
+  font-size: var(--font-size-sm);
+  padding: 4px 6px;
+  border-radius: var(--radius-full);
+  transition: all 0.15s;
+}
+
+/* ── Add button with shimmer sweep ── */
+.pillar-add-btn {
+  background: none;
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-md, 8px);
+  padding: 10px 14px;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.pillar-add-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent-primary) 8%, transparent) 50%,
+    transparent 100%);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.pillar-add-btn:active {
+  transform: scale(var(--scale-press));
+}
+
+/* ── Toggle switch ── */
+.pillar-toggle {
+  position: relative;
+  width: 32px;
+  height: 18px;
+  min-height: auto;
+  padding: 0;
+  background: var(--border-default);
+  border-radius: 9px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.pillar-toggle.active {
+  background: var(--accent-primary);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent-primary) 30%, transparent);
+}
+
+.pillar-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  transition: transform 0.2s;
+}
+
+.pillar-toggle.active::after {
+  transform: translateX(14px);
+}
+
+/* ── Confidence bar with gradient ── */
+.pillar-confidence-bar {
+  height: 6px;
+  background: var(--border-subtle);
+  border-radius: 3px;
+  overflow: hidden;
+  width: 60px;
+}
+
+.pillar-confidence-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-primary-hover));
+  box-shadow: 0 0 4px color-mix(in srgb, var(--accent-primary) 20%, transparent);
+  transition: width 0.3s;
+}
+
+.pillar-scope-badge {
+  font-size: 0.62rem;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  color: var(--accent-primary);
+}
+
+.pillar-undo-toast {
+  position: sticky;
+  bottom: 0;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-default);
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.pillar-undo-btn {
+  background: none;
+  border: none;
+  color: var(--accent-primary);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+/* ============================================================================
+   FOOTER — Save bar (TrainingPage)
+   ============================================================================ */
+
+.training-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.training-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Save-bar buttons migrated to the shared <Button> component (ui/button.tsx).
+   Only the focus-visible / :active groupings for sibling training-* controls
+   remain below. */
+
+.pillar-add-btn:focus-visible,
+.pillar-delete-btn:focus-visible,
+.pillar-toggle:focus-visible,
+.training-refresh-btn:focus-visible,
+.training-deep-btn:focus-visible,
+.training-danger-zone-btn:focus-visible,
+.training-page-back:focus-visible,
+.pillar-nav-card:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-md, 8px);
+}
+
+.pillar-delete-btn:active,
+.training-danger-zone-btn:active:not(:disabled) {
+  transform: scale(var(--scale-press, 0.97));
+}
+
+/* Issue #187 — StyleObservedFromOutbox */
+.style-observed {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: var(--surface-elevated, rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.style-observed-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+.style-observed-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.style-observed-metric dt {
+  font-size: 12px;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.style-observed-metric dd {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.style-observed-metric dd strong {
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary, inherit);
+}
+
+.style-observed-hint {
+  font-size: 11px;
+  color: var(--text-tertiary, rgba(255, 255, 255, 0.45));
+}
+
+.style-observed-empty {
+  font-size: 13px;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+  margin: 0;
+}
+
+.style-observed-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.style-observed-reanalyze {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-strong, rgba(255, 255, 255, 0.12));
+  background: transparent;
+  color: var(--text-primary, inherit);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 150ms ease, transform 100ms ease;
+}
+
+.style-observed-reanalyze:active:not(:disabled) {
+  transform: scale(var(--scale-press, 0.97));
+}
+
+.style-observed-reanalyze:disabled {
+  opacity: 0.5;
+  cursor: progress;
+}
+
+.style-observed-error {
+  padding: 8px 12px;
+  background: var(--surface-danger, rgba(255, 59, 48, 0.1));
+  border: 1px solid var(--border-danger, rgba(255, 59, 48, 0.3));
+  border-radius: 8px;
+  color: var(--text-danger, #ff3b30);
+  font-size: 13px;
+}

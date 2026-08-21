@@ -1,0 +1,125 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "g.montfort@bcp-banque.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur le Directeur Général,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "v.sanchez@bcp-banque.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Bonjour Valérie,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "m.petit@bcp-banque.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Bonjour Marine,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "b.lefevre@cgt-bcp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Lefèvre,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "a.mercier@bcp-banque.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Bonjour Antoine,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "f.delacroix@bcp-banque.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Bonjour François,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "c.tessier@tessier-avocats.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Chère Maître,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "i.fontaine@formapro.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Madame Fontaine,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "m.dubois@bcp-banque.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Madame Dubois,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "s.morel@cgt-bcp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Madame Morel,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "p.laurent@medecine-travail.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Docteur Laurent,",
+      "closing": "Cordialement,"
+    }
+  ],
+  "general_rules": [
+    {
+      "description": "Tutoyer les collègues internes de même niveau (équipe RH, managers opérationnels) avec salutation « Bonjour [Prénom] » et closing « Bien cordialement »"
+    },
+    {
+      "description": "Vouvoyer la direction générale, les représentants syndicaux externes, les prestataires externes et les candidats avec salutation protocolaire « Monsieur/Madame [Nom] » et closing « Cordialement »"
+    },
+    {
+      "description": "Utiliser l'honorifique « Maître » pour les avocats externes, suivi de « Chère Maître » en salutation et « Cordialement » en closing"
+    },
+    {
+      "description": "Structurer les emails importants (NAO, contentieux, recrutement) avec numérotation des points et sous-points, sans emoji"
+    },
+    {
+      "description": "Inclure systématiquement la signature complète (nom, titre, entreprise, téléphone, mention confidentialité) dans tous les emails, sauf réponses très courtes à collègues internes"
+    },
+    {
+      "description": "Utiliser le jargon RH/juridique/bancaire sans définition : NAO, CDI/CDD, CSE, LCB-FT, RGPD, Prud'hommes, masse salariale, enveloppe budgétaire, convention collective, procédure disciplinaire, reclassement, inaptitude"
+    },
+    {
+      "description": "Transférer les documents sensibles (avis médicaux, dossiers disciplinaires, rapports d'audit) en pièce jointe avec mention [CONFIDENTIEL] dans le sujet"
+    },
+    {
+      "description": "Demander des actions précises aux collaborateurs internes avec formules « Peux-tu… », « Merci de… », « Pourrais-tu… » et délais explicites (« pour vendredi », « avant le 5 février »)"
+    },
+    {
+      "description": "Proposer des réunions avec ordre du jour détaillé et contexte explicite pour les contacts externes (syndicats, avocats, prestataires)"
+    },
+    {
+      "description": "Utiliser des formules de transition formelles avec contacts externes : « Faisant suite à… », « Suite à notre réunion… », « J'accuse réception de… »"
+    }
+  ],
+  "forbidden_phrases": []
+}

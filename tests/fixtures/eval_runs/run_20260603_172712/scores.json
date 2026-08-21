@@ -1,0 +1,65 @@
+{
+  "profile": {
+    "completeness": 88,
+    "precision": 82,
+    "usefulness": 85,
+    "overall": 85,
+    "missing": [
+      "tone.uses_emoji: false",
+      "addressing at top-level (moved inside tone object)",
+      "formal greeting variants 'Madame,' and 'Monsieur,' in greeting_styles.formal_fr"
+    ],
+    "incorrect": [
+      "default_tone: 'semi-formal' (ground truth is 'formal')"
+    ],
+    "details": "The system output captures most key profile elements correctly: user email, name, preferred name, signature details, languages, language variant, greeting/closing styles, and response length. Two notable issues: (1) The default_tone is listed as 'semi-formal' in the output vs 'formal' in ground truth — this is a meaningful discrepancy that could affect email drafting behavior. (2) The 'addressing' field ('vous') is placed inside the tone object rather than at the top level as in ground truth, though the value is correct. The system adds extra fields (profession, profession_confirmed, department: null) that are not in ground truth but are not harmful. The greeting style for formal_fr is slightly incomplete — ground truth includes 'Madame, / Monsieur,' variants whereas the output only captures 'Monsieur le Directeur Général,'. The 'uses_emoji: false' field is missing from the output."
+  },
+  "knowledge": {
+    "completeness": 82,
+    "precision": 68,
+    "usefulness": 72,
+    "overall": 74,
+    "missing": [
+      "Valérie Sanchez title: 'Responsable Paie'",
+      "Antoine Mercier title: 'Juriste social'",
+      "Marine Petit title: 'Assistante RH'",
+      "Bruno Lefèvre title: 'Délégué syndical CGT'",
+      "Sylvie Morel title: 'Secrétaire du CSE'",
+      "Isabelle Fontaine title: 'Directrice Commerciale'",
+      "Caroline Tessier honorific 'Maître' and full title 'Avocat au Barreau de Paris'",
+      "Philippe Laurent title 'Dr.' prefix and full title 'Médecin du travail'",
+      "Marie Dubois company: null (she has no company)"
+    ],
+    "incorrect": [
+      "Gérard Montfort interaction_count: 11 (should be 12)",
+      "Marine Petit preferred_tone: 'casual' (should be 'semi-formal')",
+      "Marie Dubois preferred_tone: 'formal' (should be 'semi-formal')",
+      "Marie Dubois title: 'Responsable Conformité' (should be 'Candidate Responsable Conformité')",
+      "Marie Dubois company: 'BCP (Banque Centrale de Paris)' (should be null)",
+      "Isabelle Fontaine preferred_tone: 'semi-formal' (should be 'formal')",
+      "Caroline Tessier name missing 'Maître' honorific"
+    ],
+    "details": "The system found all 11 contacts present in the ground truth, which is good for completeness. However, there are several accuracy issues: (1) Gérard Montfort's interaction_count is wrong (11 vs 12); (2) Multiple titles are missing (Valérie Sanchez: 'Responsable Paie', Antoine Mercier: 'Juriste social', Marine Petit: 'Assistante RH', Bruno Lefèvre: 'Délégué syndical CGT', Sylvie Morel: 'Secrétaire du CSE', Isabelle Fontaine: 'Directrice Commerciale'); (3) Marine Petit's tone is wrong ('casual' vs 'semi-formal') — this is a significant error for email drafting; (4) Marie Dubois's title is slightly wrong ('Responsable Conformité' vs 'Candidate Responsable Conformité') and tone is wrong ('formal' vs 'semi-formal'); (5) Caroline Tessier is missing her honorific 'Maître' and formal title; (6) Isabelle Fontaine's tone is wrong ('semi-formal' vs 'formal'); (7) Philippe Laurent is missing 'Dr.' prefix; (8) Company names are slightly reformatted but functionally equivalent. The missing titles and wrong tones reduce usefulness for email drafting, particularly the Marine Petit casual/semi-formal error and the Isabelle Fontaine tone error."
+  },
+  "rules": {
+    "completeness": 82,
+    "precision": 78,
+    "usefulness": 75,
+    "overall": 78,
+    "missing": [
+      "general_rule: bcc_avocat — Add c.tessier@tessier-avocats.fr in BCC on internal emails related to litigation",
+      "general_rule: bcc_direction — Add g.montfort@bcp-banque.fr in BCC on replies to unions on sensitive topics",
+      "general_rule: cc_juridique_nao — Add a.mercier@bcp-banque.fr in CC on NAO and litigation communications",
+      "general_rule: forward_with_context — Forward relevant emails with context note and specific instructions"
+    ],
+    "incorrect": [
+      "general_rule: 'Demander explicitement des actions avec formules...' — not in ground truth, fabricated",
+      "general_rule: 'Justifier les décisions RH par des éléments factuels...' — not in ground truth, fabricated",
+      "general_rule: 'Utiliser le jargon RH/bancaire sans définition...' — not in ground truth, fabricated",
+      "general_rule: 'Transférer les documents sources en bloc texte...' — not in ground truth, fabricated",
+      "general_rule: 'Fixer des délais précis...' — not in ground truth, fabricated"
+    ],
+    "details": "Contact rules: All 11 contacts from ground truth are present in the output with correct tone, language, greeting, and closing — full marks here, with a bonus 'addressing' field added. General rules: The output captures several key rules (confidentiel_marker, signature_complete, tutoiement/vouvoiement, structured_emails) but misses specific BCC rules (bcc_avocat, bcc_direction, cc_juridique_nao, forward_with_context) which are critical operational rules. Instead, the output adds several new rules not in ground truth (explicit action formulas, factual justification, jargon usage, deadline-setting, document forwarding style) — these are plausible but not validated by ground truth. The missing BCC/CC rules are particularly impactful for usefulness since they govern routing behavior in sensitive situations."
+  },
+  "overall": 79
+}

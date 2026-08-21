@@ -1,0 +1,1632 @@
+yarn run v1.22.22
+$ C:\Users\Alexa\desktop\agentys\agentys-app\node_modules\.bin\playwright test --reporter=list
+
+Running 547 tests using 6 workers
+
+  ✓    2 [chromium] › e2e\accessibility.spec.ts:29:3 › Accessibility - Main App › should have navigation in sidebar (7.2s)
+  ✓    6 [chromium] › e2e\accessibility.spec.ts:24:3 › Accessibility - Main App › should have main landmark with aria-label (7.6s)
+  ✓    5 [chromium] › e2e\accessibility.spec.ts:18:3 › Accessibility - Main App › should have skip link to main content (7.6s)
+  ✓    4 [chromium] › e2e\accessibility.spec.ts:51:3 › Accessibility - Settings Modal › should trap focus within settings modal when tabbing (7.9s)
+  ✓    3 [chromium] › e2e\accessibility.spec.ts:42:3 › Accessibility - Settings Modal › should have dialog role and aria-modal on settings (8.2s)
+  ✓    1 [chromium] › e2e\accessibility.spec.ts:83:3 › Accessibility - Compose Modal › should have proper ARIA on compose modal (8.4s)
+  ✓   10 [chromium] › e2e\accessibility.spec.ts:124:3 › Accessibility - Keyboard Navigation › should open new message with N key (3.9s)
+  ✓    7 [chromium] › e2e\accessibility.spec.ts:91:3 › Accessibility - Compose Modal › should auto-focus To field in compose modal (4.6s)
+  ✓    8 [chromium] › e2e\accessibility.spec.ts:106:3 › Accessibility - Keyboard Navigation › should navigate emails with arrow keys (4.4s)
+  ✓    9 [chromium] › e2e\accessibility.spec.ts:115:3 › Accessibility - Keyboard Navigation › should close email detail with Escape (4.9s)
+  ✓   16 [chromium] › e2e\archive-flow.spec.ts:89:3 › Archive flow › Inbox affiche l'email cible (5.4s)
+  ✓   17 [chromium] › e2e\archive-flow.spec.ts:95:3 › Archive flow › Archiver retire l'email de la boîte inbox (UI optimiste) (3.9s)
+  ✓   18 [chromium] › e2e\archive-flow.spec.ts:107:3 › Archive flow › Toast "archivé" apparaît avec action Annuler (5.0s)
+  ✓   19 [chromium] › e2e\archive-flow.spec.ts:118:3 › Archive flow › Archives est vide juste après l'action (avant le timer 5s) (5.6s)
+  ✓   20 [chromium] › e2e\archive-flow.spec.ts:131:3 › Archive flow › Archives auto-refresh après le timer 5s via event agentys:archived (4.5s)
+  ✘   12 [chromium] › e2e\account-manager.spec.ts:55:3 › Account Manager - Display › should display account list (31.0s)
+  ✘   11 [chromium] › e2e\account-manager.spec.ts:48:3 › Account Manager - Display › should open account manager from settings (30.9s)
+  ✘   14 [chromium] › e2e\account-manager.spec.ts:75:3 › Account Manager - Display › should close account manager with close button (30.7s)
+  ✘   13 [chromium] › e2e\account-manager.spec.ts:66:3 › Account Manager - Display › should display account email and status (30.6s)
+  ✘   15 [chromium] › e2e\account-manager.spec.ts:88:3 › Account Manager - Empty State › should show empty state when no accounts (30.6s)
+  ✓   21 [chromium] › e2e\archive-flow.spec.ts:145:3 › Archive flow › Naviguer vers Archives après le timer affiche l'email archivé (9.6s)
+  ✓   23 [chromium] › e2e\archives-folder.spec.ts:114:3 › Dossier Archives — navigation › nav Archives a la classe active après navigation (3.6s)
+  ✓   22 [chromium] › e2e\archives-folder.spec.ts:106:3 › Dossier Archives — navigation › navigue vers Archives sans erreur (3.6s)
+  ✓   26 [chromium] › e2e\archives-folder.spec.ts:152:3 › Dossier Archives — affichage liste › affiche les emails archivés après navigation (6.1s)
+  ✓   24 [chromium] › e2e\archives-folder.spec.ts:120:3 › Dossier Archives — navigation › retour inbox depuis Archives fonctionne (6.8s)
+  ✓   28 [chromium] › e2e\archives-folder.spec.ts:159:3 › Dossier Archives — affichage liste › affiche le bon nombre d'emails archivés (4.7s)
+  ✓   29 [chromium] › e2e\archives-folder.spec.ts:166:3 › Dossier Archives — affichage liste › affiche les sujets des emails archivés (4.9s)
+  ✓   30 [chromium] › e2e\archives-folder.spec.ts:173:3 › Dossier Archives — affichage liste › affiche le troisième email archivé (3.3s)
+  ✓   31 [chromium] › e2e\archives-folder.spec.ts:185:3 › Dossier Archives — état erreur 500 › affiche l'état d'erreur quand l'API retourne 500 (3.2s)
+  ✓   32 [chromium] › e2e\archives-folder.spec.ts:225:3 › Dossier Archives — état erreur 500 › bouton Réessayer est visible dans l'état d'erreur (3.0s)
+  ✓   25 [chromium] › e2e\archives-folder.spec.ts:127:3 › Dossier Archives — navigation › le titre de page reflète le dossier Archives (10.3s)
+  ✓   33 [chromium] › e2e\archives-folder.spec.ts:263:3 › Dossier Archives — état erreur 500 › le bouton Réessayer re-fetche les emails (500 → 200) (3.5s)
+  ✓   34 [chromium] › e2e\archives-folder.spec.ts:357:3 › Dossier Archives — détail email › clic sur un email archivé ouvre le détail (3.7s)
+  ✓   35 [chromium] › e2e\archives-folder.spec.ts:371:3 › Dossier Archives — détail email › le sujet de l'email est visible dans le détail (3.9s)
+  ✓   36 [chromium] › e2e\archives-folder.spec.ts:382:3 › Dossier Archives — détail email › fermeture du détail via la touche Escape (4.2s)
+  ✓   37 [chromium] › e2e\archives-folder.spec.ts:404:3 › Dossier Archives — détail email › fermeture du détail via le bouton close (4.1s)
+  ✓   38 [chromium] › e2e\archives-folder.spec.ts:438:3 › Dossier Archives — état vide › affiche un état vide quand aucun email archivé (4.0s)
+  ✓   39 [chromium] › e2e\bulk-delete.spec.ts:116:3 › Bulk Delete › Happy path: multi-select + Del supprime les emails (4.1s)
+  ✓   40 [chromium] › e2e\bulk-delete.spec.ts:130:3 › Bulk Delete › Provider failure (500): rollback + error toast (3.9s)
+  ✓   41 [chromium] › e2e\bulk-delete.spec.ts:150:3 › Bulk Delete › Partial failure (207): warning toast with counts (4.4s)
+  ✓   42 [chromium] › e2e\calendar.spec.ts:55:3 › Calendar — navigation › navigue vers le calendrier sans erreur (4.3s)
+  ✓   43 [chromium] › e2e\calendar.spec.ts:60:3 › Calendar — navigation › affiche la vue calendrier (10.0s)
+  ✓   45 [chromium] › e2e\calendar.spec.ts:75:3 › Calendar — état non connecté › affiche l'état non connecté (8.1s)
+  ✓   47 [chromium] › e2e\calendar.spec.ts:93:3 › Calendar — affichage connecté › affiche les boutons de vue (Mois/Semaine/Jour) (7.9s)
+  ✓   46 [chromium] › e2e\calendar.spec.ts:84:3 › Calendar — affichage connecté › affiche le bouton Aujourd'hui (8.3s)
+  ✓   49 [chromium] › e2e\close-buttons.spec.ts:157:3 › Boutons icônes — padding:0 + couleur visible (régression) › SignatureModal .sig-close — padding:0, couleur visible, ferme (2.8s)
+  ✓   48 [chromium] › e2e\calendar.spec.ts:102:3 › Calendar — affichage connecté › affiche la légende des couleurs (4.6s)
+  ✓   50 [chromium] › e2e\close-buttons.spec.ts:167:3 › Boutons icônes — padding:0 + couleur visible (régression) › SendConfirmationModal .send-confirmation-modal-close — padding:0, couleur visible, ferme (3.3s)
+  ✓   51 [chromium] › e2e\close-buttons.spec.ts:181:3 › Boutons icônes — padding:0 + couleur visible (régression) › RegenerateModal .regenerate-modal-close — padding, couleur visible, ferme (3.5s)
+  ✓   52 [chromium] › e2e\close-buttons.spec.ts:195:3 › Boutons icônes — padding:0 + couleur visible (régression) › AutoReplyModal .autoreply-close — padding:0, couleur visible, ferme (3.5s)
+  ✘   27 [chromium] › e2e\archive-flow.spec.ts:161:3 › Archive flow › Annuler restaure l'email dans l'inbox (31.9s)
+  ✓   56 [chromium] › e2e\close-buttons.spec.ts:246:3 › CSS global — audit régression padding boutons icônes › Tous les boutons icônes connus ont padding: 0px (2.6s)
+  ✓   53 [chromium] › e2e\close-buttons.spec.ts:205:3 › Boutons icônes — padding:0 + couleur visible (régression) › ShareSnippetDialog .share-dialog-close — padding, couleur visible, ferme (5.9s)
+  ✓   54 [chromium] › e2e\close-buttons.spec.ts:215:3 › Boutons icônes — padding:0 + couleur visible (régression) › SpecialtyDetailModal .spdm-close — padding:0, couleur visible, ferme (4.7s)
+  ✓   55 [chromium] › e2e\close-buttons.spec.ts:227:3 › Boutons icônes — flux naturels › EmailDetailModal .email-detail-close — padding:0, couleur visible, ferme (5.1s)
+  ✓   59 [chromium] › e2e\command-palette.spec.ts:42:3 › Command Palette - Open/Close › should toggle with repeated Cmd+K (2.4s)
+  ✓   57 [chromium] › e2e\command-palette.spec.ts:23:3 › Command Palette - Open/Close › should close command palette with Escape (3.5s)
+  ✓   58 [chromium] › e2e\command-palette.spec.ts:32:3 › Command Palette - Open/Close › should close on overlay click (3.7s)
+  ✓   60 [chromium] › e2e\command-palette.spec.ts:60:3 › Command Palette - Search & Navigation › should focus search input on open (7.6s)
+  ✓   61 [chromium] › e2e\command-palette.spec.ts:65:3 › Command Palette - Search & Navigation › should display command items (6.6s)
+  ✓   62 [chromium] › e2e\command-palette.spec.ts:77:3 › Command Palette - Search & Navigation › should filter commands by search query (5.6s)
+  ✓   63 [chromium] › e2e\command-palette.spec.ts:86:3 › Command Palette - Search & Navigation › should show empty state for unmatched query (5.7s)
+  ✓   65 [chromium] › e2e\command-palette.spec.ts:94:3 › Command Palette - Search & Navigation › should navigate items with arrow keys (3.9s)
+  ✓   68 [chromium] › e2e\comprehensive-calendar.spec.ts:54:3 › Calendar — navigation et affichage › navigue vers le calendrier sans erreur (5.2s)
+  ✓   66 [chromium] › e2e\command-palette.spec.ts:111:3 › Command Palette - Execute Actions › should open settings via command palette (6.0s)
+  ✓   64 [chromium] › e2e\command-palette.spec.ts:17:3 › Command Palette - Open/Close › should open command palette with Cmd+K (7.5s)
+  ✘   44 [chromium] › e2e\calendar.spec.ts:65:3 › Calendar — navigation › retour à l'inbox depuis le calendrier (33.2s)
+  ✓   67 [chromium] › e2e\command-palette.spec.ts:123:3 › Command Palette - Execute Actions › should open new message via command palette (7.5s)
+  ✓   70 [chromium] › e2e\comprehensive-calendar.spec.ts:72:3 › Calendar — navigation et affichage › affiche les boutons de vue (3.9s)
+  ✓   71 [chromium] › e2e\comprehensive-calendar.spec.ts:59:3 › Calendar — navigation et affichage › affiche la vue calendrier (4.5s)
+  ✓   69 [chromium] › e2e\comprehensive-calendar.spec.ts:64:3 › Calendar — navigation et affichage › affiche le bouton Aujourd'hui (5.1s)
+  ✓   73 [chromium] › e2e\comprehensive-calendar.spec.ts:106:3 › Calendar — navigation et affichage › change de vue (Semaine → Jour) (4.4s)
+  ✓   74 [chromium] › e2e\comprehensive-calendar.spec.ts:116:3 › Calendar — navigation et affichage › navigue au mois suivant/précédent (3.5s)
+  ✓   72 [chromium] › e2e\comprehensive-calendar.spec.ts:80:3 › Calendar — navigation et affichage › retour à l'inbox depuis le calendrier (6.4s)
+  ✓   75 [chromium] › e2e\comprehensive-calendar.spec.ts:133:3 › Calendar — état non connecté › affiche l'état non connecté (4.3s)
+  ✓   76 [chromium] › e2e\comprehensive-calendar.spec.ts:140:3 › Calendar — performance › charge le calendrier en moins de 5 secondes (5.6s)
+  ✓   79 [chromium] › e2e\comprehensive-compose.spec.ts:53:3 › Compose — ouverture › affiche le titre Nouveau message (4.3s)
+  ✓   78 [chromium] › e2e\comprehensive-compose.spec.ts:45:3 › Compose — ouverture › ouvre avec le bouton Composer de la sidebar (4.4s)
+  ✓   77 [chromium] › e2e\comprehensive-compose.spec.ts:40:3 › Compose — ouverture › ouvre avec la touche N (6.1s)
+  ✓   81 [chromium] › e2e\comprehensive-compose.spec.ts:62:3 › Compose — champs du formulaire › affiche le champ To (destinataire) (24.2s)
+  ✓   82 [chromium] › e2e\comprehensive-compose.spec.ts:66:3 › Compose — champs du formulaire › affiche le champ Objet (22.6s)
+  ✓   83 [chromium] › e2e\comprehensive-compose.spec.ts:70:3 › Compose — champs du formulaire › affiche le textarea du corps (21.6s)
+  ✓   84 [chromium] › e2e\comprehensive-compose.spec.ts:74:3 › Compose — champs du formulaire › le bouton Envoyer est désactivé sans destinataire (21.7s)
+  ✓   85 [chromium] › e2e\comprehensive-compose.spec.ts:78:3 › Compose — champs du formulaire › permet de saisir un objet (21.9s)
+  ✓   80 [chromium] › e2e\comprehensive-calendar.spec.ts:95:3 › Calendar — navigation et affichage › change de vue (Mois → Semaine) (21.7s)
+  ✓   88 [chromium] › e2e\comprehensive-compose.spec.ts:101:3 › Compose — CC/BCC › ouvre le champ Cc au clic (6.7s)
+  ✓   89 [chromium] › e2e\comprehensive-compose.spec.ts:106:3 › Compose — CC/BCC › ouvre le champ Cci au clic (6.6s)
+  ✓   86 [chromium] › e2e\comprehensive-compose.spec.ts:87:3 › Compose — champs du formulaire › permet de saisir du texte dans le corps (8.1s)
+  ✓   87 [chromium] › e2e\comprehensive-compose.spec.ts:97:3 › Compose — CC/BCC › affiche le toggle Cc (8.1s)
+  ✓   90 [chromium] › e2e\comprehensive-compose.spec.ts:118:3 › Compose — fermeture › ferme avec le bouton X (7.5s)
+  ✓   91 [chromium] › e2e\comprehensive-compose.spec.ts:124:3 › Compose — fermeture › ferme avec Escape (6.6s)
+  ✓   93 [chromium] › e2e\comprehensive-compose.spec.ts:150:3 › Compose — maximiser/minimiser › maximise la modale (4.7s)
+  ✓   92 [chromium] › e2e\comprehensive-compose.spec.ts:134:3 › Compose — fermeture › sauvegarde le brouillon à la fermeture (5.0s)
+  ✓   95 [chromium] › e2e\comprehensive-compose.spec.ts:166:3 › Compose — footer › affiche le footer (5.4s)
+  ✓   94 [chromium] › e2e\comprehensive-compose.spec.ts:155:3 › Compose — maximiser/minimiser › restaure après maximisation (6.4s)
+  ✓   98 [chromium] › e2e\comprehensive-connection.spec.ts:42:3 › Connexion — page de login › affiche le champ email (2.3s)
+  ✓   99 [chromium] › e2e\comprehensive-connection.spec.ts:38:3 › Connexion — page de login › affiche la page de login quand non authentifié (2.4s)
+  ✓  100 [chromium] › e2e\comprehensive-connection.spec.ts:46:3 › Connexion — page de login › affiche le bouton magic link (2.2s)
+  ✓  101 [chromium] › e2e\comprehensive-connection.spec.ts:58:3 › Connexion — page de login › le bouton est désactivé sans email (2.5s)
+  ✓  102 [chromium] › e2e\comprehensive-connection.spec.ts:51:3 › Connexion — page de login › affiche les boutons OAuth (Google/Outlook) (2.6s)
+  ✓  103 [chromium] › e2e\comprehensive-connection.spec.ts:67:3 › Connexion — magic link flow › envoie le magic link avec un email valide (2.5s)
+  ✓  105 [chromium] › e2e\comprehensive-connection.spec.ts:93:3 › Connexion — mode dev authentifié › accède à l'inbox en mode dev (3.1s)
+  ✓  106 [chromium] › e2e\comprehensive-connection.spec.ts:97:3 › Connexion — mode dev authentifié › ne montre pas la page de login (3.0s)
+  ✓  107 [chromium] › e2e\comprehensive-connection.spec.ts:103:3 › Connexion — mode dev authentifié › affiche le nom d'utilisateur ou l'email (3.0s)
+  ✓  104 [chromium] › e2e\comprehensive-connection.spec.ts:73:3 › Connexion — magic link flow › affiche une erreur si le serveur échoue (4.3s)
+  ✘   97 [chromium] › e2e\comprehensive-compose.spec.ts:174:3 › Compose — footer › affiche le bouton poubelle (10.4s)
+  ✘   96 [chromium] › e2e\comprehensive-compose.spec.ts:170:3 › Compose — footer › affiche le bouton pièce jointe (10.6s)
+  ✓  110 [chromium] › e2e\comprehensive-inbox.spec.ts:44:3 › Inbox — affichage de la liste › affiche les sujets des emails (2.3s)
+  ✓  109 [chromium] › e2e\comprehensive-inbox.spec.ts:38:3 › Inbox — affichage de la liste › affiche les emails dans la liste (2.4s)
+  ✓  111 [chromium] › e2e\comprehensive-inbox.spec.ts:48:3 › Inbox — affichage de la liste › affiche les noms des expéditeurs (2.5s)
+  ✓  108 [chromium] › e2e\comprehensive-connection.spec.ts:112:3 › Connexion — health check › l'app gère gracieusement un backend indisponible (5.0s)
+  ✓  112 [chromium] › e2e\comprehensive-inbox.spec.ts:66:3 › Inbox — affichage de la liste › distingue les emails non lus (bold) (2.5s)
+  ✓  113 [chromium] › e2e\comprehensive-inbox.spec.ts:78:3 › Inbox — état vide › affiche un message quand la boîte est vide (2.6s)
+  ✓  114 [chromium] › e2e\comprehensive-inbox.spec.ts:100:3 › Inbox — ouverture email detail › ouvre le détail au clic sur un email (3.4s)
+  ✓  115 [chromium] › e2e\comprehensive-inbox.spec.ts:110:3 › Inbox — ouverture email detail › affiche l'expéditeur dans le détail (4.1s)
+  ✓  118 [chromium] › e2e\comprehensive-inbox.spec.ts:52:3 › Inbox — affichage de la liste › affiche les heures de réception (4.2s)
+  ✓  117 [chromium] › e2e\comprehensive-inbox.spec.ts:105:3 › Inbox — ouverture email detail › affiche le sujet dans le détail (5.4s)
+  ✓  119 [chromium] › e2e\comprehensive-inbox.spec.ts:58:3 › Inbox — affichage de la liste › affiche l'icône pièce jointe pour les emails avec attachements (4.7s)
+  ✓  116 [chromium] › e2e\comprehensive-inbox.spec.ts:115:3 › Inbox — ouverture email detail › affiche le corps de l'email (5.9s)
+  ✓  120 [chromium] › e2e\comprehensive-inbox.spec.ts:121:3 › Inbox — ouverture email detail › ferme le détail avec Escape (6.5s)
+  ✓  124 [chromium] › e2e\comprehensive-inbox.spec.ts:164:3 › Inbox — performance › charge la liste en moins de 5 secondes (4.1s)
+  ✓  123 [chromium] › e2e\comprehensive-inbox.spec.ts:153:3 › Inbox — navigation clavier J/K › navigue vers le haut avec K (4.4s)
+  ✓  121 [chromium] › e2e\comprehensive-inbox.spec.ts:130:3 › Inbox — ouverture email detail › ferme le détail avec le bouton X (5.9s)
+  ✓  122 [chromium] › e2e\comprehensive-inbox.spec.ts:145:3 › Inbox — navigation clavier J/K › navigue vers le bas avec J (5.2s)
+  ✓  125 [chromium] › e2e\comprehensive-inbox.spec.ts:174:3 › Inbox — performance › ouvre le détail en moins de 3 secondes (cache chaud) (5.4s)
+  ✓  126 [chromium] › e2e\comprehensive-navigation.spec.ts:66:3 › Sidebar — affichage et navigation › affiche tous les onglets de navigation (4.2s)
+  ✓  127 [chromium] › e2e\comprehensive-navigation.spec.ts:72:3 › Sidebar — affichage et navigation › inbox est actif par défaut (3.2s)
+  ✓  129 [chromium] › e2e\comprehensive-navigation.spec.ts:82:3 › Sidebar — affichage et navigation › navigue vers Brouillons (4.0s)
+  ✓  128 [chromium] › e2e\comprehensive-navigation.spec.ts:76:3 › Sidebar — affichage et navigation › navigue vers Envoyés (4.5s)
+  ✓  130 [chromium] › e2e\comprehensive-navigation.spec.ts:88:3 › Sidebar — affichage et navigation › navigue vers Archives (4.5s)
+  ✓  131 [chromium] › e2e\comprehensive-navigation.spec.ts:97:3 › Sidebar — affichage et navigation › navigue vers Spam (5.3s)
+  ✓  133 [chromium] › e2e\comprehensive-navigation.spec.ts:115:3 › Sidebar — affichage et navigation › retour à l'inbox depuis un autre dossier (4.1s)
+  ✓  132 [chromium] › e2e\comprehensive-navigation.spec.ts:106:3 › Sidebar — affichage et navigation › navigue vers Corbeille (4.9s)
+  ✓  134 [chromium] › e2e\comprehensive-navigation.spec.ts:126:3 › Sidebar — collapse/expand › toggle la sidebar (4.6s)
+  ✓  135 [chromium] › e2e\comprehensive-navigation.spec.ts:140:3 › Dossier Envoyés › affiche les emails envoyés (5.1s)
+  ✓  136 [chromium] › e2e\comprehensive-navigation.spec.ts:147:3 › Dossier Envoyés › pas d'erreur 500 dans le dossier Envoyés (5.6s)
+  ✓  139 [chromium] › e2e\comprehensive-navigation.spec.ts:184:3 › Search — recherche › affiche l'icône de recherche (3.6s)
+  ✓  138 [chromium] › e2e\comprehensive-navigation.spec.ts:171:3 › Dossier Corbeille › navigue vers corbeille sans erreur (4.6s)
+  ✓  140 [chromium] › e2e\comprehensive-navigation.spec.ts:193:3 › Search — recherche › ouvre la recherche au clic (3.5s)
+  ✓  137 [chromium] › e2e\comprehensive-navigation.spec.ts:158:3 › Dossier Spam › navigue vers spam sans erreur (5.5s)
+  ✓  141 [chromium] › e2e\comprehensive-navigation.spec.ts:203:3 › Search — recherche › permet de taper une recherche (3.9s)
+  ✓  142 [chromium] › e2e\comprehensive-navigation.spec.ts:217:3 › Search — recherche › ferme la recherche avec Escape (3.1s)
+  ✓  143 [chromium] › e2e\comprehensive-navigation.spec.ts:232:3 › Raccourcis clavier globaux › Meta+N ouvre le composer (5.0s)
+  ✓  144 [chromium] › e2e\comprehensive-navigation.spec.ts:244:3 › Raccourcis clavier globaux › Meta+, ouvre les paramètres (5.3s)
+  ✓  146 [chromium] › e2e\comprehensive-performance.spec.ts:33:3 › Performance — chargement initial › l'app se charge en moins de 5 secondes (4.9s)
+  ✓  145 [chromium] › e2e\comprehensive-navigation.spec.ts:253:3 › Raccourcis clavier globaux › Meta+/ ouvre l'aide raccourcis (5.4s)
+  ✓  147 [chromium] › e2e\comprehensive-performance.spec.ts:42:3 › Performance — chargement initial › la liste d'emails apparaît en moins de 4 secondes (4.7s)
+  ✓  148 [chromium] › e2e\comprehensive-performance.spec.ts:55:3 › Performance — navigation entre dossiers › switching inbox → sent en moins de 2 secondes (5.2s)
+  ✓  150 [chromium] › e2e\comprehensive-performance.spec.ts:78:3 › Performance — ouverture email detail › premier clic ouvre en moins de 5 secondes (cache froid) (4.8s)
+  ✓  153 [chromium] › e2e\comprehensive-performance.spec.ts:113:3 › Performance — ouverture composer › new message s'ouvre en moins de 2 secondes (4.6s)
+  ✓  152 [chromium] › e2e\comprehensive-performance.spec.ts:99:3 › Performance — ouverture email detail › fermeture du detail est instantanée (< 1s) (5.0s)
+  ✓  149 [chromium] › e2e\comprehensive-performance.spec.ts:64:3 › Performance — navigation entre dossiers › switching sent → inbox en moins de 2 secondes (5.9s)
+  ✓  151 [chromium] › e2e\comprehensive-performance.spec.ts:85:3 › Performance — ouverture email detail › deuxième clic ouvre en moins de 2 secondes (cache chaud) (5.5s)
+  ✓  154 [chromium] › e2e\comprehensive-performance.spec.ts:121:3 › Performance — ouverture composer › reply composer s'ouvre en moins de 3 secondes (6.5s)
+  ✓  158 [chromium] › e2e\comprehensive-reply.spec.ts:53:3 › Reply — ouverture et affichage › ouvre le reply composer avec la touche R (4.0s)
+  ✓  157 [chromium] › e2e\comprehensive-reply.spec.ts:58:3 › Reply — ouverture et affichage › affiche le champ de saisie AI/refine (5.3s)
+  ✓  155 [chromium] › e2e\comprehensive-performance.spec.ts:137:3 › Performance — pas de fuite mémoire › ouvrir/fermer 10 emails sans ralentissement (7.8s)
+  ✓  156 [chromium] › e2e\comprehensive-performance.spec.ts:163:3 › Performance — pas de loading bloquant › pas de spinner bloquant après chargement initial (7.5s)
+  ✓  161 [chromium] › e2e\comprehensive-reply.spec.ts:73:3 › Reply — ouverture et affichage › affiche le label Brouillon (3.5s)
+  ✓  162 [chromium] › e2e\comprehensive-reply.spec.ts:78:3 › Reply — ouverture et affichage › affiche la barre d'actions (3.2s)
+  ✓  163 [chromium] › e2e\comprehensive-reply.spec.ts:83:3 › Reply — ouverture et affichage › affiche le bouton Supprimer (3.5s)
+  ✓  165 [chromium] › e2e\comprehensive-reply.spec.ts:106:3 › Reply All — ouverture › vérifie la présence du bouton Reply All (3.0s)
+  ✓  164 [chromium] › e2e\comprehensive-reply.spec.ts:92:3 › Reply — bouton Reply dans le détail › ouvre le reply via le bouton Répondre (3.8s)
+  ✘  159 [chromium] › e2e\comprehensive-reply.spec.ts:63:3 › Reply — ouverture et affichage › affiche le bouton Envoyer (10.1s)
+  ✘  160 [chromium] › e2e\comprehensive-reply.spec.ts:68:3 › Reply — ouverture et affichage › le bouton Envoyer est désactivé sans contenu (9.2s)
+  ✓  166 [chromium] › e2e\comprehensive-reply.spec.ts:117:3 › Reply All — ouverture › ouvre Reply All avec Shift+R (4.5s)
+  ✓  168 [chromium] › e2e\comprehensive-reply.spec.ts:140:3 › Reply — slash commands › filtre les commands en tapant /cor (3.8s)
+  ✓  167 [chromium] › e2e\comprehensive-reply.spec.ts:133:3 › Reply — slash commands › ouvre le menu slash avec / (4.3s)
+  ✓  169 [chromium] › e2e\comprehensive-reply.spec.ts:148:3 › Reply — slash commands › ferme le menu slash avec Escape (3.9s)
+  ✓  170 [chromium] › e2e\comprehensive-settings.spec.ts:45:3 › Settings — ouverture › ouvre avec Meta+, (3.2s)
+  ✓  171 [chromium] › e2e\comprehensive-settings.spec.ts:50:3 › Settings — ouverture › ouvre via le bouton sidebar (3.2s)
+  ✓  172 [chromium] › e2e\comprehensive-settings.spec.ts:62:3 › Settings — navigation sections › affiche la section Compte (3.5s)
+  ✓  173 [chromium] › e2e\comprehensive-settings.spec.ts:67:3 › Settings — navigation sections › navigue entre les sections (3.9s)
+  ✓  174 [chromium] › e2e\comprehensive-settings.spec.ts:85:3 › Settings — toggles › affiche les toggles de paramètres (5.7s)
+  ✓  175 [chromium] › e2e\comprehensive-settings.spec.ts:91:3 › Settings — toggles › toggle un paramètre au clic (4.8s)
+  ✓  179 [chromium] › e2e\comprehensive-settings.spec.ts:116:3 › Settings — fermeture › ferme avec Escape (5.0s)
+  ✓  178 [chromium] › e2e\comprehensive-settings.spec.ts:107:3 › Settings — fermeture › ferme avec le bouton X (5.9s)
+  ✓  180 [chromium] › e2e\deep-focus.spec.ts:75:3 › Deep Focus — goal picker › affiche le Goal Picker quand on presse S (3.9s)
+  ✓  181 [chromium] › e2e\deep-focus.spec.ts:83:3 › Deep Focus — goal picker › affiche les options de nombre d'emails (3.6s)
+  ✓  182 [chromium] › e2e\deep-focus.spec.ts:91:3 › Deep Focus — goal picker › affiche les options de temps (3.3s)
+  ✓  183 [chromium] › e2e\deep-focus.spec.ts:107:3 › Deep Focus — activation › active le mode Deep Focus après le Goal Picker (4.0s)
+  ✓  185 [chromium] › e2e\deep-focus.spec.ts:117:3 › Deep Focus — activation › affiche le progress ring (3.6s)
+  ✓  184 [chromium] › e2e\deep-focus.spec.ts:112:3 › Deep Focus — activation › affiche le topbar (3.9s)
+  ✓  186 [chromium] › e2e\deep-focus.spec.ts:122:3 › Deep Focus — activation › affiche le bouton exit (X) (3.5s)
+  ✘  176 [chromium] › e2e\comprehensive-reply.spec.ts:161:3 › Reply — mode dropdown › affiche le chevron de mode (12.4s)
+  ✓  187 [chromium] › e2e\deep-focus.spec.ts:135:3 › Deep Focus — hero card › affiche la hero card (4.1s)
+  ✓  188 [chromium] › e2e\deep-focus.spec.ts:139:3 › Deep Focus — hero card › affiche le sujet dans la hero card (3.8s)
+  ✓  190 [chromium] › e2e\deep-focus.spec.ts:155:3 › Deep Focus — navigation › affiche les flèches de navigation (3.7s)
+  ✓  189 [chromium] › e2e\deep-focus.spec.ts:143:3 › Deep Focus — hero card › affiche le nom de l'expéditeur (3.9s)
+  ✓  191 [chromium] › e2e\deep-focus.spec.ts:163:3 › Deep Focus — navigation › le step courant est marqué --current (3.8s)
+  ✓  192 [chromium] › e2e\deep-focus.spec.ts:175:3 › Deep Focus — raccourcis › ouvre l'overlay de raccourcis avec ? (3.7s)
+  ✓  193 [chromium] › e2e\deep-focus.spec.ts:180:3 › Deep Focus — raccourcis › contient des lignes de raccourci (4.2s)
+  ✓  194 [chromium] › e2e\deep-focus.spec.ts:187:3 › Deep Focus — raccourcis › ferme l'overlay avec Escape (4.4s)
+  ✓  195 [chromium] › e2e\deep-focus.spec.ts:202:3 › Deep Focus — sortie › quitte avec le bouton X (4.3s)
+  ✓  197 [chromium] › e2e\deep-focus.spec.ts:207:3 › Deep Focus — sortie › quitte avec Escape (4.3s)
+  ✓  196 [chromium] › e2e\deep-focus.spec.ts:159:3 › Deep Focus — navigation › affiche les steps du stepper (4.9s)
+  ✓  198 [chromium] › e2e\deep-focus.spec.ts:212:3 › Deep Focus — sortie › revient à l'inbox après sortie (4.5s)
+  ✓  200 [chromium] › e2e\delete-to-trash.spec.ts:117:3 › Delete → Trash flow › Inbox affiche les emails cibles (2.7s)
+  ✓  199 [chromium] › e2e\deep-focus.spec.ts:225:3 › Deep Focus — actions › archive un email avec E et affiche un toast (4.5s)
+  ✓  201 [chromium] › e2e\delete-to-trash.spec.ts:123:3 › Delete → Trash flow › Supprimer retire l'email de l'inbox (UI optimiste) (3.3s)
+  ✓  205 [chromium] › e2e\dnd-mode.spec.ts:42:3 › DND Panel › should open DND panel from sidebar (3.6s)
+  ✓  204 [chromium] › e2e\delete-to-trash.spec.ts:163:3 › Delete → Trash flow › Toast "supprimé" apparaît avec action Annuler (4.8s)
+  ✘  177 [chromium] › e2e\comprehensive-reply.spec.ts:165:3 › Reply — mode dropdown › ouvre le dropdown de mode au clic (30.7s)
+  ✓  207 [chromium] › e2e\dnd-mode.spec.ts:73:3 › DND Overlay - Bypass › should show bypass confirmation on DND overlay click (2.7s)
+  ✓  202 [chromium] › e2e\delete-to-trash.spec.ts:135:3 › Delete → Trash flow › Corbeille est vide si aucun email supprimé (8.0s)
+  ✓  208 [chromium] › e2e\draft-list.spec.ts:55:3 › Draft List - Display › should display the drafts tab content (2.8s)
+  ✓  209 [chromium] › e2e\draft-list.spec.ts:69:3 › Draft List - Display › should display draft sender name (3.0s)
+  ✓  210 [chromium] › e2e\draft-list.spec.ts:74:3 › Draft List - Display › should display draft subject (3.5s)
+  ✓  211 [chromium] › e2e\draft-list.spec.ts:79:3 › Draft List - Display › should display status badge (3.4s)
+  ✓  203 [chromium] › e2e\delete-to-trash.spec.ts:142:3 › Delete → Trash flow › Email supprimé apparaît dans la Corbeille après le timer undo (5s) (11.7s)
+  ✘  206 [chromium] › e2e\dnd-mode.spec.ts:54:3 › DND Panel › should have main DND toggle switch in settings (9.8s)
+  ✓  216 [chromium] › e2e\draft-list.spec.ts:130:3 › Draft List - Empty State › should show empty state when no drafts (8.6s)
+  ✓  214 [chromium] › e2e\draft-list.spec.ts:61:3 › Draft List - Display › should display draft items (8.9s)
+  ✓  212 [chromium] › e2e\draft-list.spec.ts:86:3 › Draft List - Display › should display pending count badge (10.4s)
+  ✓  213 [chromium] › e2e\draft-list.spec.ts:102:3 › Draft List - Selection › should open draft detail on click (10.4s)
+  ✓  215 [chromium] › e2e\draft-list.spec.ts:115:3 › Draft List - Selection › should navigate drafts with keyboard (10.0s)
+  ✓  219 [chromium] › e2e\email-compose.spec.ts:68:3 › Email Compose - Open Modal › should open compose modal with N key (3.9s)
+  ✓  220 [chromium] › e2e\email-compose.spec.ts:75:3 › Email Compose - Open Modal › should display compose modal header (4.7s)
+  ✓  218 [chromium] › e2e\draft-list.spec.ts:159:3 › Draft List - Status Filtering › should show drafts with various statuses (5.1s)
+  ✓  221 [chromium] › e2e\email-compose.spec.ts:81:3 › Email Compose - Open Modal › should close compose modal with Escape (4.9s)
+  ✓  222 [chromium] › e2e\email-compose.spec.ts:93:3 › Email Compose - Open Modal › should close compose modal with close button (6.3s)
+  ✓  217 [chromium] › e2e\draft-list.spec.ts:142:3 › Draft List - Refresh › should refresh drafts with Cmd+R (6.4s)
+  ✓  223 [chromium] › e2e\email-compose.spec.ts:114:3 › Email Compose - Form Fields › should have recipient (To) field (3.8s)
+  ✓  225 [chromium] › e2e\email-compose.spec.ts:130:3 › Email Compose - Form Fields › should have AI prompt field (3.1s)
+  ✓  224 [chromium] › e2e\email-compose.spec.ts:120:3 › Email Compose - Form Fields › should have subject field (5.4s)
+  ✓  226 [chromium] › e2e\email-compose.spec.ts:125:3 › Email Compose - Form Fields › should have body field (4.7s)
+  ✓  227 [chromium] › e2e\email-compose.spec.ts:144:3 › Email Compose - Form Validation › should disable send button when no recipient (4.7s)
+  ✓  229 [chromium] › e2e\email-compose.spec.ts:168:3 › Email Compose - Submit › should fill and submit compose form (4.5s)
+  ✓  228 [chromium] › e2e\email-compose.spec.ts:150:3 › Email Compose - Form Validation › should enable send button with recipient (5.2s)
+  ✓  230 [chromium] › e2e\email-compose.spec.ts:183:3 › Email Compose - Submit › should show loading state during submission (5.2s)
+  ✓  235 [chromium] › e2e\email-compose.spec.ts:271:3 › Email Compose - Accessibility › should have focusable elements in logical order (3.6s)
+  ✓  234 [chromium] › e2e\email-compose.spec.ts:265:3 › Email Compose - Accessibility › should have proper ARIA attributes on modal (4.1s)
+  ✓  232 [chromium] › e2e\email-compose.spec.ts:239:3 › Email Compose - Keyboard Shortcuts › should focus To field on open (5.6s)
+  ✓  231 [chromium] › e2e\email-compose.spec.ts:207:3 › Email Compose - Submit › should handle submission error gracefully (6.7s)
+  ✓  233 [chromium] › e2e\email-compose.spec.ts:245:3 › Email Compose - Keyboard Shortcuts › should navigate fields with Tab (5.5s)
+  ✓  236 [chromium] › e2e\email-detail.spec.ts:91:3 › Email Detail - View › should open email detail on click (3.8s)
+  ✓  237 [chromium] › e2e\email-detail.spec.ts:99:3 › Email Detail - View › should display email subject in detail (3.8s)
+  ✓  238 [chromium] › e2e\email-detail.spec.ts:106:3 › Email Detail - View › should display sender information (3.9s)
+  ✓  239 [chromium] › e2e\email-detail.spec.ts:113:3 › Email Detail - View › should display email metadata (date, subject) (4.9s)
+  ✓  241 [chromium] › e2e\email-detail.spec.ts:136:3 › Email Detail - Actions › should have reply all button (5.2s)
+  ✓  240 [chromium] › e2e\email-detail.spec.ts:128:3 › Email Detail - Actions › should have reply button (5.6s)
+  ✓  242 [chromium] › e2e\email-detail.spec.ts:145:3 › Email Detail - Actions › should close detail view with Escape key (6.5s)
+  ✓  244 [chromium] › e2e\email-detail.spec.ts:173:3 › Email Detail - Body Content › should not execute malicious scripts (4.9s)
+  ✓  243 [chromium] › e2e\email-detail.spec.ts:163:3 › Email Detail - Body Content › should render email body area (5.3s)
+  ✓  245 [chromium] › e2e\email-detail.spec.ts:190:3 › Email Detail - Modal View › should open email in modal on double-click (4.8s)
+  ✓  247 [chromium] › e2e\email-detail.spec.ts:243:3 › Email Detail - Performance (prefetch) › should not show loading spinner when detail API responds quickly (5.9s)
+  ✓  246 [chromium] › e2e\email-detail.spec.ts:204:3 › Email Detail - Performance (prefetch) › should open detail instantly on second click (warm cache) (7.0s)
+  ✓  249 [chromium] › e2e\email-detail.spec.ts:308:3 › Email Detail - Error Handling › should show error when email detail fails to load (5.2s)
+  ✓  248 [chromium] › e2e\email-detail.spec.ts:265:3 › Email Detail - Error Handling › should display inline logo (data:image/) from email signature (5.4s)
+  [WARN] Console errors: [
+  [32m'Failed to load resource: the server responded with a status of 404 (NOT FOUND)'[39m
+]
+  ✓  250 [chromium] › e2e\email-flow-integration.spec.ts:34:3 › Email Flow Integration (real backend) › charge inbox sans erreur (5.5s)
+  ✓  251 [chromium] › e2e\email-inline-images.spec.ts:84:3 › Inline Images (CID) › email with resolved data: URI shows image — not broken (5.0s)
+  Envoyés: 50 emails (466ms)
+  ✓  256 [chromium] › e2e\email-flow-integration.spec.ts:71:5 › Email Flow Integration (real backend) › navigue vers Envoyés (477ms)
+  ✓  255 [chromium] › e2e\email-inline-images.spec.ts:168:3 › Inline Images (CID) › email list shows Carol email without crashing (2.7s)
+  ✓  253 [chromium] › e2e\email-inline-images.spec.ts:130:3 › Inline Images (CID) › email with unresolved cid: does NOT display broken img tag in DOM (4.1s)
+  ✓  252 [chromium] › e2e\email-inline-images.spec.ts:107:3 › Inline Images (CID) › email with resolved data: URI does NOT contain cid: references (5.4s)
+  [WARN] Archives: timeout or error (IMAP slow) — skipping
+  ✓  258 [chromium] › e2e\email-flow-integration.spec.ts:71:5 › Email Flow Integration (real backend) › navigue vers Archives (2.5s)
+  ✓  254 [chromium] › e2e\email-inline-images.spec.ts:148:3 › Inline Images (CID) › signature text remains visible when image is present (4.0s)
+  ✓  257 [chromium] › e2e\email-inline-images.spec.ts:181:3 › Inline Images (CID) › opening and closing CID email does not crash the app (4.5s)
+  ✓  259 [chromium] › e2e\email-list.spec.ts:79:3 › Email List - Display › should display a list of emails (2.7s)
+  ✓  260 [chromium] › e2e\email-list.spec.ts:87:3 › Email List - Display › should display email sender name (2.7s)
+  [WARN] Corbeille: timeout or error (IMAP slow) — skipping
+  ✓  261 [chromium] › e2e\email-flow-integration.spec.ts:71:5 › Email Flow Integration (real backend) › navigue vers Corbeille (2.7s)
+  ✓  262 [chromium] › e2e\email-list.spec.ts:91:3 › Email List - Display › should display email subject (2.8s)
+  ✓  263 [chromium] › e2e\email-list.spec.ts:95:3 › Email List - Display › should have email preview in DOM (2.9s)
+  ✓  264 [chromium] › e2e\email-list.spec.ts:102:3 › Email List - Display › should show unread indicator for unread emails (2.7s)
+  ✓  265 [chromium] › e2e\email-list.spec.ts:107:3 › Email List - Display › should show attachment icon for emails with attachments (2.6s)
+  [WARN] Indésirables: timeout or error (IMAP slow) — skipping
+  ✓  267 [chromium] › e2e\email-flow-integration.spec.ts:71:5 › Email Flow Integration (real backend) › navigue vers Indésirables (2.5s)
+  ✓  266 [chromium] › e2e\email-list.spec.ts:114:3 › Email List - Display › should display relative time for recent emails (3.5s)
+  ✓  268 [chromium] › e2e\email-list.spec.ts:123:3 › Email List - Empty State › should show empty state when no emails (3.0s)
+  ✓  271 [chromium] › e2e\email-list.spec.ts:187:3 › Email List - Search › should search emails by subject (2.0s)
+  ✓  269 [chromium] › e2e\email-list.spec.ts:153:3 › Email List - Filtering › should filter to show only unread emails (3.2s)
+  ✓  270 [chromium] › e2e\email-list.spec.ts:166:3 › Email List - Filtering › should filter to show only read emails (3.1s)
+  ✓  273 [chromium] › e2e\email-list.spec.ts:198:3 › Email List - Search › should search emails by sender (2.6s)
+  ✓  274 [chromium] › e2e\email-list.spec.ts:209:3 › Email List - Search › should show no results for unmatched search (2.6s)
+  [WARN] Send failed: 500 (email service may be disconnected)
+  ✓  272 [chromium] › e2e\email-flow-integration.spec.ts:96:3 › Email Flow Integration (real backend) › envoie email à soi-même (3.6s)
+  [SKIP] Send did not succeed
+  ✓  280 [chromium] › e2e\email-flow-integration.spec.ts:128:3 › Email Flow Integration (real backend) › retrouve email dans Envoyés (6ms)
+  ✓  276 [chromium] › e2e\email-list.spec.ts:253:3 › Email List - Selection › should select email on click (3.3s)
+  ✓  277 [chromium] › e2e\email-list.spec.ts:260:3 › Email List - Selection › should navigate emails with keyboard arrows (3.5s)
+  ✓  279 [chromium] › e2e\email-list.spec.ts:297:3 › Email List - Mark Read/Unread › should mark email as read on open (3.2s)
+  ✓  278 [chromium] › e2e\email-list.spec.ts:280:3 › Email List - Mark Read/Unread › should mark email as read via context menu or action (3.5s)
+  Archived: 14152
+  ✓  281 [chromium] › e2e\email-flow-integration.spec.ts:165:3 › Email Flow Integration (real backend) › archive email depuis inbox (3.3s)
+  ✓  282 [chromium] › e2e\email-list.spec.ts:311:3 › Email List - Swipe Actions › should have swipeable email items (2.8s)
+  ✓  283 [chromium] › e2e\email-list.spec.ts:322:3 › Email List - Loading States › should show loading indicator while fetching emails (1.9s)
+  ✓  275 [chromium] › e2e\email-list.spec.ts:229:3 › Email List - Search › should clear search and show all emails (6.9s)
+  ✓  284 [chromium] › e2e\email-list.spec.ts:343:3 › Email List - Loading States › should show error state on API failure (2.3s)
+  Email gone from inbox
+  ✓  286 [chromium] › e2e\email-flow-integration.spec.ts:186:3 › Email Flow Integration (real backend) › vérifie disparition de inbox (3.2s)
+  ✓  287 [chromium] › e2e\email-list.spec.ts:388:3 › Email List - Refresh › should refresh emails via sync shortcut Cmd+Shift+S (2.9s)
+  ✓  285 [chromium] › e2e\email-list.spec.ts:374:3 › Email List - Refresh › should refresh emails with keyboard shortcut Cmd+R (3.7s)
+  ✓  289 [chromium] › e2e\error-states.spec.ts:14:3 › Error States - Backend Disconnected › should show disconnected state when backend is down (2.9s)
+  ✓  288 [chromium] › e2e\email-list.spec.ts:403:3 › Email List - Virtualization › should handle large email lists efficiently (4.0s)
+  ✓  290 [chromium] › e2e\error-states.spec.ts:42:3 › Error States - API Failures › should handle email detail load failure gracefully (3.6s)
+  Deleted: 14152
+  ✓  291 [chromium] › e2e\email-flow-integration.spec.ts:203:3 › Email Flow Integration (real backend) › supprime email + vérifie 200 (2.7s)
+  ✓  293 [chromium] › e2e\error-states.spec.ts:81:3 › Error States - Loading States › should not crash during slow loading (2.4s)
+  ✓  292 [chromium] › e2e\error-states.spec.ts:60:3 › Error States - API Failures › should handle settings load failure (3.5s)
+[PERF] Envoyés: 1001ms
+  ✓  294 [chromium] › e2e\folder-loading-perf.spec.ts:63:3 › Folder loading performance › Envoyés charge en moins de 3s (3.5s)
+  [WARN] Restore failed: backend unreachable
+  ✓  297 [chromium] › e2e\email-flow-integration.spec.ts:219:3 › Email Flow Integration (real backend) › restaure depuis corbeille (3.1s)
+  ✓  298 [chromium] › e2e\folder-tabs.spec.ts:90:3 › Spam folder › should navigate to Spam and display emails (3.2s)
+  ✓  295 [chromium] › e2e\folder-tabs.spec.ts:52:3 › Sent folder › should navigate to Sent and display emails (4.8s)
+  ✓  296 [chromium] › e2e\folder-tabs.spec.ts:71:3 › Archived folder › should navigate to Archived and display emails (3.8s)
+  ✓  299 [chromium] › e2e\folder-tabs.spec.ts:109:3 › Trash folder › should navigate to Trash and display emails (3.4s)
+[PERF] Archives: 566ms
+  ✓  300 [chromium] › e2e\folder-loading-perf.spec.ts:76:3 › Folder loading performance › Archives charge en moins de 3s (4.0s)
+  ✓  303 [chromium] › e2e\folder-tabs.spec.ts:181:3 › Tab switching › should deselect email when switching tabs (3.6s)
+  ✓  302 [chromium] › e2e\folder-tabs.spec.ts:121:3 › Archive flow › email archivé apparaît dans Archives après archivage (3.7s)
+  ✓  304 [chromium] › e2e\folder-tabs.spec.ts:197:3 › Tab switching › should update browser title when switching tabs (3.6s)
+  ✓  305 [chromium] › e2e\label-library.spec.ts:51:3 › Label Library › should open label library (3.3s)
+[PERF] Corbeille: 736ms
+
+  ══════════════════════════════════════════
+       PERFORMANCE SUMMARY (5 folders)
+  ──────────────────────────────────────────
+  inbox          473ms    50 emails [OK]
+  sent           335ms    50 emails [OK]
+  archived       373ms     1 emails [OK]
+  trash            TIMEOUT
+  spam             TIMEOUT
+  ══════════════════════════════════════════
+  ✓  301 [chromium] › e2e\email-flow-integration.spec.ts:239:3 › Email Flow Integration (real backend) › résumé performances 5 dossiers (6.7s)
+  ✓  306 [chromium] › e2e\folder-loading-perf.spec.ts:89:3 › Folder loading performance › Corbeille charge en moins de 3s (4.0s)
+  ✓  307 [chromium] › e2e\label-library.spec.ts:59:3 › Label Library › should display label items (3.7s)
+  ✓  308 [chromium] › e2e\label-library.spec.ts:70:3 › Label Library › should have favorite star toggle (3.9s)
+  ✓  309 [chromium] › e2e\label-library.spec.ts:81:3 › Label Library › should close label library (3.8s)
+  ✓  310 [chromium] › e2e\learning-dashboard.spec.ts:61:3 › Learning Dashboard › should open learning dashboard (4.5s)
+[PERF] Indésirables: 369ms
+  ✓  312 [chromium] › e2e\folder-loading-perf.spec.ts:102:3 › Folder loading performance › Indésirables charge en moins de 3s (4.4s)
+  ✓  314 [chromium] › e2e\login.spec.ts:61:3 › Login Page - Display › should display login page when not authenticated (4.3s)
+  ✓  311 [chromium] › e2e\learning-dashboard.spec.ts:70:3 › Learning Dashboard › should display hero stats (5.6s)
+  ✓  315 [chromium] › e2e\learning-dashboard.spec.ts:95:3 › Learning Dashboard › should close learning dashboard (4.5s)
+  ✓  313 [chromium] › e2e\learning-dashboard.spec.ts:84:3 › Learning Dashboard › should have period selector buttons (5.5s)
+  ✓  316 [chromium] › e2e\login.spec.ts:66:3 › Login Page - Display › should have email input (5.2s)
+[PERF] Skeleton/first-email: 21ms
+  ✓  319 [chromium] › e2e\login.spec.ts:77:3 › Login Page - Display › should have OAuth buttons (3.1s)
+  ✓  318 [chromium] › e2e\login.spec.ts:71:3 › Login Page - Display › should have magic link submit button (3.2s)
+  ✓  317 [chromium] › e2e\folder-loading-perf.spec.ts:115:3 › Folder loading performance › Skeleton loader apparaît immédiatement lors du changement de dossier (5.1s)
+  ✓  320 [chromium] › e2e\login.spec.ts:95:3 › Login Page - Magic Link Flow › should submit magic link request (3.7s)
+  ✓  321 [chromium] › e2e\login.spec.ts:107:3 › Login Page - Magic Link Flow › should keep form visible with empty email (2.9s)
+  ✓  323 [chromium] › e2e\my-style.spec.ts:57:3 › My Style - Modal › should open My Style modal (3.9s)
+  ✓  324 [chromium] › e2e\my-style.spec.ts:66:3 › My Style - Modal › should display maturity progress bar (5.0s)
+  ✓  326 [chromium] › e2e\my-style.spec.ts:76:3 › My Style - Modal › should close My Style with close button (4.4s)
+  ✓  322 [chromium] › e2e\login.spec.ts:117:3 › Login Page - Magic Link Flow › should show error on server failure (5.9s)
+  ✓  325 [chromium] › e2e\folder-loading-perf.spec.ts:128:3 › Folder loading performance › Aller-retour rapide inbox→envoyés→inbox ne crashe pas (5.7s)
+  ✓  327 [chromium] › e2e\new-message-signature.spec.ts:80:3 › NewMessage — Signature insertion › insère la signature au premier affichage (5.5s)
+  ✓  329 [chromium] › e2e\new-message-signature.spec.ts:111:3 › NewMessage — Contact Autocomplete › affiche les suggestions quand on tape dans le champ To (4.8s)
+  ✓  331 [chromium] › e2e\new-message-signature.spec.ts:120:3 › NewMessage — Contact Autocomplete › affiche le nom et email du contact (4.8s)
+  ✓  330 [chromium] › e2e\new-message-signature.spec.ts:129:3 › NewMessage — Contact Autocomplete › sélectionne un contact au clic (4.8s)
+  ✓  332 [chromium] › e2e\folder-loading-perf.spec.ts:143:3 › Folder loading performance › Données non périmées après retour depuis un dossier (4.0s)
+  ✓  328 [chromium] › e2e\new-message-signature.spec.ts:88:3 › NewMessage — Signature insertion › insère la signature après fermeture et réouverture (6.5s)
+  ✓  333 [chromium] › e2e\new-message-signature.spec.ts:139:3 › NewMessage — Contact Autocomplete › dropdown au-dessus des champs suivants (z-index) (5.1s)
+[AUDIT] inbox→sent: 652ms
+  ✓  337 [chromium] › e2e\folder-loading-perf.spec.ts:163:3 › Folder loading performance › [AUDIT] Inbox → Envoyés : mesure temps de réponse (3.4s)
+  ✓  335 [chromium] › e2e\new-message.spec.ts:37:3 › NewMessage — ouverture et affichage › ouvre la modale avec N (4.3s)
+  ✓  336 [chromium] › e2e\new-message.spec.ts:47:3 › NewMessage — ouverture et affichage › affiche le champ To (5.5s)
+  ✓  334 [chromium] › e2e\new-message.spec.ts:42:3 › NewMessage — ouverture et affichage › affiche le titre Nouveau message (5.7s)
+  ✓  339 [chromium] › e2e\new-message.spec.ts:57:3 › NewMessage — ouverture et affichage › affiche le textarea du corps (5.0s)
+[AUDIT] Navigation complète: {
+  "inbox→archived": 536,
+  "archived→spam": 235,
+  "spam→trash": 345,
+  "trash→inbox": 978
+}
+[AUDIT] Pire transition: 978ms
+  ✓  341 [chromium] › e2e\new-message.spec.ts:62:3 › NewMessage — ouverture et affichage › affiche le bouton Envoyer (4.2s)
+  ✓  340 [chromium] › e2e\folder-loading-perf.spec.ts:174:3 › Folder loading performance › [AUDIT] Navigation complète inbox→archives→spam→corbeille→inbox (5.3s)
+  ✓  342 [chromium] › e2e\new-message.spec.ts:67:3 › NewMessage — ouverture et affichage › le bouton Envoyer est désactivé sans destinataire (4.3s)
+  ✓  343 [chromium] › e2e\new-message.spec.ts:76:3 › NewMessage — CC/BCC › affiche le toggle Cc (4.7s)
+  ✓  344 [chromium] › e2e\new-message.spec.ts:80:3 › NewMessage — CC/BCC › affiche le champ Cc au clic (5.1s)
+  ✘  338 [chromium] › e2e\new-message.spec.ts:52:3 › NewMessage — ouverture et affichage › affiche le champ Objet (10.0s)
+  ✓  345 [chromium] › e2e\new-message.spec.ts:85:3 › NewMessage — CC/BCC › affiche le champ Cci au clic (4.4s)
+[AUDIT] Retour inbox: {
+  "sent→inbox": 407,
+  "archived→inbox": 371,
+  "spam→inbox": 491,
+  "trash→inbox": 391
+}
+[AUDIT] Pire retour inbox: 491ms
+  ✓  346 [chromium] › e2e\folder-loading-perf.spec.ts:205:3 › Folder loading performance › [AUDIT] Retour inbox depuis chaque dossier : test de cache (6.7s)
+  ✓  350 [chromium] › e2e\new-message.spec.ts:131:3 › NewMessage — maximiser › affiche les boutons header (maximiser, fermer) (3.4s)
+  ✓  351 [chromium] › e2e\new-message.spec.ts:135:3 › NewMessage — maximiser › maximise la modale au clic (2.6s)
+  ✘  347 [chromium] › e2e\new-message.spec.ts:98:3 › NewMessage — AI prompt et slash commands › affiche le champ AI prompt (9.2s)
+  ✘  352 [chromium] › e2e\new-message.spec.ts:144:3 › NewMessage — auto-save › sauvegarde le brouillon à la fermeture (3.2s)
+  ✓  354 [chromium] › e2e\new-message.spec.ts:168:3 › NewMessage — footer › affiche le footer (2.9s)
+  ✓  355 [chromium] › e2e\pending-draft-detail.spec.ts:82:3 › Pending Draft Detail — affichage › ouvre le détail d'un brouillon au clic (3.8s)
+  ✓  358 [chromium] › e2e\pending-draft-detail.spec.ts:86:3 › Pending Draft Detail — affichage › affiche le sujet de l'email original (3.0s)
+  ✘  356 [chromium] › e2e\new-message.spec.ts:172:3 › NewMessage — footer › affiche le bouton pièce jointe (8.5s)
+  ✘  357 [chromium] › e2e\new-message.spec.ts:176:3 › NewMessage — footer › affiche le bouton poubelle (8.8s)
+  ✓  359 [chromium] › e2e\pending-draft-detail.spec.ts:90:3 › Pending Draft Detail — affichage › affiche l'expéditeur (3.2s)
+  ✓  360 [chromium] › e2e\pending-draft-detail.spec.ts:106:3 › Pending Draft Detail — actions › affiche le bouton Supprimer (3.4s)
+  ✓  362 [chromium] › e2e\pending-draft-detail.spec.ts:103:3 › Pending Draft Detail — actions › affiche le bouton Envoyer (4.4s)
+  ✓  361 [chromium] › e2e\pending-draft-detail.spec.ts:94:3 › Pending Draft Detail — affichage › affiche le corps du brouillon (4.4s)
+  ✓  363 [chromium] › e2e\pending-draft-detail.spec.ts:109:3 › Pending Draft Detail — actions › affiche la barre d'actions (4.8s)
+  ✘  348 [chromium] › e2e\new-message.spec.ts:102:3 › NewMessage — AI prompt et slash commands › ouvre le menu slash en tapant / (30.8s)
+  ✓  364 [chromium] › e2e\pending-draft-detail.spec.ts:117:3 › Pending Draft Detail — raffinement › affiche le champ de raffinement AI (4.0s)
+  ✓  365 [chromium] › e2e\pending-draft-detail.spec.ts:120:3 › Pending Draft Detail — raffinement › affiche le menu slash au typing / (4.2s)
+  ✘  349 [chromium] › e2e\new-message.spec.ts:109:3 › NewMessage — AI prompt et slash commands › affiche les slash commands (30.8s)
+  ✓  366 [chromium] › e2e\pending-draft-detail.spec.ts:125:3 › Pending Draft Detail — raffinement › affiche la zone de raffinement (3.8s)
+  ✓  367 [chromium] › e2e\pending-draft-detail.spec.ts:136:3 › Pending Draft Detail — pipeline › ouvre les pipeline cards au clic (4.3s)
+  ✓  368 [chromium] › e2e\pending-draft-detail.spec.ts:145:3 › Pending Draft Detail — mode réponse › affiche la pill de mode réponse (4.2s)
+  ✓  369 [chromium] › e2e\regression-lessons.spec.ts:107:3 › Régression CSS — padding:0 boutons icône › les boutons icône de la sidebar ont du contenu visible (3.8s)
+  ✘  353 [chromium] › e2e\new-message.spec.ts:116:3 › NewMessage — AI prompt et slash commands › filtre les slash commands (31.4s)
+  ✓  372 [chromium] › e2e\regression-lessons.spec.ts:174:3 › Régression Settings — défauts activés › localStorage hide_noise est true par défaut (pas de valeur = true) (5.4s)
+  ✓  371 [chromium] › e2e\regression-lessons.spec.ts:124:3 › Régression CSS — padding:0 boutons icône › le bouton Composer a un SVG visible (5.6s)
+  ✓  370 [chromium] › e2e\pending-draft-detail.spec.ts:133:3 › Pending Draft Detail — pipeline › affiche le toggle pipeline (7.7s)
+  ✓  374 [chromium] › e2e\regression-lessons.spec.ts:190:3 › Régression — chargement email sans body_html › affiche le contenu même sans body_html (fallback body_text) (7.6s)
+  ✓  373 [chromium] › e2e\pending-draft-detail.spec.ts:148:3 › Pending Draft Detail — mode réponse › affiche le destinataire (7.6s)
+  ✓  376 [chromium] › e2e\regression-lessons.spec.ts:341:3 › Régression — animation de suppression › la liste reste visible après une action sur un email (5.9s)
+  ✓  377 [chromium] › e2e\regression-lessons.spec.ts:379:3 › Régression — champs null dans les emails › affiche un email avec sender_name=null sans crash (4.0s)
+  ✓  375 [chromium] › e2e\regression-lessons.spec.ts:302:3 › Régression — ordre des labels core › les onglets labels sont dans l'ordre Action, Info, Bruit (6.9s)
+  ✓  379 [chromium] › e2e\regression-lessons.spec.ts:455:3 › Régression — données corrompues ne crashent pas l'UI › affiche les emails valides même si un a des données manquantes (4.6s)
+  ✓  378 [chromium] › e2e\regression-lessons.spec.ts:428:3 › Régression — StrictMode fetch non annulé › la liste d'emails se charge sans abort (6.2s)
+  ✓  382 [chromium] › e2e\regression-lessons.spec.ts:589:3 › Régression — Settings UI clean › ouvre les settings sans crash (6.8s)
+  ✓  380 [chromium] › e2e\regression-lessons.spec.ts:237:3 › Régression — emails envoyés prefix sent: › charge un email envoyé avec le prefix sent: (8.2s)
+  ✓  381 [chromium] › e2e\regression-lessons.spec.ts:528:3 › Régression — Snooze calendrier uniquement › pas d'options rapides (Dans 2h, Demain, etc.) dans le dropdown snooze (7.5s)
+  ✓  384 [chromium] › e2e\regression-lessons.spec.ts:639:3 › Régression — raccourcis clavier globaux › la touche N ouvre le compose depuis n'importe quel état (6.5s)
+  ✓  383 [chromium] › e2e\regression-lessons.spec.ts:611:3 › Régression — pas de timeout sur email detail › ouvre un email en < 5s sans timeout (7.4s)
+  ✓  386 [chromium] › e2e\regression-lessons.spec.ts:696:3 › Régression — persistance du thème › le thème choisi persiste après reload (3.3s)
+  ✓  387 [chromium] › e2e\reply-composer.spec.ts:40:3 › Reply Composer — ouverture › ouvre le reply composer avec R (5.3s)
+  ✓  385 [chromium] › e2e\regression-lessons.spec.ts:669:3 › Régression — pas de crash au démarrage › l'app démarre sans erreur JS critique (10.0s)
+  ✓  389 [chromium] › e2e\reply-composer.spec.ts:49:3 › Reply Composer — ouverture › affiche le bouton Envoyer (5.5s)
+  ✓  388 [chromium] › e2e\reply-composer.spec.ts:45:3 › Reply Composer — ouverture › affiche le champ AI prompt (5.8s)
+  ✓  390 [chromium] › e2e\reply-composer.spec.ts:53:3 › Reply Composer — ouverture › affiche le header Brouillon (6.0s)
+  ✓  391 [chromium] › e2e\reply-composer.spec.ts:66:3 › Reply Composer — slash commands › affiche le menu slash quand on tape / (8.1s)
+  ✓  393 [chromium] › e2e\reply-composer.spec.ts:93:3 › Reply Composer — envoi › le bouton Envoyer est désactivé quand le brouillon est vide (10.6s)
+  ✓  394 [chromium] › e2e\reply-composer.spec.ts:96:3 › Reply Composer — envoi › affiche le bouton Supprimer (11.5s)
+  ✓  392 [chromium] › e2e\reply-composer.spec.ts:71:3 › Reply Composer — slash commands › filtre les slash commands en tapant (12.7s)
+  ✓  396 [chromium] › e2e\reply-composer.spec.ts:108:3 › Reply Composer — mode réponse › affiche la pill de mode (11.7s)
+  ✓  395 [chromium] › e2e\reply-composer.spec.ts:77:3 › Reply Composer — slash commands › ferme le menu slash avec Escape (14.5s)
+  ✓  402 [chromium] › e2e\reply-process.spec.ts:147:3 › Reply Process — génération IA de brouillon › affiche une erreur quand /process retourne 404 (8.7s)
+  ✓  399 [chromium] › e2e\reply-composer.spec.ts:127:3 › Reply Composer — action bar › affiche la barre d'actions (12.3s)
+  ✓  401 [chromium] › e2e\reply-process.spec.ts:125:3 › Reply Process — génération IA de brouillon › ouvre le reply composer et génère un brouillon via Processus IA (10.4s)
+  ✓  404 [chromium] › e2e\reply-send.spec.ts:185:3 › Répondre à un email — flux complet › ouvre le composer, génère un brouillon IA, et affiche le texte (7.8s)
+  ✓  403 [chromium] › e2e\reply-process.spec.ts:165:3 › Reply Process — génération IA de brouillon › affiche le reply composer avec le prompt AI visible (8.2s)
+  ✓  405 [chromium] › e2e\reply-send.spec.ts:203:3 › Répondre à un email — flux complet › génère un brouillon avec instructions personnalisées (8.2s)
+  ✓  407 [chromium] › e2e\reply-send.spec.ts:272:3 › Répondre à un email — flux complet › affiche le destinataire correctement (5.4s)
+  ✓  408 [chromium] › e2e\reply-send.spec.ts:251:3 › Répondre à un email — flux complet › affiche une erreur si la génération échoue (5.9s)
+  ✘  397 [chromium] › e2e\reply-composer.spec.ts:111:3 › Reply Composer — mode réponse › affiche le chevron pour changer de mode (26.8s)
+  ✓  406 [chromium] › e2e\reply-send.spec.ts:215:3 › Répondre à un email — flux complet › envoie le brouillon après génération IA (7.0s)
+  ✘  400 [chromium] › e2e\reply-composer.spec.ts:130:3 › Reply Composer — action bar › affiche le bouton d'envoi principal (20.1s)
+  ✘  398 [chromium] › e2e\reply-composer.spec.ts:114:3 › Reply Composer — mode réponse › ouvre le dropdown de mode au clic (30.9s)
+  ✓  411 [chromium] › e2e\reply-send.spec.ts:310:3 › Répondre à un email — raccourcis clavier › ouvre le composer avec la touche R (3.8s)
+  -  412 [chromium] › e2e\scroll-unified.spec.ts:176:8 › Scroll unifié — Régression guard › Panel inbox : email + draft → scroll unique sur .pending-draft-detail
+  -  413 [chromium] › e2e\scroll-unified.spec.ts:199:8 › Scroll unifié — Régression guard › CSS invariants : propriétés critiques présentes
+  -  414 [chromium] › e2e\scroll-unified.spec.ts:247:8 › Scroll unifié — Régression guard › Action bar sticky : reste visible après scroll vers le bas
+  ✓  410 [chromium] › e2e\reply-send.spec.ts:288:3 › Répondre à un email — flux complet › le bouton Envoyer est désactivé quand le brouillon est vide (5.2s)
+  ✘  409 [chromium] › e2e\reply-send.spec.ts:279:3 › Répondre à un email — flux complet › affiche le sujet avec Re: (11.8s)
+  ✓  416 [chromium] › e2e\search.spec.ts:44:3 › Search — ouverture et saisie › le champ de recherche est focusable (6.9s)
+  ✓  417 [chromium] › e2e\reply-send.spec.ts:295:3 › Répondre à un email — flux complet › peut supprimer le brouillon (6.8s)
+  ✓  418 [chromium] › e2e\reply-send.spec.ts:323:3 › Répondre à un email — échec d'envoi › affiche une erreur si l'envoi échoue (8.9s)
+  ✓  419 [chromium] › e2e\search.spec.ts:57:3 › Search — ouverture et saisie › affiche le bouton clear après saisie (3.2s)
+  ✘  415 [chromium] › e2e\search.spec.ts:40:3 › Search — ouverture et saisie › affiche la barre de recherche (12.8s)
+  ✘  421 [chromium] › e2e\scroll-unified.spec.ts:158:3 › Scroll unifié — Régression guard › Panel inbox : email long sans draft → scroll sur .email-detail-inline, PAS sur .email-detail-body (4.9s)
+  ✓  423 [chromium] › e2e\search.spec.ts:84:3 › Search — suggestions › Escape ferme les suggestions (3.6s)
+  ✓  422 [chromium] › e2e\search.spec.ts:76:3 › Search — suggestions › affiche le dropdown de suggestions au focus (4.1s)
+  ✓  424 [chromium] › e2e\search.spec.ts:50:3 › Search — ouverture et saisie › saisie de texte dans le champ (3.5s)
+  ✓  426 [chromium] › e2e\sent-email-detail.spec.ts:268:3 › Email envoyé — ouverture du détail › le sujet de l'email est affiché dans le détail (3.6s)
+  ✓  425 [chromium] › e2e\sent-email-detail.spec.ts:257:3 › Email envoyé — ouverture du détail › clic sur un email envoyé ouvre un panneau/modal de détail (3.7s)
+  ✓  427 [chromium] › e2e\sent-email-detail.spec.ts:276:3 › Email envoyé — ouverture du détail › le destinataire (To:) est visible dans le détail (5.1s)
+  ✓  429 [chromium] › e2e\search.spec.ts:103:3 › Search — icône et recherche sauvegardée › affiche le bouton sauvegarder après saisie (4.9s)
+  ✓  430 [chromium] › e2e\sent-email-detail.spec.ts:291:3 › Email envoyé — ouverture du détail › le corps de l'email est visible après chargement (5.2s)
+  ✓  431 [chromium] › e2e\sent-email-detail.spec.ts:321:3 › Email envoyé — contenu du détail › la date d'envoi est affichée dans le détail (6.1s)
+  ✓  432 [chromium] › e2e\sent-email-detail.spec.ts:341:3 › Email envoyé — contenu du détail › l'expéditeur (From:) est l'email de l'utilisateur (3.8s)
+  ✓  433 [chromium] › e2e\sent-email-detail.spec.ts:355:3 › Email envoyé — contenu du détail › les headers principaux sont présents dans le détail (3.8s)
+  ✓  434 [chromium] › e2e\sent-email-detail.spec.ts:390:3 › Email envoyé — navigation dans le détail › fermeture du détail avec la touche Escape (5.2s)
+  ✓  436 [chromium] › e2e\sent-email-detail.spec.ts:434:3 › Email envoyé — navigation dans le détail › navigation vers l'email suivant dans les envoyés (3.4s)
+  ✓  435 [chromium] › e2e\sent-email-detail.spec.ts:411:3 › Email envoyé — navigation dans le détail › fermeture du détail avec le bouton close (6.4s)
+  ✓  437 [chromium] › e2e\sent-email-detail.spec.ts:467:3 › Email envoyé — navigation dans le détail › navigation vers l'email précédent dans les envoyés (5.6s)
+  ✓  439 [chromium] › e2e\sent-email-detail.spec.ts:594:3 › Email envoyé — état de chargement › le détail s'affiche correctement après chargement (4.0s)
+  ✓  438 [chromium] › e2e\sent-email-detail.spec.ts:507:3 › Email envoyé — état de chargement › indicateur de chargement visible pendant le fetch IMAP lent (5.5s)
+  ✓  441 [chromium] › e2e\sent-email-detail.spec.ts:650:3 › Email envoyé — pièce jointe › indicateur de pièce jointe visible dans la liste quand has_attachments: true (3.0s)
+  ✓  440 [chromium] › e2e\sent-email-detail.spec.ts:616:3 › Email envoyé — état de chargement › aucun spinner bloquant après chargement du détail (5.1s)
+  ✘  428 [chromium] › e2e\search.spec.ts:99:3 › Search — icône et recherche sauvegardée › affiche l'icône de recherche (14.1s)
+  ✓  442 [chromium] › e2e\sent-email-detail.spec.ts:673:3 › Email envoyé — pièce jointe › indicateur de pièce jointe visible dans le détail quand has_attachments: true (3.7s)
+  ✓  443 [chromium] › e2e\sent-email-detail.spec.ts:699:3 › Email envoyé — pièce jointe › email sans pièce jointe n'affiche pas d'indicateur d'attachement (3.8s)
+  ✓  444 [chromium] › e2e\sent-email-detail.spec.ts:729:3 › Email envoyé — robustesse › erreur 500 sur le détail affiche un message d'erreur (3.8s)
+  ✘  420 [chromium] › e2e\search.spec.ts:64:3 › Search — ouverture et saisie › le bouton clear efface le texte (31.7s)
+  ✓  446 [chromium] › e2e\sent-folder.spec.ts:102:3 › Dossier Envoyés — navigation › affiche les emails envoyés après navigation (3.9s)
+  ✓  447 [chromium] › e2e\sent-folder.spec.ts:110:3 › Dossier Envoyés — navigation › affiche les sujets des emails envoyés (2.7s)
+  ✓  448 [chromium] › e2e\sent-folder.spec.ts:117:3 › Dossier Envoyés — navigation › nav Envoyés a la classe active (3.0s)
+  ✓  445 [chromium] › e2e\sent-email-detail.spec.ts:789:3 › Email envoyé — robustesse › liste vide des envoyés affiche un état vide (pas d'erreur) (8.4s)
+  ✓  449 [chromium] › e2e\sent-folder.spec.ts:132:3 › Dossier Envoyés — état erreur 500 › affiche l'état d'erreur quand API retourne 500 (3.0s)
+  ✓  450 [chromium] › e2e\sent-folder.spec.ts:172:3 › Dossier Envoyés — état erreur 500 › bouton Réessayer re-fetch les emails (3.1s)
+  ✓  451 [chromium] › e2e\sent-folder.spec.ts:258:3 › Dossier Envoyés — détail email › ouvre le détail d'un email envoyé au clic (3.6s)
+  ✓  452 [chromium] › e2e\sent-folder.spec.ts:93:3 › Dossier Envoyés — navigation › navigue vers Envoyés sans erreur 500 (4.8s)
+  ✓  454 [chromium] › e2e\settings.spec.ts:24:3 › Settings › should open settings with button click (5.2s)
+  ✓  455 [chromium] › e2e\settings.spec.ts:31:3 › Settings › should display settings nav pills (5.9s)
+  ✓  456 [chromium] › e2e\sent-folder.spec.ts:122:3 › Dossier Envoyés — navigation › retour inbox depuis Envoyés fonctionne (5.3s)
+  ✓  453 [chromium] › e2e\settings.spec.ts:17:3 › Settings › should open settings with keyboard shortcut (6.9s)
+  -  462 [chromium] › e2e\settings.spec.ts:100:8 › Settings › should toggle autostart setting
+  ✓  459 [chromium] › e2e\settings.spec.ts:74:3 › Settings › should close settings with close button (4.8s)
+  ✓  458 [chromium] › e2e\settings.spec.ts:54:3 › Settings › should toggle tooltips setting (5.8s)
+  ✓  460 [chromium] › e2e\settings.spec.ts:83:3 › Settings › should close settings with overlay click (5.5s)
+  ✓  463 [chromium] › e2e\shortcuts-help.spec.ts:18:3 › Shortcuts Help Panel › should open shortcuts panel with Cmd+/ (5.3s)
+  ✓  465 [chromium] › e2e\shortcuts-help.spec.ts:33:3 › Shortcuts Help Panel › should display keyboard keys (4.2s)
+  ✓  464 [chromium] › e2e\shortcuts-help.spec.ts:24:3 › Shortcuts Help Panel › should display shortcut sections (4.8s)
+  ✓  466 [chromium] › e2e\shortcuts-help.spec.ts:42:3 › Shortcuts Help Panel › should close panel with close button (4.8s)
+  ✓  467 [chromium] › e2e\shortcuts-help.spec.ts:53:3 › Shortcuts Help Panel › should close panel with Escape (4.2s)
+  ✘  457 [chromium] › e2e\settings.spec.ts:43:3 › Settings › should scroll to section on nav pill click (11.8s)
+  ✘  461 [chromium] › e2e\settings.spec.ts:92:3 › Settings › should display Compte section content (8.9s)
+  ✓  468 [chromium] › e2e\shortcuts-help.spec.ts:62:3 › Shortcuts Help Panel › should have reset all shortcuts button (2.7s)
+  ✓  469 [chromium] › e2e\shortcuts.spec.ts:17:3 › Keyboard Shortcuts › should open compose modal with Cmd+N (2.8s)
+  ✓  471 [chromium] › e2e\shortcuts.spec.ts:36:3 › Keyboard Shortcuts › should trigger sync with Cmd+Shift+S (3.0s)
+  ✓  470 [chromium] › e2e\shortcuts.spec.ts:28:3 › Keyboard Shortcuts › should open settings with Cmd+, (3.8s)
+  ✓  472 [chromium] › e2e\shortcuts.spec.ts:79:3 › Keyboard Shortcuts › should close modal with Escape (3.3s)
+  ✓  473 [chromium] › e2e\sidebar.spec.ts:22:3 › Sidebar - Navigation › should display sidebar with all navigation tabs (3.0s)
+  ✓  474 [chromium] › e2e\sidebar.spec.ts:32:3 › Sidebar - Navigation › should highlight active tab (4.4s)
+  ✓  479 [chromium] › e2e\shortcuts.spec.ts:51:3 › Keyboard Shortcuts › should refresh drafts with Cmd+R (5.6s)
+  ✓  478 [chromium] › e2e\shortcuts.spec.ts:67:3 › Keyboard Shortcuts › should show shortcuts help with Cmd+/ (6.0s)
+  ✓  476 [chromium] › e2e\sidebar.spec.ts:42:3 › Sidebar - Navigation › should switch to sent tab (7.3s)
+  ✓  475 [chromium] › e2e\sidebar.spec.ts:37:3 › Sidebar - Navigation › should switch to drafts tab (7.6s)
+  ✓  477 [chromium] › e2e\sidebar.spec.ts:47:3 › Sidebar - Navigation › should switch to archived tab (7.1s)
+  ✓  483 [chromium] › e2e\sidebar.spec.ts:66:3 › Sidebar - Navigation › should have settings button (4.1s)
+  ✓  482 [chromium] › e2e\sidebar.spec.ts:62:3 › Sidebar - Navigation › should have compose button (4.8s)
+  ✓  481 [chromium] › e2e\sidebar.spec.ts:57:3 › Sidebar - Navigation › should switch to trash tab (5.2s)
+  ✓  480 [chromium] › e2e\sidebar.spec.ts:52:3 › Sidebar - Navigation › should switch to spam tab (8.4s)
+  ✓  485 [chromium] › e2e\sidebar.spec.ts:113:3 › Sidebar - Open Modals › should open settings from sidebar (5.2s)
+  ✓  484 [chromium] › e2e\sidebar.spec.ts:81:3 › Sidebar - Collapse/Expand › should cycle sidebar modes on toggle (5.5s)
+  ✓  486 [chromium] › e2e\sidebar.spec.ts:118:3 › Sidebar - Open Modals › should open compose from sidebar (4.1s)
+  ✓  491 [chromium] › e2e\snippet-library.spec.ts:54:3 › Snippet Library › should open snippet library (5.2s)
+  ✓  492 [chromium] › e2e\snippet-library.spec.ts:62:3 › Snippet Library › should display snippets list (3.1s)
+  ✓  490 [chromium] › e2e\signature-preview.spec.ts:115:3 › Signature Preview — NewMessageModal › affiche la signature dans le nouveau message (6.8s)
+  ✓  494 [chromium] › e2e\snippet-library.spec.ts:83:3 › Snippet Library › should have tab switcher (2.4s)
+  ✓  493 [chromium] › e2e\snippet-library.spec.ts:73:3 › Snippet Library › should have search input (3.0s)
+  ✓  495 [chromium] › e2e\snippet-library.spec.ts:94:3 › Snippet Library › should have create button (2.8s)
+  ✓  497 [chromium] › e2e\spam-folder.spec.ts:41:3 › Indésirables — navigation › navigue vers les Indésirables sans erreur (1.9s)
+  ✓  496 [chromium] › e2e\snippet-library.spec.ts:104:3 › Snippet Library › should close snippet library (2.5s)
+  ✓  498 [chromium] › e2e\spam-folder.spec.ts:45:3 › Indésirables — navigation › nav Indésirables a la classe active (2.7s)
+  ✓  499 [chromium] › e2e\spam-folder.spec.ts:49:3 › Indésirables — navigation › retour inbox depuis les Indésirables (2.4s)
+  ✓  500 [chromium] › e2e\spam-folder.spec.ts:53:3 › Indésirables — navigation › le titre de page est mis à jour (2.5s)
+  ✓  501 [chromium] › e2e\spam-folder.spec.ts:63:3 › Indésirables — affichage liste › affiche les emails spam (2.8s)
+  ✓  502 [chromium] › e2e\spam-folder.spec.ts:67:3 › Indésirables — affichage liste › affiche le nombre correct d'emails (2.9s)
+  ✓  503 [chromium] › e2e\spam-folder.spec.ts:71:3 › Indésirables — affichage liste › affiche les sujets des emails spam (3.0s)
+  ✘  487 [chromium] › e2e\signature-preview.spec.ts:81:3 › Signature Preview — PendingDraftDetail › signature est non-interactive (pointer-events: none) (15.6s)
+  ✘  488 [chromium] › e2e\signature-preview.spec.ts:68:3 › Signature Preview — PendingDraftDetail › affiche la signature dans le brouillon AI (16.3s)
+  ✘  489 [chromium] › e2e\signature-preview.spec.ts:94:3 › Signature Preview — PendingDraftDetail › signature a une opacité réduite (15.6s)
+  ✓  504 [chromium] › e2e\spam-folder.spec.ts:76:3 › Indésirables — affichage liste › affiche la bannière spam avec info 30 jours (2.3s)
+  ✓  505 [chromium] › e2e\spam-folder.spec.ts:82:3 › Indésirables — affichage liste › affiche le bouton Vider les indésirables (2.6s)
+  ✓  506 [chromium] › e2e\spam-folder.spec.ts:89:3 › Indésirables — erreur 500 › affiche l'état d'erreur quand l'API retourne 500 (2.7s)
+  ✓  507 [chromium] › e2e\spam-folder.spec.ts:153:3 › Indésirables — comportements spécifiques › affiche un état vide quand aucun email (2.6s)
+  ✓  508 [chromium] › e2e\support-panel.spec.ts:36:3 › Support Panel - Open/Close › should open support panel from sidebar (2.8s)
+  ✓  509 [chromium] › e2e\support-panel.spec.ts:44:3 › Support Panel - Open/Close › should close support panel with close button (4.2s)
+  ✓  510 [chromium] › e2e\support-panel.spec.ts:67:3 › Support Panel - Chat Home › should display chat home with action buttons (4.9s)
+  ✓  514 [chromium] › e2e\support-panel.spec.ts:75:3 › Support Panel - Chat Home › should have chat input area (6.7s)
+  ✓  512 [chromium] › e2e\spam-folder.spec.ts:145:3 › Indésirables — détail email › le sujet est visible dans le détail (6.8s)
+  ✓  513 [chromium] › e2e\spam-folder.spec.ts:103:3 › Indésirables — erreur 500 › bouton Réessayer re-fetche les emails (1er 500, 2ème 200) (6.8s)
+  ✓  511 [chromium] › e2e\spam-folder.spec.ts:140:3 › Indésirables — détail email › clic sur un email spam ouvre son détail (6.8s)
+  ✓  515 [chromium] › e2e\trash-folder.spec.ts:111:3 › Corbeille — navigation › navigue vers la Corbeille sans erreur (4.6s)
+  ✓  516 [chromium] › e2e\trash-folder.spec.ts:118:3 › Corbeille — navigation › nav Corbeille a la classe active après navigation (5.0s)
+  ✓  520 [chromium] › e2e\trash-folder.spec.ts:166:3 › Corbeille — affichage liste › affiche les sujets des emails de la corbeille (4.3s)
+  ✓  517 [chromium] › e2e\trash-folder.spec.ts:123:3 › Corbeille — navigation › retour inbox depuis la Corbeille fonctionne (4.9s)
+  ✓  518 [chromium] › e2e\trash-folder.spec.ts:129:3 › Corbeille — navigation › le titre de page est mis à jour après navigation vers la Corbeille (4.6s)
+  ✓  521 [chromium] › e2e\trash-folder.spec.ts:159:3 › Corbeille — affichage liste › affiche le nombre correct d'emails dans la corbeille (4.8s)
+  ✓  519 [chromium] › e2e\trash-folder.spec.ts:152:3 › Corbeille — affichage liste › affiche les emails dans la corbeille (5.3s)
+  ✓  522 [chromium] › e2e\trash-folder.spec.ts:179:3 › Corbeille — état erreur 500 › affiche l'état d'erreur quand l'API retourne 500 pour la corbeille (6.3s)
+  ✓  523 [chromium] › e2e\trash-folder.spec.ts:217:3 › Corbeille — état erreur 500 › bouton Réessayer est visible en état d'erreur (4.5s)
+  ✓  525 [chromium] › e2e\trash-folder.spec.ts:346:3 › Corbeille — détail email › clic sur un email de la corbeille ouvre son détail (4.7s)
+  ✓  524 [chromium] › e2e\trash-folder.spec.ts:255:3 › Corbeille — état erreur 500 › bouton Réessayer re-fetche les emails (1er 500, 2ème 200) (5.4s)
+  ✓  526 [chromium] › e2e\trash-folder.spec.ts:360:3 › Corbeille — détail email › le sujet de l'email est visible dans le détail (5.2s)
+  ✓  527 [chromium] › e2e\trash-folder.spec.ts:378:3 › Corbeille — comportements spécifiques › affiche une bannière ou information relative à la Corbeille (5.4s)
+  ✓  530 [chromium] › e2e\visual-audit.spec.ts:145:3 › Visual Audit — Full App › 02 — Sidebar navigation (3.4s)
+  ✓  529 [chromium] › e2e\visual-audit.spec.ts:140:3 › Visual Audit — Full App › 01 — Inbox view (main) (4.1s)
+  ✓  532 [chromium] › e2e\visual-audit.spec.ts:165:3 › Visual Audit — Full App › 04 — New message modal (5.5s)
+  ✓  531 [chromium] › e2e\visual-audit.spec.ts:153:3 › Visual Audit — Full App › 03 — Email detail modal (6.0s)
+  ✓  535 [chromium] › e2e\visual-audit.spec.ts:213:3 › Visual Audit — Full App › 07 — Archives folder (3.1s)
+  ✓  534 [chromium] › e2e\visual-audit.spec.ts:204:3 › Visual Audit — Full App › 06 — Sent folder (4.1s)
+  ✓  528 [chromium] › e2e\trash-folder.spec.ts:401:3 › Corbeille — comportements spécifiques › affiche un état vide quand la corbeille ne contient aucun email (8.5s)
+  ✓  536 [chromium] › e2e\visual-audit.spec.ts:222:3 › Visual Audit — Full App › 08 — Trash folder (4.5s)
+  ✓  539 [chromium] › e2e\visual-audit.spec.ts:255:3 › Visual Audit — Full App › 11 — Search panel (3.4s)
+  ✓  537 [chromium] › e2e\visual-audit.spec.ts:231:3 › Visual Audit — Full App › 09 — Spam folder (4.6s)
+  ✓  538 [chromium] › e2e\visual-audit.spec.ts:243:3 › Visual Audit — Full App › 10 — Pending drafts list (4.8s)
+  ✓  540 [chromium] › e2e\visual-audit.spec.ts:275:3 › Visual Audit — Full App › 12 — Calendar view (4.0s)
+  ✓  533 [chromium] › e2e\visual-audit.spec.ts:183:3 › Visual Audit — Full App › 05 — Settings modal (11.5s)
+  ✓  541 [chromium] › e2e\visual-audit.spec.ts:287:3 › Visual Audit — Full App › 13 — Label library (4.5s)
+  ✓  542 [chromium] › e2e\visual-audit.spec.ts:299:3 › Visual Audit — Full App › 14 — Command palette (4.5s)
+  ✓  543 [chromium] › e2e\visual-audit.spec.ts:311:3 › Visual Audit — Full App › 15 — Shortcuts help (4.9s)
+  ✓  545 [chromium] › e2e\visual-audit.spec.ts:332:3 › Visual Audit — Full App › 17 — Narrow viewport (mobile-like) (5.1s)
+  ✓  544 [chromium] › e2e\visual-audit.spec.ts:320:3 › Visual Audit — Full App › 16 — Support panel (5.7s)
+  ✓  546 [chromium] › e2e\visual-audit.spec.ts:341:3 › Visual Audit — Full App › 18 — Empty inbox state (6.1s)
+  ✓  547 [chromium] › e2e\visual-audit.spec.ts:379:3 › Visual Audit — Full App › 19 — Context menu on email (3.6s)
+
+
+  1) [chromium] › e2e\account-manager.spec.ts:48:3 › Account Manager - Display › should open account manager from settings 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Comptes email').first()[22m
+
+
+      36 |   // Click on "Comptes email" link in settings
+      37 |   const accountsLink = page.locator('text=Comptes email').first()
+    > 38 |   await accountsLink.click()
+         |                      ^
+      39 | }
+      40 |
+      41 | test.describe('Account Manager - Display', () => {
+        at openAccountManager (C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\account-manager.spec.ts:38:22)
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\account-manager.spec.ts:49:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\account-manager-Account-Ma-90de4-count-manager-from-settings-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\account-manager-Account-Ma-90de4-count-manager-from-settings-chromium\error-context.md
+
+  2) [chromium] › e2e\account-manager.spec.ts:55:3 › Account Manager - Display › should display account list 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Comptes email').first()[22m
+
+
+      36 |   // Click on "Comptes email" link in settings
+      37 |   const accountsLink = page.locator('text=Comptes email').first()
+    > 38 |   await accountsLink.click()
+         |                      ^
+      39 | }
+      40 |
+      41 | test.describe('Account Manager - Display', () => {
+        at openAccountManager (C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\account-manager.spec.ts:38:22)
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\account-manager.spec.ts:56:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\account-manager-Account-Ma-06ac8-should-display-account-list-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\account-manager-Account-Ma-06ac8-should-display-account-list-chromium\error-context.md
+
+  3) [chromium] › e2e\account-manager.spec.ts:66:3 › Account Manager - Display › should display account email and status 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Comptes email').first()[22m
+
+
+      36 |   // Click on "Comptes email" link in settings
+      37 |   const accountsLink = page.locator('text=Comptes email').first()
+    > 38 |   await accountsLink.click()
+         |                      ^
+      39 | }
+      40 |
+      41 | test.describe('Account Manager - Display', () => {
+        at openAccountManager (C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\account-manager.spec.ts:38:22)
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\account-manager.spec.ts:67:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\account-manager-Account-Ma-509b5-ay-account-email-and-status-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\account-manager-Account-Ma-509b5-ay-account-email-and-status-chromium\error-context.md
+
+  4) [chromium] › e2e\account-manager.spec.ts:75:3 › Account Manager - Display › should close account manager with close button 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Comptes email').first()[22m
+
+
+      36 |   // Click on "Comptes email" link in settings
+      37 |   const accountsLink = page.locator('text=Comptes email').first()
+    > 38 |   await accountsLink.click()
+         |                      ^
+      39 | }
+      40 |
+      41 | test.describe('Account Manager - Display', () => {
+        at openAccountManager (C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\account-manager.spec.ts:38:22)
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\account-manager.spec.ts:76:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\account-manager-Account-Ma-8756c-t-manager-with-close-button-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\account-manager-Account-Ma-8756c-t-manager-with-close-button-chromium\error-context.md
+
+  5) [chromium] › e2e\account-manager.spec.ts:88:3 › Account Manager - Empty State › should show empty state when no accounts 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Comptes email').first()[22m
+
+
+      36 |   // Click on "Comptes email" link in settings
+      37 |   const accountsLink = page.locator('text=Comptes email').first()
+    > 38 |   await accountsLink.click()
+         |                      ^
+      39 | }
+      40 |
+      41 | test.describe('Account Manager - Display', () => {
+        at openAccountManager (C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\account-manager.spec.ts:38:22)
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\account-manager.spec.ts:102:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\account-manager-Account-Ma-39e3d-mpty-state-when-no-accounts-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\account-manager-Account-Ma-39e3d-mpty-state-when-no-accounts-chromium\error-context.md
+
+  6) [chromium] › e2e\archive-flow.spec.ts:161:3 › Archive flow › Annuler restaure l'email dans l'inbox 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.toast, [role="alert"], [role="status"]').filter({ hasText: /archiv/i }).first().getByText('Annuler')[22m
+
+
+      169 |     const toast = page.locator('.toast, [role="alert"], [role="status"]').filter({ hasText: /archiv/i })
+      170 |     await expect(toast.first()).toBeVisible({ timeout: 2000 })
+    > 171 |     await toast.first().getByText('Annuler').click()
+          |                                              ^
+      172 |
+      173 |     // Email restored
+      174 |     await expect(page.locator(EMAIL_ITEM).filter({ hasText: 'Email à archiver E2E' }).first())
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\archive-flow.spec.ts:171:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\archive-flow-Archive-flow--b7182-staure-l-email-dans-l-inbox-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\archive-flow-Archive-flow--b7182-staure-l-email-dans-l-inbox-chromium\error-context.md
+
+  7) [chromium] › e2e\calendar.spec.ts:65:3 › Calendar — navigation › retour à l'inbox depuis le calendrier 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[data-testid="nav-inbox"]')[22m
+
+
+      65 |   test('retour à l\'inbox depuis le calendrier', async ({ page }) => {
+      66 |     await navigateToCalendar(page)
+    > 67 |     await page.locator('[data-testid="nav-inbox"]').click()
+         |                                                     ^
+      68 |     await expect(page.locator('[data-testid="nav-inbox"]')).toHaveClass(/active/, { timeout: 10000 })
+      69 |   })
+      70 | })
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\calendar.spec.ts:67:53
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\calendar-Calendar-—-naviga-a03bc--inbox-depuis-le-calendrier-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\calendar-Calendar-—-naviga-a03bc--inbox-depuis-le-calendrier-chromium\error-context.md
+
+  8) [chromium] › e2e\comprehensive-compose.spec.ts:170:3 › Compose — footer › affiche le bouton pièce jointe 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('.btn-attach').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('.btn-attach').first()[22m
+
+
+      169 |
+      170 |   test('affiche le bouton pièce jointe', async ({ page }) => {
+    > 171 |     await expect(page.locator('.btn-attach').first()).toBeVisible({ timeout: 5000 })
+          |                                                       ^
+      172 |   })
+      173 |
+      174 |   test('affiche le bouton poubelle', async ({ page }) => {
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\comprehensive-compose.spec.ts:171:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\comprehensive-compose-Comp-8edc3-iche-le-bouton-pièce-jointe-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\comprehensive-compose-Comp-8edc3-iche-le-bouton-pièce-jointe-chromium\error-context.md
+
+  9) [chromium] › e2e\comprehensive-compose.spec.ts:174:3 › Compose — footer › affiche le bouton poubelle 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('.gmail-trash').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('.gmail-trash').first()[22m
+
+
+      173 |
+      174 |   test('affiche le bouton poubelle', async ({ page }) => {
+    > 175 |     await expect(page.locator('.gmail-trash').first()).toBeVisible({ timeout: 5000 })
+          |                                                        ^
+      176 |   })
+      177 | })
+      178 |
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\comprehensive-compose.spec.ts:175:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\comprehensive-compose-Comp-55ea0--affiche-le-bouton-poubelle-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\comprehensive-compose-Comp-55ea0--affiche-le-bouton-poubelle-chromium\error-context.md
+
+  10) [chromium] › e2e\comprehensive-reply.spec.ts:63:3 › Reply — ouverture et affichage › affiche le bouton Envoyer 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('.rc-send-pill-main, .rc-send-pill').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('.rc-send-pill-main, .rc-send-pill').first()[22m
+
+
+      63 |   test('affiche le bouton Envoyer', async ({ page }) => {
+      64 |     await openEmailAndReply(page)
+    > 65 |     await expect(page.locator('.rc-send-pill-main, .rc-send-pill').first()).toBeVisible({ timeout: 5000 })
+         |                                                                             ^
+      66 |   })
+      67 |
+      68 |   test('le bouton Envoyer est désactivé sans contenu', async ({ page }) => {
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\comprehensive-reply.spec.ts:65:77
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\comprehensive-reply-Reply--98099-e-affiche-le-bouton-Envoyer-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\comprehensive-reply-Reply--98099-e-affiche-le-bouton-Envoyer-chromium\error-context.md
+
+  11) [chromium] › e2e\comprehensive-reply.spec.ts:68:3 › Reply — ouverture et affichage › le bouton Envoyer est désactivé sans contenu 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeDisabled[2m([22m[2m)[22m failed
+
+    Locator: locator('.rc-send-pill-main').first()
+    Expected: disabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeDisabled" with timeout 5000ms[22m
+    [2m  - waiting for locator('.rc-send-pill-main').first()[22m
+
+
+      68 |   test('le bouton Envoyer est désactivé sans contenu', async ({ page }) => {
+      69 |     await openEmailAndReply(page)
+    > 70 |     await expect(page.locator('.rc-send-pill-main').first()).toBeDisabled({ timeout: 5000 })
+         |                                                              ^
+      71 |   })
+      72 |
+      73 |   test('affiche le label Brouillon', async ({ page }) => {
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\comprehensive-reply.spec.ts:70:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\comprehensive-reply-Reply--79a05--est-désactivé-sans-contenu-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\comprehensive-reply-Reply--79a05--est-désactivé-sans-contenu-chromium\error-context.md
+
+  12) [chromium] › e2e\comprehensive-reply.spec.ts:161:3 › Reply — mode dropdown › affiche le chevron de mode 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('.rc-send-chevron').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('.rc-send-chevron').first()[22m
+
+
+      160 |
+      161 |   test('affiche le chevron de mode', async ({ page }) => {
+    > 162 |     await expect(page.locator('.rc-send-chevron').first()).toBeVisible({ timeout: 5000 })
+          |                                                            ^
+      163 |   })
+      164 |
+      165 |   test('ouvre le dropdown de mode au clic', async ({ page }) => {
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\comprehensive-reply.spec.ts:162:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\comprehensive-reply-Reply--d96cf--affiche-le-chevron-de-mode-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\comprehensive-reply-Reply--d96cf--affiche-le-chevron-de-mode-chromium\error-context.md
+
+  13) [chromium] › e2e\comprehensive-reply.spec.ts:165:3 › Reply — mode dropdown › ouvre le dropdown de mode au clic 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.rc-send-chevron').first()[22m
+
+
+      164 |
+      165 |   test('ouvre le dropdown de mode au clic', async ({ page }) => {
+    > 166 |     await page.locator('.rc-send-chevron').first().click()
+          |                                                    ^
+      167 |     await expect(page.locator('.rc-send-dropdown')).toBeVisible({ timeout: 5000 })
+      168 |   })
+      169 | })
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\comprehensive-reply.spec.ts:166:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\comprehensive-reply-Reply--bdaec-le-dropdown-de-mode-au-clic-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\comprehensive-reply-Reply--bdaec-le-dropdown-de-mode-au-clic-chromium\error-context.md
+
+  14) [chromium] › e2e\dnd-mode.spec.ts:54:3 › DND Panel › should have main DND toggle switch in settings 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('settings-modal').getByRole('heading', { name: 'Ne pas déranger' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByTestId('settings-modal').getByRole('heading', { name: 'Ne pas déranger' })[22m
+
+
+      62 |
+      63 |     const dndHeading = settingsModal.getByRole('heading', { name: 'Ne pas déranger' })
+    > 64 |     await expect(dndHeading).toBeVisible({ timeout: 5000 })
+         |                              ^
+      65 |
+      66 |     // DND toggle switch should be present
+      67 |     const toggle = settingsModal.locator('input[aria-label="Activer le mode ne pas déranger"]')
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\dnd-mode.spec.ts:64:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\dnd-mode-DND-Panel-should--31857-D-toggle-switch-in-settings-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\dnd-mode-DND-Panel-should--31857-D-toggle-switch-in-settings-chromium\error-context.md
+
+  15) [chromium] › e2e\new-message.spec.ts:52:3 › NewMessage — ouverture et affichage › affiche le champ Objet 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('input[placeholder*="Objet"], .gmail-input').nth(1)
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('input[placeholder*="Objet"], .gmail-input').nth(1)[22m
+
+
+      52 |   test('affiche le champ Objet', async ({ page }) => {
+      53 |     await openNewMessage(page)
+    > 54 |     await expect(page.locator('input[placeholder*="Objet"], .gmail-input').nth(1)).toBeVisible({ timeout: 5000 })
+         |                                                                                    ^
+      55 |   })
+      56 |
+      57 |   test('affiche le textarea du corps', async ({ page }) => {
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\new-message.spec.ts:54:84
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\new-message-NewMessage-—-o-8a24b-hage-affiche-le-champ-Objet-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\new-message-NewMessage-—-o-8a24b-hage-affiche-le-champ-Objet-chromium\error-context.md
+
+  16) [chromium] › e2e\new-message.spec.ts:98:3 › NewMessage — AI prompt et slash commands › affiche le champ AI prompt 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator:  locator('.refine-capsule-input, input[aria-label*="IA"]').first()
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('.refine-capsule-input, input[aria-label*="IA"]').first()[22m
+    [2m    8 × locator resolved to <input type="checkbox" aria-label="Sélectionner Les tendances IA de 2026"/>[22m
+    [2m      - unexpected value "hidden"[22m
+
+
+       97 |
+       98 |   test('affiche le champ AI prompt', async ({ page }) => {
+    >  99 |     await expect(page.locator('.refine-capsule-input, input[aria-label*="IA"]').first()).toBeVisible({ timeout: 5000 })
+          |                                                                                          ^
+      100 |   })
+      101 |
+      102 |   test('ouvre le menu slash en tapant /', async ({ page }) => {
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\new-message.spec.ts:99:90
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\new-message-NewMessage-—-A-1c31c--affiche-le-champ-AI-prompt-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\new-message-NewMessage-—-A-1c31c--affiche-le-champ-AI-prompt-chromium\error-context.md
+
+  17) [chromium] › e2e\new-message.spec.ts:102:3 › NewMessage — AI prompt et slash commands › ouvre le menu slash en tapant / 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.refine-capsule-input, input[aria-label*="IA"]').first()[22m
+    [2m    - locator resolved to <input type="checkbox" aria-label="Sélectionner Les tendances IA de 2026"/>[22m
+    [2m    - fill("/")[22m
+    [2m  - attempting fill action[22m
+    [2m    2 × waiting for element to be visible, enabled and editable[22m
+    [2m      - element is not visible[22m
+    [2m    - retrying fill action[22m
+    [2m    - waiting 20ms[22m
+    [2m    2 × waiting for element to be visible, enabled and editable[22m
+    [2m      - element is not visible[22m
+    [2m    - retrying fill action[22m
+    [2m      - waiting 100ms[22m
+    [2m    51 × waiting for element to be visible, enabled and editable[22m
+    [2m       - element is not visible[22m
+    [2m     - retrying fill action[22m
+    [2m       - waiting 500ms[22m
+
+
+      103 |     const input = page.locator('.refine-capsule-input, input[aria-label*="IA"]').first()
+      104 |     await input.focus()
+    > 105 |     await input.fill('/')
+          |                 ^
+      106 |     await expect(page.locator('.rc-slash-menu').first()).toBeVisible({ timeout: 5000 })
+      107 |   })
+      108 |
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\new-message.spec.ts:105:17
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\new-message-NewMessage-—-A-19211-re-le-menu-slash-en-tapant--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\new-message-NewMessage-—-A-19211-re-le-menu-slash-en-tapant--chromium\error-context.md
+
+  18) [chromium] › e2e\new-message.spec.ts:109:3 › NewMessage — AI prompt et slash commands › affiche les slash commands 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.refine-capsule-input, input[aria-label*="IA"]').first()[22m
+    [2m    - locator resolved to <input type="checkbox" aria-label="Sélectionner Les tendances IA de 2026"/>[22m
+    [2m    - fill("/")[22m
+    [2m  - attempting fill action[22m
+    [2m    2 × waiting for element to be visible, enabled and editable[22m
+    [2m      - element is not visible[22m
+    [2m    - retrying fill action[22m
+    [2m    - waiting 20ms[22m
+    [2m    2 × waiting for element to be visible, enabled and editable[22m
+    [2m      - element is not visible[22m
+    [2m    - retrying fill action[22m
+    [2m      - waiting 100ms[22m
+    [2m    52 × waiting for element to be visible, enabled and editable[22m
+    [2m       - element is not visible[22m
+    [2m     - retrying fill action[22m
+    [2m       - waiting 500ms[22m
+
+
+      110 |     const input = page.locator('.refine-capsule-input, input[aria-label*="IA"]').first()
+      111 |     await input.focus()
+    > 112 |     await input.fill('/')
+          |                 ^
+      113 |     await expect(page.locator('.rc-slash-item').first()).toBeVisible({ timeout: 5000 })
+      114 |   })
+      115 |
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\new-message.spec.ts:112:17
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\new-message-NewMessage-—-A-adbe5--affiche-les-slash-commands-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\new-message-NewMessage-—-A-adbe5--affiche-les-slash-commands-chromium\error-context.md
+
+  19) [chromium] › e2e\new-message.spec.ts:116:3 › NewMessage — AI prompt et slash commands › filtre les slash commands 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.refine-capsule-input, input[aria-label*="IA"]').first()[22m
+    [2m    - locator resolved to <input type="checkbox" aria-label="Sélectionner Les tendances IA de 2026"/>[22m
+    [2m    - fill("/cor")[22m
+    [2m  - attempting fill action[22m
+    [2m    2 × waiting for element to be visible, enabled and editable[22m
+    [2m      - element is not visible[22m
+    [2m    - retrying fill action[22m
+    [2m    - waiting 20ms[22m
+    [2m    2 × waiting for element to be visible, enabled and editable[22m
+    [2m      - element is not visible[22m
+    [2m    - retrying fill action[22m
+    [2m      - waiting 100ms[22m
+    [2m    54 × waiting for element to be visible, enabled and editable[22m
+    [2m       - element is not visible[22m
+    [2m     - retrying fill action[22m
+    [2m       - waiting 500ms[22m
+
+
+      117 |     const input = page.locator('.refine-capsule-input, input[aria-label*="IA"]').first()
+      118 |     await input.focus()
+    > 119 |     await input.fill('/cor')
+          |                 ^
+      120 |     await page.waitForTimeout(300)
+      121 |     const items = page.locator('.rc-slash-item')
+      122 |     if (await items.count() > 0) {
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\new-message.spec.ts:119:17
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\new-message-NewMessage-—-A-a9aff-s-filtre-les-slash-commands-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\new-message-NewMessage-—-A-a9aff-s-filtre-les-slash-commands-chromium\error-context.md
+
+  20) [chromium] › e2e\new-message.spec.ts:144:3 › NewMessage — auto-save › sauvegarde le brouillon à la fermeture 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+      159 |       return Array.isArray(drafts) && drafts.length > 0
+      160 |     })
+    > 161 |     expect(hasDraft).toBe(true)
+          |                      ^
+      162 |   })
+      163 | })
+      164 |
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\new-message.spec.ts:161:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\new-message-NewMessage-—-a-4b309-le-brouillon-à-la-fermeture-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\new-message-NewMessage-—-a-4b309-le-brouillon-à-la-fermeture-chromium\error-context.md
+
+  21) [chromium] › e2e\new-message.spec.ts:172:3 › NewMessage — footer › affiche le bouton pièce jointe 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('.btn-attach').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('.btn-attach').first()[22m
+
+
+      171 |
+      172 |   test('affiche le bouton pièce jointe', async ({ page }) => {
+    > 173 |     await expect(page.locator('.btn-attach').first()).toBeVisible({ timeout: 5000 })
+          |                                                       ^
+      174 |   })
+      175 |
+      176 |   test('affiche le bouton poubelle', async ({ page }) => {
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\new-message.spec.ts:173:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\new-message-NewMessage-—-f-4c089-iche-le-bouton-pièce-jointe-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\new-message-NewMessage-—-f-4c089-iche-le-bouton-pièce-jointe-chromium\error-context.md
+
+  22) [chromium] › e2e\new-message.spec.ts:176:3 › NewMessage — footer › affiche le bouton poubelle 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('.gmail-trash').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('.gmail-trash').first()[22m
+
+
+      175 |
+      176 |   test('affiche le bouton poubelle', async ({ page }) => {
+    > 177 |     await expect(page.locator('.gmail-trash').first()).toBeVisible({ timeout: 5000 })
+          |                                                        ^
+      178 |   })
+      179 | })
+      180 |
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\new-message.spec.ts:177:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\new-message-NewMessage-—-footer-affiche-le-bouton-poubelle-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\new-message-NewMessage-—-footer-affiche-le-bouton-poubelle-chromium\error-context.md
+
+  23) [chromium] › e2e\reply-composer.spec.ts:111:3 › Reply Composer — mode réponse › affiche le chevron pour changer de mode 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('.rc-send-chevron').first()
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for locator('.rc-send-chevron').first()[22m
+
+
+      110 |   })
+      111 |   test('affiche le chevron pour changer de mode', async ({ page }) => {
+    > 112 |     await expect(page.locator('.rc-send-chevron').first()).toBeVisible({ timeout: 10000 })
+          |                                                            ^
+      113 |   })
+      114 |   test('ouvre le dropdown de mode au clic', async ({ page }) => {
+      115 |     await page.locator('.rc-send-chevron').first().click()
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\reply-composer.spec.ts:112:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\reply-composer-Reply-Compo-2c171-hevron-pour-changer-de-mode-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\reply-composer-Reply-Compo-2c171-hevron-pour-changer-de-mode-chromium\error-context.md
+
+  24) [chromium] › e2e\reply-composer.spec.ts:114:3 › Reply Composer — mode réponse › ouvre le dropdown de mode au clic 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.rc-send-chevron').first()[22m
+
+
+      113 |   })
+      114 |   test('ouvre le dropdown de mode au clic', async ({ page }) => {
+    > 115 |     await page.locator('.rc-send-chevron').first().click()
+          |                                                    ^
+      116 |     await expect(page.locator('.rc-send-dropdown')).toBeVisible({ timeout: 5000 })
+      117 |   })
+      118 | })
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\reply-composer.spec.ts:115:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\reply-composer-Reply-Compo-56d0a-le-dropdown-de-mode-au-clic-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\reply-composer-Reply-Compo-56d0a-le-dropdown-de-mode-au-clic-chromium\error-context.md
+
+  25) [chromium] › e2e\reply-composer.spec.ts:130:3 › Reply Composer — action bar › affiche le bouton d'envoi principal 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('.rc-send-pill').first()
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for locator('.rc-send-pill').first()[22m
+
+
+      129 |   })
+      130 |   test('affiche le bouton d\'envoi principal', async ({ page }) => {
+    > 131 |     await expect(page.locator('.rc-send-pill').first()).toBeVisible({ timeout: 10000 })
+          |                                                         ^
+      132 |   })
+      133 | })
+      134 |
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\reply-composer.spec.ts:131:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\reply-composer-Reply-Compo-adc87-le-bouton-d-envoi-principal-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\reply-composer-Reply-Compo-adc87-le-bouton-d-envoi-principal-chromium\error-context.md
+
+  26) [chromium] › e2e\reply-send.spec.ts:279:3 › Répondre à un email — flux complet › affiche le sujet avec Re: 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('.rc-subject-input, input[value*="Re:"]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('.rc-subject-input, input[value*="Re:"]').first()[22m
+
+
+      282 |     // Le sujet est dans un input text, pas un texte brut
+      283 |     const subjectInput = page.locator('.rc-subject-input, input[value*="Re:"]').first()
+    > 284 |     await expect(subjectInput).toBeVisible({ timeout: 5000 })
+          |                                ^
+      285 |     await expect(subjectInput).toHaveValue(/Re:.*Question sur le projet/)
+      286 |   })
+      287 |
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\reply-send.spec.ts:284:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\reply-send-Répondre-à-un-e-459db-t-affiche-le-sujet-avec-Re--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\reply-send-Répondre-à-un-e-459db-t-affiche-le-sujet-avec-Re--chromium\error-context.md
+
+  27) [chromium] › e2e\scroll-unified.spec.ts:158:3 › Scroll unifié — Régression guard › Panel inbox : email long sans draft → scroll sur .email-detail-inline, PAS sur .email-detail-body 
+
+    Error: ".email-detail-inline" devrait scroller (scrollHeight=651 > clientHeight=646)
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+      126 |     `"${selector}" devrait avoir overflow-y: auto|scroll, trouvé: ${result.overflowY}`
+      127 |   ).toBe(true)
+    > 128 |   expect(result.isScrollable, `"${selector}" devrait scroller (scrollHeight=${result.scrollHeight} > clientHeight=${result.clientHeight})`).toBe(true)
+          |                                                                                                                                             ^
+      129 | }
+      130 |
+      131 | /**
+        at assertScrollable (C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\scroll-unified.spec.ts:128:141)
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\scroll-unified.spec.ts:170:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\scroll-unified-Scroll-unif-eaeae-e-PAS-sur-email-detail-body-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\scroll-unified-Scroll-unif-eaeae-e-PAS-sur-email-detail-body-chromium\error-context.md
+
+  28) [chromium] › e2e\search.spec.ts:40:3 › Search — ouverture et saisie › affiche la barre de recherche 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('.smart-search-bar, [data-testid="smart-search-bar"]').first()
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for locator('.smart-search-bar, [data-testid="smart-search-bar"]').first()[22m
+
+
+      39 |
+      40 |   test('affiche la barre de recherche', async ({ page }) => {
+    > 41 |     await expect(page.locator('.smart-search-bar, [data-testid="smart-search-bar"]').first()).toBeVisible({ timeout: 10000 })
+         |                                                                                               ^
+      42 |   })
+      43 |
+      44 |   test('le champ de recherche est focusable', async ({ page }) => {
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\search.spec.ts:41:95
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\search-Search-—-ouverture--15f6e-fiche-la-barre-de-recherche-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\search-Search-—-ouverture--15f6e-fiche-la-barre-de-recherche-chromium\error-context.md
+
+  29) [chromium] › e2e\search.spec.ts:64:3 › Search — ouverture et saisie › le bouton clear efface le texte 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.smart-search-clear').first()[22m
+    [2m    - locator resolved to <button type="button" class="smart-search-clear" aria-label="Effacer la recherche">…</button>[22m
+    [2m  - attempting click action[22m
+    [2m    - waiting for element to be visible, enabled and stable[22m
+    [2m  - element was detached from the DOM, retrying[22m
+
+
+      66 |     const input = page.locator('.smart-search-input, [data-testid="smart-search-input"]').first()
+      67 |     await input.fill('test')
+    > 68 |     await page.locator('.smart-search-clear').first().click()
+         |                                                       ^
+      69 |     await expect(input).toHaveValue('', { timeout: 5000 })
+      70 |   })
+      71 | })
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\search.spec.ts:68:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\search-Search-—-ouverture--c9f87-outon-clear-efface-le-texte-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\search-Search-—-ouverture--c9f87-outon-clear-efface-le-texte-chromium\error-context.md
+
+  30) [chromium] › e2e\search.spec.ts:99:3 › Search — icône et recherche sauvegardée › affiche l'icône de recherche 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('.smart-search-icon').first()
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for locator('.smart-search-icon').first()[22m
+
+
+       98 |
+       99 |   test('affiche l\'icône de recherche', async ({ page }) => {
+    > 100 |     await expect(page.locator('.smart-search-icon').first()).toBeVisible({ timeout: 10000 })
+          |                                                              ^
+      101 |   })
+      102 |
+      103 |   test('affiche le bouton sauvegarder après saisie', async ({ page }) => {
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\search.spec.ts:100:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\search-Search-—-icône-et-r-c253f-ffiche-l-icône-de-recherche-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\search-Search-—-icône-et-r-c253f-ffiche-l-icône-de-recherche-chromium\error-context.md
+
+  31) [chromium] › e2e\settings.spec.ts:43:3 › Settings › should scroll to section on nav pill click 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Général' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Général' })[22m
+
+
+      49 |
+      50 |     // Général section heading should be visible
+    > 51 |     await expect(page.getByRole('heading', { name: 'Général' })).toBeVisible()
+         |                                                                  ^
+      52 |   })
+      53 |
+      54 |   test('should toggle tooltips setting', async ({ page }) => {
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\settings.spec.ts:51:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\settings-Settings-should-scroll-to-section-on-nav-pill-click-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\settings-Settings-should-scroll-to-section-on-nav-pill-click-chromium\error-context.md
+
+  32) [chromium] › e2e\settings.spec.ts:92:3 › Settings › should display Compte section content ────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Compte' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Compte' })[22m
+
+
+      94 |
+      95 |     // The Compte section should be visible by default
+    > 96 |     await expect(page.getByRole('heading', { name: 'Compte' })).toBeVisible()
+         |                                                                 ^
+      97 |     await expect(page.locator('text=Comptes email')).toBeVisible()
+      98 |   })
+      99 |
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\settings.spec.ts:96:65
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\settings-Settings-should-display-Compte-section-content-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\settings-Settings-should-display-Compte-section-content-chromium\error-context.md
+
+  33) [chromium] › e2e\signature-preview.spec.ts:68:3 › Signature Preview — PendingDraftDetail › affiche la signature dans le brouillon AI 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('.pdd-signature-preview')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for locator('.pdd-signature-preview')[22m
+
+
+      75 |     // Verify signature preview is visible
+      76 |     const sigPreview = page.locator('.pdd-signature-preview')
+    > 77 |     await expect(sigPreview).toBeVisible({ timeout: 10000 })
+         |                              ^
+      78 |     await expect(sigPreview).toContainText('Alexandre Savageau')
+      79 |   })
+      80 |
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\signature-preview.spec.ts:77:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\signature-preview-Signatur-2b4ee-nature-dans-le-brouillon-AI-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\signature-preview-Signatur-2b4ee-nature-dans-le-brouillon-AI-chromium\error-context.md
+
+  34) [chromium] › e2e\signature-preview.spec.ts:81:3 › Signature Preview — PendingDraftDetail › signature est non-interactive (pointer-events: none) 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('.pdd-signature-preview')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for locator('.pdd-signature-preview')[22m
+
+
+      86 |
+      87 |     const sigPreview = page.locator('.pdd-signature-preview')
+    > 88 |     await expect(sigPreview).toBeVisible({ timeout: 10000 })
+         |                              ^
+      89 |
+      90 |     const pointerEvents = await sigPreview.evaluate(el => getComputedStyle(el).pointerEvents)
+      91 |     expect(pointerEvents).toBe('none')
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\signature-preview.spec.ts:88:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\signature-preview-Signatur-fc31e-active-pointer-events-none--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\signature-preview-Signatur-fc31e-active-pointer-events-none--chromium\error-context.md
+
+  35) [chromium] › e2e\signature-preview.spec.ts:94:3 › Signature Preview — PendingDraftDetail › signature a une opacité réduite 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('.pdd-signature-preview')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for locator('.pdd-signature-preview')[22m
+
+
+       99 |
+      100 |     const sigPreview = page.locator('.pdd-signature-preview')
+    > 101 |     await expect(sigPreview).toBeVisible({ timeout: 10000 })
+          |                              ^
+      102 |
+      103 |     const opacity = await sigPreview.evaluate(el => getComputedStyle(el).opacity)
+      104 |     expect(parseFloat(opacity)).toBeLessThan(1)
+        at C:\Users\Alexa\Desktop\agentys\agentys-app\e2e\signature-preview.spec.ts:101:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\signature-preview-Signatur-7352f-ature-a-une-opacité-réduite-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\signature-preview-Signatur-7352f-ature-a-une-opacité-réduite-chromium\error-context.md
+
+  35 failed
+    [chromium] › e2e\account-manager.spec.ts:48:3 › Account Manager - Display › should open account manager from settings 
+    [chromium] › e2e\account-manager.spec.ts:55:3 › Account Manager - Display › should display account list 
+    [chromium] › e2e\account-manager.spec.ts:66:3 › Account Manager - Display › should display account email and status 
+    [chromium] › e2e\account-manager.spec.ts:75:3 › Account Manager - Display › should close account manager with close button 
+    [chromium] › e2e\account-manager.spec.ts:88:3 › Account Manager - Empty State › should show empty state when no accounts 
+    [chromium] › e2e\archive-flow.spec.ts:161:3 › Archive flow › Annuler restaure l'email dans l'inbox 
+    [chromium] › e2e\calendar.spec.ts:65:3 › Calendar — navigation › retour à l'inbox depuis le calendrier 
+    [chromium] › e2e\comprehensive-compose.spec.ts:170:3 › Compose — footer › affiche le bouton pièce jointe 
+    [chromium] › e2e\comprehensive-compose.spec.ts:174:3 › Compose — footer › affiche le bouton poubelle 
+    [chromium] › e2e\comprehensive-reply.spec.ts:63:3 › Reply — ouverture et affichage › affiche le bouton Envoyer 
+    [chromium] › e2e\comprehensive-reply.spec.ts:68:3 › Reply — ouverture et affichage › le bouton Envoyer est désactivé sans contenu 
+    [chromium] › e2e\comprehensive-reply.spec.ts:161:3 › Reply — mode dropdown › affiche le chevron de mode 
+    [chromium] › e2e\comprehensive-reply.spec.ts:165:3 › Reply — mode dropdown › ouvre le dropdown de mode au clic 
+    [chromium] › e2e\dnd-mode.spec.ts:54:3 › DND Panel › should have main DND toggle switch in settings 
+    [chromium] › e2e\new-message.spec.ts:52:3 › NewMessage — ouverture et affichage › affiche le champ Objet 
+    [chromium] › e2e\new-message.spec.ts:98:3 › NewMessage — AI prompt et slash commands › affiche le champ AI prompt 
+    [chromium] › e2e\new-message.spec.ts:102:3 › NewMessage — AI prompt et slash commands › ouvre le menu slash en tapant / 
+    [chromium] › e2e\new-message.spec.ts:109:3 › NewMessage — AI prompt et slash commands › affiche les slash commands 
+    [chromium] › e2e\new-message.spec.ts:116:3 › NewMessage — AI prompt et slash commands › filtre les slash commands 
+    [chromium] › e2e\new-message.spec.ts:144:3 › NewMessage — auto-save › sauvegarde le brouillon à la fermeture 
+    [chromium] › e2e\new-message.spec.ts:172:3 › NewMessage — footer › affiche le bouton pièce jointe 
+    [chromium] › e2e\new-message.spec.ts:176:3 › NewMessage — footer › affiche le bouton poubelle ──
+    [chromium] › e2e\reply-composer.spec.ts:111:3 › Reply Composer — mode réponse › affiche le chevron pour changer de mode 
+    [chromium] › e2e\reply-composer.spec.ts:114:3 › Reply Composer — mode réponse › ouvre le dropdown de mode au clic 
+    [chromium] › e2e\reply-composer.spec.ts:130:3 › Reply Composer — action bar › affiche le bouton d'envoi principal 
+    [chromium] › e2e\reply-send.spec.ts:279:3 › Répondre à un email — flux complet › affiche le sujet avec Re: 
+    [chromium] › e2e\scroll-unified.spec.ts:158:3 › Scroll unifié — Régression guard › Panel inbox : email long sans draft → scroll sur .email-detail-inline, PAS sur .email-detail-body 
+    [chromium] › e2e\search.spec.ts:40:3 › Search — ouverture et saisie › affiche la barre de recherche 
+    [chromium] › e2e\search.spec.ts:64:3 › Search — ouverture et saisie › le bouton clear efface le texte 
+    [chromium] › e2e\search.spec.ts:99:3 › Search — icône et recherche sauvegardée › affiche l'icône de recherche 
+    [chromium] › e2e\settings.spec.ts:43:3 › Settings › should scroll to section on nav pill click ─
+    [chromium] › e2e\settings.spec.ts:92:3 › Settings › should display Compte section content ──────
+    [chromium] › e2e\signature-preview.spec.ts:68:3 › Signature Preview — PendingDraftDetail › affiche la signature dans le brouillon AI 
+    [chromium] › e2e\signature-preview.spec.ts:81:3 › Signature Preview — PendingDraftDetail › signature est non-interactive (pointer-events: none) 
+    [chromium] › e2e\signature-preview.spec.ts:94:3 › Signature Preview — PendingDraftDetail › signature a une opacité réduite 
+  4 skipped
+  508 passed (9.9m)
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

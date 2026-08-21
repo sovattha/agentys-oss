@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr" spellcheck="false">
+  <head>
+    <meta charset="UTF-8" />
+    <!--
+      Strict CSP for the Vercel-served web build. The Tauri build overrides this
+      via tauri.conf.json `security.csp` (which adds ipc: + tauri.localhost). The
+      web build only needs to talk to Railway + Google Fonts.
+      `frame-ancestors` and `frame-src` are intentionally NOT in this meta —
+      browsers ignore them when delivered via meta (only HTTP headers count).
+      Vercel sets X-Frame-Options DENY + frame-ancestors 'none' via the response
+      header, which is the canonical place for click-jacking protection.
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://api.agentys.io wss://api.agentys.io https://agentys-backend-production.up.railway.app wss://agentys-backend-production.up.railway.app https://*.ingest.us.sentry.io https://*.ingest.sentry.io https://*.sentry.io; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'" />
+    <link rel="icon" type="image/svg+xml" href="/agentys-favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Agentys — Assistant IA pour vos emails. Tri automatique, brouillons intelligents, productivit&eacute; maximale." />
+    <meta property="og:title" content="Agentys" />
+    <meta property="og:description" content="Assistant IA pour vos emails. Tri automatique, brouillons intelligents, productivit&eacute; maximale." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/agentys-favicon.svg" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Agentys" />
+    <meta name="twitter:description" content="Assistant IA pour vos emails." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <!-- Critical fonts (Clarity theme — above the fold, reduced weights) -->
+    <!-- ital,wght axes required to load true italic glyphs (not synthesized oblique) -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+    <!-- Mono font (JetBrains Mono, used by --font-mono) — loaded programmatically
+         from main.tsx after first paint to avoid the inline `onload` handler that
+         CSP `script-src 'self'` blocks. Browser still parses @font-face from the
+         imported stylesheet so the mono font becomes available. -->
+    <link id="theme-fonts" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap">
+    <title>Agentys</title>
+    <!-- Critical CSS — instant loading screen paint (eliminates FOUC, cuts FCP ~1s) -->
+    <style>
+      :root {
+        --accent-primary: #0d9488;
+        --surface-base: #faf9f7;
+        --text-primary: #1a1a1a;
+      }
+      body { margin: 0; background: var(--surface-base); font-family: 'Instrument Sans', system-ui, sans-serif; }
+      #root { min-height: 100vh; }
+      .loading-screen {
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        height: 100vh; gap: 16px; background: var(--surface-base);
+      }
+      .loading-brand-mark { width: 48px; height: 48px; }
+      .loading-brand-mark img, .loading-brand-mark svg { width: 100%; height: 100%; }
+      .loading-brand-name {
+        font-family: 'Instrument Sans', 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 28px; font-weight: 400;
+        color: var(--text-primary); letter-spacing: 0.02em; opacity: 0.88;
+      }
+      .loading-bar-track {
+        width: 200px; height: 3px; background: rgba(0,0,0,0.06); border-radius: 2px; overflow: hidden;
+      }
+      .loading-bar-fill {
+        height: 100%; width: 40%; background: var(--accent-primary); border-radius: 2px;
+        animation: loadProgress 1.5s ease-in-out infinite;
+      }
+      @keyframes loadProgress { 0% { transform: translateX(-100%); } 100% { transform: translateX(350%); } }
+      .loading-hint { font-size: 12px; color: #9ca3af; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

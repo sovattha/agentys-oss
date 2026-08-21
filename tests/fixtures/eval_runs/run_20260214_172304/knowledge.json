@@ -1,0 +1,292 @@
+{
+  "contacts": [
+    {
+      "email": "p.dumont@dumont-associes.fr",
+      "name": "Philippe Dumont",
+      "type": "manager",
+      "company": "Dumont & Associés",
+      "title": "Associé fondateur",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 13,
+      "topics": [
+        "restructuration des pôles d'activité",
+        "développement international",
+        "recrutement associé",
+        "stratégie du cabinet",
+        "comité de gestion",
+        "clientèle internationale",
+        "fusions-acquisitions transfrontalières"
+      ]
+    },
+    {
+      "email": "e.fontaine@dumont-associes.fr",
+      "name": "Élise Fontaine",
+      "type": "colleague",
+      "company": "Dumont & Associés",
+      "title": "Collaboratrice senior",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 12,
+      "topics": [
+        "recherches préalables",
+        "dossier Nexus Group",
+        "due diligence",
+        "audit RGPD",
+        "contrats de travail",
+        "engagements hors bilan",
+        "contentieux prud'homal",
+        "data room"
+      ]
+    },
+    {
+      "email": "h.castellan@nexus-group.fr",
+      "name": "Henri Castellan",
+      "type": "client",
+      "company": "Nexus Group",
+      "title": "Directeur Général",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 11,
+      "topics": [
+        "acquisition DataFlow",
+        "opération d'acquisition",
+        "lettre de mission",
+        "due diligence",
+        "protocole d'accord",
+        "closing",
+        "calendrier",
+        "conditions suspensives",
+        "séquestre"
+      ]
+    },
+    {
+      "email": "n.vernier@nexus-group.fr",
+      "name": "Nathalie Vernier",
+      "type": "client",
+      "company": "Nexus Group",
+      "title": "Directrice juridique",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 11,
+      "topics": [
+        "documentation juridique",
+        "data room",
+        "garantie actif/passif",
+        "clauses GAP",
+        "transmission documentation",
+        "point d'avancement",
+        "closing",
+        "procès-verbal conseil d'administration"
+      ]
+    },
+    {
+      "email": "jl.garnier@sarl-garnier.fr",
+      "name": "Jean-Louis Garnier",
+      "type": "client",
+      "company": "SARL Garnier & Fils",
+      "title": "Gérant",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 8,
+      "topics": [
+        "litige commercial",
+        "contentieux Distribex",
+        "mise en demeure",
+        "factures impayées",
+        "assignation en référé",
+        "procédure judiciaire",
+        "contrat de fourniture"
+      ]
+    },
+    {
+      "email": "d.perrin@perrin-avocats.fr",
+      "name": "Maître Dominique Perrin",
+      "type": "partner",
+      "company": "Perrin Avocats",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 7,
+      "topics": [
+        "coopération transfrontalière",
+        "RGPD",
+        "transferts de données France-Allemagne",
+        "droit européen",
+        "technologies médicales",
+        "données de santé",
+        "conformité RGPD"
+      ]
+    },
+    {
+      "email": "m.leroux@dumont-associes.fr",
+      "name": "Maxime Leroux",
+      "type": "colleague",
+      "company": "Dumont & Associés",
+      "title": "Stagiaire",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 6,
+      "topics": [
+        "recherche jurisprudentielle",
+        "garantie actif/passif",
+        "fusions-acquisitions",
+        "note de synthèse",
+        "jurisprudence GAP",
+        "base Dalloz",
+        "LexisNexis"
+      ]
+    },
+    {
+      "email": "f.braun@braun-partner.de",
+      "name": "Friedrich Braun",
+      "type": "partner",
+      "company": "Braun & Partner",
+      "title": "Rechtsanwalt / Avocat",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 6,
+      "topics": [
+        "coopération franco-allemande",
+        "RGPD",
+        "implantation en France",
+        "convention de correspondance",
+        "entreprises allemandes",
+        "partenariat international"
+      ]
+    },
+    {
+      "email": "s.renard@notaire-renard.fr",
+      "name": "Maître Sophie Renard",
+      "type": "partner",
+      "company": null,
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 6,
+      "topics": [
+        "closing",
+        "actes notariés",
+        "opération Nexus DataFlow",
+        "calendrier closing",
+        "transmission des pièces",
+        "réunion de closing"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Acquisition Nexus Group / DataFlow SAS",
+      "description": "Opération de fusion-acquisition d'un montant de 12 millions d'euros. Due diligence juridique, rédaction du protocole d'accord, négociation des clauses de garantie actif/passif, closing prévu en mars 2026.",
+      "contacts": [
+        "h.castellan@nexus-group.fr",
+        "n.vernier@nexus-group.fr",
+        "e.fontaine@dumont-associes.fr",
+        "m.leroux@dumont-associes.fr",
+        "s.renard@notaire-renard.fr"
+      ],
+      "status": "active",
+      "keywords": [
+        "fusion-acquisition",
+        "due diligence",
+        "garantie actif/passif",
+        "protocole d'accord",
+        "closing",
+        "data room",
+        "conditions suspensives",
+        "séquestre",
+        "AMF"
+      ]
+    },
+    {
+      "name": "Contentieux SARL Garnier & Fils vs Distribex SAS",
+      "description": "Litige commercial portant sur des factures impayées d'un montant de 180 000 euros TTC. Mise en demeure envoyée, assignation en référé provision devant le Tribunal de Commerce de Paris.",
+      "contacts": [
+        "jl.garnier@sarl-garnier.fr"
+      ],
+      "status": "active",
+      "keywords": [
+        "contentieux commercial",
+        "factures impayées",
+        "mise en demeure",
+        "référé provision",
+        "Tribunal de Commerce",
+        "contrat de fourniture"
+      ]
+    },
+    {
+      "name": "Restructuration des pôles d'activité du cabinet",
+      "description": "Réorganisation interne du cabinet Dumont & Associés suite à la croissance significative des deux dernières années. Analyse de la répartition actuelle et propositions d'optimisation.",
+      "contacts": [
+        "p.dumont@dumont-associes.fr",
+        "e.fontaine@dumont-associes.fr"
+      ],
+      "status": "active",
+      "keywords": [
+        "restructuration",
+        "organisation interne",
+        "pôles d'activité",
+        "croissance",
+        "stratégie cabinet"
+      ]
+    },
+    {
+      "name": "Développement clientèle internationale",
+      "description": "Développement de l'offre du cabinet pour les entreprises étrangères souhaitant s'implanter en France. Établissement de partenariats avec des cabinets étrangers (Allemagne).",
+      "contacts": [
+        "p.dumont@dumont-associes.fr",
+        "f.braun@braun-partner.de",
+        "d.perrin@perrin-avocats.fr"
+      ],
+      "status": "active",
+      "keywords": [
+        "développement international",
+        "fusions-acquisitions transfrontalières",
+        "partenariats",
+        "implantation en France",
+        "coopération franco-allemande"
+      ]
+    },
+    {
+      "name": "Recrutement associé pôle contentieux",
+      "description": "Recrutement d'un nouvel associé pour renforcer le pôle contentieux du cabinet. Trois profils présélectionnés par le cabinet de recrutement Lexis Partners.",
+      "contacts": [
+        "p.dumont@dumont-associes.fr"
+      ],
+      "status": "active",
+      "keywords": [
+        "recrutement",
+        "associé",
+        "contentieux",
+        "entretiens",
+        "grille d'évaluation"
+      ]
+    }
+  ],
+  "terminology": {
+    "GAP": "Garantie Actif/Passif — clause contractuelle dans les opérations de fusion-acquisition garantissant l'acheteur contre les passifs non révélés",
+    "Due diligence": "Audit juridique approfondi réalisé avant une opération d'acquisition",
+    "Data room": "Espace virtuel sécurisé contenant l'ensemble de la documentation juridique d'une société cible",
+    "Closing": "Réunion finale de signature des actes de cession et de transfert de propriété",
+    "Conditions suspensives": "Conditions devant être réalisées avant la finalisation d'une opération (ex: autorisation AMF)",
+    "Séquestre": "Somme bloquée provisoirement pour garantir l'exécution d'obligations contractuelles",
+    "Référé provision": "Procédure d'urgence permettant d'obtenir rapidement le paiement d'une somme non sérieusement contestable",
+    "AMF": "Autorité des Marchés Financiers",
+    "RGPD": "Règlement Général sur la Protection des Données",
+    "Kbis": "Document officiel attestant de l'existence juridique d'une entreprise",
+    "Golden parachute": "Clause d'indemnité de départ pour les dirigeants",
+    "MAC": "Material Adverse Change — changement défavorable significatif"
+  },
+  "frequent_topics": [
+    "fusions-acquisitions",
+    "garantie actif/passif",
+    "due diligence juridique",
+    "contentieux commercial",
+    "RGPD et protection des données",
+    "coopération transfrontalière",
+    "restructuration cabinet",
+    "développement international",
+    "recherches jurisprudentielles",
+    "closing d'opérations"
+  ]
+}

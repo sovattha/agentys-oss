@@ -1,0 +1,119 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "r.hayes@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Richard,",
+      "closing": "Cheers, / J."
+    },
+    {
+      "contact_email": "a.patel@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Anika,",
+      "closing": "J. / Well done."
+    },
+    {
+      "contact_email": "m.torres@acmecorp.com",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Michael,",
+      "closing": "Best regards, / James Conseil"
+    },
+    {
+      "contact_email": "b.crawford@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Ben,",
+      "closing": "J. / Cheers,"
+    },
+    {
+      "contact_email": "e.phillips@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi Emma, / Emma,",
+      "closing": "Thanks, / J."
+    },
+    {
+      "contact_email": "i.moreau@luxegroup.fr",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Isabelle,",
+      "closing": "Best regards, / James Conseil"
+    },
+    {
+      "contact_email": "w.lin@strategyco.sg",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Wei,",
+      "closing": "J. / Cheers,"
+    },
+    {
+      "contact_email": "j.walsh@acmecorp.com",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Jennifer,",
+      "closing": "Best regards, / James Conseil"
+    },
+    {
+      "contact_email": "k.weber@industriewerke.de",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Klaus,",
+      "closing": "Best regards, / James Conseil"
+    },
+    {
+      "contact_email": "t.yamamoto@nipponpartners.jp",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Takeshi,",
+      "closing": "Best regards, / James Conseil"
+    },
+    {
+      "contact_email": "d.chen@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "David,",
+      "closing": "J."
+    }
+  ],
+  "general_rules": [
+    {
+      "description": "Internal team members (same domain @strategyco.com) receive casual greetings (first name only) and closings (initials or first name), regardless of seniority."
+    },
+    {
+      "description": "External clients and senior stakeholders receive formal greetings ('Dear [First Name]' or 'Dear [Title] [Last Name]') with full signature block closings ('Best regards, James Conseil Senior Consultant StrategyCo | London')."
+    },
+    {
+      "description": "Emails to internal team include action items formatted as numbered lists with clear ownership and deadlines."
+    },
+    {
+      "description": "Client-facing emails (external) open with context-setting or gratitude and include structured sections (e.g., workstreams, key risks, next steps) with bullet points."
+    },
+    {
+      "description": "Emails to administrative staff (Emma Phillips) use casual tone with direct, task-focused requests and minimal preamble."
+    },
+    {
+      "description": "Formal emails to external contacts include detailed context, investment figures, timelines, and governance frameworks to establish credibility and structure."
+    },
+    {
+      "description": "Feedback to team members combines praise ('Well done', 'Good work', 'Nice job') with specific, constructive comments and next steps."
+    },
+    {
+      "description": "Strategic/business development emails to external contacts emphasize value proposition, industry expertise, and phased approaches to build long-term relationships."
+    }
+  ],
+  "forbidden_phrases": []
+}

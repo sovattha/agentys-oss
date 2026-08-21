@@ -1,0 +1,182 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "pierre.durand@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Pierre,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "lucas.bernard@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "greeting": "Salut Lucas,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "marie.leclerc@clientcorp.com",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Madame Leclerc,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "camille.roux@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "greeting": "Camille,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "sarah.jones@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi Sarah,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "nicolas.moreau@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Nicolas,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "ceo@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Marc,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "amelie.petit@fournisseur.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Madame Petit,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "contact@prospect-startup.io",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Thomas,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "david.kim@partnertech.co.kr",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi David,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "elena.volkov@eupartner.de",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Elena,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "claire.fontaine@clientcorp.com",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Claire,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "john.smith@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi John,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "support@cloudprovider.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi,",
+      "closing": "Regards,"
+    }
+  ],
+  "general_rules": [
+    {
+      "name": "signature_formal",
+      "description": "Utiliser la signature complète avec titre et coordonnées pour les emails externes formels",
+      "trigger": "Clients externes, fournisseurs, prospects",
+      "action": "Ajouter signature: Sophie Martin | Chef de projet - Division Digitale | TechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "name": "signature_casual",
+      "description": "Utiliser uniquement le prénom pour les collègues directs de l'équipe",
+      "trigger": "Emails internes casual avec Lucas et Camille",
+      "action": "Terminer par le prénom seul: Sophie"
+    },
+    {
+      "name": "tutoiement_equipe",
+      "description": "Utiliser le tutoiement avec les membres directs de l'équipe technique",
+      "trigger": "Lucas, Camille (membres d'équipe directs)",
+      "action": "Utiliser tu et les prénoms"
+    },
+    {
+      "name": "vouvoiement_clients_fournisseurs",
+      "description": "Utiliser le vouvoiement avec tous les contacts externes",
+      "trigger": "Clients, fournisseurs, prospects, partenaires",
+      "action": "Utiliser vous systématiquement"
+    },
+    {
+      "name": "vouvoiement_hierarchie",
+      "description": "Utiliser le vouvoiement avec le CEO et la direction financière",
+      "trigger": "Marc (CEO), Nicolas (Direction Financière)",
+      "action": "Utiliser vous même en interne"
+    },
+    {
+      "name": "structured_updates",
+      "description": "Utiliser des listes numérotées pour les rapports d'avancement et actions multiples",
+      "trigger": "Updates de projet, comptes-rendus, rapports mensuels",
+      "action": "Structurer en points numérotés 1. 2. 3."
+    },
+    {
+      "name": "action_items_section",
+      "description": "Terminer les emails clients et rapports par une section Actions explicite",
+      "trigger": "Emails clients avec suivi requis, comptes-rendus",
+      "action": "Ajouter section 'Actions à suivre:' ou 'Actions:' avec liste à puces"
+    },
+    {
+      "name": "cc_stakeholders",
+      "description": "Mettre en copie les parties prenantes techniques lors des discussions avec clients/partenaires",
+      "trigger": "Discussions techniques avec clients ou partenaires externes",
+      "action": "CC Pierre (lead technique) sur les sujets architecture/API/intégration"
+    },
+    {
+      "name": "language_switch_international",
+      "description": "Utiliser l'anglais avec tous les contacts internationaux hors France",
+      "trigger": "Domaines non-.fr ou contacts internationaux explicites",
+      "action": "Rédiger en anglais"
+    },
+    {
+      "name": "french_for_france",
+      "description": "Utiliser le français pour tous les contacts français même en contexte international",
+      "trigger": "Domaines .fr ou contacts basés en France",
+      "action": "Rédiger en français"
+    },
+    {
+      "name": "technical_precision",
+      "description": "Inclure des détails techniques précis dans les discussions d'architecture",
+      "trigger": "Discussions API, infrastructure, sécurité",
+      "action": "Mentionner technologies spécifiques (GraphQL, OAuth2, mTLS, AWS WAF)"
+    },
+    {
+      "name": "concise_responses",
+      "description": "Réponses brèves et directes pour les confirmations simples",
+      "trigger": "Validation, accord, confirmation simple",
+      "action": "Réponse courte 1-3 phrases maximum sans formule développée"
+    }
+  ],
+  "forbidden_phrases": [],
+  "auto_reply_patterns": [
+    "Tickets IT support: réponse courte de confirmation de résolution",
+    "Validation budget/achats: email structuré avec détails chiffrés et justification",
+    "Demandes RH/formation: email administratif bref avec liste de personnes/dates"
+  ]
+}

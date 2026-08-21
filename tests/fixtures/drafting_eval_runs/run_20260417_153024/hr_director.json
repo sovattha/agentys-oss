@@ -1,0 +1,230 @@
+{
+  "aggregate": {
+    "critic": {
+      "coherence": 86,
+      "tone": 82,
+      "completeness": 78,
+      "errors": 72,
+      "conciseness": 86,
+      "emotional_intelligence": 67,
+      "overall": 76
+    },
+    "judge": {
+      "faithfulness": 87,
+      "completeness": 77,
+      "tone_match": 81,
+      "conciseness": 84,
+      "overall": 82
+    }
+  },
+  "cases": [
+    {
+      "case_id": "msg-003",
+      "subject": "NAO 2026 - Revendications CGT",
+      "draft": "Nous accusons bonne réception des revendications de la CGT-BCP dans le cadre des NAO 2026.\n\nL'ensemble des points soulevés sera intégré à l'ordre du jour des négociations :\n\n1. Augmentation générale des salaires\n2. Revalorisation de la prime d'ancienneté\n3. Durée effective du travail\n4. Part employeur sur les tickets restaurant\n5. Accord télétravail\n6. Plan de recrutement\n\nLa question des conditions de travail au service clientèle sera également inscrite à l'ordre du jour, conformément à votre demande.\n\nUne convocation à la première réunion de négociation vous sera adressée pour le [À confirmer].\n",
+      "elapsed_draft_s": 10.63,
+      "critic": {
+        "coherence": 92,
+        "tone": 88,
+        "completeness": 90,
+        "errors": 85,
+        "conciseness": 90,
+        "over_commitment": 72,
+        "emotional_intelligence": 60,
+        "overall": 82,
+        "decision": "valid",
+        "suggestions": [
+          "Ton plus chaleureux",
+          "Accusé réception sincère"
+        ]
+      },
+      "judge": {
+        "faithfulness": 85,
+        "completeness": 78,
+        "tone_match": 82,
+        "conciseness": 80,
+        "overall": 82,
+        "strengths": [
+          "Aucune information inventée : les 6 points de revendication sont fidèlement repris sans ajout de chiffres ou de dates fabriquées",
+          "La demande additionnelle sur les conditions de travail au service clientèle est explicitement prise en compte",
+          "Le placeholder [À confirmer] pour la date de convocation est honnête plutôt qu'une date inventée",
+          "Ton professionnel et formel cohérent avec le registre de l'email entrant (courrier syndical officiel)"
+        ],
+        "weaknesses": [
+          "Les chiffres précis des revendications (+3,5%, +0,5%/tranche de 5 ans, 35h, 65%, 3 jours/semaine, 15 postes) ont été effacés — la réponse reste fidèle mais perd en précision attendue dans un accusé de réception formel",
+          "Absence de formule d'appel nominative ('Monsieur Lefèvre' ou 'Monsieur le Délégué syndical') alors que l'expéditeur est identifié",
+          "La promesse d'inscrire 'l'ensemble des points à l'ordre du jour' sans réserve ni nuance engage la DRH sans mandat — légèrement présomptueuse dans un contexte de NAO",
+          "Pas de signature ni d'identité de l'expéditeur, ce qui est impropre pour un courrier officiel RH"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-008",
+      "subject": "[CONFIDENTIEL] Licenciement M. Renault - Saisine Prud'hommes",
+      "draft": "Bien reçu pour la convocation. Je prends contact avec Maître Tessier dès aujourd'hui pour organiser une première réunion de préparation avant l'audience de conciliation du 15 mars.\n\nDe mon côté, je rassemble les éléments du dossier disciplinaire : les comptes rendus d'entretien préalable, les échanges écrits et les témoignages internes disponibles. Si tu as déjà identifié des points faibles à consolider, envoie-moi ta liste pour qu'on priorise.\n\nIl faudra également vérifier avec Maître Tessier si une tentative de conciliation est envisageable ou si on va au fond — ça conditionne notre stratégie sur les montants en jeu (environ 150 500 € cumulés).\n\nJe te tiens informé après l'échange avec le cabinet.\n",
+      "elapsed_draft_s": 14.89,
+      "critic": {
+        "coherence": 88,
+        "tone": 85,
+        "completeness": 82,
+        "errors": 72,
+        "conciseness": 80,
+        "over_commitment": 62,
+        "emotional_intelligence": 70,
+        "overall": 77,
+        "decision": "valid",
+        "suggestions": [
+          "Vérifier total montants",
+          "Nuancer engagement Tessier"
+        ]
+      },
+      "judge": {
+        "faithfulness": 75,
+        "completeness": 85,
+        "tone_match": 92,
+        "conciseness": 88,
+        "overall": 84,
+        "strengths": [
+          "Le tutoiement est correctement conservé, miroir exact du ton d'Antoine Mercier",
+          "Les montants cumulés (150 500 €) sont calculés avec précision à partir des chiffres fournis",
+          "La date d'audience du 15 mars est reprise fidèlement",
+          "La demande proactive d'une liste des points faibles est pertinente et actionnelle",
+          "Longueur proportionnée à l'email reçu, sans remplissage"
+        ],
+        "weaknesses": [
+          "Les types de documents cités (comptes rendus d'entretien préalable, échanges écrits, témoignages internes) ne sont pas mentionnés dans l'email entrant — ajout de spécificité non fournie",
+          "La question conciliation vs fond est pertinente stratégiquement, mais introduit un cadrage décisionnel absent de l'email source",
+          "Le brouillon ne précise pas explicitement l'identité de l'expéditeur (Catherine) ni sa fonction, ce qui nuit à la clarté du contexte de réponse"
+        ],
+        "hallucinations": [
+          "« comptes rendus d'entretien préalable, les échanges écrits et les témoignages internes disponibles » — types de pièces du dossier non mentionnés dans l'email entrant"
+        ]
+      }
+    },
+    {
+      "case_id": "msg-010",
+      "subject": "Re: [CONFIDENTIEL] Licenciement contesté - M. Renault - Prud'hommes",
+      "draft": "Chère Maître,\n\nNous serons présents jeudi 15 janvier à 14h30 à votre cabinet. Je viendrai accompagnée d'Antoine Mercier, notre juriste social, qui a suivi le dossier disciplinaire depuis le début.\n\nS'agissant des pièces à réunir :\n\n1. Les rapports d'audit interne sont déjà en notre possession — je les apporterai le 15.\n2. Les attestations de collègues sont à solliciter ; Antoine prendra contact avec les témoins identifiés d'ici jeudi.\n3. La procédure disciplinaire a été conduite par notre service RH — je vérifierai les délais et la conformité des actes avant notre réunion.\n\nSur l'éventualité d'une transaction, votre fourchette de 40 à 50 000€ me semble raisonnable si les pièces confirment la solidité du dossier. Nous pourrons en discuter plus précisément une fois les documents examinés.\n",
+      "elapsed_draft_s": 15.19,
+      "critic": {
+        "coherence": 95,
+        "tone": 92,
+        "completeness": 92,
+        "errors": 88,
+        "conciseness": 90,
+        "over_commitment": 78,
+        "emotional_intelligence": 75,
+        "overall": 87,
+        "decision": "valid",
+        "suggestions": [
+          "Ajouter formule clôture",
+          "Confirmer par écrit"
+        ]
+      },
+      "judge": {
+        "faithfulness": 92,
+        "completeness": 85,
+        "tone_match": 88,
+        "conciseness": 90,
+        "overall": 89,
+        "strengths": [
+          "Confirmation explicite de la présence avec le juriste interne (Antoine Mercier), répondant directement à la demande de Maître Tessier",
+          "Les trois points de préparation demandés par l'avocate sont tous adressés dans l'ordre",
+          "Réponse sur la transaction prudente et bien calibrée : ni rejet ni acceptation ferme, cohérente avec le contexte",
+          "Ton professionnel et formel, en miroir du registre de Maître Tessier",
+          "Longueur proportionnée : concise, sans remplissage"
+        ],
+        "weaknesses": [
+          "La phrase 'votre fourchette de 40 à 50 000€ me semble raisonnable' engage prématurément la DRH sur un montant transactionnel avant même que les pièces aient été examinées — légèrement imprudent dans un contexte contentieux",
+          "Il n'est pas précisé que les attestations de témoins restent à 'solliciter' et non acquises — une légère imprécision dans la formulation laisse entendre que c'est en cours, ce qui est juste, mais gagnerait à être précisé comme hypothétique",
+          "Absence de signature complète (titre, coordonnées), contrairement aux usages observés dans l'historique"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-013",
+      "subject": "Re: Planning entretiens annuels - Janvier 2026",
+      "draft": "Bonjour Marine,\n\nOui, pas de problème pour décaler la Direction des Risques à la semaine du 27. Le nouveau planning serait alors :\n\n1. Direction des Risques (F. Delacroix) - semaine du 27 janvier\n2. Service Clientèle - semaine du 3 février\n3. Back Office - semaine du 10 février\n4. Front Office - semaine du 17 février\n\nLa campagne reste bouclée avant fin février, donc c'est tout à fait tenable.\n\nPour les dossiers, tu peux prioriser les agents de maîtrise en premier, les employés pouvant suivre dans la foulée.\n\nLe planning consolidé vendredi, c'est parfait.\n\nBien cordialement,\n",
+      "elapsed_draft_s": 10.33,
+      "critic": {
+        "coherence": 72,
+        "tone": 85,
+        "completeness": 75,
+        "errors": 30,
+        "conciseness": 82,
+        "over_commitment": 35,
+        "emotional_intelligence": 70,
+        "overall": 64,
+        "decision": "reject",
+        "suggestions": [
+          "Supprimer planning inventé",
+          "Retirer ordre dossiers"
+        ]
+      },
+      "judge": {
+        "faithfulness": 88,
+        "completeness": 90,
+        "tone_match": 70,
+        "conciseness": 78,
+        "overall": 82,
+        "strengths": [
+          "Le décalage d'une semaine est correctement appliqué à l'ensemble des 4 services, en cohérence exacte avec le planning d'origine",
+          "La contrainte 'avant fin février' est vérifiée implicitement (Front Office semaine du 17 février, soit avant le 28)",
+          "Toutes les demandes actionnables de Marine sont adressées : validation du décalage, dossiers individuels, accusé de réception du planning vendredi",
+          "Ton collégial professionnel cohérent avec l'échange en cours"
+        ],
+        "weaknesses": [
+          "Absence du bloc de signature (Catherine Carrière, Directrice RH, Banque Centrale de Paris, tél.) présent dans l'email original et la référence — rupture de cohérence formelle",
+          "La suggestion de prioriser les agents de maîtrise avant les employés est une directive non sollicitée, légèrement directive sans base dans l'email entrant",
+          "'c'est tout à fait tenable' est une formule rassurante superflue — Catherine valide, elle n'a pas besoin de se justifier"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-015",
+      "subject": "Recrutement Analyste Risques Senior - Besoin urgent",
+      "draft": "C'est noté, je lance le recrutement sur ce profil.\n\nSemaine du 27 pour les entretiens, pas de souci de mon côté.\n",
+      "elapsed_draft_s": 27.36,
+      "critic": {
+        "coherence": 82,
+        "tone": 58,
+        "completeness": 52,
+        "errors": 85,
+        "conciseness": 90,
+        "over_commitment": 72,
+        "emotional_intelligence": 60,
+        "overall": 71,
+        "decision": "reject",
+        "suggestions": [
+          "Confirmer fourchette salariale",
+          "Préciser délai sourcing",
+          "Accuser réception départ"
+        ]
+      },
+      "judge": {
+        "faithfulness": 95,
+        "completeness": 45,
+        "tone_match": 72,
+        "conciseness": 85,
+        "overall": 73,
+        "strengths": [
+          "Aucune hallucination détectée : pas de faits inventés, noms ou dates fabriqués",
+          "Brouillon court et direct, sans remplissage inutile",
+          "Confirme la disponibilité pour les entretiens semaine du 27, conformément à la demande"
+        ],
+        "weaknesses": [
+          "Ne confirme pas explicitement le lancement du processus de recrutement avec un quelconque plan d'action ou prochaines étapes",
+          "Ignore totalement le profil détaillé envoyé (critères, fourchette salariale) sans même accuser réception",
+          "N'adresse pas la demande implicite de confirmer la prise en charge urgente suite au départ de Mme Chartier",
+          "Le ton est trop familier/désinvolte ('C'est noté', 'pas de souci de mon côté') pour une communication B2B formelle entre un Directeur des Risques et une DRH",
+          "Absence de formule de politesse d'ouverture ('Bonjour François') et de clôture professionnelle",
+          "Absence de signature professionnelle"
+        ],
+        "hallucinations": []
+      }
+    }
+  ]
+}

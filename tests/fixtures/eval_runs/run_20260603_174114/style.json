@@ -1,0 +1,117 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "p.dumont@dumont-associes.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Dumont,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "e.fontaine@dumont-associes.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Chère Madame Fontaine,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "h.castellan@nexus-group.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur le Directeur Général,",
+      "closing": "Je vous prie d'agréer, Monsieur le Directeur Général, l'expression de mes salutations distinguées."
+    },
+    {
+      "contact_email": "jl.garnier@sarl-garnier.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Garnier,",
+      "closing": "Je vous prie d'agréer, Monsieur, l'expression de mes salutations distinguées."
+    },
+    {
+      "contact_email": "n.vernier@nexus-group.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Madame Vernier,",
+      "closing": "Je vous prie d'agréer, Madame, l'expression de mes salutations distinguées."
+    },
+    {
+      "contact_email": "m.leroux@dumont-associes.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Leroux,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "greffe@tc-paris.justice.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Madame, Monsieur,",
+      "closing": "Je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées."
+    },
+    {
+      "contact_email": "f.braun@braun-partner.de",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Cher Maître Braun,",
+      "closing": "Je vous prie d'agréer, cher Maître, l'expression de mes salutations distinguées."
+    },
+    {
+      "contact_email": "s.renard@notaire-renard.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Chère Maître,",
+      "closing": "Je vous prie d'agréer, chère Maître, l'expression de mes sentiments les plus distingués."
+    },
+    {
+      "contact_email": "d.perrin@perrin-avocats.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Cher Maître,",
+      "closing": "Je vous prie d'agréer, cher Maître, l'expression de mes sentiments les plus distingués."
+    }
+  ],
+  "general_rules": [
+    {
+      "description": "Utiliser systématiquement le vouvoiement avec tous les contacts externes et internes, sans exception."
+    },
+    {
+      "description": "Adopter des formules de politesse protocolaires avec les clients et partenaires externes : salutation formelle (Monsieur/Madame/Maître) et fermeture longue (Je vous prie d'agréer...)."
+    },
+    {
+      "description": "Structurer les emails avec des listes numérotées et des points d'alerte clairement identifiés pour les dossiers complexes (due diligence, restructuration, RGPD)."
+    },
+    {
+      "description": "Inclure systématiquement la signature complète (nom, titre, cabinet, adresse, téléphone) dans tous les emails externes et formels."
+    },
+    {
+      "description": "Utiliser un vocabulaire juridique et technique précis sans simplification, en supposant l'interlocuteur familier avec les concepts du domaine."
+    },
+    {
+      "description": "Adapter le niveau de formalité de la fermeture selon le statut du destinataire : « Bien cordialement » pour les collaborateurs internes, « Je vous prie d'agréer... l'expression de mes salutations distinguées » pour les clients et magistrats."
+    },
+    {
+      "description": "Structurer les communications sur les dossiers clients avec un résumé des actions, des risques identifiés et des recommandations numérotées."
+    },
+    {
+      "description": "Utiliser des termes métier spécialisés en droit des affaires sans définition : due diligence, GAP (garantie actif/passif), closing, AIPD, clause de changement de contrôle, earn-out, séquestre, conditions suspensives."
+    },
+    {
+      "description": "Demander explicitement la confirmation ou l'accord du destinataire avant de procéder à des actions engageantes (signification, transmission de documents, signature)."
+    },
+    {
+      "description": "Proposer des rendez-vous ou visioconférences pour les dossiers complexes nécessitant une discussion approfondie plutôt que de trancher par email."
+    }
+  ],
+  "forbidden_phrases": []
+}

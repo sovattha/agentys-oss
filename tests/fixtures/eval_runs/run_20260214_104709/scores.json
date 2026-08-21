@@ -1,0 +1,32 @@
+{
+  "profile": {
+    "completeness": 100,
+    "precision": 100,
+    "usefulness": 100,
+    "overall": 100,
+    "missing": [],
+    "incorrect": [],
+    "details": ""
+  },
+  "knowledge": {
+    "completeness": 100,
+    "precision": 100,
+    "usefulness": 100,
+    "overall": 100,
+    "missing": [],
+    "incorrect": [],
+    "details": ""
+  },
+  "rules": {
+    "completeness": 92,
+    "precision": 92,
+    "usefulness": 92,
+    "overall": 92,
+    "missing": [
+      "john.smith@globaltech.com"
+    ],
+    "incorrect": [],
+    "details": ""
+  },
+  "overall": 97
+}

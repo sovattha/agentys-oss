@@ -1,0 +1,436 @@
+/* ============================================================================
+   SNIPPET LIBRARY - Full-screen snippet management
+   ============================================================================ */
+
+.snippet-library-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-popover);
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.snippet-library {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 780px;
+  height: min(80vh, 640px);
+  background: var(--surface-primary);
+  border-radius: var(--radius-xl, 16px);
+  box-shadow: var(--shadow-xl, 0 24px 48px rgba(0,0,0,0.18));
+  overflow: hidden;
+  animation: modalSlideIn 0.25s var(--ease-settle) both;
+}
+
+.snippet-library.closing {
+  animation: modalSlideOut 0.18s var(--ease-clarity) both;
+}
+
+/* Header */
+.snippet-library-header {
+  display: flex;
+  align-items: center;
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--border-default);
+  background: var(--surface-primary);
+  gap: var(--space-4);
+}
+
+.snippet-library-back {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.snippet-library-header h2 {
+  flex: 1;
+}
+
+.snippet-library-close {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.snippet-library-close svg {
+  display: block;
+}
+
+.snippet-library-back svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.snippet-library-header h2 {
+  flex: 1;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Tabs */
+.snippet-library-tabs {
+  display: flex;
+  gap: 0;
+  margin: 0 var(--space-6);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.snippet-tab {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.snippet-tab.active {
+  color: var(--text-primary);
+  border-bottom-color: var(--accent-primary);
+}
+
+.snippet-tab-count {
+  font-size: var(--font-size-xs);
+  color: var(--text-placeholder);
+  background: var(--surface-secondary);
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.snippet-tab.active .snippet-tab-count {
+  color: var(--accent-primary);
+  background: rgba(var(--accent-primary-rgb, 13, 148, 136), 0.1);
+}
+
+.snippet-tab-count--shared {
+  color: var(--accent-primary);
+  background: rgba(var(--accent-primary-rgb, 13, 148, 136), 0.1);
+}
+
+/* Content */
+.snippet-library-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-6);
+}
+
+/* Loading */
+.snippet-library-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-12);
+  color: var(--text-muted);
+  font-size: var(--font-size-base);
+}
+
+.snippet-library-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-default);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Error */
+.snippet-library-error {
+  text-align: center;
+  padding: var(--space-12);
+  color: var(--error);
+}
+
+.snippet-library-error button {
+  margin-top: var(--space-3);
+  background: var(--error);
+  color: var(--text-inverse);
+  border: none;
+  padding: var(--space-2) var(--space-4);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+/* Empty state — centred in the content area. The modal has a fixed height,
+   so min-height:100% on this block resolves and lets flex centre it
+   vertically; one accent icon tile is the single focal anchor. */
+.snippet-library-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  box-sizing: border-box;
+  padding: var(--space-6) 0;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.snippet-library-empty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: rgba(var(--accent-primary-rgb, 13, 148, 136), 0.1);
+  color: var(--accent-primary);
+}
+
+.snippet-library-empty-icon svg {
+  display: block;
+  width: 28px;
+  height: 28px;
+}
+
+/* font-size deliberately omitted here — title and hint each set their own
+   size below, so this shared rule can't out-specify .snippet-library-hint. */
+.snippet-library-empty p {
+  margin: 0 0 var(--space-2);
+}
+
+.snippet-library-empty-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.snippet-library-hint {
+  max-width: 34ch;
+  color: var(--text-placeholder);
+  font-size: var(--font-size-sm);
+  line-height: var(--leading-normal);
+}
+
+.snippet-library-create-btn {
+  margin-top: var(--space-4);
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  border: none;
+  padding: 10px var(--space-5);
+  border-radius: 8px;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+/* List */
+.snippet-library-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* Category */
+.snippet-category-title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  margin: 0 0 var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.snippet-category-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-3);
+}
+
+/* Card */
+.snippet-card {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+
+/* Lift-on-hover affordance — matches the Label Library cards.
+ * Scoped to snippet-card via the class selector only, so other places
+ * using .snippet-card-* descendants are not affected. */
+.snippet-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px -6px color-mix(in srgb, var(--text-primary) 18%, transparent);
+  border-color: color-mix(in srgb, var(--accent-primary) 35%, var(--border-default));
+}
+
+/* Match the lift on the ghost "New snippet" card so the whole grid
+ * shares one hover feel. Scoped via descendant so the same primitive
+ * elsewhere (e.g. SnippetLibrary list outside this grid) is unaffected. */
+.snippet-library-list .ghost-add-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px -6px color-mix(in srgb, var(--text-primary) 18%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snippet-card,
+  .snippet-library-list .ghost-add-card {
+    transition: box-shadow 0.15s, border-color 0.15s;
+  }
+  .snippet-card:hover,
+  .snippet-library-list .ghost-add-card:hover {
+    transform: none;
+  }
+}
+
+.snippet-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.snippet-card-name {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.snippet-card-uses {
+  font-size: var(--font-size-xs);
+  color: var(--text-placeholder);
+  flex-shrink: 0;
+}
+
+.snippet-card-content {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  line-height: var(--leading-normal);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.snippet-card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.snippet-card-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: var(--font-size-xs);
+  padding: 6px 10px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.snippet-card-shares-wrapper {
+  position: relative;
+}
+
+.snippet-card-confirm {
+  color: var(--error);
+  background: var(--error-bg-subtle);
+}
+
+/* Shared card variant */
+.snippet-card--shared {
+  border-left: 3px solid var(--accent-primary);
+}
+
+.snippet-card-shared-by {
+  font-size: var(--font-size-xs);
+  color: var(--text-placeholder);
+  flex-shrink: 0;
+  font-style: italic;
+}
+
+/* Footer */
+.snippet-library-footer {
+  padding: var(--space-3) var(--space-6);
+  border-top: 1px solid var(--border-default);
+  background: var(--surface-primary);
+  text-align: center;
+}
+
+.snippet-tip {
+  font-size: var(--font-size-xs);
+  color: var(--text-placeholder);
+}
+
+.snippet-tip kbd {
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: var(--font-size-xs);
+  font-family: inherit;
+  margin: 0 2px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .snippet-library-header {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .snippet-library-content {
+    padding: 0 var(--space-4) var(--space-4);
+  }
+
+  .snippet-category-items {
+    grid-template-columns: 1fr;
+  }
+
+  .snippet-library-tabs {
+    margin: 0 var(--space-4);
+  }
+
+}

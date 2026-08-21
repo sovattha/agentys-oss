@@ -1,0 +1,735 @@
+/* ============================================================================
+   SMART SEARCH BAR — Spotlight-style unified search
+   Glassmorphism dropdown, inline chips, shimmer micro-interactions
+   ============================================================================ */
+
+/* === Main bar === */
+.smart-search-bar {
+  position: relative;
+}
+
+.smart-search-input-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 6px;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  min-height: 42px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.smart-search-input-row::-webkit-scrollbar {
+  display: none;
+}
+
+.smart-search-icon {
+  flex-shrink: 0;
+  color: var(--text-muted, var(--text-placeholder));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-base);
+}
+
+.smart-search-input-row:focus-within .smart-search-icon {
+  color: var(--accent-primary, #0d9488);
+}
+
+.smart-search-input-row:focus-within {
+  box-shadow: none;
+}
+
+.smart-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: var(--font-size-md);
+  color: var(--text-primary, #111827);
+  outline: none;
+  min-width: 100px;
+  padding: 4px 0;
+  line-height: var(--leading-normal);
+  box-shadow: none;
+}
+
+.smart-search-input:focus {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.smart-search-input::placeholder {
+  color: var(--text-muted, var(--text-placeholder));
+}
+
+.smart-search-save,
+.smart-search-clear,
+.smart-search-loading {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color var(--transition-base), background-color var(--transition-base);
+}
+
+.smart-search-save {
+  color: var(--text-tertiary);
+}
+
+.smart-search-save.has-content {
+  color: var(--color-amber, #eab308);
+}
+
+.smart-search-save.has-content svg polygon {
+  fill: color-mix(in srgb, var(--color-amber, #eab308) 22%, transparent);
+  transition: fill var(--transition-base);
+}
+
+.smart-search-loading {
+  color: var(--accent-primary, #0d9488);
+  cursor: default;
+}
+
+.smart-search-loading .spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* === Search Chips (inline filters) === */
+.search-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px 2px 6px;
+  border-radius: 9999px;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  white-space: nowrap;
+  background: color-mix(in srgb, var(--chip-color, var(--accent-primary)) 12%, var(--surface-primary));
+  color: color-mix(in srgb, var(--chip-color, var(--accent-primary)) 80%, var(--text-primary));
+  animation: chipAppear 0.15s ease-out;
+  transition: background var(--transition-base);
+  cursor: pointer;
+}
+
+.search-chip-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0.65;
+}
+
+.search-chip-label {
+  opacity: 0.55;
+  font-weight: 400;
+  font-size: 10px;
+  text-transform: lowercase;
+}
+
+.search-chip-separator {
+  opacity: 0.3;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.search-chip-value {
+  font-weight: 600;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.smart-search-add-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border: 1px dashed var(--border-subtle);
+  border-radius: 9999px;
+  background: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+}
+
+.smart-search-add-filter:hover,
+.smart-search-add-filter:focus-visible {
+  border-color: var(--accent-primary);
+  border-style: solid;
+  color: var(--accent-primary);
+}
+
+.smart-search-add-filter svg {
+  flex-shrink: 0;
+}
+
+.search-chip-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  margin-left: 2px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-primary, currentColor);
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity var(--transition-base), background var(--transition-base);
+}
+
+/* Chip inline edit input */
+.search-chip-edit-input {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  min-width: 60px;
+  max-width: 200px;
+  background: color-mix(in srgb, var(--chip-color, var(--accent-primary)) 18%, var(--surface-primary));
+  color: color-mix(in srgb, var(--chip-color, var(--accent-primary)) 90%, var(--text-primary));
+  border: 1.5px solid color-mix(in srgb, var(--chip-color, var(--accent-primary)) 40%, transparent);
+  outline: none;
+  animation: chipAppear 0.1s ease-out;
+}
+
+@keyframes chipAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* === Suggestions Dropdown === */
+.search-suggestions-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: var(--z-dropdown);
+  max-height: 480px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--surface-primary) 95%, transparent) 0%,
+      color-mix(in srgb, var(--surface-base, var(--surface-primary)) 98%, transparent) 100%
+    );
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 color-mix(in srgb, var(--surface-highlight, rgba(255,255,255,0.5)) 20%, transparent);
+  padding: 6px 0;
+  animation: dropdownAppear 0.12s ease-out;
+}
+
+@keyframes dropdownAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section headers */
+.search-suggestions-section-header {
+  padding: 8px 14px 4px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--text-muted, var(--text-placeholder));
+  user-select: none;
+}
+
+/* Operator section header ("RECHERCHER PAR") — slightly more prominent */
+.search-suggestions-section:has(.search-operators-section) .search-suggestions-section-header {
+  padding: 10px 14px 6px;
+  font-size: 10px;
+  letter-spacing: 0.09em;
+  color: var(--text-secondary, var(--text-muted));
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.search-suggestions-section:has(.search-operators-section) .search-suggestions-section-header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: color-mix(in srgb, var(--border-subtle, rgba(0,0,0,0.08)) 80%, transparent);
+  border-radius: 1px;
+}
+
+.search-suggestions-divider {
+  height: 1px;
+  margin: 4px 12px;
+  background: var(--border-subtle);
+  opacity: 0.5;
+}
+
+/* Suggestion items */
+.search-suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  margin: 0 6px;
+  transition: background var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.search-suggestion-item.highlighted {
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 6%, var(--surface-primary));
+  box-shadow: inset 3px 0 0 var(--accent-primary, #0d9488);
+}
+
+/* Shimmer sweep on hover — same pattern as Sidebar nav items */
+.search-suggestion-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    color-mix(in srgb, var(--surface-highlight, rgba(255,255,255,0.5)) 20%, transparent) 50%,
+    transparent 60%
+  );
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+
+.search-suggestion-item.highlighted::before {
+  opacity: 1;
+  animation: shimmerSweep 0.6s ease forwards;
+}
+
+
+.search-suggestion-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted, var(--text-placeholder));
+}
+
+.search-suggestion-item.highlighted .search-suggestion-icon {
+  color: var(--accent-primary, #0d9488);
+}
+
+.search-suggestion-label {
+  flex: 1;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-primary, #111827);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-suggestion-sublabel {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted, var(--text-placeholder));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+/* === Scrollbar styling === */
+.search-suggestions-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-suggestions-dropdown::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.search-suggestions-dropdown::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 3px;
+}
+
+/* Firefox : pas de ::-webkit-scrollbar — ré-active l'équivalent fin par-dessus
+   le `* { scrollbar-width: none }` global. Scopé hors WebKit/Blink : en
+   Blink >= 121, scrollbar-width/color non-auto désactiveraient le styling
+   ::-webkit-scrollbar ci-dessus. */
+@supports not selector(::-webkit-scrollbar) {
+  .search-suggestions-dropdown {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-subtle) transparent;
+  }
+}
+
+/* === Two-column layout: recents left / operators right === */
+.search-suggestions-two-col {
+  display: flex;
+  align-items: flex-start;
+}
+
+.search-suggestions-col-left {
+  flex: 0 0 280px;
+  min-width: 0;
+  border-right: 1px solid var(--border-subtle);
+}
+
+.search-suggestions-col-sep {
+  display: none; /* handled by border-right on col-left */
+}
+
+.search-suggestions-col-right {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Align both column headers to the same top padding */
+.search-suggestions-two-col .search-suggestions-section-header,
+.search-suggestions-two-col .search-suggestions-section:has(.search-operators-section) .search-suggestions-section-header {
+  padding-top: 10px;
+}
+
+/* === Operator items — subtle "prefix:" label === */
+
+/* Operator label bold prefix */
+.search-suggestion-item .search-suggestion-label {
+  font-weight: 500;
+}
+
+/* === Operator grouped grid layout === */
+.search-operators-section {
+  padding: 0 0 4px;
+}
+
+.search-operators-group {
+  padding: 0 6px 5px;
+}
+
+/* Color-coded group titles with left-accent mark */
+.search-operators-group-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px 3px;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  user-select: none;
+}
+
+.search-operators-group-title::before {
+  display: none;
+}
+
+[data-testid="operator-group-people"]  .search-operators-group-title,
+[data-testid="operator-group-content"] .search-operators-group-title,
+[data-testid="operator-group-date"]    .search-operators-group-title,
+[data-testid="operator-group-folder"]  .search-operators-group-title { color: var(--text-muted, #9ca3af); }
+
+/* Flex-wrap so chips take natural content width, not stretched columns */
+.search-operators-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 2px 0;
+}
+
+/* Compact horizontal pill for operator grid cells */
+.operator-item {
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: 5px;
+  margin: 0;
+  min-width: 0;
+  height: 22px;
+}
+
+/* Show icon, sized for compact row */
+.operator-item .search-suggestion-icon {
+  display: flex;
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+/* Icon colors — uniform, no per-group coloring */
+[data-testid="operator-group-people"]  .operator-item .search-suggestion-icon,
+[data-testid="operator-group-content"] .operator-item .search-suggestion-icon,
+[data-testid="operator-group-date"]    .operator-item .search-suggestion-icon,
+[data-testid="operator-group-folder"]  .operator-item .search-suggestion-icon { color: var(--text-muted, #9ca3af); }
+
+.operator-item .search-suggestion-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-primary);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1;
+}
+
+/* Sublabel hidden — no vertical room in compact row */
+.operator-item-hint {
+  display: none;
+}
+
+/* Ungrouped operators (Non lus, Dans: Envoyés) — secondary chip tier below separator */
+.search-operators-ungrouped {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px 6px 6px;
+  margin-top: 4px;
+  border-top: 1px solid color-mix(in srgb, var(--border-subtle, rgba(0,0,0,0.08)) 70%, transparent);
+}
+
+/* Soften secondary chips — they are shortcuts, not primary filters */
+.search-operators-ungrouped .operator-item {
+  opacity: 0.72;
+}
+.search-operators-ungrouped .operator-item.highlighted {
+  opacity: 1;
+}
+
+/* Active operator — subtle background, no border */
+.operator-item.is-active {
+  background: var(--surface-secondary, rgba(0,0,0,0.04));
+  box-shadow: none;
+}
+
+.operator-item.is-active .search-suggestion-label {
+  color: var(--text-primary, #111827);
+  font-weight: 600;
+}
+
+.operator-item.is-active .search-suggestion-icon {
+  color: var(--text-secondary, #374151) !important;
+}
+
+/* === Inline filter panel === */
+.inline-filter-panel {
+  padding: 10px 12px 8px;
+}
+
+.inline-filter-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 8%, var(--surface-primary));
+  border-radius: 10px;
+  border: 1.5px solid var(--accent-primary, #0d9488);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary, #0d9488) 12%, transparent);
+  animation: inline-filter-appear 0.2s ease-out;
+}
+
+@keyframes inline-filter-appear {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.inline-filter-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-primary, #0d9488);
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.01em;
+}
+
+.inline-filter-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+  font-size: var(--font-size-md);
+  color: var(--text-primary, #111827);
+  min-width: 0;
+}
+
+.inline-filter-input:focus {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.inline-filter-input::placeholder {
+  color: var(--text-muted, var(--text-placeholder));
+}
+
+.inline-filter-cancel {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-muted, var(--text-placeholder));
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.inline-filter-suggestions {
+  margin-top: 4px;
+}
+
+.inline-filter-empty {
+  padding: 10px 8px;
+  font-size: var(--font-size-xs);
+  color: var(--text-muted, var(--text-placeholder));
+  text-align: center;
+  font-style: italic;
+}
+
+/* === Date input (inline Après/Avant mode) === */
+.inline-date-picker-wrap {
+  padding: 6px 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.inline-date-picker {
+  width: 130px;
+  padding: 6px 10px;
+  border: 1px solid var(--border-default, rgba(0,0,0,0.1));
+  border-radius: var(--radius-md, 6px);
+  background: var(--surface-primary, #fff);
+  color: var(--text-primary, #111827);
+  font-size: var(--font-size-sm, 13px);
+  font-family: var(--font-mono, monospace);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+  outline: none;
+  transition: border-color 0.12s;
+}
+
+.inline-date-picker::placeholder {
+  color: var(--text-placeholder, #9ca3af);
+  font-family: var(--font-mono, monospace);
+}
+
+.inline-date-picker:focus {
+  border-color: var(--accent-primary, #0d9488);
+  box-shadow: 0 0 0 2px var(--accent-primary-subtle, rgba(13,148,136,0.08));
+}
+
+.inline-date-hint {
+  font-size: 11px;
+  color: var(--text-muted, #9ca3af);
+  white-space: nowrap;
+}
+
+/* Delete button for saved searches */
+.search-suggestion-delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-muted, var(--text-placeholder));
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity var(--transition-base), color var(--transition-base), background var(--transition-base);
+  flex-shrink: 0;
+}
+
+/* Label color dot — shown inline before label name */
+.search-suggestion-color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* === Contact avatar — colored circle with initials === */
+.search-suggestion-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+
+/* === Operator hint — shown inline after label === */
+.search-suggestion-operator-hint {
+  margin-left: 5px;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--text-muted, var(--text-placeholder));
+  opacity: 0.8;
+}
+
+/* === Recent search mini-chips === */
+.recent-query-chips {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.recent-query-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border-radius: 0;
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+  background: none;
+  color: var(--text-secondary, #374151);
+}

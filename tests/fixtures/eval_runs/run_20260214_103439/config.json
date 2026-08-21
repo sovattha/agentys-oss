@@ -1,0 +1,14 @@
+{
+  "timestamp": "20260214_103439",
+  "agents": [
+    "profile"
+  ],
+  "llm_mode": "claude-cli",
+  "llm_model": "sonnet",
+  "llm_judge": false,
+  "timing": {
+    "analysis_s": 189.8,
+    "evaluation_s": 0.0,
+    "total_s": 189.8
+  }
+}

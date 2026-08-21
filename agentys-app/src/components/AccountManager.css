@@ -1,0 +1,846 @@
+.account-manager {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.account-manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.account-manager-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.account-manager-back {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: var(--radius-md, 6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.account-manager-header h2 {
+  margin: 0;
+  font-size: var(--font-size-lg, 18px);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.account-manager-close {
+  background: none;
+  border: none;
+  font-size: var(--font-size-3xl);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: var(--space-1) var(--space-2);
+  line-height: var(--leading-none);
+  border-radius: var(--radius-xs);
+  transition: all var(--transition-base);
+}
+
+.account-manager-error {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3) var(--space-5);
+  background: var(--error-bg, #fee2e2);
+  color: var(--error);
+  font-size: var(--font-size-base);
+}
+
+.account-manager-error button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: var(--font-size-xl);
+  padding: 0 var(--space-1);
+}
+
+.account-manager-content {
+  padding: var(--space-4) var(--space-5);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.account-manager-loading {
+  text-align: center;
+  padding: var(--space-10);
+  color: var(--text-tertiary);
+}
+
+.account-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.account-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-10) var(--space-5);
+  text-align: center;
+  color: var(--text-tertiary);
+}
+
+.account-empty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: rgba(var(--accent-primary-rgb, 13, 148, 136), 0.1);
+  color: var(--accent-primary);
+}
+
+.account-empty-icon svg {
+  display: block;
+  width: 28px;
+  height: 28px;
+}
+
+.account-empty p {
+  margin: 0;
+}
+
+.account-empty-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.account-empty-hint {
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-2) !important;
+  max-width: 34ch;
+}
+
+.account-item {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 12px 14px;
+  transition: all 0.2s ease;
+}
+
+.account-item-current {
+  border-color: var(--accent-primary);
+  background: linear-gradient(135deg, var(--surface-primary) 0%, color-mix(in srgb, var(--accent-primary) 4%, var(--surface-primary)) 100%);
+  box-shadow: 0 0 0 1px var(--accent-primary), 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.account-item-main {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  position: relative;
+}
+
+.account-item-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--accent-primary), color-mix(in srgb, var(--accent-primary) 70%, #000));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
+}
+
+.account-item-avatar-btn {
+  position: relative;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.account-item-avatar-btn:hover .account-avatar-edit-overlay {
+  opacity: 1;
+}
+
+.account-avatar-edit-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.account-btn-avatar-import {
+  font-size: var(--font-size-xs);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-secondary);
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.account-btn-avatar-import:hover:not(:disabled) {
+  background: var(--surface-tertiary);
+  color: var(--text-primary);
+}
+
+.account-btn-avatar-import:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.avatar-error-banner {
+  margin: 8px 16px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--color-error, #ef4444) 12%, transparent);
+  color: var(--color-error, #ef4444);
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+}
+
+.account-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.account-item-name-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.account-item-name {
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.account-item-email {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.account-item-provider {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  font-weight: 600;
+}
+
+.account-item-provider-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.account-item-capabilities {
+  display: flex;
+  gap: 4px;
+}
+
+.capability-badge {
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  letter-spacing: 0.01em;
+}
+
+.capability-email {
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  color: var(--accent-primary);
+}
+
+.capability-calendar {
+  background: color-mix(in srgb, var(--success, #22c55e) 10%, transparent);
+  color: var(--success, #16a34a);
+}
+
+.account-item-status {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.status-active {
+  background: color-mix(in srgb, var(--success, #22c55e) 12%, transparent);
+  color: var(--success, #16a34a);
+}
+
+.status-inactive {
+  background: color-mix(in srgb, var(--warning, #f59e0b) 12%, transparent);
+  color: var(--warning, #d97706);
+}
+
+.status-error {
+  background: color-mix(in srgb, var(--error, #ef4444) 12%, transparent);
+  color: var(--error, #dc2626);
+}
+
+.status-limited {
+  background: color-mix(in srgb, var(--warning, #f59e0b) 12%, transparent);
+  color: var(--warning, #d97706);
+}
+
+.account-item-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: var(--accent-primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.account-item-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.account-btn {
+  padding: 5px 12px;
+  font-size: 12px;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: inherit;
+  transition: all 0.15s ease;
+}
+
+.account-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.account-btn-activate {
+  background: var(--accent-primary);
+  color: #fff;
+}
+
+.account-btn-delete-icon {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, background 0.15s, opacity 0.15s;
+  flex-shrink: 0;
+  opacity: 1;
+}
+
+/* hover color handled by global .icon-btn--delete rule in index.css */
+
+.account-btn-cancel {
+  background: var(--surface-primary);
+  color: var(--text-tertiary);
+  border: 1px solid var(--border-default);
+}
+
+.account-btn-submit {
+  background: var(--accent-primary);
+  color: var(--surface-primary);
+  flex: 1;
+}
+
+.account-add-btn {
+  width: 100%;
+  padding: var(--space-3);
+  background: var(--surface-secondary);
+  border: 2px dashed var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--text-tertiary);
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.account-form {
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.account-form:has(.am-oauth-hero) {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.account-form h3 {
+  margin: 0 0 var(--space-4) 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.account-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: var(--space-4);
+}
+
+.account-form-field span {
+  font-size: var(--font-size-base);
+  color: var(--text-tertiary);
+}
+
+.account-form-field input,
+.account-form-field select,
+.account-form-field textarea {
+  padding: 10px var(--space-3);
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: var(--font-size-md);
+  font-family: inherit;
+  transition: border-color var(--transition-base);
+}
+
+/* Connection type selector - larger for better UX */
+.account-form-field select.connection-type-select {
+  padding: 14px var(--space-4);
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a6adc8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+.account-form-field input:focus,
+.account-form-field select:focus,
+.account-form-field textarea:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+}
+
+.account-form-field input::placeholder,
+.account-form-field textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.account-form-field textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.account-form-actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+/* OAuth form section */
+.account-form-oauth {
+  margin: var(--space-4) 0;
+  padding: var(--space-4);
+  background: var(--surface-primary);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.account-form-oauth-info {
+  margin: 0 0 var(--space-4) 0;
+  font-size: var(--font-size-base);
+  color: var(--text-tertiary);
+  line-height: var(--leading-normal);
+}
+
+.account-form-oauth .connect-gmail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.account-form-oauth .connect-gmail-btn {
+  min-width: 220px;
+}
+
+.account-form-oauth .connect-outlook {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.account-form-oauth .connect-outlook-btn {
+  min-width: 220px;
+}
+
+/* Expired status */
+.status-expired {
+  background: var(--warning-bg, #fef3c7);
+  color: var(--warning);
+}
+
+/* Reconnect button */
+.account-btn-reconnect {
+  background: var(--warning-bg, #fef3c7);
+  color: var(--warning);
+  border: 1px solid var(--warning);
+}
+
+/* Reconnection Modal */
+.account-reconnect-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-heavy);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: var(--z-modal);
+  padding: var(--space-5);
+}
+
+.account-reconnect-modal {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  max-width: 460px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Attention tile — same 56px accent-tile recipe as .account-empty-icon,
+   warning-tinted because the account needs the user's action. */
+.account-reconnect-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--warning-subtle);
+  color: var(--warning);
+}
+
+.account-reconnect-icon svg {
+  display: block;
+  width: 26px;
+  height: 26px;
+}
+
+.account-reconnect-modal h3 {
+  margin: 0 0 var(--space-3) 0;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  /* Long mailbox addresses wrap instead of overflowing the modal. */
+  overflow-wrap: anywhere;
+}
+
+.account-reconnect-info {
+  margin: 0 0 var(--space-5) 0;
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  line-height: var(--leading-normal);
+}
+
+.account-reconnect-steps {
+  list-style: none;
+  counter-reset: reconnect-step;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-5) 0;
+  padding: 0;
+  text-align: left;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-normal);
+}
+
+.account-reconnect-steps li {
+  counter-increment: reconnect-step;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.account-reconnect-steps li::before {
+  content: counter(reconnect-step);
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(var(--accent-primary-rgb, 13, 148, 136), 0.1);
+  color: var(--accent-primary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+/* Edge-case hint, demoted under the provider button. */
+.account-reconnect-note {
+  margin: var(--space-3) 0 0 0;
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  line-height: var(--leading-normal);
+}
+
+.account-reconnect-modal .connect-gmail,
+.account-reconnect-modal .connect-outlook {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.account-reconnect-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+/* Test result toast */
+.account-manager-toast {
+  display: flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  animation: toast-slide-in 0.3s ease-out;
+}
+
+.account-manager-toast.toast-success {
+  background: var(--success-bg, #dcfce7);
+  color: var(--success);
+}
+
+.account-manager-toast.toast-error {
+  background: var(--error-bg, #fee2e2);
+  color: var(--error);
+}
+
+@keyframes toast-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* IMAP/SMTP form layout */
+.account-form-warning {
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #92400e;
+  margin-bottom: 4px;
+}
+
+.account-form-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary, #9ca3af);
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.account-form-row {
+  display: flex;
+  gap: 8px;
+}
+
+.account-form-row .account-form-field {
+  flex: 1;
+}
+
+.account-form-field-small {
+  max-width: 100px;
+}
+
+/* ── Branding (logo + titre quand aucun compte) ── */
+.am-oauth-branding {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: var(--space-6);
+  margin-bottom: var(--space-2);
+}
+
+.am-oauth-branding-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-2);
+  animation: am-logo-float 3s var(--ease-settle, ease-in-out) infinite;
+}
+
+@keyframes am-logo-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.am-oauth-branding-title {
+  font-size: var(--font-size-2xl, 1.5rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* ── Add Account — OAuth Hero (mirrors onboarding Step1Connect) ── */
+.am-oauth-hero {
+  display: grid;
+  grid-template-columns: 160px 160px;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  margin: 24px 0 8px;
+}
+
+.am-oauth-hero .connect-gmail,
+.am-oauth-hero .connect-outlook {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: amCardIn 0.4s cubic-bezier(.22,1,.36,1) forwards;
+}
+.am-oauth-hero .connect-outlook {
+  animation-delay: 0.08s;
+}
+
+@keyframes amCardIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.am-oauth-hero .connect-gmail-btn,
+.am-oauth-hero .connect-outlook-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 24px 16px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--border-default);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition:
+    border-color .25s ease,
+    box-shadow .3s ease,
+    transform .2s cubic-bezier(.34,1.56,.64,1);
+}
+
+.am-oauth-hero .connect-gmail-btn:active:not(:disabled),
+.am-oauth-hero .connect-outlook-btn:active:not(:disabled) {
+  transform: translateY(0) scale(.98);
+  transition-duration: .08s;
+}
+
+.am-oauth-hero .connect-gmail-icon,
+.am-oauth-hero .connect-outlook-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.am-oauth-hero .connect-gmail-btn.connected,
+.am-oauth-hero .connect-outlook-btn.connected {
+  border-color: color-mix(in srgb, var(--success) 30%, transparent);
+  background: color-mix(in srgb, var(--success) 6%, var(--surface-secondary));
+}
+
+.account-add-imap-link {
+  display: block;
+  margin: 0 auto;
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  background: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s;
+}

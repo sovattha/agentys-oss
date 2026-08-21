@@ -1,0 +1,121 @@
+/* OAuthCallback styles */
+
+.oauth-callback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 2rem;
+}
+
+.oauth-callback-card {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  max-width: 440px;
+  width: 100%;
+}
+
+.oauth-callback-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.oauth-callback-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.oauth-callback-icon.processing {
+  background: var(--info-bg, color-mix(in srgb, var(--accent-primary) 12%, var(--surface-primary)));
+  color: var(--accent-primary);
+}
+
+.oauth-callback-icon.processing .spinner {
+  animation: spin 1s linear infinite;
+}
+
+.oauth-callback-icon.processing .spinner circle {
+  stroke: currentColor;
+  stroke-dasharray: 50;
+  stroke-dashoffset: 20;
+}
+
+.oauth-callback-icon.success {
+  background: var(--success-bg, color-mix(in srgb, var(--success) 12%, var(--surface-primary)));
+  color: var(--success);
+}
+
+.oauth-callback-icon.error {
+  background: var(--error-bg, color-mix(in srgb, var(--error) 12%, var(--surface-primary)));
+  color: var(--error);
+}
+
+.oauth-callback-icon.repair {
+  background: var(--warning-bg, color-mix(in srgb, #d97706 14%, var(--surface-primary)));
+  color: var(--warning, #b45309);
+}
+
+.oauth-callback-title {
+  margin: 0 0 0.5rem;
+  font-size: var(--font-size-3xl);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.oauth-callback-message {
+  margin: 0;
+  font-size: var(--font-size-md);
+  color: var(--text-muted);
+  line-height: var(--leading-normal);
+}
+
+.oauth-callback-repair {
+  margin-top: 1.25rem;
+  text-align: left;
+}
+
+.oauth-callback-repair-label {
+  margin: 0 0 0.5rem;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm, 14px);
+  font-weight: 600;
+}
+
+.oauth-callback-repair-list {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+  font-size: var(--font-size-sm, 14px);
+  line-height: var(--leading-normal);
+}
+
+.oauth-callback-secondary-link {
+  display: block;
+  margin-top: 0.75rem;
+  color: var(--accent-primary, #4f46e5);
+  font-size: var(--font-size-sm, 14px);
+  text-align: center;
+}
+
+.oauth-callback-return-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.625rem 1.5rem;
+  background: var(--accent-primary, #4f46e5);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--font-size-sm, 14px);
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}

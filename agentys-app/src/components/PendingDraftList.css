@@ -1,0 +1,743 @@
+/* ============================================================================
+   DRAFT LIST — Inbox-style layout
+   Matches EmailList appearance: full-width, date sections, Gmail single-row
+   ============================================================================ */
+
+.draft-list-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  container-type: inline-size;
+  container-name: draft-list;
+}
+
+.draft-list-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--surface-highlight, rgba(255, 255, 255, 0.5)) 50%,
+    transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ============================================================================
+   HEADER — matches EmailListHeader style
+   ============================================================================ */
+.draft-list-header {
+  display: flex;
+  align-items: center;
+  /* Mirror .email-list-header so the Drafts label sits at the same x-offset as
+     the Inbox label. */
+  padding: var(--space-2) var(--space-3);
+  gap: var(--space-2);
+  min-height: 40px;
+}
+
+.draft-header-select-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+.draft-header-select-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.draft-header-select-count {
+  font-size: 11px;
+  color: var(--accent-primary);
+  font-weight: 600;
+  min-width: 14px;
+}
+
+.draft-header-tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.draft-header-tab {
+  /* Match .header-tab in EmailList.css so the Drafts label looks identical to
+     the Inbox label (same size, weight, padding). */
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px var(--space-3) var(--space-2);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  letter-spacing: normal;
+  color: var(--text-tertiary);
+  cursor: default;
+  white-space: nowrap;
+}
+
+.draft-header-tab.active {
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+.draft-header-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  line-height: var(--leading-none);
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+}
+
+.draft-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.draft-header-icon-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.draft-header-icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.draft-header-icon-btn:disabled {
+  opacity: var(--opacity-disabled, 0.5);
+  cursor: not-allowed;
+}
+
+.draft-header-icon-btn:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.draft-header-icon-btn svg.spinning {
+  animation: spin 1s linear infinite;
+}
+
+/* ============================================================================
+   SCROLLABLE LIST
+   ============================================================================ */
+.draft-list-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* ============================================================================
+   DATE SECTION SEPARATORS — match inbox (.email-date-separator)
+   ============================================================================ */
+.draft-date-separator {
+  padding: 6px var(--space-4) 4px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.draft-date-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.draft-date-count {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  opacity: 0.6;
+}
+
+/* ============================================================================
+   DRAFT ITEM — Gmail single-row layout
+   ============================================================================ */
+.draft-item {
+  padding: var(--space-2) var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  animation: pdl-item-in 0.25s var(--ease-settle) both;
+  position: relative;
+  /* Render-virtualization (2026-06-24) : le navigateur (WebView Chromium) saute
+     le layout/paint des lignes HORS écran — l'essentiel du coût d'une longue
+     liste de brouillons — tout en gardant le DOM intact (sélection, navigation
+     clavier, menu contextuel, find-in-page et lecteurs d'écran inchangés). La
+     taille intrinsèque réserve la hauteur (~44px) pour une scrollbar correcte ;
+     `auto` mémorise la vraie hauteur une fois la ligne rendue. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 44px;
+}
+
+/* New (unviewed) AI draft indicator — vertical green bar on the leading edge,
+   matches .swipeable-email-item.unread::after pattern from the inbox view */
+.draft-item.unread::after {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: var(--accent-primary);
+  border-radius: 0 2px 2px 0;
+  z-index: 2;
+  box-shadow: 0 0 4px rgba(13, 148, 136, 0.4);
+}
+
+/* Pinned draft indicator — red vertical bar, mirrors
+   .swipeable-email-item.pinned::after from the inbox. Declared after the
+   .unread rule (same ::after element, equal specificity) so a pinned+unread
+   draft shows red, matching the inbox where pinned overrides unread. */
+.draft-item.pinned::after {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: #dc2626;
+  border-radius: 0 2px 2px 0;
+  z-index: 3;
+  box-shadow: 0 0 6px rgba(220, 38, 38, 0.4);
+}
+
+/* Staggered entrance for first 8 items */
+.draft-item:nth-child(1) { animation-delay: 0ms; }
+.draft-item:nth-child(2) { animation-delay: 30ms; }
+.draft-item:nth-child(3) { animation-delay: 60ms; }
+.draft-item:nth-child(4) { animation-delay: 90ms; }
+.draft-item:nth-child(5) { animation-delay: 120ms; }
+.draft-item:nth-child(6) { animation-delay: 150ms; }
+.draft-item:nth-child(7) { animation-delay: 180ms; }
+.draft-item:nth-child(8) { animation-delay: 210ms; }
+
+@keyframes pdl-item-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.draft-item.selected {
+  background: var(--accent-primary-light);
+  border-inline-start: 2px solid var(--accent-primary);
+}
+
+.draft-item.checked {
+  background: linear-gradient(90deg, var(--accent-primary-subtle) 0%, rgba(13,148,136,0.01) 100%);
+}
+
+/* Row hover background — scanning affordance for a dense list. Mirrors
+   SwipeableEmailItem.css:37-45 (the documented exception to the global
+   no-hover rule, justified by "rows are scanning affordances, not
+   decorative"). The :not(.selected):not(.checked) guard preserves the
+   brighter selected / checked backgrounds when the row is in those
+   states (selected wins on click; checked wins on multi-select). */
+.draft-item:not(.selected):not(.checked):hover {
+  background: var(--accent-primary-subtle);
+}
+
+/* Gmail-style single row: [checkbox] [sender] [subject-cell] [time].
+ *
+ * The subject-cell is a flex container that holds the subject text and
+ * any optional inline badges (⚡ Auto, 💤 Snoozed). Keeping badges
+ * inside this cell means the grid stays 4 columns regardless of how
+ * many badges a given row carries — no wrap/stacking bugs when the
+ * snoozed chip is conditionally rendered. */
+/* Trailing chips live in ONE content-sized column (`auto`) right before
+   the date. The subject's `1fr` absorbs all slack, so the date column —
+   the last fixed track — stays at a constant X no matter how many chips a
+   row carries, while the chips themselves stay tight against each other
+   and the date (no fixed-width spacer to strand them). */
+.draft-row {
+  display: grid;
+  grid-template-columns: auto 180px 1fr auto 52px;
+  align-items: center;
+  width: 100%;
+  column-gap: 12px;
+}
+
+/* Subject cell — subject text only now (chips moved into their own
+   grid columns to fix alignment across rows with/without chips). */
+.draft-row-subject-cell {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding-right: var(--space-3);
+}
+
+.draft-row-subject-cell .draft-row-subject {
+  padding-right: 0;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+/* Combined chip cluster — content-sized flex row holding the 🔁 marker,
+   ⚡ Auto badge, and 💤 snoozed chip in that order. The 8px gap spaces
+   them evenly; flex-shrink:0 keeps each chip whole (the subject's 1fr
+   gives up width first). Empty when a row carries no chip. */
+.draft-row-meta-col {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.draft-row-meta-col .emoji-marker-chip,
+.draft-row-meta-col .auto-badge-chip,
+.draft-row-meta-col .draft-row-snoozed-chip {
+  flex-shrink: 0;
+}
+
+/* ============================================================================
+   SENDER — fixed width, truncated
+   ============================================================================ */
+.draft-row-sender {
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: var(--space-3);
+}
+
+/* ============================================================================
+   SUBJECT — fills remaining space
+   ============================================================================ */
+.draft-row-subject {
+  min-width: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: var(--space-3);
+}
+
+/* ============================================================================
+   TIME — right-aligned, fixed width
+   ============================================================================ */
+.draft-row-time {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  text-align: right;
+  min-width: 52px;
+}
+
+/* Snoozed chip — surfaced on drafts gated by a draft_followup reminder.
+   Sits between the subject and the time column, signaling "this draft
+   won't auto-surface in the inbox until {{date}}". Compact pill that
+   mirrors the inbox `.email-badge-zzz` vocabulary without copying its
+   font sizes. */
+.draft-row-snoozed-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent-violet, #8b5cf6);
+  background: color-mix(in srgb, var(--accent-violet, #8b5cf6) 12%, transparent);
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.draft-row-snoozed-chip svg {
+  display: block;
+}
+
+/* ============================================================================
+   CHECKBOX — Gmail-style affordance: hidden until the row is hovered,
+   focused, or already-checked. Mirrors SwipeableEmailItem.css:418-455
+   so the Drafts list matches the inbox/sent/spam/trash visual rhythm.
+   ============================================================================ */
+.draft-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  margin-right: var(--space-2, 8px);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+/* Show on row hover or keyboard focus-within (matches inbox pattern). */
+.draft-item:hover .draft-checkbox,
+.draft-item:focus-within .draft-checkbox {
+  opacity: 1;
+}
+
+/* Always visible when checked (the user is already in multi-select). */
+.draft-checkbox.checked {
+  opacity: 1;
+}
+
+.draft-checkbox input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Box shape mirrors SwipeableEmailItem.css:464-473 — same width/border/
+   color/radius/transition so the affordance has identical visual weight
+   in both the inbox and the Drafts list. */
+.draft-checkbox .checkbox-custom {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--text-muted);
+  border-radius: var(--radius-xs, 4px);
+  position: relative;
+  transition: all var(--transition-fast, 0.1s);
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.draft-checkbox input:checked + .checkbox-custom {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.draft-checkbox input:checked + .checkbox-custom::after {
+  content: '';
+  position: absolute;
+  left: 4.5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* ============================================================================
+   SELECTION BAR
+   ============================================================================ */
+.selection-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-primary);
+  position: relative;
+  z-index: 10;
+  animation: selectionBarSlideIn 0.2s ease-out;
+}
+
+@keyframes selectionBarSlideIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.selection-bar .bulk-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.selection-count {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.select-all-btn {
+  margin-inline-start: auto;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast), transform 0.1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.select-all-btn:active {
+  transform: scale(var(--scale-press));
+}
+
+.bulk-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--error);
+  color: var(--text-inverse);
+  border: none;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  padding: 5px 16px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast), transform 0.1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.bulk-delete-btn:active:not(:disabled) {
+  transform: scale(var(--scale-press));
+}
+
+.bulk-delete-btn:disabled {
+  opacity: var(--opacity-disabled, 0.5);
+  cursor: not-allowed;
+}
+
+.bulk-delete-spinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--text-inverse);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+/* ============================================================================
+   LOADING, ERROR, EMPTY STATES
+   ============================================================================ */
+.pending-draft-list-loading,
+.pending-draft-list-error,
+.pending-draft-list-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12) var(--space-6);
+  text-align: center;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+.loading-spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--border-default);
+  border-top-color: var(--accent-secondary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+.pending-draft-list-error .error-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--error-bg);
+  color: var(--error);
+  border-radius: 50%;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.retry-button {
+  margin-top: 16px;
+  padding: 10px 20px;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.empty-icon {
+  font-size: var(--font-size-4xl);
+  margin-bottom: 12px;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+@media (max-width: 768px) {
+  .draft-row {
+    grid-template-columns: auto 120px 1fr auto 52px;
+  }
+  .draft-row-sender {
+    font-size: var(--font-size-sm);
+  }
+
+  .draft-row-subject {
+    font-size: var(--font-size-sm);
+  }
+
+  .draft-item {
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .draft-row {
+    grid-template-columns: auto 100px 1fr auto 44px;
+    column-gap: 8px;
+  }
+  .draft-row-sender {
+    font-size: var(--font-size-sm);
+  }
+
+  .draft-item {
+    padding: 8px 10px;
+  }
+}
+
+/* Touch devices — always show checkbox */
+@media (pointer: coarse) {
+  .draft-checkbox {
+    opacity: 1;
+  }
+}
+
+/* Container queries for when the draft list panel shrinks */
+@container email-list (max-width: 500px) {
+  .draft-row {
+    grid-template-columns: auto 100px 1fr auto 44px;
+    column-gap: 8px;
+  }
+}
+
+@container email-list (max-width: 380px) {
+  .draft-row {
+    grid-template-columns: auto 80px 1fr auto 40px;
+    column-gap: 6px;
+  }
+  .draft-row-sender {
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* ============================================================================
+   CONTAINER QUERIES — Component-intrinsic responsive behavior
+   (draft-list container supplements existing email-list container queries)
+   ============================================================================ */
+@container draft-list (max-width: 500px) {
+  .draft-row {
+    grid-template-columns: auto 110px 1fr auto 44px;
+    column-gap: 8px;
+  }
+  .draft-item {
+    padding: 10px var(--space-3);
+  }
+  .draft-header-tab {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@container draft-list (max-width: 380px) {
+  .draft-row {
+    grid-template-columns: auto 80px 1fr auto 40px;
+    column-gap: 6px;
+  }
+  .draft-row-sender {
+    font-size: var(--font-size-sm);
+  }
+  .draft-row-subject {
+    font-size: var(--font-size-sm);
+  }
+  .draft-row-time {
+    min-width: 40px;
+    font-size: var(--font-size-2xs);
+  }
+  .draft-item {
+    padding: var(--space-2) var(--space-2);
+  }
+}
+
+/* Drafts auto-delete banner */
+.drafts-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  background: color-mix(in srgb, var(--text-tertiary) 6%, var(--surface-base));
+  border-bottom: 1px solid color-mix(in srgb, var(--text-tertiary) 12%, transparent);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  animation: slideDown 0.2s ease-out;
+}
+.drafts-banner svg { flex-shrink: 0; color: var(--text-tertiary); }
+.drafts-banner span { flex: 1; }
+
+.drafts-cleanup-btn {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* hover color handled by global .icon-btn--delete rule in index.css */
+
+.drafts-cleanup-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}

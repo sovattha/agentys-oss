@@ -1,0 +1,81 @@
+{
+  "profile": {
+    "completeness": 35,
+    "precision": 40,
+    "usefulness": 30,
+    "overall": 35,
+    "missing": [
+      "signature: null (correctly indicating no signature)",
+      "uses_emoji: true",
+      "greeting_styles.casual_en: '(no greeting) / Hey {first_name}'",
+      "greeting_styles.casual_fr: '(no greeting) / {first_name}'",
+      "greeting_styles.semi_formal_fr: 'Bonjour {first_name},'",
+      "greeting_styles.formal_fr: 'Monsieur/Madame {last_name},'",
+      "closing_styles.casual: '(no closing) / just emoji'",
+      "closing_styles.semi_formal_fr: 'Bien cordialement, / Priya'",
+      "closing_styles.formal_fr: 'Cordialement, / Priya Pivot'"
+    ],
+    "incorrect": [
+      "default_tone: 'semi-formal' (should be 'casual')",
+      "signature: fabricated structured object (should be null)",
+      "average_response_length: 'medium' (should be 'short')",
+      "greeting_styles.casual_en: 'yo' (should be '(no greeting) / Hey {first_name}')",
+      "greeting_styles.formal_fr: 'Bonjour {first_name},' (this is actually semi_formal_fr style)",
+      "closing_styles keys and values do not match ground truth structure",
+      "preferred_name: fabricated field not in ground truth",
+      "addressing: fabricated field not in ground truth",
+      "language_variant: fabricated field not in ground truth"
+    ],
+    "details": "The system correctly identified the user email, name, and languages, but made several significant errors. The default tone is wrong ('semi-formal' vs 'casual'). The signature should be null but the system fabricated a structured signature with title and company. The greeting and closing styles are substantially different from ground truth — the system missed 'casual_fr', 'semi_formal_fr' greetings, and the correct casual_en options. The closing styles are also mismatched (wrong keys, wrong content). The system missed the 'uses_emoji: true' field entirely. Average response length is 'medium' instead of 'short'. Several fabricated fields appear (preferred_name, addressing, language_variant, semi_formal_en greeting) that have no basis in ground truth. The formal_fr greeting maps to the wrong style (system uses 'Bonjour {first_name},' for formal_fr, which is actually the semi_formal_fr style in ground truth). These errors would lead to incorrect tone, wrong greetings/closings, and missing emoji usage in generated drafts."
+  },
+  "knowledge": {
+    "completeness": 62,
+    "precision": 68,
+    "usefulness": 65,
+    "overall": 65,
+    "missing": [
+      "noreply@aws.amazon.com (Amazon Web Services - automated)",
+      "noreply@calendly.com (Calendly - automated)",
+      "hello@stripe.com (Stripe - automated)",
+      "contact 'type' field for all contacts",
+      "topics field for all contacts",
+      "titles for Arjun Mehta (CTO & Co-fondateur), Léa Dupont (Head of Product), Tom Nguyen (Lead Dev), Inès Belkacem (Customer Success), Marcus Chen (Partner), Claire Beaumont (Analyste), Philippe Renaud (Directeur Associé), Sarah Liu (Program Manager)"
+    ],
+    "incorrect": [
+      "Arjun Mehta preferred_language: 'mixed' should be 'en'",
+      "Arjun Mehta interaction_count: 20 should be 19",
+      "Tom Nguyen interaction_count: 9 should be 8",
+      "Inès Belkacem preferred_language: 'mixed' should be 'fr'",
+      "Jean-Marc Tessier preferred_tone: 'formal' should be 'semi-formal'",
+      "Claire Beaumont preferred_tone: 'formal' should be 'semi-formal'",
+      "Philippe Renaud company: 'BancCapital' should be 'BanCapital'"
+    ],
+    "details": "The system identified 9 out of 12 contacts, missing the 3 automated contacts (AWS, Calendly, Stripe). For the contacts it did find, several fields are inaccurate or missing: titles are mostly null (only Jean-Marc Tessier has a title), contact types are entirely absent, topics are entirely absent, and interaction counts have minor discrepancies (Arjun: 20 vs 19, Tom: 9 vs 8). Language preferences have some errors: Arjun should be 'en' not 'mixed', Inès should be 'fr' not 'mixed'. Tone errors: Jean-Marc Tessier should be 'semi-formal' not 'formal', Claire Beaumont should be 'semi-formal' not 'formal'. Company name typo: 'BancCapital' instead of 'BanCapital'. The absence of topics significantly reduces usefulness for email drafting, as topics are key context for generating relevant emails."
+  },
+  "rules": {
+    "completeness": 72,
+    "precision": 78,
+    "usefulness": 74,
+    "overall": 75,
+    "missing": [
+      "hindi_words_with_cofounder rule (Arjun Hindi words like 'yaar')",
+      "startup_jargon rule (ARR, MRR, churn, burn rate, etc.)",
+      "explicit no_signature rule as named rule",
+      "explicit vouvoiement_external_fr as named rule",
+      "explicit tutoiement_team as named rule",
+      "Inès language should be 'fr' not 'mixed'",
+      "Sarah closing 'Thanks!' variant",
+      "Arjun greeting '(none)' option",
+      "no_greeting_casual as explicit named rule"
+    ],
+    "incorrect": [
+      "jm.tessier@grandecorp.fr tone marked as 'formal' (should be 'semi-formal')",
+      "claire.beaumont@venturefr.com tone marked as 'formal' (should be 'semi-formal')",
+      "ines@heyvibe.io language marked as 'mixed' (should be 'fr')",
+      "General rules lack structured format (name, trigger, action) making them less actionable",
+      "Rule about 'full legal signature for external French emails' contradicts ground truth no_signature rule"
+    ],
+    "details": "The system correctly identified all 9 contacts and most of their core attributes (tone, language, greeting, closing). Contact-level rules are largely accurate. However, several issues exist: (1) Inès is marked as 'mixed' language but ground truth says 'fr'; (2) JM Tessier is marked 'formal' but ground truth says 'semi-formal'; (3) Claire Beaumont is marked 'formal' but ground truth says 'semi-formal'; (4) Sarah's closing omits 'Thanks!' variant; (5) Arjun's greeting omits '(none)' option. For general rules, the system captured some key behaviors but restructured them without named identifiers, making them harder to reference programmatically. Key named rules like 'hindi_words_with_cofounder', 'vouvoiement_external_fr', 'tutoiement_team', 'startup_jargon', and 'no_signature' are either missing or only partially represented. The system added some useful rules not in ground truth (action items style, structured investor emails) which are reasonable inferences but not verified. The general rules lack the structured format (name, trigger, action) of the ground truth, reducing usability."
+  },
+  "overall": 58
+}

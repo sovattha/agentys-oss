@@ -1,0 +1,345 @@
+{
+  "description": "Expected outputs from the onboarding KB analysis of test_emails_sales_director.json",
+  "expected_profile": {
+    "user_email": "karim.mandat@immoplus-lyon.fr",
+    "user_name": "Karim Mandat",
+    "signature": {
+      "name": "Karim Mandat",
+      "title": "Directeur Commercial",
+      "company": "ImmoPlus Lyon"
+    },
+    "tone": {
+      "default_tone": "semi-formal",
+      "greeting_styles": {
+        "formal_fr": "Bonjour Madame/Monsieur {last_name},",
+        "semi_formal_fr": "Bonjour {first_name},",
+        "casual_fr": "{first_name}, / Salut {first_name},"
+      },
+      "closing_styles": {
+        "formal_fr": "Bien cordialement, / Cordialement,",
+        "semi_formal_fr": "Cordialement, / Karim",
+        "casual_fr": "(no closing or just name)"
+      },
+      "uses_emoji": true,
+      "average_response_length": "short"
+    },
+    "languages": [
+      "fr"
+    ],
+    "preferred_name": "Karim",
+    "addressing": "mixed",
+    "language_variant": "fr-FR"
+  },
+  "expected_contacts": [
+    {
+      "email": "samira@immoplus-lyon.fr",
+      "name": "Samira Bensaid",
+      "company": "ImmoPlus Lyon",
+      "title": "Assistante commerciale",
+      "preferred_language": "fr",
+      "preferred_tone": "casual",
+      "interaction_count": 13
+    },
+    {
+      "email": "delphine.mercier@gmail.com",
+      "name": "Delphine Mercier",
+      "company": null,
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 10
+    },
+    {
+      "email": "julien@immoplus-lyon.fr",
+      "name": "Julien Roche",
+      "company": "ImmoPlus Lyon",
+      "title": "Agent immobilier junior",
+      "preferred_language": "fr",
+      "preferred_tone": "casual",
+      "interaction_count": 9
+    },
+    {
+      "email": "famille.lambert@orange.fr",
+      "name": "M. et Mme Laurent",
+      "company": null,
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 7
+    },
+    {
+      "email": "jp.astier@promoval.fr",
+      "name": "Jean-Philippe Astier",
+      "company": "Promoval",
+      "title": "Directeur des ventes",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 7
+    },
+    {
+      "email": "p.cassagne@notaire-cassagne.fr",
+      "name": "Pierre Cassagne",
+      "company": "Étude Cassagne",
+      "title": "Notaire",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 6
+    },
+    {
+      "email": "e.blanchard@diagimmo.fr",
+      "name": "Éric Blanchard",
+      "company": "DiagImmo",
+      "title": "Diagnostiqueur immobilier",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 5
+    },
+    {
+      "email": "nadia.ferhat@bnp-immo.fr",
+      "name": "Nadia Ferhat",
+      "company": "BNP Paribas",
+      "title": "Conseillère Immobilier",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 5
+    },
+    {
+      "email": "direction@immoplus-lyon.fr",
+      "name": "Catherine Vernet",
+      "company": "ImmoPlus Lyon",
+      "title": "Directrice",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 5
+    },
+    {
+      "email": "hugo.m@immoplus-lyon.fr",
+      "name": "Hugo Martin",
+      "company": "ImmoPlus Lyon",
+      "title": "Agent immobilier senior",
+      "preferred_language": "fr",
+      "preferred_tone": "casual",
+      "interaction_count": 5
+    },
+    {
+      "email": "alertes@seloger.com",
+      "name": "SeLoger Alertes",
+      "company": "SeLoger",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": null,
+      "interaction_count": 4
+    },
+    {
+      "email": "photo.vernier@gmail.com",
+      "name": "Stéphane Vernier",
+      "company": "Freelance",
+      "title": "Photographe immobilier",
+      "preferred_language": "fr",
+      "preferred_tone": "casual",
+      "interaction_count": 3
+    },
+    {
+      "email": "t.nakamura@investcorp.jp",
+      "name": "Takeshi Nakamura",
+      "company": "InvestCorp",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 3
+    },
+    {
+      "email": "a.fournier@sfr.fr",
+      "name": "Anne Fournier",
+      "company": null,
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 3
+    },
+    {
+      "email": "celine.dupuis@laposte.net",
+      "name": "Céline Dupuis",
+      "company": null,
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 3
+    },
+    {
+      "email": "contact@meilleursagents.com",
+      "name": "MeilleursAgents",
+      "company": "MeilleursAgents",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": null,
+      "interaction_count": 2
+    }
+  ],
+  "expected_rules": {
+    "contact_rules": [
+      {
+        "contact_email": "samira@immoplus-lyon.fr",
+        "tone": "casual",
+        "language": "fr",
+        "greeting": "Samira, / (no greeting)",
+        "closing": "(no closing or emoji 👍)"
+      },
+      {
+        "contact_email": "julien@immoplus-lyon.fr",
+        "tone": "casual",
+        "language": "fr",
+        "greeting": "Julien,",
+        "closing": "Karim / (no closing)"
+      },
+      {
+        "contact_email": "hugo.m@immoplus-lyon.fr",
+        "tone": "casual",
+        "language": "fr",
+        "greeting": "Hugo,",
+        "closing": "Karim / (no closing)"
+      },
+      {
+        "contact_email": "delphine.mercier@gmail.com",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Bonjour Madame Moreau, / Bonjour Delphine,",
+        "closing": "Bien cordialement, / Cordialement,"
+      },
+      {
+        "contact_email": "famille.lambert@orange.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Monsieur et Madame Laurent, / Monsieur Laurent,",
+        "closing": "Bien cordialement, / Cordialement,"
+      },
+      {
+        "contact_email": "p.cassagne@notaire-cassagne.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Maître Cassagne,",
+        "closing": "Bien cordialement,"
+      },
+      {
+        "contact_email": "t.nakamura@investcorp.jp",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Monsieur Nakamura,",
+        "closing": "Restant à votre disposition, / Bien cordialement,"
+      },
+      {
+        "contact_email": "a.fournier@sfr.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Bonjour Madame Fournier, / Parfait Madame Fournier,",
+        "closing": "Bien cordialement,"
+      },
+      {
+        "contact_email": "e.blanchard@diagimmo.fr",
+        "tone": "semi-formal",
+        "language": "fr",
+        "greeting": "Bonjour Éric, / Éric,",
+        "closing": "Cordialement, / Merci Éric !"
+      },
+      {
+        "contact_email": "nadia.ferhat@bnp-immo.fr",
+        "tone": "semi-formal",
+        "language": "fr",
+        "greeting": "Bonjour Nadia, / Super Nadia,",
+        "closing": "Merci d'avance, / Karim"
+      },
+      {
+        "contact_email": "jp.astier@promoval.fr",
+        "tone": "semi-formal",
+        "language": "fr",
+        "greeting": "Bonjour Jean-Philippe, / Merci JP,",
+        "closing": "Cordialement, / Karim"
+      },
+      {
+        "contact_email": "direction@immoplus-lyon.fr",
+        "tone": "semi-formal",
+        "language": "fr",
+        "greeting": "Bonjour Catherine, / Catherine,",
+        "closing": "Cordialement, / Karim"
+      },
+      {
+        "contact_email": "photo.vernier@gmail.com",
+        "tone": "casual",
+        "language": "fr",
+        "greeting": "Salut Stéphane,",
+        "closing": "Karim / (no closing)"
+      },
+      {
+        "contact_email": "celine.dupuis@laposte.net",
+        "tone": "semi-formal",
+        "language": "fr",
+        "greeting": "Bonjour Madame Dupuis, / Bonjour Céline,",
+        "closing": "Cordialement,"
+      }
+    ],
+    "general_rules": [
+      {
+        "name": "tutoiement_equipe",
+        "description": "Use 'tu' form with internal team members (Samira, Julien, Hugo, Stéphane)",
+        "trigger": "Internal emails to team members at @immoplus-lyon.fr or regular freelancers",
+        "action": "Use casual tu form, first names, short messages, occasional emoji"
+      },
+      {
+        "name": "vouvoiement_clients",
+        "description": "Use 'vous' form with external clients, prospects, and formal partners",
+        "trigger": "Emails to prospects (Moreau, Laurent, Fournier, Nakamura, Dupuis), notaire",
+        "action": "Maintain vouvoiement, use Madame/Monsieur, full signature"
+      },
+      {
+        "name": "signature_externe_uniquement",
+        "description": "Full signature for external contacts only, omitted for internal team",
+        "trigger": "External email (clients, prospects, notaire, banque, promoteur)",
+        "action": "Append full signature block with title, company, phone numbers"
+      },
+      {
+        "name": "emails_courts_internes",
+        "description": "Very short emails (1-2 lines) for internal communications",
+        "trigger": "Quick confirmations, acknowledgments with team members",
+        "action": "Write minimal response (OK, Ça marche, Top, Parfait, emoji only)"
+      },
+      {
+        "name": "emoji_equipe_uniquement",
+        "description": "Emoji usage restricted to internal team communications",
+        "trigger": "Casual internal emails to Samira, Julien, Hugo",
+        "action": "Use 👍, 😉, 🎉, 💪, 🏠 occasionally"
+      },
+      {
+        "name": "horaires_etendus",
+        "description": "Extended working hours from 07h to 22h, including some weekends",
+        "trigger": "Emails sent/received outside standard office hours",
+        "action": "Respond promptly regardless of hour"
+      },
+      {
+        "name": "ton_evolutif_prospects",
+        "description": "Tone evolves from formal to semi-formal as relationship progresses",
+        "trigger": "After several exchanges with a prospect (Moreau: Madame -> Delphine)",
+        "action": "Gradually shift from Madame/Monsieur to first name while maintaining vouvoiement"
+      },
+      {
+        "name": "structured_commercial_reports",
+        "description": "Use structured format with metrics for reporting to direction",
+        "trigger": "Status reports, performance updates to Catherine Vernet",
+        "action": "Include KPIs, bullet points, concrete numbers"
+      }
+    ],
+    "forbidden_phrases": []
+  },
+  "expected_statistics": {
+    "total_emails": 90,
+    "sent_emails": 55,
+    "received_emails": 35,
+    "threads": 41,
+    "french_emails": 90,
+    "english_emails": 0,
+    "emails_with_signature": 33,
+    "emails_with_attachments": 9,
+    "unique_contacts": 16,
+    "internal_contacts": 4,
+    "external_contacts": 12
+  }
+}

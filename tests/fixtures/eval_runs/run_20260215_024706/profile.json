@@ -1,0 +1,41 @@
+{
+  "user_email": "james.conseil@strategyco.com",
+  "user_name": "James Conseil",
+  "signature": {
+    "full_text": "James Conseil\nSenior Consultant\nStrategyCo | London",
+    "name": "James Conseil",
+    "title": "Senior Consultant",
+    "department": null,
+    "company": "StrategyCo",
+    "phone": null
+  },
+  "signature_en": {
+    "full_text": "James Conseil\nSenior Consultant\nStrategyCo | London",
+    "name": "James Conseil",
+    "title": "Senior Consultant",
+    "department": null,
+    "company": "StrategyCo",
+    "phone": null
+  },
+  "tone": {
+    "default_tone": "semi-formal",
+    "greeting_styles": {
+      "formal_en": "Dear {first_name},",
+      "semi_formal_en": "Hi {first_name},",
+      "casual_en": "{first_name},"
+    },
+    "closing_styles": {
+      "formal_en": "Best regards,",
+      "semi_formal_en": "Cheers,",
+      "casual_en": "J."
+    },
+    "uses_first_name": true,
+    "uses_emoji": false,
+    "average_response_length": "medium"
+  },
+  "languages": [
+    "en"
+  ],
+  "active_hours": "08:00-18:30",
+  "response_time_avg": "< 4h"
+}

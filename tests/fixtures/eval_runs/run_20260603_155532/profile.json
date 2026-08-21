@@ -1,0 +1,35 @@
+{
+  "user_email": "sophie.martin@techcorp.fr",
+  "user_name": "Sophie Martin",
+  "preferred_name": "Sophie",
+  "profession": "chef de projet digital",
+  "signature": {
+    "name": "Sophie Martin",
+    "title": "Chef de projet - Division Digitale",
+    "company": "TechCorp",
+    "department": "Division Digitale"
+  },
+  "tone": {
+    "default_tone": "semi-formal",
+    "addressing": "vous",
+    "greeting_styles": {
+      "semi_formal_fr": "Bonjour {first_name},",
+      "formal_fr": "Bonjour Madame {last_name},",
+      "semi_formal_en": "Hi {first_name},",
+      "formal_en": "Dear {first_name},"
+    },
+    "closing_styles": {
+      "semi_formal_fr": "Cordialement,",
+      "formal_fr": "Restant à votre disposition,",
+      "semi_formal_en": "Best regards,",
+      "casual_fr": "(no closing or just name)"
+    },
+    "average_response_length": "medium-long"
+  },
+  "languages": [
+    "fr",
+    "en"
+  ],
+  "language_variant": "fr-FR",
+  "profession_confirmed": false
+}

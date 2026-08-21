@@ -1,0 +1,105 @@
+# Agentys Docker Compose Configuration
+# Pipeline Multi-Agents IA pour Email
+#
+# Usage:
+#   docker-compose run --rm agentys setup  # Configuration interactive (modifie le .env)
+#   docker-compose up -d                   # Démarrer en arrière-plan
+#   docker-compose logs -f                 # Voir les logs
+#   docker-compose down                    # Arrêter
+#   docker-compose up -d --build           # Reconstruire et démarrer
+#
+
+services:
+  # Service principal Agentys
+  agentys:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agentys
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    environment:
+      # Ces variables sont chargées depuis le .env monté
+      # Elles servent de fallback si le .env n'existe pas
+      - LLM_PROVIDER=${LLM_PROVIDER:-claude}
+      - LLM_MODEL=${LLM_MODEL:-claude-sonnet-4-6}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - EMAIL_PROVIDER_TYPE=${EMAIL_PROVIDER_TYPE:-IMAP_SMTP}
+      - DAEMON_POLL_INTERVAL=${DAEMON_POLL_INTERVAL:-60}
+      - DAEMON_SKIP_LOW_PRIORITY=${DAEMON_SKIP_LOW_PRIORITY:-false}
+      - MONTHLY_BUDGET_USD=${MONTHLY_BUDGET_USD:-50}
+      - NOTIFICATIONS_ENABLED=${NOTIFICATIONS_ENABLED:-true}
+    volumes:
+      # IMPORTANT: .env monté en lecture-écriture pour le setup
+      - ./.env:/app/.env:rw
+      # Données persistantes
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./knowledge:/app/knowledge
+      - ./agents:/app/agents
+    ports:
+      - "5050:5050"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import app.config; print('healthy')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Service de setup (pour la configuration interactive)
+  setup:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agentys-setup
+    stdin_open: true
+    tty: true
+    command: ["setup"]
+    volumes:
+      # .env monté en lecture-écriture pour pouvoir le modifier
+      - ./.env:/app/.env:rw
+    profiles:
+      - setup
+
+  # Prometheus metrics (optionnel)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: agentys-prometheus
+    restart: unless-stopped
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    profiles:
+      - monitoring
+
+  # Grafana (optionnel)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: agentys-grafana
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+    volumes:
+      - grafana_data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    profiles:
+      - monitoring
+
+volumes:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  default:
+    name: agentys-network

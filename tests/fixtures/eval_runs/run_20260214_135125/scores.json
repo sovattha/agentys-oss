@@ -1,0 +1,74 @@
+{
+  "profile": {
+    "completeness": 90,
+    "precision": 85,
+    "usefulness": 88,
+    "overall": 88,
+    "missing": [],
+    "incorrect": [
+      "greeting_styles.formal_fr uses {nom} instead of {last_name}",
+      "greeting_styles.semi_formal_fr uses {prenom} instead of {first_name}",
+      "greeting_styles.casual_fr uses {prenom} instead of {first_name}",
+      "closing_styles.casual_fr is '{prenom}' instead of '(no closing or just name)'",
+      "closing_styles.semi_formal_en is 'Regards,' instead of 'Best,'",
+      "active_hours is '08:00-16:30' instead of '08:00-18:00' (1.5 hour discrepancy)",
+      "response_time_avg is '< 2h' instead of '< 1h'"
+    ],
+    "details": "The system captured most key information correctly including user identity, signature blocks (both French and English), default tone, language support, and general communication patterns. However, there are several minor discrepancies: (1) greeting placeholders use French terms {nom}/{prenom} instead of English {last_name}/{first_name} in formal_fr and semi_formal_fr/casual_fr styles, (2) casual_fr closing changed from '(no closing or just name)' to '{prenom}', (3) semi_formal_en closing is 'Regards,' instead of 'Best,', (4) active_hours is '08:00-16:30' instead of '08:00-18:00', and (5) response_time_avg is '< 2h' instead of '< 1h'. These are relatively minor issues that would still produce usable email drafts, though with slightly less accuracy."
+  },
+  "knowledge": {
+    "completeness": 85,
+    "precision": 75,
+    "usefulness": 80,
+    "overall": 80,
+    "missing": [
+      "Contact topics: 'conges' for Lucas Bernard",
+      "Contact topics: 'demo' for Pierre Durand",
+      "Contact topics: 'pentest' for Camille Roux",
+      "Contact topics: 'webhooks' for Sarah Jones",
+      "Contact topics: 'renouvellement' for Amelie Petit",
+      "Contact topics: 'integration API' for Thomas Renard",
+      "Project keywords: 'webhooks' for GlobalTech Partnership",
+      "Terminology: 'Sprint', 'Daily', 'Retro', 'PR' definitions"
+    ],
+    "incorrect": [
+      "Pierre Durand interaction_count: 27 (should be 20)",
+      "Pierre Durand title: 'Tech Lead' (should be 'Lead Developer')",
+      "Lucas Bernard interaction_count: 15 (should be 10)",
+      "Lucas Bernard title: 'Developer' (ground truth has null)",
+      "Camille Roux interaction_count: 11 (should be 6)",
+      "Marie Leclerc interaction_count: 8 (should be 6)",
+      "Nicolas Moreau interaction_count: 7 (should be 4)",
+      "Marc Dupont (CEO) interaction_count: 6 (should be 4)",
+      "Marc Dupont title: 'CEO' (should be 'PDG' in French context)",
+      "Sarah Jones preferred_tone: 'casual' (should be 'semi-formal')",
+      "Amelie Petit preferred_tone: 'semi-formal' (should be 'formal')"
+    ],
+    "details": "The system output captures most contacts (13/13 present) and projects (5/5 present), with good coverage of terminology. However, there are notable discrepancies: interaction counts are inflated for several contacts (Pierre: 27 vs 20, Lucas: 15 vs 10, Camille: 11 vs 6, Marie: 8 vs 6, Nicolas: 7 vs 4, CEO: 6 vs 4), suggesting over-counting. Titles differ in some cases (Pierre: 'Tech Lead' vs 'Lead Developer', Lucas: 'Developer' vs null, CEO: 'CEO' vs 'PDG'). Tone assessments differ for Sarah Jones (casual vs semi-formal) and Amelie Petit (semi-formal vs formal). Topics are generally accurate but show some variation. The system added extra fields (frequent_topics) not in ground truth, and expanded terminology definitions which adds value. Project descriptions are more detailed but accurate. Missing some specific topic keywords from ground truth (e.g., 'conges', 'demo', 'pentest', 'webhooks')."
+  },
+  "rules": {
+    "completeness": 85,
+    "precision": 82,
+    "usefulness": 88,
+    "overall": 85,
+    "missing": [
+      "Pierre Durand: alternative greeting 'Salut Pierre,'",
+      "Pierre Durand: closing note '(name only or none)'",
+      "Amelie Petit: alternative greeting 'Bonjour Amelie,'",
+      "Lucas Bernard: alternative greeting 'Lucas,'",
+      "Nicolas Moreau: alternative greeting/closing 'Nicolas,' / 'Sophie Martin'",
+      "Sarah Jones: alternative closing 'Best,'",
+      "David Kim: alternative closing 'Best,'",
+      "Claire Fontaine: alternative greeting 'Parfait Claire,'",
+      "Auto-reply: 'JIRA notification: forward to relevant team member with action item'"
+    ],
+    "incorrect": [
+      "Pierre Durand: tone should be 'casual' not 'semi-formal' (critical error - affects email generation)",
+      "Pierre Durand: greeting should include 'Salut Pierre,' option for casual tone",
+      "Amelie Petit: greeting missing 'Bonjour Amelie,' variation",
+      "Auto-reply patterns: less specific than ground truth, missing JIRA forwarding pattern"
+    ],
+    "details": "The system captured 13/13 contact rules (100%) but with some tone misclassifications. For general rules, it found 12/8 items (150%) - it correctly identified all 8 ground truth rules and added 4 reasonable extensions. Contact rules show good coverage but Pierre's tone is incorrect (semi-formal vs casual ground truth), and some greeting/closing variations are missing. General rules are well-explained and actionable, with good French descriptions. Auto-reply patterns are present but less specific than ground truth."
+  },
+  "overall": 84
+}

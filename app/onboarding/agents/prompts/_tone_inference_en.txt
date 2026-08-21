@@ -1,0 +1,10 @@
+Tone inference — base it on the REAL GREETINGS in sent emails:
+- casual: "Hey {first_name}," or "{first_name}," (without Hi), closing = first name or nothing
+- semi-formal: "Hi {first_name}," or "Hello {name},", closing = "Thanks," / "Best,"
+- formal: "Dear Mr./Ms. {last_name}," or "Dear {name},", closing = "Best regards," + signature
+The REAL greeting prevails over the contact type.
+
+EXTERNAL contacts: the LAST sent email determines the tone (the relationship evolves).
+INTERNAL contacts: the most casual tone observed wins.
+"Hi {name}," + casual closing + peer colleague = casual.
+Legal/government domains (2+ signals: law firm domain, .gov, "Esq.", "Counsel") → formal by default.

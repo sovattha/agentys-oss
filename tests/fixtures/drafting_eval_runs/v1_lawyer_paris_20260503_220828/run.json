@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-05-03T22:08:28Z",
+  "config": {
+    "persona": "lawyer_paris",
+    "drafter_model": "claude-haiku-4-5",
+    "judge_model": "sonnet",
+    "use_claude_cli": true,
+    "with_gold": false,
+    "gold_dir": "/Users/you/dev/agentys/tests/fixtures/drafting_eval",
+    "repeat": 3,
+    "warmup": true,
+    "no_llm_judge": false
+  },
+  "cases": [
+    {
+      "case_id": "msg-001",
+      "subject": "Restructuration des pôles d'activité",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 2498,
+          "judge_overall": 85
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 2481,
+          "judge_overall": 80
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 2496,
+          "judge_overall": 84
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 2496.0,
+        "p95_ms": 2498.0,
+        "mean_ms": 2491.6666666666665,
+        "std_ms": 7.586537784494028
+      },
+      "critic_overall": 81,
+      "judge_overall_mean": 83,
+      "last_draft": "Je vais préparer cette note d'ici fin de mois. Pour affiner mon diagnostic, j'aurais besoin de précisions sur deux points :\n\n1. Souhaitez-vous que j'analyse aussi les flux de facturation par pôle, ou seulement la répartition des dossiers ?\n2. Y a-t-il des contraintes de délai ou des jalons spécifiques à respecter lors de la mise en œuvre ?\n\nJe vous proposerai également une première ébauche de la nouvelle structure dès que j'aurai ces éléments, afin qu'on puisse l'affiner ensemble avant la version finale."
+    },
+    {
+      "case_id": "msg-002",
+      "subject": "Opération d'acquisition — engagement du cabinet",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 2211,
+          "judge_overall": 63
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 2719,
+          "judge_overall": 56
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 2943,
+          "judge_overall": 66
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 2719.0,
+        "p95_ms": 2943.0,
+        "mean_ms": 2624.3333333333335,
+        "std_ms": 306.24318586523503
+      },
+      "critic_overall": 81,
+      "judge_overall_mean": 62,
+      "last_draft": "Merci pour votre email du 3 janvier et pour la confiance accordée à notre cabinet.\n\nNous confirmons notre engagement pour accompagner Nexus Group dans l'acquisition de DataFlow SAS. Nous avons bien noté le montant de 12 millions d'euros et la cible de closing avant fin mars 2026.\n\nNotre lettre de mission et le calendrier prévisionnel de due diligence vous seront transmis dans les deux jours ouvrables. Ce calendrier intégrera les étapes clés : audit juridique, financier, fiscal et social, ainsi que les vérifications contractuelles et réglementaires.\n\nNous vous proposerons également un premier rendez-vous de coordination avec votre équipe pour affiner le planning et identifier les points critiques de l'opération."
+    },
+    {
+      "case_id": "msg-012",
+      "subject": "Re: Re: Opération d'acquisition — accord",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 2720,
+          "judge_overall": 84
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 2756,
+          "judge_overall": 88
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 2706,
+          "judge_overall": 80
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 2720.0,
+        "p95_ms": 2756.0,
+        "mean_ms": 2727.3333333333335,
+        "std_ms": 21.060758665241753
+      },
+      "critic_overall": 89,
+      "judge_overall_mean": 84,
+      "last_draft": "Monsieur le Directeur Général,\n\nJe vous remercie de la signature rapide de la lettre de mission. Nous avons bien reçu le document.\n\nJe confirme que Mme Élise Fontaine, qui pilote la due diligence, se mettra en relation avec Mme Vernier dès réception de la documentation. Nous respecterons strictement le calendrier convenu pour un closing avant fin mars 2026.\n\nN'hésitez pas à nous contacter si vous avez besoin de précisions sur nos modalités de travail.\n\nJe vous prie d'agréer, Monsieur le Directeur Général, l'expression de mes salutations distinguées.\n\nMarc-Antoine Barreau\nAvocat au Barreau de Paris\nDumont & Associés\n24 rue du Faubourg Saint-Honoré, 75008 Paris\nTél. +33 1 42 65 78 90\n\nCe message et ses pièces jointes sont confidentiels et destinés exclusivement à leur destinataire. Si vous n'êtes pas le destinataire de ce message, merci de le supprimer et d'en informer l'expéditeur."
+    },
+    {
+      "case_id": "msg-007",
+      "subject": "Re: Recherches préalables — dossier Nexus Group",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 2023,
+          "judge_overall": 78
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 1538,
+          "judge_overall": 68
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 2255,
+          "judge_overall": 68
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 2023.0,
+        "p95_ms": 2255.0,
+        "mean_ms": 1938.6666666666667,
+        "std_ms": 298.7265564953266
+      },
+      "critic_overall": 84,
+      "judge_overall_mean": 71,
+      "last_draft": "Chère Madame Fontaine,\n\nMerci de votre réactivité. L'inclusion des contrats de travail des dirigeants dans l'analyse des contrats commerciaux est effectivement pertinente. Veuillez les intégrer au-delà du seuil de 100 000 euros mentionné initialement.\n\nN'hésitez pas à me contacter si d'autres points requièrent une clarification avant le 17 janvier.\n\nBien cordialement,\n\nMarc-Antoine Barreau\nAvocat au Barreau de Paris\nDumont & Associés\n24 rue du Faubourg Saint-Honoré, 75008 Paris\nTél. +33 1 42 65 78 90"
+    },
+    {
+      "case_id": "msg-006",
+      "subject": "Demande de consultation — litige commercial",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 3409,
+          "judge_overall": 29
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 3096,
+          "judge_overall": 11
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 3291,
+          "judge_overall": 56
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 3291.0,
+        "p95_ms": 3409.0,
+        "mean_ms": 3265.3333333333335,
+        "std_ms": 129.06415286808166
+      },
+      "critic_overall": 22,
+      "judge_overall_mean": 32,
+      "last_draft": "Je dois clarifier une situation : l'email est adressé à \"Maître Barreau\" (un avocat), mais je suis Nathan Roy, consultant chez Sonrysa SA — pas avocat.\n\nJe ne peux donc pas rédiger une réponse authentique à cette demande de consultation juridique, car cela constituerait une usurpation de profession réglementée et serait contraire à l'éthique professionnelle.\n\nDeux options :\n\n1. **Redirection appropriée** : rédiger un email court expliquant que le contact s'est trompé de destinataire et le diriger vers un cabinet d'avocats compétent.\n\n2. **Clarification** : confirmer que vous souhaitez vraiment que je réponde en tant que consultant (non-juriste) à une demande de conseil juridique formel.\n\nQuelle approche préférez-vous ?"
+    }
+  ],
+  "aggregate": {
+    "p50_ms": 2706.0,
+    "p95_ms": 3409.0,
+    "mean_ms": 2609.4666666666667,
+    "n_total_runs": 15,
+    "judge_overall_mean": 66.4,
+    "judge_overall_p25": 32.0,
+    "instructions_coverage_pct": 0.0
+  }
+}

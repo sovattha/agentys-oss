@@ -1,0 +1,327 @@
+/* ============================================================================
+   LOGIN PAGE — Agentys Clarity
+   Premium branded entry point with theme support
+   ============================================================================ */
+
+/* LOGIN PAGE — locked to the viewport regardless of any App-level layout.
+   Uses flex centering so the card stays centered even when a sidebar or
+   other transformed ancestor is present in the DOM. */
+.login-page {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box;
+  padding: var(--space-4);
+  /* Full-bleed jungle photo + dark-green scrim. The scrim deepens the greens,
+     tames the bright central sunbeam (which sits behind the card) and lets the
+     card read as floating. Fallback colour shows if the image fails to load. */
+  background-color: #0c1a10;
+  background-image:
+    linear-gradient(180deg,
+      rgba(8, 20, 12, 0.42) 0%,
+      rgba(8, 20, 12, 0.30) 50%,
+      rgba(8, 20, 12, 0.48) 100%),
+    url('/login-bg.jpg');
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat;
+  z-index: 100;
+}
+
+.login-card {
+  margin: auto;
+  width: min(100% - 32px, 500px);
+  background: var(--surface-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-12) var(--space-10);
+  text-align: center;
+  /* Lifted off the photo: crisp inset top edge + deep soft drop shadow so the
+     card floats on the jungle scene rather than sitting flat on it. */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 24px 70px -20px rgba(0, 0, 0, 0.55),
+    0 8px 24px rgba(0, 0, 0, 0.22);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Luminous top edge — brand signal */
+.login-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent-primary) 40%, transparent) 20%,
+    var(--accent-primary) 50%,
+    color-mix(in srgb, var(--accent-primary) 40%, transparent) 80%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Logo animation */
+.login-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-2);
+  animation: login-logo-float 3s var(--ease-settle) infinite;
+}
+
+@keyframes login-logo-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.login-title {
+  font-size: var(--font-size-4xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+  line-height: var(--leading-relaxed);
+}
+
+.login-subtitle {
+  font-size: var(--font-size-base, 1rem);
+  color: var(--text-secondary, color-mix(in srgb, var(--text-primary) 65%, transparent));
+  margin: 0 0 36px 0;
+  line-height: 1.4;
+}
+
+/* Legal consent — explicit gate before OAuth (RGPD compliance). */
+.login-consent {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 10px;
+  align-items: start;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-tertiary, color-mix(in srgb, var(--text-primary) 50%, transparent));
+  margin: 0 0 20px 0;
+  padding: 12px;
+  text-align: left;
+  background: color-mix(in srgb, var(--surface-secondary, var(--surface-base)) 72%, transparent);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.login-consent input {
+  width: 16px;
+  height: 16px;
+  margin: 1px 0 0 0;
+  accent-color: var(--accent-primary);
+}
+
+.login-consent a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent-primary) 30%, transparent);
+  transition: border-color 0.15s ease;
+}
+
+.login-consent a:focus-visible,
+.login-consent input:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Spinner (used in OAuth cards) */
+.login-btn-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: var(--text-inverse);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  vertical-align: middle;
+}
+
+/* Error — shown below the cards */
+.login-error {
+  font-size: var(--font-size-sm);
+  color: var(--error);
+  padding: var(--space-2) var(--space-3);
+  background: var(--error-bg);
+  border-radius: var(--radius-sm);
+  margin-top: 16px;
+}
+
+/* ── OAuth Square Cards Grid ── */
+.login-oauth-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+.login-oauth-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  min-height: 180px;
+  padding: 36px 20px 30px;
+  border-radius: 18px;
+  overflow: hidden;
+
+  /* Glass surface */
+  background: rgba(255,255,255,.03);
+  border: 1px solid color-mix(in srgb, var(--text-primary) 10%, transparent);
+  box-shadow:
+    0 2px 8px rgba(0,0,0,.06),
+    0 8px 24px rgba(0,0,0,.08);
+
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  cursor: pointer;
+
+  transition:
+    background .25s ease,
+    border-color .25s ease,
+    box-shadow .35s ease,
+    transform .2s cubic-bezier(.34,1.56,.64,1);
+}
+
+/* Top glow line */
+.login-oauth-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    color-mix(in srgb, var(--accent-primary) 20%, transparent),
+    transparent);
+  opacity: .4;
+  transition: opacity .35s ease;
+}
+
+/* Hover — login entry CTA, a deliberate exception to the no-cosmetic-hover
+   convention (user request 2026-05-26). On-brand teal: the card lifts, its
+   border tints toward the accent, the shadow deepens with a faint teal ring,
+   and the top glow line + icon come alive. */
+.login-oauth-card:hover:not(:disabled) {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, .06);
+  border-color: color-mix(in srgb, var(--accent-primary) 45%, transparent);
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, .08),
+    0 18px 40px rgba(0, 0, 0, .14),
+    0 0 0 1px color-mix(in srgb, var(--accent-primary) 16%, transparent);
+}
+
+.login-oauth-card:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+.login-oauth-card:hover:not(:disabled) .login-oauth-icon {
+  transform: scale(1.08);
+}
+
+.login-oauth-card:active:not(:disabled) {
+  transform: translateY(0) scale(.98);
+  transition-duration: .08s;
+}
+
+.login-oauth-card:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+/* Icon — large centered */
+.login-oauth-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform .25s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.login-oauth-icon svg {
+  width: 44px;
+  height: 44px;
+}
+
+/* Label — provider name */
+.login-oauth-label {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: -.005em;
+  white-space: nowrap;
+}
+
+/* OAuth spinner — dark variant */
+.login-oauth-spinner {
+  width: 24px;
+  height: 24px;
+  border-color: color-mix(in srgb, var(--text-primary) 20%, transparent);
+  border-top-color: var(--text-primary);
+}
+
+/* Staggered entrance */
+.login-oauth-card {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: loginCardIn .5s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.login-oauth-card:nth-child(2) {
+  animation-delay: .1s;
+}
+
+@keyframes loginCardIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 420px) {
+  .login-oauth-grid {
+    grid-template-columns: 1fr;
+    max-width: 220px;
+    margin: 0 auto;
+  }
+  .login-oauth-card {
+    min-height: 100px;
+    padding: 18px 16px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-oauth-card,
+  .login-oauth-icon {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── Forced Colors ── */
+@media (forced-colors: active) {
+  .login-card {
+    border: 2px solid ButtonText;
+  }
+  .login-card::before {
+    display: none;
+  }
+  .login-oauth-card {
+    border: 1px solid ButtonText;
+  }
+}

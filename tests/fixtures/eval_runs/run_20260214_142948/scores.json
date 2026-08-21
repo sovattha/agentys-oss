@@ -1,0 +1,53 @@
+{
+  "profile": {
+    "completeness": 95,
+    "precision": 90,
+    "usefulness": 92,
+    "overall": 92,
+    "missing": [],
+    "incorrect": [
+      "active_hours: '08:00-17:00' (should be '08:00-18:00' - missing the last hour of work)",
+      "response_time_avg: '< 2h' (should be '< 1h' - double the expected response time)"
+    ],
+    "details": "The system output is highly accurate and nearly complete. All major fields are present and correct, including user identification, signature details (both French and English), tone preferences with greeting/closing styles, language support, and temporal patterns. The structure matches perfectly. However, there are two minor discrepancies in the temporal fields: active_hours shows '08:00-17:00' instead of '08:00-18:00' (off by 1 hour), and response_time_avg shows '< 2h' instead of '< 1h' (2x slower). These are relatively small deviations that would still produce usable email drafts, but they could affect scheduling recommendations and urgency handling."
+  },
+  "knowledge": {
+    "completeness": 85,
+    "precision": 92,
+    "usefulness": 88,
+    "overall": 88,
+    "missing": [
+      "Project 'Migration Cloud' from ground truth is missing as a standalone project (content appears merged into other contexts)",
+      "Terminology entries for: Sprint, Daily, Retro, PR (although these are less critical terms)",
+      "Some granular topic keywords: 'demo' (vs 'demo projet Alpha'), 'recrutement' and 'PartnerTech' not explicitly in Pierre's topics",
+      "Minor title variations: Pierre's 'Lead Developer' shown as 'Tech Lead', CEO title 'PDG' shown as 'CEO'"
+    ],
+    "incorrect": [
+      "No significant hallucinations detected - all contact emails, names, and relationships are accurate",
+      "Lucas's title inferred as 'Développeur' (ground truth has null) - this is reasonable inference rather than error",
+      "Added project 'Recrutement Dev Senior Full-Stack' not in ground truth - appears to be legitimate extraction from email content rather than fabrication",
+      "Added terminology entries (GDPR, REST, CI/CD, POC, GraphQL, OAuth2 expanded) not in ground truth - these are value-adds rather than errors",
+      "Added 'frequent_topics' section not in ground truth schema - enhancement rather than error"
+    ],
+    "details": "The system output is quite comprehensive and accurate. It correctly identified all 13 contacts with accurate email addresses, names, types, companies, and preferred communication styles. Contact details show minor differences in titles (e.g., 'Tech Lead' vs 'Lead Developer', 'Développeur' vs null, 'CEO' vs 'PDG') but these are semantically equivalent or reasonable inferences. Topics are enriched with more specific technical details which adds value. The system identified 6 projects vs 5 in ground truth, adding 'Recrutement Dev Senior Full-Stack' which appears legitimately extracted from emails. Project descriptions are more detailed and accurate. Terminology section is significantly expanded (15 terms vs 10) with additional relevant technical terms. The system added a 'frequent_topics' section not in ground truth, which enhances usefulness. Overall, the output demonstrates strong comprehension with good precision and useful enhancements."
+  },
+  "rules": {
+    "completeness": 85,
+    "precision": 92,
+    "usefulness": 88,
+    "overall": 88,
+    "missing": [
+      "support@cloudprovider.com contact rule (tone: semi-formal, language: en, greeting: 'Hi,', closing: 'Regards,')"
+    ],
+    "incorrect": [
+      "pierre.durand@techcorp.fr greeting includes 'Salut l'equipe,' which is not in ground truth (minor - includes valid variations)",
+      "lucas.bernard@techcorp.fr and camille.roux@techcorp.fr closing shows '(name only or none)' instead of specific 'Sophie' as in ground truth",
+      "nicolas.moreau@techcorp.fr closing shows only 'Cordialement,' missing the 'Sophie Martin' alternative from ground truth",
+      "general_rules descriptions are in French instead of English (functional equivalence but not exact match)",
+      "signature_formal action text is more detailed in system output (includes full signature) - this is actually helpful but differs from ground truth",
+      "auto_reply_patterns are less specific: ground truth mentions 'forward to relevant team member' while system says 'transfert au membre d'equipe concerne avec demande d'action' (semantically similar but slightly different emphasis)"
+    ],
+    "details": "The system output is quite strong overall. It captured 13 out of 14 contact rules (93% of contacts) with accurate tone, language, and greeting/closing patterns. One contact is missing (support@cloudprovider.com). All 8 general rules are present with semantically equivalent descriptions, though in French rather than English. The auto_reply_patterns are present but slightly less specific than ground truth. No hallucinated contacts or rules were found, resulting in high precision."
+  },
+  "overall": 89
+}

@@ -1,0 +1,74 @@
+{
+  "profile": {
+    "completeness": 75,
+    "precision": 70,
+    "usefulness": 75,
+    "overall": 73,
+    "missing": [
+      "signature_en (English signature variant)",
+      "tone.greeting_styles (structured dictionary with formal_fr, semi_formal_fr, casual_fr, formal_en, semi_formal_en keys)",
+      "tone.closing_styles (structured dictionary with formal_fr, semi_formal_fr, casual_fr, formal_en, semi_formal_en keys)"
+    ],
+    "incorrect": [
+      "active_hours: '08:00-17:00' should be '08:00-18:00'",
+      "response_time_avg: 'Same-day or within 1-2 business days' is less precise than '< 1h'",
+      "tone.greeting_style and tone.closing_style are freeform text instead of structured dictionaries, making them harder to use programmatically"
+    ],
+    "details": "The system captured most core profile elements correctly (user email, name, primary signature, languages, default tone). However, it's missing the English signature variant (signature_en) entirely, which is critical for bilingual communication. The tone section lacks the structured greeting_styles and closing_styles dictionaries that provide specific templates by formality level and language - instead using freeform text descriptions. Active hours are slightly wrong (17:00 vs 18:00), and response time is less precise ('1-2 business days' vs '< 1h'). The signature structure is accurate and complete."
+  },
+  "knowledge": {
+    "completeness": 75,
+    "precision": 65,
+    "usefulness": 70,
+    "overall": 70,
+    "missing": [
+      "Ground truth shows Pierre Durand as 'colleague' but system shows 'direct_report' - relationship type error",
+      "Ground truth shows Nicolas Moreau as 'manager' but system shows 'colleague' - relationship type error",
+      "Ground truth shows several 'semi-formal' tone preferences but system uses 'formal' or 'professional' instead",
+      "Ground truth terminology includes 'Sprint', 'Daily', 'Retro' - common team terms missing from system output",
+      "Ground truth shows lower interaction counts across all contacts - system consistently inflates these numbers"
+    ],
+    "incorrect": [
+      "Pierre Durand: type should be 'colleague' not 'direct_report', interaction_count 20 not 27, title 'Lead Developer' not 'Tech Lead'",
+      "Lucas Bernard: interaction_count should be 10 not 15",
+      "Camille Roux: interaction_count should be 6 not 11, preferred_tone should be 'casual' not 'formal'",
+      "Marie Leclerc: interaction_count should be 6 not 8",
+      "Nicolas Moreau: type should be 'manager' not 'colleague', interaction_count should be 4 not 7, preferred_tone should be 'semi-formal' not 'formal'",
+      "Marc Dupont (ceo@techcorp.fr): interaction_count should be 4 not 6, preferred_tone should be 'semi-formal' not 'formal', title should be 'PDG' not 'CEO'",
+      "John Smith: preferred_tone should be 'semi-formal' not 'professional'",
+      "Sarah Jones: preferred_tone should be 'semi-formal' not 'professional', interaction_count should be 4 not 5",
+      "David Kim: preferred_tone should be 'semi-formal' not 'professional'",
+      "Claire Fontaine: preferred_tone should be 'semi-formal' not 'professional', interaction_count should be 3 not 4",
+      "Thomas Renard: preferred_tone should be 'semi-formal' not 'formal'",
+      "Added 12 contacts not in ground truth: equipe-digitale@techcorp.fr, recrutement@techcorp.fr, it-support@techcorp.fr, support@cloudprovider.com, hr@techcorp.fr, all-managers@techcorp.fr, noreply@jira.techcorp.fr, rh.formation@techcorp.fr, juridique@techcorp.fr, newsletter@techwatch.io, noreply@github.com, compta@techcorp.fr"
+    ],
+    "details": "The system captured most key contacts (13/13 ground truth contacts present) but added 12 extra contacts (automated systems, team aliases, newsletters) that weren't in ground truth. Contact metadata has mixed accuracy: interaction counts are consistently inflated (e.g., Pierre: 27 vs 20, Lucas: 15 vs 10, Camille: 11 vs 6), several relationship types are wrong (Pierre marked as direct_report instead of colleague, Nicolas and Marc marked with wrong types), and preferred_tone has systematic errors (semi-formal contacts marked as formal/professional). Projects section is strong with all 5 ground truth projects captured plus 1 reasonable addition. Terminology is comprehensive (11 ground truth terms + 13 additional relevant terms). The output would be usable for email generation but would need correction for relationship dynamics and formality levels."
+  },
+  "rules": {
+    "completeness": 72,
+    "precision": 65,
+    "usefulness": 70,
+    "overall": 69,
+    "missing": [
+      "Contact: john.smith@globaltech.com (completely missing)",
+      "General rule: cc_relevant_people (CC relevant stakeholders on cross-functional topics)",
+      "General rule: action_items (End client emails with 'Actions a suivre' section)",
+      "General rule: structured_updates (numbered lists for status reports/meeting recaps)",
+      "Auto_reply_patterns: All patterns missing (Conge/absence acknowledgment, JIRA forwarding)",
+      "Forbidden_phrases section (empty but should be present)"
+    ],
+    "incorrect": [
+      "pierre.durand@techcorp.fr: tone should be 'casual' not 'semi-formal', closing should be '(name only or none)' not always 'Sophie'",
+      "nicolas.moreau@techcorp.fr: tone should be 'semi-formal' not 'formal', closing options missing flexibility ('Cordialement, / Sophie Martin')",
+      "ceo@techcorp.fr: tone should be 'semi-formal' not 'formal'",
+      "contact@prospect-startup.io: tone should be 'semi-formal' not 'formal'",
+      "claire.fontaine@clientcorp.com: tone should be 'semi-formal' not 'formal'",
+      "camille.roux@techcorp.fr: tone marked 'semi-formal' but ground truth shows 'casual'",
+      "Added contacts not in ground truth: equipe-digitale@techcorp.fr, recrutement@techcorp.fr, it-support@techcorp.fr (possible hallucinations)",
+      "Closing signatures: System adds full signature blocks where ground truth specifies simpler closings (e.g., 'Cordialement,' vs full signature)",
+      "Missing greeting variations: Ground truth shows alternatives like 'Bonjour Madame Petit, / Bonjour Amelie,' and 'Bonjour Nicolas, / Nicolas,' - system only shows one option"
+    ],
+    "details": "The system captured most major contacts (13/13 present, but some with wrong attributes) and identified many core communication patterns. However, it missed several key nuances: (1) Contact tone mismatches - Pierre marked as semi-formal instead of casual, Nicolas as formal instead of semi-formal, contact@prospect-startup.io as formal instead of semi-formal, and Claire as formal instead of semi-formal. (2) Missing contacts: john.smith@globaltech.com completely absent. (3) Added 3 contacts not in ground truth (equipe-digitale@, recrutement@, it-support@) - unclear if hallucinated or from additional data. (4) Closing signatures too verbose - ground truth shows simple closings like 'Cordialement,' but system adds full signature blocks where not specified. (5) Missing 2 important general rules: 'cc_relevant_people' and 'action_items' for client communications. (6) Missing auto_reply_patterns entirely. (7) General rules are more granular but capture the essence - good tutoiement/vouvoiement distinction, proper English language switching, and signature variations. The output would work reasonably well for drafting but needs refinement for accuracy."
+  },
+  "overall": 71
+}

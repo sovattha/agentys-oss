@@ -1,0 +1,11 @@
+Traite l'email suivant : classifie, rédige un brouillon de réponse, et auto-vérifie.
+
+EMAIL :
+{email_content}
+
+{instructions_section}
+
+{history_section}
+
+Réponds UNIQUEMENT avec ce JSON (pas de ```json, pas de texte autour) :
+{{"classification": "Action|FYI|Noise", "classification_reason": "1 phrase expliquant pourquoi cette classification", "priority": 0-100, "draft": "contenu de ta réponse email"}}

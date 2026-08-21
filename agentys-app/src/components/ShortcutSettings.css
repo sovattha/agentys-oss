@@ -1,0 +1,234 @@
+.shortcut-settings {
+  margin-bottom: 1.5rem;
+}
+
+.shortcut-settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.shortcut-settings-header h3 {
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+}
+
+.shortcut-reset-footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.shortcuts-help-footer {
+  padding: 12px 20px;
+  border-top: 1px solid var(--border-default);
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.shortcut-reset-btn {
+  padding: 0.5rem 1.25rem;
+  font-size: var(--font-size-sm);
+  background: transparent;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.shortcut-reset-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.shortcut-reset-btn--success {
+  border-color: var(--success-border, #22c55e);
+  color: #22c55e;
+}
+
+.shortcut-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.shortcut-settings .shortcut-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+}
+
+.shortcut-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.shortcut-label {
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+}
+
+.shortcut-badge {
+  padding: 0.125rem 0.5rem;
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  border-radius: 4px;
+}
+
+.shortcut-badge-global {
+  background: var(--info-bg);
+  color: var(--info);
+}
+
+.shortcut-binding-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.5rem;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.shortcut-edit-icon {
+  opacity: 0;
+  font-size: var(--font-size-xs);
+  transition: opacity var(--transition-base);
+}
+
+.shortcut-kbd {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  /* Same font family as the rest of the panel — keycaps stay distinct via
+     size + color, not a mismatched monospace family. */
+  font-size: var(--font-size-xs);
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--text-secondary);
+}
+
+/* Modal Styles */
+.shortcut-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--overlay-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+  animation: fadeIn 0.2s ease;
+}
+
+.shortcut-modal {
+  background: var(--surface-primary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.shortcut-modal h4 {
+  margin: 0 0 1rem;
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.shortcut-modal h4 strong {
+  color: var(--accent-primary);
+}
+
+.shortcut-modal-instruction {
+  margin: 0 0 1.5rem;
+  font-size: var(--font-size-base);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.shortcut-capture-display {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--surface-secondary);
+  border: 2px dashed var(--border-default);
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+  transition: all var(--transition-fast);
+}
+
+.shortcut-capture-display.has-conflict {
+  background: var(--error-bg);
+  border-color: var(--error);
+}
+
+.shortcut-kbd-large {
+  padding: 0.5rem 1rem;
+  font-size: var(--font-size-2xl);
+  min-height: 2.5rem;
+  min-width: 100px;
+  justify-content: center;
+}
+
+.shortcut-conflict-warning {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--error-bg);
+  border: 1px solid var(--error-border, var(--error));
+  border-radius: var(--radius-sm);
+  margin-bottom: 1rem;
+  font-size: var(--font-size-base);
+  color: var(--error);
+}
+
+.shortcut-conflict-icon {
+  font-size: var(--font-size-lg);
+}
+
+.shortcut-modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+/* Modal cancel/save buttons migrated to the shared <Button> component
+   (ui/button.tsx): variant="outline" for cancel, variant="default" for save. */

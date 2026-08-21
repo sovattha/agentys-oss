@@ -1,0 +1,220 @@
+{
+  "aggregate": {
+    "critic": {
+      "coherence": 90,
+      "tone": 85,
+      "completeness": 77,
+      "errors": 94,
+      "conciseness": 93,
+      "emotional_intelligence": 70,
+      "overall": 85
+    },
+    "judge": {
+      "faithfulness": 86,
+      "completeness": 76,
+      "tone_match": 81,
+      "conciseness": 88,
+      "overall": 83
+    }
+  },
+  "cases": [
+    {
+      "case_id": "msg-002",
+      "subject": "Re: Planning visites semaine 2",
+      "draft": "15h30 nickel pour Mme Moreau, go.\n\nMerci pour les Laurent 👍\n",
+      "elapsed_draft_s": 9.64,
+      "critic": {
+        "coherence": 95,
+        "tone": 92,
+        "completeness": 90,
+        "errors": 95,
+        "conciseness": 97,
+        "over_commitment": 95,
+        "emotional_intelligence": 80,
+        "overall": 92,
+        "decision": "valid",
+        "suggestions": [
+          "Rien à corriger"
+        ]
+      },
+      "judge": {
+        "faithfulness": 95,
+        "completeness": 90,
+        "tone_match": 97,
+        "conciseness": 98,
+        "overall": 95,
+        "strengths": [
+          "Ton ultra-concis et informel parfaitement aligné avec le registre de l'échange (tutoiement, emoji, langage direct)",
+          "Valide explicitement la proposition de 15h30 pour Mme Moreau sans ambiguïté",
+          "Accuse réception de la confirmation des Laurent de façon naturelle",
+          "Aucun remplissage ni placeholder"
+        ],
+        "weaknesses": [
+          "L'appart Confluence (jeudi 16h) demandé initialement n'a pas été mentionné par Samira et n'est pas relancé — acceptable si Karim considère la relance hors scope de cette réponse, mais légère omission possible"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-005",
+      "subject": "Re: Villa Caluire - Confirmation visite mardi",
+      "draft": "Sur ces deux points, je reviens vers vous avant mardi :\n\n• Garage double : je vérifie la configuration exacte auprès du vendeur.\n• Transports en commun : je me renseigne sur les lignes desservant le secteur et vous transmets l'information.\n",
+      "elapsed_draft_s": 34.42,
+      "critic": {
+        "coherence": 88,
+        "tone": 82,
+        "completeness": 85,
+        "errors": 90,
+        "conciseness": 92,
+        "over_commitment": 55,
+        "emotional_intelligence": 70,
+        "overall": 80,
+        "decision": "valid",
+        "suggestions": [
+          "Confirmer délai précis",
+          "Accuser réception mari"
+        ]
+      },
+      "judge": {
+        "faithfulness": 95,
+        "completeness": 45,
+        "tone_match": 80,
+        "conciseness": 88,
+        "overall": 77,
+        "strengths": [
+          "Aucune information inventée : le brouillon ne fabrique ni configuration de garage ni lignes de transport non connues — prudence justifiée face à l'absence de données dans l'historique",
+          "Les deux questions sont explicitement identifiées et listées, montrant que rien n'est ignoré",
+          "Structure en bullet points claire et proportionnée à la demande ; aucun remplissage"
+        ],
+        "weaknesses": [
+          "Complétude insuffisante : les deux questions sont renvoyées à plus tard ('je vérifie', 'je me renseigne') sans réponse effective — équivalent fonctionnel de deux placeholders [À confirmer], ce qui force la cliente à attendre un second email",
+          "Le brouillon annonce de revenir 'avant mardi' sans préciser par quel canal ni dans quel délai — engagement vague qui peut générer une relance inutile",
+          "Ton légèrement froid et bureaucratique (liste sèche) par rapport à l'échange plutôt cordial ; un mot de bienvenue pour l'accompagnement du mari aurait miroir le chaleureux 'N'hésitez pas à venir accompagnée' de l'email précédent"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-008",
+      "subject": "Re: Tes objectifs janvier",
+      "draft": "9h c'est bon pour moi.\n\nBien pour le studio, et si tu closes Villeurbanne cette semaine on sera bien partis. Il te manque encore un mandat exclu pour atteindre l'objectif — t'as des pistes ?\n",
+      "elapsed_draft_s": 12.58,
+      "critic": {
+        "coherence": 92,
+        "tone": 90,
+        "completeness": 78,
+        "errors": 95,
+        "conciseness": 95,
+        "over_commitment": 90,
+        "emotional_intelligence": 72,
+        "overall": 87,
+        "decision": "valid",
+        "suggestions": [
+          "Ajouter encouragement",
+          "Mentionner deadline objectif"
+        ]
+      },
+      "judge": {
+        "faithfulness": 55,
+        "completeness": 85,
+        "tone_match": 88,
+        "conciseness": 87,
+        "overall": 77,
+        "strengths": [
+          "Confirme le rendez-vous 9h directement et sans ambiguïté",
+          "Valorise le mandat signé et mentionne Villeurbanne de façon pertinente",
+          "Pose une question de suivi utile ('t'as des pistes ?') qui pousse l'action",
+          "Ton parfaitement calqué sur l'historique : tutoiement, registre informel professionnel, phrases courtes"
+        ],
+        "weaknesses": [
+          "Le qualificatif 'exclu' (exclusif) est appliqué aux mandats alors que Julien n'a jamais précisé que ses mandats étaient exclusifs — or c'est précisément ce que Karim exige, la distinction est critique",
+          "Le raisonnement 'il te manque encore UN mandat exclu' ignore la deuxième négo en cours (autre que Villeurbanne) : Julien mentionne '2 en cours de négo', le draft n'en retient qu'une pour le compte",
+          "La formulation 'on sera bien partis' est conditionnelle mais le décompte qui suit ('il te manque encore un') présuppose que Villeurbanne est déjà acquis, ce qui crée une légère incohérence logique"
+        ],
+        "hallucinations": [
+          "'mandat exclu' — Julien écrit 'mandat signé', jamais 'mandat exclusif' ; le qualificatif exclusif est inventé par le brouillon",
+          "'il te manque encore un mandat exclu' — implique 2 exclusifs déjà sécurisés, alors qu'il n'y en a qu'1 signé et 2 en négociation non conclue ; le compte est inexact"
+        ]
+      }
+    },
+    {
+      "case_id": "msg-010",
+      "subject": "Estimation appartement Croix-Rousse",
+      "draft": "Votre appartement présente de belles caractéristiques pour le secteur Croix-Rousse : traversant, avec ascenseur et une rénovation récente.\n\nPour convenir d'une date de visite, merci de me proposer deux ou trois créneaux qui vous conviennent — en semaine ou le week-end — et je confirme celui qui correspond à mon planning.\n",
+      "elapsed_draft_s": 10.94,
+      "critic": {
+        "coherence": 82,
+        "tone": 72,
+        "completeness": 55,
+        "errors": 95,
+        "conciseness": 88,
+        "over_commitment": 90,
+        "emotional_intelligence": 58,
+        "overall": 77,
+        "decision": "reject",
+        "suggestions": [
+          "Ajouter formule salutation",
+          "Mentionner projet Ardèche"
+        ]
+      },
+      "judge": {
+        "faithfulness": 92,
+        "completeness": 78,
+        "tone_match": 72,
+        "conciseness": 88,
+        "overall": 83,
+        "strengths": [
+          "Aucune information inventée : les caractéristiques mentionnées (traversant, ascenseur, rénovation récente) sont toutes issues de l'email entrant",
+          "La demande principale (convenir d'une date de visite) est adressée de façon claire et actionnelle",
+          "Corps concis, sans remplissage ni répétition, proportionné à la demande"
+        ],
+        "weaknesses": [
+          "La question explicite 'À quelle date pourriez-vous passer ?' est partiellement esquivée : le brouillon renvoie la balle sans proposer de créneau concret, ce qui allonge les échanges inutilement",
+          "Le ton est légèrement trop commercial/enthousiaste ('belles caractéristiques') pour une première réponse à un particulier qui écrit de façon sobre et neutre — le miroir de formalité n'est pas parfaitement respecté",
+          "La surface (95m²) et l'étage (3ème) mentionnés par les Laurent ne sont pas repris, ce qui donne une impression de réponse générique",
+          "Absence de toute mention 'estimation gratuite/sans engagement', information rassurante attendue dans ce contexte"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-018",
+      "subject": "Re: Diagnostics T4 Croix-Rousse - 34 rue Hénon",
+      "draft": "Nickel pour mardi 14 à 9h, je note.\n\nTarif OK, on reste sur le forfait habituel.\n",
+      "elapsed_draft_s": 9.45,
+      "critic": {
+        "coherence": 92,
+        "tone": 88,
+        "completeness": 78,
+        "errors": 95,
+        "conciseness": 95,
+        "over_commitment": 90,
+        "emotional_intelligence": 72,
+        "overall": 87,
+        "decision": "valid",
+        "suggestions": [
+          "Ajouter confirmation adresse",
+          "Préciser accès logement"
+        ]
+      },
+      "judge": {
+        "faithfulness": 95,
+        "completeness": 80,
+        "tone_match": 70,
+        "conciseness": 80,
+        "overall": 83,
+        "strengths": [
+          "Aucune information inventée : la date et la référence au forfait habituel sont fidèles à l'email entrant",
+          "Répond aux deux points soulevés par Éric (confirmation du créneau + accusé de réception du tarif)",
+          "Très court, pas de remplissage"
+        ],
+        "weaknesses": [
+          "\"Nickel\" est un terme argotique qui dépasse le registre de Karim dans l'historique (il écrit dans un style professionnel-détendu, pas familier/slangy) — léger décalage de formalité vers le bas",
+          "Absence de mention de la prochaine action implicite et attendue en contexte immobilier : prévenir les propriétaires de l'horaire — la réponse de référence l'inclut, et c'est un élément professionnel structurant",
+          "\"Tarif OK, on reste sur le forfait habituel\" reformule deux fois la même chose sans ajouter de valeur"
+        ],
+        "hallucinations": []
+      }
+    }
+  ]
+}

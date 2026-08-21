@@ -1,0 +1,263 @@
+{
+  "description": "Expected outputs from the onboarding KB analysis of test_emails_lawyer_paris.json",
+  "expected_profile": {
+    "user_email": "ma.barreau@dumont-associes.fr",
+    "user_name": "Marc-Antoine Barreau",
+    "signature": {
+      "name": "Marc-Antoine Barreau",
+      "title": "Avocat au Barreau de Paris",
+      "company": "Dumont & Associés"
+    },
+    "tone": {
+      "default_tone": "formal",
+      "greeting_styles": {
+        "formal_fr_client": "Monsieur le Directeur Général, / Monsieur Garnier, / Madame Vernier, / Madame, Monsieur,",
+        "formal_fr_colleague": "Monsieur Dumont, / Chère Madame Fontaine, / Monsieur Leroux,",
+        "formal_fr_lawyer": "Cher Maître, / Chère Maître,"
+      },
+      "closing_styles": {
+        "formal_fr_external": "Je vous prie d'agréer, [titre], l'expression de mes salutations distinguées.",
+        "formal_fr_lawyer": "Je vous prie d'agréer, cher Maître, l'expression de mes sentiments les plus distingués.",
+        "formal_fr_colleague": "Bien cordialement,"
+      },
+      "uses_emoji": false,
+      "average_response_length": "long"
+    },
+    "languages": [
+      "fr"
+    ],
+    "preferred_name": "Marc-Antoine",
+    "addressing": "vous",
+    "language_variant": "fr-FR"
+  },
+  "expected_contacts": [
+    {
+      "email": "d.perrin@perrin-avocats.fr",
+      "name": "Maître Dominique Perrin",
+      "company": "Perrin Avocats",
+      "title": "Avocat au Barreau de Paris",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 7
+    },
+    {
+      "email": "e.fontaine@dumont-associes.fr",
+      "name": "Élise Fontaine",
+      "company": "Dumont & Associés",
+      "title": "Collaboratrice senior",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 12
+    },
+    {
+      "email": "f.braun@braun-partner.de",
+      "name": "Friedrich Braun",
+      "company": "Braun & Partner",
+      "title": "Rechtsanwalt / Avocat",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 6
+    },
+    {
+      "email": "greffe@tc-paris.justice.fr",
+      "name": "Greffe du Tribunal de Commerce de Paris",
+      "company": "Tribunal de Commerce de Paris",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 5
+    },
+    {
+      "email": "h.castellan@nexus-group.fr",
+      "name": "Henri Castellan",
+      "company": "Nexus Group",
+      "title": "Directeur Général",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 11
+    },
+    {
+      "email": "jl.garnier@sarl-garnier.fr",
+      "name": "Jean-Louis Garnier",
+      "company": "SARL Garnier & Fils",
+      "title": "Gérant",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 8
+    },
+    {
+      "email": "m.leroux@dumont-associes.fr",
+      "name": "Maxime Leroux",
+      "company": "Dumont & Associés",
+      "title": "Stagiaire",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 6
+    },
+    {
+      "email": "n.vernier@nexus-group.fr",
+      "name": "Nathalie Vernier",
+      "company": "Nexus Group",
+      "title": "Directrice juridique",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 11
+    },
+    {
+      "email": "p.dumont@dumont-associes.fr",
+      "name": "Philippe Dumont",
+      "company": "Dumont & Associés",
+      "title": "Associé fondateur",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 13
+    },
+    {
+      "email": "s.renard@notaire-renard.fr",
+      "name": "Maître Sophie Renard",
+      "company": "Étude Renard",
+      "title": "Notaire",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 6
+    }
+  ],
+  "expected_rules": {
+    "contact_rules": [
+      {
+        "contact_email": "p.dumont@dumont-associes.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Monsieur Dumont,",
+        "closing": "Bien cordialement,"
+      },
+      {
+        "contact_email": "e.fontaine@dumont-associes.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Chère Madame Fontaine,",
+        "closing": "Bien cordialement,"
+      },
+      {
+        "contact_email": "m.leroux@dumont-associes.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Monsieur Leroux,",
+        "closing": "Bien cordialement,"
+      },
+      {
+        "contact_email": "h.castellan@nexus-group.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Monsieur le Directeur Général,",
+        "closing": "Je vous prie d'agréer, Monsieur le Directeur Général, l'expression de mes salutations distinguées."
+      },
+      {
+        "contact_email": "n.vernier@nexus-group.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Madame Vernier,",
+        "closing": "Je vous prie d'agréer, Madame, l'expression de mes salutations distinguées."
+      },
+      {
+        "contact_email": "d.perrin@perrin-avocats.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Cher Maître,",
+        "closing": "Je vous prie d'agréer, cher Maître, l'expression de mes sentiments les plus distingués."
+      },
+      {
+        "contact_email": "jl.garnier@sarl-garnier.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Monsieur Garnier,",
+        "closing": "Je vous prie d'agréer, Monsieur, l'expression de mes salutations distinguées."
+      },
+      {
+        "contact_email": "s.renard@notaire-renard.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Chère Maître,",
+        "closing": "Je vous prie d'agréer, chère Maître, l'expression de mes sentiments les plus distingués."
+      },
+      {
+        "contact_email": "greffe@tc-paris.justice.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Madame, Monsieur,",
+        "closing": "Je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées."
+      },
+      {
+        "contact_email": "f.braun@braun-partner.de",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Cher Maître Braun,",
+        "closing": "Je vous prie d'agréer, cher Maître, l'expression de mes salutations distinguées."
+      }
+    ],
+    "general_rules": [
+      {
+        "name": "vouvoiement_systematique",
+        "description": "Utilise systématiquement le vouvoiement, y compris avec les collègues du cabinet",
+        "trigger": "Tous les emails",
+        "action": "Vouvoyer tous les interlocuteurs sans exception"
+      },
+      {
+        "name": "signature_avec_disclaimer",
+        "description": "Signature complète avec mention de confidentialité sur tous les emails envoyés",
+        "trigger": "Tous les emails envoyés",
+        "action": "Ajouter signature complète avec disclaimer de confidentialité"
+      },
+      {
+        "name": "maitre_entre_avocats",
+        "description": "Utilisation du titre 'Maître' entre avocats et avec les notaires",
+        "trigger": "Correspondance avec un avocat ou notaire",
+        "action": "Adresser comme 'Cher Maître' / 'Chère Maître'"
+      },
+      {
+        "name": "formules_politesse_externes",
+        "description": "Formules de politesse complètes pour les contacts externes",
+        "trigger": "Email à un client, partenaire ou institution",
+        "action": "Utiliser 'Je vous prie d'agréer... l'expression de mes salutations/sentiments distingué(e)s'"
+      },
+      {
+        "name": "formules_politesse_internes",
+        "description": "Formules de politesse plus simples pour les collègues",
+        "trigger": "Email interne au cabinet",
+        "action": "Utiliser 'Bien cordialement,'"
+      },
+      {
+        "name": "emails_structures",
+        "description": "Emails longs et structurés avec listes numérotées",
+        "trigger": "Communications détaillées",
+        "action": "Structurer avec des points numérotés et des références juridiques"
+      },
+      {
+        "name": "references_juridiques",
+        "description": "Citations de textes de loi et de jurisprudence",
+        "trigger": "Analyse juridique ou argumentation",
+        "action": "Citer articles du Code civil, Code de commerce, RGPD, jurisprudence"
+      },
+      {
+        "name": "zero_emoji_zero_abreviation",
+        "description": "Aucun emoji, aucune abréviation familière",
+        "trigger": "Tous les emails",
+        "action": "Rédiger dans un français soutenu sans emoji ni abréviation"
+      }
+    ],
+    "forbidden_phrases": []
+  },
+  "expected_statistics": {
+    "total_emails": 75,
+    "sent_emails": 43,
+    "received_emails": 32,
+    "threads": 33,
+    "french_emails": 75,
+    "english_emails": 0,
+    "emails_with_signature": 73,
+    "emails_with_attachments": 23,
+    "unique_contacts": 10,
+    "internal_contacts": 3,
+    "external_contacts": 7
+  }
+}

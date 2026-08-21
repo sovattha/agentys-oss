@@ -1,0 +1,136 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "p.dumont@dumont-associes.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Monsieur Dumont,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "e.fontaine@dumont-associes.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Chère Madame Fontaine,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "h.castellan@nexus-group.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Monsieur le Directeur Général,",
+      "closing": "Je vous prie d'agréer, Monsieur le Directeur Général, l'expression de mes salutations les plus distinguées."
+    },
+    {
+      "contact_email": "jl.garnier@sarl-garnier.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Monsieur Garnier,",
+      "closing": "Veuillez agréer, Monsieur Garnier, l'expression de mes salutations distinguées."
+    },
+    {
+      "contact_email": "n.vernier@nexus-group.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Madame Vernier,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "m.leroux@dumont-associes.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Monsieur Leroux,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "greffe@tc-paris.justice.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Madame, Monsieur,",
+      "closing": "Je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées."
+    },
+    {
+      "contact_email": "f.braun@braun-partner.de",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Cher Maître Braun,",
+      "closing": "Je vous prie d'agréer, cher Maître, l'expression de mes sentiments les plus distingués."
+    },
+    {
+      "contact_email": "s.renard@notaire-renard.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Chère Maître,",
+      "closing": "Je vous prie d'agréer, chère Maître, l'expression de mes sentiments les plus distingués."
+    },
+    {
+      "contact_email": "d.perrin@perrin-avocats.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Cher Maître,",
+      "closing": "Cordialement,"
+    }
+  ],
+  "general_rules": [
+    {
+      "name": "signature_formal",
+      "description": "Utiliser la signature complète avec titre professionnel, adresse du cabinet et clause de confidentialité",
+      "trigger": "Tous les emails externes (clients, confrères, institutions judiciaires)",
+      "action": "Inclure : Marc-Antoine Barreau / Avocat au Barreau de Paris / Dumont & Associés / 24 rue du Faubourg Saint-Honoré / mention de confidentialité"
+    },
+    {
+      "name": "signature_casual",
+      "description": "Utiliser la signature complète professionnelle même en interne",
+      "trigger": "Emails internes au cabinet",
+      "action": "Maintenir la signature complète avec titre et coordonnées, même pour les collaborateurs"
+    },
+    {
+      "name": "language_switch",
+      "description": "Rester en français pour toutes les communications, y compris internationales",
+      "trigger": "Correspondance avec confrères allemands ou internationaux",
+      "action": "Utiliser le français comme langue de travail par défaut"
+    },
+    {
+      "name": "structured_updates",
+      "description": "Utiliser des listes numérotées pour structurer les demandes, livrables et rapports",
+      "trigger": "Emails contenant des instructions, rapports d'avancement, ou transmission de documents",
+      "action": "Structurer systématiquement avec des points numérotés (1., 2., 3.)"
+    },
+    {
+      "name": "cc_relevant_people",
+      "description": "Ne pas mettre en copie systématiquement, privilégier les échanges directs",
+      "trigger": "Correspondance avec clients ou collaborateurs",
+      "action": "Limiter les destinataires au strict nécessaire, pas de CC automatique"
+    },
+    {
+      "name": "action_items",
+      "description": "Terminer les emails aux clients avec un rappel des prochaines étapes ou actions attendues",
+      "trigger": "Emails clients après transmission de documents ou rapports",
+      "action": "Inclure une section finale récapitulant le calendrier, les actions requises ou les prochains rendez-vous"
+    },
+    {
+      "name": "vouvoiement_clients",
+      "description": "Utiliser systématiquement le vouvoiement avec tous les interlocuteurs externes",
+      "trigger": "Emails avec clients, confrères, institutions, fournisseurs",
+      "action": "Vouvoiement universel, aucune exception observée"
+    },
+    {
+      "name": "tutoiement_equipe",
+      "description": "Maintenir le vouvoiement même avec les collaborateurs internes du cabinet",
+      "trigger": "Emails internes à l'équipe",
+      "action": "Vouvoiement systématique, y compris avec les collaborateurs directs et stagiaires"
+    }
+  ],
+  "forbidden_phrases": [
+    "Cordialement vôtre",
+    "Amitiés",
+    "Bonne journée",
+    "Merci d'avance",
+    "N'hésitez pas à me contacter",
+    "Restant à votre disposition"
+  ],
+  "auto_reply_patterns": [
+    "Accusé de réception de documents : confirmer réception, préciser les prochaines étapes et délais",
+    "Demandes de documents administratifs (greffe) : formulation institutionnelle brève avec pièces jointes et formule de politesse complète"
+  ]
+}

@@ -1,0 +1,837 @@
+/* ============================================================================
+   SIGNATURE MODAL — Premium redesign
+   ============================================================================ */
+
+.sig-modal {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.14), 0 4px 16px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+/* ── Header ── */
+.sig-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 18px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-primary);
+  flex-shrink: 0;
+}
+
+.sig-header-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sig-back {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: var(--radius-md, 6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.sig-header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.sig-header-title h2 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.sig-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  padding: 0;
+  background: none;
+  color: var(--text-tertiary);
+  border-radius: var(--radius-md, 6px);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+/* ── Body ── */
+.sig-body {
+  padding: 20px 24px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sig-description {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-placeholder);
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+/* ── Loading ── */
+.sig-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 40px 0;
+}
+
+.sig-loading-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-placeholder);
+  animation: sigDotPulse 1.2s ease-in-out infinite;
+}
+
+.sig-loading-dot:nth-child(2) { animation-delay: 0.2s; }
+.sig-loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes sigDotPulse {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.85); }
+  40%           { opacity: 1;   transform: scale(1); }
+}
+
+/* ── Section ── */
+.sig-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sig-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sig-section-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* ── Import button ── */
+.sig-import-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-default) !important;
+  border-radius: var(--radius-md, 6px);
+  padding: 7px 13px;
+  font-size: 12.5px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  line-height: 1.4;
+}
+
+.sig-import-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ── Aperçu HTML ── */
+.sig-preview {
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  padding: 14px 16px;
+  background: var(--surface-secondary);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.sig-preview img {
+  max-width: 100%;
+  height: auto;
+  max-height: 100px;
+  object-fit: contain;
+}
+
+/* Fidelity: links inside the user's signature keep their own styling. The
+   app-wide `a` rule (index.css) paints anchors teal at font-weight 500 with
+   no underline — on an imported Outlook/Gmail signature that turns a mailto
+   into a green chip the original never had. `revert` falls back to standard
+   browser link rendering; inline colors in the signature HTML still win. */
+.sig-editor a,
+.sig-preview a {
+  color: revert;
+  font-weight: revert;
+  text-decoration: revert;
+  transition: none;
+}
+.sig-preview table { border-collapse: collapse; }
+.sig-preview td { padding: 2px 4px; }
+
+/* ── Formatting toolbar ── */
+.sig-format-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-primary);
+  border-radius: 10px 10px 0 0;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.sig-format-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none !important;
+  padding: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.12s, color 0.12s;
+  box-shadow: none;
+}
+
+.sig-format-btn:active {
+  transform: scale(0.95);
+}
+
+.sig-format-btn.active {
+  background: color-mix(in srgb, var(--accent-primary) 14%, transparent);
+  color: var(--accent-primary);
+}
+
+.sig-format-sep {
+  width: 1px;
+  height: 16px;
+  background: var(--border-subtle);
+  margin: 0 4px;
+}
+
+/* Dropdown trigger button (has caret) */
+.sig-format-btn-dropdown {
+  width: auto;
+  padding: 0 6px;
+  gap: 2px;
+  min-width: 32px;
+}
+
+.sig-format-btn-dropdown .sig-caret {
+  opacity: 0.55;
+  flex-shrink: 0;
+}
+
+/* Popover — color picker, font size, templates, social */
+.sig-popover {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 4px);
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 10px;
+  min-width: 180px;
+}
+
+.sig-popover-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 8px;
+}
+
+/* Color grid */
+.sig-color-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.sig-color-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.12s, box-shadow 0.12s;
+  position: relative;
+}
+
+.sig-color-swatch.sig-color-default {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--surface-primary),
+    var(--surface-primary) 4px,
+    var(--border-default) 4px,
+    var(--border-default) 5px
+  );
+}
+
+/* Size list */
+.sig-size-list,
+.sig-template-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sig-size-item,
+.sig-template-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 13px;
+  text-align: left;
+  width: 100%;
+  transition: background 0.12s;
+}
+
+.sig-size-item-preview {
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.sig-template-item-desc {
+  display: block;
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+/* Social form */
+.sig-social-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 260px;
+}
+
+.sig-social-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sig-social-row svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+
+.sig-social-input {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background: var(--surface-primary);
+  outline: none;
+  transition: border-color 0.12s;
+}
+
+.sig-social-input:focus {
+  border-color: var(--accent-primary);
+}
+
+.sig-social-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.sig-popover-btn {
+  padding: 6px 12px;
+  font-size: 12.5px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid var(--border-default);
+  background: var(--surface-primary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+
+.sig-popover-btn.sig-popover-btn-primary {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: var(--text-inverse);
+}
+
+/* Size icon variants */
+.sig-size-icon-s { font-size: 11px; }
+.sig-size-icon-m { font-size: 14px; }
+.sig-size-icon-l { font-size: 17px; }
+
+/* ── Rich Editor ── */
+.sig-editor-wrap {
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  overflow: visible;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+.sig-editor-wrap:focus-within {
+  border-color: var(--border-strong);
+  box-shadow:
+    var(--shadow-sm),
+    0 0 0 3px var(--accent-primary-subtle, rgba(13, 148, 136, 0.06));
+}
+
+.sig-editor {
+  min-height: 140px;
+  padding: 14px 16px;
+  outline: none;
+  font-size: 13.5px;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif);
+  line-height: 1.65;
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--surface-secondary) 30%, var(--surface-primary));
+  border-radius: 0 0 10px 10px;
+  /* `normal`, NOT pre-wrap: provider-imported signature HTML carries raw
+     newlines between block tags, and pre-wrap renders each one as a phantom
+     empty line (the "double-spaced imported signature" bug). Plain-text
+     signatures are converted to <div>-per-line by plainTextToHtml, so
+     nothing relies on literal \n rendering here. */
+  white-space: normal;
+  word-break: break-word;
+}
+
+.sig-editor[contenteditable="false"] {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.sig-editor:empty::before {
+  content: attr(data-placeholder);
+  color: var(--text-placeholder);
+  pointer-events: none;
+}
+
+/* `display` is intentionally NOT set here: the editor renders Gmail-style
+   signatures whose social icons are inline <img>s meant to flow in a row.
+   Tailwind Preflight forces img→block; the canonical revert (.sig-editor img
+   → display:inline) lives in index.css alongside every other signature
+   surface. Pasted standalone images carry their own inline display:block,
+   so they still sit on their own line. */
+.sig-editor img {
+  max-width: 100%;
+}
+
+.sig-editor hr {
+  border: none;
+  border-top: 1px solid var(--border-default);
+  margin: 8px 0;
+}
+
+.sig-editor ul,
+.sig-editor ol {
+  margin: 4px 0;
+  padding-left: 22px;
+}
+
+/* ── Char counter ── */
+.sig-char-count {
+  font-size: 11px;
+  color: var(--text-placeholder);
+  text-align: right;
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+}
+
+.sig-char-count.warning {
+  color: var(--warning, #d97706);
+}
+
+/* ── Feedback ── */
+.sig-success,
+.sig-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  line-height: 1.4;
+}
+
+.sig-success {
+  color: var(--success-text, #065f46);
+  background: var(--success-bg-subtle, rgba(16, 185, 129, 0.08));
+  border: 1px solid var(--success-border, rgba(16, 185, 129, 0.2));
+}
+
+.sig-error {
+  color: var(--error, #dc2626);
+  background: var(--error-bg-subtle);
+  border: 1px solid var(--error-border);
+}
+
+/* ── Footer ── */
+.sig-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--surface-primary);
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.sig-footer-left {
+  display: flex;
+  align-items: center;
+}
+
+.sig-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Share button — footer left */
+.sig-share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  padding: 7px 13px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.sig-share-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Action buttons — Save migrated to the shared <Button> component
+   (ui/button.tsx, variant="default"). */
+
+/* ── Image resize mini-toolbar ── */
+.sig-img-resize-bar {
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  padding: 4px 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+  font-size: 12px;
+  color: var(--text-primary);
+}
+
+.sig-img-resize-bar button {
+  width: 24px;
+  height: 24px;
+  border: none;
+  padding: 0;
+  border-radius: 5px;
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sig-img-resize-bar span {
+  min-width: 20px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.sig-img-size-input {
+  width: 52px;
+  height: 22px;
+  border: 1px solid var(--border-default);
+  border-radius: 5px;
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-size: 12px;
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  padding: 0 4px;
+  outline: none;
+  transition: border-color 0.12s;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.sig-img-size-input::-webkit-outer-spin-button,
+.sig-img-size-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.sig-img-size-input:focus {
+  border-color: var(--accent-primary);
+}
+
+.sig-img-size-unit {
+  color: var(--text-tertiary);
+  font-size: 11px;
+}
+
+.sig-img-resize-close {
+  opacity: 0.5;
+  font-size: 12px !important;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .sig-modal {
+    max-width: 100%;
+    max-height: 100dvh;
+    border-radius: 0;
+    height: 100dvh;
+  }
+
+  .sig-footer {
+    flex-wrap: wrap;
+  }
+}
+
+/* ── Bibliothèque multi-signatures (vue liste) ─────────────────────────────
+   La signature active du compte = l'entrée « Par défaut » ; le backend la
+   miroite dans accounts.signature/_html. Les aperçus réutilisent .sig-preview
+   (déjà dans la liste canonique Preflight img→inline d'index.css). */
+
+.sig-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sig-list-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: var(--surface-primary);
+  cursor: pointer;
+}
+
+.sig-list-item:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.sig-list-item-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.sig-list-item-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sig-list-item-name {
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sig-default-badge {
+  flex-shrink: 0;
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 3px 7px;
+  border-radius: 999px;
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+}
+
+/* Aperçu compact, non interactif : les liens de la signature ne doivent pas
+   voler le clic d'ouverture de l'éditeur. Dé-boxé (2026-06-09) : l'encadré
+   gris lisait comme un input désactivé (boîte dans boîte) ; l'aperçu est du
+   CONTENU — typographique, pleine largeur, hauteur bornée avec fondu bas
+   pour que toutes les cartes gardent le même rythme. */
+.sig-list-item .sig-preview {
+  margin-top: 4px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+  max-height: 40px;
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: linear-gradient(180deg, #000 calc(100% - 12px), transparent);
+  -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 12px), transparent);
+}
+
+.sig-list-item .sig-preview img {
+  max-height: 32px;
+}
+
+.sig-list-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Sélecteur « par défaut » — radio group (choix unique) à gauche de chaque
+   carte ; remplace l'ancien bouton bordé « Set as default » qui cassait
+   l'alignement entre la carte par défaut et les autres. */
+.sig-radio-wrap {
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.sig-default-radio {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  accent-color: var(--accent-primary);
+  cursor: pointer;
+}
+.sig-default-radio:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* index.css déclare button{padding:12px 20px} : un bouton icône à taille fixe
+   DOIT poser padding:0 sinon le SVG est écrasé (tasks/lessons.md). */
+.sig-delete-btn,
+.sig-edit-btn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  min-height: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Ghost add-row — affordance de création dans la collection. Exception hover
+   documentée (archétype « discovery affordance ») : couleur/bordure seulement. */
+.sig-add-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 14px;
+  min-height: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1.5px dashed var(--border-default);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.sig-add-row:hover,
+.sig-add-row:focus-visible {
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+/* ── Champ nom (vue éditeur) ── */
+.sig-name-input {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 9px 12px;
+  font-size: 13.5px;
+  color: var(--text-primary);
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+}
+
+.sig-name-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+}

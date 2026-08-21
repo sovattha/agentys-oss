@@ -1,0 +1,131 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "arjun@heyvibe.io",
+      "tone": "casual",
+      "language": "mixed",
+      "greeting": "(none)",
+      "closing": "(none) / emoji only"
+    },
+    {
+      "contact_email": "lea@heyvibe.io",
+      "tone": "casual",
+      "language": "mixed",
+      "greeting": "hey léa / léa",
+      "closing": "(none) / emoji only"
+    },
+    {
+      "contact_email": "tom@heyvibe.io",
+      "tone": "casual",
+      "language": "mixed",
+      "greeting": "tom",
+      "closing": "(none) / emoji only"
+    },
+    {
+      "contact_email": "ines@heyvibe.io",
+      "tone": "casual",
+      "language": "fr",
+      "greeting": "inès",
+      "closing": "(none) / emoji only"
+    },
+    {
+      "contact_email": "marcus@sequoiacap.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi Marcus,",
+      "closing": "Priya"
+    },
+    {
+      "contact_email": "jm.tessier@grandecorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Jean-Marc,",
+      "closing": "Bien cordialement, / Priya Pivot"
+    },
+    {
+      "contact_email": "claire.beaumont@venturefr.com",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Claire,",
+      "closing": "Bien cordialement, / Priya"
+    },
+    {
+      "contact_email": "sarah@stationf.co",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi Sarah,",
+      "closing": "Thanks! / Priya"
+    },
+    {
+      "contact_email": "philippe@bancapital.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Monsieur Renaud,",
+      "closing": "Cordialement, / Priya Pivot / CEO - HeyVibe"
+    }
+  ],
+  "general_rules": [
+    {
+      "name": "tutoiement_equipe_interne",
+      "description": "Tutoiement systématique avec tous les membres de l'équipe HeyVibe (même domaine @heyvibe.io)",
+      "trigger": "Email à un contact @heyvibe.io",
+      "action": "Utiliser le tu, prénoms uniquement, ton direct et informel"
+    },
+    {
+      "name": "vouvoiement_contacts_externes_francais",
+      "description": "Vouvoiement avec les contacts externes français (investisseurs, clients, partenaires institutionnels)",
+      "trigger": "Email à un contact externe en français",
+      "action": "Utiliser le vous, formules de politesse formelles"
+    },
+    {
+      "name": "code_switching_fr_en_interne",
+      "description": "Mélange systématique français-anglais dans les emails internes à l'équipe, avec l'anglais pour les termes tech/business (ARR, churn, beta users, NPS, dashboard)",
+      "trigger": "Email interne à l'équipe",
+      "action": "Alterner français et anglais dans la même phrase, utiliser l'anglais pour le jargon métier"
+    },
+    {
+      "name": "emoji_usage_intensif_startup",
+      "description": "Usage intensif et non-ironique des emojis (🚀🙏💪🔥✅) avec l'équipe interne et les investisseurs internationaux, jamais avec les contacts français formels",
+      "trigger": "Email casual ou semi-formel en anglais",
+      "action": "Utiliser des emojis pour ponctuer l'enthousiasme, l'urgence ou la validation. Proscrire avec contacts français formels"
+    },
+    {
+      "name": "structure_liste_numerotee_externe",
+      "description": "Structurer les emails externes importants (investisseurs, due diligence) avec des listes numérotées ou à puces pour clarifier l'information",
+      "trigger": "Email avec données financières, métriques ou documents multiples",
+      "action": "Organiser en liste numérotée (1. 2. 3.) ou à puces (-) pour faciliter la lecture"
+    },
+    {
+      "name": "signature_variable_selon_formalite",
+      "description": "Signature complète (Priya Pivot + titre CEO) uniquement avec contacts très formels (banques, institutions). Prénom seul (Priya) avec investisseurs. Aucune signature en interne",
+      "trigger": "Niveau de formalité du contact",
+      "action": "Formal institutionnel = Priya Pivot + titre. Semi-formal = Priya. Casual interne = pas de signature"
+    },
+    {
+      "name": "ton_enthousiaste_avec_investisseurs",
+      "description": "Maintenir un ton professionnel mais enthousiaste avec les investisseurs internationaux, utiliser des formules comme 'Really excited', 'Looking forward', emoji rocket",
+      "trigger": "Email à un investisseur anglophone",
+      "action": "Combiner professionnalisme et enthousiasme startup, terminer par une note positive avec emoji rocket (🚀) ou muscle (💪)"
+    },
+    {
+      "name": "absence_salutation_interne",
+      "description": "Supprimer toute salutation formelle (Bonjour, Hi) dans les emails internes à l'équipe. Commencer directement par le prénom ou le message",
+      "trigger": "Email à un membre de l'équipe @heyvibe.io",
+      "action": "Pas de 'Bonjour' ni 'Hi', entrer directement dans le vif du sujet avec prénom ou sans"
+    },
+    {
+      "name": "urgence_et_directivite_interne",
+      "description": "Ton directif et orienté action avec l'équipe interne : deadlines claires, questions directes, impératifs, validation rapide (✅, 'go for it', 'just go 🚀')",
+      "trigger": "Email à l'équipe pour assigner une tâche ou demander un livrable",
+      "action": "Formuler des demandes directes avec deadlines explicites, valider rapidement avec emoji check (✅) ou formules courtes"
+    },
+    {
+      "name": "metriques_chiffrees_systematiques",
+      "description": "Inclure systématiquement des métriques chiffrées précises dans les emails stratégiques (ARR, churn %, MRR, CAC/LTV, NPS, burn rate) pour étayer les arguments",
+      "trigger": "Email à un investisseur, board member ou partenaire stratégique",
+      "action": "Toujours quantifier (pas 'bon churn' mais '4.2% churn', pas 'bon NPS' mais 'NPS 62')"
+    }
+  ],
+  "forbidden_phrases": [],
+  "auto_reply_patterns": []
+}

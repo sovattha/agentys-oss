@@ -1,0 +1,1396 @@
+/* ============================================================================
+   EMAIL LIST — Agentys Clarity Theme
+   Clean, Gmail-inspired inbox list
+   ============================================================================ */
+
+.email-list-container {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  overscroll-behavior-y: contain;
+  container-type: inline-size;
+  container-name: email-list-inner;
+}
+
+.email-list-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--text-inverse) 50%, transparent), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Toolbar — removed (consolidated into header) */
+
+.clear-filters-button {
+  background: transparent;
+  border: 1px solid var(--border-default);
+  color: var(--text-tertiary);
+  padding: 6px var(--space-3);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+/* ============================================================================
+   HEADER — Lean Editorial
+   ============================================================================ */
+.email-list-header {
+  display: flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  gap: var(--space-2);
+  min-height: 40px;
+  background: var(--surface-base);
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+/* ============================================================================
+   SELECT ALL CHECKBOX — Superhuman-style left-aligned checkbox
+   ============================================================================ */
+.header-select-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-1);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+  color: var(--text-tertiary);
+  animation: selectBtnIn 0.2s var(--ease-settle);
+}
+
+@keyframes selectBtnIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.header-select-btn.partial,
+.header-select-btn.all {
+  color: var(--accent-primary);
+}
+
+.header-select-count {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--accent-primary);
+  min-width: 14px;
+  text-align: center;
+  line-height: var(--leading-none);
+}
+
+.header-select-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Dropdown menu — dark Superhuman style */
+.header-select-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: var(--z-dropdown);
+  min-width: 240px;
+  background: var(--text-primary);
+  border-radius: 8px;
+  padding: var(--space-1);
+  box-shadow: var(--shadow-xl);
+  animation: selectMenuIn 0.15s var(--ease-settle);
+}
+
+@keyframes selectMenuIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes selectMenuOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-4px); }
+}
+
+.header-select-menu.closing {
+  animation: selectMenuOut 0.12s ease-in forwards;
+  pointer-events: none;
+}
+
+.header-select-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-2) 10px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--text-inverse);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.1s;
+  white-space: nowrap;
+}
+
+.header-select-menu-item .shortcut-keys {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.header-select-menu-item kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 20px;
+  padding: 0 5px;
+  background: color-mix(in srgb, var(--text-inverse) 12%, transparent);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  line-height: var(--leading-none);
+}
+
+/* Signal line — teal gradient under header */
+.email-list-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--accent-primary-glow) 20%,
+    var(--accent-primary) 50%,
+    var(--accent-primary-glow) 80%,
+    transparent 100%
+  );
+  opacity: 0.4;
+}
+
+/* Location text — folder/label name. Matches .header-tab.active (the Inbox
+   label) so Drafts / Later / Sent / Archive / Spam / Trash all share the same
+   typography and position as the Inbox header. */
+.header-location {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px var(--space-3) var(--space-2);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: normal;
+  opacity: 1;
+  flex-shrink: 0;
+}
+
+/* Spacer pushes actions right */
+.header-spacer {
+  flex: 1;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.header-icon-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.header-icon-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.header-icon-btn:disabled {
+  opacity: var(--opacity-disabled, 0.5);
+  cursor: not-allowed;
+}
+
+.header-icon-btn.active {
+  background: var(--accent-primary-subtle);
+  color: var(--accent-primary);
+}
+
+/* ============================================================================
+   LABEL FILTER CHIP (visible only when a label is active)
+   ============================================================================ */
+.header-label-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-1) 10px var(--space-1) var(--space-2);
+  background: var(--accent-primary-subtle);
+  border: 1px solid var(--accent-primary-glow);
+  border-radius: 9999px;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--accent-primary);
+  animation: chipIn 0.25s var(--ease-settle);
+  flex-shrink: 0;
+}
+
+/* ============================================================================
+   HEADER TABS — Opacity-fade navigation: active = full, inactive = muted
+   ============================================================================ */
+.header-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  /* Audit 2026-05-18: at 390px viewport only 2 of 4 chips were visible and
+     the hidden scrollbar made the rest undiscoverable. Snap each tab to the
+     start so a swipe lands on a chip boundary, and fade the right edge so
+     overflow is visually announced. */
+  scroll-snap-type: x proximity;
+  scroll-padding-inline-start: 8px;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent);
+}
+
+.header-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.header-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px var(--space-3) var(--space-2);
+  border: none;
+  border-radius: 0;
+  border-bottom: none;
+  font-size: var(--font-size-md);
+  font-weight: 400;
+  color: var(--text-tertiary);
+  opacity: 0.55;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--transition-base), opacity var(--transition-base), font-weight var(--transition-base);
+  background: transparent;
+  /* Audit 2026-05-18: keep each tab at its natural width and snap to the
+     start so swipes land on a chip boundary on narrow viewports. */
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+/* ── Active state ── */
+.header-tab.active {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--label-color, var(--text-primary)) 75%, var(--text-primary));
+  opacity: 1;
+}
+
+.header-tab-label {
+  padding: 5px var(--space-2) 6px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+.header-tab-label.active {
+  font-weight: 600;
+}
+
+/* ── Label dot — supprimé ── */
+
+/* ── Count (plain number, no badge) ──
+   Margin-left tient le compteur près du label : le `gap` du parent flex ne
+   s'applique pas entre le texte direct du bouton et ce span (CSS gap = entre
+   éléments, pas entre text-node anonymes). Sans cette marge le compteur
+   collait au label : « Boîte de réception926 ».
+   2026-05-25 : pas de point séparateur (« Inbox 630 »), nombre rapproché. */
+.header-tab-count {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  /* Superhuman-tight: number sits right next to the label. */
+  margin-left: 4px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+.header-tab.active .header-tab-count {
+  color: var(--text-secondary);
+}
+
+@keyframes chipIn {
+  from { opacity: 0; transform: scale(0.9) translateX(-4px); }
+  to { opacity: 1; transform: scale(1) translateX(0); }
+}
+
+.header-label-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.header-label-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  border-radius: 50%;
+  color: var(--accent-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.12s;
+  margin-left: 2px;
+  opacity: 0.6;
+}
+
+/* ============================================================================
+   SEARCH BAR (Collapsible)
+   ============================================================================ */
+.email-list-search-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  border: none;
+  background: var(--bg-primary, #ffffff);
+  animation: slideDown 0.2s ease-out;
+}
+
+.email-list-search-bar .email-search-bar,
+.email-list-search-bar .smart-search-bar {
+  flex: 1;
+}
+
+/* Search results count pill */
+.search-results-count {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+  padding: var(--space-1) var(--space-2);
+  margin-top: var(--space-1);
+  margin-bottom: var(--space-2);
+  font-size: 11px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.01em;
+}
+
+.search-results-count-number {
+  font-weight: 600;
+  color: var(--accent-primary, #3b82f6);
+}
+
+.search-results-query {
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.search-results-scope {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  color: var(--text-tertiary);
+}
+
+.search-results-scope-sep {
+  color: var(--border-subtle);
+  margin: 0 0.15em;
+}
+
+.header-icon-btn svg.spinning {
+  animation: spin 1s linear infinite;
+}
+
+/* Legacy - kept for backwards compatibility */
+.search-icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.search-icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.email-count {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  background: var(--surface-secondary);
+  padding: var(--space-1) 10px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+}
+
+.refresh-button {
+  background: transparent;
+  border: 1px solid var(--border-default);
+  color: var(--text-tertiary);
+  padding: 6px var(--space-3);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-fast);
+}
+
+.refresh-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+   MULTI-SELECT & BULK ACTIONS
+   ============================================================================ */
+.multi-select-toggle {
+  background: transparent;
+  border: 1px solid var(--border-default);
+  color: var(--text-tertiary);
+  padding: 6px var(--space-3);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-fast);
+}
+
+.multi-select-toggle.active {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: var(--text-inverse);
+}
+
+.bulk-actions-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  background: var(--accent-primary-light);
+  border-bottom: 1px solid var(--accent-primary-subtle);
+  gap: var(--space-3);
+}
+
+.bulk-actions-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.bulk-actions-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.bulk-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.bulk-select-btn {
+  background: transparent;
+  border: 1px solid var(--accent-primary);
+  color: var(--accent-primary);
+  padding: 6px var(--space-3);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-fast);
+}
+
+.selected-count {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.bulk-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid var(--border-default);
+  color: var(--text-primary);
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.bulk-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bulk-action-btn svg {
+  flex-shrink: 0;
+}
+
+.bulk-action-btn.danger {
+  color: var(--error);
+  border-color: var(--error);
+}
+
+/* ============================================================================
+   EMAIL LIST
+   ============================================================================ */
+.email-list-virtualized {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Infinite scroll loading indicator */
+.email-list-loading-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+}
+
+.loading-spinner-small {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border-default);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.email-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================================================
+   DATE GROUPING
+   ============================================================================ */
+.email-date-group {
+  /* Container for date section */
+}
+
+/* Row entrance — no animation to avoid replaying on every re-render */
+
+/* prefers-reduced-motion handled globally in index.css */
+
+.email-date-separator {
+  padding: 6px var(--space-4) 4px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.email-date-separator::before {
+  display: none;
+}
+
+.email-date-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.email-date-label.snooze-woken {
+  color: #6366f1;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ============================================================================
+   EMAIL ITEM
+   ============================================================================ */
+.email-item {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* Archive : même direction que delete → gauche */
+.email-item-slide-right {
+  animation: slideLeft 220ms var(--ease-settle) forwards;
+  overflow: hidden;
+}
+
+/* Delete */
+.email-item-slide-left {
+  animation: slideLeft 220ms var(--ease-settle) forwards;
+  overflow: hidden;
+}
+
+@keyframes slideLeft {
+  0%   { transform: translateX(0);     opacity: 1; }
+  100% { transform: translateX(-100%); opacity: 0; }
+}
+
+.email-item-animating-row {
+  overflow: hidden;
+}
+
+/* Shift up: items below the animating email slide up to fill the gap */
+.email-item-shift-up {
+  animation: emailShiftUp 220ms var(--ease-settle) forwards;
+}
+
+@keyframes emailShiftUp {
+  from { transform: translateY(0); }
+  to   { transform: translateY(var(--shift-amount, -32px)); }
+}
+
+.email-item.selected {
+  background: var(--accent-primary-light);
+  border-inline-start: 2px solid var(--accent-primary);
+}
+
+.email-item.unread {
+  background: var(--surface-primary);
+}
+
+.email-item.unread .email-sender {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.email-item.unread .email-subject {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.email-sender {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 500;
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+}
+
+.attachment-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transform: rotate(-45deg);
+}
+
+.email-subject {
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.email-preview {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.email-time {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+/* ============================================================================
+   LOADING, ERROR, EMPTY STATES
+   ============================================================================ */
+.email-list-welcome,
+.email-list-loading,
+.email-list-error,
+.email-list-empty,
+.email-list-loading-label {
+  flex: 1;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12) var(--space-6);
+  text-align: center;
+  color: var(--text-muted);
+  gap: var(--space-4);
+  animation: emptyStateFadeIn 0.3s var(--ease-clarity, ease) both;
+}
+
+@keyframes emptyStateFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.noise-hidden-hint {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+}
+
+.noise-hidden-hint p {
+  margin: 0;
+}
+
+.noise-hidden-toggle {
+  padding: 6px 16px;
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  background: none;
+  color: var(--accent-primary);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.email-list-loading-label p {
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border-default);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Skeleton Loading — Premium 3-color shimmer (8.1) + stagger entrance (10) */
+.email-skeleton-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.email-skeleton-item {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 32px;
+  animation: skeletonFadeIn 0.3s ease-out both;
+}
+
+@keyframes skeletonFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Stagger skeleton items for cascade effect */
+.email-skeleton-item:nth-child(1) { animation-delay: 0ms; }
+.email-skeleton-item:nth-child(2) { animation-delay: 60ms; }
+.email-skeleton-item:nth-child(3) { animation-delay: 120ms; }
+.email-skeleton-item:nth-child(4) { animation-delay: 180ms; }
+.email-skeleton-item:nth-child(5) { animation-delay: 240ms; }
+.email-skeleton-item:nth-child(6) { animation-delay: 300ms; }
+.email-skeleton-item:nth-child(7) { animation-delay: 360ms; }
+.email-skeleton-item:nth-child(8) { animation-delay: 420ms; }
+
+.skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.skeleton-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(90deg,
+    var(--surface-secondary) 0%,
+    var(--surface-tertiary) 40%,
+    var(--surface-secondary) 60%,
+    var(--surface-secondary) 100%
+  );
+  background-size: 300% 100%;
+  animation: shimmer3 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.skeleton-text {
+  height: 12px;
+  border-radius: var(--radius-xs);
+  background: linear-gradient(90deg,
+    var(--surface-secondary) 0%,
+    var(--surface-tertiary) 40%,
+    var(--surface-secondary) 60%,
+    var(--surface-secondary) 100%
+  );
+  background-size: 300% 100%;
+  animation: shimmer3 1.8s ease-in-out infinite;
+}
+
+@keyframes shimmer3 {
+  0% { background-position: 100% 50%; }
+  100% { background-position: -100% 50%; }
+}
+
+.skeleton-text.sender {
+  width: 140px;
+  height: 13px;
+}
+
+.skeleton-text.date {
+  width: 55px;
+  margin-inline-start: auto;
+  height: 11px;
+}
+
+.skeleton-text.subject {
+  width: 65%;
+  flex: 1;
+}
+
+.skeleton-text.preview {
+  width: 90%;
+  height: 11px;
+  opacity: 0.5;
+}
+
+.error-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--error-bg);
+  color: var(--error);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-3xl);
+  font-weight: bold;
+}
+
+.email-list-error p {
+  margin: 0;
+  color: var(--error);
+}
+
+.retry-button {
+  background: var(--error);
+  color: var(--text-inverse);
+  border: none;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: opacity var(--transition-fast);
+}
+
+.empty-icon {
+  font-size: var(--font-size-4xl);
+  color: var(--text-muted);
+}
+
+.welcome-icon {
+  font-size: var(--font-size-4xl);
+}
+
+.email-list-welcome h3 {
+  font-size: var(--font-size-lg, 1.125rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.email-list-welcome p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.welcome-connect-btn {
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  border: none;
+  padding: 10px var(--space-5);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: opacity var(--transition-fast);
+}
+
+/* Spam folder info banner */
+.spam-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  background: color-mix(in srgb, var(--text-tertiary) 6%, var(--surface-base));
+  border-bottom: 1px solid color-mix(in srgb, var(--text-tertiary) 12%, transparent);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  animation: slideDown 0.2s ease-out;
+}
+
+.spam-banner svg {
+  flex-shrink: 0;
+  color: var(--text-tertiary);
+}
+
+.spam-banner span {
+  flex: 1;
+}
+
+.spam-empty-btn {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.spam-empty-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Noise cleanup banner */
+.noise-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  background: color-mix(in srgb, var(--text-tertiary) 6%, var(--surface-base));
+  border-bottom: 1px solid color-mix(in srgb, var(--text-tertiary) 12%, transparent);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  animation: slideDown 0.2s ease-out;
+}
+.noise-banner svg { flex-shrink: 0; color: var(--text-tertiary); }
+.noise-banner > span { flex: 1; }
+.noise-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-shrink: 0;
+}
+.noise-read-btn,
+.noise-clean-btn {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.noise-read-btn:disabled,
+.noise-clean-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* Trash folder info banner */
+.trash-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  background: color-mix(in srgb, var(--text-tertiary) 6%, var(--surface-base));
+  border-bottom: 1px solid color-mix(in srgb, var(--text-tertiary) 15%, transparent);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  animation: slideDown 0.2s ease-out;
+}
+
+.trash-banner svg {
+  flex-shrink: 0;
+  color: var(--text-tertiary);
+}
+
+.trash-banner span {
+  flex: 1;
+}
+
+.trash-empty-btn {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.trash-empty-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.banner-btn-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid color-mix(in srgb, var(--text-tertiary) 30%, transparent);
+  border-top-color: var(--text-tertiary);
+  border-radius: 50%;
+  animation: bannerSpin 0.6s linear infinite;
+}
+@keyframes bannerSpin { to { transform: rotate(360deg); } }
+
+/* Hidden Noise emails banner */
+.hidden-noise-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  margin-top: var(--space-2);
+  background: color-mix(in srgb, var(--accent-primary) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 15%, transparent);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  animation: emptyStateFadeIn 0.3s var(--ease-clarity, ease) 0.15s both;
+}
+
+.hidden-noise-show-btn {
+  background: transparent;
+  border: 1px solid var(--accent-primary);
+  color: var(--accent-primary);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 9999px;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+@media (max-width: 768px) {
+  .email-list-toolbar {
+    padding: 10px var(--space-3);
+    gap: var(--space-2);
+  }
+
+  .email-item {
+    padding: 10px var(--space-3);
+  }
+
+  .email-sender {
+    font-size: var(--font-size-sm);
+  }
+
+  .email-subject {
+    font-size: var(--font-size-sm);
+  }
+
+  .email-preview {
+    font-size: var(--font-size-xs);
+  }
+
+  .bulk-actions-toolbar {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .bulk-actions-toolbar button {
+    font-size: var(--font-size-sm);
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .email-list-toolbar {
+    padding: var(--space-2) 10px;
+  }
+
+  .email-item {
+    padding: var(--space-2) 10px;
+  }
+
+  .bulk-actions-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Shortcuts ribbon at bottom */
+/* ── Shortcuts ribbon ── */
+.shortcuts-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--surface-primary);
+  border-top: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+  z-index: 10;
+  height: 40px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text-primary) 4%, transparent);
+  transition: height 0.25s var(--ease-settle, ease), padding 0.25s var(--ease-settle, ease), opacity 0.2s var(--ease-clarity, ease), border-top-width var(--transition-base);
+}
+
+.shortcuts-ribbon--visible {
+  height: 40px;
+  padding: var(--space-2) var(--space-4);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.shortcuts-ribbon--hidden {
+  height: 0;
+  padding: 0 var(--space-4);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  border-top-width: 0;
+}
+
+.shortcut-group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+/* Minimal hint when ribbon is hidden */
+.shortcuts-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  flex-shrink: 0;
+  cursor: pointer;
+  opacity: 0.35;
+  transition: opacity 0.15s var(--ease-clarity, ease);
+  border-top: 1px solid var(--border-subtle);
+  background: var(--surface-primary);
+}
+
+.shortcuts-hint-text {
+  font-size: var(--font-size-2xs);
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.shortcut-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  cursor: pointer;
+  user-select: none;
+  border-radius: var(--radius-sm, 6px);
+  transition: background 0.15s var(--ease-clarity, ease);
+}
+
+.shortcut-keys {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.shortcut-key {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 var(--space-1);
+  background: var(--surface-primary);
+  border: 1px solid color-mix(in srgb, var(--text-primary) 10%, transparent);
+  border-bottom-color: color-mix(in srgb, var(--text-primary) 14%, transparent);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-tertiary);
+  letter-spacing: var(--tracking-wider);
+  font-family: var(--font-sans, 'Instrument Sans', system-ui, sans-serif);
+  box-shadow: var(--shadow-xs);
+  line-height: var(--leading-none);
+  text-align: center;
+  transition: border-color 0.15s var(--ease-clarity, ease), color 0.15s var(--ease-clarity, ease), transform 0.15s var(--ease-clarity, ease), box-shadow 0.15s var(--ease-clarity, ease);
+}
+
+/* Highlighted shortcut — contextually relevant action */
+.shortcut-item--highlighted .shortcut-key {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-md);
+}
+
+.shortcut-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted, var(--text-tertiary));
+  white-space: nowrap;
+  letter-spacing: var(--tracking-wide, 0.02em);
+  transition: color 0.15s var(--ease-clarity, ease);
+}
+
+@media (max-width: 768px) {
+  .shortcuts-ribbon {
+    display: none;
+  }
+  .shortcuts-hint {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .shortcuts-ribbon {
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+  }
+}
+
+/* ============================================================================
+   CONTAINER QUERIES — Component-intrinsic responsive behavior
+   (email-list-inner supplements the email-list container from App.css)
+   ============================================================================ */
+@container email-list-inner (max-width: 600px) {
+  .email-list-header {
+    padding: var(--space-2) var(--space-2);
+    gap: var(--space-1);
+  }
+  .email-item {
+    padding: 10px var(--space-3);
+  }
+  .shortcuts-ribbon {
+    display: none;
+  }
+}
+
+@container email-list-inner (max-width: 480px) {
+  .email-item {
+    padding: var(--space-2) var(--space-2);
+  }
+  .email-list-toolbar {
+    padding: var(--space-2) var(--space-2);
+    gap: var(--space-1);
+  }
+  .bulk-actions-toolbar {
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+  .bulk-actions-toolbar button {
+    padding: 5px var(--space-2);
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media (max-width: 768px) {
+  .email-list-container > .email-list-header {
+    padding-inline-start: 62px;
+  }
+}

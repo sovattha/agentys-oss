@@ -1,0 +1,109 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "arjun@heyvibe.io",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "dude / yo",
+      "closing": "(none)"
+    },
+    {
+      "contact_email": "lea@heyvibe.io",
+      "tone": "casual",
+      "language": "mixed",
+      "addressing": "tu",
+      "greeting": "hey léa / léa",
+      "closing": "(none)"
+    },
+    {
+      "contact_email": "marcus@sequoiacap.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi Marcus,",
+      "closing": "Priya"
+    },
+    {
+      "contact_email": "tom@heyvibe.io",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "tom",
+      "closing": "(none)"
+    },
+    {
+      "contact_email": "ines@heyvibe.io",
+      "tone": "casual",
+      "language": "mixed",
+      "addressing": "tu",
+      "greeting": "inès",
+      "closing": "(none)"
+    },
+    {
+      "contact_email": "jm.tessier@grandecorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Jean-Marc,",
+      "closing": "Bien cordialement, / Priya Pivot"
+    },
+    {
+      "contact_email": "claire.beaumont@venturefr.com",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Claire,",
+      "closing": "Bien cordialement, / Priya"
+    },
+    {
+      "contact_email": "sarah@stationf.co",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi Sarah,",
+      "closing": "Priya"
+    },
+    {
+      "contact_email": "philippe@bancapital.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Renaud,",
+      "closing": "Cordialement, / Priya Pivot"
+    }
+  ],
+  "general_rules": [
+    {
+      "description": "Internal team (same domain) receives casual tone with no greeting or first-name-only greeting, no closing signature."
+    },
+    {
+      "description": "Code-switch between English and French with internal French-speaking colleagues (Léa, Inès), using 'tu' form and mixing languages within single emails."
+    },
+    {
+      "description": "External French contacts (enterprise, investors, government) receive formal or semi-formal French with 'vous' form and proper closings."
+    },
+    {
+      "description": "Investor/VC contacts (Marcus, Claire, Sarah) receive semi-formal English or French with 'Hi/Bonjour' greeting and first-name-only closing."
+    },
+    {
+      "description": "Use emoji sparingly in internal casual emails (👌, 🔥, 🚀, ⚠️) but never in formal external communications."
+    },
+    {
+      "description": "Enterprise/formal external contacts receive full signature block (name + title) only in formal register; semi-formal uses first name only."
+    },
+    {
+      "description": "Action-oriented structure: numbered lists, direct requests, and imperative tone with internal team; structured paragraphs with external stakeholders."
+    },
+    {
+      "description": "Ultra-short responses to internal colleagues ('just go 🚀', 'exactement ce que je pensais') signal trust and speed."
+    },
+    {
+      "description": "Investor updates and external pitches include specific metrics (CAC, LTV, burn rate, ARR) formatted as structured lists."
+    },
+    {
+      "description": "French formal register uses 'Bien cordialement' or 'Cordialement' as standard closing; never 'Amicalement' or casual variants."
+    }
+  ],
+  "forbidden_phrases": []
+}

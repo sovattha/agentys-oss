@@ -1,0 +1,29 @@
+.zoom-indicator {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translate(-50%, 10px);
+  z-index: var(--z-notification, 1300);
+  padding: 8px 16px;
+  min-width: 68px;
+  text-align: center;
+  background: color-mix(in srgb, var(--surface-elevated, #fff) 92%, transparent);
+  color: var(--text-primary, #111827);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  box-shadow: var(--shadow-lg, 0 10px 24px rgba(0, 0, 0, 0.12));
+  opacity: 0;
+  pointer-events: none;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: opacity 0.18s ease-out, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.zoom-indicator--visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}

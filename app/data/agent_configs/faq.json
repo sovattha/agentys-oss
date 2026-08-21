@@ -1,0 +1,6 @@
+{
+  "confidence_threshold": 80,
+  "auto_send": true,
+  "test_mode": false,
+  "reply_tone": "professional"
+}

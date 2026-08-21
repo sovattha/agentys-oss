@@ -1,0 +1,32 @@
+{
+  "default": {
+    "critic_overall": 81,
+    "judge_overall": 86,
+    "num_cases": 5
+  },
+  "lawyer_paris": {
+    "critic_overall": 80,
+    "judge_overall": 84,
+    "num_cases": 5
+  },
+  "sales_director": {
+    "critic_overall": 85,
+    "judge_overall": 83,
+    "num_cases": 5
+  },
+  "startup_ceo": {
+    "critic_overall": 87,
+    "judge_overall": 84,
+    "num_cases": 5
+  },
+  "hr_director": {
+    "critic_overall": 78,
+    "judge_overall": 86,
+    "num_cases": 5
+  },
+  "consultant_intl": {
+    "critic_overall": 83,
+    "judge_overall": 66,
+    "num_cases": 5
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "aggregate": {
+    "critic": {
+      "coherence": 94,
+      "tone": 88,
+      "completeness": 88,
+      "errors": 92,
+      "conciseness": 93,
+      "emotional_intelligence": 76,
+      "overall": 87
+    },
+    "judge": {
+      "faithfulness": 73,
+      "completeness": 88,
+      "tone_match": 90,
+      "conciseness": 92,
+      "overall": 84
+    }
+  },
+  "cases": [
+    {
+      "case_id": "msg-002",
+      "subject": "Re: board deck",
+      "draft": "yes add the cohort graph, Marcus asks every single time 😅\n\nnice on 1.2M€ btw 🔥\n",
+      "elapsed_draft_s": 9.38,
+      "critic": {
+        "coherence": 95,
+        "tone": 92,
+        "completeness": 88,
+        "errors": 95,
+        "conciseness": 95,
+        "over_commitment": 95,
+        "emotional_intelligence": 90,
+        "overall": 92,
+        "decision": "valid",
+        "suggestions": [
+          "RAS"
+        ]
+      },
+      "judge": {
+        "faithfulness": 95,
+        "completeness": 90,
+        "tone_match": 92,
+        "conciseness": 96,
+        "overall": 93,
+        "strengths": [
+          "Confirme clairement l'ajout du graphe de rétention cohorte demandé par Arjun",
+          "Ton décontracté et informel parfaitement aligné avec le registre de l'échange (emojis, langage familier)",
+          "Brouillon ultra-concis, aucun remplissage",
+          "Valide le chiffre 1.2M€ sans l'inventer — il provient de l'email entrant"
+        ],
+        "weaknesses": [
+          "Ne mentionne pas la correction des chiffres de churn (4.2% vs 5.1%) qui était le point central de la conversation initiale — sujet non bouclé explicitement",
+          "Légère perte d'énergie par rapport au ton source (« every single time 😅 » est un poil plus neutre que « let's gooo 🚀🚀🚀 » de la référence, mais reste acceptable)"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-004",
+      "subject": "Series A - Next Steps",
+      "draft": "Glad it resonated. Happy to move quickly on the three items:\n\n1. January numbers are ready — I'll update the data room by end of week.\n2. I have two enterprise references lined up. I'll make the intros directly so you can schedule at your convenience.\n3. Technical architecture doc is in progress. Can have a draft to you within the week.\n\nOn board composition — one seat works for us. Worth a short call to align on structure before we get to term sheet. What does your calendar look like next week?\n",
+      "elapsed_draft_s": 13.18,
+      "critic": {
+        "coherence": 95,
+        "tone": 88,
+        "completeness": 92,
+        "errors": 90,
+        "conciseness": 93,
+        "over_commitment": 72,
+        "emotional_intelligence": 75,
+        "overall": 86,
+        "decision": "valid",
+        "suggestions": [
+          "Préciser délai call",
+          "Confirmer disponibilités"
+        ]
+      },
+      "judge": {
+        "faithfulness": 68,
+        "completeness": 93,
+        "tone_match": 88,
+        "conciseness": 91,
+        "overall": 83,
+        "strengths": [
+          "Tous les points actionnables de Marcus sont adressés (data room, références, archi, board composition, timing)",
+          "Ton direct et confiant, calqué sur le registre startup-friendly de l'email entrant",
+          "Aucun placeholder ni remplissage — corps dense et utile",
+          "Proposition proactive d'un call court sur la board composition avant le term sheet"
+        ],
+        "weaknesses": [
+          "\"two enterprise references\" : chiffre spécifique (2) non mentionné dans l'email ni dans l'historique — invention potentielle",
+          "\"January numbers are ready\" : affirmation présentée comme un fait établi, sans base dans le contexte fourni — légèrement présomptif même si plausible"
+        ],
+        "hallucinations": [
+          "\"two enterprise references\" — le nombre de références disponibles n'est indiqué nulle part dans l'email entrant ou l'historique"
+        ]
+      }
+    },
+    {
+      "case_id": "msg-007",
+      "subject": "Re: v2 features prioritization",
+      "draft": "yes perfect, le one-pager c'est exactement ce qu'il faut pour le board\n\nles chiffres parlent d'eux-mêmes — team workspace à 87% ça va clore le débat sur la prio\n\ntu peux ajouter une ligne de timeline estimé pour chaque feature? Marcus va demander\n",
+      "elapsed_draft_s": 19.02,
+      "critic": {
+        "coherence": 92,
+        "tone": 88,
+        "completeness": 85,
+        "errors": 95,
+        "conciseness": 90,
+        "over_commitment": 82,
+        "emotional_intelligence": 75,
+        "overall": 86,
+        "decision": "valid",
+        "suggestions": [
+          "Ajouter salutation",
+          "Signer l'email"
+        ]
+      },
+      "judge": {
+        "faithfulness": 33,
+        "completeness": 88,
+        "tone_match": 92,
+        "conciseness": 93,
+        "overall": 73,
+        "strengths": [
+          "Ton parfaitement calqué sur le registre franglais/casual de la conversation (« yes perfect », « ça va clore le débat »)",
+          "Répond directement et positivement à la proposition du one-pager de Léa",
+          "La demande de timeline estimée est pertinente et enrichit le livrable sans alourdir le message",
+          "Très bon ratio longueur/contenu : zéro remplissage, zéro placeholder"
+        ],
+        "weaknesses": [
+          "« Marcus » est un prénom inventé : aucun Marcus n'apparaît dans l'email entrant ni dans l'historique — hallucination nette qui force le score faithfulness ≤ 40",
+          "Sans la référence à Marcus, la demande de timeline aurait pu être mieux justifiée (« pour le board » suffit)"
+        ],
+        "hallucinations": [
+          "« Marcus va demander » — le prénom Marcus n'est cité nulle part dans le fil de conversation ni dans l'email entrant"
+        ]
+      }
+    },
+    {
+      "case_id": "msg-010",
+      "subject": "Re: SSO integration for GrandeCorp",
+      "draft": "just go, no time for a spec with end of month on the line\n\nstart Monday, keep me posted if SCIM runs long - i'll manage JM's expectations on their side\n",
+      "elapsed_draft_s": 13.43,
+      "critic": {
+        "coherence": 92,
+        "tone": 88,
+        "completeness": 85,
+        "errors": 95,
+        "conciseness": 95,
+        "over_commitment": 90,
+        "emotional_intelligence": 72,
+        "overall": 88,
+        "decision": "valid",
+        "suggestions": [
+          "Confirmer deadline",
+          "Remercier Tom"
+        ]
+      },
+      "judge": {
+        "faithfulness": 95,
+        "completeness": 90,
+        "tone_match": 92,
+        "conciseness": 96,
+        "overall": 93,
+        "strengths": [
+          "Réponse directe à la question principale (spec ou non) sans ambiguïté",
+          "Justification implicite cohérente avec le contexte (deadline fin de mois)",
+          "Ton décontracté, minuscules, style messaging rapide — miroir parfait du registre de Tom et de Priya",
+          "Pas d'information inventée : le délai de 3 semaines et le démarrage lundi sont repris de Tom",
+          "Gestion proactive des attentes côté client (JM) mentionnée sans en faire trop"
+        ],
+        "weaknesses": [
+          "La question 'start Monday' est implicitement validée mais jamais confirmée explicitement — Tom a posé deux questions (spec ou non + lundi ?) et la seconde est inférée plutôt qu'actée",
+          "Pas de signal d'urgence sur le risque calendaire : 3 semaines vs fin de mois, l'écart potentiel n'est pas adressé"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-012",
+      "subject": "POC HeyVibe - Préparation",
+      "draft": "Les quatre prérequis que vous listez sont bien intégrés dans notre périmètre POC. Voici notre position :\n\n1. SSO SAML 2.0 : intégration Active Directory supportée. Nous aurons besoin des métadonnées de votre IdP pour configurer la connexion.\n2. SCIM : le provisioning automatique est disponible. Le mapping des attributs sera à caler lors du setup technique.\n3. RGPD / hébergement France : nos données sont hébergées sur infrastructure européenne. Je vous transmets notre DPA et la documentation de localisation des données à la suite de cet email.\n4. SLA 99.9% : couvert dans notre offre Enterprise, avec les détails contractuels dans l'accord de service standard.\n\nLa date du 15 février est tenable pour une démo fonctionnelle, à condition de lancer la configuration SSO dans les prochains jours.\n\nPouvez-vous me mettre en copie votre référent technique côté GrandeCorp pour qu'on planifie un point de cadrage cette semaine ?\n",
+      "elapsed_draft_s": 35.66,
+      "critic": {
+        "coherence": 95,
+        "tone": 82,
+        "completeness": 92,
+        "errors": 85,
+        "conciseness": 90,
+        "over_commitment": 62,
+        "emotional_intelligence": 70,
+        "overall": 82,
+        "decision": "valid",
+        "suggestions": [
+          "Confirmer délai SSO",
+          "Nuancer 15 février"
+        ]
+      },
+      "judge": {
+        "faithfulness": 72,
+        "completeness": 78,
+        "tone_match": 86,
+        "conciseness": 85,
+        "overall": 79,
+        "strengths": [
+          "Structure miroir point-par-point très lisible, reprend exactement la numérotation de l'email entrant",
+          "La conditionnelle sur la date ('à condition de lancer la configuration SSO dans les prochains jours') est réaliste et honnête",
+          "La demande de mise en copie d'un référent technique est proactive et actionnable",
+          "Ton professionnel et registre B2B soutenu parfaitement calibré sur celui du DSI",
+          "Pas de remplissage ni de redondance — chaque phrase apporte de la valeur"
+        ],
+        "weaknesses": [
+          "RGPD / hébergement France : le client a explicitement demandé 'hébergement des données en France' ; répondre 'infrastructure européenne' est évasif et ne confirme pas la conformité France — pénalité complétude et légère suspicion faithfulness",
+          "SCIM présenté comme 'disponible' alors qu'aucun élément de la conversation ne permet d'affirmer la disponibilité effective en prod (risque d'overclaim)",
+          "La promesse 'Je vous transmets notre DPA et la documentation de localisation des données à la suite de cet email' est une action concrète non déclenchable par un brouillon seul — à valider côté émetteur avant envoi",
+          "Aucune proposition de créneau ou de prochaine étape datée, alors que le calendrier est serré (comité le 15 février)"
+        ],
+        "hallucinations": [
+          "'Le provisioning automatique est disponible' — présenté comme un fait établi sans base dans l'historique de conversation ni l'email entrant ; potentiel overclaim si SCIM est en développement",
+          "'nos données sont hébergées sur infrastructure européenne' — formulé comme un fait précis alors qu'aucune source ne confirme le pays d'hébergement ; de plus, la demande était France spécifiquement, pas UE"
+        ]
+      }
+    }
+  ]
+}

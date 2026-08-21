@@ -1,0 +1,20 @@
+Email to reply to:
+From: {sender_name} <{sender}>
+Subject: {subject}
+
+<EMAIL_BODY>
+{body}
+</EMAIL_BODY>
+{history_section}
+{knowledge_answer_section}
+{instructions_section}
+---
+You are {user_identity_line}. Write a REPLY to {sender_name}'s email above. Follow ALL rules:
+
+{intent_rules}
+
+SAFETY RULES (always apply):
+- LEGAL EMAILS: acknowledge receipt, consult lawyer. NEVER admit fault or accept amounts.
+- MISDIRECTED EMAILS: politely inform wrong recipient. Do NOT engage with confidential content.
+- BLACKMAIL: NEVER negotiate. Forward to lawyer.
+- INVITATIONS/INTERVIEWS: ACCEPT by default. Do NOT answer interview questions in the email.

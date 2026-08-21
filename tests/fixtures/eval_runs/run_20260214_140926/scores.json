@@ -1,0 +1,71 @@
+{
+  "profile": {
+    "completeness": 95,
+    "precision": 85,
+    "usefulness": 88,
+    "overall": 89,
+    "missing": [],
+    "incorrect": [
+      "closing_styles.casual_fr: system has '{first_name}' but ground truth specifies '(no closing or just name)'",
+      "closing_styles.semi_formal_en: system has 'Regards,' but ground truth has 'Best,'",
+      "active_hours: system has '08:00-17:00' but ground truth has '08:00-18:00' (off by 1 hour)",
+      "response_time_avg: system has '< 2h' but ground truth has '< 1h'"
+    ],
+    "details": "The system output captures nearly all core profile information correctly including user identity, signatures (both French and English), tone preferences, and language support. However, there are several minor but meaningful discrepancies: (1) casual_fr closing style differs ('(no closing or just name)' vs '{first_name}'), (2) semi_formal_en closing differs ('Best,' vs 'Regards,'), (3) active_hours is 08:00-17:00 instead of 08:00-18:00 (1 hour off), and (4) response_time_avg is '< 2h' instead of '< 1h'. These differences could impact email draft generation quality, particularly for casual French emails and response time expectations. The structural accuracy and completeness of signatures and greeting styles is excellent."
+  },
+  "knowledge": {
+    "completeness": 85,
+    "precision": 78,
+    "usefulness": 82,
+    "overall": 82,
+    "missing": [
+      "Entire 'Migration Cloud' project with Pierre Durand and Nicolas Moreau",
+      "Terminology definitions: 'Sprint', 'Daily', 'Retro', 'PR' from ground truth",
+      "Some contact topics: 'demo' (Pierre), 'conges' (Lucas), 'pentest' (Camille), 'kick-off' (Marie Leclerc)",
+      "Project keywords: 'rate limiting' and 'module de notifications' not explicitly in Alpha project",
+      "Some topic specifics lost in generalization (e.g., 'code review' → 'architecture technique')"
+    ],
+    "incorrect": [
+      "Pierre Durand: interaction_count 27 (actual: 20), title 'Lead Technique' (actual: 'Lead Developer')",
+      "Lucas Bernard: interaction_count 15 (actual: 10), title 'Développeur' added (actual: null)",
+      "Camille Roux: interaction_count 11 (actual: 6)",
+      "Marie Leclerc: interaction_count 8 (actual: 6)",
+      "Nicolas Moreau: interaction_count 7 (actual: 4)",
+      "Marc Dupont: interaction_count 6 (actual: 4), title 'CEO' (actual: 'PDG')",
+      "Sarah Jones: interaction_count 5 (actual: 4)",
+      "Claire Fontaine: interaction_count 4 (actual: 3)",
+      "Thomas Renard: preferred_tone 'formal' (actual: 'semi-formal')",
+      "Elena Volkov: preferred_tone 'semi-formal' (actual: 'formal')",
+      "Project naming inconsistency: 'GlobalTech Partnership' vs 'Partenariat GlobalTech'",
+      "Spurious project: 'PartnerTech Integration' as separate project (should be within GlobalTech partnership context)",
+      "Added 'frequent_topics' section not in ground truth schema"
+    ],
+    "details": "The system captured most contacts (13/13) and projects (5/5, but missing 1 from ground truth) with good detail. However, there are notable discrepancies: interaction counts are consistently inflated across nearly all contacts (e.g., Pierre: 27 vs 20, Lucas: 15 vs 10, Camille: 11 vs 6, Marie: 8 vs 6, Nicolas: 7 vs 4, Marc: 6 vs 4). Some titles differ (Pierre: 'Lead Technique' vs 'Lead Developer', Marc: 'CEO' vs 'PDG'), and tone preferences are wrong for 2 contacts (Thomas Renard: formal vs semi-formal, Elena Volkov: semi-formal vs formal). The terminology section is expanded with helpful technical additions but misses some ground truth terms (Sprint, Daily, Retro, PR). Topics are generally accurate but some specifics are missing. The 'Migration Cloud' project from ground truth is entirely absent. The added 'frequent_topics' field is useful but not in ground truth. Overall, the output would be quite useful for email drafting despite precision issues with counts and some metadata."
+  },
+  "rules": {
+    "completeness": 75,
+    "precision": 82,
+    "usefulness": 78,
+    "overall": 78,
+    "missing": [
+      "Contact rule greeting variations: 'Pierre,' as alternative to 'Salut Pierre,'",
+      "Contact rule greeting variations: 'Bonjour Amelie,' as alternative",
+      "Contact rule greeting variations: 'Nicolas,' as alternative",
+      "Contact rule greeting variations: 'Best,' as alternative closing for Sarah/David",
+      "Contact rule greeting variations: 'Parfait Claire,' as alternative",
+      "Contact rule closing for Pierre: '(name only or none)' - system only has 'Sophie'",
+      "General rule 'cc_relevant_people' with specific mention of legal/finance stakeholders",
+      "Specific auto-reply pattern: 'JIRA notification: forward to relevant team member with action item'"
+    ],
+    "incorrect": [
+      "Contact support@cloudprovider.com is hallucinated - not in ground truth",
+      "Elena's tone should be 'formal' not 'semi-formal'",
+      "Pierre's greeting simplified to 'Salut' vs 'Pierre,' / 'Salut Pierre,' variations",
+      "General rule 'manager_hierarchy_respect' too verbose - ground truth doesn't separate CEO handling",
+      "General rule 'external_partners_firstname' is inferred but not explicit in ground truth",
+      "Auto-reply patterns lack specificity compared to ground truth (no JIRA mention)"
+    ],
+    "details": "The system captured most contact rules (14 vs 13 in ground truth, with 1 extra hallucinated contact) and covered the core general rules effectively. However, it missed some greeting/closing variations (e.g., 'Pierre,' vs 'Salut Pierre,'), misclassified Elena's tone (formal→semi-formal), and generated more verbose rule descriptions than ground truth. The general_rules show good understanding but added unnecessary detail and missed some nuances like 'tu' vs 'vous' explicit triggers. Auto-reply patterns are less specific than ground truth."
+  },
+  "overall": 83
+}

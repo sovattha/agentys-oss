@@ -1,0 +1,54 @@
+name: Bug report
+description: Something behaves differently from what you expected
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please do not paste real email content, addresses, or names.
+        Redact them before submitting — this is a public issue tracker.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you observe, and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Connect an IMAP account
+        2. Open an email in the inbox
+        3. Click "Generate reply"
+        4. Observe ...
+    validations:
+      required: true
+  - type: dropdown
+    id: provider
+    attributes:
+      label: Mail provider
+      options: [Gmail, Outlook / Microsoft Graph, IMAP/SMTP, Not applicable]
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Where
+      options: [Backend API, Desktop app, Mobile app, Not sure]
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "OS, Python version, commit or release"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Redact addresses and message content first.
+      render: shell

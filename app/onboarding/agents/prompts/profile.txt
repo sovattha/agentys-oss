@@ -1,0 +1,76 @@
+LANGUE DE SORTIE : utilise la même langue que la majorité des emails analysés. Les valeurs techniques (clés JSON, codes de langue) restent en anglais.
+
+Analyse les emails ENVOYÉS d'un utilisateur et produis un profil structuré de ses habitudes de communication.
+
+RÈGLE D'IDENTITÉ (CRITIQUE) :
+- L'utilisateur EST le propriétaire du compte indiqué par `User email:` dans le prompt.
+- `user_name` DOIT correspondre au signataire réel des emails ENVOYÉS : soit le champ `From:` de ces emails, soit la signature apposée en bas par le propriétaire du compte.
+- NE JAMAIS utiliser un nom trouvé dans le corps d'un email (vocatif comme "Salut Alexandre,"), en destinataire (To/Cc), dans un thread forwardé, ou dans une signature d'un autre interlocuteur. Ceux-ci sont des CONTACTS, pas l'utilisateur.
+- Si plusieurs noms apparaissent fréquemment, privilégie TOUJOURS celui qui correspond à l'adresse du `From:` ≡ `User email:`.
+- En cas de doute ou si la signature est absente, retourne `user_name: ""` (string vide) plutôt que d'inventer.
+- INTERDIT : ne retourne JAMAIS la string littérale "None", "null", "N/A", "undefined", "Unknown", "Inconnu" ou "User" — utilise uniquement `""` (string vide).
+
+Extrais :
+1. **Identité** : nom complet, prénom usuel, poste, entreprise, métier libre (du propriétaire du compte uniquement).
+
+   PREFERRED_NAME (prénom usuel) :
+   - Le prénom sous lequel l'utilisateur se signe réellement dans ses emails (peut différer du nom légal).
+   - Observe la signature ET les closings "casual" : "Alex" pour "Alexandre Dupont", "Kate" pour "Katherine Miller".
+   - Si l'utilisateur signe toujours avec son nom complet ou pas du tout de diminutif → mets la 1ère composante de `user_name` (ex: "Alexandre" si user_name="Alexandre Dupont").
+   - Retourne `""` (string vide) uniquement si `user_name` lui-même est vide.
+
+   PROFESSION (métier libre) :
+   - Déduis le métier réel de l'utilisateur depuis sa signature, son poste, son entreprise, les objets d'emails et le vocabulaire récurrent.
+   - Exemples valides : "courtier immobilier", "avocat en droit social", "fondateur SaaS", "responsable support client".
+   - Le métier n'est PAS forcément identique au poste exact dans `signature.title` : synthétise un libellé court et compréhensible.
+   - Si le signal est faible, contradictoire ou absent → retourne `profession: ""` plutôt que d'inventer.
+
+2. **Profil de ton** : niveau de formalité par défaut + adressage (tu/vous) + salutations et formules de politesse.
+
+   DEFAULT TONE :
+   1. Compte les emails par ton (casual, semi-formal, formal)
+   2. Le default_tone = le ton le plus fréquent DANS L'ENSEMBLE
+   3. Si ton très différent entre interne et externe → le ton EXTERNE l'emporte
+
+   ADDRESSING (uniquement pertinent pour le français) :
+   - "tu" : l'utilisateur tutoie la majorité des contacts réels (pronoms "tu", "toi", "ton"/"ta").
+   - "vous" : l'utilisateur vouvoie ("vous", "votre").
+   - "mixed" : mélange significatif selon les contacts (≥ 30 % dans chaque registre).
+   - null : corpus majoritairement en anglais OU signal insuffisant — n'invente JAMAIS.
+
+   Mapping salutations → clés :
+   - "Salut {first_name}," / juste "{first_name}," → casual_fr
+   - "Bonjour {first_name}," → semi_formal_fr
+   - "Bonjour Madame/Monsieur {last_name}," → formal_fr
+   - "Hi {first_name}," → semi_formal_en (casual_en si closing très court + collègue pair)
+   - "Dear {first_name}," → formal_en
+   - Formules de fin : "Cordialement," → formel/semi-formel, prénom seul → casual, "Best regards," → formal_en, "Best," → semi_formal_en
+
+   CLÉS : utilise les clés standard (casual_fr, semi_formal_fr, formal_fr, casual_en, semi_formal_en, formal_en).
+   N'INVENTE PAS de nouvelles clés. N'inclus QUE celles observées.
+3. **Langues** : dans quelles langues l'utilisateur écrit
+4. **Variante régionale** : code ISO de la variante linguistique détectée à partir du vocabulaire et de l'adresse dans la signature (ex: fr-CA, fr-FR, fr-BE, en-US, en-GB, pt-BR). null si pas assez de signal.
+
+IMPORTANT :
+- Utilise TOUJOURS {first_name} et {last_name} dans greeting_styles (PAS {prenom}/{nom})
+- Pour closing_styles casual_fr, utilise "(no closing or just name)" si applicable
+
+CRITIQUE : Produis UNIQUEMENT un objet JSON valide. Pas de markdown, pas d'explication, pas de blocs de code.
+
+Schéma JSON :
+{
+  "user_email": "string",
+  "user_name": "string",
+  "preferred_name": "Alex",
+  "profession": "courtier immobilier",
+  "signature": {"name": "...", "title": "... ou null", "company": "... ou null"},
+  "tone": {
+    "default_tone": "formal | semi-formal | casual",
+    "addressing": "tu | vous | mixed | null",
+    "greeting_styles": {"casual_fr": "Salut {first_name},", "semi_formal_fr": "Bonjour {first_name},", "...": "..."},
+    "closing_styles": {"casual_fr": "(no closing or just name)", "semi_formal_fr": "Merci,", "...": "..."},
+    "average_response_length": "short | medium | medium-long | long"
+  },
+  "languages": ["fr", "en"],
+  "language_variant": "fr-CA"
+}

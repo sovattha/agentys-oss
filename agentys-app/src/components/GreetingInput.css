@@ -1,0 +1,248 @@
+/* ============================================================================
+ * GreetingInput — compact inline editor for greeting templates
+ * Layout: [ display/input ............................. | Mode ▾ ]
+ * Empty state: placeholder parsed with muted chips (not raw {first_name}).
+ * ============================================================================ */
+
+.gi-wrap {
+  position: relative;
+  width: 100%;
+  font-size: var(--font-size-sm, 0.8125rem);
+  line-height: 1.4;
+  container-type: inline-size;
+}
+
+.gi-field {
+  display: flex;
+  align-items: stretch;
+  min-height: 38px;
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--border-default, #e5e7eb);
+  background: var(--bg-secondary, #f8fafc);
+  overflow: hidden;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.gi-wrap.is-editing .gi-field {
+  border-color: var(--accent-primary, #2dd4bf);
+  box-shadow: 0 0 0 3px var(--accent-primary-glow, rgba(45, 212, 191, 0.18));
+}
+
+/* --- Display (preview with chips) --- */
+.gi-display,
+.gi-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 8px 12px;
+  font-family: inherit;
+  font-size: var(--font-size-sm, 0.8125rem);
+  color: var(--text-primary, #111827);
+  background: none;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: text;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 3px;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.gi-display {
+  text-overflow: ellipsis;
+}
+
+.gi-display:focus-visible {
+  outline: 2px solid var(--accent-primary, #2dd4bf);
+  outline-offset: -2px;
+  border-radius: 8px;
+}
+
+.gi-input::placeholder {
+  color: var(--text-tertiary, #9ca3af);
+}
+
+.gi-text {
+  white-space: pre;
+}
+
+/* --- Chips (pills for tokens) --- */
+.gi-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  border-radius: 999px;
+  white-space: nowrap;
+  cursor: default;
+  user-select: none;
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease, transform 140ms ease;
+}
+
+/* first_name → teal (the most common, brand-aligned) */
+.gi-chip-first_name {
+  color: var(--accent-primary-strong, #0f766e);
+  background: var(--accent-primary-soft, rgba(45, 212, 191, 0.14));
+  border: 1px solid var(--accent-primary-glow, rgba(45, 212, 191, 0.35));
+}
+
+/* civility → blue (formal prefix) */
+.gi-chip-civility {
+  color: var(--accent-secondary-strong, #1d4ed8);
+  background: var(--accent-secondary-soft, rgba(59, 130, 246, 0.12));
+  border: 1px solid var(--accent-secondary-glow, rgba(59, 130, 246, 0.35));
+}
+
+/* last_name → purple (distinct, complementary) */
+.gi-chip-last_name {
+  color: var(--accent-tertiary-strong, #7c3aed);
+  background: var(--accent-tertiary-soft, rgba(124, 58, 237, 0.12));
+  border: 1px solid var(--accent-tertiary-glow, rgba(124, 58, 237, 0.35));
+}
+
+/* Empty state: muted chips and text, signals "preview / placeholder" */
+.gi-wrap.is-empty .gi-chip {
+  color: var(--text-tertiary, #9ca3af);
+  background: rgba(148, 163, 184, 0.14);
+  border-color: rgba(148, 163, 184, 0.35);
+}
+
+.gi-wrap.is-empty .gi-text {
+  color: var(--text-tertiary, #9ca3af);
+}
+
+.gi-wrap.is-empty .gi-display {
+  cursor: pointer;
+}
+
+/* --- Mode button (right side) --- */
+.gi-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 10px;
+  border: none;
+  border-left: 1px solid var(--border-subtle, #e5e7eb);
+  background: transparent;
+  color: var(--text-secondary, #6b7280);
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 140ms ease, color 140ms ease;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.gi-mode-btn:focus-visible {
+  outline: 2px solid var(--accent-primary, #2dd4bf);
+  outline-offset: -2px;
+}
+
+.gi-mode-btn-label {
+  display: inline-block;
+}
+
+.gi-mode-btn-caret {
+  transition: transform 160ms ease;
+  opacity: 0.65;
+}
+
+.gi-mode-btn[aria-expanded="true"] .gi-mode-btn-caret {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+.gi-mode-btn[aria-expanded="true"] {
+  background: rgba(15, 118, 110, 0.06);
+  color: var(--accent-primary-strong, #0f766e);
+}
+
+/* --- Popover menu --- */
+.gi-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 40;
+  min-width: 260px;
+  padding: 6px;
+  background: var(--surface-primary, #ffffff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: gi-menu-in 140ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes gi-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.gi-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 8px 10px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-primary, #111827);
+  transition: background 120ms ease;
+}
+
+.gi-menu-item.is-active {
+  background: var(--accent-primary-soft, rgba(45, 212, 191, 0.12));
+}
+
+.gi-menu-item.is-active .gi-menu-label {
+  color: var(--accent-primary-strong, #0f766e);
+}
+
+.gi-menu-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.gi-menu-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary, #6b7280);
+  white-space: nowrap;
+}
+
+/* --- Responsive: narrow CONTAINERS (not viewport) collapse to icon-only ---
+ * Uses container queries so it reacts to the pillar-field width (usually
+ * ~280–310px inside Settings rows), not to the viewport. When the field
+ * itself is too narrow, hide the label and show just the caret so the
+ * chips+text still fit on one line. */
+@container (max-width: 320px) {
+  .gi-mode-btn-label {
+    display: none;
+  }
+  .gi-mode-btn {
+    padding: 0 9px;
+  }
+}

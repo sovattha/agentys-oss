@@ -1,0 +1,103 @@
+{
+  "profile": {
+    "completeness": 85,
+    "precision": 70,
+    "usefulness": 75,
+    "overall": 77,
+    "missing": [
+      "greeting_styles: '(no greeting)' option for casual tones",
+      "greeting_styles: 'Hey {first_name}' for casual_en (system has 'yo')",
+      "closing_styles: '(no closing) / just emoji' exact format",
+      "closing_styles: 'Bien cordialement, / Priya' for semi_formal_fr",
+      "closing_styles: 'Cordialement, / Priya Pivot' for formal_fr",
+      "signature: should be null, not a structured object",
+      "active_hours: 'irregular' (system has specific time range)",
+      "response_time_avg: '< 30min' (system has '< 1h')",
+      "average_response_length: 'short' (system has 'medium')"
+    ],
+    "incorrect": [
+      "signature: hallucinated detailed structure with title/company when ground truth is null",
+      "signature_en: fabricated field not in ground truth",
+      "greeting_styles.casual_en: 'yo' instead of 'Hey {first_name}'",
+      "greeting_styles.formal_fr_institutional: fabricated, should be 'Monsieur/Madame {last_name},'",
+      "greeting_styles.semi_formal_en: 'Hi {first_name},' not in ground truth",
+      "closing_styles: all entries have wrong format (full signatures instead of slash-separated options)",
+      "active_hours: '08:00-00:00' instead of 'irregular'",
+      "response_time_avg: '< 1h' instead of '< 30min'",
+      "average_response_length: 'medium' instead of 'short'"
+    ],
+    "details": "The system correctly identified the core user profile (email, name, languages). Tone analysis captured the casual default and emoji/first-name usage. However, several issues reduce precision: (1) The system hallucinated detailed signature structures when ground truth shows null/simple signatures, (2) greeting/closing styles don't match ground truth patterns (e.g., 'yo' vs 'Hey {first_name}', missing '(no greeting)' option), (3) response length is 'medium' vs 'short', (4) active hours are '08:00-00:00' vs 'irregular', (5) response time is '< 1h' vs '< 30min'. The system found most categories but with varying accuracy."
+  },
+  "knowledge": {
+    "completeness": 75,
+    "precision": 70,
+    "usefulness": 75,
+    "overall": 73,
+    "missing": [
+      "Contact: noreply@aws.amazon.com (Amazon Web Services, automated)",
+      "Contact: noreply@calendly.com (Calendly, automated)",
+      "Contact: hello@stripe.com (Stripe, automated)",
+      "Terminology: NRR (Net Revenue Retention)",
+      "Terminology: CAC (Customer Acquisition Cost)",
+      "Terminology: LTV (Lifetime Value)",
+      "Terminology: PMF (Product-Market Fit)",
+      "Terminology: burn rate",
+      "Terminology: runway",
+      "Terminology: BSPCE",
+      "Terminology: DPA (Data Processing Agreement)",
+      "Terminology: RBAC",
+      "Terminology: SDR",
+      "Terminology: WTTJ",
+      "Terminology: lgtm",
+      "Contact titles for: Arjun Mehta (CTO & Co-fondateur), Léa Dupont (Head of Product), Tom Nguyen (Lead Dev), Inès Belkacem (Customer Success), Marcus Chen (Partner), Sarah Liu (Program Manager)",
+      "Ground truth project keywords: 'CAC', 'LTV', 'burn rate', 'runway', 'board seat', 'valuation', 'DPA', 'conversion rate'"
+    ],
+    "incorrect": [
+      "Arjun Mehta type: 'colleague' should be 'co-founder' (CRITICAL - relationship misclassified)",
+      "Marcus Chen type: 'partner' should be 'investor' (CRITICAL - affects tone/approach)",
+      "Claire Beaumont type: 'partner' should be 'investor', tone: 'formal' should be 'semi-formal'",
+      "Jean-Marc Tessier type: 'prospect' should be 'client' (affects sales vs account management approach)",
+      "Philippe Renaud type: 'supplier' should be 'banker' (wrong relationship category)",
+      "Arjun interaction_count: 20 should be 19 (minor)",
+      "Tom interaction_count: 9 should be 8 (minor)",
+      "Léa preferred_language: 'fr' should be 'mixed' (affects language choice in emails)",
+      "All contact titles are null/missing when ground truth has specific titles (reduces personalization)",
+      "Project 'Security & Compliance' - not in ground truth (reasonable inference but not requested)",
+      "Topics contain over-expanded technical details not in ground truth (e.g., 'AES-256', 'TLS 1.3', 'Vanta', 'CloudFront', 'DocuSign')"
+    ],
+    "details": "The system captures most key contacts (9/12) and projects (4/4 core + 1 extra), with good topic coverage. However, it misses 3 automated contacts (AWS, Calendly, Stripe), incorrectly classifies contact types (Arjun as 'colleague' not 'co-founder', Marcus/Claire as 'partner' not 'investor', JM as 'prospect' not 'client', Philippe as 'supplier' not 'banker'), and omits critical contact titles entirely. Terminology is comprehensive (23 terms vs 32 in ground truth) with accurate definitions. The interaction count for Arjun is slightly off (20 vs 19). Topics are well-captured but sometimes over-expanded with granular details not in ground truth. The extra 'Security & Compliance' project shows good inference but wasn't in ground truth. The 'frequent_topics' section is a useful addition. Overall, the output would be helpful for drafting emails but has notable precision issues with contact classification and missing automated senders."
+  },
+  "rules": {
+    "completeness": 72,
+    "precision": 78,
+    "usefulness": 75,
+    "overall": 75,
+    "missing": [
+      "Emoji-only closings for internal team members (arjun, lea, tom, ines)",
+      "Greeting variations: 'yo/dude' for Arjun",
+      "Lea's mixed language (FR+EN) specification",
+      "Claire's closing variant 'Bien cordialement, / Priya'",
+      "Philippe's full signature 'Priya Pivot / CEO - HeyVibe'",
+      "JM Tessier's closing with name 'Bien cordialement, / Priya Pivot'",
+      "Sarah's closing variants 'Priya / Thanks!'",
+      "General rule: ultra_short_responses (lgtm, ship it, +1, emoji-only)",
+      "General rule: startup_jargon (without explicit FR/EN context mixing)",
+      "General rule: hindi_words_with_cofounder (yaar)",
+      "General rule: no_signature (explicit mention of no signature block)",
+      "General rule: formal_for_external (as a distinct rule)",
+      "Auto-reply patterns for AWS/Calendly/Stripe notifications",
+      "Auto-reply patterns for quick approvals"
+    ],
+    "incorrect": [
+      "Lea's language marked as 'fr' instead of 'mixed'",
+      "Claire Beaumont marked as 'formal' tone instead of 'semi-formal'",
+      "JM Tessier marked as 'formal' tone instead of 'semi-formal'",
+      "Internal team closings listed as '(name only or none)' missing emoji specification",
+      "General rule 'minuscules_casual' is overly specific - ground truth doesn't explicitly mention lowercase/SMS style",
+      "General rule 'termes_techniques_anglais' overlaps with but differs from 'startup_jargon' rule",
+      "General rule 'urgence_delais_courts' not present in ground truth"
+    ],
+    "details": "The system captured most contact rules (9/9 contacts identified) and several key general rules, but missed important details. COMPLETENESS: Missing emoji-only closings for internal team, 'yo/dude' greetings for Arjun, Hindi words usage, ultra-short response patterns, startup jargon rule, and auto-reply patterns. Some contact tone classifications differ (Claire/JM marked as 'formal' vs 'semi-formal'). PRECISION: Lea's language marked as 'fr' instead of 'mixed', missing 'Priya Pivot' variants in closings for some contacts, and some general rules are overly specific or reframed differently than ground truth. USEFULNESS: The output would still generate reasonable emails with correct tone levels and formality, but would miss key stylistic elements like emoji-heavy closings, ultra-short responses, and specific greeting variations."
+  },
+  "overall": 75
+}

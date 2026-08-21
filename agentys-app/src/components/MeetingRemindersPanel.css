@@ -1,0 +1,260 @@
+/* ============================================================================
+   MEETING REMINDERS PANEL — Modal & Card-based settings
+   ============================================================================ */
+
+.meeting-reminders-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-light, rgba(15, 23, 42, 0.4));
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal, 9000);
+  animation: meeting-reminders-overlay-in 180ms ease-out;
+}
+
+@keyframes meeting-reminders-overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.meeting-reminders-panel {
+  background: var(--surface-primary, #ffffff);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  border-radius: var(--radius-xl, 16px);
+  max-width: 520px;
+  width: 92%;
+  max-height: 85vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18), 0 6px 16px rgba(0, 0, 0, 0.08);
+  animation: meeting-reminders-panel-in 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.meeting-reminders-panel.closing {
+  animation: meeting-reminders-panel-out 160ms ease-in forwards;
+}
+
+@keyframes meeting-reminders-panel-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+@keyframes meeting-reminders-panel-out {
+  from { opacity: 1; transform: translateY(0)   scale(1); }
+  to   { opacity: 0; transform: translateY(8px) scale(0.98); }
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+.meeting-reminders-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid var(--border-subtle, #e2e8f0);
+}
+
+.meeting-reminders-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.meeting-reminders-header h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary, #0f172a);
+  letter-spacing: -0.01em;
+}
+
+.meeting-reminders-back,
+.meeting-reminders-close {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary, #64748b);
+  padding: 7px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 120ms ease, transform 120ms ease;
+}
+
+.meeting-reminders-close:active {
+  transform: scale(0.94);
+}
+
+/* ── Content ──────────────────────────────────────────────── */
+.meeting-reminders-content {
+  padding: 18px 22px 22px;
+  overflow-y: auto;
+}
+
+.meeting-reminders-intro {
+  margin: 0 0 16px;
+  color: var(--text-secondary, #64748b);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.meeting-reminders-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── Card ─────────────────────────────────────────────────── */
+.mr-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 14px 14px 12px;
+  background: var(--surface-secondary, #f8fafc);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  border-radius: 12px;
+  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.mr-card.is-on {
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 4%, var(--surface-primary, #ffffff));
+  border-color: color-mix(in srgb, var(--accent-primary, #0d9488) 30%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-primary, #0d9488) 10%, transparent);
+}
+
+.mr-card-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-primary, #ffffff);
+  color: var(--text-secondary, #64748b);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.mr-card.is-on .mr-card-icon {
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 12%, var(--surface-primary, #ffffff));
+  color: var(--accent-primary, #0d9488);
+  border-color: color-mix(in srgb, var(--accent-primary, #0d9488) 25%, transparent);
+}
+
+.mr-card-body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mr-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.mr-card-title {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  line-height: 1.3;
+}
+
+.mr-card-hint {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--text-secondary, #64748b);
+}
+
+/* ── Toggle (custom switch) ──────────────────────────────── */
+.mr-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.mr-toggle input {
+  appearance: none;
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.mr-toggle-track {
+  position: relative;
+  width: 38px;
+  height: 22px;
+  background: var(--border-default, #cbd5e1);
+  border-radius: 999px;
+  transition: background 180ms ease;
+}
+
+.mr-toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mr-toggle input:checked + .mr-toggle-track {
+  background: var(--accent-primary, #0d9488);
+}
+
+.mr-toggle input:checked + .mr-toggle-track::after {
+  transform: translateX(16px);
+}
+
+.mr-toggle input:focus-visible + .mr-toggle-track {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary, #0d9488) 30%, transparent);
+}
+
+/* ── Select (System notification timing) ─────────────────── */
+.mr-card-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--surface-primary, #ffffff)
+    url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E")
+    no-repeat right 8px center;
+  border: 1px solid var(--border-default, #cbd5e1);
+  border-radius: 8px;
+  padding: 6px 26px 6px 10px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-primary, #0f172a);
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.mr-card-select:focus-visible {
+  outline: none;
+  border-color: var(--accent-primary, #0d9488);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary, #0d9488) 20%, transparent);
+}
+
+.mr-card.is-on .mr-card-select {
+  border-color: color-mix(in srgb, var(--accent-primary, #0d9488) 35%, var(--border-default, #cbd5e1));
+}

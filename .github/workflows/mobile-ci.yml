@@ -1,0 +1,54 @@
+name: Mobile CI
+
+# Type-check + tests unitaires de agentys-mobile.
+# Déclenché uniquement sur les changements mobile pour préserver les minutes CI
+# (même politique que test.yml, incident coût 2026-04-23).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "agentys-mobile/**"
+      - ".github/workflows/mobile-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "agentys-mobile/**"
+      - ".github/workflows/mobile-ci.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  typecheck-and-test:
+    name: typecheck + jest
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: agentys-mobile
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Yarn 4 (Berry) via corepack — version épinglée par packageManager/yarnrc
+      - name: Enable corepack
+        run: corepack enable
+
+      # --immutable garantit le lockfile ; le postinstall patch-codegen-plugin.js
+      # DOIT tourner (patches node_modules pour Expo 54 + RN 0.86).
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Type-check
+        run: npx tsc --noEmit
+
+      - name: Unit tests
+        run: yarn test --ci --silent

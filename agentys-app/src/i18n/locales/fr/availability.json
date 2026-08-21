@@ -1,0 +1,23 @@
+{
+  "button_label": "Insérer mes créneaux",
+  "button_title": "Insérer un lien de réservation ou des créneaux libres dans votre réponse",
+  "mode_link_only": "Insérer le lien de réservation",
+  "mode_free_times": "Insérer des créneaux libres",
+  "mode_free_times_and_link": "Insérer créneaux + lien",
+  "mode_link_missing_badge": "Aucun lien",
+  "no_booking_link_warning": "Ajoutez d'abord un lien dans Paramètres → Productivité.",
+
+  "picker_title": "Choisissez les créneaux à proposer",
+  "picker_hint": "Cliquez sur un horaire libre pour l'ajouter. × pour retirer.",
+  "select_times_hint": "Sélectionnez des créneaux à insérer dans votre réponse.",
+  "selected_count_one": "{{count}} créneau sélectionné",
+  "selected_count_other": "{{count}} créneaux sélectionnés",
+  "insert": "Insérer",
+
+  "duration_minutes_one": "{{count}} min",
+  "duration_minutes_other": "{{count}} min",
+
+  "busy_unnamed": "Occupé",
+  "emails_check": "Emails",
+  "personal_work": "Travail personnel"
+}

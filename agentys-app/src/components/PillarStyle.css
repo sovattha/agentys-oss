@@ -1,0 +1,834 @@
+.pillar-style {
+  padding: 0;
+  /* Local tone tokens (mapped to semantic colors) */
+  --tone-casual: var(--accent-success, #22c55e);
+  --tone-semi-formal: var(--warning, #f59e0b);
+  --tone-formal: var(--info, #3b82f6);
+  --tone-amber-dark: var(--warning-dark, #b45309);
+  --tone-premium: var(--accent-premium, #8b5cf6);
+  --tone-premium-dark: var(--accent-premium-dark, #7c3aed);
+}
+
+.pillar-style-divider {
+  height: 1px;
+  margin: 22px 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent-primary) 18%, var(--border-subtle)) 50%,
+    transparent 100%);
+}
+
+.style-detected {
+  padding: 0;
+}
+
+.style-detected-loading {
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--text-placeholder);
+  padding: 8px 0;
+}
+
+.style-detected-empty {
+  margin: 0;
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--text-placeholder);
+  font-style: italic;
+  padding: 8px 0;
+}
+
+.style-detected-meta {
+  font-size: var(--font-size-2xs, 0.7rem);
+  color: var(--accent-primary);
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.style-detected-meta::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 4px currentColor;
+}
+
+.style-detected-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.style-detected-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.style-detected-item-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.style-detected-item-text {
+  font-size: var(--font-size-sm, 0.78rem);
+  color: var(--text-secondary);
+}
+
+.style-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Greeting/closing block: the formality lead-in hugs its rows (12px) so it
+   reads as their heading, while the block as a whole keeps the 18px gap from
+   the language picker above. */
+.style-greetings-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.style-emotion-control {
+  display: flex;
+  gap: 0;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md, 8px);
+  padding: 3px;
+}
+
+.style-emotion-option {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 40px;
+  padding: 8px 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.25;
+  border-radius: calc(var(--radius-md, 8px) - 4px);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.style-emotion-option.active {
+  background: var(--surface-primary);
+  color: var(--accent-primary);
+  font-weight: 600;
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--accent-primary) 15%, transparent);
+}
+
+.style-nickname-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+/* Contact filter */
+.style-contact-filter {
+  margin-bottom: 10px;
+  font-size: var(--font-size-xs, 0.76rem);
+}
+
+.style-nickname-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.style-nickname-add {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.style-nickname-add:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.style-learned-rules {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.style-rules-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.style-rules-group {
+  margin-bottom: 12px;
+}
+
+.style-rules-group-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-xs, 0.74rem);
+  font-weight: 600;
+  text-align: left;
+  transition: color 0.15s;
+}
+
+.style-rules-count {
+  font-size: var(--font-size-2xs, 0.65rem);
+  color: var(--text-placeholder);
+  font-weight: 400;
+}
+
+.style-rules-chevron {
+  width: 12px;
+  height: 12px;
+  transform: rotate(0deg);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  flex-shrink: 0;
+}
+
+.style-rules-chevron.expanded {
+  transform: rotate(90deg);
+}
+
+.style-rules-group-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.style-rule-item {
+  display: grid;
+  grid-template-columns: 32px 1fr 60px auto auto;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background 0.15s, border-left 0.15s, padding-left 0.15s;
+}
+
+.style-rule-item:last-child {
+  border-bottom: none;
+}
+
+.style-rule-text {
+  font-size: var(--font-size-xs, 0.76rem);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.style-corrections {
+  display: flex;
+  flex-direction: column;
+}
+
+.style-correction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-subtle);
+  gap: 12px;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.style-correction-item:last-child {
+  border-bottom: none;
+}
+
+.style-correction-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.style-correction-contact {
+  font-size: var(--font-size-xs, 0.72rem);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.style-correction-diff {
+  font-size: var(--font-size-xs, 0.72rem);
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.style-correction-time {
+  font-size: var(--font-size-2xs, 0.65rem);
+  color: var(--text-placeholder);
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+/* Correction chips */
+.style-correction-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 3px;
+}
+
+.style-correction-chip {
+  font-size: var(--font-size-2xs, 0.68rem);
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.style-correction-chip--change {
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  color: var(--accent-primary);
+}
+
+.style-correction-chip--length {
+  background: color-mix(in srgb, var(--text-tertiary) 8%, transparent);
+  color: var(--text-tertiary);
+}
+
+.style-correction-chip--regen {
+  background: color-mix(in srgb, var(--tone-semi-formal) 10%, transparent);
+  color: var(--tone-amber-dark);
+  font-style: italic;
+  white-space: normal;
+}
+
+/* Rejection summary */
+.style-corrections-summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  font-size: var(--font-size-xs, 0.72rem);
+  color: var(--text-placeholder);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Format preview */
+.format-preview {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.format-preview-label {
+  font-size: var(--font-size-2xs, 0.7rem);
+  color: var(--text-placeholder);
+  font-style: italic;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.format-preview-question {
+  font-size: var(--font-size-xs, 0.74rem);
+  color: var(--text-tertiary);
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  border-radius: 8px 8px 0 0;
+  border: 1px solid var(--border-subtle);
+  border-bottom: 1px dashed var(--border-default);
+}
+
+.format-preview-answer {
+  font-size: var(--font-size-xs, 0.76rem);
+  color: var(--text-secondary);
+  padding: 10px 12px;
+  background: color-mix(in srgb, var(--accent-primary) 3%, var(--bg-secondary));
+  border-radius: 0 0 8px 8px;
+  border: 1px solid var(--border-subtle);
+  border-top: none;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* Inline rules (inside default style / per-contact) */
+.style-inline-rules {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.style-inline-rules--contact {
+  margin: 0 10px 6px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border-subtle);
+}
+
+.style-inline-rules-title {
+  font-size: var(--font-size-2xs, 0.7rem);
+  color: var(--text-placeholder);
+  font-style: italic;
+  margin-bottom: 4px;
+}
+
+.style-rule-item--inline {
+  grid-template-columns: 32px 1fr 50px auto;
+}
+
+/* Show more */
+.style-corrections-show-more {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  background: none;
+  border: 1px dashed var(--border-default);
+  border-radius: 6px;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-xs, 0.72rem);
+  cursor: pointer;
+  margin-top: 4px;
+  transition: all 0.15s;
+}
+
+/* Contact Style Editor */
+.style-contact-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.style-contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.style-contact-row-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.style-contact-row-email {
+  font-size: var(--font-size-sm, 0.78rem);
+  color: var(--text-secondary);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.style-contact-row-badge {
+  font-size: var(--font-size-2xs, 0.65rem);
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  color: var(--accent-primary);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.style-contact-row-badge--formality {
+  background: color-mix(in srgb, var(--text-tertiary) 10%, transparent);
+  color: var(--text-tertiary);
+}
+
+.style-contact-row-details {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.style-contact-row-detail {
+  font-size: var(--font-size-2xs, 0.7rem);
+  color: var(--text-placeholder);
+  font-style: italic;
+}
+
+.style-contact-row-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.style-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border-default);
+  margin-top: 4px;
+}
+
+.style-contact-form-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.style-contact-error {
+  font-size: var(--font-size-xs, 0.72rem);
+  color: var(--status-error, #ef4444);
+  margin: 0;
+  padding: 4px 8px;
+  background: color-mix(in srgb, var(--status-error, #ef4444) 8%, transparent);
+  border-radius: 4px;
+}
+
+/* ── Contact Accordion Cards ──────────────────────────────────────── */
+
+.contact-card {
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.contact-card + .contact-card {
+  margin-top: 6px;
+}
+
+.contact-card--expanded {
+  border-color: color-mix(in srgb, var(--accent-primary) 35%, transparent);
+  box-shadow: 0 2px 12px color-mix(in srgb, var(--accent-primary) 8%, transparent);
+}
+
+.contact-card--new {
+  border-style: dashed;
+}
+
+/* Header is a flex row container — NOT a button — so we can sit the
+   pencil/delete/chevron next to the toggle without violating
+   no-nested-buttons HTML semantics. */
+.contact-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 6px 10px 6px 12px;
+}
+
+.contact-card-header-toggle {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+
+.contact-card-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+/* Card-level metadata caption (e.g. "Updated yesterday") — lives next to
+   the email instead of polluting a field-value row below. */
+.contact-card-header-meta {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--font-size-2xs, 0.65rem);
+  color: var(--text-placeholder);
+  font-weight: 400;
+}
+
+.contact-card-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xs, 0.72rem);
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.contact-card-header-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-card-name {
+  font-size: var(--font-size-sm, 0.82rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contact-card-email {
+  font-size: var(--font-size-2xs, 0.7rem);
+  color: var(--text-placeholder);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contact-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-top: 3px;
+}
+
+.contact-card-badge {
+  font-size: var(--font-size-2xs, 0.63rem);
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  color: var(--accent-primary);
+  font-weight: 500;
+}
+
+.contact-card-badge--alt {
+  background: color-mix(in srgb, var(--text-tertiary) 10%, transparent);
+  color: var(--text-tertiary);
+}
+
+.contact-card-badge--variant {
+  background: color-mix(in srgb, var(--tone-premium) 12%, transparent);
+  color: var(--tone-premium-dark);
+}
+
+.contact-card-badge--nickname {
+  background: color-mix(in srgb, var(--text-primary) 8%, transparent);
+  color: var(--text-secondary);
+}
+
+.contact-card-meta {
+  font-size: var(--font-size-2xs, 0.67rem);
+  color: var(--text-placeholder);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.contact-card-chevron {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: var(--text-placeholder);
+  transform: rotate(0deg);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact-card-chevron.expanded {
+  transform: rotate(90deg);
+}
+
+.contact-card-body {
+  padding: 0 12px 12px;
+  border-top: 1px solid var(--border-subtle);
+  animation: cardBodyOpen 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes cardBodyOpen {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.contact-card-view {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 10px;
+}
+
+.contact-card-view-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  font-size: var(--font-size-xs, 0.76rem);
+}
+
+.contact-card-view-row label {
+  color: var(--text-placeholder);
+  flex-shrink: 0;
+  font-size: var(--font-size-2xs, 0.7rem);
+}
+
+.contact-card-view-row span {
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Content-style rows (Greeting, Closing) carry a free-text value, not an
+   enumerated choice — left-align so the string reads naturally and
+   doesn't get ellipsed mid-sentence on narrow popovers. */
+.contact-card-view-row--content span {
+  text-align: left;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+/* Inline chip marking the recipient's name inside a greeting, so the
+   greeting↔nickname link is visible rather than reading as the name typed
+   twice. Accent-tinted (like the app's `{x}` field tokens) to signal "this
+   part is filled from the nickname", distinct from static greeting text. */
+.greeting-name-chip {
+  display: inline-block;
+  padding: 0 5px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent-primary) 14%, transparent);
+  color: var(--accent-primary);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Trailing punctuation hugs the name ("Salut Mon amour," not "… amour ,"):
+   collapse the chip's right padding when a comma/period immediately follows. */
+.greeting-name-chip--tight-end {
+  padding-right: 2px;
+}
+
+/* ── Per-contact formality value (auto/locked badge + caption) ──────────
+   Renders on the right-hand side of the formality row in view mode :
+   "Semi-formal · ✨ auto · Updated 2 days ago"
+   "Semi-formal · 🔒 locked · Updated yesterday  Back to auto" */
+
+.contact-card-formality-value {
+  /* Override the default "white-space: nowrap" on view-row spans so the
+     badge + caption can wrap below on narrow popovers. */
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px 8px;
+  align-items: baseline;
+  white-space: normal !important;
+}
+
+.contact-card-formality-mode {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 1px 6px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.contact-card-formality-mode--auto {
+  color: color-mix(in srgb, var(--accent-primary, #0d9488) 75%, #18181b);
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 25%, transparent);
+}
+
+.contact-card-formality-mode--locked {
+  color: #71717a;
+  background: #f4f4f5;
+  border: 1px solid #e4e4e7;
+}
+
+.contact-card-formality-unlock {
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--accent-primary, #0d9488);
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.contact-card-formality-unlock:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.contact-card-icon-btn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  min-height: auto;
+  background: none;
+  border: none;
+  color: var(--text-placeholder);
+  cursor: pointer;
+  border-radius: var(--radius-full, 9999px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, background 0.15s;
+}
+
+.contact-card-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 12px;
+}
+
+.contact-card-form-actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+/* ContactAutocomplete inside pillar fields — match compact sizing */
+.pillar-contact-autocomplete input {
+  font-size: var(--font-size-sm, 0.8rem);
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--bg-input, var(--bg-secondary));
+}

@@ -1,0 +1,345 @@
+/* ============================================================================
+   AUTO-REPLY MODAL
+   ============================================================================ */
+
+.autoreply-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-popover);
+  animation: autoreplyFadeIn 0.2s ease-out;
+}
+
+@keyframes autoreplyFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.autoreply-modal {
+  background: var(--surface-primary, white);
+  border-radius: 16px;
+  max-width: 440px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 28px 32px 32px;
+  position: relative;
+  box-shadow: var(--shadow-xl);
+  animation: autoreplySlideUp 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes autoreplySlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.autoreply-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.autoreply-back {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: var(--radius-md, 6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.autoreply-top-bar .autoreply-title {
+  margin: 0;
+}
+
+.autoreply-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  padding: 0;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  border-radius: var(--radius-md, 6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.autoreply-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 20px;
+  text-align: left;
+}
+
+.autoreply-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.autoreply-toggle input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.autoreply-toggle input:checked + .settings-switch {
+  background-color: var(--accent-primary);
+}
+
+.autoreply-toggle input:checked + .settings-switch::before {
+  transform: translateX(20px);
+}
+
+.autoreply-toggle-label {
+  font-size: var(--font-size-sm, 14px);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.autoreply-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: opacity 0.2s;
+}
+
+.autoreply-body[data-disabled="true"] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.autoreply-field-label {
+  font-size: var(--font-size-sm, 14px);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.autoreply-date-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.autoreply-date-group {
+  flex: 1;
+}
+
+.autoreply-date-group span {
+  display: block;
+  font-size: var(--font-size-xs, 12px);
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.autoreply-separator {
+  color: var(--text-muted);
+  padding-top: 16px;
+}
+
+.autoreply-date-error {
+  font-size: var(--font-size-xs, 12px);
+  color: var(--color-error, #ef4444);
+  margin: 0;
+  line-height: var(--leading-normal);
+}
+
+.autoreply-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-secondary);
+  font-family: inherit;
+  font-size: var(--font-size-sm, 14px);
+  color: var(--text-primary);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.autoreply-textarea:focus {
+  border-color: var(--accent-primary);
+}
+
+.autoreply-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.autoreply-hint {
+  font-size: var(--font-size-xs, 12px);
+  color: var(--text-muted);
+  margin: 4px 0 0;
+  line-height: var(--leading-normal);
+}
+
+.autoreply-save {
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 0;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--font-size-sm, 14px);
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.autoreply-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --- Transfer section --- */
+
+.autoreply-divider {
+  height: 1px;
+  background: var(--border-default);
+  margin: 4px 0;
+}
+
+.autoreply-transfer-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: opacity 0.2s;
+}
+
+.autoreply-transfer-body[data-disabled="true"] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.autoreply-email-input {
+  width: 100%;
+  padding: 4px 12px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-secondary);
+  font-family: inherit;
+  font-size: var(--font-size-sm, 14px);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.autoreply-email-input:focus-within {
+  border-color: var(--accent-primary);
+}
+
+/* Strip the ContactAutocomplete's own border/bg so the outer wrapper styles apply */
+.autoreply-email-input .contact-autocomplete-input,
+.autoreply-email-input input {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 6px 0 !important;
+  width: 100%;
+  font-family: inherit;
+  font-size: var(--font-size-sm, 14px);
+  color: var(--text-primary);
+}
+
+.autoreply-email-invalid {
+  border-color: var(--color-error, #ef4444);
+}
+
+.autoreply-email-invalid:focus-within {
+  border-color: var(--color-error, #ef4444);
+}
+
+.autoreply-email-error {
+  font-size: var(--font-size-xs, 12px);
+  color: var(--color-error, #ef4444);
+  margin: 0;
+  line-height: var(--leading-normal);
+}
+
+/* --- Calendar sync chip --- */
+
+.ar-calendar-sync {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--color-success, #22c55e);
+  margin-top: 6px;
+}
+
+.ar-calendar-sync--pending {
+  color: var(--text-tertiary, var(--text-muted));
+}
+
+.ar-calendar-sync--error {
+  color: var(--color-warning, #e67e22);
+}
+
+.autoreply-overlay.closing {
+  animation: modalSlideOut 0.18s var(--ease-clarity) both;
+}
+
+.autoreply-modal.closing {
+  animation: modalSlideOut 0.18s var(--ease-clarity) both;
+}
+
+/* Signature footer mounted below the message RichTextEditor. Mirrors the
+   compact, slightly muted look used in QuickStepsManager / NewMessageModal /
+   ReplyComposer so the signature reads as a preview, not editable content. */
+.autoreply-signature-footer,
+.autoreply-signature-footer p,
+.autoreply-signature-footer div {
+  margin: 0;
+  line-height: 1.5;
+}
+.autoreply-signature-footer {
+  padding: 8px 12px 0 12px;
+  margin-top: 6px;
+  color: var(--text-secondary, #64748b);
+  font-size: 12px;
+  opacity: 0.85;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+.autoreply-signature-footer .agentys-signature,
+.autoreply-signature-footer .agentys-signature[style],
+.autoreply-signature-footer * {
+  border-top: none !important;
+  border-bottom: none !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  box-shadow: none !important;
+}
+.autoreply-signature-footer hr { display: none !important; }
+
+/* The dynamic-field chip styling lives in RichTextEditor.css (.rte-editor
+   .ar-token) so it applies in every editor that uses the {x} menu. */

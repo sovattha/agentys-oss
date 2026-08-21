@@ -1,0 +1,389 @@
+.contact-autocomplete {
+  position: relative;
+  width: 100%;
+}
+
+.contact-autocomplete input {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--border-default);
+  border-radius: 0.375rem;
+  font-size: var(--font-size-base);
+  background-color: var(--surface-primary);
+  color: var(--text-primary);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.contact-autocomplete input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.contact-autocomplete input:disabled {
+  background-color: var(--surface-secondary);
+  cursor: not-allowed;
+}
+
+/* Inline variant: inherits styling from parent (e.g. gmail-field) */
+.contact-autocomplete.inline {
+  flex: 1;
+}
+
+/* Audit 2026-06-11 U-03 : hint flottant sous le champ quand une adresse
+   invalide est refusée (Enter/Tab/virgule/blur) — sans lui, la saisie reste
+   muette et Send grisé est inexpliqué. */
+.ca-invalid-hint {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 2px;
+  padding: 2px 8px;
+  font-size: var(--font-size-xs, 12px);
+  line-height: 1.4;
+  color: var(--color-error, #ff453a);
+  background: var(--surface-primary, #fff);
+  border: 1px solid var(--border-default);
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.contact-autocomplete.inline input,
+.contact-autocomplete.multi input {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  font-family: inherit;
+}
+
+.contact-autocomplete.inline input::placeholder {
+  color: var(--text-placeholder);
+}
+
+.contact-autocomplete.inline input:focus {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+/* ============================================================================
+   MULTI-CHIP MODE (Gmail-style)
+   ============================================================================ */
+.contact-autocomplete.multi {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  cursor: text;
+  min-height: 28px;
+}
+
+.contact-autocomplete.multi input {
+  flex: 1;
+  min-width: 80px;
+  width: auto;
+  border: none;
+  border-radius: 0;
+  padding: 2px 0;
+  background: transparent;
+  box-shadow: none;
+  font-size: var(--font-size-sm, 0.875rem);
+}
+
+.contact-autocomplete.multi input:focus {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.contact-autocomplete.multi input::placeholder {
+  color: var(--text-muted, #94a3b8);
+}
+
+/* Chips container */
+.ca-chips {
+  display: contents;
+}
+
+/* Individual chip */
+.ca-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 26px;
+  padding: 2px 6px 2px 3px;
+  background: var(--surface-secondary, #f1f5f9);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  border-radius: 20px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-primary, #1e293b);
+  line-height: 1.3;
+  white-space: nowrap;
+  animation: chipIn 0.15s ease-out;
+}
+
+.ca-chip-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent-primary, #0ea5e9);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+@keyframes chipIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.ca-chip-label {
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+  padding-bottom: 1px;
+}
+
+.ca-chip-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted, #94a3b8);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+/* ============================================================================
+   CHIP EMAIL POPOVER (click-to-copy)
+   ============================================================================ */
+.ca-chip-email-popover {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  background: var(--surface-elevated, #fff);
+  border: 1px solid var(--border-default, #e2e8f0);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+  z-index: var(--z-top, 9999);
+  white-space: nowrap;
+  animation: chipIn 0.12s ease-out;
+}
+
+.ca-chip-email-popover-email {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--text-primary, #1e293b);
+  font-weight: 400;
+  user-select: all;
+}
+
+.ca-chip-email-popover-copy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-muted, #94a3b8);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+/* ============================================================================
+   SUGGESTIONS DROPDOWN
+   ============================================================================ */
+.suggestions-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 0.25rem;
+  padding: 4px 0;
+  list-style: none;
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.06);
+  z-index: var(--z-top);
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.suggestion-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.12s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.suggestion-item.highlighted {
+  background-color: var(--surface-secondary, #f1f5f9);
+}
+
+/* Circular avatar */
+.suggestion-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-primary, #0ea5e9);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.suggestion-avatar-group {
+  background: var(--surface-secondary, #f1f5f9);
+  font-size: 18px;
+}
+
+.suggestion-item--tous {
+  border-bottom: 1px solid var(--border-subtle, #e5e7eb);
+}
+
+.suggestion-item--tous .contact-name {
+  font-weight: 700;
+}
+
+.suggestion-item--tous .contact-email {
+  color: var(--accent-primary);
+  font-weight: 500;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  overflow: hidden;
+  flex: 1;
+}
+
+.contact-name {
+  font-size: var(--font-size-base, 14px);
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  line-height: 1.3;
+}
+
+.contact-email {
+  font-size: var(--font-size-xs, 12px);
+  color: var(--text-muted, #94a3b8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  line-height: 1.3;
+}
+
+.contact-display {
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+}
+
+/* Match highlight */
+.contact-match {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.contact-email .contact-match {
+  color: var(--accent-primary, #0ea5e9);
+}
+
+/* Hide contact button — visible on hover only */
+.suggestion-hide-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted, #94a3b8);
+  cursor: pointer;
+  flex-shrink: 0;
+  opacity: 1;
+  transition: opacity 0.15s, background 0.15s, color 0.15s;
+}
+
+.suggestion-empty {
+  cursor: default;
+  color: var(--text-muted, #94a3b8);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+  padding: 12px 16px;
+}
+
+/* ============================================================================
+   DRAG-AND-DROP CHIPS
+   ============================================================================ */
+.ca-chip-draggable {
+  cursor: grab;
+}
+
+.ca-chip-draggable:active {
+  cursor: grabbing;
+}
+
+/* Ghost chip while being dragged out (browser sets opacity; we reinforce) */
+.ca-chip-draggable[data-dragging="true"] {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* Insert-before indicator during same-field reorder */
+.ca-chip.drag-insert-before {
+  border-left: 2px solid var(--accent-primary, #6366f1);
+  margin-left: -2px;
+}

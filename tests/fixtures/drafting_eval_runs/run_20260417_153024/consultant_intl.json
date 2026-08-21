@@ -1,0 +1,232 @@
+{
+  "aggregate": {
+    "critic": {
+      "coherence": 90,
+      "tone": 86,
+      "completeness": 84,
+      "errors": 85,
+      "conciseness": 88,
+      "emotional_intelligence": 73,
+      "overall": 83
+    },
+    "judge": {
+      "faithfulness": 84,
+      "completeness": 74,
+      "tone_match": 77,
+      "conciseness": 77,
+      "overall": 79
+    }
+  },
+  "cases": [
+    {
+      "case_id": "msg-002",
+      "subject": "AcmeCorp Engagement Update",
+      "draft": "On the three points:\n\n1. The $18M breaks down as follows: [À confirmer — catégories et montants détaillés]\n\n2. On the second manager question — given the scope, it's worth a serious look. I'd lean toward yes, but want to align with you before raising it with the partners.\n\n3. Ben's bandwidth is the real constraint here. He's [À confirmer — % disponibilité / durée engagement parallèle]. If we need him full-time by [À confirmer — date], we'll need to resolve the other workstream first.\n\nI'll have a short deck ready for Thursday. Targeting 8–10 slides covering Phase 1 results, the $18M pipeline, resourcing options, and next steps — does that framing work for you?\n",
+      "elapsed_draft_s": 11.06,
+      "critic": {
+        "coherence": 92,
+        "tone": 88,
+        "completeness": 90,
+        "errors": 85,
+        "conciseness": 88,
+        "over_commitment": 78,
+        "emotional_intelligence": 72,
+        "overall": 84,
+        "decision": "valid",
+        "suggestions": [
+          "Confirmer placeholders",
+          "Aligner avant jeudi"
+        ]
+      },
+      "judge": {
+        "faithfulness": 72,
+        "completeness": 85,
+        "tone_match": 78,
+        "conciseness": 70,
+        "overall": 77,
+        "strengths": [
+          "Toutes les questions de Richard sont explicitement adressées (breakdown $18M, second manager, Ben, deck)",
+          "Le brouillon propose de livrer le deck pour jeudi, conformément à la demande",
+          "L'utilisation de placeholders '[À confirmer]' évite d'inventer des données non fournies",
+          "Le cadrage proposé pour le deck (8–10 slides) est raisonnable et actionnable"
+        ],
+        "weaknesses": [
+          "Le format '8–10 slides' est une information ajoutée sans base dans l'email entrant — légère fabrication de détail opérationnel",
+          "Le ton est légèrement trop formel/structuré par rapport à l'email de Richard (lui-même assez direct et informel) — manque de fluidité conversationnelle",
+          "La réponse est un peu longue pour un échange de ce niveau d'informalité relative",
+          "Les placeholders '[À confirmer]' laissent des trous béants dans des points critiques — un choix défensif mais qui rend la réponse partiellement inutilisable en l'état",
+          "Aucune salutation ni closing, ce qui crée une asymétrie de ton avec le 'Best, Richard'"
+        ],
+        "hallucinations": [
+          "'8–10 slides' — nombre de slides inventé, non mentionné ni dans l'email ni dans l'historique",
+          "La structure du deck ('Phase 1 results, $18M pipeline, resourcing options, next steps') est construite de toutes pièces sans base fournie"
+        ]
+      }
+    },
+    {
+      "case_id": "msg-004",
+      "subject": "Phase 2 Scope and Timeline",
+      "draft": "Thank you for the board's feedback — noted on all three points.\n\n1. On timeline: we can work toward a 10-week delivery for the operating model workstream. I'll have the revised schedule to you by [À confirmer].\n\n2. On analytical capacity: we agree the procurement deep-dive requires reinforcement. We can bring in [À confirmer: additional resource/profile] to address the gap. I'll confirm availability and names within the week.\n\n3. On change management: Jennifer's concern is well-founded. We'll move the frontline engagement workstream earlier in the sequencing, with a structured buy-in plan presented at kick-off.\n\nI'll prepare a revised proposal incorporating these three adjustments and share it ahead of [À confirmer: next review date] for sign-off.\n",
+      "elapsed_draft_s": 14.55,
+      "critic": {
+        "coherence": 92,
+        "tone": 88,
+        "completeness": 95,
+        "errors": 85,
+        "conciseness": 88,
+        "over_commitment": 72,
+        "emotional_intelligence": 78,
+        "overall": 85,
+        "decision": "valid",
+        "suggestions": [
+          "Confirmer les placeholders",
+          "Préciser prochaine échéance"
+        ]
+      },
+      "judge": {
+        "faithfulness": 82,
+        "completeness": 95,
+        "tone_match": 72,
+        "conciseness": 85,
+        "overall": 83,
+        "strengths": [
+          "Les trois points soulevés par Michael Torres sont tous adressés explicitement et dans l'ordre",
+          "Les placeholders '[À confirmer]' sont honnêtes et évitent l'invention de dates ou de noms",
+          "La promesse de préparer une proposition révisée reprend bien la logique de clôture attendue",
+          "La réponse sur le change management paraphrase fidèlement la demande sans ajouter d'informations inventées"
+        ],
+        "weaknesses": [
+          "Ton trop informel pour un échange CFO/Consultant sans historique préalable : absence de formule d'appel ('Dear Michael') et de formule de politesse finale — le registre est légèrement en-dessous du niveau de formalité de l'email entrant",
+          "La réponse ne se signe pas (nom, titre, entreprise), ce qui est attendu dans ce type de correspondance professionnelle formelle",
+          "Le point 2 reste vague ('additional resource/profile') là où un minimum d'engagement concret aurait renforcé la crédibilité, même sans nommer quelqu'un",
+          "La phrase d'ouverture 'noted on all three points' est un peu abrupte comparée au ton courtois de l'email entrant"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-006",
+      "subject": "AcmeCorp cost model — data gaps",
+      "draft": "Good catch on all three — these need to be resolved before the model goes further.\n\n1. Indirect costs: [À confirmer — activity-based costing or standard overhead rate]\n2. Facilities: [À confirmer — data for the 3 missing regional offices]\n3. FTE: [À confirmer — which figure to reconcile against, HR or finance headcount]\n\nOn the baseline: [À confirmer — 2024 actuals or 2025 budget]. Given the $2.3M delta, this call will materially shift the output, so worth locking in now rather than rerunning later.\n",
+      "elapsed_draft_s": 26.89,
+      "critic": {
+        "coherence": 88,
+        "tone": 82,
+        "completeness": 85,
+        "errors": 90,
+        "conciseness": 88,
+        "over_commitment": 92,
+        "emotional_intelligence": 72,
+        "overall": 85,
+        "decision": "valid",
+        "suggestions": [
+          "Remplir les placeholders",
+          "Valider les points"
+        ]
+      },
+      "judge": {
+        "faithfulness": 95,
+        "completeness": 72,
+        "tone_match": 68,
+        "conciseness": 85,
+        "overall": 81,
+        "strengths": [
+          "Aucune hallucination : le brouillon n'invente ni méthodologie, ni noms, ni délais, ni chiffres absents de l'email entrant",
+          "Les quatre points soulevés par Anika sont tous structurellement reconnus (3 issues + question baseline)",
+          "La justification sur l'impact du delta $2.3M ('will materially shift the output') ajoute de la valeur sans inventer de fait",
+          "Longueur proportionnée à la demande, pas de remplissage"
+        ],
+        "weaknesses": [
+          "Absence de salutation d'ouverture ('Hi Anika' ou 'Anika,') alors que l'email entrant utilise 'Hi James'",
+          "Absence de formule de clôture / signature, ce qui rompt la symétrie de forme avec l'email reçu",
+          "Toutes les réponses sont des placeholders [À confirmer] : aucune orientation réelle n'est donnée à Anika — les questions sont reconnues mais pas traitées, ce qui ne répond pas fonctionnellement aux demandes actionnables",
+          "Le brouillon s'apparente à un template inachevé plutôt qu'à une réponse prête à envoyer"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-008",
+      "subject": "AcmeCorp — can you join mid-Jan?",
+      "draft": "Good to hear Meridian wraps up Friday — the 13th works perfectly on our end.\n\nFor AcmeCorp, the focus is [À confirmer : operating model design / cost side]. I'll send over the project brief so you have the full picture before we kick off.\n",
+      "elapsed_draft_s": 10.65,
+      "critic": {
+        "coherence": 88,
+        "tone": 85,
+        "completeness": 62,
+        "errors": 72,
+        "conciseness": 90,
+        "over_commitment": 65,
+        "emotional_intelligence": 72,
+        "overall": 76,
+        "decision": "reject",
+        "suggestions": [
+          "Confirmer le scope",
+          "Supprimer placeholder"
+        ]
+      },
+      "judge": {
+        "faithfulness": 90,
+        "completeness": 28,
+        "tone_match": 80,
+        "conciseness": 75,
+        "overall": 69,
+        "strengths": [
+          "Aucune information inventée : la confirmation du timing est directement tirée de l'email de Ben",
+          "Le ton informel ('Good to hear...') reflète correctement le registre décontracté de Ben ('Yeah, should be fine')",
+          "Promesse d'envoyer le brief projet : geste concret et utile"
+        ],
+        "weaknesses": [
+          "La question centrale de Ben ('Operating model design or more on the cost side?') n'est PAS répondue — le placeholder [À confirmer] laisse le destinataire sans réponse à sa demande explicite",
+          "Le placeholder révèle que le brouillon est inachevé et n'aurait pas dû être soumis en l'état",
+          "Aucune information sur le périmètre, les livrables ou les attendus concrets, ce qui est l'essentiel de ce que Ben cherche à savoir"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-010",
+      "subject": "Digital Strategy Roadmap — Board Presentation",
+      "draft": "Here is a proposed structure for the board presentation:\n\n1. Strategic Context — why digital transformation now, and what's at stake for LuxeGroup's people agenda.\n\n2. Employee Experience as North Star — the guiding principle behind every initiative, with 2–3 concrete use cases that resonate at board level.\n\n3. CHRO Transformation Narrative — framing HR's role as a strategic driver, not a support function; this section should carry Isabelle's voice directly.\n\n4. 90-Day Quick Wins — a prioritised list of high-visibility, low-friction initiatives that demonstrate momentum before the next board cycle. I'll flag which ones require zero incremental budget.\n\n5. 18-Month Roadmap — phased delivery against the EUR 2.5M envelope, with clear milestones and decision gates at months 6 and 12.\n\n6. Governance & KPIs — ownership model, steering committee cadence, and the 3–4 metrics the board will track.\n\n7. Ask — the specific approvals and mandates needed to proceed.\n\nA few points I'll need before building out the slides:\n\n- Do you have a slide template or brand deck to use?\n- Is there a page/slide limit the board typically expects?\n- What date does the presentation need to be ready for internal review — ahead of the January meeting?\n\nOnce confirmed, I can have a first draft to you within [À confirmer] days.\n",
+      "elapsed_draft_s": 20.93,
+      "critic": {
+        "coherence": 92,
+        "tone": 88,
+        "completeness": 90,
+        "errors": 95,
+        "conciseness": 85,
+        "over_commitment": 82,
+        "emotional_intelligence": 72,
+        "overall": 86,
+        "decision": "valid",
+        "suggestions": [
+          "Ajouter salutation chaleureuse",
+          "Confirmer délai livraison"
+        ]
+      },
+      "judge": {
+        "faithfulness": 82,
+        "completeness": 90,
+        "tone_match": 85,
+        "conciseness": 72,
+        "overall": 83,
+        "strengths": [
+          "Toutes les priorités CEO mentionnées dans l'email entrant sont intégrées : employee experience, quick wins 90 jours, enveloppe EUR 2.5M, narratif CHRO",
+          "La structure en 7 sections est logique, progressive et adaptée à une présentation de board",
+          "Les questions de clarification posées en fin de brouillon sont pertinentes et professionnelles",
+          "Le ton formel correspond bien à celui d'Isabelle Moreau (CHRO, email professionnel structuré)"
+        ],
+        "weaknesses": [
+          "Le brouillon est adressé de manière implicite sans salutation nominative ('Dear Isabelle' ou équivalent), contrairement à l'email entrant qui commence par 'Dear James'",
+          "Le placeholder '[À confirmer] days' laisse un délai vide — même une fourchette indicative aurait été préférable",
+          "La section est légèrement verbeuse pour un premier échange de cadrage ; la description de chaque slide pourrait être plus synthétique",
+          "Pas de formule de clôture explicite (pas de 'Best regards' ou équivalent), ce qui rompt la symétrie de ton avec l'email entrant"
+        ],
+        "hallucinations": [
+          "La mention 'I'll flag which ones require zero incremental budget' introduit une promesse non sollicitée et non fondée sur des données fournies",
+          "La suggestion de 'decision gates at months 6 and 12' dans la roadmap 18 mois est une information inventée, absente de l'email entrant"
+        ]
+      }
+    }
+  ]
+}

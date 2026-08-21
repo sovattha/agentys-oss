@@ -1,0 +1,24 @@
+# EditorConfig — read by VS Code, JetBrains, vim, most editors.
+# Enforces LF on every save so the repo never accumulates CRLF drift
+# (which previously caused phantom-line PR diffs and merge conflicts —
+# see .gitattributes header for context).
+# https://editorconfig.org
+
+root = true
+
+[*]
+end_of_line = lf
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+[*.py]
+indent_size = 4
+
+[Makefile]
+indent_style = tab
+
+[*.md]
+trim_trailing_whitespace = false

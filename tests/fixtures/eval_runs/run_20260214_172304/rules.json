@@ -1,0 +1,126 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "p.dumont@dumont-associes.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Monsieur Dumont,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "e.fontaine@dumont-associes.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Chère Madame Fontaine,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "h.castellan@nexus-group.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Monsieur le Directeur Général,",
+      "closing": "Je vous prie d'agréer, Monsieur le Directeur Général,"
+    },
+    {
+      "contact_email": "jl.garnier@sarl-garnier.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Monsieur Garnier,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "n.vernier@nexus-group.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Madame Vernier,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "m.leroux@dumont-associes.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Monsieur Leroux,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "greffe@tc-paris.justice.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Madame, Monsieur,",
+      "closing": "Je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées."
+    },
+    {
+      "contact_email": "f.braun@braun-partner.de",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Cher Maître Braun,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "s.renard@notaire-renard.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Chère Maître,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "d.perrin@perrin-avocats.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Cher Maître,",
+      "closing": "Bien cordialement,"
+    }
+  ],
+  "general_rules": [
+    {
+      "name": "signature_formal",
+      "description": "Utiliser la signature complète avec titre et coordonnées pour les emails formels",
+      "trigger": "Emails à Philippe Dumont, Henri Castellan, greffe du tribunal, clients formels",
+      "action": "Marc-Antoine Barreau / Avocat au Barreau de Paris / Dumont & Associés / 24 rue du Faubourg Saint-Honoré"
+    },
+    {
+      "name": "signature_casual",
+      "description": "Utiliser signature simplifiée pour les collaborateurs et confrères",
+      "trigger": "Emails à Élise Fontaine, Maxime Leroux, autres avocats partenaires",
+      "action": "Signature abrégée ou sans coordonnées complètes"
+    },
+    {
+      "name": "language_switch",
+      "description": "Maintenir le français même avec les partenaires internationaux",
+      "trigger": "Correspondance professionnelle",
+      "action": "Utiliser le français sauf demande explicite du destinataire"
+    },
+    {
+      "name": "structured_updates",
+      "description": "Structurer les rapports d'avancement avec listes numérotées",
+      "trigger": "Points d'avancement, synthèses, rapports clients",
+      "action": "Utiliser des listes numérotées pour énumérer les points, documents ou demandes"
+    },
+    {
+      "name": "cc_relevant_people",
+      "description": "Coordonner les parties prenantes sur les dossiers complexes",
+      "trigger": "Dossiers multi-acteurs (M&A, contentieux)",
+      "action": "Informer les collaborateurs concernés et coordonner avec les intervenants externes"
+    },
+    {
+      "name": "action_items",
+      "description": "Conclure les emails clients par des actions concrètes ou délais",
+      "trigger": "Emails à clients et partenaires externes",
+      "action": "Indiquer clairement les prochaines étapes, documents attendus ou dates limites"
+    },
+    {
+      "name": "vouvoiement_clients",
+      "description": "Utiliser le vouvoiement avec tous les clients et partenaires externes",
+      "trigger": "Toute correspondance externe au cabinet",
+      "action": "Utiliser systématiquement vous avec les clients, confrères, institutions"
+    },
+    {
+      "name": "tutoiement_equipe",
+      "description": "Utiliser le vouvoiement même avec les collaborateurs internes",
+      "trigger": "Emails à Élise Fontaine, Maxime Leroux",
+      "action": "Maintenir le vous professionnel avec les collaborateurs du cabinet"
+    }
+  ],
+  "forbidden_phrases": [],
+  "auto_reply_patterns": []
+}

@@ -1,0 +1,15 @@
+{
+  "cancel": "Annuler",
+  "ok": "OK",
+  "close": "Fermer",
+  "back": "Retour",
+  "retry": "Réessayer",
+  "send": "envoyer",
+  "loading": "Chargement",
+  "error": "Erreur",
+  "continue": "Continuer",
+  "delete": "Supprimer",
+  "failed": "Échec",
+  "and": " et ",
+  "toastDismissHint": "Toucher pour fermer"
+}

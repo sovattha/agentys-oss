@@ -1,0 +1,103 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "arjun@heyvibe.io",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "dude / yo",
+      "closing": "(none)"
+    },
+    {
+      "contact_email": "lea@heyvibe.io",
+      "tone": "casual",
+      "language": "mixed",
+      "addressing": "tu",
+      "greeting": "hey léa / léa",
+      "closing": "(none) / 👌 / 🔥"
+    },
+    {
+      "contact_email": "marcus@sequoiacap.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi Marcus,",
+      "closing": "Priya"
+    },
+    {
+      "contact_email": "tom@heyvibe.io",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "tom",
+      "closing": "(none) / 🚀"
+    },
+    {
+      "contact_email": "ines@heyvibe.io",
+      "tone": "casual",
+      "language": "mixed",
+      "addressing": "tu",
+      "greeting": "inès",
+      "closing": "🙏 / 🔥 / (none)"
+    },
+    {
+      "contact_email": "jm.tessier@grandecorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Jean-Marc,",
+      "closing": "Bien cordialement, / Priya Pivot"
+    },
+    {
+      "contact_email": "claire.beaumont@venturefr.com",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Claire,",
+      "closing": "Bien cordialement, / Priya"
+    },
+    {
+      "contact_email": "sarah@stationf.co",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi Sarah,",
+      "closing": "Priya / Thanks!"
+    },
+    {
+      "contact_email": "philippe@bancapital.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Renaud,",
+      "closing": "Cordialement, / Priya Pivot / CEO - HeyVibe"
+    }
+  ],
+  "general_rules": [
+    {
+      "description": "Use casual tone and first names only with internal team members (Arjun, Tom, Léa, Inès); no formal greeting or closing required."
+    },
+    {
+      "description": "Switch to French with formal 'vous' addressing for external French contacts (investors, clients, government partners); include full signature with title when appropriate."
+    },
+    {
+      "description": "Use semi-formal English with external English-speaking investors and partners (Marcus, Sarah); greet with 'Hi [Name],' and close with first name only."
+    },
+    {
+      "description": "Code-switch between French and English within the same email when communicating with bilingual internal team members; maintain casual tone throughout."
+    },
+    {
+      "description": "Include emoji sparingly in casual internal emails (🚀, 🔥, 👌, 🙏) but never in formal external communications."
+    },
+    {
+      "description": "Structure technical or data-heavy emails with numbered lists and bullet points for clarity, especially in investor communications."
+    },
+    {
+      "description": "Keep internal team messages ultra-brief with minimal greeting; jump directly to action items or questions."
+    },
+    {
+      "description": "Use full legal signature (name + title + company) only for formal French communications with government/banking partners; omit for internal and casual external contacts."
+    }
+  ],
+  "forbidden_phrases": []
+}

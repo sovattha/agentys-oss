@@ -1,0 +1,104 @@
+.compose-email-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.form-field label {
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--text-secondary, #64748b);
+}
+
+.form-field input,
+.form-field textarea {
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 0.375rem;
+  font-size: var(--font-size-base);
+  background-color: var(--input-bg, #fff);
+  color: var(--text-primary, #1e293b);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.form-field input:disabled,
+.form-field textarea:disabled {
+  background-color: var(--input-disabled-bg, #f1f5f9);
+  cursor: not-allowed;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.field-error {
+  font-size: var(--font-size-xs);
+  color: var(--error-color, var(--error));
+}
+
+.form-field-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-field-checkbox input[type="checkbox"] {
+  /* Inherits global checkbox styles from index.css */
+}
+
+.form-field-checkbox label {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-color, #e2e8f0);
+}
+
+.btn-cancel,
+.btn-submit {
+  padding: 0.625rem 1rem;
+  border-radius: 0.375rem;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, opacity 0.2s;
+}
+
+.btn-cancel {
+  background-color: transparent;
+  border: 1px solid var(--border-color, #e2e8f0);
+  color: var(--text-secondary, #64748b);
+}
+
+.btn-submit {
+  background-color: var(--accent-primary);
+  border: none;
+  color: var(--text-inverse);
+}
+
+.btn-cancel:disabled,
+.btn-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

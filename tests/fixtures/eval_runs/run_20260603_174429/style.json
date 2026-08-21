@@ -1,0 +1,125 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "r.hayes@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Richard,",
+      "closing": "Cheers, / J."
+    },
+    {
+      "contact_email": "a.patel@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Anika,",
+      "closing": "J. / Well done."
+    },
+    {
+      "contact_email": "m.torres@acmecorp.com",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Michael,",
+      "closing": "Best regards, / James Conseil"
+    },
+    {
+      "contact_email": "b.crawford@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Ben,",
+      "closing": "J. / Cheers,"
+    },
+    {
+      "contact_email": "e.phillips@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi Emma, / Emma,",
+      "closing": "Thanks, / J."
+    },
+    {
+      "contact_email": "i.moreau@luxegroup.fr",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Isabelle,",
+      "closing": "Best regards, / James Conseil"
+    },
+    {
+      "contact_email": "w.lin@strategyco.sg",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Wei,",
+      "closing": "J. / Cheers,"
+    },
+    {
+      "contact_email": "j.walsh@acmecorp.com",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Jennifer,",
+      "closing": "Best regards, / James Conseil"
+    },
+    {
+      "contact_email": "k.weber@industriewerke.de",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Klaus,",
+      "closing": "Best regards, / James Conseil"
+    },
+    {
+      "contact_email": "t.yamamoto@nipponpartners.jp",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Takeshi,",
+      "closing": "Best regards, / James Conseil"
+    },
+    {
+      "contact_email": "d.chen@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "David,",
+      "closing": "J."
+    }
+  ],
+  "general_rules": [
+    {
+      "description": "Internal team members (same domain @strategyco.com) receive casual greetings (first name only), short closings (initials or 'Cheers'), and direct action-oriented language without formality."
+    },
+    {
+      "description": "External clients and senior stakeholders receive formal greetings ('Dear [First Name]' or 'Dear [Title] [Last Name]'), full signature block closings ('Best regards, James Conseil'), and structured, detailed communication."
+    },
+    {
+      "description": "Emails to internal team include specific action items numbered or bulleted, with clear ownership and deadlines (e.g., 'by Wednesday', 'by Thursday')."
+    },
+    {
+      "description": "Client-facing emails (external contacts) are longer, more narrative-driven, include executive summaries, and emphasise value and strategic alignment."
+    },
+    {
+      "description": "Travel and logistics requests to Emma Phillips are brief, casual, and use 'Hi Emma' or 'Emma,' with minimal formality despite being administrative."
+    },
+    {
+      "description": "Emails to peers on the same engagement (Ben, Anika, David) use collaborative language ('Let's', 'We'll') and provide constructive feedback with specific slide/section references."
+    },
+    {
+      "description": "Formal external emails include full title and company affiliation in the signature block; internal emails omit the signature block entirely."
+    },
+    {
+      "description": "Feedback to team members is specific and actionable, referencing slide numbers, data gaps, or deliverable quality, rather than generic praise."
+    },
+    {
+      "description": "Strategic updates to leadership (Richard Hayes) are concise, use bullet points, include financial metrics (revenue, utilisation, margins), and end with 'Cheers, J.' without full signature."
+    },
+    {
+      "description": "Emails to external contacts in non-English-speaking regions (Klaus, Takeshi, Isabelle) are written in English but maintain heightened formality and cultural sensitivity language ('I would be honoured', 'I am mindful of')."
+    }
+  ],
+  "forbidden_phrases": []
+}

@@ -1,0 +1,89 @@
+{
+  "profile": {
+    "completeness": 75,
+    "precision": 70,
+    "usefulness": 72,
+    "overall": 72,
+    "missing": [
+      "Greeting style: 'formal_fr_client' - missing relationship-specific client greetings",
+      "Greeting style: 'formal_fr_colleague' - missing colleague-specific greetings",
+      "Greeting style: 'formal_fr_lawyer' - missing lawyer-specific greeting 'Cher Maître'",
+      "Closing style: 'formal_fr_external' - missing formal external closing with title placeholder",
+      "Closing style: 'formal_fr_lawyer' - missing lawyer-specific closing",
+      "Closing style: 'formal_fr_colleague' - categorized as semi_formal instead of colleague-specific",
+      "Correct active hours: 09:00-19:30",
+      "Correct response time: < 4h"
+    ],
+    "incorrect": [
+      "active_hours: '09:00-14:30' (should be '09:00-19:30') - 5.5 hour error",
+      "response_time_avg: '< 2h' (should be '< 4h') - halved response time expectation",
+      "greeting_styles schema: uses generic 'formal_fr/semi_formal_fr' instead of relationship-based categories (client/colleague/lawyer)",
+      "closing_styles schema: uses generic 'formal_fr/semi_formal_fr' instead of context-specific categories (external/lawyer/colleague)",
+      "Missing greeting examples: only 2 examples vs 7+ in ground truth across different relationship types"
+    ],
+    "details": "The system correctly extracted core profile information (user_email, user_name, signature details, formal tone, French language, no emoji/first names). However, it used a different schema for greeting/closing styles (generic 'formal_fr' vs specific 'formal_fr_client/lawyer/colleague'), losing important context about relationship-based tone variation. Active hours (09:00-14:30 vs 09:00-19:30) and response time (< 2h vs < 4h) are significantly incorrect, which could mislead email scheduling. The schema includes extra null fields (signature_en, casual styles) not in ground truth."
+  },
+  "knowledge": {
+    "completeness": 75,
+    "precision": 70,
+    "usefulness": 80,
+    "overall": 75,
+    "missing": [
+      "Contact title: 'Avocat au Barreau de Paris' for Dominique Perrin",
+      "Contact title: 'Rechtsanwalt / Avocat' for Friedrich Braun",
+      "Contact title: 'Notaire' for Sophie Renard",
+      "Name prefix 'Maître' for Dominique Perrin and Sophie Renard",
+      "Project: 'RGPD transfrontalier' as distinct project",
+      "Terminology: AIPD (Analyse d'Impact relative à la Protection des Données)",
+      "Terminology: CCT (Clauses Contractuelles Types)",
+      "Terminology: Earn-out",
+      "Terminology: Article 700 CPC",
+      "Terminology: Conclusions (écritures déposées)",
+      "Terminology: Greffe (definition)"
+    ],
+    "incorrect": [
+      "Philippe Dumont type: 'manager' (should be 'colleague')",
+      "Élise Fontaine preferred_tone: 'semi-formal' (should be 'formal')",
+      "Dominique Perrin preferred_tone: 'semi-formal' (should be 'formal')",
+      "Maxime Leroux type: 'direct_report' (should be 'colleague')",
+      "Friedrich Braun preferred_tone: 'semi-formal' (should be 'formal')",
+      "Greffe TC Paris type: 'partner' (should be 'institution')",
+      "Project: 'Recrutement associé contentieux' appears as separate project (not in ground truth)",
+      "RGPD transfrontalier project merged/absorbed into 'Développement international' instead of being distinct"
+    ],
+    "details": "The system found all 10 contacts with correct names, emails, and companies, but made several errors in contact types (manager vs colleague, direct_report vs colleague, partner vs institution). Missing 4 contact titles and incorrectly labeled 3 contacts as 'semi-formal' when ground truth specifies 'formal'. Projects section is 80% complete - identified 3 of 4 main projects correctly but merged RGPD transfrontalier into a broader international development project, and added an extra recruitment project not in ground truth. Terminology coverage is good (13/17 core terms) but missing AIPD, CCT, Earn-out, Article 700 CPC, Conclusions, and Greffe definition. Topics are well-captured and would be useful for email drafting despite the precision issues."
+  },
+  "rules": {
+    "completeness": 65,
+    "precision": 55,
+    "usefulness": 60,
+    "overall": 60,
+    "missing": [
+      "Contact rule for d.perrin@perrin-avocats.fr has wrong closing: should be 'Je vous prie d'agréer, cher Maître, l'expression de mes sentiments les plus distingués.' not 'Cordialement,'",
+      "Contact rule for n.vernier@nexus-group.fr has wrong closing: should be 'Je vous prie d'agréer, Madame, l'expression de mes salutations distinguées.' not 'Cordialement,'",
+      "General rule 'vouvoiement_systematique' - system split this into two contradictory rules",
+      "General rule 'signature_avec_disclaimer' - system split into formal/casual which wasn't in ground truth",
+      "General rule 'maitre_entre_avocats' - not explicitly captured as separate rule",
+      "General rule 'formules_politesse_externes' - merged into other rules, not standalone",
+      "General rule 'formules_politesse_internes' - merged into other rules, not standalone",
+      "General rule 'emails_structures' - captured as 'structured_updates' but narrower scope",
+      "General rule 'references_juridiques' - completely missing",
+      "General rule 'zero_emoji_zero_abreviation' - completely missing"
+    ],
+    "incorrect": [
+      "e.fontaine@dumont-associes.fr: tone should be 'formal' not 'semi-formal'",
+      "m.leroux@dumont-associes.fr: tone should be 'formal' not 'semi-formal'",
+      "n.vernier@nexus-group.fr: closing should be full formula not 'Cordialement,'",
+      "d.perrin@perrin-avocats.fr: closing should be full formula not 'Cordialement,'",
+      "jl.garnier@sarl-garnier.fr: closing has wrong wording variant 'Veuillez agréer' instead of 'Je vous prie d'agréer'",
+      "h.castellan@nexus-group.fr: closing says 'salutations les plus distinguées' instead of 'salutations distinguées'",
+      "General rule 'tutoiement_equipe' contradicts ground truth vouvoiement_systematique (claims vouvoiement maintained but rule name suggests tutoiement)",
+      "Forbidden_phrases array: completely fabricated - ground truth has empty array",
+      "Auto_reply_patterns array: completely fabricated - ground truth has empty array",
+      "General rules have different names and structure than ground truth, making them harder to match systematically",
+      "Missing critical rules: 'references_juridiques' and 'zero_emoji_zero_abreviation' which are important for legal communication"
+    ],
+    "details": "The system captured 9/10 contact rules (90%) but with several errors in tone classification and closings. It found 8/8 general rules conceptually but reformulated them significantly, changing names and sometimes meanings. The system hallucinated forbidden_phrases and auto_reply_patterns that don't exist in ground truth. Major issues: incorrect tone classifications (e.fontaine and m.leroux marked 'semi-formal' instead of 'formal'), wrong closings (n.vernier got 'Cordialement' instead of full formula, d.perrin got 'Cordialement' instead of full formula, jl.garnier got wrong formula variant, h.castellan has minor wording difference). General rules were restructured with different names and some conceptual drift (e.g., 'tutoiement_equipe' contradicts the vouvoiement rule). The fabricated forbidden_phrases and auto_reply_patterns reduce precision significantly."
+  },
+  "overall": 69
+}

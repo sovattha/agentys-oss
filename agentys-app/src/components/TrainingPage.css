@@ -1,0 +1,716 @@
+/* ============================================================================
+   TRAINING PAGE — Premium Modal (720px wide)
+   Invisible scrollbar, luminous separator, refined hierarchy
+   ============================================================================ */
+
+.training-page-modal {
+  max-width: 720px;
+}
+
+.training-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Header ── */
+.training-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px 28px 16px;
+  flex-shrink: 0;
+  position: relative;
+  animation: slideIn 0.3s ease both;
+}
+
+/* Luminous separator under header */
+.training-page-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 28px;
+  right: 28px;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent-primary) 30%, transparent) 30%,
+    color-mix(in srgb, var(--accent-primary) 50%, transparent) 50%,
+    color-mix(in srgb, var(--accent-primary) 30%, transparent) 70%,
+    transparent 100%);
+}
+
+.training-page-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.training-page-back {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color var(--transition-base);
+  flex-shrink: 0;
+}
+
+.training-page-header h2 {
+  margin: 0;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.training-page-subtitle {
+  margin: var(--space-1) 0 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  line-height: var(--leading-normal);
+}
+
+.training-page-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+/* ── Scrollable content — invisible scrollbar ── */
+.training-page-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 28px 16px;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.training-page > .training-footer {
+  flex-shrink: 0;
+  padding: 16px 28px;
+  border-top: 1px solid color-mix(in srgb, var(--border-default) 40%, transparent);
+}
+
+/* ── Footer area (danger zone container, fixed above save footer) ── */
+.training-page-footer-area {
+  flex-shrink: 0;
+  padding: 12px 28px 0;
+  animation: slideIn 0.3s ease both;
+  animation-delay: 0.22s;
+}
+
+.training-page-content::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+
+/* ── Staggered entrance for children ── */
+.training-page-content > * {
+  animation: slideIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.training-page-content > :nth-child(1) { animation-delay: 0.04s; }
+.training-page-content > :nth-child(2) { animation-delay: 0.08s; }
+.training-page-content > :nth-child(3) { animation-delay: 0.12s; }
+.training-page-content > :nth-child(4) { animation-delay: 0.16s; }
+.training-page-content > :nth-child(5) { animation-delay: 0.20s; }
+.training-page-content > :nth-child(6) { animation-delay: 0.24s; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Pillar content area (flat, background-less) ── */
+.training-pillar-content {
+  position: relative;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  min-height: 180px;
+  padding: 18px 4px 20px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  animation: training-content-enter 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes training-content-enter {
+  from { opacity: 0; transform: translateY(8px) scale(.99); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.training-page-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 60px 0;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+}
+
+.training-spinner {
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid color-mix(in srgb, var(--accent-primary) 15%, transparent);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: trainingSpinnerRotate 0.8s linear infinite;
+}
+
+@keyframes trainingSpinnerRotate {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes toastSlideInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Toast messages (error / success) ── */
+.training-error,
+.training-success {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3, 12px);
+  padding: 12px 16px;
+  border-radius: var(--radius-md, 10px);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  animation: toastSlideInUp 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.training-error {
+  color: var(--accent-error, #ef4444);
+  background: color-mix(in srgb, var(--accent-error, #ef4444) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-error, #ef4444) 22%, transparent);
+}
+
+.training-success {
+  color: var(--accent-success, #22c55e);
+  background: color-mix(in srgb, var(--accent-success, #22c55e) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-success, #22c55e) 22%, transparent);
+  font-weight: 600;
+}
+
+.training-retry-btn {
+  padding: 6px 14px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--accent-error, #ef4444);
+  background: color-mix(in srgb, var(--accent-error, #ef4444) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-error, #ef4444) 30%, transparent);
+  border-radius: var(--radius-full, 999px);
+  cursor: pointer;
+  transition: background var(--transition-base, 0.2s), border-color var(--transition-base, 0.2s);
+}
+
+/* ── Sections ── */
+.training-page-section {
+  margin-bottom: 0;
+}
+
+.training-page-section:last-child {
+  margin-bottom: 0;
+}
+
+.training-page-section h3 {
+  margin: 0 0 14px;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Accent line after section title */
+.training-page-section h3::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--accent-primary) 40%, transparent) 0%,
+    color-mix(in srgb, var(--border-default) 30%, transparent) 50%,
+    transparent 100%);
+}
+
+/* ── Refresh button — Premium pill ── */
+.training-refresh-btn {
+  padding: 7px 16px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 20%, transparent);
+  border-radius: var(--radius-full, 16px);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-slow);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer sweep */
+.training-refresh-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent-primary) 10%, transparent) 50%,
+    transparent 100%);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.training-refresh-btn:active:not(:disabled) {
+  transform: scale(var(--scale-press));
+}
+
+.training-refresh-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Refresh result / error */
+.training-refresh-result {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--accent-success, #22c55e);
+  white-space: nowrap;
+  background: color-mix(in srgb, var(--accent-success, #22c55e) 8%, transparent);
+  padding: 4px 10px;
+  border-radius: var(--radius-full, 16px);
+}
+
+.training-refresh-error {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--accent-danger, var(--error-hover));
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Next refresh counter section */
+.training-next-refresh {
+  margin-bottom: var(--space-6);
+  padding: 14px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+}
+
+.training-next-refresh-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+.training-next-refresh-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary, #111827);
+}
+
+.training-next-refresh-count {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.training-next-refresh-bar {
+  height: 6px;
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.training-next-refresh-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-primary-hover));
+  border-radius: 3px;
+  transition: width var(--transition-slow);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--accent-primary) 20%, transparent);
+}
+
+.training-next-refresh-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.training-next-refresh-ready {
+  color: var(--accent-primary, var(--color-blue));
+  font-weight: 500;
+}
+
+.training-next-refresh-btn {
+  padding: 4px 10px;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.training-next-refresh-btn.accent {
+  color: var(--accent-primary, var(--color-blue));
+  border-color: var(--accent-primary, var(--color-blue));
+  font-weight: 600;
+}
+
+.training-next-refresh-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Deep Training section ── */
+.training-deep-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: var(--space-6);
+  padding: 14px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+}
+
+.training-deep-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) 18px;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--accent-premium, #a855f7);
+  background: color-mix(in srgb, var(--accent-premium, #a855f7) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-premium, #a855f7) 25%, transparent);
+  border-radius: var(--radius-full, 16px);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-slow);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.training-deep-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent-premium, #a855f7) 12%, transparent) 50%,
+    transparent 100%);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.training-deep-btn:active:not(:disabled) {
+  transform: scale(var(--scale-press));
+}
+
+.training-deep-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.training-deep-btn svg {
+  flex-shrink: 0;
+}
+
+.training-deep-hint {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary, var(--text-placeholder));
+  line-height: var(--leading-normal);
+}
+
+/* ── Deep Training Recap Screen ── */
+.training-deep-recap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-8) var(--space-6);
+  animation: learning-fade-in 0.3s ease-out;
+}
+
+@keyframes learning-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.training-deep-recap-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.training-deep-recap-title {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--text-primary, #111827);
+  text-align: center;
+}
+
+.training-deep-recap-subtitle {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary, var(--text-placeholder));
+  text-align: center;
+}
+
+.training-deep-recap-stats {
+  display: flex;
+  gap: var(--space-8);
+  padding: var(--space-5) 0;
+}
+
+.training-deep-recap-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.training-deep-recap-stat-value {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-primary, var(--color-blue));
+}
+
+.training-deep-recap-stat-label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-tertiary, var(--text-placeholder));
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+}
+
+.training-deep-recap-close {
+  padding: var(--space-2) var(--space-6);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary, #111827);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+/* ── Danger zone (editorial, understated) ── */
+.training-danger-zone {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: 16px 20px;
+  margin: 0;
+  border: 1px solid color-mix(in srgb, var(--accent-error, #ef4444) 15%, transparent);
+  border-left: 3px solid color-mix(in srgb, var(--accent-error, #ef4444) 55%, transparent);
+  border-radius: var(--radius-md, 10px);
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent-error, #ef4444) 3%, transparent) 0%,
+    color-mix(in srgb, var(--accent-error, #ef4444) 1%, transparent) 100%);
+  transition: all var(--transition-base, 0.2s);
+}
+
+.training-danger-zone-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.training-danger-zone-title {
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent-error, #ef4444);
+  line-height: 1.2;
+}
+
+.training-danger-zone-desc {
+  font-family: inherit;
+  font-size: 0.72rem;
+  color: var(--text-tertiary, #6b7280);
+  line-height: 1.45;
+}
+
+.training-danger-zone-btn {
+  flex-shrink: 0;
+  height: 34px;
+  padding: 0 14px;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--accent-error, #ef4444);
+  background: color-mix(in srgb, var(--accent-error, #ef4444) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-error, #ef4444) 35%, transparent);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.training-danger-zone-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Danger zone (minimal) ── */
+.training-danger-zone-minimal {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.training-danger-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.72rem;
+  color: var(--text-placeholder, #9ca3af);
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm, 4px);
+  transition: color 0.15s;
+}
+
+.training-danger-link svg {
+  flex-shrink: 0;
+}
+
+.training-danger-icon-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  background: transparent;
+  color: var(--text-placeholder);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, background 0.15s;
+}
+
+.training-danger-icon-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ── Delete confirmation overlay / modal ── */
+.training-danger-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--surface-primary, #fff) 55%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.6);
+  backdrop-filter: blur(14px) saturate(1.6);
+  -webkit-backdrop-filter: blur(14px) saturate(1.6);
+  z-index: 10;
+  border-radius: inherit;
+  animation: fadeIn 0.2s ease;
+}
+
+.training-danger-modal {
+  width: min(420px, 90%);
+  padding: 28px 28px 24px;
+  background: var(--surface-primary, #fff);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl, 16px);
+  box-shadow: var(--shadow-xl, 0 20px 25px -5px rgba(30, 20, 10, 0.08));
+  animation: modalSlideIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.training-danger-modal-title {
+  margin: 0 0 12px;
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--text-primary, #111827);
+}
+
+.training-danger-modal-body {
+  margin: 0 0 16px;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary, #6b7280);
+  line-height: var(--leading-relaxed, 1.625);
+  white-space: pre-line;
+}
+
+.training-danger-modal-error {
+  margin: 0 0 12px;
+  font-size: var(--font-size-xs, 11px);
+  color: var(--accent-error, #ef4444);
+}
+
+.training-danger-modal-success {
+  margin: 0 0 12px;
+  font-size: var(--font-size-sm);
+  color: var(--accent-success, #22c55e);
+  font-weight: 600;
+}
+
+.training-danger-modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* Cancel/Confirm buttons migrated to the shared <Button> component
+   (ui/button.tsx): variant="outline" + variant="destructive". */

@@ -1,0 +1,46 @@
+/* ============================================================================
+   AI PROGRESS BAR — 3px thin bar at top of detail panel
+   ============================================================================ */
+
+.ai-progress-bar {
+  display: flex;
+  height: 4px;
+  width: 100%;
+  background: var(--surface-secondary);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.ai-progress-segment {
+  flex: 1;
+  height: 100%;
+  background: var(--surface-tertiary);
+  position: relative;
+  overflow: hidden;
+  transition: background-color var(--transition-slow);
+}
+
+.ai-progress-segment + .ai-progress-segment {
+  border-left: 1px solid var(--surface-base);
+}
+
+.ai-progress-segment.done {
+  background: var(--segment-color);
+}
+
+.ai-progress-segment.active {
+  background: color-mix(in srgb, var(--segment-color) 40%, transparent);
+}
+
+.ai-progress-pulse {
+  position: absolute;
+  inset: 0;
+  background: var(--segment-color);
+  animation: aiPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes aiPulse {
+  0%, 100% { opacity: 0.4; filter: brightness(1); }
+  50% { opacity: 1; filter: brightness(1.15); }
+}

@@ -1,0 +1,85 @@
+{
+  "profile": {
+    "completeness": 65,
+    "precision": 55,
+    "usefulness": 60,
+    "overall": 60,
+    "missing": [
+      "default_tone: 'casual' (system said 'semi-formal')",
+      "greeting_styles.casual_en: '(no greeting) / Hey {first_name}'",
+      "greeting_styles.casual_fr: '(no greeting) / {first_name}'",
+      "greeting_styles.semi_formal_fr: 'Bonjour {first_name},'",
+      "greeting_styles.formal_fr: 'Monsieur/Madame {last_name},'",
+      "closing_styles.casual: '(no closing) / just emoji'",
+      "closing_styles.semi_formal_fr: 'Bien cordialement, / Priya'",
+      "closing_styles.formal_fr: 'Cordialement, / Priya Pivot'",
+      "active_hours: 'irregular' (system provided specific time range instead)",
+      "response_time_avg: '< 30min' (system said '< 2h')"
+    ],
+    "incorrect": [
+      "default_tone: should be 'casual' not 'semi-formal'",
+      "greeting_styles categories: used 'formal_fr_external', 'formal_fr_institutional', 'semi_formal_en', 'casual_internal' instead of ground truth's 'casual_en', 'casual_fr', 'semi_formal_fr', 'formal_fr'",
+      "closing_styles categories: same issue - different categorization schema than ground truth",
+      "active_hours: '08:00-23:30' instead of 'irregular'",
+      "response_time_avg: '< 2h' instead of '< 30min'",
+      "signature_en: null (extra field not in ground truth)"
+    ],
+    "details": "The system correctly identified basic profile information (user_email, user_name, signature, languages, uses_first_name, uses_emoji, average_response_length). However, it missed the casual default tone (marked semi-formal instead), misclassified greeting/closing styles with incorrect categorizations (formal_fr_external, formal_fr_institutional, casual_internal vs the ground truth's simpler casual/semi_formal/formal categories), got active_hours wrong (specified 08:00-23:30 instead of 'irregular'), and overstated response_time_avg (< 2h vs < 30min). The greeting/closing styles are partially correct in content but use different, more complex category names that don't match ground truth's schema."
+  },
+  "knowledge": {
+    "completeness": 75,
+    "precision": 70,
+    "usefulness": 80,
+    "overall": 75,
+    "missing": [
+      "Contact: noreply@aws.amazon.com (Amazon Web Services, automated)",
+      "Contact: noreply@calendly.com (Calendly, automated)",
+      "Contact: hello@stripe.com (Stripe, automated)",
+      "Arjun's title: CTO & Co-fondateur",
+      "Léa's title: Head of Product",
+      "Tom's title: Lead Dev",
+      "Inès's title: Customer Success",
+      "Marcus's title: Partner",
+      "Sarah's title: Program Manager",
+      "Project contact: philippe@bancapital.fr not listed under Series A (though has separate BPI project)",
+      "Some ground truth topics like 'hiring', 'board composition', 'NRR', 'CAC', 'LTV', 'runway', 'burn rate'"
+    ],
+    "incorrect": [
+      "Arjun: preferred_language should be 'en' not 'mixed', interaction_count should be 19 not 20",
+      "Tom: preferred_tone should be 'casual' not 'semi-formal', interaction_count should be 8 not 9",
+      "All contact titles are null instead of actual job titles",
+      "Claire Beaumont: preferred_tone should be 'semi-formal' not 'formal'",
+      "System added 2 projects not in ground truth: 'Prêt BPI France' and 'SOC 2 Type II Certification' (though arguably these are valid extractions from context)",
+      "System added 'frequent_topics' section not present in ground truth schema",
+      "Series A project missing key contacts: philippe@bancapital.fr and arjun@heyvibe.io listed in ground truth"
+    ],
+    "details": "The system captured most major contacts (9/12) and all 4 major projects, plus identified 2 additional projects. Contact information is generally accurate with good topic coverage, though some key details are missing (titles are null, interaction counts slightly off). Terminology section is comprehensive with helpful definitions. Main gaps: missing 3 automated contacts (AWS, Calendly, Stripe) and some nuanced relationship details. The output is highly usable for email drafting with accurate tone/language preferences and rich contextual topics."
+  },
+  "rules": {
+    "completeness": 72,
+    "precision": 78,
+    "usefulness": 75,
+    "overall": 75,
+    "missing": [
+      "Ground truth general_rule: 'hindi_words_with_cofounder' - occasionally uses Hindi words like 'yaar' with Arjun",
+      "Ground truth general_rule: 'startup_jargon' - uses VC/startup jargon naturally without explanation",
+      "Ground truth general_rule: 'ultra_short_responses' - many responses are 1-2 lines or emoji-only",
+      "Auto_reply_patterns: forwarding automated notifications and ultra-short approvals",
+      "Forbidden_phrases category (empty in ground truth but completely absent in output)",
+      "Arjun greeting variants: 'yo / dude'",
+      "Arjun language should be 'en' not 'mixed'",
+      "Tom language should be 'en' not 'mixed'",
+      "Inès closing should include 'merci' option",
+      "Sarah closing order: should be 'Priya / Thanks!' not 'Thanks! / Priya'"
+    ],
+    "incorrect": [
+      "arjun@heyvibe.io language: listed as 'mixed' but ground truth is 'en'",
+      "tom@heyvibe.io language: listed as 'mixed' but ground truth is 'en'",
+      "claire.beaumont@venturefr.com tone: listed as 'formal' but ground truth is 'semi-formal'",
+      "jm.tessier@grandecorp.fr tone: listed as 'formal' but ground truth is 'semi-formal'",
+      "General_rules structure: system created 10 different rules instead of matching the 10 ground truth rules - while semantically overlapping, they are different categorizations and miss some specific behaviors"
+    ],
+    "details": "The system captured most contact rules (9/9 contacts present) with good accuracy on tone, language, greetings and closings. However, it missed several specific ground truth details: (1) Arjun's language should be 'en' not 'mixed', and missing greeting variants 'yo / dude'; (2) Tom's language should be 'en' not 'mixed'; (3) Inès closing should include 'merci' option; (4) Claire's tone downgraded from 'semi-formal' to 'formal'; (5) JM Tessier's tone upgraded from 'semi-formal' to 'formal'; (6) Sarah's closing has wrong order. For general_rules, the system created 10 well-structured rules that capture the essence of Priya's communication style, but they don't match the ground truth's 10 specific rules. The system's rules are more granular and prescriptive (good for implementation) but miss some nuances like Hindi words with Arjun, startup jargon usage, and ultra-short response patterns. Missing entirely: forbidden_phrases and auto_reply_patterns categories."
+  },
+  "overall": 70
+}

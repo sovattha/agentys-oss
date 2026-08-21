@@ -1,0 +1,110 @@
+/* ============================================================================
+   MIC PERMISSION DIALOG — Soft-ask before browser prompt
+   Mirrors AttachmentReminderModal visual language (glass card, ring icon).
+   ============================================================================ */
+
+.mpd-card {
+  width: min(420px, calc(100vw - 48px));
+  padding: 0;
+  border-radius: var(--radius-xl);
+  background: color-mix(in srgb, var(--surface-primary) 82%, transparent);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  backdrop-filter: blur(24px) saturate(1.6);
+  border: 1px solid var(--border-subtle);
+  box-shadow:
+    0 24px 48px -12px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 1px 0 rgba(255, 255, 255, 0.1) inset;
+  overflow: hidden;
+  animation: mpd-card-in 0.35s var(--ease-settle) both;
+}
+
+@keyframes mpd-card-in {
+  from { opacity: 0; transform: translateY(12px) scale(var(--scale-press)); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Icon ring ────────────────────────────────────────────────────────────── */
+.mpd-icon-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 24px 0;
+}
+
+.mpd-icon-ring {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary-subtle) 0%,
+    color-mix(in srgb, var(--accent-primary) 12%, transparent) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: mpd-ring-pulse 2.4s ease-in-out infinite;
+}
+
+.mpd-icon-ring::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px dashed color-mix(in srgb, var(--accent-primary) 25%, transparent);
+  animation: mpd-ring-spin 12s linear infinite;
+}
+
+@keyframes mpd-ring-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.04); }
+}
+
+@keyframes mpd-ring-spin {
+  to { transform: rotate(360deg); }
+}
+
+.mpd-mic-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--accent-primary);
+  animation: mpd-icon-in 0.6s var(--ease-settle) 0.2s both;
+}
+
+@keyframes mpd-icon-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Content ──────────────────────────────────────────────────────────────── */
+.mpd-content {
+  padding: 20px 28px 8px;
+  text-align: center;
+}
+
+.mpd-title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--font-size-lg, 18px);
+  color: var(--text-primary);
+  margin: 0 0 8px;
+  letter-spacing: var(--tracking-tight);
+}
+
+.mpd-description {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  margin: 0;
+  line-height: var(--leading-normal);
+}
+
+/* ── Actions ──────────────────────────────────────────────────────────────── */
+.mpd-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 28px 24px;
+}

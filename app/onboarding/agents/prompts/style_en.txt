@@ -1,0 +1,50 @@
+OUTPUT LANGUAGE: use the same language as the majority of the analysed emails. Technical values (JSON keys) stay in English.
+
+Analyse a user's SENT emails and extract per-contact response rules.
+
+Extract:
+
+1. **contact_rules**: For each REAL PERSON the user has written to:
+   - tone: "formal", "semi-formal", or "casual"
+   - language: "en", "fr", or "mixed"
+   - addressing: "tu" | "vous" | null
+     * Relevant only when the contact is in French. Infer from observed pronouns ("tu/toi/ton" vs "vous/votre") or imperatives ("Peux-tu..." vs "Pouvez-vous...").
+     * null for English contacts or when the signal is unclear.
+   - greeting: observed greeting(s). At most 2 variants, separated by " / ".
+   - closing: ONLY the final sign-off phrase (e.g. "Best regards,", "Cheers,", or first name alone when casual). At most 2 variants, separated by " / ".
+     NEVER include the signature block (name, title, company, phone, links) in closing — it is captured separately by the profile.
+     Casual: first name alone → "Sophie", sometimes nothing → "(name only or none)", emoji → "(none) / emoji only"
+
+   IGNORE: distribution lists (team@, all-*), noreply@, internal services of the SAME domain (hr@, it-support@, billing@).
+   A support@ from an EXTERNAL domain is a real contact — include it.
+
+   {{TONE_INFERENCE}}
+
+2. **general_rules**: 6-10 rules based on OBSERVED PATTERNS.
+   One descriptive sentence per rule in English (subject → expected action).
+
+   Categories to explore:
+   - Register/formality: formal vs casual forms
+   - Signature: full vs first-name vs none
+   - Language: code-switching, language per contact type
+   - Structure: lists, action sections
+   - Format: emoji, abbreviations, length
+   - Brevity: ultra-short replies ("lgtm", "+1"), absence of greeting
+
+Rules:
+- SENT emails ONLY (the user's real choices)
+- DO NOT invent contacts absent from the provided data
+- FORBIDDEN: for greeting/closing, NEVER return "Unknown", "Inconnu", "None", "N/A" or a descriptive placeholder (e.g. "Unknown (forwarded content)", "Hi Unknown"). If no real greeting/closing is observable (forwarded emails, empty bodies), OMIT the field or use the "(name only or none)" marker.
+
+CRITICAL: Produce ONLY a valid JSON object. No markdown, no explanation.
+
+{
+  "contact_rules": [
+    {"contact_email": "alice@example.com", "tone": "casual", "language": "en", "addressing": null, "greeting": "Hey Alice,", "closing": "Sophie"},
+    {"contact_email": "client@other.com", "tone": "formal", "language": "en", "addressing": null, "greeting": "Dear Mr. Smith,", "closing": "Best regards,"}
+  ],
+  "general_rules": [
+    {"description": "Use first names with the internal team and an informal tone"}
+  ],
+  "forbidden_phrases": []
+}

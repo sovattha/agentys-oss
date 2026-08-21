@@ -1,0 +1,267 @@
+/* ============================================================================
+   SNIPPET EDITOR — Centered modal
+   ============================================================================ */
+
+.snippet-editor-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-modal);
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+}
+
+.snippet-editor {
+  background: var(--surface-primary);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 560px;
+  max-height: 80vh;
+  overflow: hidden;
+  animation: snippet-editor-in 0.18s ease-out;
+}
+
+@keyframes snippet-editor-in {
+  from { opacity: 0; transform: scale(0.97) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Header */
+.snippet-editor-header {
+  display: flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-default);
+  gap: var(--space-3);
+}
+
+.snippet-back-btn,
+.snippet-close-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.snippet-editor-title {
+  flex: 1;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  text-align: left;
+}
+
+/* Body */
+.snippet-editor-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.snippet-name-input {
+  border: 1px solid var(--border-default);
+  outline: none;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--text-primary);
+  padding: var(--space-2) var(--space-3);
+  border-radius: 8px;
+  transition: border-color 0.15s;
+}
+
+.snippet-name-input:focus {
+  border-color: var(--accent-primary);
+}
+
+.snippet-name-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.snippet-content-input {
+  width: 100%;
+  min-height: 180px;
+  border: 1px solid var(--border-default);
+  outline: none;
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  font-family: inherit;
+  resize: vertical;
+  padding: var(--space-3);
+  border-radius: 8px;
+  line-height: var(--leading-relaxed);
+  transition: border-color 0.15s;
+}
+
+.snippet-content-input:focus {
+  border-color: var(--accent-primary);
+}
+
+.snippet-content-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Content wrapper + variables help */
+.snippet-content-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.snippet-content-wrap .snippet-content-input {
+  flex: 1;
+}
+
+/* Variable chips — always-visible row above the textarea. Clicking a chip
+   inserts the token at the caret. Horizontal scroll kicks in if the list
+   overflows (currently 5 variables, but future-proof for ≥10). */
+.snippet-vars-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 4px 2px 8px;
+  margin: 0 0 6px;
+  /* Hide scrollbar visually — content still scrolls via wheel/touch. */
+  scrollbar-width: thin;
+}
+
+.snippet-vars-chips::-webkit-scrollbar {
+  height: 4px;
+}
+
+.snippet-vars-chips::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 2px;
+}
+
+/* Firefox : pas de ::-webkit-scrollbar — ré-active l'équivalent fin par-dessus
+   le `* { scrollbar-width: none }` global. Scopé hors WebKit/Blink : en
+   Blink >= 121, scrollbar-width/color non-auto désactiveraient le styling
+   ::-webkit-scrollbar ci-dessus. */
+@supports not selector(::-webkit-scrollbar) {
+  .snippet-vars-chips {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-default) transparent;
+  }
+}
+
+.snippet-var-chip {
+  flex-shrink: 0;
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s, border-color 0.12s, color 0.12s, transform 0.08s;
+}
+
+.snippet-var-chip:active {
+  transform: scale(var(--scale-press, 0.97));
+}
+
+.snippet-var-chip:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Advanced fields */
+.snippet-advanced-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-default);
+}
+
+.snippet-field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.snippet-field label {
+  width: 50px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.snippet-field input {
+  flex: 1;
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.snippet-field input:focus {
+  border-color: var(--accent-primary);
+}
+
+/* Error */
+.snippet-error {
+  padding: 10px 14px;
+  background: var(--error-bg-subtle);
+  border: 1px solid var(--error-border);
+  border-radius: 8px;
+  color: var(--error);
+  font-size: var(--font-size-sm);
+}
+
+/* Footer */
+.snippet-editor-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: var(--space-3) var(--space-5);
+  border-top: 1px solid var(--border-default);
+}
+
+.snippet-save-btn {
+  padding: 8px var(--space-5);
+  background: var(--accent-primary, #0d9488);
+  color: var(--text-inverse, #fff);
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--font-size-sm, 14px);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition-fast, 0.15s);
+}
+
+
+.snippet-save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -1,0 +1,58 @@
+{
+  "profile": {
+    "completeness": 100,
+    "precision": 100,
+    "usefulness": 100,
+    "overall": 100,
+    "missing": [],
+    "incorrect": [],
+    "details": ""
+  },
+  "knowledge": {
+    "completeness": 0,
+    "precision": 0,
+    "usefulness": 0,
+    "overall": 0,
+    "missing": [
+      "elena.volkov@eupartner.de",
+      "marie.leclerc@clientcorp.com",
+      "ceo@techcorp.fr",
+      "amelie.petit@fournisseur.fr",
+      "camille.roux@techcorp.fr",
+      "contact@prospect-startup.io",
+      "claire.fontaine@clientcorp.com",
+      "sarah.jones@globaltech.com",
+      "john.smith@globaltech.com",
+      "pierre.durand@techcorp.fr",
+      "lucas.bernard@techcorp.fr",
+      "david.kim@partnertech.co.kr",
+      "nicolas.moreau@techcorp.fr"
+    ],
+    "incorrect": [],
+    "details": ""
+  },
+  "rules": {
+    "completeness": 0,
+    "precision": 0,
+    "usefulness": 0,
+    "overall": 0,
+    "missing": [
+      "elena.volkov@eupartner.de",
+      "marie.leclerc@clientcorp.com",
+      "ceo@techcorp.fr",
+      "amelie.petit@fournisseur.fr",
+      "camille.roux@techcorp.fr",
+      "contact@prospect-startup.io",
+      "claire.fontaine@clientcorp.com",
+      "sarah.jones@globaltech.com",
+      "john.smith@globaltech.com",
+      "pierre.durand@techcorp.fr",
+      "lucas.bernard@techcorp.fr",
+      "david.kim@partnertech.co.kr",
+      "nicolas.moreau@techcorp.fr"
+    ],
+    "incorrect": [],
+    "details": ""
+  },
+  "overall": 33
+}

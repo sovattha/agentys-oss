@@ -1,0 +1,33 @@
+{
+  "title": "Guide",
+  "intro": "Agentys is driven by voice and touch. No buttons to hunt for: speak, or tap the screen.",
+  "speakSection": "Speak",
+  "speakIntro": "Just say the word, at any time:",
+  "speak": {
+    "reply": { "cmd": "\"reply\"", "desc": "dictate a reply to the current email" },
+    "replyAll": { "cmd": "\"reply all\"", "desc": "reply to all recipients" },
+    "forward": { "cmd": "\"forward\"", "desc": "forward the email (it asks to whom)" },
+    "next": { "cmd": "\"next\" / \"previous\"", "desc": "navigate between emails" },
+    "archive": { "cmd": "\"archive\" / \"delete\"", "desc": "file the email and move on" },
+    "send": { "cmd": "\"send\"", "desc": "after dictating: drafts and sends the reply" },
+    "cancel": { "cmd": "\"cancel\"", "desc": "cancel the current reply or an imminent send" },
+    "repeat": { "cmd": "\"repeat\"", "desc": "listen to the current email again" },
+    "stop": { "cmd": "\"pause\" / \"stop\"", "desc": "suspend or end the session" }
+  },
+  "touchSection": "Touch",
+  "touch": {
+    "interrupt": { "gesture": "Tap the screen while it reads", "desc": "cuts the voice and opens the mic" },
+    "finish": { "gesture": "Tap the screen while dictating", "desc": "ends your message — then say \"send\"" },
+    "swipe": { "gesture": "Swipe left / right", "desc": "next / previous email" },
+    "logo": { "gesture": "Long-press the triangle", "desc": "opens settings" },
+    "undo": { "gesture": "Tap \"Undo\"", "desc": "cancels the last action (send, archive…)" }
+  },
+  "soundsSection": "The beeps",
+  "soundsIntro": "Agentys replaces spoken questions with short sounds:",
+  "sounds": {
+    "turn": { "name": "Two rising tones", "desc": "your turn — I'm listening" },
+    "tick": { "name": "Short blip", "desc": "noted" },
+    "done": { "name": "Chord", "desc": "done — sent" },
+    "alert": { "name": "Low falling tones", "desc": "error or destructive action" }
+  }
+}

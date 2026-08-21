@@ -1,0 +1,49 @@
+# Gitleaks configuration (CASA V1.11/V6.4 — issue #207)
+#
+# This file extends gitleaks' default ruleset (do NOT replace — extend with
+# `[extend]`) and allowlists the test fixtures that contain format-valid but
+# fake secrets. Without this allowlist, every `gitleaks detect` run would
+# flag those fixtures as if they were real leaks.
+#
+# Maintenance rule: each allowlist entry MUST cite a file path and a one-line
+# rationale. If you find yourself wanting to allowlist a value without a clear
+# rationale, the value probably shouldn't be in the repo at all.
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Test fixtures and documentation placeholders that look like real secrets"
+
+paths = [
+  # Anonymized fake-key fixtures used by the log-redactor regression suite.
+  # Pattern: real secret shape with `realsecretvalue1234567890abcdef` body.
+  '''tests/api/test_log_redaction\.py''',
+  # Slack adapter test fixtures — `xoxb-test-token-*` bodies, never real.
+  # Documentation placeholders (.env templates etc.) — values like
+  # `your-key-here` or `sk-ant-api03-replace-me`.
+  '''\.env\.example''',
+  '''config/\.env\.example''',
+  '''docs/setup-guide\.md''',
+  # The Sentry DSN is public-by-design (frontend instrumentation needs it
+  # client-side). Tracked as a separate hardening item — moving to
+  # VITE_SENTRY_DSN env in agentys-app — but until then, allowlist the literal.
+  '''agentys-app/src/instrument\.ts''',
+]
+
+# Specific commits to allowlist when scrubbing history with BFG isn't an option
+# yet (e.g. coordinating force-push across multiple maintainers). Do NOT extend
+# this list without an explicit ticket reference.
+commits = [
+  # Pinterest agent landed with a Gemini API key in tasks/todo.md (since
+  # rotated and scrubbed from working tree). Tracked: rotation runbook
+  # `docs/security/secrets-rotation.md` § GEMINI_API_KEY. The literal will be
+  # removed from history via BFG once collaborators are notified.
+  "b69d0b87",
+]
+
+[[rules]]
+id = "agentys-prod-anthropic-key"
+description = "Anthropic prod API key with `agentys-prod-` operator prefix"
+regex = '''sk-ant-api03-agentys-prod-[A-Za-z0-9_-]+'''
+tags = ["key", "anthropic", "prod"]

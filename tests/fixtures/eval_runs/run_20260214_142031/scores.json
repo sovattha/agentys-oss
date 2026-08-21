@@ -1,0 +1,65 @@
+{
+  "profile": {
+    "completeness": 95,
+    "precision": 95,
+    "usefulness": 92,
+    "overall": 94,
+    "missing": [],
+    "incorrect": [
+      "active_hours: system shows '08:00-17:00' but ground truth is '08:00-18:00' (1 hour shorter work day)",
+      "response_time_avg: system shows '< 2h' but ground truth is '< 1h' (slower response time)"
+    ],
+    "details": "The system output is highly accurate and captures nearly all profile information correctly. The signature blocks (both French and English) are perfect matches. Tone settings, greeting/closing styles, and language preferences are all correct. However, there are two minor discrepancies: active_hours is '08:00-17:00' instead of '08:00-18:00' (off by 1 hour), and response_time_avg is '< 2h' instead of '< 1h' (doubled). These are small but potentially meaningful differences for email scheduling and response expectations."
+  },
+  "knowledge": {
+    "completeness": 85,
+    "precision": 88,
+    "usefulness": 87,
+    "overall": 87,
+    "missing": [
+      "Contact topics: 'demo', 'recrutement', 'PartnerTech' for Pierre Durand",
+      "Contact topics: 'conges', 'sprint' for Lucas Bernard",
+      "Contact topics: 'pentest' for Camille Roux",
+      "Contact topics: 'kick-off' for Marie Leclerc",
+      "Contact topics: 'validation achat WAF' for Nicolas Moreau",
+      "Contact topics: 'webhooks' for Sarah Jones",
+      "Contact topics: 'renouvellement' for Amelie Petit",
+      "Contact topics: 'integration API' for Thomas Renard",
+      "Contact topics: 'mTLS', 'testing' for David Kim",
+      "Contact topics: 'pilot Germany' for Elena Volkov",
+      "Contact topics: 'methodes de travail' for Claire Fontaine",
+      "Project: 'Migration Cloud' as standalone project",
+      "Terminology: 'Sprint', 'Daily', 'Retro', 'PR' definitions"
+    ],
+    "incorrect": [
+      "Pierre Durand title: 'Tech Lead' should be 'Lead Developer'",
+      "Lucas Bernard title: 'Developer' should be null",
+      "Camille Roux topics: 'projet Beta' should be 'projet Alpha'",
+      "Marie Leclerc topics: listed 'projet Alpha' incorrectly (not in ground truth)",
+      "Sarah Jones topics: 'integration technique', 'API documentation' instead of 'API integration', 'webhooks'",
+      "Amelie Petit topics: 'support weekend' instead of 'renouvellement'",
+      "David Kim topics: 'mutual TLS', 'API versioning' instead of 'mTLS', 'testing'",
+      "Projet Alpha contacts: should include 'marie.leclerc@clientcorp.com' but system doesn't list her",
+      "Terminology 'Backward compat' not in ground truth (though not incorrect, just extra)"
+    ],
+    "details": "The system captured 13 of 13 contacts present in ground truth with mostly accurate information. Minor discrepancies include Pierre's title ('Tech Lead' vs 'Lead Developer'), Lucas's title ('Developer' vs null), and some topic variations. One contact (Marie Leclerc) incorrectly linked to 'projet Alpha' when she should not be. Projects are well-captured (5/5) with good descriptions, though 'Migration Cloud' project from ground truth is missing as a standalone entry. Terminology section is expanded with useful additions (PKCE, CSP, Rate limiting) beyond ground truth, which adds value. The system also added a 'frequent_topics' section not in ground truth, which enhances usefulness. Overall, the output would be highly useful for email drafting with correct tone preferences, relationship types, and context."
+  },
+  "rules": {
+    "completeness": 85,
+    "precision": 92,
+    "usefulness": 88,
+    "overall": 88,
+    "missing": [
+      "Auto-reply pattern: Conge/absence acknowledgment",
+      "Auto-reply pattern: JIRA notification forwarding"
+    ],
+    "incorrect": [
+      "Extra contact: support@cloudprovider.com (not in ground truth)",
+      "Auto-reply pattern: IT technical issues (not in ground truth)",
+      "Auto-reply pattern: Admin validation HR/accounting (not in ground truth)",
+      "Auto-reply pattern: Simple thanks acknowledgment (not in ground truth)"
+    ],
+    "details": "Contact rules are excellent - all 13 contacts correctly identified with accurate tone, language, greetings, and closings. System shows deeper learning by including greeting variations from actual usage. All 8 general rules are present and correctly capture the intent, with system output providing more implementation detail (French descriptions, specific examples). Major issue: auto-reply patterns completely differ from ground truth (0/2 matched, 3 new patterns instead). One minor hallucination (cloudprovider.com contact). Overall highly usable for email generation despite auto-reply mismatch."
+  },
+  "overall": 90
+}

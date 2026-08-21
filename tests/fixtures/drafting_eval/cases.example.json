@@ -1,0 +1,46 @@
+[
+  {
+    "case_id": "example_decline_meeting_fr",
+    "persona": "lawyer_paris",
+    "incoming_email": {
+      "from": "client@example.com",
+      "from_name": "Jean Client",
+      "subject": "Demande de réunion vendredi 14h",
+      "body": "Maître,\n\nPourriez-vous me recevoir vendredi 14h pour discuter du dossier X ?\n\nCordialement,\nJean Client"
+    },
+    "conversation_history": [],
+    "instructions": "décliner poliment, proposer mardi 10h ou jeudi 16h",
+    "user_email": "barreau@example.com",
+    "user_signature": "Marc-Antoine Barreau\nAvocat à la Cour",
+    "metadata": {
+      "language": "fr",
+      "length": "short",
+      "intent": "decline",
+      "complexity": "low",
+      "has_user_keywords": true,
+      "selection_reason": "exemple : refus poli avec alternatives proposées (FR formel) — Reply Composer guidé"
+    }
+  },
+  {
+    "case_id": "example_schedule_request_en",
+    "persona": "startup_ceo",
+    "incoming_email": {
+      "from": "investor@vc.com",
+      "from_name": "Pat Investor",
+      "subject": "Quick call this week?",
+      "body": "Hi Priya,\n\nWould love a 30min call this week to discuss the Series A. Tue/Wed/Thu work for you?\n\nBest,\nPat"
+    },
+    "conversation_history": [],
+    "instructions": "",
+    "user_email": "priya@startup.com",
+    "user_signature": "Priya Pivot\nCEO, Acme SaaS",
+    "metadata": {
+      "language": "en",
+      "length": "short",
+      "intent": "schedule",
+      "complexity": "low",
+      "has_user_keywords": false,
+      "selection_reason": "exemple : confirmer un slot — auto-draft sans guidage utilisateur"
+    }
+  }
+]

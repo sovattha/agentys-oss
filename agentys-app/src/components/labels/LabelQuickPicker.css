@@ -1,0 +1,362 @@
+/* ============================================================================
+   LABEL QUICK PICKER — "Teal Signal" Glass-Morphism Design
+   Premium two-step popup: pick label → provide reason → confirm.
+   Teal accent with frosted glass depth, staggered reveals, micro-interactions.
+   ============================================================================ */
+
+/* --- Teal Palette (scoped) --- */
+.lqp {
+  --lqp-teal: var(--accent-primary);
+  --lqp-teal-bright: color-mix(in srgb, var(--accent-primary) 70%, var(--surface-primary));
+  --lqp-teal-deep: var(--accent-primary-hover);
+  --lqp-teal-glow: rgba(20, 184, 166, 0.25);
+  --lqp-teal-subtle: rgba(20, 184, 166, 0.08);
+  --lqp-teal-ring: rgba(20, 184, 166, 0.18);
+  --lqp-glass: rgba(255, 255, 255, 0.82);
+  --lqp-glass-border: rgba(0, 0, 0, 0.08);
+  --lqp-radius: 12px;
+  --lqp-easing: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- Container — Frosted glass panel --- */
+.lqp {
+  z-index: var(--z-popover);
+  min-width: 220px;
+  max-width: 320px;
+  background: var(--surface-primary);
+  border: 1px solid var(--lqp-glass-border);
+  border-radius: var(--lqp-radius);
+  box-shadow:
+    0 0 0 1px var(--lqp-glass-border),
+    var(--shadow-2xl);
+  overflow: hidden;
+  animation: lqpEnter 0.2s var(--lqp-easing) both;
+}
+
+/* --- Teal accent glow line at top --- */
+.lqp-glow-line {
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--lqp-teal) 20%,
+    var(--lqp-teal-bright) 50%,
+    var(--lqp-teal) 80%,
+    transparent 100%
+  );
+  opacity: 0.8;
+}
+
+/* --- Step containers --- */
+.lqp-step {
+  animation: lqpStepIn 0.18s var(--lqp-easing) both;
+}
+
+/* --- Header bar --- */
+.lqp-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-3) var(--space-2);
+}
+
+.lqp-header-title {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--lqp-teal);
+}
+
+/* --- Label list (step 1) --- */
+.lqp-list {
+  padding: 2px 6px 6px;
+}
+
+.lqp-item {
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.15s var(--lqp-easing);
+  animation: lqpItemReveal 0.22s var(--lqp-easing) both;
+  position: relative;
+}
+
+.lqp-item::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 2px;
+  height: 16px;
+  border-radius: 1px;
+  background: var(--lqp-teal);
+  transition: transform 0.2s var(--lqp-easing);
+}
+
+.lqp-item:active {
+  transform: scale(var(--scale-press));
+}
+
+/* --- Dot --- */
+.lqp-dot-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.lqp-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: all 0.2s var(--lqp-easing);
+  box-shadow: 0 0 0 0 transparent;
+}
+
+/* Header dot (step 2) — larger with glow ring */
+.lqp-header > .lqp-dot {
+  width: 10px;
+  height: 10px;
+  box-shadow: 0 0 0 3px var(--lqp-teal-ring), 0 0 12px var(--lqp-teal-glow);
+  animation: lqpDotPulse 2s ease-in-out infinite;
+}
+
+/* --- Divider between Classification and Tags sections --- */
+.lqp-divider {
+  height: 1px;
+  margin: 4px 12px;
+  background: var(--lqp-glass-border);
+}
+
+/* --- Active item (current default / checked tag) --- */
+.lqp-item--active {
+  background: var(--lqp-teal-subtle);
+}
+
+.lqp-item--active::before {
+  transform: translateY(-50%) scaleY(1);
+}
+
+/* --- Checkmark icon for active items --- */
+.lqp-item-check {
+  color: var(--lqp-teal);
+  flex-shrink: 0;
+  animation: lqpItemReveal 0.18s var(--lqp-easing) both;
+}
+
+/* --- Item name + arrow --- */
+.lqp-item-name {
+  flex: 1;
+  min-width: 0;
+}
+
+.lqp-item-arrow {
+  opacity: 1;
+  transform: translateX(-4px);
+  transition: all 0.15s var(--lqp-easing);
+  color: var(--lqp-teal);
+  flex-shrink: 0;
+}
+
+/* --- Reason step body --- */
+.lqp-reason-body {
+  padding: 0 var(--space-3) var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  animation: lqpStepIn 0.2s var(--lqp-easing) 0.05s both;
+}
+
+.lqp-reason-subtitle {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wider);
+}
+
+/* --- Suggestion chips --- */
+.lqp-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.lqp-suggestion {
+  padding: 6px var(--space-3);
+  border: 1px solid var(--lqp-glass-border);
+  border-radius: 20px;
+  background: var(--lqp-teal-subtle);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s var(--lqp-easing);
+  animation: lqpItemReveal 0.22s var(--lqp-easing) both;
+  white-space: nowrap;
+}
+
+.lqp-suggestion:active {
+  transform: scale(var(--scale-dramatic));
+}
+
+.lqp-suggestion--other {
+  border-style: dashed;
+  color: var(--text-secondary);
+}
+
+.lqp-suggestion--active {
+  border-style: solid;
+  border-color: var(--lqp-teal);
+  color: var(--lqp-teal-bright);
+  background: var(--lqp-teal-ring);
+}
+
+/* --- Custom reason input --- */
+.lqp-custom-reason {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  animation: lqpStepIn 0.18s var(--lqp-easing) both;
+}
+
+/* --- Textarea --- */
+.lqp-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--lqp-glass-border);
+  border-radius: 8px;
+  background: var(--lqp-teal-subtle);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  line-height: var(--leading-normal);
+  resize: none;
+  outline: none;
+  transition: all 0.2s var(--lqp-easing);
+}
+
+.lqp-textarea:focus {
+  border-color: var(--lqp-teal);
+  box-shadow:
+    0 0 0 3px var(--lqp-teal-ring),
+    inset 0 1px 2px rgba(0, 0, 0, 0.06);
+  background: var(--lqp-glass);
+}
+
+.lqp-textarea::placeholder {
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+/* --- Actions row --- */
+.lqp-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* --- Confirm button — Teal gradient --- */
+.lqp-confirm {
+  padding: 6px 18px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--lqp-teal-deep), var(--lqp-teal));
+  color: var(--text-inverse);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  cursor: pointer;
+  transition: all 0.2s var(--lqp-easing);
+  box-shadow: 0 2px 8px var(--lqp-teal-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+.lqp-confirm::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1));
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.lqp-confirm:active {
+  transform: translateY(0) scale(var(--scale-press));
+  box-shadow: 0 1px 4px var(--lqp-teal-glow);
+}
+
+/* ============================================================================
+   KEYFRAMES
+   ============================================================================ */
+
+@keyframes lqpEnter {
+  from {
+    opacity: 0;
+    transform: scale(var(--scale-dramatic)) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes lqpStepIn {
+  from {
+    opacity: 0;
+    transform: translateX(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes lqpItemReveal {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lqpDotPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 3px var(--lqp-teal-ring), 0 0 12px var(--lqp-teal-glow);
+  }
+  50% {
+    box-shadow: 0 0 0 5px var(--lqp-teal-ring), 0 0 20px var(--lqp-teal-glow);
+  }
+}
+
+@keyframes lqpExit {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(var(--scale-dramatic)) translateY(-2px);
+  }
+}
+
+.lqp.lqp-closing {
+  animation: lqpExit 0.12s var(--lqp-easing) forwards;
+}

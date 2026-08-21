@@ -1,0 +1,13 @@
+node_modules
+**/node_modules
+.expo
+dist
+web-build
+__tests__
+docs
+tasks
+coverage
+preview-all-screens.html
+*.log
+.env
+.git

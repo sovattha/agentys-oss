@@ -1,0 +1,117 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "p.dumont@dumont-associes.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Dumont,",
+      "closing": "Bien cordialement, / Marc-Antoine Barreau Avocat au Barreau de Paris Dumont & Associés"
+    },
+    {
+      "contact_email": "e.fontaine@dumont-associes.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Chère Madame Fontaine,",
+      "closing": "Bien cordialement, / Marc-Antoine Barreau Avocat au Barreau de Paris Dumont & Associés"
+    },
+    {
+      "contact_email": "h.castellan@nexus-group.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur le Directeur Général,",
+      "closing": "Je vous prie d'agréer, Monsieur le Directeur Général, l'expression de mes salutations distinguées."
+    },
+    {
+      "contact_email": "jl.garnier@sarl-garnier.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Garnier,",
+      "closing": "Je vous prie d'agréer, Monsieur, l'expression de mes salutations distinguées."
+    },
+    {
+      "contact_email": "n.vernier@nexus-group.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Madame Vernier,",
+      "closing": "Je vous prie d'agréer, Madame, l'expression de mes salutations distinguées."
+    },
+    {
+      "contact_email": "m.leroux@dumont-associes.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Leroux,",
+      "closing": "Bien cordialement, / Marc-Antoine Barreau Avocat au Barreau de Paris Dumont & Associés"
+    },
+    {
+      "contact_email": "greffe@tc-paris.justice.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Madame, Monsieur,",
+      "closing": "Je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées."
+    },
+    {
+      "contact_email": "f.braun@braun-partner.de",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Cher Maître Braun,",
+      "closing": "Je vous prie d'agréer, cher Maître, l'expression de mes salutations distinguées."
+    },
+    {
+      "contact_email": "s.renard@notaire-renard.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Chère Maître,",
+      "closing": "Je vous prie d'agréer, chère Maître, l'expression de mes sentiments les plus distingués."
+    },
+    {
+      "contact_email": "d.perrin@perrin-avocats.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Cher Maître,",
+      "closing": "Je vous prie d'agréer, cher Maître, l'expression de mes sentiments les plus distingués."
+    }
+  ],
+  "general_rules": [
+    {
+      "description": "Utiliser systématiquement le vouvoiement avec tous les contacts externes et le supérieur hiérarchique (Philippe Dumont)."
+    },
+    {
+      "description": "Adopter une signature complète avec titre professionnel et coordonnées du cabinet pour tous les emails externes et formels."
+    },
+    {
+      "description": "Structurer les emails longs par listes numérotées avec points et sous-points pour clarifier les demandes ou les analyses."
+    },
+    {
+      "description": "Utiliser des formules de fermeture solennelles (« Je vous prie d'agréer ») pour les clients externes et les magistrats ; réserver « Bien cordialement » aux collègues internes."
+    },
+    {
+      "description": "Intégrer des références précises au Code civil, Code de procédure civile et RGPD dans les emails de conseil juridique sans définition préalable."
+    },
+    {
+      "description": "Employer un jargon juridique spécialisé en fusions-acquisitions (due diligence, GAP, clauses de garantie actif/passif, earn-out, closing, conditions suspensives) sans explication."
+    },
+    {
+      "description": "Utiliser un jargon RGPD spécialisé (AIPD, transferts transfrontaliers, DPO, clauses contractuelles types, décisions d'adéquation) sans définition préalable."
+    },
+    {
+      "description": "Inclure des références à des arrêts jurisprudentiels (Cass. com., Cour d'appel) avec numéros de dossier et dates précises dans les analyses juridiques."
+    },
+    {
+      "description": "Proposer des alternatives ou des recommandations numérotées dans les emails de conseil, en distinguant clairement les observations des propositions."
+    },
+    {
+      "description": "Transmettre les documents en pièces jointes plutôt que dans le corps du message pour les projets de contrats, notes d'analyse et rapports."
+    }
+  ],
+  "forbidden_phrases": []
+}

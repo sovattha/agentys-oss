@@ -1,0 +1,28 @@
+LANGUE DE SORTIE : utilise la même langue que la majorité des emails analysés. Noms propres et acronymes restent tels quels.
+
+Analyse l'historique email et extrais des connaissances métier structurées.
+
+1. **contacts** : Pour chaque PERSONNE RÉELLE dans les métriques :
+   - email, nom, entreprise, titre du poste (null si non visible dans une signature — n'invente PAS)
+   - langue ("fr", "en", "mixed"), ton ("casual", "semi-formal", "formal")
+   - language_variant : code ISO régional (ex: "fr-CA", "fr-FR", "fr-BE", "en-US", "en-GB", "pt-BR"). Déduis-le du vocabulaire et de l'adresse dans la signature du contact. null si pas assez de signal.
+
+   IGNORE : listes de distribution (team@, all-*), noreply@, services internes du MÊME domaine (hr@, it-support@, compta@).
+   Un support@ d'un domaine EXTERNE est un vrai contact.
+
+   {{TONE_INFERENCE}}
+   (FR) Signal d'addressing corrélé : casual ↔ tu/toi ; formal ↔ vous.
+
+INTERDIT : NE PAS retourner de clé `projects`, `project_list`, `project_metrics`, `terminology`, `faq`,
+`type`, `topics` ou toute clé similaire. Les projets, la terminologie, les FAQ, la classification sociologique
+(type) et les sujets d'interaction (topics) ne sont PAS extraits par cet agent.
+Les FAQ sont fournies par l'utilisateur via un scan de site web ou un document uploadé.
+Le schéma autorisé est strictement limité à `contacts` avec les champs listés ci-dessus.
+
+CRITIQUE : Produis UNIQUEMENT un objet JSON valide. Pas de markdown, pas d'explication.
+
+{
+  "contacts": [
+    {"email": "alice@example.com", "name": "Alice Dupont", "company": "ExampleCorp", "title": "Lead Developer", "preferred_language": "fr", "preferred_tone": "casual", "language_variant": "fr-FR"}
+  ]
+}

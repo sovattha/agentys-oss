@@ -1,0 +1,286 @@
+{
+  "description": "Expected outputs from the onboarding KB analysis of test_emails_startup_ceo.json",
+  "expected_profile": {
+    "user_email": "priya@heyvibe.io",
+    "user_name": "Priya Pivot",
+    "signature": null,
+    "tone": {
+      "default_tone": "casual",
+      "greeting_styles": {
+        "casual_en": "(no greeting) / Hey {first_name}",
+        "casual_fr": "(no greeting) / {first_name}",
+        "semi_formal_fr": "Bonjour {first_name},",
+        "formal_fr": "Monsieur/Madame {last_name},"
+      },
+      "closing_styles": {
+        "casual": "(no closing) / just emoji",
+        "semi_formal_fr": "Bien cordialement, / Priya",
+        "formal_fr": "Cordialement, / Priya Pivot"
+      },
+      "uses_emoji": true,
+      "average_response_length": "short"
+    },
+    "languages": [
+      "en",
+      "fr"
+    ],
+    "preferred_name": "Priya",
+    "addressing": "mixed",
+    "language_variant": null
+  },
+  "expected_contacts": [
+    {
+      "email": "arjun@heyvibe.io",
+      "name": "Arjun Mehta",
+      "company": "HeyVibe",
+      "title": "CTO & Co-fondateur",
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "interaction_count": 19
+    },
+    {
+      "email": "lea@heyvibe.io",
+      "name": "Léa Dupont",
+      "company": "HeyVibe",
+      "title": "Head of Product",
+      "preferred_language": "mixed",
+      "preferred_tone": "casual",
+      "interaction_count": 14
+    },
+    {
+      "email": "tom@heyvibe.io",
+      "name": "Tom Nguyen",
+      "company": "HeyVibe",
+      "title": "Lead Dev",
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "interaction_count": 8
+    },
+    {
+      "email": "ines@heyvibe.io",
+      "name": "Inès Belkacem",
+      "company": "HeyVibe",
+      "title": "Customer Success",
+      "preferred_language": "fr",
+      "preferred_tone": "casual",
+      "interaction_count": 7
+    },
+    {
+      "email": "marcus@sequoiacap.com",
+      "name": "Marcus Chen",
+      "company": "Sequoia Capital",
+      "title": "Partner",
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 8
+    },
+    {
+      "email": "claire.beaumont@venturefr.com",
+      "name": "Claire Beaumont",
+      "company": "VentureFR",
+      "title": "Analyste",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 5
+    },
+    {
+      "email": "philippe@bancapital.fr",
+      "name": "Philippe Renaud",
+      "company": "BanCapital",
+      "title": "Directeur Associé",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 3
+    },
+    {
+      "email": "jm.tessier@grandecorp.fr",
+      "name": "Jean-Marc Tessier",
+      "company": "GrandeCorp",
+      "title": "DSI",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 6
+    },
+    {
+      "email": "sarah@stationf.co",
+      "name": "Sarah Liu",
+      "company": "Station F",
+      "title": "Program Manager",
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 4
+    },
+    {
+      "email": "noreply@aws.amazon.com",
+      "name": "Amazon Web Services",
+      "company": "AWS",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": null,
+      "interaction_count": 3
+    },
+    {
+      "email": "noreply@calendly.com",
+      "name": "Calendly",
+      "company": "Calendly",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": null,
+      "interaction_count": 2
+    },
+    {
+      "email": "hello@stripe.com",
+      "name": "Stripe",
+      "company": "Stripe",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": null,
+      "interaction_count": 2
+    }
+  ],
+  "expected_rules": {
+    "contact_rules": [
+      {
+        "contact_email": "arjun@heyvibe.io",
+        "tone": "casual",
+        "language": "en",
+        "greeting": "(none) / yo / dude",
+        "closing": "(none) / emoji only"
+      },
+      {
+        "contact_email": "lea@heyvibe.io",
+        "tone": "casual",
+        "language": "mixed",
+        "greeting": "(none) / hey léa / léa",
+        "closing": "(none) / emoji only"
+      },
+      {
+        "contact_email": "tom@heyvibe.io",
+        "tone": "casual",
+        "language": "en",
+        "greeting": "(none) / tom",
+        "closing": "(none) / emoji only"
+      },
+      {
+        "contact_email": "ines@heyvibe.io",
+        "tone": "casual",
+        "language": "fr",
+        "greeting": "(none) / inès",
+        "closing": "(none) / merci"
+      },
+      {
+        "contact_email": "marcus@sequoiacap.com",
+        "tone": "semi-formal",
+        "language": "en",
+        "greeting": "Hi Marcus,",
+        "closing": "Priya"
+      },
+      {
+        "contact_email": "claire.beaumont@venturefr.com",
+        "tone": "semi-formal",
+        "language": "fr",
+        "greeting": "Bonjour Claire,",
+        "closing": "Bien cordialement, / Priya"
+      },
+      {
+        "contact_email": "philippe@bancapital.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Monsieur Renaud,",
+        "closing": "Cordialement, / Priya Pivot / CEO - HeyVibe"
+      },
+      {
+        "contact_email": "jm.tessier@grandecorp.fr",
+        "tone": "semi-formal",
+        "language": "fr",
+        "greeting": "Bonjour Jean-Marc,",
+        "closing": "Bien cordialement, / Priya Pivot"
+      },
+      {
+        "contact_email": "sarah@stationf.co",
+        "tone": "semi-formal",
+        "language": "en",
+        "greeting": "Hi Sarah,",
+        "closing": "Priya / Thanks!"
+      }
+    ],
+    "general_rules": [
+      {
+        "name": "no_signature",
+        "description": "Never uses a formal email signature block",
+        "trigger": "All outgoing emails",
+        "action": "No signature appended. Occasionally signs with just first name 'Priya' or 'Priya Pivot' for formal contacts"
+      },
+      {
+        "name": "code_switching",
+        "description": "Frequently mixes French and English in the same email, especially with internal team",
+        "trigger": "Emails to HeyVibe team members (Léa, Inès)",
+        "action": "Mix FR and EN naturally within the same message body"
+      },
+      {
+        "name": "ultra_short_responses",
+        "description": "Many responses are extremely short (1-2 lines, emoji-only, or single words)",
+        "trigger": "Quick acknowledgments, approvals, reactions",
+        "action": "Reply with minimal text: 'lgtm', 'ship it', '+1', emoji strings, etc."
+      },
+      {
+        "name": "emoji_heavy",
+        "description": "Uses emoji frequently to convey tone and enthusiasm",
+        "trigger": "Most casual and semi-formal emails",
+        "action": "Include relevant emoji (🚀, 💪, 🔥, ✅, 🙏, etc.) naturally in message body"
+      },
+      {
+        "name": "no_greeting_casual",
+        "description": "Often omits greeting entirely in casual internal emails",
+        "trigger": "Emails to team members (arjun, tom, léa, inès)",
+        "action": "Start directly with content, no 'Hi' or 'Bonjour'"
+      },
+      {
+        "name": "formal_for_external",
+        "description": "Switches to proper French or English for external professional contacts",
+        "trigger": "Emails to investors (Claire, Philippe), enterprise clients (JM Tessier), partners (Sarah)",
+        "action": "Use proper greeting, structured content, and polite closing"
+      },
+      {
+        "name": "vouvoiement_external_fr",
+        "description": "Uses 'vous' form with French external contacts",
+        "trigger": "Emails in French to Philippe Renaud, Jean-Marc Tessier, Claire Beaumont",
+        "action": "Maintain vouvoiement consistently"
+      },
+      {
+        "name": "tutoiement_team",
+        "description": "Uses 'tu' form with team members",
+        "trigger": "French emails to Léa, Inès",
+        "action": "Use informal tu form"
+      },
+      {
+        "name": "startup_jargon",
+        "description": "Uses startup/VC jargon naturally without explanation",
+        "trigger": "Business discussions about metrics, fundraising, product",
+        "action": "Use terms like ARR, MRR, churn, burn rate, CAC, LTV, NRR, PMF, runway without definition"
+      },
+      {
+        "name": "hindi_words_with_cofounder",
+        "description": "Occasionally uses Hindi words when communicating with co-founder Arjun",
+        "trigger": "Casual emails to arjun@heyvibe.io",
+        "action": "May include Hindi words like 'yaar' (friend/dude)"
+      }
+    ],
+    "forbidden_phrases": []
+  },
+  "expected_statistics": {
+    "total_emails": 80,
+    "sent_emails": 43,
+    "received_emails": 37,
+    "threads": 34,
+    "english_emails": 44,
+    "french_emails": 20,
+    "mixed_emails": 16,
+    "emails_with_signature": 0,
+    "emails_with_attachments": 5,
+    "unique_contacts": 12,
+    "internal_contacts": 4,
+    "external_contacts": 5,
+    "automated_contacts": 3
+  }
+}

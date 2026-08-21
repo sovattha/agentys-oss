@@ -1,0 +1,14 @@
+[
+  {
+    "case_id": "example_decline_meeting_fr",
+    "gold_body": "Cher Monsieur,\n\nJe vous remercie pour votre demande. Vendredi 14h ne m'est malheureusement pas possible. Je peux vous proposer mardi 10h ou jeudi 16h selon vos disponibilités.\n\nDans l'attente de votre retour,",
+    "rationale": "ton formel attendu d'un avocat ; refus avec alternatives concrètes plutôt qu'esquive ; pas d'invention de date hypothétique au-delà de celles raisonnablement disponibles ; ne demande pas d'info absente du fil",
+    "edge_cases_handled": ["decline_politely", "propose_alt_dates", "fr_formal", "no_hallucination"]
+  },
+  {
+    "case_id": "example_schedule_request_en",
+    "gold_body": "Hi Pat,\n\nThanks for reaching out — happy to chat. Wednesday at 3pm or Thursday at 10am EST work for me. Let me know which suits you and I'll send a calendar invite.\n\nTalk soon,",
+    "rationale": "ton casual aligné EN ; confirme deux slots concrets (pas de placeholder vague type 'sometime this week') ; propose ownership de l'invite ; reste court (cible startup_ceo qui répond vite)",
+    "edge_cases_handled": ["schedule_confirm", "concrete_slots", "en_casual", "ownership_clear"]
+  }
+]

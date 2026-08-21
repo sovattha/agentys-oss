@@ -1,0 +1,1294 @@
+/* ============================================================================
+   SIDEBAR — Agentys Premium Navigation
+   Luminous edge indicators, glass depth, shimmer micro-interactions
+   ============================================================================ */
+
+.sidebar {
+  width: calc(256px * var(--app-zoom, 1));
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--surface-primary) 97%, transparent) 0%,
+      var(--surface-base) 100%
+    );
+  box-shadow:
+    inset 1px 0 0 color-mix(in srgb, var(--surface-highlight, rgba(255,255,255,0.5)) 20%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--surface-highlight, rgba(255,255,255,0.5)) 10%, transparent);
+  border-inline-end: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: width var(--transition-slow);
+  height: 100%;
+  overflow: visible;
+  container-type: inline-size;
+  container-name: sidebar;
+}
+
+.sidebar.collapsed {
+  width: calc(48px * var(--app-zoom, 1));
+}
+
+/* ============================================================================
+   HEADER
+   ============================================================================ */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Taller than .email-list-header so the triangle apex aligns with the "Inbox" label top edge */
+  min-height: calc(72px * var(--app-zoom, 1));
+  padding: 0 var(--space-2);
+  gap: var(--space-2);
+}
+
+/* Logo-toggle — the triangle logo IS the sidebar toggle */
+.sidebar-logo-toggle {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-1);
+  border-radius: var(--radius-md);
+  transition: opacity var(--transition-base);
+  user-select: none;
+  overflow: hidden;
+}
+
+.sidebar-logo-toggle:active .sidebar-logo-mark {
+  transform: scale(0.9);
+}
+
+.sidebar-logo-mark {
+  width: calc(28px * var(--app-zoom, 1));
+  height: calc(28px * var(--app-zoom, 1));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-base);
+}
+
+.sidebar-logo-mark svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.sidebar-logo-gentys {
+  font-family: var(--font-sans, 'Instrument Sans', 'Plus Jakarta Sans', sans-serif);
+  font-weight: 400;
+  font-size: var(--font-size-3xl);
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-wider);
+  opacity: 0.88;
+  white-space: nowrap;
+  transform: translateY(3px);
+}
+
+.sidebar.collapsed .sidebar-logo-gentys {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-header {
+  justify-content: center;
+  padding: 0 var(--space-2);
+}
+
+.sidebar.collapsed .sidebar-logo-toggle {
+  width: 32px;
+  height: 32px;
+  justify-content: center;
+  padding: 0;
+  border-radius: var(--radius-full);
+}
+
+.sidebar.collapsed .sidebar-logo-mark {
+  width: calc(26px * var(--app-zoom, 1));
+  height: calc(26px * var(--app-zoom, 1));
+}
+
+.sidebar.collapsed .sidebar-logo-mark svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================================================
+   APP MODE SWITCHER — Frosted glass segmented control with sliding indicator
+   ============================================================================ */
+.app-mode-switcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0 var(--space-3) var(--space-3);
+  padding: 3px;
+  background: color-mix(in srgb, var(--text-primary) 4%, transparent);
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--border-subtle) 50%, transparent);
+}
+
+/* ── Sliding glass indicator ── */
+.mode-slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: calc(50% - 4px);
+  height: calc(100% - 6px);
+  border-radius: 11px;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--surface-primary) 92%, transparent) 0%,
+      color-mix(in srgb, var(--surface-primary) 80%, transparent) 100%
+    );
+  box-shadow:
+    var(--shadow-sm),
+    0 0 0 0.5px color-mix(in srgb, var(--border-subtle) 40%, transparent),
+    inset 0 0.5px 0 color-mix(in srgb, var(--surface-highlight, rgba(255,255,255,0.6)) 30%, transparent);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.15, 1);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.app-mode-switcher.calendar-active .mode-slider {
+  transform: translateX(calc(100% + 5px));
+}
+
+/* ── Buttons ── */
+.mode-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 7px var(--space-3);
+  background: transparent;
+  border: none;
+  border-radius: 11px;
+  color: var(--text-tertiary);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: color var(--transition-slow), opacity var(--transition-slow);
+  position: relative;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.mode-btn.active {
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+.mode-btn--disabled {
+  opacity: 0.3;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* ── Timezone picker in sidebar — styled as sidebar-item ── */
+.sidebar-tz-wrap {
+  width: 100%;
+}
+
+.sidebar-tz-wrap .calendar-tz-picker {
+  width: 100%;
+}
+
+.sidebar-tz-wrap .calendar-tz-picker-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  margin: 0 auto;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  opacity: 0.5;
+}
+
+.sidebar-tz-wrap .calendar-tz-picker-btn svg {
+  width: 17px;
+  height: 17px;
+  opacity: 0.45;
+  flex-shrink: 0;
+}
+
+.sidebar-tz-wrap .calendar-tz-picker-btn span {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-tz-wrap .calendar-tz-picker-btn {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+  padding: 0;
+}
+
+.sidebar .sidebar-tz-wrap .calendar-tz-picker-btn.has-value {
+  opacity: 0.7;
+  color: var(--text-secondary);
+}
+
+.sidebar .sidebar-tz-wrap .calendar-tz-picker-btn.has-value svg {
+  opacity: 0.7;
+}
+
+/* ── Create Event "+" button ── */
+.sidebar .sidebar-create-event-btn.sidebar-item {
+  margin: 0 auto;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  min-height: 34px;
+  padding: 0;
+  justify-content: center;
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 25%, transparent) !important;
+  opacity: 1 !important;
+  color: var(--accent-primary-hover);
+  box-shadow: none;
+  transition: all 0.2s var(--ease-clarity);
+  overflow: hidden;
+}
+
+.sidebar .sidebar-create-event-btn.sidebar-item .sidebar-icon {
+  color: var(--accent-primary-hover) !important;
+  width: 20px;
+  height: 20px;
+  filter: none !important;
+  transform: none;
+}
+
+.sidebar .sidebar-create-event-btn.sidebar-item .sidebar-label {
+  display: none;
+}
+
+.sidebar .sidebar-create-event-btn.sidebar-item:active {
+  transform: scale(var(--scale-dramatic));
+  box-shadow: var(--shadow-sm);
+}
+
+.mode-btn svg {
+  flex-shrink: 0;
+  transition: color var(--transition-slow);
+}
+
+.mode-btn.active svg {
+  color: var(--accent-primary);
+}
+
+.mode-label {
+  white-space: nowrap;
+}
+
+/* ── Collapsed state — vertical stack ── */
+.sidebar.collapsed .app-mode-switcher {
+  flex-direction: column;
+  gap: 2px;
+  padding: 3px;
+  margin: 0 var(--space-2) var(--space-2);
+  border-radius: 22px;
+}
+
+.sidebar.collapsed .mode-slider {
+  width: 30px;
+  height: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+}
+
+.sidebar.collapsed .app-mode-switcher.calendar-active .mode-slider {
+  transform: translateX(-50%) translateY(calc(100% + 2px));
+}
+
+.sidebar.collapsed .mode-btn {
+  padding: var(--space-1);
+  border-radius: 15px;
+  width: 30px;
+  height: 30px;
+}
+
+.sidebar.collapsed .mode-label {
+  display: none;
+}
+
+/* ── Hover expand (auto mode only) ── */
+.sidebar.sidebar-mode-auto.hover-expanded .app-mode-switcher {
+  flex-direction: row;
+  margin: 0 var(--space-3) var(--space-3);
+  border-radius: 14px;
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .mode-slider {
+  width: calc(50% - 4px);
+  height: calc(100% - 6px);
+  border-radius: 11px;
+  transform: translateX(0) translateY(0);
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .app-mode-switcher.calendar-active .mode-slider {
+  transform: translateX(calc(100% + 5px)) translateY(0);
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .mode-btn {
+  width: auto;
+  height: auto;
+  padding: 7px var(--space-3);
+  border-radius: 11px;
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .mode-label {
+  display: inline;
+}
+
+/* ============================================================================
+   COMPOSE BUTTON — Subtle, matches nav items
+   ============================================================================ */
+.sidebar-compose {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-2);
+  margin: var(--space-1) var(--space-3) var(--space-3);
+  padding: var(--space-2) 14px;
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 25%, transparent);
+  border-radius: var(--radius-lg);
+  color: var(--accent-primary-hover);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.sidebar-compose:hover,
+.sidebar-compose:focus-visible {
+  background: color-mix(in srgb, var(--accent-primary) 18%, transparent);
+  border-color: color-mix(in srgb, var(--accent-primary) 38%, transparent);
+}
+
+.sidebar-compose:active {
+  transform: scale(var(--scale-press));
+}
+
+.compose-icon {
+  width: calc(17px * var(--app-zoom, 1));
+  height: calc(17px * var(--app-zoom, 1));
+  color: currentColor;
+  flex-shrink: 0;
+}
+
+.sidebar.collapsed .sidebar-compose {
+  width: calc(34px * var(--app-zoom, 1));
+  height: calc(34px * var(--app-zoom, 1));
+  padding: 0;
+  align-self: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  margin: var(--space-1) 0 var(--space-3);
+}
+
+.sidebar.collapsed .sidebar-compose .sidebar-label {
+  display: none;
+}
+
+/* ============================================================================
+   NAVIGATION
+   ============================================================================ */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--space-2);
+  gap: 1px;
+  flex: 1;
+}
+
+/* Staggered entrance for nav items on app load */
+.sidebar-nav > .sidebar-item:nth-child(1) { animation: sidebarItemIn 0.3s var(--ease-settle) 0ms both; }
+.sidebar-nav > .sidebar-item:nth-child(2) { animation: sidebarItemIn 0.3s var(--ease-settle) 40ms both; }
+.sidebar-nav > .sidebar-item:nth-child(3) { animation: sidebarItemIn 0.3s var(--ease-settle) 80ms both; }
+.sidebar-nav > .sidebar-item:nth-child(4) { animation: sidebarItemIn 0.3s var(--ease-settle) 120ms both; }
+.sidebar-nav > .sidebar-item:nth-child(5) { animation: sidebarItemIn 0.3s var(--ease-settle) 160ms both; }
+.sidebar-nav > .sidebar-item:nth-child(6) { animation: sidebarItemIn 0.3s var(--ease-settle) 200ms both; }
+.sidebar-nav > .sidebar-item:nth-child(7) { animation: sidebarItemIn 0.3s var(--ease-settle) 240ms both; }
+.sidebar-nav > .sidebar-item:nth-child(n+8) { animation: sidebarItemIn 0.3s var(--ease-settle) 280ms both; }
+
+@keyframes sidebarItemIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Nav divider — gradient separator between primary and secondary sections ── */
+.sidebar-divider {
+  height: 1px;
+  margin: var(--space-2) var(--space-4);
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--border-subtle) 20%,
+    var(--border-subtle) 80%,
+    transparent 100%
+  );
+  opacity: 0.6;
+}
+
+.sidebar.collapsed .sidebar-divider {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-nav {
+  gap: 2px;
+  /* Keep items packed at the top at any viewport — without this the flex:1
+     on .sidebar-nav lets a stretched container redistribute vertical space,
+     which pushes items apart at narrow widths. */
+  justify-content: flex-start;
+}
+
+/* ── Sidebar item — base style ── */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 0 var(--space-3);
+  height: calc(34px * var(--app-zoom, 1));
+  background: transparent;
+  border: none;
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  width: 100%;
+  text-align: left;
+  margin-left: -8px;
+  padding-left: var(--space-5);
+  position: relative;
+  overflow: hidden;
+  opacity: 0.5;
+}
+
+/* ── Hover shimmer — horizontal light sweep ── */
+.sidebar-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent-primary) 5%, transparent) 35%,
+    color-mix(in srgb, var(--accent-primary) 9%, transparent) 50%,
+    color-mix(in srgb, var(--accent-primary) 5%, transparent) 65%,
+    transparent 100%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Active state — luminous vertical edge bar ── */
+.sidebar-item.active {
+  background: color-mix(in srgb, var(--accent-primary) 6%, transparent);
+  color: var(--accent-primary);
+  font-weight: 600;
+  opacity: 1;
+}
+
+/* The shimmer doesn't play on active items */
+.sidebar-item.active::before {
+  display: none;
+}
+
+/* Luminous vertical bar — THE signature indicator (7.2 animated) */
+.sidebar-item.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  border-radius: 0 2px 2px 0;
+  background: var(--accent-primary);
+  box-shadow:
+    0 0 8px color-mix(in srgb, var(--accent-primary) 40%, transparent),
+    0 0 20px color-mix(in srgb, var(--accent-primary) 15%, transparent);
+  z-index: 1;
+  animation: sidebarBarIn 0.2s var(--ease-settle, ease-out) both;
+}
+
+@keyframes sidebarBarIn {
+  from {
+    opacity: 0;
+    transform: scaleY(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* ── Collapsed state ── */
+.sidebar.collapsed .sidebar-item {
+  justify-content: center;
+  padding: 0;
+  border-radius: var(--radius-full);
+  width: calc(30px * var(--app-zoom, 1));
+  height: calc(30px * var(--app-zoom, 1));
+  /* Lock aspect so a flex parent with extra vertical room can't stretch
+     items into ovals at narrow viewports (~50% width). */
+  aspect-ratio: 1 / 1;
+  flex: 0 0 auto;
+  margin: 0 auto;
+  overflow: visible;
+  background: transparent !important;
+  /* Override global `button { min-height: 32px }` — 30px is already explicit. */
+  min-height: 0;
+}
+
+/* Collapsed active: solid pill so it's unmissable */
+.sidebar.collapsed .sidebar-item.active {
+  background: color-mix(in srgb, var(--accent-primary) 16%, transparent) !important;
+  opacity: 1;
+}
+
+/* Collapsed: create-event button stays colored */
+.sidebar.collapsed .sidebar-create-event-btn.sidebar-item {
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 25%, transparent) !important;
+  opacity: 1 !important;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+}
+
+.sidebar.collapsed .sidebar-create-event-btn.sidebar-item .sidebar-icon {
+  color: var(--accent-primary-hover) !important;
+  filter: none !important;
+}
+
+/* Collapsed: no shimmer */
+.sidebar.collapsed .sidebar-item::before {
+  display: none;
+}
+
+/* Collapsed active: no dash — opacity handles hierarchy */
+.sidebar.collapsed .sidebar-item.active::after {
+  display: none;
+}
+
+.sidebar.expanded .sidebar-item {
+  justify-content: flex-start;
+  margin: 0 0 0 -8px;
+  padding-left: var(--space-5);
+}
+
+/* ── Icons — size + hierarchy via opacity ── */
+.sidebar-icon {
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  width: calc(17px * var(--app-zoom, 1));
+  height: calc(17px * var(--app-zoom, 1));
+  opacity: 0.55;
+  transition:
+    opacity 0.2s ease,
+    color 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar-item.active .sidebar-icon {
+  color: var(--accent-primary);
+  opacity: 1;
+}
+
+/* Collapsed: same opacity rules */
+.sidebar.collapsed .sidebar-item.active .sidebar-icon {
+  transform: none;
+  filter: none;
+}
+
+/* ── Labels ── */
+.sidebar-item .sidebar-label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar.collapsed .sidebar-item .sidebar-label {
+  display: none;
+}
+
+/* Meeting countdown — distinct from sidebar-badge so it stays a readable pill in collapsed mode (a dot would lose the time info). */
+.sidebar-meeting-countdown {
+  margin-inline-start: auto;
+  padding: 0 6px;
+  min-width: 28px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-primary, #0d9488);
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 30%, transparent);
+  border-radius: var(--radius-full, 999px);
+  white-space: nowrap;
+}
+
+/* En mode collapsed la pill se superposait à l'icône (cf. retour utilisateur).
+   On masque entièrement le countdown — il reste accessible en mode étendu
+   où il a la place de s'afficher proprement à côté du label. */
+.sidebar.collapsed .sidebar-meeting-countdown {
+  display: none;
+}
+
+/* ── Badge — contextual pill (expanded) / notification dot (collapsed) ── */
+.sidebar-badge {
+  margin-inline-start: auto;
+  padding: 0 6px;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  /* Solid accent background ensures readable badge contrast. (A prior 12%-opacity
+     tint failed contrast on dark backgrounds; BUG-L001/L002.) */
+  color: var(--text-inverse);
+  background: var(--accent-primary);
+  border-radius: var(--radius-full);
+  position: relative;
+  z-index: 1;
+  transition: all var(--transition-base);
+}
+
+.sidebar-item.active .sidebar-badge {
+  color: var(--text-inverse);
+  background: var(--accent-primary);
+  opacity: 0.85;
+}
+
+/* Collapsed: transform badge into a compact notification dot */
+.sidebar.collapsed .sidebar-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  margin: 0;
+  padding: 0;
+  min-width: 8px;
+  width: 8px;
+  height: 8px;
+  font-size: 0;
+  line-height: 0;
+  background: var(--accent-primary);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-glow-primary);
+}
+
+/* Deep Work wrap — pushed to bottom, always visible */
+.sidebar-deep-work-wrap {
+  padding: 0 var(--space-3, 8px);
+  position: relative;
+  margin-top: auto;
+}
+
+/* Sibling wraps: no extra auto margin, stay grouped */
+.sidebar-deep-work-wrap + .sidebar-deep-work-wrap {
+  margin-top: 0;
+}
+
+.sidebar-deep-work-wrap ~ .sidebar-tz-wrap {
+  margin-top: 0;
+}
+
+.sidebar.collapsed .sidebar-deep-work-wrap {
+  padding: 0 var(--space-2, 6px);
+}
+
+/* Deep Work toggle — visually distinct from regular nav items */
+.sidebar-deep-work {
+  position: relative;
+}
+
+.sidebar-deep-work .sidebar-icon {
+  color: var(--accent-primary);
+  opacity: 0.65;
+  transition: opacity var(--transition-base), filter var(--transition-base);
+}
+
+.sidebar-deep-work--on {
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent) !important;
+}
+
+.sidebar-deep-work--on .sidebar-icon {
+  color: var(--accent-primary);
+  opacity: 1;
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent-primary) 40%, transparent));
+}
+
+.sidebar.collapsed .sidebar-deep-work--on {
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent) !important;
+  border-radius: var(--radius-full);
+}
+
+/* Deep Work active badge — pulsing dot */
+.sidebar-badge--active {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  animation: sidebarActivePulse 2s ease-in-out infinite;
+  margin-inline-start: auto;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes sidebarActivePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* AI Drafts indicator — Amber dot */
+.sidebar-item.has-drafts::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--accent-secondary);
+  border-radius: var(--radius-full);
+  animation: pulse-dot 2s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateY(-50%) scale(0.8);
+  }
+}
+
+.sidebar.collapsed .sidebar-item.has-drafts::before {
+  display: none;
+}
+
+/* ============================================================================
+   SIGNAL RAIL — Always-visible label dots (sub-items of Inbox)
+   ============================================================================ */
+.sidebar-labels-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 2px var(--space-2) var(--space-1) 0;
+}
+
+.sidebar-label-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 var(--space-3) 0 var(--space-8);
+  height: 32px;
+  background: transparent;
+  border: none;
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  width: 100%;
+  text-align: left;
+}
+
+.sidebar-label-item.active {
+  background: color-mix(in srgb, var(--label-color, var(--accent-primary)) 12%, transparent);
+  color: var(--label-color, var(--accent-primary));
+}
+
+.sidebar-label-item.drag-over {
+  background: color-mix(in srgb, var(--label-color) 25%, transparent);
+  border: 2px dashed var(--label-color);
+}
+
+/* Label dot */
+.sidebar-label-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--label-color, var(--text-tertiary));
+  flex-shrink: 0;
+  transition: transform var(--transition-base), width var(--transition-base), height var(--transition-base), box-shadow var(--transition-base);
+}
+
+/* Active dot: bigger + ring */
+.sidebar-label-item.active .sidebar-label-dot {
+  width: 10px;
+  height: 10px;
+  box-shadow: var(--shadow-focus);
+}
+
+.sidebar-label-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-label-count {
+  margin-inline-start: auto;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--text-muted);
+  min-width: 18px;
+  text-align: right;
+}
+
+.sidebar-label-item.active .sidebar-label-count {
+  color: var(--label-color, var(--accent-primary));
+  font-weight: 600;
+}
+
+/* ============================================================================
+   COLLAPSED: Dot column (no text, centered)
+   ============================================================================ */
+.sidebar.collapsed .sidebar-labels-rail {
+  padding: var(--space-1) 0;
+  gap: var(--space-1);
+  align-items: center;
+}
+
+.sidebar.collapsed .sidebar-label-item {
+  justify-content: center;
+  padding: 0;
+  border-radius: var(--radius-full);
+  width: 32px;
+  height: 32px;
+  margin: 0 auto;
+  gap: 0;
+}
+
+.sidebar.collapsed .sidebar-label-name,
+.sidebar.collapsed .sidebar-label-count {
+  display: none;
+}
+
+/* ============================================================================
+   HOVER EXPAND: Text + counts reappear (auto mode only)
+   ============================================================================ */
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-labels-rail {
+  padding: 2px var(--space-2) var(--space-1) 0;
+  align-items: stretch;
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-label-item {
+  justify-content: flex-start;
+  width: 100%;
+  height: 32px;
+  padding: 0 var(--space-3) 0 var(--space-8);
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+  margin: 0;
+  gap: 10px;
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-label-name {
+  display: inline;
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-label-count {
+  display: inline;
+}
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+.sidebar-footer {
+  margin-top: auto;
+  padding: var(--space-3) var(--space-4);
+}
+
+.sidebar.collapsed .sidebar-footer {
+  padding: var(--space-2) var(--space-2);
+}
+
+.sidebar-plan-badge {
+  color: #047857;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  opacity: 1;
+}
+
+.sidebar-plan-badge:hover {
+  color: #065f46;
+  background: rgba(16, 185, 129, 0.16);
+}
+
+.sidebar-plan-badge .sidebar-icon {
+  color: currentColor;
+  opacity: 1;
+}
+
+.sidebar.collapsed .sidebar-plan-badge {
+  background: rgba(16, 185, 129, 0.12) !important;
+  border: 1px solid rgba(16, 185, 129, 0.24);
+}
+
+/* Update indicator */
+.sidebar-icon-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sidebar-update-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background: var(--error);
+  border-radius: 50%;
+  border: 2px solid var(--surface-primary);
+  animation: update-pulse 2s ease-in-out infinite;
+}
+
+.sidebar-update-badge {
+  margin-inline-start: auto;
+  background: var(--error);
+  color: var(--text-inverse);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+}
+
+.sidebar.collapsed .sidebar-update-badge {
+  display: none;
+}
+
+@keyframes update-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ============================================================================
+   HOVER EXPAND (only in auto/hybrid mode — NOT in collapsed-locked mode)
+   ============================================================================ */
+.sidebar.sidebar-mode-auto.hover-expanded {
+  width: 256px;
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-header {
+  justify-content: flex-start;
+  padding: var(--space-3) var(--space-3) var(--space-3) 14px;
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-logo-toggle {
+  width: auto;
+  height: auto;
+  padding: var(--space-1);
+  border-radius: var(--radius-md);
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-logo-mark {
+  width: 28px;
+  height: 28px;
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-logo-mark svg {
+  width: 38px;
+  height: 38px;
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-logo-gentys {
+  display: inline;
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-compose {
+  width: auto;
+  padding: var(--space-2) 14px;
+  border-radius: var(--radius-lg);
+  margin: var(--space-1) var(--space-3) var(--space-3);
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-compose .sidebar-label {
+  display: inline;
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-item {
+  justify-content: flex-start;
+  width: 100%;
+  height: 40px;
+  padding-left: var(--space-5);
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+  margin: 0 0 0 -8px;
+  overflow: hidden;
+}
+
+/* Re-enable shimmer on hover-expanded items */
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-item::before {
+  display: block;
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-item.active::before {
+  display: none;
+}
+
+/* Hover-expanded active: vertical bar (not collapsed dot) */
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-item.active::after {
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  height: auto;
+  transform: none;
+  border-radius: 0 2px 2px 0;
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-item .sidebar-label {
+  display: inline;
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-badge {
+  display: flex;
+  position: relative;
+  top: auto;
+  right: auto;
+  min-width: 20px;
+  width: auto;
+  height: 20px;
+  padding: 0 6px;
+  font-size: var(--font-size-xs);
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  border: none;
+  border-radius: 10px;
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-item.has-drafts::before {
+  display: block;
+}
+
+.sidebar.sidebar-mode-auto.hover-expanded .sidebar-divider {
+  margin: var(--space-2) var(--space-4);
+}
+
+/* ============================================================================
+   HAMBURGER TOGGLE — Mobile navigation
+   ============================================================================ */
+.sidebar-hamburger {
+  display: none; /* Hidden on desktop */
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  min-height: 0; /* Override global 44px min-height — already explicit */
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+@media (max-width: 768px) {
+  .sidebar-hamburger {
+    display: flex;
+  }
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: var(--z-dropdown);
+    background: var(--surface-primary);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Mobile collapsed: just the hamburger strip visible */
+  .sidebar.collapsed {
+    width: 56px;
+    height: 56px;
+    bottom: auto;
+    padding: 0;
+    overflow: hidden;
+    border-inline-end: 0;
+    border-block-end: 1px solid var(--border-subtle);
+    border-end-end-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .sidebar.collapsed .sidebar-header {
+    min-height: 56px;
+    padding: 0;
+  }
+
+  .sidebar.collapsed .sidebar-mode-switcher,
+  .sidebar.collapsed .sidebar-compose,
+  .sidebar.collapsed .sidebar-nav,
+  .sidebar.collapsed .sidebar-labels-rail,
+  .sidebar.collapsed .sidebar-footer {
+    display: none;
+  }
+
+  /* Mobile expanded: full drawer overlay */
+  .sidebar.expanded {
+    width: 256px;
+    height: 100%;
+    bottom: 0;
+  }
+}
+
+/* Mobile drawer backdrop */
+.sidebar-mobile-backdrop {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sidebar-mobile-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: calc(var(--z-dropdown) - 1);
+    background: rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ============================================================================
+   CONTAINER QUERIES — Component-intrinsic responsive behavior
+   ============================================================================ */
+@container sidebar (max-width: 256px) {
+  .app-mode-switcher {
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-1);
+  }
+  .mode-slider {
+    display: none;
+  }
+  .mode-btn {
+    padding: 5px var(--space-2);
+    font-size: var(--font-size-xs);
+  }
+  .sidebar-nav-label {
+    display: none;
+  }
+  .sidebar-nav-count {
+    display: none;
+  }
+}
+
+@container sidebar (max-width: 80px) {
+  .sidebar-header {
+    justify-content: center;
+    padding: var(--space-2);
+  }
+  .sidebar-logo-gentys {
+    display: none;
+  }
+  .app-mode-switcher {
+    margin: 0 var(--space-1) var(--space-2);
+  }
+}
+
+/* ── Projets section ───────────────────────────────────────────── */
+.sidebar-section {
+  padding: var(--space-2) 0 var(--space-1);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: var(--space-1);
+}
+
+.sidebar-section-title {
+  display: block;
+  padding: 0 var(--space-3) var(--space-1);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  user-select: none;
+}
+
+.sidebar-item--project {
+  gap: var(--space-2);
+}
+
+.sidebar-project-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* ============================================================================
+   SIMPLIFIED ICON-ONLY SIDEBAR
+   ============================================================================ */
+
+/* Logo mark non-cliquable en header centré — taille contrôlée par .sidebar-logo-mark plus haut */
+.sidebar-header .sidebar-logo-mark svg {
+  display: block;
+}
+
+/* Mode switcher — deux icônes mail/calendar en bas de nav */
+.sidebar-mode-switcher {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--space-2);
+  gap: 1px;
+  padding-top: 0;
+  margin-top: 0;
+}

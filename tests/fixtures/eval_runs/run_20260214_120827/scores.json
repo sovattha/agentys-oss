@@ -1,0 +1,57 @@
+{
+  "profile": {
+    "completeness": 65,
+    "precision": 85,
+    "usefulness": 70,
+    "overall": 73,
+    "missing": [
+      "signature_en (English signature with title 'Project Manager', department 'Digital Division')",
+      "tone.greeting_styles object with 5 specific templates (formal_fr, semi_formal_fr, casual_fr, formal_en, semi_formal_en)",
+      "tone.closing_styles object with 5 specific templates",
+      "response_time_avg precision ('< 1h' vs generic 'same-day or next business day')"
+    ],
+    "incorrect": [
+      "active_hours: '08:00-17:00' (should be '08:00-18:00')",
+      "tone.greeting_style: generic string instead of structured greeting_styles object",
+      "tone.closing_style: generic string instead of structured closing_styles object"
+    ],
+    "details": "The system captured core profile fields (name, email, signature, tone, languages) but missed critical details. MISSING: (1) signature_en - entire English signature variant, (2) greeting_styles/closing_styles - specific templates with {first_name} placeholders for each formality level, (3) response_time_avg precision ('< 1h' vs vague 'same-day'). INCORRECT: (1) active_hours end time (17:00 vs 18:00 in ground truth), (2) tone structure uses generic strings instead of actionable templates. The output is partially usable but lacks the granularity needed for high-quality draft generation (e.g., can't programmatically select 'Bonjour {first_name},' for semi-formal FR)."
+  },
+  "knowledge": {
+    "completeness": 0,
+    "precision": 0,
+    "usefulness": 0,
+    "overall": 0,
+    "missing": [],
+    "incorrect": [],
+    "details": "Output Knowledge vide — évaluation LLM ignorée"
+  },
+  "rules": {
+    "completeness": 72,
+    "precision": 85,
+    "usefulness": 78,
+    "overall": 78,
+    "missing": [
+      "john.smith@globaltech.com contact rule (semi-formal English contact)",
+      "Alternate greeting variations: 'Salut Pierre' vs 'Pierre', 'Bonjour Amelie' vs 'Bonjour Madame Petit'",
+      "Alternate closing variations: 'Best,' for Sarah Jones, 'Sophie Martin' for Nicolas",
+      "auto_reply_patterns section (congé/absence, JIRA notifications)",
+      "signature_casual rule (explicit rule for omitting signature in casual contexts)",
+      "structured_updates rule (numbered lists for status updates - partially covered)",
+      "action_items rule (clear next steps with owners)",
+      "forbidden_phrases section (empty but should exist)"
+    ],
+    "incorrect": [
+      "pierre.durand@techcorp.fr tone: labeled 'semi-formal' but should be 'casual' per ground truth",
+      "ceo@techcorp.fr tone: labeled 'formal' but should be 'semi-formal' per ground truth",
+      "nicolas.moreau@techcorp.fr tone: labeled 'formal' but should be 'semi-formal' per ground truth",
+      "contact@prospect-startup.io tone: labeled 'formal' but should be 'semi-formal' per ground truth",
+      "claire.fontaine@clientcorp.com tone: labeled 'formal' but should be 'semi-formal' per ground truth",
+      "Added hallucinated contacts: equipe-digitale@, recrutement@, it-support@ (not in ground truth)",
+      "Missing greeting variations (e.g., 'Salut Lucas' vs just 'Lucas')",
+      "Signature in contact_rules too detailed - ground truth just says 'Cordialement,' not full signature block"
+    ],
+    "details": "The system captured most key contacts and general rules, but missed some important contacts (john.smith@globaltech.com - 10/13 contacts = 77%) and nuanced greeting/closing variations. General rules coverage was good (8/8 core patterns identified) but some were reformulated rather than directly matched. The system added extra contacts not in ground truth (equipe-digitale@, recrutement@, it-support@), which shows inference but isn't strictly accurate. Signature formatting is more detailed than ground truth but essentially correct."
+  },
+  "overall": 50
+}

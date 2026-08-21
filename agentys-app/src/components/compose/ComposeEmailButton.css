@@ -1,0 +1,41 @@
+.compose-email-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem 0.875rem 1rem;
+  background-color: color-mix(in srgb, var(--accent-primary) 18%, var(--surface-primary));
+  color: var(--text-primary);
+  border: none;
+  border-radius: 1rem;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  font-family: var(--font-sans);
+  letter-spacing: var(--tracking-wide);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), box-shadow var(--transition-base);
+  box-shadow: var(--shadow-md);
+}
+
+.compose-email-button:active:not(:disabled) {
+  background-color: color-mix(in srgb, var(--accent-primary) 35%, var(--surface-primary));
+}
+
+.compose-email-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.compose-email-button:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.compose-email-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.compose-email-text {
+  white-space: nowrap;
+}

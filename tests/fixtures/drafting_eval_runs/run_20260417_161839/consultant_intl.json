@@ -1,0 +1,237 @@
+{
+  "aggregate": {
+    "critic": {
+      "coherence": 91,
+      "tone": 82,
+      "completeness": 90,
+      "errors": 87,
+      "conciseness": 88,
+      "emotional_intelligence": 71,
+      "overall": 83
+    },
+    "judge": {
+      "faithfulness": 52,
+      "completeness": 80,
+      "tone_match": 58,
+      "conciseness": 81,
+      "overall": 66
+    }
+  },
+  "cases": [
+    {
+      "case_id": "msg-002",
+      "subject": "AcmeCorp Engagement Update",
+      "draft": "On the $18M breakdown — I'll put together the category split and include it in the deck. The main buckets are procurement, operational overhead, and revenue leakage, but I want to verify the exact figures before sharing them.\n\nOn the second manager question, I'd lean toward yes given the scope, but it depends on how Phase 2 shapes up. Worth a quick discussion Thursday before we commit.\n\nRegarding Ben — he's available roughly 60% through end of Q2, with the other workstream winding down in mid-May. If we need him at higher capacity before then, we'd need to escalate with the other engagement lead.\n\nI'll have the status deck ready for Thursday's partners' meeting. Can you confirm the start time and whether you want it capped at a certain number of slides?\n",
+      "elapsed_draft_s": 18.32,
+      "critic": {
+        "coherence": 92,
+        "tone": 88,
+        "completeness": 90,
+        "errors": 82,
+        "conciseness": 87,
+        "over_commitment": 78,
+        "emotional_intelligence": 72,
+        "overall": 84,
+        "decision": "valid",
+        "suggestions": [
+          "Confirmer heure deck",
+          "Éviter ~60% Ben"
+        ]
+      },
+      "judge": {
+        "faithfulness": 28,
+        "completeness": 82,
+        "tone_match": 85,
+        "conciseness": 80,
+        "overall": 67,
+        "strengths": [
+          "Toutes les questions de Richard sont adressées dans l'ordre",
+          "La question de clôture sur l'heure de début et le nombre de slides est pertinente et actionnable",
+          "Le ton est bien calibré : professionnel et collégial, miroir du registre de Richard",
+          "Structure claire, paragraphe par paragraphe suivant l'ordre des points soulevés"
+        ],
+        "weaknesses": [
+          "Chiffre '60%' de disponibilité de Ben complètement inventé — l'email entrant dit seulement 'partially committed'",
+          "Date 'mid-May' pour la fin du second workstream de Ben est fabriquée — aucune donnée temporelle dans l'email entrant",
+          "Les trois catégories du $18M ('procurement, operational overhead, revenue leakage') sont présentées comme des faits connus alors qu'elles ne figurent nulle part dans l'email entrant ni dans l'historique"
+        ],
+        "hallucinations": [
+          "Ben disponible à '60% through end of Q2' — pourcentage et horizon temporel inventés",
+          "'other workstream winding down in mid-May' — date inventée",
+          "'procurement, operational overhead, and revenue leakage' comme catégories connues du $18M — non sourcées"
+        ]
+      }
+    },
+    {
+      "case_id": "msg-004",
+      "subject": "Phase 2 Scope and Timeline",
+      "draft": "Noted on all three points.\n\nOn the timeline, we'll run a detailed review of the operating model workstream to assess whether 10 weeks is achievable without compromising quality. You'll have our revised schedule by end of next week.\n\nOn the procurement deep-dive, we agree the current resource allocation is light for the depth of analysis required. We'll propose additional analytical capacity and share an updated team structure for your review.\n\nOn change management, Jennifer's concern is well-founded. We'll move frontline engagement earlier in the plan — before the operating model recommendations are finalized, not after. This will be reflected in the updated proposal.\n\nWe'll consolidate all three responses into a revised document and send it ahead of our next call.\n",
+      "elapsed_draft_s": 19.71,
+      "critic": {
+        "coherence": 92,
+        "tone": 88,
+        "completeness": 90,
+        "errors": 95,
+        "conciseness": 88,
+        "over_commitment": 62,
+        "emotional_intelligence": 75,
+        "overall": 84,
+        "decision": "valid",
+        "suggestions": [
+          "Délai fin semaine",
+          "Capacité analytique précise"
+        ]
+      },
+      "judge": {
+        "faithfulness": 82,
+        "completeness": 78,
+        "tone_match": 72,
+        "conciseness": 88,
+        "overall": 80,
+        "strengths": [
+          "Aucune information inventée : pas de délais fabriqués, pas de ressources spécifiques hallusinées, pas de noms non fournis",
+          "Les trois points soulevés par Michael sont adressés dans l'ordre et de façon structurée",
+          "Le repositionnement du change management (avant finalisation des recommandations) est une réponse substantielle et pertinente au point 3",
+          "Longueur proportionnée : concis sans être lapidaire, pas de remplissage"
+        ],
+        "weaknesses": [
+          "Ton trop prudent et conditionnel face à un CFO qui attend des engagements fermes : 'we'll run a review to assess whether 10 weeks is achievable' ne répond pas à la demande — Michael veut un oui ou un non motivé, pas une nouvelle étude",
+          "Le point 2 (renforcement analytique) reste vague ('additional analytical capacity') sans aucun engagement de forme ou de délai, alors que Michael signale que l'équipe est 'thin' — une réponse plus directe était attendue",
+          "Le point 1 de la réponse de référence confirme la compression à 10 semaines ; le brouillon en fait un sujet d'étude supplémentaire, ce qui peut être perçu comme une esquive",
+          "L'annonce d'un 'revised document' en fin de message est une bonne pratique mais reste suspendue dans le vide sans date précise ni format — légèrement moins actionnable que promis"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-006",
+      "subject": "AcmeCorp cost model — data gaps",
+      "draft": "Good catch on all three.\n\n1. Indirect costs : la méthodologie doit être clarifiée directement avec AcmeCorp — demande-leur la base d'allocation avant de modéliser quoi que ce soit.\n2. Facilities : quels trois bureaux régionaux sont absents ? Une fois identifiés, demande les données séparément du data pack.\n3. FTE : note la variance et utilise le rapport finance comme référence de travail — il est généralement plus à jour que les données RH en période de restructuration.\n\nSur la baseline : prends les actuals 2024. Les chiffres budgétaires introduisent des hypothèses qu'on ne peut pas valider, et $2.3M est trop matériel pour être traité comme un écart résiduel.\n",
+      "elapsed_draft_s": 36.27,
+      "critic": {
+        "coherence": 92,
+        "tone": 78,
+        "completeness": 95,
+        "errors": 95,
+        "conciseness": 90,
+        "over_commitment": 95,
+        "emotional_intelligence": 62,
+        "overall": 86,
+        "decision": "valid",
+        "suggestions": [
+          "Reconnaître l'effort",
+          "Ton plus neutre"
+        ]
+      },
+      "judge": {
+        "faithfulness": 35,
+        "completeness": 90,
+        "tone_match": 15,
+        "conciseness": 78,
+        "overall": 52,
+        "strengths": [
+          "Les quatre points soulevés par Anika (3 problèmes + la question baseline) sont tous adressés directement",
+          "La recommandation sur la baseline (actuals 2024) est tranchée et motivée, sans ambiguïté",
+          "La structure en liste numérotée miroir celle de l'email entrant — facilite la lecture point par point",
+          "Ton d'ouverture ('Good catch on all three') calibré et non-condescendant"
+        ],
+        "weaknesses": [
+          "Mismatch linguistique majeur : Anika écrit en anglais, le corps de la réponse est en français — violation frontale du miroir de registre",
+          "Hallucination détectée : 'en période de restructuration' — aucune restructuration n'est mentionnée dans l'email ni dans l'historique ; cette justification est inventée",
+          "Mixte anglais/français incohérent dans le même email (intro en anglais, corps en français) — signal d'une réponse mal ciblée"
+        ],
+        "hallucinations": [
+          "'en période de restructuration' : aucune mention de restructuration dans l'email entrant ni dans l'historique de conversation — contexte fabriqué pour justifier la priorité du rapport finance sur les données RH"
+        ]
+      }
+    },
+    {
+      "case_id": "msg-008",
+      "subject": "AcmeCorp — can you join mid-Jan?",
+      "draft": "The 13th works perfectly — glad Meridian wraps up in time.\n\nOn scope : je t'envoie le project brief aujourd'hui. En deux mots, c'est principalement de l'operating model design, mais avec un volet cost reduction qui s'y greffe en phase 2. On en parle de vive voix cette semaine si tu veux aligner avant le kick-off.\n",
+      "elapsed_draft_s": 30.41,
+      "critic": {
+        "coherence": 88,
+        "tone": 72,
+        "completeness": 85,
+        "errors": 90,
+        "conciseness": 88,
+        "over_commitment": 68,
+        "emotional_intelligence": 75,
+        "overall": 80,
+        "decision": "valid",
+        "suggestions": [
+          "brief déjà prêt?",
+          "confirmer disponibilité appel"
+        ]
+      },
+      "judge": {
+        "faithfulness": 25,
+        "completeness": 70,
+        "tone_match": 35,
+        "conciseness": 75,
+        "overall": 49,
+        "strengths": [
+          "Confirme explicitement la disponibilité à partir du 13, en écho à ce que Ben a dit",
+          "Tente de répondre à la question sur le scope, qui est la demande centrale de Ben",
+          "Structure courte et sans remplissage inutile"
+        ],
+        "weaknesses": [
+          "Réponse rédigée en français alors que Ben écrit en anglais — rupture de langue totale, aucun signal dans l'historique ne justifie ce choix",
+          "Mélange anglais/français au sein du même email (première phrase en anglais, suite en français) — incohérence rédactionnelle",
+          "Les détails du scope (operating model principal + cost reduction en phase 2) sont inventés : aucune source dans l'email entrant ni dans l'historique",
+          "L'engagement 'je t'envoie le project brief aujourd'hui' est fabriqué — aucune mention d'un tel document dans le fil"
+        ],
+        "hallucinations": [
+          "'principalement de l'operating model design, mais avec un volet cost reduction qui s'y greffe en phase 2' — répartition et phasage du scope inventés, non fournis par l'expéditeur",
+          "'je t'envoie le project brief aujourd'hui' — existence d'un brief et engagement d'envoi le jour même, sans aucune base dans le contexte"
+        ]
+      }
+    },
+    {
+      "case_id": "msg-010",
+      "subject": "Digital Strategy Roadmap — Board Presentation",
+      "draft": "Here is a proposed structure for the board presentation:\n\n1. Strategic context — why digital transformation now, and what's at stake for LuxeGroup's people agenda\n2. Vision & guiding principles — employee experience as the north star, aligned with the CEO's mandate\n3. 18-month roadmap — phased across three horizons (0–90 days / 90 days–12 months / 12–18 months), with clear milestones and budget allocation against the EUR 2.5M envelope\n4. Quick wins (90-day sprint) — three to five initiatives deliverable before the next board review, with measurable impact on employee experience\n5. CHRO transformation narrative — how this roadmap positions HR as a strategic driver, not a support function\n6. Governance & accountability — ownership model, KPIs, and review cadence\n7. Investment summary — phased spend, expected ROI, and risk mitigation\n\nA few things that would sharpen the draft before I finalise it:\n\n- Are there existing digital initiatives already underway that the roadmap should build on or supersede?\n- Does the board expect a technology vendor shortlist, or is this a strategic framing deck only?\n- What is the exact date of the January board meeting?\n\nOnce I have those inputs, I can have a full first draft to you within 48 hours.\n",
+      "elapsed_draft_s": 20.13,
+      "critic": {
+        "coherence": 92,
+        "tone": 85,
+        "completeness": 90,
+        "errors": 72,
+        "conciseness": 88,
+        "over_commitment": 62,
+        "emotional_intelligence": 70,
+        "overall": 79,
+        "decision": "valid",
+        "suggestions": [
+          "Supprimer délai 48h",
+          "Clarifier relation James"
+        ]
+      },
+      "judge": {
+        "faithfulness": 88,
+        "completeness": 80,
+        "tone_match": 84,
+        "conciseness": 83,
+        "overall": 84,
+        "strengths": [
+          "Les 4 priorités CEO sont toutes adressées structurellement : employee experience (sections 2 et 4), quick wins 90 jours (section 4), enveloppe EUR 2,5M sur 18 mois (sections 3 et 7), CHRO transformation narrative (section 5)",
+          "Aucune information inventée : les chiffres cités (2,5M, 18 mois, 90 jours) proviennent exclusivement de l'email entrant",
+          "La structure en 7 sections est logique, bien articulée et directement actionnable pour une board presentation",
+          "Le ton est professionnel et formel, parfaitement calqué sur le registre soutenu d'Isabelle Moreau",
+          "Les questions de clarification sont pertinentes et permettent réellement d'affiner le livrable"
+        ],
+        "weaknesses": [
+          "L'engagement de livraison 'within 48 hours' n'est pas sollicité et introduit une contrainte temporelle non discutée avec le contact",
+          "Les 3 questions de clarification, bien que légitimes, décalent partiellement la responsabilité vers Isabelle alors qu'elle a explicitement demandé un premier draft — le draft est fourni, mais son caractère conditionnel affaiblit la réponse",
+          "La mention 'three to five initiatives' dans la section quick wins est une suggestion non ancrée dans l'email (nombre proposé sans base fournie par le contact)",
+          "Aucune proposition de format (nombre de slides estimé, durée de présentation) qui aurait pu être pertinente pour le contexte board"
+        ],
+        "hallucinations": [
+          "'within 48 hours' : délai de livraison auto-engagé, absent de toute instruction ou demande de l'email entrant",
+          "'three to five initiatives' : fourchette numérique inventée sans ancrage dans les informations fournies"
+        ]
+      }
+    }
+  ]
+}

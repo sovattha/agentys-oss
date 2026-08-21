@@ -1,0 +1,5 @@
+Email:
+De: {sender_name} <{sender}>
+Sujet: {subject}
+
+{body}

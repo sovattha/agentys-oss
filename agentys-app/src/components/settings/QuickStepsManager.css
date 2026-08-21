@@ -1,0 +1,3789 @@
+/* QuickStepsManager — visual polish pass.
+ *
+ * Reads canonical theme tokens from src/index.css (Clarity) so the
+ * component auto-adapts:
+ *   --text-primary / --text-secondary / --text-tertiary / --text-placeholder
+ *   --surface-primary / --surface-secondary / --surface-elevated / --surface-tertiary
+ *   --border-default / --border-subtle / --border-strong
+ *   --accent-primary / --accent-primary-hover / --accent-primary-subtle / --text-inverse
+ *
+ * Layout principles:
+ *   - One header per surface (the modal owns the title).
+ *   - Action chips, per-action icons, and rounded number badges replace
+ *     bare text controls so the eye can scan a chain at a glance.
+ *   - Sticky save row at the bottom of the editor — never compete with a
+ *     redundant top row.
+ */
+
+.quicksteps-panel {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  color: var(--text-primary, #111827);
+}
+
+.quicksteps-panel__lead {
+  color: var(--text-secondary, #374151);
+  font-size: 13px;
+  margin: 0 0 18px;
+  line-height: 1.55;
+}
+
+.quicksteps-panel__primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-primary, #0d9488);
+  color: var(--text-inverse, #ffffff);
+  border: 0;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+  box-shadow: 0 1px 2px rgba(13, 148, 136, 0.25);
+}
+
+.quicksteps-panel__primary:hover,
+.quicksteps-panel__primary:focus-visible {
+  background: var(--accent-primary-hover, #0f766e);
+}
+
+.quicksteps-panel__error {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 10px;
+  color: rgb(185, 28, 28);
+  padding: 10px 14px;
+  font-size: var(--font-size-sm);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.quicksteps-panel__error-retry {
+  flex-shrink: 0;
+  background: rgb(185, 28, 28);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.quicksteps-panel__placeholder {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.quicksteps-skeleton {
+  display: block;
+  height: 64px;
+  border-radius: 12px;
+  background: linear-gradient(
+    90deg,
+    var(--surface-secondary, #f5f4f1) 0%,
+    var(--surface-tertiary, #ebe9e5) 50%,
+    var(--surface-secondary, #f5f4f1) 100%
+  );
+  background-size: 200% 100%;
+  animation: qs-skeleton 1.4s ease-in-out infinite;
+}
+
+@keyframes qs-skeleton {
+  0%   { background-position: 0% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Empty state (Quick Start templates + create-blank)                          */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.quicksteps-empty {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quicksteps-empty__caption {
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary, #4b5563);
+  margin: 0 0 2px;
+  font-weight: 600;
+}
+
+.quicksteps-empty__grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+}
+
+.quicksteps-template {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text-primary, #111827);
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.quicksteps-template:focus-visible {
+  outline: 2px solid var(--accent-primary, #0d9488);
+  outline-offset: 2px;
+}
+
+.quicksteps-template__icon {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--accent-primary-subtle, rgba(13, 148, 136, 0.1));
+  color: var(--accent-primary, #0d9488);
+}
+
+.quicksteps-template--blank .quicksteps-template__icon {
+  background: var(--surface-tertiary, #ebe9e5);
+  color: var(--text-tertiary, #4b5563);
+}
+
+.quicksteps-template__body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.quicksteps-template__name {
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  color: var(--text-primary, #111827);
+}
+
+.quicksteps-template__desc {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary, #374151);
+  line-height: 1.45;
+}
+
+.quicksteps-template__chev {
+  color: var(--text-tertiary, #4b5563);
+  display: inline-flex;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Saved-list header                                                           */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.quicksteps-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.quicksteps-list-header__count {
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-tertiary, #4b5563);
+  background: var(--surface-secondary, #f5f4f1);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.08));
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Filter bar (All / Auto / Manual / Disabled) — left-aligned in the header   */
+/* opposite the "+ New" CTA. Hidden when only one card exists; see manager.   */
+/* Selecting any non-"all" chip also disables drag-to-reorder because the     */
+/* drop index would otherwise be interpreted against the FILTERED list and    */
+/* silently shuffle hidden rows.                                              */
+/* ─────────────────────────────────────────────────────────────────────────── */
+.quicksteps-filter-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--surface-secondary, #f5f4f1);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.06));
+  border-radius: 999px;
+  padding: 3px;
+}
+
+.quicksteps-filter-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary, #4b5563);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  white-space: nowrap;
+}
+
+.quicksteps-filter-chip[data-active] {
+  background: var(--surface-elevated, #ffffff);
+  color: var(--text-primary, #111827);
+  box-shadow:
+    0 0 0 1px var(--border-default, rgba(0, 0, 0, 0.05)),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.quicksteps-filter-chip:focus-visible {
+  outline: 2px solid var(--accent-primary, #0d9488);
+  outline-offset: 2px;
+}
+
+.quicksteps-filter-chip__count {
+  font-variant-numeric: tabular-nums;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-tertiary, #6b7280);
+  background: color-mix(in srgb, var(--text-tertiary, #6b7280) 12%, transparent);
+  border-radius: 999px;
+  padding: 1px 6px;
+  line-height: 1.3;
+}
+
+.quicksteps-filter-chip[data-active] .quicksteps-filter-chip__count {
+  color: var(--accent-primary, #0d9488);
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 14%, transparent);
+}
+
+/* Inline empty-state row shown when a non-"all" filter selects zero cards. */
+.quicksteps-list__empty-filter {
+  list-style: none;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted, #6b7280);
+  padding: 18px 12px;
+  border: 1px dashed var(--border-default, rgba(0, 0, 0, 0.08));
+  border-radius: 10px;
+  background: var(--surface-secondary, #f5f4f1);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Step card list                                                              */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.quicksteps-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+li[data-drag-over] > .quickstep-card {
+  border-top: 2px solid var(--accent-primary, #0d9488);
+  margin-top: -1px;
+}
+
+.quickstep-card {
+  display: grid;
+  grid-template-columns: 16px auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0 12px;
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.08));
+  border-radius: 10px;
+  padding: 12px 12px 12px 14px;
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.14s ease;
+  outline: none;
+}
+
+/* Embedded mode (Settings → Automation discovery surface): no drag handle,
+   no action-icon stack — just name/summary on the left and the toggle
+   pushed all the way to the right edge of the card. */
+.quickstep-card[data-embedded] {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.quickstep-card[data-embedded] .quickstep-card__meta {
+  justify-self: end;
+}
+
+/* 2026-05-13 visual pass: the per-action colored left bar was decorative
+   and competed with the action-icon stack for "what kind of action is
+   this?" semantics. The accent now appears ONLY on hover/focus, in the
+   app's single accent color — so the resting state is neutral and the
+   user's eye lands on the title + action chips first. */
+.quickstep-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: var(--accent-primary, #0d9488);
+  border-radius: 10px 0 0 10px;
+  opacity: 0;
+  transition: opacity 0.18s ease, width 0.18s ease;
+}
+
+.quickstep-card:hover::before,
+.quickstep-card:focus-visible::before {
+  opacity: 1;
+  width: 3px;
+}
+
+.quickstep-card:focus-visible {
+  outline: 2px solid var(--accent-primary, #0d9488);
+  outline-offset: 2px;
+}
+
+/* Lift-on-hover affordance — matches the Label Library cards (audit
+ * 2026-05-15). Skipped while dragging / dropping so the swap animation
+ * isn't fighting a transform on the lifted-row's hover state. */
+.quickstep-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px -6px color-mix(in srgb, var(--text-primary) 18%, transparent);
+  border-color: color-mix(in srgb, var(--accent-primary) 28%, var(--border-default));
+}
+
+.quickstep-card[data-dragging]:hover,
+li[data-drag-over] > .quickstep-card:hover {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quickstep-card:hover {
+    transform: none;
+  }
+}
+
+.quickstep-card[data-disabled] { opacity: 0.5; }
+
+/* Non-interactive variant — wraps a static settings row (e.g. the
+   Auto-reminder toggle in the Automation tab) in the quickstep-card
+   chrome for visual coherence, minus the click-to-edit affordances. */
+.quickstep-card--static { cursor: default; }
+.quickstep-card--static:focus-visible::before { opacity: 0; width: 0; }
+
+/* Drag handle — hidden until the row is hovered, focused, or grabbed.
+ * Matches the email-list checkbox affordance: keep the chrome quiet at
+ * rest, surface reorder hint only when the cursor (or keyboard focus)
+ * lands on a row. */
+.quickstep-card__drag {
+  color: var(--text-placeholder, #9ca3af);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.quickstep-card:hover .quickstep-card__drag,
+.quickstep-card:focus-within .quickstep-card__drag {
+  opacity: 1;
+  color: var(--text-secondary, #4b5563);
+}
+
+/* Mid-drag: keep the handle visible even when the cursor leaves the row
+ * (some browsers fire pointerleave while a drag is in progress). */
+.quickstep-card__drag:active {
+  cursor: grabbing;
+  opacity: 1;
+}
+
+/* Inline action chip flow */
+.quickstep-card__stack {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.quickstep-card__chip {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  background: var(--surface-secondary, #f5f4f1);
+  color: var(--text-secondary, #374151);
+  flex-shrink: 0;
+  transition: transform 0.12s ease;
+}
+
+/* Arrow between chips */
+.quickstep-card__flow-sep {
+  font-size: 10px;
+  line-height: 1;
+  color: var(--text-placeholder, #9ca3af);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.quickstep-card__chip[data-action='archive']                       { background: #e0f2fe; color: #0369a1; }
+.quickstep-card__chip[data-action='unarchive']                     { background: #cffafe; color: #0e7490; }
+.quickstep-card__chip[data-action='delete']                        { background: #fee2e2; color: #dc2626; }
+.quickstep-card__chip[data-action='mark_read']                     { background: #dcfce7; color: #16a34a; }
+.quickstep-card__chip[data-action='move_to_spam']                  { background: #fef3c7; color: #b45309; }
+.quickstep-card__chip[data-action='pin']                           { background: #fef9c3; color: #a16207; }
+.quickstep-card__chip[data-action='reply_template']                { background: #ede9fe; color: #7c3aed; }
+.quickstep-card__chip[data-action='forward']                       { background: #ccfbf1; color: #0f766e; }
+.quickstep-card__chip[data-action='rsvp_meeting']                  { background: #e0e7ff; color: #4338ca; }
+.quickstep-card__chip[data-action='create_snoozed_followup_draft'] { background: #f3e8ff; color: #9333ea; }
+
+.quickstep-card__main { min-width: 0; }
+
+.quickstep-card__header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 2px;
+  flex-wrap: wrap;
+}
+
+.quickstep-card__name {
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--text-primary, #111827);
+  letter-spacing: -0.01em;
+}
+
+.quickstep-card__badge {
+  background: var(--surface-tertiary, #ebe9e5);
+  border-radius: 999px;
+  padding: 1.5px 7px;
+  font-size: 10px;
+  color: var(--text-secondary, #374151);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+.quickstep-card__badge--auto {
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 12%, transparent);
+  color: var(--accent-primary, #0d9488);
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.quickstep-card__summary {
+  font-size: 12px;
+  /* Explicit muted gray so the title leads visually even when a theme
+     overrides --text-secondary to a near-black value (codex audit
+     2026-05-13: previous fallback only kicked in when the var was unset,
+     so in dark/high-contrast themes title and description rendered with
+     the same weight). */
+  color: var(--text-muted, #6b7280);
+  /* Wrap to two lines instead of mid-word ellipsis on every row. Falls
+     back to plain ellipsis if -webkit-line-clamp is unavailable. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  line-height: 1.4;
+  /* Reserve two lines worth of height so cards align even when one
+     description is short — prevents the jagged-bottom-edge look in a
+     dense list. */
+  min-height: calc(2 * 1.4em);
+}
+
+.quickstep-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Match the .shortcut-kbd style used elsewhere in Settings — shared visual
+   language for any displayed keybinding. */
+.quickstep-card__shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 11px);
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--text-secondary, #4b5563);
+  white-space: nowrap;
+}
+
+.quickstep-card__icon-btn {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-tertiary, #9ca3af);
+  cursor: pointer;
+  padding: 0;
+  opacity: 1;
+  transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.quickstep-card__icon-btn:focus-visible {
+  opacity: 1;
+}
+
+/* Inline enable/disable toggle on each card. Compact variant of
+   `.settings-switch` — sized for the dense card meta row, not a settings
+   row. Always visible (not hover-revealed) so the user always sees the
+   rule's on/off state at a glance. */
+.quickstep-card__toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px;
+  margin: 0;
+}
+
+.quickstep-card__toggle input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.quickstep-card__switch {
+  position: relative;
+  width: 32px;
+  height: 18px;
+  background-color: color-mix(in srgb, var(--surface-tertiary) 80%, var(--text-muted));
+  border-radius: 9px;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
+}
+
+.quickstep-card__switch::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s var(--ease-spring, cubic-bezier(0.4, 0, 0.2, 1));
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.quickstep-card__toggle input:checked + .quickstep-card__switch {
+  background-color: var(--accent-primary);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent-primary) 25%, transparent);
+}
+
+.quickstep-card__toggle input:checked + .quickstep-card__switch::before {
+  transform: translateX(14px);
+}
+
+.quickstep-card__toggle input:focus-visible + .quickstep-card__switch {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Editor                                                                      */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.quickstep-editor {
+  /* Lives directly inside the modal body; the modal owns the chrome. */
+  background: transparent;
+}
+
+.quickstep-editor__row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 0;
+}
+
+.quickstep-editor__field--full {
+  /* Breathing room between the Name/Shortcut row and the Description
+     textarea so the two field groups don't read as one cramped block. */
+  margin-top: 18px;
+}
+
+.quickstep-editor__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  /* Sentence-case ("Name" / "Shortcut") to match the step section headings
+     ("Description", "Conditions", "Actions"). The previous uppercase + tight
+     letter-spacing read as label-fatigue noise next to the bigger headings. */
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary, #374151);
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
+  width: 100%;
+  text-align: left;
+}
+
+.quickstep-editor__field input[type='text'] {
+  display: block;
+  width: 100%;
+  background: var(--surface-primary, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--text-primary, #111827);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.quickstep-editor__field input[type='text']::placeholder {
+  color: var(--text-placeholder, #9ca3af);
+}
+
+.quickstep-editor__field input[type='text']:focus {
+  outline: none;
+  border-color: var(--accent-primary, #0d9488);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent-primary, #0d9488) 10%, transparent),
+    inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Free-text description textarea — same visual language as the Name input
+   so the two fields read as a pair in the editor's Step 1. resize:vertical
+   lets users grow the box when they need more than three lines without
+   shrinking it below the natural rows={3} height. */
+.quickstep-editor__field textarea {
+  display: block;
+  width: 100%;
+  background: var(--surface-primary, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  letter-spacing: normal;
+  color: var(--text-primary, #111827);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  resize: vertical;
+  min-height: 88px;
+  line-height: 1.45;
+}
+
+.quickstep-editor__field textarea::placeholder {
+  color: var(--text-placeholder, #9ca3af);
+}
+
+.quickstep-editor__field textarea:focus {
+  outline: none;
+  border-color: var(--accent-primary, #0d9488);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent-primary, #0d9488) 10%, transparent),
+    inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.quickstep-editor__error {
+  color: rgb(185, 28, 28);
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-top: 14px;
+  font-size: 13px;
+}
+
+.quickstep-editor__footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin: 18px -18px -18px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--border-default, rgba(0, 0, 0, 0.08));
+  background: var(--surface-primary, #ffffff);
+  position: sticky;
+  bottom: -18px;
+  z-index: 1;
+}
+
+/* Editor cancel/save buttons migrated to the shared <Button> component
+   (ui/button.tsx): variant="outline" for cancel, variant="default" for save. */
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Action chain                                                                */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.quickstep-editor__actions {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.quickstep-editor__actions legend {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-tertiary, #4b5563);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Numbered step layout — 1. Name → 2. When → 3. What                          */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.qs-step {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  column-gap: 14px;
+  margin-bottom: 22px;
+}
+
+.qs-step:last-of-type {
+  margin-bottom: 12px;
+}
+
+.qs-step__num {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--surface-secondary, #f1f5f9);
+  color: var(--text-tertiary, #94a3b8);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  margin-top: 4px;
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.qs-step__num--active,
+.qs-step__num[data-active] {
+  background: var(--accent-primary, #0d9488);
+  color: var(--text-inverse, #ffffff);
+  border-color: var(--accent-primary, #0d9488);
+}
+
+.qs-step__body {
+  min-width: 0;
+}
+
+.qs-step__head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 4px 0 12px;
+}
+
+.qs-step__label {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+}
+
+.qs-step__hint {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--text-secondary, #64748b);
+  line-height: 1.45;
+}
+
+/* Step 2 — bare conditions block (no card chrome, the step gives it structure) */
+.qs-conditions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.qs-conditions__empty {
+  margin: 0;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  color: var(--text-tertiary, #64748b);
+  background: var(--surface-secondary, #f8fafc);
+  border: 1px dashed var(--border-subtle, #e2e8f0);
+  border-radius: 9px;
+}
+
+/* Step 4 — auto-trigger card disabled state when no conditions exist */
+.qs-trigger-card.is-disabled {
+  opacity: 0.7;
+}
+
+.qs-trigger-card.is-disabled .qs-trigger-card__icon {
+  background: var(--surface-secondary, #f1f5f9);
+  color: var(--text-placeholder, #94a3b8);
+  border-color: var(--border-subtle, #e2e8f0);
+}
+
+.qs-trigger-card.is-disabled .qs-trigger-toggle__track {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.qs-trigger-card.is-disabled .qs-trigger-toggle input {
+  cursor: not-allowed;
+}
+
+/* Visually-hidden but screen-reader-accessible — used for the action fieldset
+   legend now that the Step heading carries the label. */
+.qs-step .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.quickstep-actions {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quickstep-actions__item {
+  background: var(--surface-primary, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.08));
+  border-radius: 10px;
+  padding: 12px 14px;
+  transition: border-color 0.15s ease;
+}
+
+.quickstep-actions__item:focus-within {
+  border-color: color-mix(in srgb, var(--accent-primary, #0d9488) 50%, var(--border-default, rgba(0, 0, 0, 0.1)));
+}
+
+.quickstep-actions__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quickstep-actions__badge {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--surface-tertiary, #ebe9e5);
+  color: var(--text-secondary, #374151);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.quickstep-actions__icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--surface-secondary, #f5f4f1);
+  color: var(--text-secondary, #374151);
+}
+
+.quickstep-actions__icon[data-action='archive']        { background: #e0f2fe; color: #075985; }
+.quickstep-actions__icon[data-action='delete']         { background: #fee2e2; color: #991b1b; }
+.quickstep-actions__icon[data-action='mark_read']      { background: #dcfce7; color: #166534; }
+.quickstep-actions__icon[data-action='move_to_spam']   { background: #fef3c7; color: #854d0e; }
+.quickstep-actions__icon[data-action='pin']            { background: #fef9c3; color: #854d0e; }
+.quickstep-actions__icon[data-action='reply_template'] { background: #ede9fe; color: #5b21b6; }
+.quickstep-actions__icon[data-action='forward']        { background: #ccfbf1; color: #0f766e; }
+.quickstep-actions__icon[data-action='rsvp_meeting']   { background: #e0e7ff; color: #3730a3; }
+
+/* Legacy selector kept in case any consumer still mounts the old <select>;
+   the new custom picker uses .qs-action-picker__* below. */
+.quickstep-actions__type {
+  flex: 1 1 auto;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--surface-elevated, #ffffff);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234b5563' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  padding-left: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary, #111827);
+  cursor: pointer;
+}
+
+.quickstep-actions__type:focus {
+  outline: none;
+  border-color: var(--accent-primary, #0d9488);
+  box-shadow: 0 0 0 3px var(--accent-primary-subtle, rgba(13, 148, 136, 0.15));
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Action type picker — premium custom dropdown                                */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.qs-action-picker {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.qs-action-picker__btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 9px;
+  padding: 8px 11px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-primary, #0f172a);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 140ms ease, box-shadow 140ms ease, background 140ms ease;
+}
+
+.qs-action-picker__btn[data-open] {
+  border-color: var(--accent-primary, #0d9488);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary, #0d9488) 14%, transparent);
+}
+
+.qs-action-picker__btn-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.qs-action-picker__btn-chev {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary, #64748b);
+  transition: transform 200ms ease, color 140ms ease;
+}
+
+.qs-action-picker__btn[data-open] .qs-action-picker__btn-chev {
+  transform: rotate(180deg);
+  color: var(--accent-primary, #0d9488);
+}
+
+.qs-action-picker__menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 12%, var(--border-default, rgba(0, 0, 0, 0.08)));
+  border-radius: 11px;
+  box-shadow:
+    0 16px 40px -12px rgba(0, 0, 0, 0.18),
+    0 4px 12px -4px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  max-height: min(calc(100vh - 200px), 360px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: qs-action-picker-in 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top center;
+}
+
+.qs-action-picker__menu[data-placement='up'] {
+  top: auto;
+  bottom: calc(100% + 6px);
+  transform-origin: bottom center;
+  animation-name: qs-action-picker-in-up;
+}
+
+/* Standalone variant — used by AddActionButton where the wrapper is sized
+   to its trigger and we want the menu to spread to its content. */
+.qs-action-picker__menu--standalone {
+  right: auto;
+  min-width: 240px;
+}
+
+@keyframes qs-action-picker-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes qs-action-picker-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.qs-action-picker__menu li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.qs-action-picker__option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  padding: 5px 10px 5px 5px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary, #0f172a);
+  cursor: pointer;
+  border-radius: 7px;
+  text-align: left;
+  transition: background 110ms ease, color 110ms ease;
+}
+
+.qs-action-picker__option:focus-visible,
+.qs-action-picker__option[data-highlighted] {
+  background: var(--surface-secondary, #f8fafc);
+  outline: none;
+}
+
+.qs-action-picker__option[data-active] {
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 8%, transparent);
+  color: var(--accent-primary, #0d9488);
+}
+
+.qs-action-picker__option-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: transform 140ms ease;
+}
+
+.qs-action-picker__option-icon svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Reuse the same per-action color scheme as .quickstep-actions__icon */
+.qs-action-picker__option-icon[data-action='archive']        { background: #e0f2fe; color: #075985; }
+.qs-action-picker__option-icon[data-action='delete']         { background: #fee2e2; color: #991b1b; }
+.qs-action-picker__option-icon[data-action='mark_read']      { background: #dcfce7; color: #166534; }
+.qs-action-picker__option-icon[data-action='move_to_spam']   { background: #fef3c7; color: #854d0e; }
+.qs-action-picker__option-icon[data-action='pin']            { background: #fef9c3; color: #854d0e; }
+.qs-action-picker__option-icon[data-action='reply_template'] { background: #ede9fe; color: #5b21b6; }
+.qs-action-picker__option-icon[data-action='forward']        { background: #ccfbf1; color: #0f766e; }
+.qs-action-picker__option-icon[data-action='rsvp_meeting']   { background: #e0e7ff; color: #3730a3; }
+
+.qs-action-picker__option-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.qs-action-picker__option-check {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-primary, #0d9488);
+}
+
+.quickstep-actions__controls {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface-elevated, #ffffff);
+}
+
+.quickstep-actions__icon-btn {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary, #374151);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.quickstep-actions__icon-btn svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+.quickstep-actions__icon-btn + .quickstep-actions__icon-btn {
+  border-left: 1px solid var(--border-default, rgba(0, 0, 0, 0.08));
+}
+
+.quickstep-actions__icon-btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.quickstep-actions__add { position: relative; margin-top: 10px; }
+
+.quickstep-actions__add > button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px dashed var(--border-strong, rgba(0, 0, 0, 0.18));
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-size: 13px;
+  color: var(--text-tertiary, #4b5563);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.quickstep-actions__add > button:hover,
+.quickstep-actions__add > button:focus-visible {
+  border-color: var(--accent-primary, #0d9488);
+  color: var(--accent-primary, #0d9488);
+  border-style: solid;
+}
+
+.quickstep-actions__add > button[data-open] {
+  border-color: var(--accent-primary, #0d9488);
+  color: var(--accent-primary, #0d9488);
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 6%, transparent);
+  border-style: solid;
+}
+
+.quickstep-actions__menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 10px;
+  padding: 6px;
+  list-style: none;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  min-width: 240px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+}
+
+.quickstep-actions__menu button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 7px 10px;
+  font-size: 13px;
+  color: var(--text-primary, #111827);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.quickstep-actions__menu-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: var(--surface-secondary, #f5f4f1);
+  color: var(--text-secondary, #374151);
+}
+
+.quickstep-actions__menu-icon[data-action='archive']        { background: #e0f2fe; color: #075985; }
+.quickstep-actions__menu-icon[data-action='delete']         { background: #fee2e2; color: #991b1b; }
+.quickstep-actions__menu-icon[data-action='mark_read']      { background: #dcfce7; color: #166534; }
+.quickstep-actions__menu-icon[data-action='move_to_spam']   { background: #fef3c7; color: #854d0e; }
+.quickstep-actions__menu-icon[data-action='pin']            { background: #fef9c3; color: #854d0e; }
+.quickstep-actions__menu-icon[data-action='reply_template'] { background: #ede9fe; color: #5b21b6; }
+.quickstep-actions__menu-icon[data-action='forward']        { background: #ccfbf1; color: #0f766e; }
+.quickstep-actions__menu-icon[data-action='rsvp_meeting']   { background: #e0e7ff; color: #3730a3; }
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Per-action sub-form                                                         */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.quickstep-action-body {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-default, rgba(0, 0, 0, 0.06));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quickstep-action-body label,
+.quickstep-action-body__check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-sm, 14px);
+  color: var(--text-secondary, #374151);
+  cursor: pointer;
+}
+
+.quickstep-action-body input[type='checkbox'],
+.quickstep-action-body input[type='radio'] {
+  accent-color: var(--accent-primary, #0d9488);
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+}
+
+/* When the form has back-to-back checkbox rows (Reply all + Include quoted),
+   pack them into a single inline row with a subtle background — matches the
+   pill-row treatment used elsewhere in the app. */
+.quickstep-action-body > .quickstep-action-body__check + .quickstep-action-body__check {
+  margin-top: -4px;
+}
+
+.quickstep-action-body__field {
+  display: block;
+  width: 100%;
+  margin: 0;
+  text-align: left;
+}
+
+.quickstep-action-body__label {
+  display: block;
+  width: 100%;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary, #475569);
+  margin-bottom: 5px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.qs-snoozed-draft-explainer {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  background: var(--surface-subtle, rgba(13, 148, 136, 0.06));
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.08));
+  border-radius: 8px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--text-secondary, #475569);
+}
+
+.qs-snoozed-draft-explainer__title {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--text-primary, #1f2937);
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+
+.qs-snoozed-draft-explainer__steps {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.qs-snoozed-draft-explainer__steps strong {
+  color: var(--text-primary, #1f2937);
+  font-weight: 600;
+}
+
+.quickstep-action-body__label-hint {
+  margin-left: 6px;
+  color: var(--text-placeholder, #9ca3af);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  font-style: normal;
+}
+
+.quickstep-action-body__field input[type='text'] {
+  display: block;
+  width: 100%;
+  background: var(--surface-primary, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 400;
+  color: var(--text-primary, #111827);
+  box-sizing: border-box;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.quickstep-action-body__field input[type='text']::placeholder {
+  color: var(--text-placeholder, #9ca3af);
+}
+
+.quickstep-action-body__field input[type='text']:focus {
+  outline: none;
+  border-color: var(--accent-primary, #0d9488);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent-primary, #0d9488) 10%, transparent),
+    inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* ============================================================================
+   Emoji marker picker — curated grid for the mark_with_emoji action
+   ============================================================================ */
+.qs-emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+  gap: 6px;
+  max-width: 480px;
+}
+
+.qs-emoji-grid__item {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background: var(--surface-secondary, rgba(148, 163, 184, 0.08));
+  border: 1px solid var(--border-subtle, rgba(148, 163, 184, 0.25));
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.12s, border-color 0.12s, transform 0.12s;
+}
+
+.qs-emoji-grid__item:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.qs-emoji-grid__item--selected {
+  background: color-mix(in srgb, var(--accent-primary, #14b8a6) 18%, transparent);
+  border-color: var(--accent-primary, #14b8a6);
+  transform: scale(1.04);
+}
+
+/* Color swatch picker for mark_with_emoji — round swatches; each item's
+   background is the palette color, set inline. Mirrors qs-emoji-grid's
+   selected/focus affordances (accent ring) for a consistent feel. */
+.qs-color-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 480px;
+}
+
+.qs-color-grid__item {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle, rgba(148, 163, 184, 0.25));
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+
+.qs-color-grid__item:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.qs-color-grid__item--selected {
+  transform: scale(1.1);
+  box-shadow:
+    0 0 0 2px var(--surface-primary, #fff),
+    0 0 0 4px var(--accent-primary, #14b8a6);
+}
+
+/* "None" tiles — the no-color swatch and the no-emoji grid tile share one
+   "none" language: a single crisp slash. Drawn as a SOLID rotated bar rather
+   than a linear-gradient stripe — the gradient's soft edges antialiased into
+   a faint, scratch-like line (and the round swatch clipped it to a stub). The
+   bar is 142% wide so it spans the full corner-to-corner diagonal of the
+   square emoji tile, and is clipped by `overflow:hidden` to a clean diameter
+   inside the round color swatch. --text-secondary is plenty visible now that
+   the line is solid (the old "too faint" note applied to a 1px gradient). */
+.qs-color-grid__item--none {
+  background: var(--surface-secondary, rgba(148, 163, 184, 0.12));
+}
+
+.qs-color-grid__item--none,
+.qs-emoji-grid__item--none {
+  position: relative;
+  overflow: hidden;
+}
+
+.qs-color-grid__item--none::after,
+.qs-emoji-grid__item--none::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 142%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text-secondary, #475569);
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* ============================================================================
+   RSVP Meeting Form — pill radio selectors + check row
+   ============================================================================ */
+.qs-rsvp-options {
+  display: flex;
+  gap: 6px;
+}
+
+.qs-rsvp-option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 7px 4px;
+  border: 1.5px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary, #374151);
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  background: transparent;
+}
+
+.qs-rsvp-option input[type='radio'] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+/* Semantic colors per option: Accepter=green, Décliner=red, Peut-être=amber */
+.qs-rsvp-option:nth-child(1):has(input:checked) {
+  border-color: #22c55e;
+  background: color-mix(in srgb, #22c55e 10%, transparent);
+  color: #16a34a;
+  font-weight: 600;
+}
+.qs-rsvp-option:nth-child(2):has(input:checked) {
+  border-color: #ef4444;
+  background: color-mix(in srgb, #ef4444 10%, transparent);
+  color: #dc2626;
+  font-weight: 600;
+}
+.qs-rsvp-option:nth-child(3):has(input:checked) {
+  border-color: #f59e0b;
+  background: color-mix(in srgb, #f59e0b 10%, transparent);
+  color: #d97706;
+  font-weight: 600;
+}
+
+.quickstep-action-body__hint {
+  /* Block + muted so a hint sits on its own line under its field. Without
+     `display:block` a `<span>` hint following an inline-flex checkbox row
+     (the emoji "merge deadline" option) flowed onto the same line and
+     overran the card. */
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-muted, #6b7280);
+}
+
+/* Placeholder-chip toolbar — sits above a templated textarea (e.g. the
+   follow-up draft body). Mirrors the snippet-editor variable chips so the
+   "click a chip → insert token at caret" interaction is consistent. */
+.quickstep-vars-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 0 6px;
+  margin: 0;
+}
+
+.quickstep-var-chip {
+  flex-shrink: 0;
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s, border-color 0.12s, color 0.12s, transform 0.08s;
+}
+
+.quickstep-var-chip:active {
+  transform: scale(var(--scale-press, 0.97));
+}
+
+.quickstep-var-chip:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.quickstep-action-body__hint summary {
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary, #4b5563);
+  user-select: none;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+  transition: color 0.15s ease;
+}
+
+.quickstep-action-body__hint summary::-webkit-details-marker {
+  display: none;
+}
+
+.quickstep-action-body__hint summary::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 4px solid currentColor;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  transition: transform 0.15s ease;
+}
+
+.quickstep-action-body__hint[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.quickstep-action-body__hint ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.quickstep-action-body__hint code {
+  background: var(--surface-secondary, #f5f4f1);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.08));
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary, #374151);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Auto-trigger section                                                        */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.quickstep-card__badge--auto {
+  background: rgba(13, 148, 136, 0.12);
+  color: var(--accent-primary, #0d9488);
+}
+
+.quickstep-editor__auto {
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  padding: 0;
+}
+
+.quickstep-editor__auto-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  background: var(--surface-secondary, #f5f4f1);
+}
+
+.quickstep-editor__auto-toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.quickstep-editor__auto-toggle-track {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--border-strong, rgba(0, 0, 0, 0.22));
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.quickstep-editor__auto-toggle-track[data-on] {
+  background: var(--accent-primary, #0d9488);
+}
+
+.quickstep-editor__auto-toggle-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.quickstep-editor__auto-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+  pointer-events: none;
+}
+
+.quickstep-editor__auto-toggle-track[data-on] .quickstep-editor__auto-toggle-thumb {
+  transform: translateX(14px);
+}
+
+.quickstep-editor__auto-toggle-text {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary, #111827);
+  white-space: nowrap;
+}
+
+.quickstep-editor__auto-hint {
+  font-size: 12px;
+  color: var(--text-tertiary, #4b5563);
+  line-height: 1.4;
+}
+
+.quickstep-editor__auto-body {
+  padding: 14px 16px;
+  border-top: 1px solid var(--border-subtle, rgba(0, 0, 0, 0.06));
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quickstep-trigger-operator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary, #374151);
+}
+
+.quickstep-trigger-operator label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.quickstep-trigger-operator input[type='radio'] {
+  accent-color: var(--accent-primary, #0d9488);
+  cursor: pointer;
+}
+
+.quickstep-trigger-operator__label {
+  color: var(--text-tertiary, #4b5563);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 4px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Drag handle — :active rule. Canonical block is higher up in this file.       */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.quickstep-card__drag:active {
+  cursor: grabbing;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Body header (label + preview toggle inline)                                  */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.qs-body-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.qs-preview-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary, #4b5563);
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: all 0.12s ease;
+  flex-shrink: 0;
+}
+
+.qs-preview-toggle--active {
+  background: var(--accent-primary-subtle, rgba(13, 148, 136, 0.1));
+  border-color: var(--accent-primary, #0d9488);
+  color: var(--accent-primary, #0d9488);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Live preview pane                                                            */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.qs-preview-pane {
+  background: var(--surface-secondary, #f5f4f1);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.08));
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-primary, #111827);
+  min-height: 60px;
+}
+
+.qs-preview-pane .qs-preview-value {
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 12%, transparent);
+  color: var(--accent-primary, #0d9488);
+  border-radius: 3px;
+  padding: 0 3px;
+  font-weight: 500;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Variable chips                                                               */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+/* Always-visible row of clickable variable tokens above the template editor.
+   Friendly labels (e.g. "Prénom expéditeur") insert the raw {token} at the
+   caret. Wraps to multiple rows — sized for the current 9 variables. */
+.qs-variable-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.qs-variable-chip {
+  flex-shrink: 0;
+  background: var(--surface-secondary, #f5f4f1);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.08));
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-family: inherit;
+  font-size: var(--font-size-xs, 11px);
+  font-weight: 500;
+  color: var(--text-secondary, #374151);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease, transform 0.08s ease;
+}
+
+.qs-variable-chip:active {
+  transform: scale(0.97);
+}
+
+.qs-variable-chip:focus-visible {
+  outline: 2px solid var(--accent-primary, #0d9488);
+  outline-offset: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Snippet picker                                                               */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.qs-snippet-picker {
+  position: relative;
+}
+
+.qs-snippet-picker__selected {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-primary-subtle, rgba(13, 148, 136, 0.1));
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 30%, transparent);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  color: var(--accent-primary, #0d9488);
+  font-weight: 500;
+}
+
+.qs-snippet-picker__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.qs-snippet-picker__clear {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.7;
+  display: inline-flex;
+  padding: 0;
+  transition: opacity 0.12s ease;
+}
+
+.qs-snippet-picker__toggle { position: relative; }
+
+.qs-snippet-picker__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px dashed var(--border-strong, rgba(0, 0, 0, 0.18));
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-tertiary, #4b5563);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.qs-snippet-picker__btn[data-open] {
+  border-color: var(--accent-primary, #0d9488);
+  color: var(--accent-primary, #0d9488);
+  border-style: solid;
+}
+
+.qs-snippet-picker__menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 10px;
+  padding: 6px;
+  list-style: none;
+  z-index: 60;
+  min-width: 260px;
+  max-height: 240px;
+  overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+}
+
+.qs-snippet-picker__menu li button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 7px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.qs-snippet-picker__item-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary, #111827);
+}
+
+.qs-snippet-picker__item-cat {
+  font-size: 11px;
+  color: var(--text-tertiary, #4b5563);
+  background: var(--surface-secondary, #f5f4f1);
+  border-radius: 4px;
+  padding: 1px 6px;
+  flex-shrink: 0;
+}
+
+.qs-snippet-picker__empty {
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--text-tertiary, #4b5563);
+  list-style: none;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Contact group chips                                                          */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.qs-group-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.qs-group-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--surface-secondary, #f5f4f1);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary, #374151);
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.qs-group-chip--selected {
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 12%, transparent);
+  border-color: var(--accent-primary, #0d9488);
+  color: var(--accent-primary, #0d9488);
+}
+
+.qs-group-chip__count {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 99px;
+  padding: 0 5px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.qs-group-chip--selected .qs-group-chip__count {
+  background: rgba(13, 148, 136, 0.15);
+}
+
+.qs-group-chip__check {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.quickstep-trigger-row {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) minmax(0, 1.6fr) 32px;
+  gap: 8px;
+  align-items: center;
+}
+
+.quickstep-trigger-row__type {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--surface-elevated, #ffffff);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234b5563' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  padding: 7px 28px 7px 10px;
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary, #111827);
+  cursor: pointer;
+  font-family: inherit;
+  width: 100%;
+}
+
+.quickstep-trigger-row__type:focus {
+  outline: none;
+  border-color: var(--accent-primary, #0d9488);
+  box-shadow: 0 0 0 3px var(--accent-primary-subtle, rgba(13, 148, 136, 0.15));
+}
+
+.quickstep-trigger-row__value {
+  display: block;
+  width: 100%;
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  padding: 7px 10px;
+  font-size: 13px;
+  color: var(--text-primary, #111827);
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.quickstep-trigger-row__value::placeholder {
+  color: var(--text-placeholder, #9ca3af);
+}
+
+.quickstep-trigger-row__value:focus {
+  outline: none;
+  border-color: var(--accent-primary, #0d9488);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent-primary, #0d9488) 10%, transparent),
+    inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.quickstep-trigger-row__remove {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  opacity: 1;
+}
+
+.quickstep-editor__auto-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px dashed var(--border-strong, rgba(0, 0, 0, 0.18));
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 13px;
+  color: var(--text-tertiary, #4b5563);
+  cursor: pointer;
+  font-weight: 500;
+  font-family: inherit;
+  transition: all 0.15s ease;
+  align-self: flex-start;
+}
+
+.quickstep-editor__auto-empty {
+  font-size: 12px;
+  color: var(--text-tertiary, #4b5563);
+  margin: 0;
+  font-style: italic;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Shortcut capture                                                            */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.shortcut-capture {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.shortcut-capture__btn {
+  flex: 1 1 auto;
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 13px;
+  color: var(--text-primary, #111827);
+  cursor: pointer;
+  text-align: left;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.shortcut-capture__btn[data-has-value] {
+  font-family: var(--font-mono);
+}
+
+.shortcut-capture__btn[data-recording] {
+  border-color: var(--accent-primary, #0d9488);
+  background: var(--accent-primary-subtle, rgba(13, 148, 136, 0.08));
+  color: var(--accent-primary, #0d9488);
+  animation: shortcut-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes shortcut-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--accent-primary-glow, rgba(13, 148, 136, 0.25)); }
+  50%      { box-shadow: 0 0 0 5px transparent; }
+}
+
+.shortcut-capture__clear {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-tertiary, #4b5563);
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Auto-trigger section — premium card matching the rest of Settings           */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.quickstep-editor__triggers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+
+.quickstep-editor__triggers-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary, #4b5563);
+  padding: 0 2px;
+}
+
+.qs-trigger-card {
+  position: relative;
+  background: var(--surface-secondary, #f8fafc);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 200ms ease, background 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+
+.qs-trigger-card.is-on {
+  background:
+    radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--accent-primary, #0d9488) 8%, transparent) 0%, transparent 60%),
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--accent-primary, #0d9488) 5%, var(--surface-primary, #ffffff)) 0%,
+      color-mix(in srgb, var(--accent-primary, #0d9488) 2%, var(--surface-primary, #ffffff)) 100%
+    );
+  border-color: color-mix(in srgb, var(--accent-primary, #0d9488) 32%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent-primary, #0d9488) 12%, transparent),
+    0 6px 16px -8px color-mix(in srgb, var(--accent-primary, #0d9488) 30%, transparent);
+}
+
+.qs-trigger-card__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 16px 16px 14px;
+}
+
+.qs-trigger-card__icon {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-primary, #ffffff);
+  color: var(--text-tertiary, #64748b);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  transition: all 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.qs-trigger-card__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.qs-trigger-card.is-on .qs-trigger-card__icon {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent-primary, #0d9488) 18%, var(--surface-primary, #ffffff)) 0%,
+    color-mix(in srgb, var(--accent-primary, #0d9488) 9%, var(--surface-primary, #ffffff)) 100%
+  );
+  color: var(--accent-primary, #0d9488);
+  border-color: color-mix(in srgb, var(--accent-primary, #0d9488) 35%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--accent-primary, #0d9488) 18%, transparent),
+    0 2px 8px -2px color-mix(in srgb, var(--accent-primary, #0d9488) 35%, transparent);
+}
+
+.qs-trigger-card__text {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.qs-trigger-card__title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qs-trigger-card__title {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  line-height: 1.3;
+  text-transform: none;
+  letter-spacing: -0.005em;
+}
+
+.qs-trigger-card__hint {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--text-secondary, #64748b);
+  max-width: 56ch;
+}
+
+/* Active count chip — between title and toggle when conditions are set */
+.qs-trigger-card__pulse {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px 3px 7px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--accent-primary, #0d9488);
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 22%, transparent);
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.qs-trigger-card__pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-primary, #0d9488);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary, #0d9488) 22%, transparent);
+  animation: qs-trigger-pulse 2s ease-in-out infinite;
+}
+
+@keyframes qs-trigger-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-primary, #0d9488) 35%, transparent); }
+  50%      { box-shadow: 0 0 0 5px transparent; }
+}
+
+/* Toggle switch — slightly larger, refined motion */
+.qs-trigger-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.qs-trigger-toggle input {
+  appearance: none;
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.qs-trigger-toggle__track {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  background: color-mix(in srgb, var(--text-tertiary, #94a3b8) 35%, var(--surface-secondary, #f1f5f9));
+  border-radius: 999px;
+  transition: background 200ms ease;
+}
+
+.qs-trigger-toggle__track::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.18),
+    0 0 0 0.5px rgba(0, 0, 0, 0.04);
+  transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.qs-trigger-toggle input:checked + .qs-trigger-toggle__track {
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary, #0d9488) 0%,
+    color-mix(in srgb, var(--accent-primary, #0d9488) 88%, #000) 100%
+  );
+}
+
+.qs-trigger-toggle input:checked + .qs-trigger-toggle__track::after {
+  transform: translateX(18px);
+}
+
+.qs-trigger-toggle input:focus-visible + .qs-trigger-toggle__track {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary, #0d9488) 28%, transparent);
+}
+
+/* Body — only when on */
+.qs-trigger-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px 16px;
+  border-top: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 14%, transparent);
+}
+
+/* Operator row — segmented pills */
+.qs-trigger-operator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.qs-trigger-operator__label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary, #4b5563);
+}
+
+.qs-trigger-pills {
+  display: inline-flex;
+  background: var(--surface-secondary, #f1f5f9);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  border-radius: 9px;
+  padding: 2px;
+  gap: 1px;
+}
+
+.qs-trigger-pill {
+  background: transparent;
+  border: 0;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary, #64748b);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 140ms ease, color 140ms ease, box-shadow 140ms ease;
+  font-family: inherit;
+  letter-spacing: 0.01em;
+}
+
+.qs-trigger-pill[data-active] {
+  background: var(--surface-primary, #ffffff);
+  color: var(--accent-primary, #0d9488);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+/* Condition list */
+.qs-trigger-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.qs-trigger-list > li {
+  display: block;
+}
+
+.qs-trigger-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--surface-primary, #ffffff);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  border-radius: 9px;
+  padding: 4px 4px 4px 10px;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.qs-trigger-row:focus-within {
+  border-color: color-mix(in srgb, var(--accent-primary, #0d9488) 45%, var(--border-subtle, #e2e8f0));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary, #0d9488) 12%, transparent);
+}
+
+/* Legacy — kept for safety; new picker below */
+.qs-trigger-row__icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary, #64748b);
+}
+
+.qs-trigger-row:focus-within .qs-trigger-row__icon {
+  color: var(--accent-primary, #0d9488);
+}
+
+/* ── Trigger type picker — inline within the trigger row ────────────── */
+
+.qs-trigger-type-picker {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.qs-trigger-type-picker__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: transparent;
+  border: 0;
+  padding: 5px 6px 5px 4px;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-primary, #0f172a);
+  cursor: pointer;
+  border-right: 1px solid var(--border-subtle, #e2e8f0);
+  margin-right: 4px;
+  border-radius: 6px;
+  transition: background 120ms ease;
+}
+
+.qs-trigger-type-picker__btn[data-open] {
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 8%, transparent);
+}
+
+.qs-trigger-type-picker__btn-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  color: var(--text-tertiary, #64748b);
+  transition: color 120ms ease;
+}
+
+.qs-trigger-type-picker__btn[data-open] .qs-trigger-type-picker__btn-icon,
+.qs-trigger-row:focus-within .qs-trigger-type-picker__btn-icon {
+  color: var(--accent-primary, #0d9488);
+}
+
+.qs-trigger-type-picker__btn-label {
+  white-space: nowrap;
+}
+
+.qs-trigger-type-picker__btn-chev {
+  display: inline-flex;
+  color: var(--text-tertiary, #64748b);
+  transition: transform 200ms ease, color 120ms ease;
+}
+
+.qs-trigger-type-picker__btn-chev svg {
+  width: 11px;
+  height: 11px;
+}
+
+.qs-trigger-type-picker__btn[data-open] .qs-trigger-type-picker__btn-chev {
+  transform: rotate(180deg);
+  color: var(--accent-primary, #0d9488);
+}
+
+.qs-trigger-type-picker__menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: -2px;
+  z-index: 30;
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  min-width: 440px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 12%, var(--border-default, rgba(0, 0, 0, 0.08)));
+  border-radius: 11px;
+  box-shadow:
+    0 16px 40px -12px rgba(0, 0, 0, 0.18),
+    0 4px 12px -4px rgba(0, 0, 0, 0.08);
+  animation: qs-action-picker-in 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top left;
+}
+
+.qs-trigger-type-picker__menu[data-placement='up'] {
+  top: auto;
+  bottom: calc(100% + 6px);
+  transform-origin: bottom left;
+  animation-name: qs-action-picker-in-up;
+}
+
+.qs-trigger-type-picker__menu li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.qs-trigger-type-picker__group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 4px;
+}
+
+.qs-trigger-type-picker__group + .qs-trigger-type-picker__group {
+  border-top: 1px solid var(--border-subtle, #e2e8f0);
+  margin-top: 4px;
+  padding-top: 4px;
+}
+
+.qs-trigger-type-picker__group-label {
+  grid-column: 1 / -1;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary, #64748b);
+  padding: 6px 10px 4px;
+}
+
+.qs-trigger-type-picker__option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  padding: 6px 10px 6px 6px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary, #0f172a);
+  cursor: pointer;
+  border-radius: 7px;
+  text-align: left;
+  transition: background 110ms ease, color 110ms ease;
+}
+
+.qs-trigger-type-picker__option:focus-visible,
+.qs-trigger-type-picker__option[data-highlighted] {
+  background: var(--surface-secondary, #f8fafc);
+  outline: none;
+}
+
+.qs-trigger-type-picker__option[data-active] {
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 8%, transparent);
+  color: var(--accent-primary, #0d9488);
+}
+
+.qs-trigger-type-picker__option-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: var(--surface-secondary, #f1f5f9);
+  color: var(--text-secondary, #64748b);
+  transition: background 110ms ease, color 110ms ease;
+}
+
+.qs-trigger-type-picker__option[data-active] .qs-trigger-type-picker__option-icon {
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 14%, var(--surface-primary, #ffffff));
+  color: var(--accent-primary, #0d9488);
+}
+
+.qs-trigger-type-picker__option-icon svg {
+  width: 12px;
+  height: 12px;
+}
+
+.qs-trigger-type-picker__option-label {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.qs-trigger-type-picker__option-check {
+  flex-shrink: 0;
+  display: inline-flex;
+  color: var(--accent-primary, #0d9488);
+}
+
+.qs-trigger-type-picker__option-check svg {
+  width: 12px;
+  height: 12px;
+}
+
+.qs-trigger-row__value {
+  flex: 1 1 0;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  padding: 7px 6px;
+  font-size: 13px;
+  color: var(--text-primary, #0f172a);
+  font-family: inherit;
+  outline: none;
+}
+
+.qs-trigger-row__value::placeholder {
+  color: var(--text-placeholder, #94a3b8);
+  font-weight: 400;
+}
+
+/* Boolean condition (is_calendar_invite) — no user input, static descriptive badge */
+.qs-trigger-row__value--badge {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent-primary, #0d9488);
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 8%, transparent);
+  border-radius: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+}
+
+/* Autocomplete variant — wraps ContactAutocomplete so it blends into the row */
+.qs-trigger-row__value--autocomplete {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.qs-trigger-row__value--autocomplete .qs-trigger-row__autocomplete,
+.qs-trigger-row__value--autocomplete .qs-trigger-row__autocomplete input {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  padding: 7px 6px;
+  font-size: 13px;
+  color: var(--text-primary, #0f172a);
+  font-family: inherit;
+  outline: none;
+}
+
+.qs-trigger-row__value--autocomplete .qs-trigger-row__autocomplete input::placeholder {
+  color: var(--text-placeholder, #94a3b8);
+  font-weight: 400;
+}
+
+/* ValueDropdown — styled replacement for the native <select> on
+   has_label and previously_auto_actioned_by triggers. */
+.qs-value-dropdown {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.qs-value-dropdown__trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  padding: 7px 8px 7px 6px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary, #0f172a);
+  cursor: pointer;
+  border-radius: 7px;
+  text-align: left;
+  transition: background 110ms ease;
+}
+
+.qs-value-dropdown__trigger:focus-visible {
+  background: var(--surface-secondary, #f8fafc);
+  outline: none;
+}
+
+.qs-value-dropdown__trigger > svg:last-child {
+  flex-shrink: 0;
+  color: var(--text-tertiary, #64748b);
+  margin-left: auto;
+}
+
+.qs-value-dropdown__current {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1 1 0;
+}
+
+.qs-value-dropdown__current-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.qs-value-dropdown__placeholder {
+  color: var(--text-placeholder, #94a3b8);
+  font-weight: 400;
+  flex: 1 1 0;
+}
+
+.qs-value-dropdown__swatch {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+}
+
+.qs-value-dropdown__menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  min-width: 220px;
+  max-height: 280px;
+  overflow-y: auto;
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 12%, var(--border-default, rgba(0, 0, 0, 0.08)));
+  border-radius: 11px;
+  box-shadow:
+    0 16px 40px -12px rgba(0, 0, 0, 0.18),
+    0 4px 12px -4px rgba(0, 0, 0, 0.08);
+  animation: qs-action-picker-in 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top left;
+}
+
+.qs-value-dropdown__menu[data-placement='up'] {
+  top: auto;
+  bottom: calc(100% + 6px);
+  transform-origin: bottom left;
+  animation-name: qs-action-picker-in-up;
+}
+
+.qs-value-dropdown__menu li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.qs-value-dropdown__empty {
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--text-placeholder, #94a3b8);
+  font-style: italic;
+}
+
+.qs-value-dropdown__option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  padding: 7px 10px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary, #0f172a);
+  cursor: pointer;
+  border-radius: 7px;
+  text-align: left;
+  transition: background 110ms ease, color 110ms ease;
+}
+
+.qs-value-dropdown__option:focus-visible,
+.qs-value-dropdown__option[data-highlighted] {
+  background: var(--surface-secondary, #f8fafc);
+  outline: none;
+}
+
+.qs-value-dropdown__option[data-active] {
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 8%, transparent);
+  color: var(--accent-primary, #0d9488);
+}
+
+.qs-value-dropdown__option-label {
+  flex: 1 1 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.qs-value-dropdown__check {
+  flex-shrink: 0;
+  color: var(--accent-primary, #0d9488);
+}
+
+.qs-trigger-row__remove {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--text-secondary, #475569);
+  cursor: pointer;
+  padding: 0;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+.qs-trigger-row__remove svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+/* Negate toggle (=, ≠) — small chip between picker and value */
+.qs-trigger-row__negate {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  border-radius: 7px;
+  color: var(--text-tertiary, #64748b);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0 2px 0 0;
+  transition: background 140ms ease, color 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+
+.qs-trigger-row__negate[data-active] {
+  background: rgba(220, 38, 38, 0.1);
+  color: rgb(185, 28, 28);
+  border-color: rgba(220, 38, 38, 0.4);
+}
+
+/* Subtle "negated" visual cue on the row when ≠ is active */
+.qs-trigger-row[data-negated] {
+  background: linear-gradient(180deg, rgba(254, 226, 226, 0.2) 0%, var(--surface-primary, #ffffff) 100%);
+  border-color: rgba(220, 38, 38, 0.18);
+}
+
+/* Add condition button — dashed, accent-colored when card is on */
+.qs-trigger-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-start;
+  background: transparent;
+  border: 1px dashed color-mix(in srgb, var(--accent-primary, #0d9488) 35%, var(--border-default, #cbd5e1));
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--accent-primary, #0d9488);
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: background 140ms ease, border-color 140ms ease;
+  font-family: inherit;
+}
+
+.qs-trigger-add:hover,
+.qs-trigger-add:focus-visible {
+  border-color: var(--accent-primary, #0d9488);
+  border-style: solid;
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 8%, transparent);
+}
+
+.qs-trigger-add svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Empty state when auto-trigger on but no conditions */
+.qs-trigger-empty {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--text-tertiary, #64748b);
+  padding: 8px 0 4px;
+  text-align: center;
+}
+
+/* Auto badge on the card */
+.quickstep-card__badge--auto {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 12%, transparent);
+  color: var(--accent-primary, #0d9488);
+  font-weight: 600;
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 22%, transparent);
+}
+
+.quickstep-card__badge--auto svg {
+  width: 10px;
+  height: 10px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Segmented control — used by MarkRead form (read / unread)                   */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.qs-segmented {
+  display: inline-flex;
+  background: var(--surface-secondary, #f1f5f9);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+  width: fit-content;
+}
+
+.qs-segmented__opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 0;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary, #64748b);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 140ms ease, color 140ms ease, box-shadow 140ms ease;
+  letter-spacing: 0.01em;
+}
+
+.qs-segmented__opt[data-active] {
+  background: var(--surface-primary, #ffffff);
+  color: var(--accent-primary, #0d9488);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 0 1px color-mix(in srgb, var(--accent-primary, #0d9488) 14%, transparent);
+}
+
+.qs-segmented__opt svg {
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Confirm-before-run row — sits between Actions and Auto-trigger              */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.qs-confirm-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  background: var(--surface-secondary, #f8fafc);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: border-color 140ms ease, background 140ms ease;
+}
+
+.qs-confirm-row__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.qs-confirm-row__title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  line-height: 1.3;
+}
+
+.qs-confirm-row__hint {
+  font-size: 12px;
+  color: var(--text-secondary, #64748b);
+  line-height: 1.45;
+}
+
+/* Inline variant of the toggle (slightly smaller, no top margin) */
+.qs-trigger-toggle--inline {
+  margin-top: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Name suggestion chip — appears below the empty Name input                   */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.qs-name-suggest {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-start;
+  margin-top: 6px;
+  padding: 3px 9px 3px 6px;
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 7%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--accent-primary, #0d9488) 35%, transparent);
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--accent-primary, #0d9488);
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease;
+  letter-spacing: 0.005em;
+  max-width: 100%;
+}
+
+.qs-name-suggest__sparkle {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.qs-name-suggest__label {
+  font-weight: 600;
+}
+
+.qs-name-suggest__value {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-secondary, #64748b);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Dry-run / Test panel — inside the auto-trigger card                         */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.qs-dryrun {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1px dashed color-mix(in srgb, var(--accent-primary, #0d9488) 20%, transparent);
+}
+
+.qs-dryrun__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  background: var(--surface-primary, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 30%, var(--border-default, #cbd5e1));
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--accent-primary, #0d9488);
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease;
+}
+
+.qs-dryrun__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.qs-dryrun__btn svg {
+  width: 13px;
+  height: 13px;
+}
+
+.qs-dryrun__error {
+  margin: 0;
+  font-size: 12px;
+  color: rgb(185, 28, 28);
+  background: rgba(220, 38, 38, 0.08);
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.qs-dryrun__result {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--surface-primary, #ffffff);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  border-radius: 9px;
+  padding: 10px 12px;
+}
+
+.qs-dryrun__count {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-primary, #0d9488);
+}
+
+.qs-dryrun__samples {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.qs-dryrun__samples li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 8px;
+  background: var(--surface-secondary, #f8fafc);
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.qs-dryrun__sender {
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.qs-dryrun__subject {
+  color: var(--text-secondary, #64748b);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Per-action IF condition editor                                              */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+/* Inline "if" toggle in the action header — adds an empty IF panel on click */
+.quickstep-actions__if-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  padding: 0 9px;
+  background: transparent;
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-tertiary, #64748b);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  transition: border-color 140ms ease, color 140ms ease, background 140ms ease;
+  margin-left: 4px;
+}
+
+.quickstep-actions__if-add-text::before {
+  content: '+ ';
+  font-family: inherit;
+}
+
+/* Lean variant — no card chrome, just a thin teal rule on the left so the
+   condition feels like an inline qualifier, not a heavy nested section. */
+.qs-action-guard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 0 10px;
+  padding: 4px 0 4px 12px;
+  background: transparent;
+  border: 0;
+  border-left: 2px solid color-mix(in srgb, var(--accent-primary, #0d9488) 38%, transparent);
+  border-radius: 0;
+  position: relative;
+}
+
+.qs-action-guard::before {
+  display: none;
+}
+
+.qs-action-guard__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.qs-action-guard__label {
+  font-size: 11.5px;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--accent-primary, #0d9488);
+  flex-shrink: 0;
+}
+
+.qs-action-guard__remove-all {
+  margin-left: auto;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  border-radius: 5px;
+  color: var(--text-tertiary, #94a3b8);
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+.qs-action-guard__remove-all svg {
+  width: 11px;
+  height: 11px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Action chain preview — live banner showing the full flow                    */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.qs-chain-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--accent-primary, #0d9488) 4%, var(--surface-primary, #ffffff)) 0%,
+      var(--surface-secondary, #f8fafc) 100%
+    );
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  border-radius: 10px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.qs-chain-preview__label {
+  flex-shrink: 0;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary, #64748b);
+  padding: 2px 6px;
+  background: var(--surface-primary, #ffffff);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  border-radius: 5px;
+}
+
+.qs-chain-preview__flow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+.qs-chain-preview__group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.qs-chain-preview__sep {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-placeholder, #94a3b8);
+}
+
+.qs-chain-preview__sep svg {
+  width: 13px;
+  height: 13px;
+}
+
+.qs-chain-preview__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px 4px 5px;
+  background: var(--surface-primary, #ffffff);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary, #0f172a);
+  white-space: nowrap;
+  transition: transform 140ms ease, border-color 140ms ease;
+}
+
+.qs-chain-preview__chip-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+}
+
+.qs-chain-preview__chip-icon svg {
+  width: 10px;
+  height: 10px;
+}
+
+.qs-chain-preview__chip-if {
+  margin-left: 2px;
+  padding: 1px 5px;
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 14%, transparent);
+  color: var(--accent-primary, #0d9488);
+  border-radius: 999px;
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.04em;
+}
+
+/* Per-action chip color matches the rest of the editor's palette */
+.qs-chain-preview__chip[data-action='archive']        .qs-chain-preview__chip-icon { background: #e0f2fe; color: #075985; }
+.qs-chain-preview__chip[data-action='delete']         .qs-chain-preview__chip-icon { background: #fee2e2; color: #991b1b; }
+.qs-chain-preview__chip[data-action='mark_read']      .qs-chain-preview__chip-icon { background: #dcfce7; color: #166534; }
+.qs-chain-preview__chip[data-action='move_to_spam']   .qs-chain-preview__chip-icon { background: #fef3c7; color: #854d0e; }
+.qs-chain-preview__chip[data-action='pin']            .qs-chain-preview__chip-icon { background: #fef9c3; color: #854d0e; }
+.qs-chain-preview__chip[data-action='reply_template'] .qs-chain-preview__chip-icon { background: #ede9fe; color: #5b21b6; }
+.qs-chain-preview__chip[data-action='forward']        .qs-chain-preview__chip-icon { background: #ccfbf1; color: #0f766e; }
+.qs-chain-preview__chip[data-action='rsvp_meeting']   .qs-chain-preview__chip-icon { background: #e0e7ff; color: #3730a3; }
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Quick Actions revamp v2 — drag handle, separator, mode cards, footer summary */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.quickstep-actions__handle {
+  width: 24px; height: 24px; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: none; background: transparent;
+  color: var(--text-tertiary, #94a3b8);
+  border-radius: 6px; cursor: grab; padding: 0;
+  transition: color 0.12s ease, background 0.12s ease;
+}
+.quickstep-actions__item:focus-within .quickstep-actions__handle {
+  color: var(--text-secondary, #64748b);
+  background: var(--surface-secondary, #f1f5f9);
+}
+.quickstep-actions__handle:active { cursor: grabbing; }
+.quickstep-actions__item:has(.quickstep-actions__handle:active) { cursor: grabbing; }
+
+.quickstep-actions__item[data-drag-over] {
+  border-top: 2px solid var(--accent-primary, #0d9488);
+  margin-top: -1px;
+}
+.quickstep-actions__item[data-dragging] { opacity: 0.45; }
+
+.quickstep-actions__sep {
+  display: flex; align-items: center; justify-content: center;
+  gap: 4px; margin: -4px 0 6px;
+  font-size: 11px; font-weight: 600;
+  color: var(--text-tertiary, #94a3b8);
+  text-transform: lowercase; letter-spacing: 0.04em;
+}
+.quickstep-actions__sep svg { width: 13px; height: 13px; }
+
+.quickstep-actions__icon-btn--a11y {
+  opacity: 1; width: 22px; height: 22px;
+  transition: opacity 0.12s ease;
+}
+.quickstep-actions__item:focus-within .quickstep-actions__icon-btn--a11y,
+.quickstep-actions__icon-btn--a11y:focus-visible { opacity: 1; }
+
+.qs-action-picker__group { list-style: none; padding: 0; margin: 0; }
+.qs-action-picker__group + .qs-action-picker__group {
+  border-top: 1px solid var(--border-subtle, #e2e8f0);
+  margin-top: 4px; padding-top: 4px;
+}
+.qs-action-picker__group-label {
+  padding: 8px 12px 4px;
+  font-size: 10.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--text-tertiary, #94a3b8);
+  pointer-events: none; user-select: none;
+}
+
+.qs-mode-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 640px) { .qs-mode-cards { grid-template-columns: 1fr; } }
+.qs-mode-card {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 16px;
+  background: var(--surface-primary, #ffffff);
+  border: 1.5px solid var(--border-default, rgba(0, 0, 0, 0.08));
+  border-radius: 10px; text-align: left; cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  color: inherit; font: inherit;
+}
+.qs-mode-card[data-active] {
+  border-color: var(--accent-primary, #0d9488);
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 5%, var(--surface-primary, #ffffff));
+}
+.qs-mode-card[data-active] .qs-mode-card__icon {
+  background: var(--accent-primary, #0d9488);
+  color: var(--text-inverse, #ffffff);
+}
+.qs-mode-card[data-disabled], .qs-mode-card:disabled { opacity: 0.55; cursor: not-allowed; }
+.qs-mode-card__icon {
+  width: 36px; height: 36px; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 8px;
+  background: var(--surface-secondary, #f1f5f9);
+  color: var(--text-secondary, #475569);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.qs-mode-card__text { min-width: 0; }
+.qs-mode-card__title {
+  margin: 0 0 4px;
+  font-size: 13.5px; font-weight: 600;
+  color: var(--text-primary, #0f172a);
+}
+.qs-mode-card__hint {
+  margin: 0; font-size: 12px;
+  color: var(--text-secondary, #64748b);
+  line-height: 1.4;
+}
+
+.qs-trigger-row__value--numeric { display: inline-flex; align-items: stretch; gap: 0; min-width: 110px; }
+.qs-trigger-row__value--numeric input {
+  flex: 1 1 auto; min-width: 0; max-width: 70px;
+  border-top-right-radius: 0; border-bottom-right-radius: 0; border-right: none;
+  text-align: right;
+}
+.qs-trigger-row__unit {
+  padding: 0 10px;
+  display: inline-flex; align-items: center;
+  background: var(--surface-secondary, #f1f5f9);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.08));
+  border-left: none;
+  border-top-right-radius: 6px; border-bottom-right-radius: 6px;
+  font-size: 12px; color: var(--text-secondary, #64748b); font-weight: 500;
+}
+.qs-trigger-row__value--regex {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+}
+
+.quickstep-editor__summary {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  font-size: 11.5px; color: var(--text-secondary, #64748b);
+}
+.quickstep-editor__summary-pill {
+  padding: 3px 9px;
+  background: var(--surface-secondary, #f1f5f9);
+  border-radius: 999px; font-weight: 500;
+}
+.quickstep-editor__summary-pill[data-count='0'] { opacity: 0.55; }
+.quickstep-editor__summary-pill--auto {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 12%, transparent);
+  color: var(--accent-primary, #0d9488);
+  font-weight: 600; text-transform: lowercase;
+}
+.quickstep-editor__summary-pill--auto svg { width: 10px; height: 10px; }
+.quickstep-editor__summary-dot { color: var(--text-tertiary, #cbd5e1); }
+.quickstep-editor__actions-row {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-left: auto;
+}
+.quickstep-editor__footer { flex-wrap: wrap; }
+
+.qs-step { position: relative; }
+.qs-step::before {
+  content: '';
+  position: absolute;
+  left: 13px; top: 32px; bottom: -22px;
+  width: 1px;
+  background: var(--border-subtle, #e2e8f0);
+}
+.qs-step:last-of-type::before { display: none; }
+.qs-step__num svg { width: 14px; height: 14px; stroke-width: 2.5; }
+
+/* --------------------------------------------------------------------------
+   Signature footer — non-editable preview of the active account's signature
+   mounted below RichTextEditor in reply_template / forward action bodies.
+   Mirrors .nm-signature-footer (compose) and .rc-signature-footer (reply).
+   -------------------------------------------------------------------------- */
+.qs-signature-footer,
+.qs-signature-footer p,
+.qs-signature-footer div {
+  margin: 0;
+  line-height: 1.5;
+}
+.qs-signature-footer {
+  padding: 8px 12px 0 12px;
+  margin-top: 6px;
+  color: var(--text-secondary, #64748b);
+  font-size: 12px;
+  opacity: 0.85;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+.qs-signature-footer .agentys-signature,
+.qs-signature-footer .agentys-signature[style],
+.qs-signature-footer * {
+  border-top: none !important;
+  border-bottom: none !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  box-shadow: none !important;
+}
+.qs-signature-footer hr { display: none !important; }
+
+/* ─── AutoBadgeToggle ────────────────────────────────────────────────────────
+   One-line "what-you-see-is-what-you-toggle" affordance : a live preview of
+   the ⚡ Auto chip is INLINE inside the sentence, and a switch on the right
+   drives both. Off = ghost chip + slate switch. On = full teal chip + glowing
+   teal switch. No verbose hint text — the visible state speaks for itself.
+   ──────────────────────────────────────────────────────────────────────── */
+
+.qs-auto-badge-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text-primary, #1f2937);
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.qs-auto-badge-toggle__sentence {
+  flex: 1;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  line-height: 1.4;
+}
+
+/* Inline preview chip — mirrors `.auto-badge-chip` from
+   SwipeableEmailItem.css but self-contained (no animation loop) and with
+   off / on visual states driven by the parent's data-on attribute. */
+.qs-auto-badge-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 6px;
+  height: 17px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border-radius: 4px;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  /* OFF state defaults : ghost outline, no fill — reads as "this is what
+     it WOULD look like, but it's currently muted". */
+  color: rgba(100, 116, 139, 0.72);
+  background: rgba(100, 116, 139, 0.08);
+  border: 1px dashed rgba(100, 116, 139, 0.35);
+  box-shadow: none;
+  transition:
+    color 220ms ease,
+    background 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.qs-auto-badge-toggle[data-on] .qs-auto-badge-preview {
+  color: #ffffff;
+  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 45%, #2dd4bf 100%);
+  border: 1px solid rgba(13, 148, 136, 0.55);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.18) inset,
+    0 0 0 1px rgba(20, 184, 166, 0.18),
+    0 2px 6px -2px rgba(13, 148, 136, 0.6);
+  transform: scale(1.02);
+}
+
+/* One-shot shine on transition off→on. Triggered by toggling the
+   `data-on` attribute. `forwards` parks the highlight off-screen so the
+   chip doesn't keep shimmering after the sweep. */
+.qs-auto-badge-toggle[data-on] .qs-auto-badge-preview::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 62%
+  );
+  transform: translateX(-120%);
+  animation: qs-auto-badge-preview-shine 900ms ease-out 60ms forwards;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes qs-auto-badge-preview-shine {
+  0%   { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+
+/* ── Switch (slate → teal pill with bouncy thumb) ──────────────────────── */
+
+.qs-switch__input {
+  /* Native checkbox is the source of truth for state + a11y, hidden
+     visually but kept hit-testable for screen readers / keyboard nav. */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.qs-switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 36px;
+  height: 20px;
+  border-radius: 999px;
+  background: rgba(100, 116, 139, 0.32);
+  transition: background 220ms ease, box-shadow 220ms ease;
+}
+
+.qs-switch__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 0 0 0.5px rgba(0, 0, 0, 0.04);
+  transition: transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* On state — checkbox-driven sibling selector so the label still works as
+   the click target without a JS data-state handshake. */
+.qs-switch__input:checked ~ .qs-switch {
+  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #2dd4bf 100%);
+  box-shadow:
+    0 0 0 1px rgba(20, 184, 166, 0.45),
+    0 0 10px rgba(20, 184, 166, 0.4);
+}
+
+.qs-switch__input:checked ~ .qs-switch .qs-switch__thumb {
+  transform: translateX(16px);
+}
+
+.qs-switch__input:focus-visible ~ .qs-switch {
+  outline: 2px solid rgba(20, 184, 166, 0.55);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qs-auto-badge-preview,
+  .qs-auto-badge-preview::after,
+  .qs-switch,
+  .qs-switch__thumb {
+    transition: none;
+    animation: none;
+  }
+}

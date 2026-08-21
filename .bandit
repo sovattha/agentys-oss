@@ -1,0 +1,36 @@
+# Agentys — security linting config (YAML format)
+# Run: bandit -r app/ -c .bandit
+
+exclude_dirs:
+  - /tests
+  - /agentys-app
+  - /agentys-mobile
+  - /browser_plugin
+  - /admin-standalone
+  - /ai-marketing-team
+  - /agentys_mcp
+  - /node_modules
+  - /.venv
+  - /venv
+  - /env
+  - /build
+  - /dist
+  - /.git
+  - /docker
+  - /scripts
+  - /docs
+  - /tasks
+  - /knowledge
+
+# Skipped checks (justified):
+#   B101 — assert_used       : used intentionally in tests and internal invariants
+#   B104 — hardcoded_bind_all: Flask dev server binds 0.0.0.0 inside Docker
+#   B311 — random            : non-cryptographic randomness (IDs, jitter) is fine
+#   B404 — import_subprocess : subprocess is used legitimately (claude -p, git, etc.)
+#   B603 — subprocess_without_shell_equals_true : args are lists, never shell strings
+skips:
+  - B101
+  - B104
+  - B311
+  - B404
+  - B603

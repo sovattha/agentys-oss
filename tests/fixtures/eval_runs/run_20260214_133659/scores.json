@@ -1,0 +1,67 @@
+{
+  "profile": {
+    "completeness": 95,
+    "precision": 85,
+    "usefulness": 88,
+    "overall": 89,
+    "missing": [],
+    "incorrect": [
+      "closing_styles.casual_fr: system has '{first_name}' but ground truth specifies '(no closing or just name)'",
+      "closing_styles.semi_formal_en: system has 'Regards,' but ground truth has 'Best,'",
+      "active_hours: system has '08:00-16:30' but ground truth has '08:00-18:00' (1.5 hour discrepancy)",
+      "response_time_avg: system has '< 2h' but ground truth has '< 1h' (2x difference)"
+    ],
+    "details": "The system output is highly complete, capturing all major fields including user email, name, both French and English signatures with detailed breakdowns, tone preferences with greeting/closing styles, languages, active hours, and response times. However, there are several minor discrepancies: (1) The casual_fr closing style differs ('(no closing or just name)' vs '{first_name}'), (2) semi_formal_en closing differs ('Best,' vs 'Regards,'), (3) active_hours differs ('08:00-18:00' vs '08:00-16:30'), and (4) response_time_avg differs ('< 1h' vs '< 2h'). These differences, while small, could affect email draft generation quality, particularly the active hours (1.5 hour difference) and response time expectations (2x difference). The signature parsing is perfect, and the greeting styles are accurate."
+  },
+  "knowledge": {
+    "completeness": 92,
+    "precision": 88,
+    "usefulness": 90,
+    "overall": 90,
+    "missing": [
+      "Terminology: 'Sprint', 'Daily', 'Retro', 'PR' definitions from ground truth",
+      "Project 'Migration Cloud' merged into other contexts rather than standalone",
+      "Some nuanced topic distinctions (e.g., 'demo' vs more specific descriptions)"
+    ],
+    "incorrect": [
+      "Pierre Durand title: 'Tech Lead' should be 'Lead Developer'",
+      "Amelie Petit tone: 'semi-formal' should be 'formal'",
+      "Sarah Jones tone: 'casual' should be 'semi-formal'",
+      "Interaction counts inflated across most contacts (e.g., Pierre: 27 vs 20, Lucas: 15 vs 10, Camille: 11 vs 6)",
+      "Created 'PartnerTech Integration' as separate project when ground truth shows PartnerTech mentioned in Pierre's topics but not as standalone project",
+      "Added terminology not in ground truth: 'CSP', 'POC'",
+      "Added 'frequent_topics' section not present in ground truth schema"
+    ],
+    "details": "The system output is highly complete and accurate. It found all 13 contacts from ground truth with correct relationships, companies, and preferred communication styles. All 5 major projects were identified with accurate descriptions. The system added some enriched data (extra topics, interaction counts) that appears reasonable. Minor issues: (1) Pierre's title differs ('Tech Lead' vs 'Lead Developer'), (2) Amelie's tone is 'semi-formal' vs 'formal', (3) Sarah's tone is 'casual' vs 'semi-formal', (4) interaction counts are higher (likely system counted differently), (5) added 'PartnerTech Integration' as separate project when ground truth merged it into GlobalTech partnership context, (6) terminology section added extra terms (CSP, POC) and omitted some ground truth terms (Sprint, Daily, Retro, PR), (7) added 'frequent_topics' section not in ground truth. Overall very strong performance with actionable insights."
+  },
+  "rules": {
+    "completeness": 75,
+    "precision": 70,
+    "usefulness": 72,
+    "overall": 72,
+    "missing": [
+      "contact_email: pierre.durand@techcorp.fr - correct tone should be 'casual' not 'semi-formal', missing 'Salut Pierre,' greeting option, missing '(name only or none)' closing option",
+      "contact_email: amelie.petit@fournisseur.fr - missing 'Bonjour Amelie,' greeting variation",
+      "contact_email: nicolas.moreau@techcorp.fr - missing 'Nicolas,' greeting variation and 'Sophie Martin' closing variation",
+      "contact_email: sarah.jones@globaltech.com - missing 'Best,' closing variation",
+      "contact_email: david.kim@partnertech.co.kr - missing 'Best,' closing variation",
+      "contact_email: claire.fontaine@clientcorp.com - missing 'Parfait Claire,' greeting variation",
+      "general_rule: cc_relevant_people - missing specific mention of CCing legal/finance stakeholders for client discussions",
+      "general_rule: action_items - ground truth specifies owner for each action, system version less specific"
+    ],
+    "incorrect": [
+      "contact_email: pierre.durand@techcorp.fr - tone marked as 'semi-formal' should be 'casual'",
+      "contact_email: pierre.durand@techcorp.fr - greeting should include 'Pierre,' / 'Salut Pierre,' not 'Bonjour Pierre,'",
+      "contact_email: pierre.durand@techcorp.fr - closing should be '(name only or none)' not 'Cordialement,'",
+      "contact_email: john.smith@globaltech.com - tone marked as 'formal' should be 'semi-formal'",
+      "contact_email: support@cloudprovider.com - this contact does not appear in ground truth (hallucination)",
+      "general_rule: vouvoiement_management - overly specific, ground truth only specifies vouvoiement for external clients/suppliers",
+      "general_rule: signature_casual - includes typo 'Sophi' not in ground truth",
+      "general_rule: concise_acknowledgments - not in ground truth, overly specific",
+      "general_rule: detailed_technical_proposals - not in ground truth, overly specific",
+      "general_rule: professional_reminders - not in ground truth, overly specific"
+    ],
+    "details": "The system captured most contact rules (13/13 contacts found, though 1 extra) and identified key general rules, but missed some nuances. Contact rules: Missing some greeting/closing variations (e.g., 'Pierre,' vs 'Salut Pierre,' or 'Best,' closing option). Incorrectly labeled pierre.durand as 'semi-formal' when ground truth shows 'casual'. Incorrectly labeled john.smith as 'formal' when it should be 'semi-formal'. Added an extra contact (support@cloudprovider.com) not in ground truth. General rules: Captured 12 rules vs 8 in ground truth, but added some that are overly specific variations of existing rules (vouvoiement_management, detailed_technical_proposals, professional_reminders, concise_acknowledgments). Missing the specific 'cc_relevant_people' details about when to involve legal/finance. Auto-reply patterns are more detailed but conceptually similar."
+  },
+  "overall": 84
+}

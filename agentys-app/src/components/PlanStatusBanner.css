@@ -1,0 +1,81 @@
+.plan-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  color: #fff;
+  transition: filter var(--duration-fast, 150ms) ease;
+}
+
+.plan-banner:hover {
+  filter: brightness(1.06);
+}
+
+.plan-banner:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -2px;
+}
+
+/* Essai : ton accent/positif — l'utilisateur a déjà la valeur, on l'incite à confirmer. */
+.plan-banner--trial {
+  background: linear-gradient(90deg, #0d9488, #0f766e);
+}
+
+/* Gratuit : ton ambre/verrou — fonctions IA bloquées, conversion à provoquer. */
+.plan-banner--free {
+  background: linear-gradient(90deg, #b45309, #92400e);
+}
+
+.plan-banner__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  animation: plan-banner-pulse 2.4s ease-out infinite;
+}
+
+.plan-banner__label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.plan-banner__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-shrink: 0;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.plan-banner__cta svg {
+  transition: transform var(--duration-fast, 150ms) ease;
+}
+
+.plan-banner:hover .plan-banner__cta svg {
+  transform: translateX(2px);
+}
+
+@keyframes plan-banner-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6); }
+  70% { box-shadow: 0 0 0 6px rgba(255, 255, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plan-banner__dot { animation: none; }
+  .plan-banner__cta svg { transition: none; }
+}

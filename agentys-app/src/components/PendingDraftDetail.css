@@ -1,0 +1,2278 @@
+/* ============================================================================
+   PENDING DRAFT DETAIL — Editorial Calm Authority
+   ============================================================================ */
+
+/* Smart Suggestion Chips */
+.smart-suggestions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 24px 4px;
+}
+.smart-suggestion-chip {
+  padding: 6px 14px;
+  border: 1px solid var(--accent-primary);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--accent-primary);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* SCROLL-UNIFIED ──────────────────────────────────────────────────────────────
+   Ce bloc est le SCROLL PARENT pour le thread unifié (email + draft).
+   Invariants critiques — NE PAS supprimer :
+     flex: 1 1 0   → prend l'espace dispo sans imposer sa taille naturelle
+     min-height: 0  → permet au flex child de scroller (sinon il déborde)
+     overflow-y: auto → scrollbar unique pour email + draft
+   Contexte : panel inbox (App.css ajoute height:0)
+   Voir aussi : App.css L118, EmailDetailModal.css L523
+   ──────────────────────────────────────────────────────────────────────────── */
+.pending-draft-detail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  background: var(--surface-primary);
+  animation: slideIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  container-type: inline-size;
+  container-name: draft-detail;
+}
+
+/* SCROLL-UNIFIED — Zone wrappers (email + draft coulent naturellement dans le scroll parent)
+   flex-shrink: 0 = chaque zone garde sa hauteur naturelle, le parent scrolle.
+   BUG-P003 / BUG-N002 fix: emails très longs (>500px) faisaient croître le panel à 4000+px
+   → freeze du renderer Tauri + auto-scroll inefficace. On plafonne à 480px avec scroll interne.
+   Le panel global reste scroll-unifié ; seule la zone email devient localement scrollable. */
+.pdd-email-zone {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  max-height: 480px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.pdd-draft-zone {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+}
+
+/* Nuclear: kill any stray line between BROUILLON label and draft card.
+   Targets all elements and pseudo-elements in the draft zone. */
+.pdd-draft-zone > .rc-draft-label,
+.pdd-draft-zone > .rc-draft-label *,
+.pdd-draft-zone > .draft-card,
+.pdd-draft-zone > .draft-card > *:not(.send-success-overlay):not(.diff-toast) {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* Glow states intentionally flat — no inset ring, no outer shadow, to keep
+   the draft surface fully seamless. The meridian line is the only visual
+   cue for "draft zone". */
+.pdd-draft-zone > .draft-card.glow-generating,
+.pdd-draft-zone > .draft-card.glow-ready {
+  box-shadow: none !important;
+}
+
+/* ============================================================================
+   CHOREOGRAPHED REVEAL — Staggered entrance sequence
+   ============================================================================ */
+
+/* prefers-reduced-motion handled globally in index.css */
+
+/* ============================================================================
+   1. COLLAPSED ORIGINAL EMAIL — Subtle, informational header
+   ============================================================================ */
+.original-email-collapsed {
+  /* Vertical breathing room — space-3 was too tight (header read as
+     cramped, 2026-05-13 user feedback). Right padding leaves room for
+     the inline header controls (nav arrows + close), which now all live
+     in-flow inside .pdd-email-header-right — no absolute reservation needed
+     (the old 100px reservation for an absolute close button overlapped the
+     arrows whenever the ≤600px container query shrank it, bug 2026-06-09). */
+  padding: var(--space-4) var(--space-5) var(--space-4) var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  cursor: pointer;
+  transition: background var(--transition-base);
+  flex-shrink: 0;
+  animation: slideInSmall 0.35s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+}
+
+.original-email-collapsed.expanded {
+  background: var(--surface-secondary);
+}
+
+.original-email-collapsed-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.original-email-collapsed-subject {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-none);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+.original-email-collapsed-date {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================================
+   ORIGINAL EMAIL SECTION (expanded) — Matches draft-card layout
+   ============================================================================ */
+.original-email-section {
+  padding: 0 var(--space-6);
+  border-bottom: none;
+  animation: slideInSmall 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.original-card-sender {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) 0 var(--space-1);
+}
+
+.original-card-date {
+  margin-inline-start: auto;
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.original-card-subject {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+}
+
+.original-card-subject-value {
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+}
+
+/* Email body rendered via EmailBodyContent (shared with EmailDetailModal) —
+   styles are in EmailDetailModal.css (.email-original-body-container) */
+
+/* EmailBodyContent already self-pads its body at 24px (.email-body-content, and
+   the HTML iframe's fixed inner padding). Here it also sits inside
+   .original-email-section's gutter, so the received email was double-padded
+   (gutter + 24px) and landed ~24px right of the draft body and the sender row.
+   Cancel the section gutter for the body only; the -24px margin and the body's
+   +24px self-padding net to the section's (responsive) gutter — which matches
+   the draft card at every breakpoint, for both plain-text and iframe bodies. */
+.pending-draft-detail .original-email-section .email-original-body-container {
+  margin-left: calc(-1 * var(--space-6));
+  margin-right: calc(-1 * var(--space-6));
+}
+
+/* ============================================================================
+   2. AI INTELLIGENCE BANNER — Quiet authority, not screaming gradient
+   ============================================================================ */
+.ai-intelligence-banner {
+  background: var(--surface-secondary);
+  padding: var(--space-3) var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-top: none;
+  border-bottom: 1px solid var(--border-subtle);
+  animation: slideInSmall 0.35s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both;
+}
+
+/* Teal gradient line motif — top of AI banner */
+.ai-intelligence-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--accent-primary-glow) 20%,
+    var(--accent-primary) 50%,
+    var(--accent-primary-glow) 80%,
+    transparent 100%
+  );
+}
+
+/* Signature moment — radial teal pulse on draft reveal */
+.ai-intelligence-banner::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 400%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center,
+    rgba(13, 148, 136, 0.06) 0%,
+    rgba(13, 148, 136, 0.02) 40%,
+    transparent 70%
+  );
+  animation: aiPulseReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  pointer-events: none;
+}
+
+@keyframes aiPulseReveal {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3);
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.ai-banner-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.ai-banner-sparkle {
+  font-size: var(--font-size-sm);
+  color: var(--accent-primary);
+  display: inline-block;
+}
+
+.ai-banner-title {
+  font-weight: 600;
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+.ai-banner-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ai-intelligence-banner .save-status {
+  font-size: var(--font-size-xs);
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--text-tertiary);
+  background: var(--surface-tertiary);
+}
+
+/* ============================================================================
+   3. PIPELINE DISCLOSURE & TOGGLE LINKS
+   ============================================================================ */
+
+.pipeline-disclosure {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  letter-spacing: var(--tracking-wide);
+}
+
+.pipeline-disclosure.open {
+  color: var(--accent-primary);
+}
+
+.pipeline-disclosure-icon {
+  font-size: var(--font-size-xs);
+  opacity: 0.7;
+}
+
+.pipeline-disclosure.open .pipeline-disclosure-icon {
+  opacity: 1;
+}
+
+.pipeline-disclosure-chevron {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: transform var(--transition-fast);
+}
+
+.history-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+/* ============================================================================
+   PIPELINE CARDS SECTION (replaces old pipeline-section)
+   ============================================================================ */
+.pipeline-cards-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: var(--space-2) var(--space-6) var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Thread context standalone card (between Classification and Rédaction) */
+.thread-context-standalone {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-secondary);
+  overflow: hidden;
+  animation: pipeCardIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.thread-context-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+}
+
+.thread-context-title {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps, 0.08em);
+}
+
+.thread-context-body-area {
+  padding: 0 var(--space-4) var(--space-3);
+}
+
+/* ── Pipeline Overview: classification + tier + knowledge inputs ──────── */
+
+.pipe-overview {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.pipe-overview-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.pipe-tier-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+}
+
+.pipe-tier-badge.tier-simple {
+  background: rgba(34, 197, 94, 0.10);
+  color: var(--success-text);
+}
+
+.pipe-tier-badge.tier-standard {
+  background: rgba(245, 158, 11, 0.10);
+  color: var(--accent-secondary);
+}
+
+.pipe-tier-badge.tier-complex {
+  background: rgba(239, 68, 68, 0.10);
+  color: var(--error);
+}
+
+.pipe-tier-badge.tier-quick_reply {
+  background: rgba(16, 185, 129, 0.10);
+  color: var(--success);
+}
+
+.pipe-specialty-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  background: rgba(99, 102, 241, 0.10);
+  color: #6366f1;
+}
+
+/* Knowledge input chips — tiny subtle indicators */
+.pipe-inputs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pipe-input-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-2xs);
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.pipe-input-chip svg {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+/* Specialty chip variant */
+.pipe-input-chip--specialty {
+  background: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.2);
+  color: var(--color-accent-secondary, #f59e0b);
+}
+.pipe-input-chip--specialty svg {
+  opacity: 0.8;
+}
+
+/* Specialty name + category in pipeline card */
+.pipe-specialty-name {
+  font-size: var(--font-size-sm, 13px);
+  font-weight: 600;
+  color: var(--color-accent-secondary, #f59e0b);
+}
+
+.pipe-specialty-category {
+  font-size: var(--font-size-2xs, 11px);
+  color: var(--text-tertiary, rgba(255,255,255,0.45));
+  text-transform: capitalize;
+}
+
+/* Specialty risk warnings */
+.pipe-specialty-warning {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2, 8px);
+  padding: var(--space-2, 8px) var(--space-3, 12px);
+  border-radius: var(--radius-2, 8px);
+  font-size: var(--font-size-2xs, 12px);
+  font-weight: 500;
+  margin-top: var(--space-1, 4px);
+}
+
+.pipe-specialty-warning--medium {
+  background: rgba(245, 158, 11, 0.08);
+  color: var(--color-accent-secondary, #f59e0b);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+}
+
+.pipe-specialty-warning--high {
+  background: rgba(239, 68, 68, 0.08);
+  color: var(--color-error, #ef4444);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+}
+
+/* Legacy compat (keep for any external references) */
+.classification-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  background: var(--accent-primary-light);
+  color: var(--accent-primary);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  margin-right: var(--space-2);
+}
+
+.routing-tier-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  margin-right: var(--space-2);
+  letter-spacing: var(--tracking-wider);
+}
+
+.routing-tier-badge.tier-simple {
+  background: rgba(34, 197, 94, 0.12);
+  color: var(--success-text);
+}
+
+.routing-tier-badge.tier-standard {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--accent-secondary);
+}
+
+.routing-tier-badge.tier-complex {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--error);
+}
+
+.classification-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+}
+
+.classification-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin-right: 2px;
+}
+
+.classification-row .classification-badge {
+  margin-right: var(--space-3);
+}
+
+.classification-row .routing-tier-badge {
+  margin-right: 0;
+}
+
+/* ============================================================================
+   THREAD CONTEXT STEP (Step 0 — Conversation History)
+   ============================================================================ */
+.thread-context-step {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+}
+
+.thread-context-icon {
+  background: color-mix(in srgb, var(--info, var(--color-blue)) 12%, transparent);
+}
+
+.thread-context-icon svg {
+  stroke: var(--info, var(--color-blue));
+}
+
+.thread-context-count-text {
+  margin-inline-start: auto;
+  font-size: var(--font-size-2xs);
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.thread-context-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.thread-context-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--transition-fast);
+  animation: slideInSmall 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  position: relative;
+}
+
+.thread-context-item.expanded {
+  background: var(--surface-secondary);
+}
+
+.thread-context-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent-primary) 15%, transparent);
+  color: var(--accent-primary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.thread-context-item-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.thread-context-item-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.thread-context-sender-group {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+}
+
+.thread-context-sender {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.thread-context-email {
+  font-size: var(--font-size-2xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.thread-context-date {
+  font-size: var(--font-size-2xs);
+  color: var(--text-muted);
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.thread-context-subject-line {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.thread-context-chevron {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  transition: transform var(--transition-base);
+  margin-top: 4px;
+}
+
+.thread-context-chevron.open {
+  transform: rotate(180deg);
+}
+
+.thread-context-preview {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  line-height: var(--leading-normal);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.thread-context-body {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-subtle);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.thread-context-empty {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.classification-row-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-inline-start: auto;
+}
+
+.classification-row-inline .classification-badge,
+.classification-row-inline .routing-tier-badge {
+  margin-right: 0;
+}
+
+/* ============================================================================
+   4. DRAFT CARD — Clean writing surface
+   ============================================================================ */
+.draft-card {
+  padding: 0 var(--space-6) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 0;
+  flex: 0 0 auto;
+  border-top: none;
+  margin-top: -1px;
+  animation: slideInSmall 0.35s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both;
+}
+
+/* Override .gmail-field's padding: 0 16px (imported from NewMessageModal.css).
+   Recipient row must align with the body text, which sits at draft-card's
+   natural 24px content padding — no extra horizontal offset. */
+.pending-draft-detail .draft-card-recipient {
+  gap: var(--space-2);
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: var(--space-1);
+  padding-bottom: var(--space-1);
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  align-items: center;
+  border: none !important;
+  min-height: 0;
+}
+
+.draft-to-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+/* CC/BCC toggle buttons — small pill links on the "A:" row.
+   This row also hosts the inline save-status, history-toggle, and the
+   ✨ AI pill (from AIProcessButton) — all right-aligned by the parent
+   layout's justify-content/auto margin. */
+.draft-cc-toggles {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-shrink: 0;
+  align-self: start;
+}
+.draft-cc-toggle-btn {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  border-radius: var(--radius-xs);
+  padding: 1px 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-weight: 500;
+}
+/* Save status + history toggle when hosted inline in the Cc/Bcc row */
+.draft-cc-toggles .save-status {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  font-weight: 500;
+  padding: 1px 4px;
+  white-space: nowrap;
+}
+.draft-cc-toggles .history-toggle {
+  font-size: var(--font-size-xs);
+  padding: 1px 6px;
+}
+
+/* CC/BCC input rows */
+.draft-card-cc-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: 6px 0;
+}
+.draft-cc-input {
+  flex: 1;
+  min-width: 0;
+}
+.draft-cc-input input {
+  font-size: var(--font-size-sm);
+  padding: 3px 0;
+}
+
+.draft-card-cc-row.drop-active,
+.draft-card-row.drop-active {
+  background: color-mix(in srgb, var(--accent-primary, #6366f1) 6%, transparent);
+  outline: 1.5px dashed var(--accent-primary, #6366f1);
+  outline-offset: -2px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+/* ── Reply mode pill (inline in the A: row) ────────────────────────────── */
+.draft-mode-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 8px;
+  height: 24px;
+  min-height: 0;
+  max-height: 24px;
+  box-sizing: border-box;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  flex-shrink: 0;
+  animation: slideInSmall 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.draft-mode-pill.reply {
+  background: color-mix(in srgb, var(--text-muted) 10%, transparent);
+  color: var(--text-muted);
+}
+
+.draft-mode-pill.reply-all {
+  background: color-mix(in srgb, var(--info, var(--color-blue)) 12%, transparent);
+  color: var(--info, var(--color-blue));
+}
+
+.draft-mode-pill.forward {
+  background: color-mix(in srgb, var(--color-amber) 12%, transparent);
+  color: var(--accent-secondary);
+}
+
+.draft-mode-pill-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: var(--font-size-xs);
+  line-height: var(--leading-none);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity var(--transition-fast);
+}
+
+/* Clickable mode pill wrapper + dropdown */
+.draft-mode-pill-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+button.draft-mode-pill {
+  cursor: pointer;
+  border: none;
+  padding: 0 6px 0 8px;
+  gap: 4px;
+  height: 24px;
+  min-height: 0;
+  max-height: 24px;
+  box-sizing: border-box;
+  line-height: 1;
+  font-size: var(--font-size-xs);
+}
+
+.draft-mode-pill-chevron {
+  width: 10px;
+  height: 10px;
+  opacity: 0.6;
+}
+
+.pending-draft-detail .draft-mode-dropdown {
+  min-width: 200px;
+}
+
+/* To/Forward input — ContactAutocomplete in the A: row */
+.draft-to-input,
+.draft-forward-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.draft-to-input input,
+.draft-forward-input input {
+  font-size: var(--font-size-sm);
+  padding: 3px 0;
+}
+
+/* Labels inline with subject in collapsed header */
+.original-email-labels {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-shrink: 0;
+  margin-left: 0;
+}
+
+.original-email-labels .label-badge-group {
+  gap: 4px;
+}
+
+/* Original email CC display */
+.original-card-cc {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-6) var(--space-2);
+}
+.original-card-cc-list {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.draft-card-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  font-weight: 500;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+}
+
+.draft-card-recipient-name {
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.draft-card-recipient-email {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  opacity: 1;
+  transition: opacity 0.15s ease;
+}
+
+/* Same override as draft-card-recipient — beat .gmail-field's 16px horizontal
+   padding so the "Re: …" text aligns with the body below. */
+.pending-draft-detail .draft-card-subject {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  border-top: none;
+}
+
+
+/* Override gmail-input's 8px padding — tighter gap below recipient row */
+.draft-card-subject .gmail-input {
+  padding: 4px 0;
+  font-weight: 700;
+}
+
+.draft-card-subject-input {
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  border: none;
+  background: transparent;
+  outline: none;
+  flex: 1;
+  padding: var(--space-1) 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--transition-base);
+}
+
+.draft-card-subject-input:focus {
+  border-bottom-color: transparent;
+}
+
+.draft-card-body-wrapper {
+  margin-bottom: 0;
+  display: block;
+  flex: 0 0 auto;
+}
+
+.draft-card-body-textarea {
+  display: block;
+  width: 100%;
+  padding: var(--space-5) var(--space-1) var(--space-5) 0;
+  background: transparent !important;
+  border-radius: 0;
+  border: none !important;
+  box-shadow: none !important;
+  -webkit-appearance: none;
+  appearance: none;
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  line-height: 1.5;
+  color: var(--text-primary);
+  resize: none;
+  outline: none;
+  overflow: hidden;
+  min-height: 2.5em;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  /* Height controlled by JS via scrollHeight — no fixed height */
+}
+
+
+.draft-card-body-textarea:focus,
+.draft-card-body-textarea:focus-visible {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
+
+.draft-card-body-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* Parité compose (2026-06-09) : le body est édité dans le DraftEditor TipTap.
+   Même neutralisation de chrome que `.rc-editor-area .draft-editor` (Reply),
+   et on reprend la respiration verticale + typo du textarea legacy pour que
+   le panneau garde exactement la même silhouette. L'éditeur grandit seul. */
+.pdd-body-editor .draft-editor {
+  border: none !important;
+  border-radius: 0;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.pdd-body-editor .draft-editor-content {
+  padding: var(--space-5) var(--space-1) var(--space-5) 0;
+  font-size: inherit;
+  line-height: 1.5;
+  color: var(--text-primary);
+  min-height: 2.5em;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  background: transparent;
+  outline: none;
+}
+
+/* Le :focus-visible global (index.css) dessine un anneau teal 3px sur tout
+   élément focusable — Chrome le considère actif en permanence sur un
+   contenteditable, donc le panneau affichait un rectangle vert autour du
+   texte dès que le caret était dans le body. Pas de chrome ici (parité
+   avec la neutralisation du textarea legacy ci-dessus). */
+.pdd-body-editor .draft-editor-content:focus,
+.pdd-body-editor .draft-editor-content:focus-visible {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Signature preview — non-interactive. Typo héritée du même style inline
+   (prefs de police compose) que le wrapper du body, pour que la signature
+   se lise comme la suite du même bloc de texte — l'éditeur TipTap reçoit
+   ces prefs en inline (DraftEditor), la signature doit suivre la même
+   source sinon elle rend plus petite (var --font-size-base = 14px vs 16px). */
+.pdd-signature-preview {
+  padding: 0;
+  white-space: pre-wrap;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--text-primary);
+  pointer-events: none;
+  user-select: none;
+  margin-top: var(--space-2);
+}
+
+.pdd-signature-preview--editable {
+  pointer-events: auto;
+  user-select: text;
+}
+
+.pdd-signature-text {
+  white-space: pre-wrap;
+}
+
+.refine-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: var(--radius-full);
+  animation: spin 0.8s linear infinite;
+}
+
+/* Contextual chips (action / transformation) */
+.refine-contextual-chips {
+  display: flex;
+  gap: 6px;
+  padding: var(--space-1) 0 2px;
+  flex-wrap: wrap;
+}
+.refine-ctx-chip {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+/* ============================================================================
+   6. ERROR MESSAGE
+   ============================================================================ */
+.error-message {
+  margin: 0 var(--space-6);
+  padding: 10px 14px;
+  background: var(--error-bg);
+  color: var(--error);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+}
+
+/* ============================================================================
+   7. FOLLOW-UP REMINDER
+   ============================================================================ */
+.followup-reminder {
+  padding: var(--space-3) var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+@keyframes followupIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.followup-reminder-text {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+.followup-reminder-text strong {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.followup-delays {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.followup-pill {
+  padding: var(--space-1) 10px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  background: var(--surface-primary);
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.followup-pill.active {
+  border-color: var(--accent-primary);
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+}
+
+.followup-toggle {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  background: var(--accent-primary);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background var(--transition-base);
+  flex-shrink: 0;
+}
+
+.followup-toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-full);
+  background: white;
+  transform: translateX(18px);
+  transition: transform var(--transition-slow);
+  box-shadow: var(--shadow-sm);
+}
+
+.followup-toggle.off {
+  background: var(--border-default);
+}
+
+.followup-toggle.off::after {
+  transform: translateX(0);
+}
+
+/* ── New toggle + date chip ── */
+.followup-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.followup-toggle-track {
+  position: relative;
+  width: 28px;
+  height: 16px;
+  border-radius: 9999px;
+  background: var(--border-default);
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.followup-toggle-btn.on .followup-toggle-track {
+  background: var(--accent-primary);
+}
+
+.followup-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  transition: transform 0.2s;
+}
+
+.followup-toggle-btn.on .followup-toggle-thumb {
+  transform: translateX(12px);
+}
+
+.followup-toggle-label {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.15s;
+}
+
+.followup-toggle-btn.on .followup-toggle-label {
+  color: var(--text-primary);
+}
+
+.followup-date-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  background: var(--accent-primary-subtle);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 30%, transparent);
+  border-radius: 9999px;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--accent-primary);
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+/* Action bar scoped to PendingDraftDetail — sticky bottom, fully seamless
+   (no separator line, bg matches draft body for a continuous surface). */
+.pending-draft-detail .rc-action-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  background: var(--surface-primary);
+  padding: 14px 16px;
+}
+
+/* Follow-up toggle inline in action bar */
+.rc-followup-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: auto;
+  padding-left: 8px;
+}
+
+/* Split button Envoyer — scoped to PendingDraftDetail for guaranteed specificity */
+.pending-draft-detail .rc-send-split {
+  display: inline-flex;
+  align-items: stretch;
+  position: relative;
+}
+
+.pending-draft-detail .rc-send-pill.rc-send-pill-main {
+  border-radius: var(--radius-full);
+}
+
+.pending-draft-detail .rc-send-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  padding: 0;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  border: none;
+  border-left: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 0 var(--radius-full) var(--radius-full) 0;
+  cursor: pointer;
+  transition: background var(--transition-base);
+}
+
+.pending-draft-detail .rc-send-chevron:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pending-draft-detail .rc-send-chevron svg {
+  width: 12px;
+  height: 12px;
+  stroke: var(--text-inverse);
+}
+
+.pending-draft-detail .rc-send-chevron[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+/* Dropdown menu */
+.pending-draft-detail .rc-send-dropdown {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  min-width: 220px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  z-index: var(--z-dropdown);
+  animation: draftChildIn 0.15s ease both;
+}
+
+@keyframes draftChildIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pending-draft-detail .rc-send-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  position: relative;
+}
+
+.pending-draft-detail .rc-send-dropdown-item.active {
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  color: var(--accent-primary);
+  font-weight: 500;
+}
+
+.pending-draft-detail .rc-send-dropdown-shortcut {
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  background: color-mix(in srgb, var(--text-muted) 10%, transparent);
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  margin-left: auto;
+  transition: all var(--transition-fast);
+}
+
+.pending-draft-detail .rc-send-dropdown-item.active .rc-send-dropdown-shortcut {
+  background: color-mix(in srgb, var(--accent-primary) 15%, transparent);
+  color: var(--accent-primary);
+}
+
+.pending-draft-detail .rc-send-dropdown-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.pending-draft-detail .rc-send-dropdown-item.active .rc-send-dropdown-icon {
+  color: var(--accent-primary);
+}
+
+.pending-draft-detail .rc-send-dropdown-text {
+  flex: 1;
+}
+
+.pending-draft-detail .rc-send-dropdown-label {
+  font-size: var(--font-size-sm);
+  color: inherit;
+}
+
+.pending-draft-detail .rc-send-dropdown-check {
+  display: none;
+}
+
+/* ============================================================================
+   8. ACTION BAR (Reject + Send)
+   ============================================================================ */
+.premium-action-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  padding: var(--space-3) var(--space-6);
+  border-top: 1px solid color-mix(in srgb, var(--border-subtle) 60%, transparent);
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  background: color-mix(in srgb, var(--surface-secondary) 40%, var(--surface-primary));
+  animation: slideInSmall 0.35s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
+
+/* Teal gradient line motif — top of action bar */
+.premium-action-bar::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--accent-primary-glow) 20%,
+    var(--accent-primary) 50%,
+    var(--accent-primary-glow) 80%,
+    transparent 100%
+  );
+  opacity: 0.5;
+}
+
+.reject-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.reject-pill:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.reject-pill svg {
+  width: 14px;
+  height: 14px;
+}
+
+.send-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 16px;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.send-pill::before {
+  display: none;
+}
+
+.send-pill:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* One-shot send-icon nudge when the form is ready (button enabled).
+   Mirrors Gmail's send-ready hint — runs once per hover, not a loop. */
+.send-pill:not(:disabled):hover svg {
+  animation: sendReadyPulse 0.55s var(--ease-settle, ease-out) 1;
+}
+
+@keyframes sendReadyPulse {
+  0%   { transform: translateX(0); }
+  45%  { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .send-pill:not(:disabled):hover svg { animation: none; }
+}
+
+.send-pill:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.send-pill svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--text-inverse);
+}
+
+/* Send button "whoosh" — content slides right as it sends (5.4) */
+.send-pill.sending {
+  pointer-events: none;
+}
+
+.send-pill.sending svg {
+  animation: sendWhoosh 0.25s var(--ease-settle, ease-out) both;
+}
+
+@keyframes sendWhoosh {
+  0% { transform: translateX(0); opacity: 1; }
+  60% { transform: translateX(12px); opacity: 0; }
+  61% { transform: translateX(-8px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* ============================================================================
+   NAV ARROWS (in collapsed header)
+   ============================================================================ */
+.pending-draft-detail .email-nav-arrows {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.pending-draft-detail .email-nav-count {
+  font-size: var(--font-size-xs, 11px);
+  color: var(--text-tertiary);
+  margin-right: var(--space-1);
+  white-space: nowrap;
+}
+
+.pending-draft-detail .email-nav-btn {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md, 6px);
+  font-size: var(--font-size-xs);
+  line-height: var(--leading-none);
+  transition: color var(--transition-fast);
+  padding: 0;
+}
+
+.pending-draft-detail .email-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+  color: var(--text-tertiary);
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+@media (max-width: 768px) {
+  .pending-draft-detail {
+    border-radius: var(--radius-md);
+  }
+
+  .original-email-collapsed,
+  .draft-card,
+  .followup-reminder,
+  .premium-action-bar {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .pipeline-disclosure-row {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .pipeline-cards-section {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .draft-card-body-textarea {
+    padding: var(--space-4) 0;
+  }
+
+  .followup-reminder {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .followup-delays {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .pending-draft-detail {
+    border-radius: var(--radius-sm);
+  }
+
+  .original-email-collapsed,
+  .draft-card,
+  .followup-reminder,
+  .premium-action-bar {
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
+  }
+
+  .ai-intelligence-banner {
+    padding: 10px var(--space-3);
+  }
+
+  .send-pill {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ============================================================================
+   ENHANCED AI BANNER — Shimmer + animated sparkle + confidence badge
+   ============================================================================ */
+
+/* Banner shimmer sweep */
+.ai-intelligence-banner .banner-shimmer {
+  position: absolute;
+  top: 0; left: -150%;
+  width: 150%; height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(13, 148, 136, 0.03),
+    rgba(13, 148, 136, 0.07),
+    rgba(13, 148, 136, 0.03),
+    transparent
+  );
+  animation: bannerShimmerSweep 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes bannerShimmerSweep {
+  0% { left: -150%; }
+  45% { left: 100%; }
+  100% { left: 100%; }
+}
+
+/* Animated sparkle with ring */
+.ai-banner-sparkle-animated {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ai-banner-sparkle-animated .sparkle-core {
+  font-size: var(--font-size-base);
+  color: var(--accent-primary);
+  animation: sparkleRotate 12s linear infinite;
+  display: block;
+}
+
+.ai-banner-sparkle-animated .sparkle-ring {
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid rgba(13, 148, 136, 0.15);
+  animation: sparkleRingPulse 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sparkleRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes sparkleRingPulse {
+  0%, 100% { transform: scale(1); opacity: 0.2; }
+  50% { transform: scale(1.2); opacity: 0.5; }
+}
+
+/* Progress dots in banner */
+.ai-banner-dots {
+  display: flex;
+  gap: var(--space-1);
+  align-items: center;
+}
+
+.ai-banner-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--surface-tertiary);
+  transition: all var(--transition-slow);
+}
+
+.ai-banner-dot.done {
+  background: var(--accent-primary);
+}
+
+.ai-banner-dot.active {
+  background: var(--accent-primary);
+  animation: dotPulse 1.2s ease-in-out infinite;
+  box-shadow: var(--shadow-glow-primary);
+}
+
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+}
+
+/* ============================================================================
+   DRAFT CARD GLOW — Teal aura during generation
+   ============================================================================ */
+.draft-card.glow-generating {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--accent-primary) 15%, transparent),
+    0 0 20px -4px color-mix(in srgb, var(--accent-primary) 10%, transparent),
+    0 0 40px -8px color-mix(in srgb, var(--accent-primary) 6%, transparent);
+  animation: draftGlowPulse 2s ease-in-out infinite;
+}
+
+.draft-card.glow-ready {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--accent-primary) 10%, transparent),
+    0 0 12px -4px color-mix(in srgb, var(--accent-primary) 8%, transparent);
+  transition: box-shadow 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes draftGlowPulse {
+  0%, 100% {
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--accent-primary) 15%, transparent),
+      0 0 20px -4px color-mix(in srgb, var(--accent-primary) 10%, transparent),
+      0 0 40px -8px color-mix(in srgb, var(--accent-primary) 6%, transparent);
+  }
+  50% {
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--accent-primary) 25%, transparent),
+      0 0 30px -4px color-mix(in srgb, var(--accent-primary) 16%, transparent),
+      0 0 50px -8px color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  }
+}
+
+/* ============================================================================
+   TYPING REVEAL — Word-by-word animation
+   ============================================================================ */
+.typing-reveal-container {
+  /* Hérite des prefs de police compose posées en inline sur
+     .draft-card-body-wrapper — la même taille que l'éditeur TipTap qui
+     remplace cette vue, sinon le texte saute de 14px à 16px au swap. */
+  font-size: inherit;
+  line-height: var(--leading-loose);
+  color: var(--text-primary);
+  padding: var(--space-5) 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.typing-word {
+  opacity: 0;
+  transition: opacity 0.08s ease;
+}
+
+.typing-word.revealed {
+  opacity: 1;
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--accent-primary);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: typingCursorBlink 0.6s steps(1) infinite;
+  border-radius: 1px;
+}
+
+@keyframes typingCursorBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ============================================================================
+   DIFF HIGHLIGHT — Flash modified passages after refinement
+   ============================================================================ */
+.diff-highlight-word {
+  background: rgba(13, 148, 136, 0.15);
+  border-radius: var(--radius-xs);
+  padding: 0 2px;
+  transition: background 2.5s ease-out;
+}
+
+.diff-highlight-word.flash {
+  background: rgba(13, 148, 136, 0.35);
+  transition: none;
+}
+
+.diff-toast {
+  position: absolute;
+  top: 12px;
+  right: 24px;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: var(--radius-md);
+  opacity: 0;
+  transform: translateY(-6px) scale(var(--scale-dramatic));
+  transition: all var(--transition-slow);
+  box-shadow: var(--shadow-hover);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.diff-toast.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ============================================================================
+   SEND SUCCESS — Checkmark + particles + text
+   ============================================================================ */
+.send-success-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: var(--surface-primary);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-slow);
+  z-index: 30;
+  border-radius: inherit;
+}
+
+.send-success-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.send-success-check-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--accent-primary-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.send-success-check-circle.pop {
+  transform: scale(1);
+}
+
+.send-success-check-circle svg {
+  width: 30px;
+  height: 30px;
+  stroke: var(--accent-primary);
+  stroke-width: 2.5;
+  fill: none;
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  transition: stroke-dashoffset var(--transition-slow) 0.25s;
+}
+
+.send-success-check-circle.pop svg {
+  stroke-dashoffset: 0;
+}
+
+.send-success-text {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--accent-primary);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all var(--transition-slow) 0.45s;
+}
+
+.send-success-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Particles */
+.send-particles-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.send-particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-full);
+  opacity: 0;
+}
+
+.send-particle.burst {
+  animation: particleBurst 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes particleBurst {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
+}
+
+/* ============================================================================
+   UNDO SEND — Countdown ring + cancel button
+   ============================================================================ */
+.send-countdown-ring {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.send-countdown-ring svg {
+  width: 80px;
+  height: 80px;
+  transform: rotate(-90deg);
+}
+
+.send-countdown-ring-bg {
+  fill: none;
+  stroke: color-mix(in srgb, var(--accent-primary) 15%, transparent);
+  stroke-width: 4;
+}
+
+.send-countdown-ring-progress {
+  fill: none;
+  stroke: var(--accent-primary);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 213.6;
+  stroke-dashoffset: 0;
+  animation: countdownStroke var(--countdown-duration, 5s) linear forwards;
+}
+
+@keyframes countdownStroke {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 213.6; }
+}
+
+.send-countdown-number {
+  position: absolute;
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--accent-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.send-countdown-text {
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  color: var(--text-secondary);
+  animation: slideIn 0.3s ease both;
+}
+
+.send-undo-btn {
+  margin-top: var(--space-1);
+  padding: var(--space-2) 28px;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid color-mix(in srgb, var(--text-primary) 15%, transparent);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  animation: slideIn 0.3s ease 0.1s both;
+}
+
+
+/* ============================================================================
+   QUICK REPLY — Binary yes/no choice buttons (legacy backward compat)
+   ============================================================================ */
+.quick-reply-choices {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-6) 0;
+  justify-content: center;
+}
+
+.quick-reply-title {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+}
+
+.quick-reply-buttons {
+  display: flex;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.quick-reply-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: var(--space-5) var(--space-4);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-primary);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-family: inherit;
+}
+
+.quick-reply-btn:active {
+  transform: translateY(0);
+}
+
+.quick-reply-btn-icon {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  line-height: var(--leading-none);
+}
+
+.quick-reply-btn.affirmative .quick-reply-btn-icon {
+  color: var(--color-emerald);
+}
+
+.quick-reply-btn.negative .quick-reply-btn-icon {
+  color: var(--error-hover);
+}
+
+.quick-reply-btn-text {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-normal);
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+.quick-reply-upgrade-link {
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: var(--font-size-xs);
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--transition-fast);
+}
+
+.quick-reply-upgrade-link:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+   REDUCED MOTION — Respect user preference
+   ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .ai-banner-sparkle-animated .sparkle-core { animation: none; }
+  .ai-banner-sparkle-animated .sparkle-ring { animation: none; }
+  .ai-intelligence-banner .banner-shimmer { animation: none; }
+  .ai-banner-dot.active { animation: none; }
+  .typing-word { opacity: 1; transition: none; }
+  .typing-cursor { animation: none; opacity: 1; }
+  .diff-highlight-word { transition: none; }
+  .draft-card.glow-generating { animation: none; }
+  .send-success-check-circle { transition: none; transform: scale(1); }
+  .send-particle { display: none; }
+}
+/* HMR force reload 1771387440 */
+
+/* ============================================================================
+   CONTAINER QUERIES — Component-intrinsic responsive behavior
+   ============================================================================ */
+@container draft-detail (max-width: 600px) {
+  .original-email-collapsed,
+  .draft-card,
+  .followup-reminder,
+  .premium-action-bar {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+  .pipeline-cards-section {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+  .original-email-section {
+    padding: 0 var(--space-4);
+  }
+  .ai-intelligence-banner {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+  .draft-card-recipient {
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+}
+
+@container draft-detail (max-width: 480px) {
+  .original-email-collapsed,
+  .draft-card,
+  .followup-reminder,
+  .premium-action-bar {
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
+  }
+  .pipeline-cards-section {
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
+  }
+  .original-email-section {
+    padding: 0 var(--space-3);
+  }
+  .draft-card-cc-row {
+    flex-wrap: wrap;
+  }
+  .followup-reminder {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .followup-delays {
+    flex-wrap: wrap;
+  }
+}
+
+
+/* Jump-to-draft chip — in email header, right side */
+.pdd-email-header-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* ── Floating jump-to-draft arrow (bottom-right) ── */
+.pdd-jump-to-draft {
+  position: sticky;
+  bottom: 12px;
+  align-self: flex-end;
+  margin-right: 12px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--border-default);
+  border-radius: 50%;
+  background: var(--surface-primary);
+  color: var(--accent-primary);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: background 0.15s, box-shadow 0.15s, transform 0.15s;
+  animation: pdd-jump-fade-in 0.2s ease-out;
+}
+
+/* Hover lift — exception to the no-hover audit. Restored on user
+   request to match .jump-to-composer-pill (the email-detail variant of
+   the same affordance) so both jump arrows feel alive when targeted. */
+.pdd-jump-to-draft:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(2px);
+}
+
+@keyframes pdd-jump-fade-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

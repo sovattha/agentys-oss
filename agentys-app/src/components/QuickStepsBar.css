@@ -1,0 +1,206 @@
+/* QuickStepsBar — chip bar inside .email-action-footer.
+ *
+ * Uses canonical theme tokens (Clarity):
+ *   --surface-* / --border-* / --text-* / --accent-primary*
+ */
+
+.quicksteps-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding-left: 10px;
+  margin-left: 6px;
+  border-left: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+}
+
+.quicksteps-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-primary, #111827);
+  transition: border-color 0.12s ease, background 0.12s ease, transform 0.1s ease;
+}
+
+.quicksteps-chip:focus-visible {
+  outline: 2px solid var(--accent-primary, #0d9488);
+  outline-offset: 2px;
+}
+
+.quicksteps-chip[data-running] {
+  pointer-events: none;
+  opacity: 0.65;
+  position: relative;
+}
+
+.quicksteps-chip[data-running]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  border-top-color: var(--accent-primary, #0d9488);
+  animation: quicksteps-spin 0.7s linear infinite;
+}
+
+@keyframes quicksteps-spin {
+  to { transform: rotate(360deg); }
+}
+
+.quicksteps-chip__name {
+  white-space: nowrap;
+}
+
+.quicksteps-chip__kbd {
+  background: var(--surface-tertiary, #ebe9e5);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-secondary, #374151);
+  /* Hotkey hint fade-in: 0→100→60% over 1.6s on chip mount. */
+  opacity: 0;
+  animation: quicksteps-kbd-fade 1.6s ease-out forwards;
+}
+
+@keyframes quicksteps-kbd-fade {
+  0%   { opacity: 0; }
+  20%  { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+/* Per-action feedback track — pips check off after a chain runs. */
+.quicksteps-chip__track {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+  margin-left: 2px;
+}
+
+.quicksteps-chip__pip {
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: 700;
+  color: #fff;
+  opacity: 0;
+  transform: scale(0.5);
+  animation: quicksteps-pip-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.quicksteps-chip__pip.ok   { background: #22c55e; }
+.quicksteps-chip__pip.fail { background: #ef4444; }
+
+@keyframes quicksteps-pip-pop {
+  0%   { opacity: 0; transform: scale(0.5); }
+  60%  { opacity: 1; transform: scale(1.15); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.quicksteps-chip[data-feedback='ok']   { border-color: rgba(34, 197, 94, 0.6); }
+.quicksteps-chip[data-feedback='fail'] { border-color: rgba(239, 68, 68, 0.6); }
+
+/* Confirmation modal -------------------------------------------------------- */
+.quicksteps-confirm {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: quicksteps-fade 0.16s ease-out;
+}
+
+@keyframes quicksteps-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.quicksteps-confirm__panel {
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 12px;
+  padding: 22px;
+  max-width: 440px;
+  width: 90%;
+  color: var(--text-primary, #111827);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+  animation: quicksteps-rise 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes quicksteps-rise {
+  from { transform: translateY(8px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.quicksteps-confirm__panel h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: var(--text-primary, #111827);
+  font-weight: 600;
+}
+
+.quicksteps-confirm__panel p {
+  margin: 0 0 14px;
+  font-size: 13px;
+  color: var(--text-secondary, #374151);
+}
+
+.quicksteps-confirm__chain {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 10px 14px;
+  background: var(--surface-secondary, #f5f4f1);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text-primary, #111827);
+}
+
+.quicksteps-confirm__chain li {
+  padding: 3px 0;
+}
+
+.quicksteps-confirm__cta {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.quicksteps-confirm__cta button {
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-primary, #111827);
+}
+
+.quicksteps-confirm__cta .primary {
+  background: var(--accent-primary, #0d9488);
+  border-color: transparent;
+  color: var(--text-inverse, #ffffff);
+  font-weight: 600;
+}
+
+.quicksteps-confirm__hint {
+  margin: 14px 0 0;
+  font-size: 11px;
+  color: var(--text-tertiary, #4b5563);
+  text-align: right;
+}

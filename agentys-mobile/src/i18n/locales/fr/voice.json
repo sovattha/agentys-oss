@@ -1,0 +1,37 @@
+{
+  "tabPremade": "Prédéfinies ({{count}})",
+  "tabCloned": "Clonées ({{count}})",
+  "loadingVoices": "Chargement des voix ElevenLabs…",
+  "noClonedVoices": "Aucune voix clonée",
+  "cloneDescription": "Clonez votre voix à partir d'un échantillon audio (30 s minimum).",
+  "cloneCta": "Cloner ma voix",
+  "cloneAnother": "Cloner une autre voix",
+  "deleteTitle": "Supprimer cette voix ?",
+  "deleteMessage": "« {{name}} » sera définitivement supprimée de votre compte ElevenLabs.",
+  "deleteFailed": "Suppression impossible",
+  "errors": {
+    "noVoiceSelected": "Aucune voix sélectionnée — ouvrir les Réglages",
+    "cannotLoadVoices": "Impossible de charger les voix"
+  },
+  "clone": {
+    "title": "Cloner ma voix",
+    "nameLabel": "NOM DE LA VOIX",
+    "audioLabel": "ÉCHANTILLON AUDIO",
+    "audioHelper": "Lisez un texte à voix haute pendant au moins {{min}} s (recommandé {{rec}} s). Parlez clairement, sans bruit de fond.",
+    "minDuration": "min {{min}}s",
+    "okDuration": "OK · {{rec}}s recommandé",
+    "optimalQuality": "qualité optimale",
+    "recordStart": "Commencer",
+    "recordRedo": "Ré-enregistrer",
+    "recordStop": "Arrêter",
+    "sampleReady": "Échantillon prêt ({{duration}}s)",
+    "submit": "Créer la voix",
+    "submitting": "Clonage en cours…",
+    "successTitle": "Voix clonée",
+    "successMessage": "« {{name}} » est maintenant disponible et sélectionnée.",
+    "failureTitle": "Échec du clonage",
+    "failureUnknown": "Erreur inconnue"
+  },
+  "previewVoiceA11y": "Écouter un extrait de {{name}}",
+  "deleteVoiceA11y": "Supprimer la voix {{name}}"
+}

@@ -1,0 +1,425 @@
+/* ── Locale Pickers — premium collapsible picker ─────────────────── */
+
+.locale-root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Trigger button (always visible, compact) ───────────────────── */
+
+.locale-trigger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 11px 14px;
+  min-height: 46px;
+  background: var(--surface-primary, #ffffff);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-xs, 0.8rem);
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.22s ease,
+    color 0.18s ease;
+  position: relative;
+}
+
+.locale-trigger:focus-visible {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent-primary) 22%, transparent),
+    0 4px 14px color-mix(in srgb, var(--accent-primary) 10%, transparent);
+}
+
+.locale-trigger--open {
+  border-color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 7%, var(--surface-primary));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent-primary) 35%, transparent) inset,
+    0 6px 18px color-mix(in srgb, var(--accent-primary) 12%, transparent);
+}
+
+.locale-trigger--placeholder {
+  color: var(--text-placeholder, var(--text-tertiary));
+  font-style: italic;
+  font-weight: 400;
+}
+
+.locale-trigger--placeholder:not(.locale-trigger--open) {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent-primary) 25%, var(--border-default));
+}
+
+.locale-trigger-flag {
+  font-size: 1.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+  filter: saturate(1.05);
+  min-width: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.locale-trigger-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.locale-trigger-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+.locale-trigger-code {
+  font-size: var(--font-size-2xs, 0.64rem);
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+}
+
+.locale-trigger--open .locale-trigger-code {
+  color: color-mix(in srgb, var(--accent-primary) 70%, var(--text-tertiary));
+}
+
+.locale-trigger-chevron {
+  flex-shrink: 0;
+  color: var(--text-tertiary);
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.18s ease;
+}
+
+.locale-trigger--open .locale-trigger-chevron {
+  transform: rotate(180deg);
+  color: var(--accent-primary);
+}
+
+/* ── Panel expand/collapse ──────────────────────────────────────── */
+
+.locale-panel-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.28s cubic-bezier(0.22, 1, 0.36, 1), margin-top 0.22s ease;
+  margin-top: 0;
+}
+
+.locale-panel-wrap--open {
+  grid-template-rows: 1fr;
+  margin-top: 8px;
+}
+
+.locale-panel-wrap > .locale-picker {
+  min-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.22s ease 0.04s, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.locale-panel-wrap--open > .locale-picker {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Panel (chip grid container) ────────────────────────────────── */
+
+.locale-picker {
+  padding: 12px;
+  background: color-mix(in srgb, var(--bg-secondary) 55%, transparent);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  position: relative;
+  isolation: isolate;
+}
+
+.locale-picker::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent-primary) 3%, transparent) 0%,
+    transparent 40%,
+    color-mix(in srgb, var(--accent-primary) 2%, transparent) 100%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Flat grid for language picker */
+.locale-picker--language {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+  gap: 8px;
+}
+
+.locale-picker--language .locale-chip--auto {
+  grid-column: 1 / -1;
+}
+
+/* Grouped layout for variant picker */
+.locale-picker--variant {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.locale-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.locale-group-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-2xs, 0.68rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-tertiary);
+  padding: 0 2px;
+  user-select: none;
+}
+
+.locale-group-header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--accent-primary) 14%, var(--border-subtle)),
+    transparent
+  );
+}
+
+.locale-group-flag {
+  font-size: 0.95rem;
+  line-height: 1;
+  filter: saturate(0.9);
+}
+
+.locale-group-label {
+  font-variant: small-caps;
+}
+
+.locale-group-chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(164px, 1fr));
+  gap: 8px;
+}
+
+/* ── Chip ─────────────────────────────────────────────────────────── */
+
+.locale-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  min-height: 48px;
+  background: var(--surface-primary, #ffffff);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-xs, 0.78rem);
+  font-weight: 500;
+  line-height: 1.25;
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.14s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.22s ease,
+    color 0.18s ease;
+}
+
+.locale-chip:focus-visible {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent-primary) 22%, transparent),
+    0 4px 14px color-mix(in srgb, var(--accent-primary) 10%, transparent);
+}
+
+.locale-chip:active:not(.locale-chip--active) {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.08s;
+}
+
+.locale-chip--active {
+  border-color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 9%, var(--surface-primary));
+  color: var(--accent-primary);
+  font-weight: 600;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent-primary) 55%, transparent) inset,
+    0 8px 22px color-mix(in srgb, var(--accent-primary) 16%, transparent);
+}
+
+/* Diagonal highlight overlay on active chip */
+.locale-chip--active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent-primary) 9%, transparent) 0%,
+    transparent 45%,
+    color-mix(in srgb, var(--accent-primary) 6%, transparent) 100%
+  );
+}
+
+/* Shine sweep animation on newly-active chip */
+@keyframes locale-chip-shine {
+  0% {
+    transform: translateX(-110%) skewX(-18deg);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.35;
+  }
+  70% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateX(220%) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+.locale-chip--active:not(.locale-chip--auto)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 38%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--accent-primary) 28%, transparent),
+    transparent
+  );
+  pointer-events: none;
+  animation: locale-chip-shine 1.3s ease-out 1;
+  will-change: transform, opacity;
+  z-index: 1;
+}
+
+.locale-chip-flag {
+  font-size: 1.2rem;
+  line-height: 1;
+  flex-shrink: 0;
+  filter: saturate(1.05);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.4rem;
+  position: relative;
+  z-index: 2;
+}
+
+.locale-chip-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.locale-chip-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  z-index: 2;
+}
+
+.locale-chip-code {
+  font-size: var(--font-size-2xs, 0.64rem);
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+.locale-chip--active .locale-chip-code {
+  color: color-mix(in srgb, var(--accent-primary) 75%, var(--text-tertiary));
+  opacity: 0.9;
+}
+
+/* Auto chip — distinct, softer, italic */
+.locale-chip--auto {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent-primary) 4%, var(--surface-primary)) 0%,
+    var(--surface-primary) 100%
+  );
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent-primary) 35%, var(--border-default));
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.locale-chip--auto .locale-chip-flag {
+  font-size: 1rem;
+  filter: saturate(0.85);
+}
+
+.locale-chip--auto.locale-chip--active {
+  border-style: solid;
+  font-style: normal;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .locale-chip {
+    transition-duration: 0.01s;
+  }
+  .locale-chip--active:not(.locale-chip--auto)::before {
+    display: none;
+  }
+}
+
+/* Narrow viewport — denser grid */
+@media (max-width: 480px) {
+  .locale-picker--language {
+    grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+  }
+  .locale-group-chips {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+  .locale-chip {
+    min-height: 44px;
+    padding: 8px 10px;
+    gap: 8px;
+  }
+}

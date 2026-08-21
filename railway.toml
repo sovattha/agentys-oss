@@ -1,0 +1,22 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+preDeployCommand = "python scripts/railway_entrypoint.py predeploy"
+# Keep prod in native threading mode: simple-websocket gives Socket.IO a real
+# WebSocket transport without eventlet monkey-patching ThreadPoolExecutor,
+# which can starve /api/health while Gmail/Outlook background I/O is running.
+startCommand = "python scripts/railway_entrypoint.py start"
+# Use the DB-aware strict variant so a container with a broken DB
+# (Postgres pool exhausted, migration failed) returns 503 and Railway
+# refuses to promote it. Cf. issue #577 item 1.
+# /api/health (always 200) is preserved for load-balancer presence pings
+# and the frontend connection check.
+healthcheckPath = "/api/health/strict"
+# Boot peut prendre jusqu'à ~3 min pendant une cold start Postgres ou une
+# migration schema. 300s couvre le cas pathologique sans masquer un vrai bug
+# (timeout post-300s = container dur à diagnostiquer = signal clair).
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 5

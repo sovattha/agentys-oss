@@ -1,0 +1,432 @@
+name: Tests
+
+on:
+  push:
+    branches: [main, develop]
+    # Ne pas trigger CI sur des changements purement docs/scripts/config
+    # qui ne touchent ni app/ ni tests/ ni agentys-app/. Réduit la
+    # consommation de minutes après incident coût 2026-04-23.
+    # NB : scripts/** PAS dans paths-ignore — certains scripts (eval_drafting.py
+    # notamment) sont couverts par des tests pytest, donc une modif scripts/
+    # doit re-trigger la suite. Sinon les fix de tests/scripts ne sont jamais
+    # valides en CI (incident PR #501, 2026-05-04).
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'tasks/**'
+      - '_bmad/**'
+      - '_bmad-output/**'
+      - '.claude/**'
+      - '.gitignore'
+      - 'CLAUDE.md'
+      - 'LICENSE*'
+  pull_request:
+    branches: [main]
+    # NB : scripts/** PAS dans paths-ignore — certains scripts (eval_drafting.py
+    # notamment) sont couverts par des tests pytest, donc une modif scripts/
+    # doit re-trigger la suite. Sinon les fix de tests/scripts ne sont jamais
+    # valides en CI (incident PR #501, 2026-05-04).
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'tasks/**'
+      - '_bmad/**'
+      - '_bmad-output/**'
+      - '.claude/**'
+      - '.gitignore'
+      - 'CLAUDE.md'
+      - 'LICENSE*'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  changes:
+    name: detect changed areas
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      backend: ${{ steps.scope.outputs.backend }}
+      frontend: ${{ steps.scope.outputs.frontend }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Choose CI scope
+        id: scope
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Pushes to protected branches keep the full gate. Pull requests can
+          # skip the half of the suite that cannot be affected by the diff.
+          if [ "${{ github.event_name }}" != "pull_request" ]; then
+            echo "backend=true" >> "$GITHUB_OUTPUT"
+            echo "frontend=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git diff --name-only \
+            "${{ github.event.pull_request.base.sha }}" \
+            "${{ github.event.pull_request.head.sha }}" > changed-files.txt
+
+          backend=false
+          frontend=false
+          mobile=false
+          unknown=false
+
+          while IFS= read -r file; do
+            [ -n "$file" ] || continue
+
+            case "$file" in
+              app/*|ai_team/*|agentys_mcp/*|scripts/*|tests/*|requirements*.txt|pytest.ini|mypy.ini|run_*.py|.github/workflows/test.yml)
+                backend=true
+                ;;
+            esac
+
+            case "$file" in
+              agentys-app/*|.github/workflows/test.yml)
+                frontend=true
+                ;;
+            esac
+
+            case "$file" in
+              agentys-mobile/*)
+                mobile=true
+                ;;
+            esac
+
+            case "$file" in
+              app/*|ai_team/*|agentys_mcp/*|scripts/*|tests/*|requirements*.txt|pytest.ini|mypy.ini|run_*.py|agentys-app/*|agentys-mobile/*|.github/workflows/test.yml)
+                ;;
+              *)
+                unknown=true
+                ;;
+            esac
+          done < changed-files.txt
+
+          # Mobile has no job in this workflow. A mobile-only Dependabot PR should
+          # not consume backend/frontend runners while pretending to test mobile.
+          if [ "$backend" != "true" ] && [ "$frontend" != "true" ] && [ "$mobile" = "true" ] && [ "$unknown" != "true" ]; then
+            echo "backend=false" >> "$GITHUB_OUTPUT"
+            echo "frontend=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Conservative fallback: if a changed file is not classified as a known
+          # scope, run both suites instead of silently under-testing.
+          if [ "$backend" != "true" ] && [ "$frontend" != "true" ] && [ "$unknown" = "true" ]; then
+            backend=true
+            frontend=true
+          fi
+
+          echo "backend=$backend" >> "$GITHUB_OUTPUT"
+          echo "frontend=$frontend" >> "$GITHUB_OUTPUT"
+
+  backend-test-shards:
+    name: backend-tests (${{ matrix.shard }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    needs: changes
+    if: needs.changes.outputs.backend == 'true'
+    strategy:
+      fail-fast: false
+      matrix:
+        shard:
+          - backend-0
+          - backend-1
+          - backend-2
+          - backend-3
+          - backend-4
+          - backend-5
+          - backend-6
+          - backend-7
+          - backend-8
+          - backend-9
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        # requirements-dev.txt tire `redis`, `chromadb`, `python-telegram-bot`
+        # utilisés par tests/ai_team/*. Sans ça, pytest plante au collect
+        # sur `ModuleNotFoundError: No module named 'redis'`.
+        run: pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Run pytest shard
+        # --timeout=60 : garde-fou anti-hang. Un test qui consomme >60s sans
+        # produire de signal indique un thread non-cleané ou une attente sur
+        # une condition externe (cf. _ensure_provider_alive bug fixé dans #505).
+        # Sans ce flag, un test qui hang bloque la CI jusqu'au timeout job.
+        # `-q` garde les logs GitHub lisibles et évite le coût I/O du mode
+        # verbose sur les 20k+ tests backend.
+        # --maxfail=20 (au lieu de -x / --maxfail=1) : surface jusqu'à 20
+        # failures par run au lieu de s'arrêter au premier. Incident 2026-05-08 :
+        # avec -x, chaque cycle CI ne montre qu'un fail, ce qui nécessite N
+        # pushes successifs pour rattraper N tests stales (vu 7 cycles).
+        # Avec maxfail=20, on débloque en un seul push tout en gardant un
+        # garde-fou contre une suite massivement cassée.
+        # --durations=50 expose les tests les plus lents pour ajuster le
+        # manifeste historique `scripts/ci_backend_test_timings.json`.
+        # Le script de sharding équilibre les fichiers par coût estimé au lieu
+        # de garder de gros buckets par dossier (package-data/package-core/
+        # top-level), ce qui évite de lancer un shard long en seconde vague.
+        shell: bash
+        run: |
+          set -euo pipefail
+          ci_home="${RUNNER_TEMP}/agentys-home/${GITHUB_RUN_ID}-${{ matrix.shard }}"
+          export HOME="$ci_home"
+          export AGENTYS_DB_PATH="$ci_home/.agentys/data/agentys.db"
+          mkdir -p "$(dirname "$AGENTYS_DB_PATH")"
+
+          common_args=(--tb=short --maxfail=20 -q --timeout=60 --durations=50)
+          python scripts/ci_backend_shard.py \
+            --shard "${{ matrix.shard }}" \
+            --output shard-files.txt \
+            --summary \
+            --validate
+
+          mapfile -t files < shard-files.txt
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No backend test files selected for shard ${{ matrix.shard }}"
+            exit 1
+          fi
+
+          pytest "${files[@]}" "${common_args[@]}"
+        env:
+          FLASK_ENV: testing
+          JWT_SECRET: test-secret-ci
+
+  backend-quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: changes
+    if: needs.changes.outputs.backend == 'true'
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Lint account isolation (bloque les fuites multi-compte)
+        run: python scripts/lint_account_scoping.py app/api app/services app/infrastructure
+
+      - name: Audit email content retention policy
+        run: python scripts/audit_email_content_retention.py --data-dir data --skip-db
+
+      - name: Alembic schema drift gate
+        run: python scripts/check_alembic_model_drift.py
+
+      # mypy strict allowlist — catches the #290 class of silent-failure
+      # bugs (ImportError / AttributeError hidden inside try/except).
+      # Scope: files listed in mypy.ini. Extend the allowlist when a new
+      # silent-failure bug lands in a new module.
+      - name: mypy strict (allowlist)
+        run: |
+          pip install mypy
+          mypy --config-file mypy.ini \
+            app/api/websocket.py \
+            app/api/onboarding.py \
+            app/api/routes_helpers.py \
+            app/onboarding/manager.py \
+            app/faq_agent.py
+
+  backend-tests:
+    name: backend-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs:
+      - changes
+      - backend-test-shards
+      - backend-quality
+    if: always()
+    steps:
+      - name: Check backend suite
+        run: |
+          test "${{ needs.changes.result }}" = "success"
+          if [ "${{ needs.changes.outputs.backend }}" != "true" ]; then
+            echo "Backend suite skipped: no backend-relevant changes detected."
+            exit 0
+          fi
+          test "${{ needs.backend-test-shards.result }}" = "success"
+          test "${{ needs.backend-quality.result }}" = "success"
+
+  frontend-typecheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
+    defaults:
+      run:
+        working-directory: agentys-app
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Enable corepack (yarn 4)
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: TypeScript check
+        run: yarn tsc -b --noEmit
+
+      - name: Lint
+        run: yarn lint
+
+      - name: npm audit (production deps, high/critical)
+        run: yarn npm audit --environment production --severity high
+        continue-on-error: false
+
+  # Tests unitaires vitest, SHARDÉS en 4 (parallèle). Ajouté apres l'incident
+  # undici@8 / jsdom@29 (2026-05-04) ou Dependabot a bumpe undici sans qu'aucun
+  # job CI ne lance vitest. Bug invisible jusqu'a un yarn install propre cote Mac.
+  #
+  # Sharding (2026-06-03) : la suite mono-job (177 fichiers, 1922 tests) faisait
+  # gonfler le heap d'un fork worker jusqu'à l'OOM V8 (~4 Go) en fin de run, puis
+  # spirale de GC mark-compact — `frontend-tests` rouge sur main depuis ~2026-06-02,
+  # ce qui bloquait la merge de TOUTE PR frontend. Relever NODE_OPTIONS ne faisait
+  # que ralentir (timeout 30 min). `vitest --shard=i/N` partitionne les fichiers de
+  # façon déterministe : chaque worker traite ~1/4 des fichiers → mémoire bornée
+  # sous le plafond par défaut + wall-clock parallèle. Même schéma que backend-tests.
+  frontend-test-shards:
+    name: frontend-tests (${{ matrix.shard }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    defaults:
+      run:
+        working-directory: agentys-app
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Enable corepack (yarn 4)
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      # Smoke test BLOQUANT (shard 1 seulement) : valide que le worker vitest
+      # demarre. Si jsdom ou undici sont incompatibles, vitest crash sur "Failed
+      # to start forks worker" AVANT toute assertion. Canary qui aurait du
+      # attraper le bump undici 7 vers 8.
+      - name: vitest smoke (worker plus jsdom boot)
+        if: matrix.shard == 1
+        run: yarn test:run src/types/approval.test.ts --reporter=default --silent=passed-only
+
+      # Shard i/4 de la suite complète. BLOQUANT depuis PR #511 (38 fails legacy
+      # fixés). Si un futur fail apparaît, le shard rouge → l'agrégateur
+      # `frontend-tests` rouge → bloque la merge. C'est le but : vraie couverture.
+      - name: vitest shard
+        run: yarn test:run --reporter=default --silent=passed-only --shard=${{ matrix.shard }}/4
+
+  # Check requis agrégateur : vert seulement si les 4 shards passent (ou si le
+  # frontend n'est pas concerné par le diff). Préserve le nom de check
+  # `frontend-tests` attendu par la protection de branche. Même schéma que le
+  # job agrégateur `backend-tests`.
+  frontend-tests:
+    name: frontend-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs:
+      - changes
+      - frontend-test-shards
+    if: always()
+    steps:
+      - name: Check frontend suite
+        run: |
+          test "${{ needs.changes.result }}" = "success"
+          if [ "${{ needs.changes.outputs.frontend }}" != "true" ]; then
+            echo "Frontend suite skipped: no frontend-relevant changes detected."
+            exit 0
+          fi
+          test "${{ needs.frontend-test-shards.result }}" = "success"
+
+  # NOTE : le job e2e tourne dans `.github/workflows/nightly.yml` (cron 4h UTC,
+  # job `e2e-tests-full`) pour ne pas bloquer les pushs sur main. Nombreux
+  # specs outdatés après refactors récents — à remettre ici une fois stabilisés.
+  # Exécution locale : `cd agentys-app && yarn test:e2e` (voir README).
+  e2e-tests:
+    if: false
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    defaults:
+      run:
+        working-directory: agentys-app
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      # Python nécessaire car Vite config (`pythonBackendPlugin`) spawn
+      # `python run_api.py` en dev. Sans Python, le proxy Vite `/api/*`
+      # et `/socket.io/*` part en ECONNREFUSED → tests bloquent >>6h.
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Python dependencies (backend for webServer)
+        working-directory: .
+        run: pip install -r requirements.txt
+
+      - name: Enable corepack (yarn 4)
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run E2E tests
+        run: yarn test:e2e --reporter=list
+        env:
+          CI: true
+          FLASK_ENV: testing
+          JWT_SECRET: test-secret-ci
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: playwright-report
+          path: agentys-app/test-results/
+          retention-days: 7

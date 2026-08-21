@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-05-06T14:04:23Z",
+  "config": {
+    "persona": "startup_ceo",
+    "drafter_model": "claude-haiku-4-5",
+    "judge_model": "container.llm_sonnet",
+    "use_claude_cli": false,
+    "with_gold": false,
+    "gold_dir": "C:\\Users\\Alexa\\desktop\\agentys\\tests\\fixtures\\drafting_eval",
+    "repeat": 1,
+    "warmup": true,
+    "no_llm_judge": false,
+    "use_orchestrator": true,
+    "gate_mode": "off"
+  },
+  "cases": [
+    {
+      "case_id": "msg-002",
+      "subject": "Re: board deck",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 23484,
+          "judge_overall": 80,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 1,
+        "p50_ms": 23484.0,
+        "p95_ms": 23484.0,
+        "mean_ms": 23484.0,
+        "std_ms": 0.0
+      },
+      "critic_overall": 90,
+      "judge_overall_mean": 80,
+      "last_draft": "Salut Arjun,\n\nParfait pour la correction des churn numbers et l'update ARR. Le 1.2M€ c'est solide.\n\nPour la cohort retention graph, oui ajoute-la. Marcus la demande systématiquement, autant l'avoir prête.\n\nÀ bientôt,",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          88
+        ]
+      }
+    },
+    {
+      "case_id": "msg-004",
+      "subject": "Series A - Next Steps",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 4375,
+          "judge_overall": 61,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 1,
+        "p50_ms": 4375.0,
+        "p95_ms": 4375.0,
+        "mean_ms": 4375.0,
+        "std_ms": 0.0
+      },
+      "critic_overall": 88,
+      "judge_overall_mean": 61,
+      "last_draft": "Bonjour Marcus,\n\nMerci pour la rencontre d'aujourd'hui. On est ravis de l'intérêt de Sequoia.\n\nVoici le timing pour les éléments demandés :\n\n• Data room avec les chiffres de janvier : fin de semaine\n• Références clients (on a plusieurs enterprise à proposer) : début de semaine prochaine\n• Architecture technique : on prépare ça en parallèle, même timing\n\nSur la composition du board, on est ouvert à discuter. On peut prévoir un appel cette semaine pour en parler plus concrètement ?\n\nÀ bientôt,\n\nAlexandre Simon\nCo-fondateur d'Agentys",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          88
+        ]
+      }
+    },
+    {
+      "case_id": "msg-007",
+      "subject": "Re: v2 features prioritization",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 3342,
+          "judge_overall": 68,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 1,
+        "p50_ms": 3342.0,
+        "p95_ms": 3342.0,
+        "mean_ms": 3342.0,
+        "std_ms": 0.0
+      },
+      "critic_overall": 90,
+      "judge_overall_mean": 68,
+      "last_draft": "Parfait, merci! Oui je fais le one-pager demain matin, ça te laisse le temps de le checker avant la présentation. Je vais aussi ajouter les % de satisfaction pour chaque feature, ça fait plus solide pour le board.\n\nÀ+",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          87
+        ]
+      }
+    }
+  ],
+  "aggregate": {
+    "p50_ms": 4375.0,
+    "p95_ms": 23484.0,
+    "mean_ms": 10400.333333333334,
+    "n_total_runs": 3,
+    "judge_overall_mean": 69.7,
+    "judge_overall_p25": 61.0,
+    "instructions_coverage_pct": 0.0
+  }
+}

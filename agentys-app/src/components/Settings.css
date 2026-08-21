@@ -1,0 +1,2974 @@
+/* ============================================================================
+   SETTINGS — Premium Panel
+   Glassmorphism, invisible scrollbar, refined hierarchy
+   ============================================================================ */
+
+.settings {
+  background:
+    linear-gradient(180deg, var(--surface-primary) 0%, color-mix(in srgb, var(--surface-secondary) 60%, var(--surface-primary)) 100%);
+  border-radius: var(--radius-xl, 16px);
+  max-width: min(900px, calc(100vw - 96px));
+  width: min(900px, calc(100vw - 96px));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: var(--text-primary);
+  container-type: inline-size;
+  container-name: settings;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent-primary) 8%, transparent),
+    var(--shadow-2xl);
+  /* Fill the modal wrapper height */
+  height: 100%;
+  max-height: 86vh;
+}
+
+/* ── Header ── */
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-5) var(--space-6) var(--space-4);
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Luminous separator under header */
+.settings-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent-primary) 30%, transparent) 30%,
+    color-mix(in srgb, var(--accent-primary) 50%, transparent) 50%,
+    color-mix(in srgb, var(--accent-primary) 30%, transparent) 70%,
+    transparent 100%);
+}
+
+.settings-header h2 {
+  margin: 0;
+  font-size: var(--font-size-lg, 18px);
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+}
+
+.settings-close {
+  background: none;
+  border: none;
+  font-size: var(--font-size-2xl);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 0;
+  line-height: var(--leading-none);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md, 6px);
+  transition: color var(--transition-base);
+}
+
+.settings-close:active {
+  transform: scale(0.9);
+}
+
+/* Override wrapper modal max-width for settings panel */
+.settings-modal:has(> .settings) {
+  max-width: min(900px, calc(100vw - 96px));
+  width: min(900px, calc(100vw - 96px));
+}
+
+/* ── Body: sidebar + content panel ── */
+.settings-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ── Sidebar fixe ── */
+.settings-sidebar {
+  position: relative;
+  width: 192px;
+  flex-shrink: 0;
+  background: var(--surface-secondary);
+  border-right: 1px solid color-mix(in srgb, var(--border-default) 50%, transparent);
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  --item-height: 38px;
+  --item-gap: 2px;
+  --rail-offset: calc(12px + var(--active-index, 0) * (38px + 2px));
+}
+
+.settings-sidebar::-webkit-scrollbar { display: none; }
+
+/* Rail coulissant teal */
+.settings-sidebar::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: var(--rail-offset);
+  width: 3px;
+  height: 38px;
+  background: var(--accent-primary);
+  border-radius: 0 2px 2px 0;
+  transition: top 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.settings-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 38px;
+  padding: 0 14px;
+  margin: 0 6px;
+  width: calc(100% - 12px);
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  text-align: left;
+}
+
+.settings-sidebar-item:not(.active):hover {
+  background: color-mix(in srgb, var(--surface-secondary) 70%, transparent);
+  color: var(--text-primary);
+}
+
+.settings-sidebar-item:not(.active):hover .settings-sidebar-icon {
+  opacity: 0.85;
+}
+
+.settings-sidebar-item.active {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--accent-primary) 15%, transparent) 0%,
+    color-mix(in srgb, var(--accent-primary) 7%, transparent) 100%);
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.settings-sidebar-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0.6;
+  transition: color var(--transition-fast), opacity var(--transition-fast);
+}
+
+.settings-sidebar-item.active .settings-sidebar-icon {
+  opacity: 1;
+  color: var(--accent-primary);
+}
+
+.settings-sidebar-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Panneau de contenu scrollable ── */
+.settings-content-panel {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+  padding: 24px 26px;
+  min-height: 0;
+}
+
+.settings-content-panel::-webkit-scrollbar { display: none; }
+
+@keyframes settingsSectionIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.settings-content-inner {
+  animation: settingsSectionIn 0.25s var(--ease-settle, cubic-bezier(0.4, 0, 0.2, 1)) both;
+}
+
+/* Staggered entrance for direct children sections */
+.settings-content-inner > .settings-section,
+.settings-content-inner > section {
+  animation: settingsSectionIn 0.25s ease both;
+}
+
+.settings-content-inner > :nth-child(1) { animation-delay: 0.03s; }
+.settings-content-inner > :nth-child(2) { animation-delay: 0.07s; }
+.settings-content-inner > :nth-child(3) { animation-delay: 0.11s; }
+.settings-content-inner > :nth-child(4) { animation-delay: 0.15s; }
+.settings-content-inner > :nth-child(5) { animation-delay: 0.19s; }
+
+/* ── Navigation pills ── */
+.settings-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, auto));
+  gap: 6px;
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid color-mix(in srgb, var(--border-default) 60%, transparent);
+}
+
+.settings-nav-pill {
+  background: color-mix(in srgb, var(--surface-secondary) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border-default) 50%, transparent);
+  border-radius: var(--radius-full, 16px);
+  padding: 5px 14px;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+  letter-spacing: var(--tracking-wide);
+}
+
+.settings-nav-pill:active {
+  transform: scale(var(--scale-dramatic));
+}
+
+/* ── Sections ── */
+.settings-section {
+  margin-bottom: var(--space-6);
+}
+
+.settings-section:last-child {
+  margin-bottom: 0;
+}
+
+.settings-section h3 {
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 10px;
+  position: relative;
+}
+
+.settings-section h3::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.5px;
+  height: 12px;
+  border-radius: 2px;
+  background: var(--accent-primary);
+  opacity: 0.7;
+}
+
+/* Accent line after section title */
+.settings-section h3::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--border-default) 60%, transparent) 0%,
+    transparent 100%);
+}
+
+/* ── Toggle rows ── */
+.settings-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 11px 12px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-default, #f0f0f0) 30%, transparent);
+  transition: background 0.15s ease, border-radius 0.15s ease;
+  border-radius: 0;
+  margin: 0 -4px;
+}
+
+.settings-toggle:hover,
+.settings-toggle:focus-within {
+  background: color-mix(in srgb, var(--surface-secondary) 60%, transparent);
+  border-radius: var(--radius-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .settings-toggle { transition: none; }
+}
+
+input[type="checkbox"]:focus-visible ~ .settings-switch {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  box-shadow: var(--shadow-focus);
+}
+
+.settings-toggle:last-child {
+  border-bottom: none;
+}
+
+/* Toggle group — card container for related toggles */
+.settings-toggle-group {
+  background: var(--surface-primary, #fff);
+  border: 1px solid color-mix(in srgb, var(--border-default) 60%, transparent);
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  margin-bottom: 4px;
+}
+
+.settings-toggle-group .settings-toggle {
+  margin: 0;
+  padding: 11px 14px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-default) 30%, transparent);
+  border-radius: 0;
+}
+
+.settings-toggle-group .settings-toggle:last-child {
+  border-bottom: none;
+}
+
+/* Quick Actions discovery surface inside Settings → Automation. Stack the
+   3 embedded cards vertically with the same rhythm as the toggle group, then
+   render the "Quick actions" link button below them as the manage entry. */
+.settings-quicksteps-discovery {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+/* Toggle icon — small colored circle */
+.settings-toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-md, 8px);
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  color: var(--accent-primary, #0d9488);
+  flex-shrink: 0;
+  margin-right: 6px;
+  transition: all 0.15s ease;
+}
+
+.settings-label {
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.settings-label-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 8px;
+  border-radius: 10px;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.settings-toggle input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* ── Toggle switch — premium pill ── */
+.settings-switch {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  min-width: 40px;
+  background-color: color-mix(in srgb, var(--surface-tertiary) 80%, var(--text-muted));
+  border-radius: 11px;
+  transition: all 0.25s var(--ease-spring, cubic-bezier(0.4, 0, 0.2, 1));
+  flex-shrink: 0;
+}
+
+.settings-switch::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.25s var(--ease-spring, cubic-bezier(0.4, 0, 0.2, 1));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.settings-toggle input:checked + .settings-switch {
+  background-color: var(--accent-primary);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--accent-primary) 25%, transparent);
+}
+
+.settings-toggle input:checked + .settings-switch::before {
+  transform: translateX(18px);
+}
+
+/* ── Hints ── */
+.settings-subtitle {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  margin: 20px 0 6px;
+  padding: 0 0 6px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-default) 30%, transparent);
+}
+
+/* First subtitle of a section sits right under the section top — no big gap. */
+.settings-subtitle--first {
+  margin-top: 4px;
+}
+
+/* Whatever follows a subtitle hugs its heading so each group reads as a unit. */
+.settings-subtitle + * {
+  margin-top: 8px;
+}
+
+.settings-hint {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted, var(--text-tertiary));
+  margin: 2px 0 0;
+  line-height: var(--leading-normal);
+  opacity: 0.8;
+}
+
+/* ── Billing ── */
+/* Le panneau est nu : la fenêtre Abonnement fournit déjà le cadre,
+   ce sont les cartes du lineup qui portent bordures et fonds. */
+.settings-billing-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.settings-billing-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.settings-billing-current {
+  font-size: var(--font-size-xs);
+  line-height: 1.45;
+  color: var(--text-tertiary);
+}
+
+.settings-billing-current {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.settings-billing-status {
+  flex: 0 0 auto;
+  min-width: 76px;
+  text-align: center;
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 650;
+  color: var(--text-secondary);
+  background: color-mix(in srgb, var(--surface-tertiary) 76%, transparent);
+}
+
+.settings-billing-status.active {
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+}
+
+.settings-billing-status.ending {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.settings-billing-error {
+  border-radius: var(--radius-md, 8px);
+  padding: 8px 10px;
+  font-size: var(--font-size-xs);
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+.settings-billing-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.settings-billing-primary,
+.settings-billing-secondary {
+  min-height: 34px;
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--font-size-xs);
+  font-weight: 650;
+  cursor: pointer;
+  transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+}
+
+.settings-billing-primary {
+  border: 1px solid var(--accent-primary);
+  background: var(--accent-primary);
+  color: white;
+  padding: 0 13px;
+}
+
+.settings-billing-secondary {
+  border: 1px solid color-mix(in srgb, var(--border-default) 70%, transparent);
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+  padding: 0 13px;
+}
+
+.settings-billing-primary:active,
+.settings-billing-secondary:active {
+  transform: scale(0.98);
+}
+
+.settings-billing-primary:disabled,
+.settings-billing-secondary:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+}
+
+/* ── Billing : sélecteur Mensuel / Annuel ── */
+.settings-billing-toggle-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.settings-billing-save-badge {
+  border-radius: 999px;
+  padding: 6px 13px;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, var(--accent-primary), #2fbf71);
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+/* Mensuel sélectionné : la réduction annuelle ne s'applique pas — badge
+   grisé + barré (l'économie « perdue » reste visible, incitation à l'annuel). */
+.settings-billing-save-badge--off {
+  background: color-mix(in srgb, var(--surface-tertiary) 85%, transparent);
+  color: var(--text-tertiary);
+  text-decoration: line-through;
+}
+
+.settings-billing-toggle {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-tertiary) 82%, transparent);
+}
+
+.settings-billing-toggle button {
+  border: none;
+  background: none;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: var(--font-size-xs);
+  font-weight: 650;
+  color: var(--text-tertiary);
+  cursor: pointer;
+}
+
+.settings-billing-toggle button.on {
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.14);
+}
+
+/* ── Billing : lineup des plans (Free / Starter / Professional) ── */
+.settings-billing-lineup {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.settings-billing-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px solid color-mix(in srgb, var(--border-default) 62%, transparent);
+  border-radius: var(--radius-lg, 12px);
+  background: var(--surface-primary);
+  padding: 16px 14px 14px;
+}
+
+.settings-billing-card.free {
+  background: color-mix(in srgb, var(--surface-secondary) 72%, transparent);
+}
+
+.settings-billing-card.highlighted {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 1px var(--accent-primary), 0 4px 14px color-mix(in srgb, var(--accent-primary) 14%, transparent);
+}
+
+.settings-billing-card-badge {
+  position: absolute;
+  top: -9px;
+  right: 12px;
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background: var(--accent-primary);
+}
+
+.settings-billing-card-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.settings-billing-card-name {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.settings-billing-card.free .settings-billing-card-name {
+  color: var(--text-secondary);
+}
+
+.settings-billing-card-tag {
+  border-radius: 5px;
+  padding: 2px 6px;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.05em;
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+}
+
+.settings-billing-card-tagline {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+  color: var(--text-tertiary);
+}
+
+.settings-billing-card-price {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.settings-billing-card-strike {
+  font-size: var(--font-size-sm);
+  font-weight: 650;
+  color: var(--text-tertiary);
+  text-decoration: line-through;
+}
+
+.settings-billing-card-amount {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.settings-billing-card-period {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-tertiary);
+}
+
+/* min-height : la ligne reste réservée en mode mensuel pour ne pas
+   faire sauter l'alignement des 3 colonnes. */
+.settings-billing-card-billed {
+  margin: 0;
+  min-height: 16px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--accent-primary) 80%, var(--text-tertiary));
+}
+
+.settings-billing-card-features {
+  margin: 6px 0 14px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 5px;
+  font-size: var(--font-size-xs);
+  line-height: 1.35;
+  color: var(--text-secondary);
+}
+
+.settings-billing-card-features li {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.settings-billing-card-features li::before {
+  content: '✓';
+  flex: 0 0 auto;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+/* Sous-titre « TOUT STARTER, ET EN PLUS » au-dessus des features (Professional). */
+.settings-billing-card-features-header {
+  margin: 8px 0 0;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.settings-billing-cta {
+  margin-top: auto;
+  min-height: 36px;
+  border-radius: var(--radius-md, 8px);
+  padding: 0 12px;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.settings-billing-cta:active {
+  transform: scale(0.98);
+}
+
+.settings-billing-cta:disabled {
+  cursor: not-allowed;
+}
+
+.settings-billing-cta.primary {
+  border: 1px solid var(--accent-primary);
+  background: var(--accent-primary);
+  color: #fff;
+}
+
+.settings-billing-cta.primary:disabled {
+  opacity: 0.6;
+}
+
+.settings-billing-cta.outline {
+  border: 1px solid color-mix(in srgb, var(--border-default) 75%, transparent);
+  background: var(--surface-primary);
+  color: var(--text-secondary);
+}
+
+.settings-billing-cta.current {
+  border: 1px solid transparent;
+  background: color-mix(in srgb, var(--surface-tertiary) 70%, transparent);
+  color: var(--text-tertiary);
+}
+
+/* Trial CTA — white/outlined button with the provider marks (Gmail + Outlook),
+   advertising the 7-day Stripe trial the checkout opens. */
+.settings-billing-cta.trial {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--accent-primary);
+  background: var(--surface-primary);
+  color: var(--accent-primary);
+}
+
+.settings-billing-cta.trial:disabled {
+  opacity: 0.6;
+}
+
+.settings-billing-cta-providers {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.settings-billing-cta-providers svg {
+  display: block;
+}
+
+/* ── Crédits : quiet rows — une métrique par ligne, jauge inline,
+   chiffre restant aligné à droite (V2a) ── */
+.settings-credits-note {
+  font-size: var(--font-size-xs);
+  line-height: 1.45;
+  color: var(--text-tertiary);
+}
+
+.settings-credit-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-credit-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(120px, 1.3fr) auto;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 2px;
+}
+
+.settings-credit-row + .settings-credit-row {
+  border-top: 1px solid color-mix(in srgb, var(--border-default) 45%, transparent);
+}
+
+.settings-credit-row-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.settings-credit-row-title {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.settings-credit-row-sub {
+  font-size: var(--font-size-xs);
+  line-height: 1.35;
+  color: var(--text-tertiary);
+}
+
+/* Barre de progression façon limites Claude : piste grise, remplissage accent. */
+.settings-credit-row-bar {
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--surface-tertiary) 92%, transparent);
+}
+
+.settings-credit-row-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent-primary);
+  transition: width 180ms ease;
+}
+
+.settings-credit-row-value {
+  display: grid;
+  gap: 2px;
+  justify-items: end;
+  text-align: right;
+}
+
+.settings-credit-row-value strong {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.settings-credit-row-value span {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
+/* Upsell compressé en barre fine */
+.settings-credits-upsell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 9px 9px 14px;
+  border-radius: var(--radius-lg, 12px);
+  background: color-mix(in srgb, var(--surface-secondary) 80%, transparent);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.settings-credits-upsell-cta {
+  flex: 0 0 auto;
+  min-height: 32px;
+  padding: 0 14px;
+  border: 1px solid var(--accent-primary);
+  border-radius: 999px;
+  background: var(--accent-primary);
+  color: #fff;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.settings-credits-upsell-cta:active {
+  transform: scale(0.98);
+}
+
+.settings-credit-usage-error {
+  margin: 0 0 10px;
+  font-size: var(--font-size-xs);
+  line-height: 1.35;
+  color: #b42318;
+}
+
+.settings-credits-note {
+  margin: 10px 0 0;
+}
+
+/* ── Cleanup-all row ── */
+.settings-cleanup-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.settings-cleanup-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--text-tertiary) 40%, var(--border-default));
+  color: var(--text-secondary);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.settings-cleanup-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.settings-cleanup-spinner {
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: settings-spin 0.6s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes settings-spin {
+  to { transform: rotate(360deg); }
+}
+
+.settings-cleanup-result {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
+/* ── Field with label + input + hint (e.g. Booking URL) ── */
+.settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-default, #f0f0f0) 40%, transparent);
+}
+
+.settings-input {
+  font-size: var(--font-size-sm);
+  padding: var(--space-1) var(--space-2);
+  border-radius: 8px;
+  border: 1px solid var(--border-default, #e0e0e0);
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--transition-base);
+  width: 100%;
+}
+
+.settings-input:focus {
+  border-color: var(--accent-primary, #0d9488);
+  box-shadow: inset 0 0 0 1px var(--accent-primary), var(--shadow-focus);
+}
+
+.settings-input::placeholder {
+  color: var(--text-tertiary);
+  opacity: 0.7;
+}
+
+/* ── Section Subtitle (e.g. "Nettoyage automatique") ── */
+.settings-section-subtitle {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--text-tertiary);
+  margin: var(--space-4) 0 var(--space-2);
+  padding: 0;
+}
+
+/* ── Select Row (e.g. Undo Send delay) ── */
+.settings-select-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-default, #f0f0f0) 40%, transparent);
+}
+
+.settings-select-row select {
+  font-size: var(--font-size-sm);
+  padding: var(--space-1) var(--space-2);
+  border-radius: 8px;
+  border: 1px solid var(--border-default, #e0e0e0);
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--transition-base);
+}
+
+.settings-select-row select:focus {
+  border-color: var(--accent-primary, #0d9488);
+  box-shadow: inset 0 0 0 1px var(--accent-primary), var(--shadow-focus);
+}
+
+/* ── Groups ── */
+.settings-group {
+  padding: 10px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-default, #f0f0f0) 40%, transparent);
+}
+
+.settings-group:last-child {
+  border-bottom: none;
+}
+
+.settings-group-label {
+  display: block;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+/* ── Time & date inputs ── */
+.settings-time-range {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.settings-time-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.settings-time-input span {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.settings-time-input input[type="time"],
+.settings-time-input input[type="date"] {
+  padding: var(--space-2) 10px;
+  border: 1px solid color-mix(in srgb, var(--border-default, #ddd) 60%, transparent);
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--surface-secondary) 40%, transparent);
+  transition: all var(--transition-base);
+}
+
+.settings-time-input input[type="time"]:focus,
+.settings-time-input input[type="date"]:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  background: var(--surface-primary, white);
+  box-shadow: var(--shadow-focus);
+}
+
+/* ── Textarea ── */
+.settings-textarea {
+  width: 100%;
+  padding: 10px var(--space-3);
+  border: 1px solid color-mix(in srgb, var(--border-default, #ddd) 60%, transparent);
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--surface-secondary) 40%, transparent);
+  resize: vertical;
+  min-height: 80px;
+  line-height: var(--leading-normal);
+  box-sizing: border-box;
+  transition: all var(--transition-base);
+}
+
+.settings-textarea:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  background: var(--surface-primary, white);
+  box-shadow: var(--shadow-focus);
+}
+
+.settings-textarea::placeholder {
+  color: var(--text-muted, #999);
+}
+
+.settings-time-separator {
+  color: var(--text-tertiary);
+  padding-top: 1.25rem;
+}
+
+/* ── Weekday picker ── */
+.dw-weekday-picker {
+  display: flex;
+  gap: var(--space-1);
+  margin: var(--space-1) 0 var(--space-2);
+}
+
+.dw-weekday-btn {
+  flex: 1;
+  padding: 6px 0;
+  border: 1px solid color-mix(in srgb, var(--border-subtle) 60%, transparent);
+  border-radius: var(--radius-sm, 6px);
+  background: transparent;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.dw-weekday-btn.active {
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+/* ── Check count picker ── */
+.dw-check-count-picker {
+  display: flex;
+  gap: 6px;
+  margin: var(--space-1) 0 var(--space-1);
+}
+
+.dw-check-count-btn {
+  flex: 1;
+  padding: var(--space-2) 0;
+  border: 1px solid color-mix(in srgb, var(--border-subtle) 60%, transparent);
+  border-radius: var(--radius-sm, 6px);
+  background: transparent;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.dw-check-count-btn.active {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-md);
+}
+
+/* ── Check slots list ── */
+.dw-check-slots-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: var(--space-1) 0 var(--space-2);
+}
+
+.dw-check-slot-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.dw-check-slot-num {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  color: var(--accent-primary);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dw-check-slot-time {
+  flex: 1;
+  padding: 6px var(--space-2);
+  border: 1px solid color-mix(in srgb, var(--border-subtle) 60%, transparent);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+}
+
+.dw-check-slot-time:focus {
+  border-color: var(--accent-primary);
+  outline: none;
+}
+
+.dw-check-slot-duration {
+  width: 80px;
+  padding: 6px var(--space-1);
+  border: 1px solid color-mix(in srgb, var(--border-subtle) 60%, transparent);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--surface-primary);
+  color: var(--text-secondary);
+  font-size: var(--font-size-xs);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.dw-check-slot-duration:focus {
+  border-color: var(--accent-primary);
+  outline: none;
+}
+
+/* Inline select inside a settings-toggle row */
+.settings-toggle-select {
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid color-mix(in srgb, var(--border-default, #ddd) 60%, transparent);
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--surface-secondary) 40%, transparent);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.settings-toggle-select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.settings-toggle-select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Inline aside group on the right side of a toggle row.
+   Used when a toggle has a companion control (e.g. nudge delay chip). */
+.settings-toggle-aside {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+/* ── Select ── */
+.settings-select {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 0;
+}
+
+.settings-select select {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid color-mix(in srgb, var(--border-default, #ddd) 60%, transparent);
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--surface-secondary) 40%, transparent);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.settings-select select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  background: var(--surface-primary, white);
+  box-shadow: var(--shadow-focus);
+}
+
+/* ============================================================================
+   LINK BUTTONS — Premium glass cards
+   ============================================================================ */
+.settings-link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 11px 14px;
+  background: color-mix(in srgb, var(--surface-secondary) 50%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border-default, #eee) 50%, transparent);
+  border-radius: var(--radius-lg, 12px);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.settings-link-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px -6px color-mix(in srgb, var(--text-primary) 18%, transparent);
+  border-color: color-mix(in srgb, var(--accent-primary) 28%, var(--border-default));
+}
+
+/* Inside `.settings-link-group` (which clips with `overflow: hidden`) the
+   translateY hover lift is clipped at the rounded corners. Suppress the
+   transform in grouped contexts and use the inset shadow + border tint as
+   the hover affordance instead. */
+.settings-link-group .settings-link-btn:hover {
+  transform: none;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent-primary) 28%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .settings-link-btn:hover { transform: none; }
+}
+
+.settings-link-btn:active {
+  transform: scale(var(--scale-press));
+}
+
+.settings-link-btn:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* When the button is in a grouped card (which has `overflow:hidden`), an
+   outline with positive offset would be clipped at the group's border.
+   Switch to an inset box-shadow so the ring renders inside the row. */
+.settings-link-group .settings-link-btn:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--accent-primary);
+  z-index: 1;
+}
+
+/* Active badge — small green pill next to label */
+.settings-link-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-primary, #0d9488);
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 12%, transparent);
+  padding: 2px 8px;
+  border-radius: 99px;
+  margin-inline-start: 8px;
+  flex-shrink: 0;
+}
+
+/* Chevron arrow — subtle, iOS-style */
+.settings-link-chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 0;
+  background: transparent;
+  color: #c0c4cc;
+  margin-inline-start: auto;
+  flex-shrink: 0;
+  transition: color var(--transition-base), transform var(--transition-base);
+}
+
+.settings-link-chevron svg {
+  width: 12px;
+  height: 12px;
+  stroke-width: 2;
+}
+
+/* Link group: stacked link buttons with shared border */
+.settings-link-group {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid color-mix(in srgb, var(--border-default, #eee) 60%, transparent);
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  background: var(--surface-primary, #fff);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.settings-link-group .settings-link-btn {
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-default, #f0f0f0) 40%, transparent);
+  padding: 12px 16px;
+  background: transparent;
+  font-weight: 400;
+  font-size: 13.5px;
+  position: relative;
+  transition: background 0.15s ease;
+}
+
+.settings-link-group .settings-link-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  background: var(--accent-primary);
+  border-radius: 0 2px 2px 0;
+  opacity: 0;
+  transform: scaleY(0.5);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.settings-link-group .settings-link-btn:last-child {
+  border-bottom: none;
+}
+
+.settings-link-group .settings-link-chevron {
+  background: transparent;
+  color: var(--text-muted, #9ca3af);
+}
+
+/* Icon inside link buttons */
+.settings-link-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  border-radius: var(--radius-md, 8px);
+  color: var(--accent-primary, #0d9488);
+  flex-shrink: 0;
+  margin-right: 8px;
+  transition: all 0.2s ease;
+}
+
+.settings-link-icon svg {
+  stroke: var(--accent-primary, #0d9488);
+}
+
+/* Large section for Memory Editor */
+.settings-section-large {
+  margin: 0 -24px var(--space-6);
+  padding: var(--space-5) var(--space-6);
+  background: color-mix(in srgb, var(--surface-secondary) 40%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--border-default) 40%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--border-default) 40%, transparent);
+}
+
+/* ============================================================================
+   TRAINING CARD — Hero CTA, the #1 differentiator
+   ============================================================================ */
+.settings-training-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: var(--space-4) 18px;
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--accent-primary) 10%, var(--surface-primary)) 0%,
+      color-mix(in srgb, var(--accent-primary) 4%, var(--surface-primary)) 100%);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 22%, transparent);
+  border-radius: var(--radius-lg, 12px);
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-slow);
+}
+
+/* Shimmer sweep */
+.settings-training-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent-primary) 8%, transparent) 50%,
+    transparent 100%);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.settings-training-card:active {
+  transform: scale(0.985);
+}
+
+/* Icon tile — premium jeweled medallion
+ *
+ *   1. 3-stop gradient for depth (highlight ↘ base ↘ deeper shade)
+ *   2. Inset top bevel simulates a top-light hitting the surface
+ *   3. Gloss overlay (::after) paints the upper half with a subtle sheen
+ *   4. Outer shadow layered: hard tight shadow + soft accent-tinted halo
+ */
+.training-card-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--accent-primary) 92%, white 8%) 0%,
+      var(--accent-primary) 48%,
+      var(--accent-primary-hover, #0f766e) 100%
+    );
+  border-radius: 12px;
+  color: var(--text-inverse, white);
+  flex-shrink: 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+    0 1px 2px rgba(15, 118, 110, 0.18),
+    0 6px 16px color-mix(in srgb, var(--accent-primary) 30%, transparent);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s ease;
+}
+
+/* Gloss overlay — upper-half soft highlight, no pointer interception. */
+.training-card-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.04) 45%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* lucide / custom stroke icons inherit color: white from the parent.
+   z-index:2 keeps them above the gloss overlay. */
+.training-card-icon > svg {
+  stroke: currentColor;
+  position: relative;
+  z-index: 2;
+  /* Optical centering — the gloss shifts perceived weight downward. */
+  transform: translateY(-0.5px);
+  /* Crisp strokes under subpixel rendering. */
+  shape-rendering: geometricPrecision;
+}
+
+.training-card-pulse {
+  position: absolute;
+  inset: -3px;
+  border-radius: 14px;
+  border: 2px solid color-mix(in srgb, var(--accent-primary) 30%, transparent);
+  animation: trainingPulse 2.4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes trainingPulse {
+  0%, 100% { opacity: 0; transform: scale(var(--scale-dramatic)); }
+  50%      { opacity: 1; transform: scale(1); }
+}
+
+/* Body text */
+.training-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.training-card-title {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.training-card-desc {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  line-height: var(--leading-normal);
+}
+
+/* Arrow chevron */
+.training-card-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: none;
+  color: var(--accent-primary);
+  flex-shrink: 0;
+  transition: all var(--transition-base);
+}
+
+/* ============================================================================
+   FEATURE BUTTON — Premium gradient card
+   ============================================================================ */
+.settings-feature-btn + .settings-feature-btn {
+  margin-top: 10px;
+}
+
+.settings-feature-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px var(--space-4);
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent-primary) 8%, transparent) 0%,
+    color-mix(in srgb, var(--accent-primary) 4%, transparent) 100%);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 18%, transparent);
+  border-radius: var(--radius-lg, 12px);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer sweep on hover */
+.settings-feature-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent-primary) 6%, transparent) 50%,
+    transparent 100%);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.settings-feature-btn:active {
+  transform: scale(0.985);
+}
+
+.settings-feature-btn .feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-primary-hover) 100%);
+  border-radius: 10px;
+  color: var(--text-inverse);
+  flex-shrink: 0;
+  box-shadow: var(--shadow-md);
+}
+
+.settings-feature-btn .feature-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.settings-feature-btn .feature-title {
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+}
+
+.settings-feature-btn .feature-description {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  line-height: var(--leading-normal);
+}
+
+/* ============================================================================
+   SHORTCUTS CARD — Keyboard-themed premium card
+   ============================================================================ */
+.settings-shortcuts-btn {
+  position: relative;
+}
+
+.settings-shortcuts-keys {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+  margin-inline-start: auto;
+  padding-left: var(--space-2);
+}
+
+.settings-shortcuts-keys kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  color: var(--text-tertiary);
+  background: color-mix(in srgb, var(--surface-primary, white) 90%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border-default) 60%, transparent);
+  border-radius: 5px;
+  box-shadow:
+    0 1px 0 color-mix(in srgb, var(--border-default) 40%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, var(--border-default) 20%, transparent);
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-wider);
+  transition: all var(--transition-base);
+}
+
+/* ============================================================================
+   ABOUT SECTION
+   ============================================================================ */
+.settings-about {
+  border-top: none;
+  padding-top: 0;
+}
+
+.about-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--surface-secondary);
+  border: 1px solid color-mix(in srgb, var(--border-default) 50%, transparent);
+  border-radius: var(--radius-lg, 12px);
+}
+
+.about-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-base);
+  padding: 2px 0;
+}
+
+.about-label {
+  color: var(--text-tertiary);
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+}
+
+.about-value {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  background: var(--surface-primary);
+  padding: 3px 10px;
+  border-radius: var(--radius-md, 6px);
+  border: 1px solid color-mix(in srgb, var(--border-default) 40%, transparent);
+}
+
+.about-update-banner {
+  background: color-mix(in srgb, var(--info, #0284c7) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--info, #0284c7) 15%, transparent);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-3) 14px;
+}
+
+.about-update-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--info);
+}
+
+.about-release-notes {
+  margin: var(--space-2) 0;
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  line-height: var(--leading-normal);
+  max-height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.about-update-actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.about-update-btn {
+  padding: 7px var(--space-4);
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition-base);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.about-update-btn.primary {
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-md);
+}
+
+.about-update-btn.secondary {
+  background: transparent;
+  color: var(--text-tertiary);
+  border: 1px solid color-mix(in srgb, var(--border-default) 60%, transparent);
+}
+
+.about-up-to-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--success);
+}
+
+.about-check-btn {
+  background: none;
+  border: 1px solid color-mix(in srgb, var(--border-default) 60%, transparent);
+  border-radius: var(--radius-md, 8px);
+  padding: 7px var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  align-self: flex-start;
+}
+
+.about-check-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+   THEME PICKER — Premium cards
+   ============================================================================ */
+.settings-theme-picker {
+  padding: 10px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-default, #f0f0f0) 40%, transparent);
+}
+
+.settings-theme-picker .settings-label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.settings-theme-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Compact chip style — gradient swatch + label inline. Doesn't expand
+   to fill the row; multiple themes wrap naturally. */
+.theme-option-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 11px 5px 5px;
+  background: var(--surface-secondary);
+  border: 1px solid color-mix(in srgb, var(--border-default) 60%, transparent);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.theme-option-card.active {
+  border-color: var(--accent-primary, #0d9488);
+  background: color-mix(in srgb, var(--accent-primary) 6%, var(--surface-secondary));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-primary) 35%, transparent);
+}
+
+.theme-option-preview {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+}
+
+.theme-option-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0;
+  transition: color 0.15s ease;
+}
+
+.theme-option-card.active .theme-option-label {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+/* ============================================================================
+   FONT PICKER — Compose font preferences
+   ============================================================================ */
+.settings-font-picker {
+  padding: 10px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-default, #f0f0f0) 40%, transparent);
+}
+
+.settings-font-picker .settings-label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Sub-section labels (Size, Preview) — breathe from the content above */
+.settings-font-picker > div + .settings-label {
+  margin-top: var(--space-5);
+}
+
+.settings-font-options {
+  display: grid;
+  /* Fixed 4-up so the four font cards fill one row (no orphaned card on a
+     second row) and align with the 4 size pills directly below. minmax(0,1fr)
+     lets columns shrink and long labels ("Instrument Sans") wrap instead of
+     overflowing. */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin-bottom: 10px;
+}
+
+.font-option-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-2);
+  background: color-mix(in srgb, var(--surface-secondary) 50%, transparent);
+  border: 2px solid color-mix(in srgb, var(--border-default) 50%, transparent);
+  border-radius: var(--radius-lg, 12px);
+  cursor: pointer;
+  transition: all 0.2s var(--ease-spring, ease);
+}
+
+.font-option-card.active {
+  border-color: var(--accent-primary, #0d9488);
+  box-shadow:
+    0 0 0 1px var(--accent-primary, #0d9488),
+    0 0 16px color-mix(in srgb, var(--accent-primary) 15%, transparent);
+  animation: settings-card-pick 0.3s var(--ease-spring, ease);
+}
+
+.font-option-sample {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.font-option-label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: var(--tracking-wider);
+  transition: color 0.15s ease;
+}
+
+.font-option-card.active .font-option-label {
+  color: var(--accent-primary);
+}
+
+/* Font picker sub-labels (Size, Preview) use the shared .settings-label
+   style — keep this file clean of legacy overrides. */
+
+.settings-font-preview {
+  margin: 0 0 6px;
+  padding: 14px 16px 15px;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface-primary) 70%, transparent) 0%,
+      color-mix(in srgb, var(--surface-secondary) 45%, transparent) 100%
+    );
+  border: 1px solid color-mix(in srgb, var(--border-default) 45%, transparent);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #ffffff 6%, transparent),
+    0 1px 2px color-mix(in srgb, #000 4%, transparent);
+  transition: border-color 0.2s ease, background 0.25s ease;
+}
+
+.settings-font-preview-meta {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary, #9ca3af);
+  margin-bottom: 10px;
+}
+
+.settings-font-preview-body {
+  color: var(--text-primary);
+  line-height: 1.55;
+  letter-spacing: 0.002em;
+}
+
+.settings-font-size-options {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.font-size-option {
+  flex: 1;
+  padding: 6px 10px;
+  background: color-mix(in srgb, var(--surface-secondary) 50%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--border-default) 50%, transparent);
+  border-radius: var(--radius-full, 20px);
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.15s ease;
+  text-align: center;
+}
+
+.font-size-option.active {
+  border-color: var(--accent-primary, #0d9488);
+  color: var(--accent-primary, #0d9488);
+  background: color-mix(in srgb, var(--accent-primary) 8%, transparent);
+  font-weight: 600;
+  box-shadow: 0 0 0 1px var(--accent-primary, #0d9488);
+}
+
+/* ============================================================================
+   ZOOM PICKER — Interface-level zoom control
+   ============================================================================ */
+/* Zoom + list-density pickers — styled as bordered rows so they sit in the
+   same visual rhythm as the theme / font pickers above them in Display. */
+.settings-zoom-picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 10px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-default, #f0f0f0) 40%, transparent);
+}
+
+.settings-zoom-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.settings-zoom-value {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--accent-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.settings-zoom-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.zoom-option {
+  flex: 1 1 auto;
+  min-width: 52px;
+  padding: 6px 10px;
+  background: color-mix(in srgb, var(--surface-secondary) 50%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--border-default) 50%, transparent);
+  border-radius: var(--radius-full, 20px);
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+
+.zoom-option.active {
+  border-color: var(--accent-primary, #0d9488);
+  color: var(--accent-primary, #0d9488);
+  background: color-mix(in srgb, var(--accent-primary) 8%, transparent);
+  font-weight: 600;
+  box-shadow: 0 0 0 1px var(--accent-primary, #0d9488);
+}
+
+.zoom-reset {
+  padding: 6px 12px;
+  background: transparent;
+  border: 1.5px dashed color-mix(in srgb, var(--border-default) 70%, transparent);
+  border-radius: var(--radius-full, 20px);
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--text-tertiary);
+  transition: all 0.15s ease;
+}
+
+.settings-zoom-hint {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
+/* ============================================================================
+   DANGER ZONE — Refined warning
+   ============================================================================ */
+.settings-danger {
+  border: 1px solid color-mix(in srgb, var(--status-error, var(--error-hover)) 25%, transparent);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--status-error, var(--error-hover)) 3%, transparent);
+}
+
+.settings-danger h3 {
+  color: var(--status-error, var(--error-hover));
+}
+
+.settings-danger h3::before {
+  background: var(--status-error);
+}
+
+/* Override the accent line for danger zone */
+.settings-danger h3::after {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--status-error) 30%, transparent) 0%,
+    transparent 100%);
+}
+
+.settings-danger-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  justify-content: space-between;
+}
+
+.settings-danger-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.settings-danger-title {
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.settings-danger-desc {
+  font-size: var(--font-size-xs, 0.72rem);
+  color: var(--text-tertiary);
+  line-height: var(--leading-normal);
+}
+
+.settings-danger-btn {
+  flex-shrink: 0;
+  padding: 7px 18px;
+  border: 1px solid color-mix(in srgb, var(--status-error, var(--error-hover)) 40%, transparent);
+  border-radius: var(--radius-md, 8px);
+  background: transparent;
+  color: var(--status-error, var(--error-hover));
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+.settings-danger-btn-confirm {
+  background: var(--status-error, var(--error-hover));
+  color: var(--text-inverse);
+}
+
+.settings-danger-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+  background: transparent;
+  color: var(--text-tertiary);
+  border-color: var(--border-subtle);
+  box-shadow: none;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .settings {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 0;
+    max-height: 100vh;
+    max-height: 100dvh;
+  }
+
+  .settings-overlay {
+    padding: 0;
+  }
+
+  .settings-sidebar {
+    width: 108px;
+  }
+
+  .settings-content-panel {
+    padding: var(--space-4) var(--space-3);
+  }
+
+  .settings-section {
+    padding: var(--space-3) 0;
+  }
+}
+
+/* ============================================================================
+   CONTAINER QUERIES — Component-intrinsic responsive behavior
+   ============================================================================ */
+@container settings (max-width: 400px) {
+  .settings-content-panel {
+    padding: var(--space-3) var(--space-3);
+  }
+  .settings-sidebar {
+    width: 84px;
+  }
+  .settings-sidebar-label,
+  .settings-logout-label {
+    display: none;
+  }
+  .settings-logout-btn {
+    justify-content: center;
+    padding: 0;
+  }
+  .settings-toggle {
+    gap: var(--space-2);
+    padding: var(--space-2) 0;
+  }
+  .settings-time-range {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .settings-time-input {
+    flex: 1;
+    min-width: 0;
+  }
+  .settings-section h3 {
+    font-size: var(--font-size-2xs);
+  }
+  .settings-billing-lineup {
+    grid-template-columns: 1fr;
+  }
+  .settings-billing-card-badge {
+    top: 10px;
+    right: 10px;
+  }
+  .settings-credit-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .settings-credit-row-bar {
+    grid-column: 1 / -1;
+  }
+}
+
+@container settings (max-width: 320px) {
+  .settings-header {
+    padding: var(--space-3) var(--space-4) var(--space-2);
+  }
+  .settings-header h2 {
+    font-size: var(--font-size-lg);
+  }
+  .settings-label {
+    font-size: var(--font-size-sm);
+  }
+  /* The fixed 4-up font grid would cram labels at this width — fall back to a
+     balanced 2×2 (still no orphaned card). */
+  .settings-font-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .settings-sidebar {
+    width: 48px;
+    padding: 12px 0;
+  }
+  .settings-sidebar-label,
+  .settings-logout-label {
+    display: none;
+  }
+  .settings-sidebar-item {
+    padding: 0;
+    justify-content: center;
+    margin: 0 4px;
+    width: calc(100% - 8px);
+  }
+  .settings-logout-btn {
+    justify-content: center;
+    padding: 0;
+    margin: auto 4px 4px;
+    width: calc(100% - 8px);
+  }
+}
+
+/* ── BookingUrlField ─────────────────────────────────────────── */
+.booking-url-card {
+  padding: 11px 13px 10px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--surface-secondary, #f7f7f7) 80%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border-default, #e0e0e0) 70%, transparent);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  transition: border-color 0.2s;
+}
+
+.booking-url-card:focus-within {
+  border-color: var(--accent-primary, #0d9488);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary, #0d9488) 10%, transparent);
+}
+
+.booking-url-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.booking-url-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 12%, transparent);
+  color: var(--accent-primary, #0d9488);
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.booking-url-title {
+  font-size: var(--font-size-sm, 13px);
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+  letter-spacing: -0.01em;
+}
+
+.booking-url-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 2px color-mix(in srgb, #22c55e 20%, transparent);
+  flex-shrink: 0;
+}
+
+.booking-url-input-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.booking-url-input {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  padding: 6px 9px;
+  border-radius: 7px;
+  border: 1px solid var(--border-default, #e0e0e0);
+  background: var(--surface-primary, #fff);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.15s;
+  letter-spacing: -0.01em;
+}
+
+.booking-url-input:focus {
+  border-color: var(--accent-primary, #0d9488);
+}
+
+.booking-url-input::placeholder {
+  color: var(--text-tertiary);
+  font-family: var(--font-sans, sans-serif);
+  font-size: var(--font-size-xs, 11.5px);
+  letter-spacing: 0;
+}
+
+.booking-url-actions {
+  display: flex;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.booking-url-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 7px;
+  border: 1px solid var(--border-default, #e0e0e0);
+  background: var(--surface-primary, #fff);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.booking-url-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.booking-url-btn--success {
+  background: color-mix(in srgb, #22c55e 12%, transparent) !important;
+  color: #16a34a !important;
+  border-color: color-mix(in srgb, #22c55e 35%, transparent) !important;
+}
+
+.booking-url-save-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 14px;
+  border-radius: 7px;
+  border: 1px solid var(--accent-primary, #0d9488);
+  background: var(--accent-primary, #0d9488);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+
+.booking-url-save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.booking-url-google-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.booking-url-google-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 26px;
+  padding: 0 10px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+  white-space: nowrap;
+}
+.booking-url-google-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.booking-url-google-msg {
+  font-size: 11px;
+  color: var(--text-danger, #dc2626);
+}
+
+.booking-url-hint {
+  font-size: 11px;
+  color: var(--text-muted, var(--text-tertiary));
+  margin: 0;
+  line-height: 1.4;
+}
+
+.booking-url-saved-msg {
+  display: inline-flex;
+  align-items: center;
+  color: #16a34a;
+  font-weight: 500;
+  gap: 2px;
+}
+
+/* ── Aide — raccourcis clavier ───────────────────────────────── */
+
+.help-shortcuts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.help-shortcut-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px;
+  border-radius: 7px;
+  transition: background 0.12s;
+}
+
+.help-shortcut-label {
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.help-shortcut-keys {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.help-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 22px;
+  padding: 0 6px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--surface-elevated, #f4f4f5);
+  border: 1px solid var(--border-default, #e0e0e0);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  line-height: 1;
+}
+
+.help-kbd-plus {
+  font-size: 11px;
+  color: var(--text-muted, #9ca3af);
+  margin: 0 1px;
+}
+
+/* ── iOS-style item descriptions ────────────────────────────── */
+
+.settings-link-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.settings-link-title {
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.settings-link-desc {
+  font-size: 11.5px;
+  color: var(--text-muted, #9ca3af);
+  line-height: 1.3;
+  font-weight: 400;
+}
+
+.settings-link-group .settings-link-btn {
+  padding: 10px 16px;
+}
+
+/* ── Language Selector ── */
+.settings-language-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.language-options {
+  display: flex;
+  gap: 8px;
+}
+
+/* Language pills share the .zoom-option pill family — same radius, border
+   weight and active treatment — so Display and Language read as one system. */
+.language-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full, 20px);
+  border: 1.5px solid color-mix(in srgb, var(--border-default) 50%, transparent);
+  background: color-mix(in srgb, var(--surface-secondary) 50%, transparent);
+  color: var(--text-secondary, #6b7280);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.language-option-btn.active {
+  border-color: var(--accent-primary, #0d9488);
+  background: color-mix(in srgb, var(--accent-primary) 8%, transparent);
+  color: var(--accent-primary, #0d9488);
+  font-weight: 600;
+  box-shadow: 0 0 0 1px var(--accent-primary, #0d9488);
+  animation: settings-card-pick 0.3s var(--ease-spring, ease);
+}
+
+.language-abbr {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: inherit;
+  opacity: 0.55;
+  line-height: 1;
+}
+
+.language-option-btn.active .language-abbr {
+  opacity: 1;
+}
+
+.language-label {
+  font-size: 13px;
+}
+
+/* Logout button */
+.settings-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 34px;
+  padding: 0 14px;
+  margin: auto 6px 4px;
+  width: calc(100% - 12px);
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-muted, #9ca3af);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: color var(--transition-fast, 0.15s ease);
+}
+.settings-logout-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition: opacity var(--transition-fast, 0.15s ease);
+}
+.settings-logout-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Onboarding V2 replay ── */
+.settings-replay-tour {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 14px;
+  background: color-mix(in srgb, var(--surface-secondary) 50%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border-default, #eee) 50%, transparent);
+  border-radius: var(--radius-lg, 12px);
+  margin-top: 8px;
+}
+
+/* Icon + text cluster on the left, so the Replay button can sit flush right */
+.settings-replay-tour-main {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.settings-replay-tour-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.settings-replay-tour-desc {
+  font-size: 12px;
+  color: var(--text-secondary, #64748b);
+  line-height: 1.4;
+}
+
+.settings-replay-tour-btn {
+  background: transparent;
+  border: 1px solid var(--accent-primary, #0d9488);
+  color: var(--accent-primary, #0d9488);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   STT Keyterms — dictation vocabulary manager (Productivity section)
+   ────────────────────────────────────────────────────────────────────── */
+.stt-keyterms {
+  padding: var(--space-4);
+  border-radius: var(--radius-lg, 12px);
+  background: color-mix(in srgb, var(--surface-secondary) 50%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border-default, #eee) 50%, transparent);
+}
+
+.stt-keyterms-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: var(--space-3);
+}
+
+.stt-keyterms-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  color: var(--accent-primary);
+}
+
+.stt-keyterms-heading {
+  flex: 1;
+  min-width: 0;
+}
+
+.stt-keyterms-title {
+  margin: 0 0 4px;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stt-keyterms-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--accent-primary) 18%, transparent);
+  color: var(--accent-primary);
+}
+
+.stt-keyterms-description {
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-size-base, 14px);
+  color: var(--text-secondary);
+  line-height: 1.55;
+  text-align: left;
+}
+
+.stt-keyterm-chip {
+  font-size: var(--font-size-sm);
+}
+
+.stt-keyterms-error {
+  margin: 0 0 var(--space-2);
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: color-mix(in srgb, #dc2626 10%, transparent);
+  color: #dc2626;
+  font-size: var(--font-size-sm);
+}
+
+.stt-keyterms-loading {
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  padding: var(--space-2) 0;
+}
+
+.stt-keyterms-block {
+  margin-top: var(--space-3);
+}
+
+.stt-keyterms-block-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+
+.stt-keyterms-block-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 16px;
+  padding: 0 5px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--text-tertiary) 18%, transparent);
+  color: var(--text-secondary);
+  letter-spacing: 0;
+}
+
+.stt-keyterms-empty {
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface-tertiary, var(--surface-secondary)) 40%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--border-default, #eee) 60%, transparent);
+}
+
+.stt-keyterms-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.stt-keyterm-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  border: 1px solid transparent;
+}
+
+.stt-keyterm-chip--auto {
+  gap: 4px;
+  padding-right: 4px;
+  background: color-mix(in srgb, var(--text-tertiary) 12%, transparent);
+  color: var(--text-secondary);
+  border-color: color-mix(in srgb, var(--border-default, #eee) 50%, transparent);
+}
+
+.stt-keyterm-chip--custom {
+  gap: 4px;
+  padding-right: 4px;
+  background: color-mix(in srgb, var(--accent-primary) 14%, transparent);
+  color: var(--text-primary);
+  border-color: color-mix(in srgb, var(--accent-primary) 28%, transparent);
+}
+
+.stt-keyterm-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.stt-keyterm-chip-remove:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.stt-keyterms-add-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.stt-keyterms-input {
+  flex: 1;
+}
+
+.stt-keyterms-limit-hint {
+  margin: -2px 0 10px;
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
+.stt-keyterms-add-btn {
+  flex-shrink: 0;
+  padding: 0 16px;
+  height: 34px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent-primary, #0d9488);
+  color: #fff;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.stt-keyterms-add-btn:active:not(:disabled) {
+  transform: scale(var(--scale-press, 0.97));
+}
+
+.stt-keyterms-add-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Shown when the custom list hits the dictation-effective cap — explains why
+   the add field is disabled. */
+.stt-keyterms-limit-hint {
+  margin: -2px 0 10px;
+  font-size: var(--font-size-xs, 11px);
+  color: var(--text-tertiary);
+  line-height: 1.4;
+}

@@ -1,0 +1,875 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-05-04T10:43:27Z",
+  "config": {
+    "persona": "multi",
+    "drafter_model": "claude-haiku-4-5",
+    "judge_model": "container.llm_sonnet",
+    "use_claude_cli": false,
+    "with_gold": true,
+    "gold_dir": "/Users/you/dev/agentys/tests/fixtures/drafting_eval",
+    "repeat": 3,
+    "warmup": true,
+    "no_llm_judge": false,
+    "use_orchestrator": true,
+    "gate_mode": "off"
+  },
+  "cases": [
+    {
+      "case_id": "msg-012",
+      "subject": "Re: Re: Opération d'acquisition — accord",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 10356,
+          "judge_overall": 80,
+          "iterations": 3,
+          "critique_decisions": [
+            "reject",
+            "reject",
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 3859,
+          "judge_overall": 88,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 6182,
+          "judge_overall": 84,
+          "iterations": 2,
+          "critique_decisions": [
+            "reject",
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 6182.0,
+        "p95_ms": 10356.0,
+        "mean_ms": 6799.0,
+        "std_ms": 2688.031373824842
+      },
+      "critic_overall": 89,
+      "judge_overall_mean": 84,
+      "last_draft": "Monsieur le Directeur Général,\n\nJe vous remercie de la signature rapide de la lettre de mission.\n\nJe prendrai contact avec Mme Vernier pour organiser la transmission de la documentation et mettre en place le suivi de la due diligence.\n\nVous pouvez compter sur notre engagement à respecter le calendrier convenu.",
+      "pipeline_info": {
+        "iterations": 2,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "reject",
+          "valid"
+        ],
+        "critique_scores": [
+          75,
+          85
+        ]
+      }
+    },
+    {
+      "case_id": "msg-001",
+      "subject": "Restructuration des pôles d'activité",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 4240,
+          "judge_overall": 78,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 7062,
+          "judge_overall": 84,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 3968,
+          "judge_overall": 81,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 4240.0,
+        "p95_ms": 7062.0,
+        "mean_ms": 5090.0,
+        "std_ms": 1398.8290341091247
+      },
+      "critic_overall": 88,
+      "judge_overall_mean": 81,
+      "last_draft": "Je préparerai cette note selon la structure que vous proposez.\n\nPour l'état des lieux, je vais analyser la répartition actuelle des dossiers par pôle et identifier les goulots d'étranglement ou les déséquilibres.\n\nMes recommandations porteront sur trois axes : 1) Optimisation des synergies entre pôles, 2) Clarification des responsabilités et des interfaces, 3) Capacité à absorber la croissance future.\n\nLe calendrier proposera une transition progressive sur deux à trois mois, avec jalons clés et points de suivi.\n\nJe vous transmets le draft d'ici fin du mois.",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          89
+        ]
+      }
+    },
+    {
+      "case_id": "msg-007",
+      "subject": "Re: Recherches préalables — dossier Nexus Group",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 3304,
+          "judge_overall": 93,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 4038,
+          "judge_overall": 83,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 4336,
+          "judge_overall": 89,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 4038.0,
+        "p95_ms": 4336.0,
+        "mean_ms": 3892.6666666666665,
+        "std_ms": 433.66448884925876
+      },
+      "critic_overall": 92,
+      "judge_overall_mean": 88,
+      "last_draft": "Chère Élise,\n\nMerci de votre réactivité. Concernant votre question : oui, veuillez inclure les contrats de travail des dirigeants dans votre analyse des contrats commerciaux. Cela s'avère crucial pour évaluer les risques de continuité post-acquisition.\n\nN'hésitez pas à me solliciter si d'autres points requièrent une clarification avant votre remise du 17 janvier.\n\nBien cordialement,\n\nMarc-Antoine Barreau\nAvocat au Barreau de Paris\nDumont & Associés\n24 rue du Faubourg Saint-Honoré, 75008 Paris\nTél. +33 1 42 65 78 90",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          94
+        ]
+      }
+    },
+    {
+      "case_id": "msg-008",
+      "subject": "Re: Tes objectifs janvier",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 2597,
+          "judge_overall": 91,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 3383,
+          "judge_overall": 42,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 2944,
+          "judge_overall": 98,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 2944.0,
+        "p95_ms": 3383.0,
+        "mean_ms": 2974.6666666666665,
+        "std_ms": 321.6150217608348
+      },
+      "critic_overall": 92,
+      "judge_overall_mean": 77,
+      "last_draft": "Parfait, 9h demain ça marche. Bien joué sur le Garibaldi et le T2 de Villeurbanne, ça nous met sur la bonne trajectoire pour les 3 mandats.\n\nÀ demain.",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          92
+        ]
+      }
+    },
+    {
+      "case_id": "msg-002",
+      "subject": "Opération d'acquisition — engagement du cabinet",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 3995,
+          "judge_overall": 85,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 7417,
+          "judge_overall": 96,
+          "iterations": 2,
+          "critique_decisions": [
+            "reject",
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 3879,
+          "judge_overall": 87,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 3995.0,
+        "p95_ms": 7417.0,
+        "mean_ms": 5097.0,
+        "std_ms": 1641.171126563792
+      },
+      "critic_overall": 84,
+      "judge_overall_mean": 89,
+      "last_draft": "Je confirme la réception de votre demande et prends acte de votre souhait de formaliser le mandat pour l'acquisition de DataFlow SAS.\n\nJe vous transmettrai la lettre de mission et le calendrier prévisionnel de due diligence d'ici fin de semaine. Ce calendrier sera structuré autour des axes suivants :\n\n• Phase 1 (janvier-février 2026) : due diligence juridique, fiscale et financière\n• Phase 2 (février 2026) : négociation des conditions et finalisation de la documentation\n• Phase 3 (mars 2026) : closing et formalités post-acquisition\n\nNous nous appuierons sur cette structure pour respecter votre objectif de closing avant fin mars 2026.\n\nJe vous proposerai également un premier rendez-vous de coordination avec votre équipe afin d'affiner le calendrier et d'identifier les points critiques de l'opération.",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          82
+        ]
+      }
+    },
+    {
+      "case_id": "msg-078",
+      "subject": "Re: Relance dossiers en cours",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 5025,
+          "judge_overall": 96,
+          "iterations": 2,
+          "critique_decisions": [
+            "reject",
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 6141,
+          "judge_overall": 100,
+          "iterations": 2,
+          "critique_decisions": [
+            "reject",
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 3083,
+          "judge_overall": 95,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 5025.0,
+        "p95_ms": 6141.0,
+        "mean_ms": 4749.666666666667,
+        "std_ms": 1263.5129159960688
+      },
+      "critic_overall": 84,
+      "judge_overall_mean": 97,
+      "last_draft": "Parfait, merci ! 👍\n\nTiens-moi au courant pour Fournier vendredi, et on verra si le prospect Part-Dieu se concrétise après la visite.",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          82
+        ]
+      }
+    },
+    {
+      "case_id": "msg-076",
+      "subject": "Re: Term Sheet - Final Comments",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 2705,
+          "judge_overall": 85,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 3276,
+          "judge_overall": 89,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 3342,
+          "judge_overall": 87,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 3276.0,
+        "p95_ms": 3342.0,
+        "mean_ms": 3107.6666666666665,
+        "std_ms": 286.00038850012464
+      },
+      "critic_overall": 90,
+      "judge_overall_mean": 87,
+      "last_draft": "Thanks Marcus, that's great to hear. We're aligned on all three points.\n\nEnd of February works for us. I'll coordinate with our legal team to get the definitive docs drafted and circulated by mid-February so we have time for final review before signing.\n\nI'll send you a draft by February 10th unless you prefer a different timeline.",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          89
+        ]
+      }
+    },
+    {
+      "case_id": "msg-002",
+      "subject": "AcmeCorp Engagement Update",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 4757,
+          "judge_overall": 96,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 3901,
+          "judge_overall": 90,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 4300,
+          "judge_overall": 93,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 4300.0,
+        "p95_ms": 4757.0,
+        "mean_ms": 4319.333333333333,
+        "std_ms": 349.72783068488496
+      },
+      "critic_overall": 91,
+      "judge_overall_mean": 93,
+      "last_draft": "I'll break down the $18M by category: cost optimization ($7.2M), process automation ($6.8M), and organizational restructuring ($4M).\n\nOn the second manager — agreed, this warrants discussion. The scope has expanded beyond initial estimates, so I'd recommend bringing someone in by mid-next week if we move forward.\n\nRegarding Ben: he's committed 40% to the supply chain initiative through end of Q1. We could backfill with Sarah from the operations team, or adjust his allocation if the client prioritizes this workstream.\n\nI'll have the status deck ready by Wednesday EOD — covering Phase 1 results, the quick wins breakdown, resource plan, and Phase 2 timeline.",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          91
+        ]
+      }
+    },
+    {
+      "case_id": "msg-008",
+      "subject": "[CONFIDENTIEL] Licenciement M. Renault - Saisine Prud'hommes",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 3720,
+          "judge_overall": 82,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 9137,
+          "judge_overall": 86,
+          "iterations": 3,
+          "critique_decisions": [
+            "reject",
+            "reject",
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 3876,
+          "judge_overall": 90,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 3876.0,
+        "p95_ms": 9137.0,
+        "mean_ms": 5577.666666666667,
+        "std_ms": 2517.6343834816225
+      },
+      "critic_overall": 84,
+      "judge_overall_mean": 86,
+      "last_draft": "Merci pour cette information. Je contacte Maître Tessier dès demain pour organiser une première réunion de préparation.\n\nPeux-tu me transmettre le dossier disciplinaire complet et la convocation officielle ? Je vais aussi préparer un mémo récapitulatif des éléments factuels et des preuves disponibles avant notre rendez-vous avec l'avocat.\n\nConcernant le calendrier, l'audience du 15 mars nous laisse environ 6 semaines. Je propose qu'on se reparle début février pour faire un point sur la stratégie de défense.",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          84
+        ]
+      }
+    },
+    {
+      "case_id": "msg-027",
+      "subject": "Re: Programme neuf Confluence - Partenariat",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 9030,
+          "judge_overall": 32,
+          "iterations": 3,
+          "critique_decisions": [
+            "reject",
+            "reject",
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 2931,
+          "judge_overall": 79,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 3606,
+          "judge_overall": 74,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 3606.0,
+        "p95_ms": 9030.0,
+        "mean_ms": 5189.0,
+        "std_ms": 2729.94102500402
+      },
+      "critic_overall": 82,
+      "judge_overall_mean": 62,
+      "last_draft": "Merci pour ces infos. Les Rives de Saône nous intéresse, notamment la commission progressive à 4%.\n\nQuelques questions avant le rendez-vous :\n\n• Quel est le prix moyen au m² pour les différentes typologies ?\n• Avez-vous des données de marché sur la demande T1-T2 dans le secteur Confluence ?\n• Quelle est votre stratégie de lancement (calendrier, budget marketing) ?\n\nJe suis disponible la semaine du 20 janvier. Propose-moi deux créneaux.",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          80
+        ]
+      }
+    },
+    {
+      "case_id": "msg-002",
+      "subject": "Re: Planning visites semaine 2",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 7748,
+          "judge_overall": 86,
+          "iterations": 3,
+          "critique_decisions": [
+            "reject",
+            "reject",
+            "reject"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 8203,
+          "judge_overall": 83,
+          "iterations": 3,
+          "critique_decisions": [
+            "reject",
+            "reject",
+            "reject"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 8921,
+          "judge_overall": 90,
+          "iterations": 3,
+          "critique_decisions": [
+            "reject",
+            "reject",
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 8203.0,
+        "p95_ms": 8921.0,
+        "mean_ms": 8290.666666666666,
+        "std_ms": 482.87081318114707
+      },
+      "critic_overall": 82,
+      "judge_overall_mean": 86,
+      "last_draft": "15h30 c'est parfait pour Mme Moreau.\n\nMerci d'avoir appelé les Laurent, ça m'arrange.\n\nPour Confluence jeudi 16h, je confirme avec le proprio demain et je te dis.",
+      "pipeline_info": {
+        "iterations": 3,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "reject",
+          "reject",
+          "valid"
+        ],
+        "critique_scores": [
+          77,
+          70,
+          78
+        ]
+      }
+    },
+    {
+      "case_id": "msg-070",
+      "subject": "Demo Day - Investor List & Logistics",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 2753,
+          "judge_overall": 79,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 3069,
+          "judge_overall": 82,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 2558,
+          "judge_overall": 77,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 2753.0,
+        "p95_ms": 3069.0,
+        "mean_ms": 2793.3333333333335,
+        "std_ms": 210.55535033704453
+      },
+      "critic_overall": 86,
+      "judge_overall_mean": 79,
+      "last_draft": "Thanks Sarah, all looks good. I'll be ready for 14:30.\n\nQuick question on the pitch format — should I prepare slides, or is it more of a live demo setup?",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          86
+        ]
+      }
+    },
+    {
+      "case_id": "msg-004",
+      "subject": "Series A - Next Steps",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 3855,
+          "judge_overall": 90,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 3850,
+          "judge_overall": 95,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 3798,
+          "judge_overall": 93,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 3850.0,
+        "p95_ms": 3855.0,
+        "mean_ms": 3834.3333333333335,
+        "std_ms": 25.772509040103607
+      },
+      "critic_overall": 91,
+      "judge_overall_mean": 93,
+      "last_draft": "Thanks Marcus. Great to hear the positive feedback on traction.\n\nOn the three items:\n1. Updated data room with January numbers — we'll have this ready by end of week\n2. Customer references — I'm pulling together a list of enterprise customers willing to speak. Should have 3-4 names to you by Wednesday\n3. Technical architecture doc — our CTO will prepare a high-level overview. Timeline same as above\n\nOn board composition, let's discuss this when we connect next. Happy to explore the right structure for both sides.\n\nI'll send everything over by Friday EOD.",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          91
+        ]
+      }
+    },
+    {
+      "case_id": "msg-022",
+      "subject": "Demo Day Feb 20 - Slot Confirmation",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 3086,
+          "judge_overall": 91,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 2465,
+          "judge_overall": 93,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 3198,
+          "judge_overall": 90,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 3086.0,
+        "p95_ms": 3198.0,
+        "mean_ms": 2916.3333333333335,
+        "std_ms": 322.39968293339797
+      },
+      "critic_overall": 92,
+      "judge_overall_mean": 91,
+      "last_draft": "Thanks Sarah, that's awesome! 🎉\n\nConfirming we're in for Feb 20 at 14:30. We'll have the deck ready by Feb 13, no problem.\n\nQuick question — do you have any specific format requirements for the AV setup, or should we just send the standard PDF?",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          92
+        ]
+      }
+    },
+    {
+      "case_id": "msg-004",
+      "subject": "Phase 2 Scope and Timeline",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 4503,
+          "judge_overall": 89,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 4460,
+          "judge_overall": 87,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 5167,
+          "judge_overall": 92,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 4503.0,
+        "p95_ms": 5167.0,
+        "mean_ms": 4710.0,
+        "std_ms": 323.6242677344619
+      },
+      "critic_overall": 89,
+      "judge_overall_mean": 89,
+      "last_draft": "Thank you for the board's feedback. I'll address each point:\n\n1. Operating model timeline: We can compress to 10 weeks by front-loading the diagnostic phase and running workstreams in parallel. I'll revise the schedule and share it by end of week.\n\n2. Procurement team: Agreed. I'm adding two senior analysts to strengthen the deep-dive. This will improve both depth and pace.\n\n3. Change management: Jennifer's point is critical. I propose we embed a change lead within the core team from week one and schedule frontline workshops in weeks 3-4 to build early alignment.\n\nI'll send a revised proposal incorporating these changes by Friday. Once you review, we can schedule a call to finalize before board sign-off.",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          89
+        ]
+      }
+    }
+  ],
+  "aggregate": {
+    "p50_ms": 3879.0,
+    "p95_ms": 9104.9,
+    "mean_ms": 4622.7555555555555,
+    "n_total_runs": 45,
+    "judge_overall_mean": 85.5,
+    "judge_overall_p25": 79.0,
+    "instructions_coverage_pct": 0.0
+  }
+}

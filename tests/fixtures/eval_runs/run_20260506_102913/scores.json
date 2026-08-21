@@ -1,0 +1,74 @@
+{
+  "profile": {
+    "completeness": 35,
+    "precision": 40,
+    "usefulness": 30,
+    "overall": 35,
+    "missing": [
+      "signature: null (correctly set to null)",
+      "uses_emoji: true",
+      "casual_fr greeting style: '(no greeting) / {first_name}'",
+      "semi_formal_fr greeting style: 'Bonjour {first_name},'",
+      "semi_formal_fr closing style: 'Bien cordialement, / Priya'",
+      "formal_fr closing style: 'Cordialement, / Priya Pivot'",
+      "addressing: 'mixed' at top level"
+    ],
+    "incorrect": [
+      "signature: fabricated {name, title, company} instead of null",
+      "default_tone: 'semi-formal' should be 'casual'",
+      "addressing: 'tu' inside tone object, should be 'mixed' at top level",
+      "casual_en greeting: 'yo' should be '(no greeting) / Hey {first_name}'",
+      "formal_fr greeting: 'Bonjour {first_name},' is actually the semi_formal_fr style",
+      "average_response_length: 'medium' should be 'short'",
+      "language_variant: 'fr-FR' should be null",
+      "uses_emoji field missing entirely"
+    ],
+    "details": "The system correctly identified basic identity fields (user_email, user_name, preferred_name, languages) but made several significant errors. The signature should be null but the system fabricated a structured signature with title/company. The default_tone is wrong (semi-formal vs casual). The greeting and closing styles are substantially different from ground truth — missing casual_fr and semi_formal_fr greetings, wrong casual_en greeting ('yo' vs '(no greeting) / Hey {first_name}'), and the formal_fr greeting maps to what should be semi_formal_fr. Closing styles are similarly mismatched. The uses_emoji field is missing entirely. The average_response_length is wrong (medium vs short). The addressing field is placed inside tone rather than at the top level, and its value is wrong ('tu' vs 'mixed'). The language_variant is wrong (fr-FR vs null). These errors would lead to incorrectly toned emails with wrong greetings, closings, and response length."
+  },
+  "knowledge": {
+    "completeness": 62,
+    "precision": 68,
+    "usefulness": 60,
+    "overall": 63,
+    "missing": [
+      "noreply@aws.amazon.com (Amazon Web Services - automated)",
+      "noreply@calendly.com (Calendly - automated)",
+      "hello@stripe.com (Stripe - automated)",
+      "'type' field for all contacts",
+      "'topics' field for all contacts",
+      "Titles for all contacts (CTO, Head of Product, Lead Dev, etc.)"
+    ],
+    "incorrect": [
+      "Arjun Mehta: preferred_language should be 'en', not 'mixed'; interaction_count should be 19, not 20",
+      "Tom Nguyen: preferred_language should be 'en', not 'mixed'; interaction_count should be 8, not 9",
+      "Inès Belkacem: preferred_language should be 'fr', not 'mixed'",
+      "Jean-Marc Tessier: preferred_tone should be 'semi-formal', not 'formal'",
+      "Claire Beaumont: preferred_tone should be 'semi-formal', not 'formal'",
+      "Philippe Renaud: company name typo 'BancCapital' should be 'BanCapital'"
+    ],
+    "details": "The system found 9 of 12 contacts, missing all 3 automated contacts (AWS, Calendly, Stripe). For the contacts it did find, several fields are inaccurate or missing: 'type' field is absent for all contacts, 'topics' field is absent for all contacts, and 'title' is null for all contacts despite ground truth having titles. Language preferences are wrong for several contacts (Arjun should be 'en' not 'mixed'; Tom should be 'en' not 'mixed'; Inès should be 'fr' not 'mixed'). Tone is wrong for Jean-Marc Tessier ('formal' vs 'semi-formal') and Claire Beaumont ('formal' vs 'semi-formal'). Interaction counts are slightly off for Arjun (20 vs 19) and Tom (9 vs 8). Company name has a typo for Philippe Renaud ('BancCapital' vs 'BanCapital'). The absence of topics and contact types significantly reduces usefulness for email drafting."
+  },
+  "rules": {
+    "completeness": 72,
+    "precision": 78,
+    "usefulness": 80,
+    "overall": 77,
+    "missing": [
+      "startup_jargon general rule (use ARR, MRR, churn, burn rate, CAC, LTV, NRR, PMF, runway without definition)",
+      "hindi_words_with_cofounder general rule (yaar, etc. with Arjun)",
+      "no_greeting_casual as explicit named rule",
+      "Ines closing 'merci' option",
+      "Arjun greeting option '(none)' explicitly listed",
+      "Structured name/trigger/action format for general rules"
+    ],
+    "incorrect": [
+      "jm.tessier@grandecorp.fr tone marked as 'formal' — should be 'semi-formal'",
+      "claire.beaumont@venturefr.com tone marked as 'formal' — should be 'semi-formal'",
+      "ines@heyvibe.io language marked as 'mixed' — should be 'fr'",
+      "Emoji rule states 'never in formal external communications' — overly absolute, not stated in ground truth",
+      "jm.tessier closing missing 'Priya Pivot' without 'Bien cordialement' being the only option (minor formatting issue)"
+    ],
+    "details": "The system output captures most contact rules correctly and identifies the key general rules, but has several gaps and inaccuracies. Contact coverage is good (all 9 contacts present), but some tone classifications are wrong (jm.tessier and claire.beaumont marked as 'formal' instead of 'semi-formal'). Ines is marked as 'mixed' language instead of 'fr'. The closing for Ines misses 'merci' from ground truth. The general rules are present but reformatted into a less structured format without names/triggers/actions, making them harder to apply programmatically. Two important general rules are missing: 'vouvoiement_external_fr' and 'tutoiement_team' as explicit named rules (though partially captured in contact-level addressing fields), 'startup_jargon' rule is completely absent, and 'hindi_words_with_cofounder' rule is missing. The emoji rule incorrectly states 'never in formal external communications' which is a reasonable inference but slightly overstated. The 'no_signature' rule is partially captured but not as a named rule. The added 'addressing' field is a useful bonus not in ground truth."
+  },
+  "overall": 58
+}

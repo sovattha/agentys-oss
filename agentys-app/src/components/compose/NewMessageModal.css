@@ -1,0 +1,1086 @@
+/* ============================================================================
+   NEW MESSAGE MODAL - Gmail Style
+   ============================================================================ */
+
+.new-message-overlay.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-modal);
+  background: rgba(15, 12, 8, 0.45);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+}
+
+/* (2026-06-11) Le restyle du ruban global sous le modal a été retiré : le
+   ruban est désormais masqué quand ce modal est ouvert (App.tsx) et les
+   raccourcis vivent dans .nm-shortcut-hints, au pied du modal. */
+
+/* Exit animation */
+.new-message-overlay.fullscreen.closing {
+  animation: composeFadeOut 0.15s ease forwards;
+  pointer-events: none;
+}
+
+.new-message-overlay.fullscreen.closing .new-message-modal {
+  animation: composeSlideOut 0.15s ease forwards;
+}
+
+/* Maximized close: composeSlideOut anime translate(-50%,…) — sur la carte
+   plein écran (top:0; transform:none) ça la projetterait d'une demi-fenêtre
+   vers le haut-gauche pendant 150ms. Fade simple à la place. */
+.new-message-overlay.fullscreen.closing .new-message-modal.maximized {
+  animation: composeFadeOut 0.15s ease forwards;
+}
+
+@keyframes composeFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes composeSlideOut {
+  from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  to { opacity: 0; transform: translate(-50%, calc(-50% + 12px)) scale(var(--scale-press)); }
+}
+
+/* Gmail-style modal */
+.new-message-modal.gmail-style {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 24px); /* 24px = half of 48px sidebar to offset into content area */
+  transform: translate(-50%, -50%);
+  width: min(720px, calc(100vw - 96px));
+  max-height: min(580px, calc(100dvh - 128px));
+  background: var(--surface-primary);
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--text-primary) 6%, transparent);
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  transition: max-width var(--transition-base), max-height var(--transition-base), border-radius var(--transition-base);
+}
+
+/* Maximized state */
+.new-message-modal.gmail-style.maximized {
+  top: 0;
+  left: 0;
+  transform: none;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.new-message-modal.gmail-style.maximized .gmail-body {
+  overflow-y: auto;
+}
+
+.new-message-modal.gmail-style.maximized .nm-body-wrapper {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.new-message-modal.gmail-style.maximized .nm-editor-borderless,
+.new-message-modal.gmail-style.maximized .draft-editor-content,
+.new-message-modal.gmail-style.maximized .ProseMirror {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* Header */
+.gmail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 12px 12px 20px;
+  background: color-mix(in srgb, var(--surface-secondary) 50%, transparent);
+  border-bottom: 1px solid var(--border-subtle);
+  min-height: 48px;
+  border-radius: 16px 16px 0 0;
+}
+
+.gmail-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.gmail-header-actions {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.gmail-header-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--text-tertiary);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md, 6px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+.gmail-header-btn svg {
+  display: block;
+  stroke: var(--text-tertiary);
+  stroke-width: 2;
+  fill: none;
+  flex-shrink: 0;
+}
+
+/* Field rows */
+.gmail-field {
+  display: flex;
+  align-items: center;
+  /* var(--space-4) (= calc(16px * --app-zoom)) so the To/Cc/Bcc/Subject rows
+     stay perfectly aligned with .gmail-body's left edge at every zoom level. */
+  padding: 0 var(--space-4);
+  min-height: 36px;
+  position: relative;
+  overflow: visible;
+  border: none;
+}
+
+/* Scoped: tighter field rows inside the compose modal */
+.new-message-modal .gmail-field {
+  min-height: 28px;
+}
+
+/* BUG-T003 (2026-05-16): "À :" / "Cc :" labels in compose so the modal is
+   visually distinct from the global search bar (`/`) which otherwise looks
+   nearly identical. */
+.gmail-field-label {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  margin-right: 8px;
+  min-width: 32px;
+  user-select: none;
+}
+
+/* Ensure autocomplete dropdown in fields stays above sibling fields */
+.gmail-field:focus-within {
+  z-index: 10;
+}
+
+/* Drop zone highlight when a chip is dragged over a field */
+.gmail-field.drop-active {
+  background: color-mix(in srgb, var(--accent-primary, #6366f1) 6%, transparent);
+  outline: 1.5px dashed var(--accent-primary, #6366f1);
+  outline-offset: -2px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.gmail-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  box-shadow: none !important; /* index.css input[type="text"] specificity (0,1,1) beats (0,1,0) */
+  font-size: var(--font-size-sm, 14px);
+  color: var(--text-primary);
+  background: transparent;
+  padding: 8px 0;
+  font-family: inherit;
+}
+
+.gmail-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.gmail-input-subject {
+  font-weight: 700;
+  font-size: var(--font-size-base, 16px);
+  letter-spacing: var(--tracking-tight);
+  padding: 2px 0;
+}
+
+/* ── Transcription error ─────────────────────────────────────────────────── */
+.rc-transcription-error {
+  font-size: 11.5px;
+  color: #ef4444;
+  padding: 4px 8px;
+  margin-bottom: 4px;
+  background: rgba(239, 68, 68, 0.06);
+  border-radius: 6px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Recording state — no visible indicator on body (button stop is enough) */
+
+/* ── Recording state — aurora waveform (cibles orphelines .refine-capsule-*
+   supprimées après la refonte 2026-04 ; conservé les keyframes utilisés
+   par .nmm-mic-recording). */
+
+.rc-rec-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #14b8a6;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(20, 184, 166, 0.5);
+  animation: rc-dot-breathe 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes rc-dot-breathe {
+  0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 6px rgba(20, 184, 166, 0.5); }
+  50% { transform: scale(1.4); opacity: 0.3; box-shadow: 0 0 12px rgba(20, 184, 166, 0.3); }
+}
+
+.rc-rec-time {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-primary);
+  font-variant-numeric: tabular-nums;
+  min-width: 34px;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+
+.rc-rec-waveform {
+  flex: 1;
+  height: 34px;
+  position: relative;
+  overflow: hidden;
+}
+
+.rc-wave-svg {
+  width: 100%;
+  height: 100%;
+  filter: saturate(1.15) contrast(1.05);
+  display: block;
+}
+
+/* Stop button — orpheline supprimée (.refine-capsule-send n'existe plus dans le JSX) */
+@keyframes rc-stop-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.4); }
+  50%      { box-shadow: 0 0 0 6px rgba(13, 148, 136, 0); }
+}
+
+@keyframes rc-morph-in {
+  0% { transform: scale(0.96); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Silence detection — timer turns amber */
+.rc-rec-time.rc-silence {
+  color: #f59e0b;
+  animation: rc-silence-pulse 1s ease infinite;
+}
+
+@keyframes rc-silence-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.rc-silence-label {
+  font-size: 11px;
+  color: #f59e0b;
+  font-weight: 500;
+  margin-left: 4px;
+  animation: rc-silence-pulse 1s ease infinite;
+  flex-shrink: 0;
+}
+
+/* Transcribing state */
+.rc-transcribing-label {
+  font-size: 12px;
+  color: var(--accent-primary);
+  font-weight: 500;
+  margin-left: 6px;
+  animation: rc-transcribing-dots 1.5s ease infinite;
+}
+
+@keyframes rc-transcribing-dots {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Cc/Bcc links */
+.gmail-cc-bcc {
+  display: flex;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+/* Standalone toggle row — rendered as a sibling beneath the To: field when
+   the chip stack wraps. Pre-fix, the inline `.gmail-cc-bcc` was vertically
+   centered against the wrapped autocomplete and visually orphaned in the
+   middle of the rows. The standalone row keeps the toggles right-aligned
+   and clearly attached to the recipient zone without claiming the middle
+   of the chip stack. Mirrors the field's horizontal padding so the
+   right-edge aligns with the To: field's right edge. */
+.gmail-cc-bcc--row {
+  padding: 2px var(--space-4) 4px 0;
+  justify-content: flex-end;
+  min-height: 24px;
+  align-items: center;
+}
+
+/* When To: is multiline, give the field a touch of bottom padding so the
+   wrapped chip stack doesn't sit flush against the toggle row below. */
+.gmail-field-to.to-field-multiline {
+  padding-bottom: 4px;
+}
+
+.gmail-cc-link {
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-xs, 13px);
+  padding: 4px 6px;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+/* ── Project prefix picker ────────────────────────────────────────────────── */
+
+.nm-project-picker {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.nm-project-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nm-project-btn--active {
+  color: var(--accent-primary);
+}
+
+.nm-project-label {
+  font-size: var(--font-size-xs, 12px);
+  font-weight: 500;
+}
+
+.nm-project-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 200px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg, 10px);
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  overflow: hidden;
+  padding: 4px;
+}
+
+.nm-project-option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 6px 10px;
+  border-radius: var(--radius-md, 6px);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.nm-project-option--selected {
+  background: color-mix(in srgb, var(--accent-primary) 8%, transparent);
+}
+
+.nm-project-option--clear {
+  color: var(--text-tertiary);
+  font-size: var(--font-size-xs, 12px);
+  font-style: italic;
+}
+
+.nm-project-option-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.nm-project-option-name {
+  flex: 1;
+  font-size: var(--font-size-xs, 12px);
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nm-project-option-star {
+  color: #f59e0b;
+  flex-shrink: 0;
+}
+
+.nm-project-empty {
+  padding: 8px 10px;
+  font-size: var(--font-size-xs, 12px);
+  color: var(--text-tertiary);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* ── Group suggestions bar ── */
+/* Group suggestion row — lives in the recipient zone (between Bcc and
+   Subject) so the chip reads as "people to add" rather than "content". */
+.nm-group-suggestions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 2px 16px 6px;
+}
+
+/* Group chip = composite control: left "body" routes to the smart-default
+   recipient field on click, right "trigger" opens a To/Cc/Bcc override menu.
+   Rendered with a dashed outline so it reads as a *suggestion*, distinct
+   from committed recipient chips (which use a solid outline). */
+.nm-group-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: 99px;
+  border: 1px dashed var(--border-default);
+  background: transparent;
+  font-size: 11px;
+  color: var(--text-secondary, var(--text-primary));
+}
+
+.nm-group-chip-body {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px 2px 7px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  border-radius: 99px 0 0 99px;
+}
+
+.nm-group-chip-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px 0 4px;
+  border: 0;
+  border-left: 1px solid var(--border-default);
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-tertiary);
+  border-radius: 0 99px 99px 0;
+}
+
+.nm-group-chip-trigger:focus-visible,
+.nm-group-chip-body:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: -1px;
+}
+
+.nm-group-chip-emoji {
+  font-size: 11px;
+  line-height: 1;
+}
+
+.nm-group-chip-name {
+  font-weight: 500;
+}
+
+.nm-group-chip-count {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  background: var(--surface-tertiary, rgba(0,0,0,0.06));
+  border-radius: 99px;
+  padding: 0 4px;
+  min-width: 14px;
+  text-align: center;
+}
+
+/* Routing-override popover */
+.nm-group-chip-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  min-width: 96px;
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--border-default);
+  background: var(--surface-primary, var(--surface-secondary));
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.nm-group-chip-menu-item {
+  display: block;
+  width: 100%;
+  padding: 6px 10px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  font: inherit;
+  font-size: 12px;
+  color: var(--text-primary);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.nm-group-chip-menu-item:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: -2px;
+}
+
+/* Body area */
+.gmail-body {
+  flex: 1 1 auto;
+  padding: 8px var(--space-4) 4px;
+  overflow-y: auto;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+}
+
+.gmail-textarea {
+  width: 100%;
+  flex: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  font-size: var(--font-size-sm, 14px);
+  color: var(--text-primary);
+  font-family: inherit;
+  resize: none;
+  line-height: var(--leading-relaxed);
+  background: transparent;
+  overflow-y: hidden;
+  min-height: 0;
+  tab-size: 3;
+  -moz-tab-size: 3;
+}
+
+.gmail-textarea:focus {
+  border: none;
+  box-shadow: none;
+}
+
+.gmail-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* AI Prompt Field — reuses refine-capsule from PendingDraftDetail */
+.compose-refine {
+  padding: var(--space-2) var(--space-4);
+  padding-right: calc(var(--space-4) - 4px); /* align green button with trash icon below */
+  position: relative;
+  animation: refineIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  flex-shrink: 0;
+}
+
+/* .compose-refine slash menu rendered via portal — see rc-slash-menu--portal in ReplyComposer.css */
+
+@keyframes refineIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── HTML Signature block ───────────────────────────────────────────────── */
+
+.nm-sig-html {
+  padding: 0 var(--space-4) var(--space-3);
+  flex-shrink: 0;
+}
+
+.nm-sig-html-separator {
+  height: 1px;
+  background: var(--border-subtle);
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+.nm-sig-html-content {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  outline: none;
+  cursor: text;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.nm-sig-html-content img {
+  max-width: 200px;
+  height: auto;
+  display: block;
+  margin: 2px 0;
+}
+
+/* ── Subtle correction highlights ──────────────────────────────────────── */
+
+.nm-stream-indicator {
+  padding: 4px 0 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nm-stream-stage {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 0 2px;
+  font-style: italic;
+}
+
+.nm-body-wrapper {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  font-size: var(--font-size-base);
+}
+
+.nm-body-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Standard placeholder gray — --text-muted read like typed text (same fix
+     as the reply composer's .rc-body-placeholder). */
+  color: var(--text-placeholder, #9ca3af);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Editor paragraphs — Gmail-style: no inter-paragraph margin, tight line-height */
+.nm-body-wrapper .draft-editor-content p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Lists — Gmail-style indentation */
+.nm-body-wrapper .draft-editor-content ul,
+.nm-body-wrapper .draft-editor-content ol {
+  padding-left: 28px;
+  margin: 0.3em 0;
+}
+
+.nm-body-wrapper .draft-editor-content li {
+  line-height: 1.5;
+  margin-bottom: 0.15em;
+}
+
+/* Signature — compact */
+.nm-signature-footer,
+.nm-signature-footer p,
+.nm-signature-footer div {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.nm-signature-footer {
+  padding: 0;
+  margin-top: 0.5em;
+  color: inherit !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+/* User-saved signature HTML may contain <hr>, a nested wrapper with inline
+   border-top, or the backend's .agentys-signature wrapper — any of which can
+   render as a stray divider (sometimes colored by a theme) above the signature.
+   Blanket-strip all visual dividers inside the signature footer. */
+.nm-body-wrapper .agentys-signature,
+.nm-signature-footer .agentys-signature,
+.nm-body-wrapper .agentys-signature[style],
+.nm-signature-footer .agentys-signature[style],
+.nm-signature-footer * {
+  border-top: none !important;
+  border-bottom: none !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  box-shadow: none !important;
+}
+.nm-signature-footer hr,
+.nm-body-wrapper .agentys-signature hr {
+  display: none !important;
+}
+
+/* Le sélecteur de signature (chips de bascule) est rendu DANS le footer :
+   il doit échapper au reset agressif `.nm-signature-footer *` ci-dessus,
+   sinon bordures et padding des chips/boutons sont dépouillés (même classe
+   de bug que les icônes invisibles de l'éditeur signature, cf. lessons.md). */
+.nm-signature-footer .rc-signature-editor .rc-signature-chip {
+  border: 1px solid var(--border-subtle) !important;
+  /* The footer reset strips the fill, which made an inactive chip read as plain
+     text ("xcvxv" looking unstyled, 2026-06-23). Restore it so it reads as a
+     real chip. */
+  background: var(--bg-secondary) !important;
+  color: var(--text-muted) !important;
+  padding: 4px 12px !important;
+}
+.nm-signature-footer .rc-signature-editor .rc-signature-chip--active {
+  background: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+  color: #fff !important;
+}
+.nm-signature-footer .rc-signature-editor .rc-signature-action-btn {
+  /* Footer reset strips the fill + top/bottom borders, which left Cancel as
+     barely-visible text (retour 2026-06-23). Restore the secondary button. */
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-subtle) !important;
+  padding: 0 16px !important;
+}
+.nm-signature-footer .rc-signature-editor .rc-signature-action-btn--primary {
+  background: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+  color: #fff !important;
+}
+.nm-signature-footer .rc-signature-editor .rc-signature-textarea {
+  border: 1px solid var(--border-subtle) !important;
+  padding: 8px 10px !important;
+}
+
+.nm-editor-borderless,
+.nm-editor-borderless *,
+.nm-editor-borderless:focus-within {
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.nm-editor-borderless .draft-editor-content {
+  padding: 0 !important;
+}
+
+.nm-body-wrapper .draft-editor-footer {
+  display: none;
+}
+
+/* Hide textarea text while overlay is visible */
+.gmail-textarea.nm-under-overlay {
+  color: transparent;
+  caret-color: transparent;
+}
+
+/* Overlay — same text as textarea, with highlights on changed words */
+.nm-diff-overlay {
+  position: absolute;
+  inset: 0;
+  font-family: inherit;
+  font-size: var(--font-size-sm, 14px);
+  line-height: var(--leading-relaxed);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: var(--text-primary);
+  background: var(--surface-primary);
+  pointer-events: none;
+  overflow-y: auto;
+  z-index: 1;
+  /* No auto-fade — overlay stays until user clicks body to dismiss */
+}
+
+/* Changed/added words — subtle background pulse */
+.nm-diff-add {
+  background: color-mix(in srgb, var(--accent-primary) 15%, transparent);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+.nm-diff-anim {
+  animation: nmHighlight 0.3s ease both;
+}
+
+@keyframes nmHighlight {
+  from { background-color: color-mix(in srgb, var(--accent-primary) 30%, transparent); }
+  to { background-color: color-mix(in srgb, var(--accent-primary) 15%, transparent); }
+}
+
+/* Attachments */
+.attachments-list {
+  padding: var(--space-2) var(--space-4);
+  background: var(--surface-primary);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.attachment-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 16px;
+  padding: 4px 10px;
+  font-size: var(--font-size-xs, 12px);
+  color: var(--text-primary);
+}
+
+.attachment-item svg {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+}
+
+.attachment-name {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.attachment-size {
+  color: var(--text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.attachment-remove {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--text-muted);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-base);
+  transition: background 0.15s, color 0.15s;
+  margin-left: 2px;
+}
+
+/* Recording waveform strip styles live in RecordingWaveform.css (co-located with the component) */
+
+/* Standalone mic button in footer */
+.nmm-mic-btn.nmm-mic-recording {
+  color: var(--accent-primary, #0d9488);
+}
+
+.nmm-mic-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--border-secondary, #e5e7eb);
+  border-top-color: var(--text-muted, #6b7280);
+  border-radius: 50%;
+  animation: ai-cmd-spin 0.6s linear infinite;
+}
+
+/* Footer */
+.gmail-footer {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--surface-primary);
+  gap: var(--space-3);
+  flex-shrink: 0;
+  border-radius: 0 0 16px 16px;
+}
+
+.gmail-send-btn {
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  border: none;
+  padding: 0 18px;
+  height: 30px;
+  border-radius: 15px;
+  font-size: var(--font-size-sm, 14px);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.gmail-footer-icons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-left: 8px;
+}
+
+.gmail-icon-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--text-secondary);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md, 6px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.gmail-icon-btn svg {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  flex-shrink: 0;
+  stroke: currentColor;
+}
+
+.btn-attach {
+  margin-left: 4px;
+}
+
+/* Snippet button */
+.snippet-btn-wrapper {
+  position: relative;
+}
+
+.btn-snippet {
+  color: var(--text-secondary);
+}
+
+.btn-snippet svg {
+  fill: none;
+  stroke: currentColor;
+}
+
+.gmail-footer-right {
+  margin-left: auto;
+}
+
+/* Floor of breathing room before the destructive trash button when the
+   toolbar row is full and margin-left:auto collapses to 0 (mirrors
+   .reply-composer .gmail-footer-right). */
+.new-message-modal .gmail-footer-right {
+  padding-left: var(--space-3);
+}
+
+/* Keyboard hints row — replaces the global shortcuts ribbon while this modal
+   is open (it rendered on the backdrop, far below the card). Reuses the
+   .shortcut-key chip styling from EmailList.css (loaded eagerly via App). */
+.nm-shortcut-hints {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding: 6px var(--space-4) 10px;
+  border-radius: 0 0 16px 16px;
+  background: var(--surface-primary);
+  font-size: var(--font-size-2xs);
+  color: var(--text-muted);
+}
+
+.nm-shortcut-hints .nm-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nm-shortcut-hints .nm-hint-label {
+  margin-left: 2px;
+}
+
+/* ============================================================================
+   SENT STATE — Success animation overlay
+   ============================================================================ */
+
+.new-message-modal.nm-sent {
+  position: relative;
+}
+
+.nm-sent-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-dropdown);
+  pointer-events: none;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sized, positioned stage so .rc-sent-label's bottom: -36px sits under the
+   56px circle instead of below the full-modal overlay. */
+.nm-sent-stage {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nm-sent .gmail-header,
+.nm-sent .gmail-field,
+.nm-sent .gmail-body,
+.nm-sent .gmail-footer,
+.nm-sent .nm-shortcut-hints,
+.nm-sent .attachments-list {
+  animation: nmContentFade 0.8s ease forwards;
+}
+
+@keyframes nmContentFade {
+  0%   { opacity: 1; filter: blur(0); }
+  100% { opacity: 0.05; filter: blur(8px); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .new-message-overlay.fullscreen {
+    padding: 0;
+  }
+
+  .new-message-modal.gmail-style {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 0;
+  }
+
+  .attachment-name {
+    max-width: 180px;
+  }
+
+  /* Hints clavier sans objet sur écran tactile (l'ancien ruban global était
+     déjà masqué ≤768px) ; on récupère la hauteur. */
+  .nm-shortcut-hints {
+    display: none;
+  }
+}
+
+/* ============================================================================
+   CUSTOM PLACEHOLDER FILL MODAL — section was truncated mid-selector in a
+   prior commit and never restored. Removed the dangling `.nmm-placeholder-`
+   token so PostCSS/autoprefixer can parse the file. If the section is
+   reintroduced later, place rules below this comment block.
+   ============================================================================ */

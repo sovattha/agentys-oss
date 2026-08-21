@@ -1,0 +1,434 @@
+[
+  {
+    "case_id": "msg-008",
+    "persona": "sales_director",
+    "incoming_email": {
+      "from": "julien@immoplus-lyon.fr",
+      "from_name": "Julien Roche",
+      "subject": "Re: Tes objectifs janvier",
+      "body": "Salut Karim,\n\nJ'ai 1 mandat signé (studio rue Garibaldi) et 2 en cours de négo. Je pense pouvoir closer le T2 de Villeurbanne cette semaine.\n\nDemain matin 9h ça te va ?\n\nJulien",
+      "date": "2026-01-06T14:22:00Z"
+    },
+    "conversation_history": [
+      {
+        "sender": "karim.mandat@immoplus-lyon.fr",
+        "subject": "Tes objectifs janvier",
+        "body": "Julien,\n\nFaut qu'on parle de tes objectifs du mois. T'en es où sur tes prises de mandats ? Il me faut minimum 3 mandats exclusifs ce mois-ci.\n\nOn fait un point demain matin ?",
+        "date": "2026-01-06T14:00:00Z"
+      }
+    ],
+    "instructions": "",
+    "user_email": "karim.mandat@immoplus-lyon.fr",
+    "user_name": "Karim Mandat",
+    "user_signature": "Karim Mandat\nDirecteur Commercial\nImmoPlus Lyon\n04 72 XX XX XX | 06 XX XX XX XX",
+    "thread_id": "thread-003",
+    "metadata": {
+      "language": "fr",
+      "length": "short",
+      "intent": "ask",
+      "complexity": "mid",
+      "n_history": 1,
+      "has_user_keywords": false,
+      "selection_reason": "stratification (fr/short/ask/mid)"
+    }
+  },
+  {
+    "case_id": "msg-005",
+    "persona": "sales_director",
+    "incoming_email": {
+      "from": "delphine.mercier@gmail.com",
+      "from_name": "Delphine Mercier",
+      "subject": "Re: Villa Caluire - Confirmation visite mardi",
+      "body": "Bonjour Monsieur Mandat,\n\nMerci pour la confirmation. Je viendrai avec mon mari.\n\nEst-ce que la villa dispose d'un garage double ? Et savez-vous si le quartier est bien desservi en transports ?\n\nCordialement,\nDelphine Mercier",
+      "date": "2026-01-06T12:10:00Z"
+    },
+    "conversation_history": [
+      {
+        "sender": "karim.mandat@immoplus-lyon.fr",
+        "subject": "Villa Caluire - Confirmation visite mardi",
+        "body": "Bonjour Madame Moreau,\n\nJe vous confirme notre rendez-vous pour la visite de la villa située 12 chemin des Érables à Caluire-et-Cuire, mardi 7 janvier à 15h30.\n\nPour rappel, il s'agit d'une villa de 180m² avec jardin de 600m², proposée à 580 000 €. Le DPE est classé C.\n\nJe me tiendrai à l'entrée du portail. N'hésitez pas à venir accompagnée si vous le souhaitez.\n\nBien cordialement,\n\nKarim Mandat\nDirecteur Commercial\nImmoPlus Lyon\n04 72 XX XX XX | 06 XX XX XX XX",
+        "date": "2026-01-06T09:15:00Z"
+      }
+    ],
+    "instructions": "",
+    "user_email": "karim.mandat@immoplus-lyon.fr",
+    "user_name": "Karim Mandat",
+    "user_signature": "Karim Mandat\nDirecteur Commercial\nImmoPlus Lyon\n04 72 XX XX XX | 06 XX XX XX XX",
+    "thread_id": "thread-002",
+    "metadata": {
+      "language": "fr",
+      "length": "short",
+      "intent": "ack",
+      "complexity": "mid",
+      "n_history": 1,
+      "has_user_keywords": false,
+      "selection_reason": "stratification (fr/short/ack/mid)"
+    }
+  },
+  {
+    "case_id": "msg-033",
+    "persona": "sales_director",
+    "incoming_email": {
+      "from": "direction@immoplus-lyon.fr",
+      "from_name": "Catherine Vernet",
+      "subject": "Objectifs Q1 2026 - Point équipe commerciale",
+      "body": "Karim,\n\nPour le Q1 2026, je te rappelle les objectifs fixés pour ton équipe :\n- CA : 180 000 € d'honoraires\n- Mandats exclusifs : 15 minimum\n- Taux de transformation : > 25%\n\nMerci de me faire un point d'avancement d'ici le 20 janvier.\n\nCatherine Vernet\nDirectrice\nImmoPlus Lyon",
+      "date": "2026-01-13T08:00:00Z"
+    },
+    "conversation_history": [],
+    "instructions": "",
+    "user_email": "karim.mandat@immoplus-lyon.fr",
+    "user_name": "Karim Mandat",
+    "user_signature": "Karim Mandat\nDirecteur Commercial\nImmoPlus Lyon\n04 72 XX XX XX | 06 XX XX XX XX",
+    "thread_id": "thread-013",
+    "metadata": {
+      "language": "fr",
+      "length": "short",
+      "intent": "ack",
+      "complexity": "low",
+      "n_history": 0,
+      "has_user_keywords": false,
+      "selection_reason": "stratification (fr/short/ack/low)"
+    }
+  },
+  {
+    "case_id": "msg-012",
+    "persona": "startup_ceo",
+    "incoming_email": {
+      "from": "jm.tessier@grandecorp.fr",
+      "from_name": "Jean-Marc Tessier",
+      "subject": "POC HeyVibe - Préparation",
+      "body": "Bonjour Priya,\n\nSuite à notre échange de la semaine dernière, je souhaitais cadrer les attendus du POC :\n\n1. Intégration SSO avec notre Active Directory (SAML 2.0)\n2. Provisioning automatique des utilisateurs (SCIM)\n3. Conformité RGPD (hébergement des données en France)\n4. SLA 99.9% uptime\n\nNous avons un comité de validation le 15 février. Il serait idéal d'avoir une démo fonctionnelle avant cette date.\n\nPouvez-vous nous confirmer la faisabilité ?\n\nCordialement,\nJean-Marc Tessier\nDSI - GrandeCorp\nTél : +33 1 42 68 90 00",
+      "date": "2026-01-08T11:00:00Z"
+    },
+    "conversation_history": [],
+    "instructions": "",
+    "user_email": "priya@heyvibe.io",
+    "user_name": "Priya Pivot",
+    "user_signature": null,
+    "thread_id": "thread-005",
+    "metadata": {
+      "language": "fr",
+      "length": "mid",
+      "intent": "ack",
+      "complexity": "mid",
+      "n_history": 0,
+      "has_user_keywords": false,
+      "selection_reason": "stratification (fr/mid/ack/mid)"
+    }
+  },
+  {
+    "case_id": "msg-078",
+    "persona": "sales_director",
+    "incoming_email": {
+      "from": "samira@immoplus-lyon.fr",
+      "from_name": "Samira Bensaid",
+      "subject": "Re: Relance dossiers en cours",
+      "body": "C'est fait !\n\n1. Fournier : elle réfléchit encore, rappel prévu vendredi\n2. Stéphane passe demain pour les photos Laurent\n3. Prospect Part-Dieu : visite calée jeudi 14h\n\n👍",
+      "date": "2026-01-22T14:00:00Z"
+    },
+    "conversation_history": [
+      {
+        "sender": "karim.mandat@immoplus-lyon.fr",
+        "subject": "Relance dossiers en cours",
+        "body": "Samira,\n\nPeux-tu relancer les dossiers suivants stp :\n1. Mme Fournier - avis de valeur envoyé, en attente retour mandat\n2. Laurent - photos en attente (relancer Stéphane Vernier)\n3. Prospect SeLoger T4 Part-Dieu - rappeler pour visite\n\nMerci !",
+        "date": "2026-01-22T11:00:00Z"
+      }
+    ],
+    "instructions": "",
+    "user_email": "karim.mandat@immoplus-lyon.fr",
+    "user_name": "Karim Mandat",
+    "user_signature": "Karim Mandat\nDirecteur Commercial\nImmoPlus Lyon\n04 72 XX XX XX | 06 XX XX XX XX",
+    "thread_id": "thread-034",
+    "metadata": {
+      "language": "fr",
+      "length": "short",
+      "intent": "reply",
+      "complexity": "low",
+      "n_history": 1,
+      "has_user_keywords": false,
+      "selection_reason": "stratification (fr/short/reply/low)"
+    }
+  },
+  {
+    "case_id": "msg-076",
+    "persona": "startup_ceo",
+    "incoming_email": {
+      "from": "marcus@sequoiacap.com",
+      "from_name": "Marcus Chen",
+      "subject": "Re: Term Sheet - Final Comments",
+      "body": "Hi Priya,\n\nThanks for the redlines. We're aligned on most points. Quick responses:\n\n1. Lock-up: We can reduce to 6 months, that works\n2. Protective provisions: Agreed to remove the revenue threshold trigger\n3. Anti-dilution: Standard weighted average is fine\n\nI think we're ready to go to definitive docs. Shall we target signing by end of February?\n\nBest,\nMarcus",
+      "date": "2026-01-29T14:00:00Z"
+    },
+    "conversation_history": [],
+    "instructions": "",
+    "user_email": "priya@heyvibe.io",
+    "user_name": "Priya Pivot",
+    "user_signature": null,
+    "thread_id": "thread-032",
+    "metadata": {
+      "language": "en",
+      "length": "short",
+      "intent": "ack",
+      "complexity": "mid",
+      "n_history": 0,
+      "has_user_keywords": false,
+      "selection_reason": "stratification (en/short/ack/mid)"
+    }
+  },
+  {
+    "case_id": "msg-002",
+    "persona": "consultant_intl",
+    "incoming_email": {
+      "from": "r.hayes@strategyco.com",
+      "from_name": "Richard Hayes",
+      "subject": "AcmeCorp Engagement Update",
+      "body": "James,\n\nGood to hear Phase 1 wrapped up well. A few thoughts:\n\n1. The $18M in quick wins sounds promising — can you break that down by category?\n2. We should consider whether this is large enough to bring in a second manager.\n3. Let's discuss Ben's availability — he's partially committed to another workstream.\n\nCan you put together a short status deck for the partners' meeting on Thursday?\n\nBest,\nRichard",
+      "date": "2026-01-06T08:30:00Z"
+    },
+    "conversation_history": [],
+    "instructions": "",
+    "user_email": "james.conseil@strategyco.com",
+    "user_name": "James Conseil",
+    "user_signature": "James Conseil\nSenior Consultant\nStrategyCo | London",
+    "thread_id": "thread-001",
+    "metadata": {
+      "language": "en",
+      "length": "short",
+      "intent": "schedule",
+      "complexity": "mid",
+      "n_history": 0,
+      "has_user_keywords": false,
+      "selection_reason": "stratification (en/short/schedule/mid)"
+    }
+  },
+  {
+    "case_id": "msg-008",
+    "persona": "hr_director",
+    "incoming_email": {
+      "from": "a.mercier@bcp-banque.fr",
+      "from_name": "Antoine Mercier",
+      "subject": "[CONFIDENTIEL] Licenciement M. Renault - Saisine Prud'hommes",
+      "body": "Bonjour Catherine,\n\nJe t'informe que nous avons reçu ce matin la convocation devant le Conseil de Prud'hommes de Paris concernant le licenciement de M. Jean-Marc Renault (ex-Responsable Middle Office).\n\nM. Renault conteste son licenciement pour faute grave et demande :\n- La requalification en licenciement sans cause réelle et sérieuse\n- 18 mois de salaire à titre de dommages et intérêts (soit environ 108 000€)\n- L'indemnité de licenciement (24 500€)\n- L'indemnité compensatrice de préavis (3 mois, soit 18 000€)\n\nL'audience de conciliation est fixée au 15 mars 2026.\n\nJe te recommande de prendre contact rapidement avec Maître Tessier pour préparer notre défense. Le dossier disciplinaire est solide mais il nous faudra consolider les preuves.\n\nBien cordialement,\nAntoine Mercier\nJuriste social\nBanque Centrale de Paris",
+      "date": "2026-01-09T10:00:00Z"
+    },
+    "conversation_history": [],
+    "instructions": "",
+    "user_email": "c.carriere@bcp-banque.fr",
+    "user_name": "Catherine Carrière",
+    "user_signature": "Catherine Carrière\nDirectrice des Ressources Humaines\nBanque Centrale de Paris\nTél. 01 44 XX XX XX\n\nCe message peut contenir des informations confidentielles.",
+    "thread_id": "thread-004",
+    "metadata": {
+      "language": "fr",
+      "length": "mid",
+      "intent": "ask",
+      "complexity": "mid",
+      "n_history": 0,
+      "has_user_keywords": false,
+      "selection_reason": "stratification (fr/mid/ask/mid)"
+    }
+  },
+  {
+    "case_id": "msg-031",
+    "persona": "sales_director",
+    "incoming_email": {
+      "from": "nadia.ferhat@bnp-immo.fr",
+      "from_name": "Nadia Ferhat",
+      "subject": "Re: Financement villa Caluire - Dossier Moreau",
+      "body": "Bonjour Karim,\n\nAvec 150k d'apport et 7 500€ de revenus, c'est tout à fait jouable :\n- Sur 20 ans à 3,2% : mensualité ~2 450€ (taux d'endettement 32%)\n- Sur 25 ans à 3,4% : mensualité ~2 100€ (taux d'endettement 28%)\n\nLe 25 ans serait plus confortable. Il me faudra les 3 derniers bulletins de salaire, les 3 derniers avis d'imposition et les relevés de compte pour monter le dossier.\n\nN'hésite pas à me les envoyer dès que possible pour un accord de principe rapide.\n\nCordialement,\nNadia Ferhat\nConseillère Immobilier\nBNP Paribas - Agence Lyon Bellecour",
+      "date": "2026-01-13T09:15:00Z"
+    },
+    "conversation_history": [
+      {
+        "sender": "karim.mandat@immoplus-lyon.fr",
+        "subject": "Financement villa Caluire - Dossier Moreau",
+        "body": "Bonjour Nadia,\n\nJ'ai une cliente intéressée par une villa à 580 000 € à Caluire. Apport environ 150 000 €, revenus du foyer ~7 500€/mois.\n\nTu pourrais me faire une simulation rapide pour savoir si c'est jouable ? Prêt sur 20 ou 25 ans.\n\nMerci d'avance,\n\nKarim Mandat\nDirecteur Commercial\nImmoPlus Lyon\n04 72 XX XX XX | 06 XX XX XX XX",
+        "date": "2026-01-10T16:00:00Z"
+      }
+    ],
+    "instructions": "",
+    "user_email": "karim.mandat@immoplus-lyon.fr",
+    "user_name": "Karim Mandat",
+    "user_signature": "Karim Mandat\nDirecteur Commercial\nImmoPlus Lyon\n04 72 XX XX XX | 06 XX XX XX XX",
+    "thread_id": "thread-012",
+    "metadata": {
+      "language": "fr",
+      "length": "mid",
+      "intent": "ack",
+      "complexity": "low",
+      "n_history": 1,
+      "has_user_keywords": false,
+      "selection_reason": "stratification (fr/mid/ack/low)"
+    }
+  },
+  {
+    "case_id": "msg-027",
+    "persona": "sales_director",
+    "incoming_email": {
+      "from": "jp.astier@promoval.fr",
+      "from_name": "Jean-Philippe Astier",
+      "subject": "Re: Programme neuf Confluence - Partenariat",
+      "body": "Bonjour Karim,\n\nOui tout à fait, on cherche des agences partenaires pour la commercialisation de \"Les Rives de Saône\", 85 lots du T1 au T5, livraison T4 2027.\n\nCommission standard 3% HT du prix de vente. On peut monter à 4% si vous placez plus de 5 lots sur le trimestre.\n\nJe t'envoie la plaquette commerciale et les grilles de prix. On se cale un rdv pour en discuter ?\n\nJean-Philippe Astier\nDirecteur des ventes\nPromoval\n04 78 XX XX XX",
+      "date": "2026-01-09T14:30:00Z"
+    },
+    "conversation_history": [
+      {
+        "sender": "karim.mandat@immoplus-lyon.fr",
+        "subject": "Programme neuf Confluence - Partenariat",
+        "body": "Bonjour Jean-Philippe,\n\nJ'ai vu que Promoval lance un nouveau programme sur le secteur Confluence. On pourrait en discuter pour un partenariat de commercialisation ?\n\nCombien de lots sont disponibles et quelle serait la commission agence ?\n\nCordialement,\n\nKarim Mandat\nDirecteur Commercial\nImmoPlus Lyon\n04 72 XX XX XX | 06 XX XX XX XX",
+        "date": "2026-01-09T10:00:00Z"
+      }
+    ],
+    "instructions": "",
+    "user_email": "karim.mandat@immoplus-lyon.fr",
+    "user_name": "Karim Mandat",
+    "user_signature": "Karim Mandat\nDirecteur Commercial\nImmoPlus Lyon\n04 72 XX XX XX | 06 XX XX XX XX",
+    "thread_id": "thread-010",
+    "metadata": {
+      "language": "fr",
+      "length": "mid",
+      "intent": "schedule",
+      "complexity": "mid",
+      "n_history": 1,
+      "has_user_keywords": false,
+      "selection_reason": "stratification (fr/mid/schedule/mid)"
+    }
+  },
+  {
+    "case_id": "msg-002",
+    "persona": "sales_director",
+    "incoming_email": {
+      "from": "samira@immoplus-lyon.fr",
+      "from_name": "Samira Bensaid",
+      "subject": "Re: Planning visites semaine 2",
+      "body": "Salut Karim,\n\nC'est noté ! Par contre mardi 14h t'as déjà le call avec la direction, je décale Mme Moreau à 15h30 ?\n\nPour le T4 Croix-Rousse j'ai appelé les Laurent, c'est bon pour mercredi 10h.\n\nSamira",
+      "date": "2026-01-06T08:52:00Z"
+    },
+    "conversation_history": [
+      {
+        "sender": "karim.mandat@immoplus-lyon.fr",
+        "subject": "Planning visites semaine 2",
+        "body": "Samira,\n\nTu peux me caler les visites suivantes stp ?\n- Villa Caluire : mardi 14h avec Mme Moreau\n- T4 Croix-Rousse : mercredi 10h (visite estimation)\n- Appart Confluence : jeudi 16h\n\nMerci 👍",
+        "date": "2026-01-06T08:30:00Z"
+      }
+    ],
+    "instructions": "",
+    "user_email": "karim.mandat@immoplus-lyon.fr",
+    "user_name": "Karim Mandat",
+    "user_signature": "Karim Mandat\nDirecteur Commercial\nImmoPlus Lyon\n04 72 XX XX XX | 06 XX XX XX XX",
+    "thread_id": "thread-001",
+    "metadata": {
+      "language": "fr",
+      "length": "short",
+      "intent": "schedule",
+      "complexity": "mid",
+      "n_history": 1,
+      "has_user_keywords": false,
+      "selection_reason": "stratification (fr/short/schedule/mid)"
+    }
+  },
+  {
+    "case_id": "msg-070",
+    "persona": "startup_ceo",
+    "incoming_email": {
+      "from": "sarah@stationf.co",
+      "from_name": "Sarah Liu",
+      "subject": "Demo Day - Investor List & Logistics",
+      "body": "Hi Priya,\n\nAs promised, here's the confirmed investor list for Feb 20:\n- Sequoia Capital (you already know them!)\n- Accel Partners\n- Index Ventures\n- Partech Partners\n- Elaia Partners\n- Kima Ventures\n- 50+ angel investors\n\nLogistics:\n- AV check at 13:00\n- Your slot: 14:30\n- Format: 12 min pitch + 3 min Q&A\n- Networking cocktail: 18:00-20:00\n\nLet me know if you need anything else!\n\nBest,\nSarah",
+      "date": "2026-01-27T11:30:00Z"
+    },
+    "conversation_history": [],
+    "instructions": "",
+    "user_email": "priya@heyvibe.io",
+    "user_name": "Priya Pivot",
+    "user_signature": null,
+    "thread_id": "thread-029",
+    "metadata": {
+      "language": "en",
+      "length": "short",
+      "intent": "ack",
+      "complexity": "low",
+      "n_history": 0,
+      "has_user_keywords": false,
+      "selection_reason": "stratification (en/short/ack/low)"
+    }
+  },
+  {
+    "case_id": "msg-004",
+    "persona": "startup_ceo",
+    "incoming_email": {
+      "from": "marcus@sequoiacap.com",
+      "from_name": "Marcus Chen",
+      "subject": "Series A - Next Steps",
+      "body": "Hi Priya,\n\nGreat meeting today. The traction is impressive, especially the net revenue retention at 130%+.\n\nA few things we'd like to see before moving to term sheet:\n1. Updated data room with January numbers\n2. Customer references (ideally enterprise)\n3. High-level technical architecture doc\n\nAlso want to discuss board composition early. We typically look for one board seat at Series A.\n\nLet me know timing.\n\nBest,\nMarcus Chen\nPartner, Sequoia Capital\nmarcus@sequoiacap.com",
+      "date": "2026-01-07T09:45:00Z"
+    },
+    "conversation_history": [],
+    "instructions": "",
+    "user_email": "priya@heyvibe.io",
+    "user_name": "Priya Pivot",
+    "user_signature": null,
+    "thread_id": "thread-002",
+    "metadata": {
+      "language": "en",
+      "length": "short",
+      "intent": "schedule",
+      "complexity": "low",
+      "n_history": 0,
+      "has_user_keywords": false,
+      "selection_reason": "stratification (en/short/schedule/low)"
+    }
+  },
+  {
+    "case_id": "msg-022",
+    "persona": "startup_ceo",
+    "incoming_email": {
+      "from": "sarah@stationf.co",
+      "from_name": "Sarah Liu",
+      "subject": "Demo Day Feb 20 - Slot Confirmation",
+      "body": "Hi Priya,\n\nExcited to confirm that HeyVibe has been selected for the Station F Demo Day on February 20th!\n\nDetails:\n- Date: February 20, 2026\n- Your slot: 14:30 - 14:45 (15 min pitch + 5 min Q&A)\n- Venue: Main Stage, Station F\n- Expected investors: ~80 VCs and angels\n\nPlease confirm your participation by January 15th. We'll also need your deck by Feb 13 for AV setup.\n\nLet me know if you have questions!\n\nBest,\nSarah Liu\nProgram Manager\nStation F",
+      "date": "2026-01-10T09:00:00Z"
+    },
+    "conversation_history": [],
+    "instructions": "",
+    "user_email": "priya@heyvibe.io",
+    "user_name": "Priya Pivot",
+    "user_signature": null,
+    "thread_id": "thread-009",
+    "metadata": {
+      "language": "en",
+      "length": "mid",
+      "intent": "ack",
+      "complexity": "low",
+      "n_history": 0,
+      "has_user_keywords": false,
+      "selection_reason": "stratification (en/mid/ack/low)"
+    }
+  },
+  {
+    "case_id": "msg-004",
+    "persona": "consultant_intl",
+    "incoming_email": {
+      "from": "m.torres@acmecorp.com",
+      "from_name": "Michael Torres",
+      "subject": "Phase 2 Scope and Timeline",
+      "body": "Dear James,\n\nThank you for the Phase 2 proposal. The board has reviewed it and we have several comments:\n\n1. The 12-week timeline for the operating model workstream feels long. Can we compress to 10 weeks?\n2. We need more analytical horsepower on the procurement deep-dive. The current team feels thin.\n3. Jennifer has raised concerns about change management — we need to ensure frontline buy-in early.\n\nOverall the direction is right, but these points need addressing before we can sign off.\n\nRegards,\nMichael Torres\nChief Financial Officer\nAcmeCorp",
+      "date": "2026-01-07T08:00:00Z"
+    },
+    "conversation_history": [],
+    "instructions": "",
+    "user_email": "james.conseil@strategyco.com",
+    "user_name": "James Conseil",
+    "user_signature": "James Conseil\nSenior Consultant\nStrategyCo | London",
+    "thread_id": "thread-002",
+    "metadata": {
+      "language": "en",
+      "length": "mid",
+      "intent": "ack",
+      "complexity": "mid",
+      "n_history": 0,
+      "has_user_keywords": false,
+      "selection_reason": "stratification (en/mid/ack/mid)"
+    }
+  }
+]

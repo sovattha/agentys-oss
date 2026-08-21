@@ -1,0 +1,92 @@
+/* Live indicator shown during AI generation / transcription.
+   Pulsing accent dot + Claude-style luminous shimmer sweep on the label. */
+
+.thinking-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 2px 8px;
+  min-height: 22px;
+  animation: thinking-indicator-fade-in 200ms ease-out;
+}
+
+.thinking-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0d9488;
+  box-shadow: 0 0 6px color-mix(in srgb, #0d9488 55%, transparent);
+  animation: thinking-indicator-pulse 1.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* Fallback for browsers without background-clip:text */
+.thinking-indicator-text {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #0d9488;
+}
+
+/* Claude-style shimmer — a luminous bright spot with halo sweeping
+   left → right through the text. Multi-stop gradient creates the soft
+   bell-curve falloff; a 105° angle gives it a tiny diagonal energy
+   instead of feeling perfectly horizontal/clinical. */
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .thinking-indicator-text {
+    background: linear-gradient(
+      105deg,
+      #0d9488 0%,
+      #0d9488 30%,
+      #14b8a6 42%,
+      #2dd4bf 48%,
+      #5eead4 50%,
+      #2dd4bf 52%,
+      #14b8a6 58%,
+      #0d9488 70%,
+      #0d9488 100%
+    );
+    background-size: 240% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: ti-shimmer 2.4s linear infinite;
+  }
+}
+
+@keyframes ti-shimmer {
+  from { background-position: 120% 0; }
+  to   { background-position: -120% 0; }
+}
+
+@keyframes thinking-indicator-pulse {
+  0%, 100% {
+    transform: scale(0.85);
+    opacity: 0.7;
+    box-shadow: 0 0 6px color-mix(in srgb, #0d9488 55%, transparent);
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+    box-shadow: 0 0 10px color-mix(in srgb, #0d9488 90%, transparent);
+  }
+}
+
+@keyframes thinking-indicator-fade-in {
+  from { opacity: 0; transform: translateY(-2px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thinking-indicator,
+  .thinking-indicator-dot,
+  .thinking-indicator-text {
+    animation: none;
+  }
+  .thinking-indicator-text {
+    color: #0d9488;
+    -webkit-text-fill-color: #0d9488;
+    background: none;
+  }
+}

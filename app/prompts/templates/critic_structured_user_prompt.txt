@@ -1,0 +1,28 @@
+Évalue ce brouillon de réponse email.
+
+EMAIL ORIGINAL :
+{email_content}
+
+BROUILLON À ÉVALUER :
+{draft}
+
+{context_section}
+
+Réponds UNIQUEMENT avec un JSON valide (pas de texte avant ou après, pas de markdown):
+
+{{
+  "coherence": <score 0-100>,
+  "tone": <score 0-100>,
+  "completeness": <score 0-100>,
+  "errors": <score 0-100>,
+  "conciseness": <score 0-100>,
+  "over_commitment": <score 0-100>,
+  "emotional_intelligence": <score 0-100>,
+  "decision": "valid" ou "reject",
+  "suggestions": ["max 3 mots", "max 3 mots"],
+  "explanation": "1 phrase 10 mots max"
+}}
+
+Décision:
+- "valid" si le score moyen >= {threshold} et aucun critère < 50
+- "reject" si le score moyen < {threshold} ou un critère critique < 50

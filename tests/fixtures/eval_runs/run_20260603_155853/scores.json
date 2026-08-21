@@ -1,0 +1,67 @@
+{
+  "profile": {
+    "completeness": 88,
+    "precision": 82,
+    "usefulness": 85,
+    "overall": 85,
+    "missing": [
+      "default_tone: 'formal' (system outputs 'semi-formal')",
+      "addressing field at top level (present only inside tone object)",
+      "formal greeting variants 'Madame,' and 'Monsieur,' in formal_fr greeting",
+      "uses_emoji: false"
+    ],
+    "incorrect": [
+      "default_tone set to 'semi-formal' instead of 'formal'",
+      "greeting placeholder format '{first_name}' instead of '[Prénom]' (minor but inconsistent with ground truth style)"
+    ],
+    "details": "The system output captures most key profile elements correctly: user email, name, preferred name, signature details, languages, language variant, greeting/closing styles, and response length. The main discrepancy is in 'default_tone': the ground truth specifies 'formal' while the system outputs 'semi-formal'. The 'addressing' field ('vous') is present but placed inside the tone object rather than at the top level as in ground truth. The system adds extra fields (profession, profession_confirmed, department: null) not in ground truth, which are harmless additions. The greeting style for formal_fr is slightly incomplete (ground truth includes 'Madame, / Monsieur,' variants), and the template placeholder format differs slightly ({first_name} vs [Prénom]). The tone mismatch is the most impactful error as it could lead to drafts defaulting to a less formal register than intended for a banking HR director."
+  },
+  "knowledge": {
+    "completeness": 72,
+    "precision": 68,
+    "usefulness": 65,
+    "overall": 68,
+    "missing": [
+      "type field for all 11 contacts",
+      "topics field for all 11 contacts",
+      "title for Valérie Sanchez (Responsable Paie)",
+      "title for Antoine Mercier (Juriste social)",
+      "title for Marine Petit (Assistante RH)",
+      "title for Bruno Lefèvre (Délégué syndical CGT)",
+      "title for Sylvie Morel (Secrétaire du CSE)",
+      "title for Isabelle Fontaine (Directrice Commerciale)"
+    ],
+    "incorrect": [
+      "Gérard Montfort interaction_count: output=11, truth=12",
+      "Marie Dubois preferred_tone: output=formal, truth=semi-formal",
+      "Marie Dubois title: output='Responsable Conformité' (her target role), truth='Candidate Responsable Conformité' (she is a candidate)",
+      "Caroline Tessier name missing 'Maître' honorific",
+      "Caroline Tessier company: output='Tessier Avocats', truth='Cabinet Tessier & Associés'",
+      "Caroline Tessier interaction_count: output=4, truth=6",
+      "Philippe Laurent missing 'Dr.' title prefix",
+      "Philippe Laurent company: output='Médecine du Travail', truth='Service de Santé au Travail Interentreprises'"
+    ],
+    "details": "The system found all 11 contacts present in the ground truth, which is good. However, it is missing several important fields: 'type' (relationship category like manager/colleague/syndicat/external_partner/supplier/candidate) is absent for all contacts, and 'topics' are missing entirely for all contacts. These are critical for generating contextually appropriate email drafts. Several titles are missing (Valérie Sanchez, Antoine Mercier, Marine Petit, Bruno Lefèvre, Sylvie Morel, Isabelle Fontaine). Some data is incorrect: Gérard Montfort's interaction_count is 11 instead of 12; Marie Dubois's tone is 'formal' instead of 'semi-formal' and her title 'Responsable Conformité' is her applied-for role not her current title (she's a candidate); Caroline Tessier is missing her 'Maître' honorific and full firm name; Philippe Laurent is missing his 'Dr.' title and full organization name. The system adds a 'language_variant' field not in ground truth (minor, not harmful). The absence of topics and contact types significantly reduces usefulness for email drafting."
+  },
+  "rules": {
+    "completeness": 82,
+    "precision": 72,
+    "usefulness": 75,
+    "overall": 76,
+    "missing": [
+      "general_rule: bcc_avocat — Add c.tessier@tessier-avocats.fr in BCC on internal emails related to litigation/Prud'hommes",
+      "general_rule: bcc_direction — Add g.montfort@bcp-banque.fr in BCC on replies to unions on sensitive topics",
+      "general_rule: cc_juridique_nao — Add a.mercier@bcp-banque.fr in CC on NAO and litigation communications",
+      "general_rule: forward_with_context — Forward with summary, vigilance points and specific action request (output contradicts this by saying forward as raw block)"
+    ],
+    "incorrect": [
+      "general_rule: 'Transférer les documents sources en bloc' contradicts ground truth rule 'forward_with_context' which requires a summary, context note and specific instructions",
+      "general_rule: 'Justifier les décisions RH par des références légales' — not in ground truth, potentially hallucinated",
+      "general_rule: 'Utiliser le jargon RH/bancaire sans définition' — not in ground truth, hallucinated",
+      "general_rule: 'Proposer des délais précis et des calendriers détaillés' — not in ground truth, hallucinated",
+      "general_rule: 'Demander explicitement les actions attendues avec formules Peux-tu...' — partially overlaps with forward_with_context but is a distinct fabricated rule"
+    ],
+    "details": "Contact rules: All 11 contacts from ground truth are present in the output with correct tone, language, greeting, and closing — full marks here. The output adds an extra 'addressing' field (tu/vous) which is a useful addition, not a penalty. General rules: The output captures several key rules (confidentiel_marker, signature_complete, tutoiement/vouvoiement, structured_emails, forward_with_context partially) but misses the critical BCC rules (bcc_avocat, bcc_direction, cc_juridique_nao) entirely. These BCC/CC rules are operationally important for compliance and legal risk management. The output also introduces several rules not in ground truth (justifying decisions with legal references, using RH/banking jargon, proposing precise timelines, forwarding documents as blocks rather than summarizing) — some of these are plausible inferences but are not validated by ground truth and could lead to incorrect behavior. The 'forward_with_context' rule is partially captured but inverted (output says forward as block rather than with summary and instructions). Forbidden phrases: Both are empty — match."
+  },
+  "overall": 76
+}

@@ -1,0 +1,64 @@
+{
+  "profile": {
+    "completeness": 95,
+    "precision": 90,
+    "usefulness": 92,
+    "overall": 92,
+    "missing": [],
+    "incorrect": [
+      "active_hours: shows '08:00-17:00' but should be '08:00-18:00'",
+      "response_time_avg: shows '< 2h' but should be '< 1h'"
+    ],
+    "details": "The system output captures nearly all critical information correctly. User identification (email, name), signatures (both French and English with all components), tone settings (default tone, greeting/closing styles, emoji usage, first name preference), and languages are all perfectly matched. However, there are two minor inaccuracies: active_hours shows '08:00-17:00' instead of '08:00-18:00' (1 hour discrepancy), and response_time_avg shows '< 2h' instead of '< 1h'. These are small but could impact scheduling suggestions or urgency assessments. Overall, the output would be highly useful for generating email drafts with correct tone, appropriate greetings/closings in both languages, and accurate signature blocks."
+  },
+  "knowledge": {
+    "completeness": 85,
+    "precision": 92,
+    "usefulness": 88,
+    "overall": 88,
+    "missing": [
+      "Pierre Durand: topics 'demo', 'recrutement', 'PartnerTech' not captured",
+      "Lucas Bernard: topics 'conges', 'sprint' not captured",
+      "Camille Roux: topic 'pentest' not captured",
+      "Marie Leclerc: topic 'kick-off' not in her contact (appears in Claire's)",
+      "Nicolas Moreau: topic 'validation achat WAF' simplified to 'achats WAF'",
+      "Marc Dupont: title 'PDG' changed to 'CEO' (semantic equivalent but language differs)",
+      "Sarah Jones: topic 'webhooks' not captured",
+      "Projects: 'Migration Cloud' project merged into other projects rather than standalone",
+      "Terminology: 'Sprint', 'Daily', 'Retro', 'PR' definitions missing"
+    ],
+    "incorrect": [
+      "Pierre Durand: interaction_count 27 vs ground truth 20 (35% higher)",
+      "Pierre Durand: title 'Lead Technique' vs 'Lead Developer' (semantic overlap but different wording)",
+      "Lucas Bernard: interaction_count 15 vs ground truth 10 (50% higher)",
+      "Lucas Bernard: title 'Développeur' vs null (hallucinated title)",
+      "Camille Roux: interaction_count 11 vs ground truth 6 (83% higher)",
+      "Camille Roux: topics include 'vulnérabilités' (not in ground truth)",
+      "Marie Leclerc: interaction_count 8 vs ground truth 6 (33% higher)",
+      "Nicolas Moreau: interaction_count 7 vs ground truth 4 (75% higher)",
+      "Marc Dupont: interaction_count 6 vs ground truth 4 (50% higher)",
+      "Sarah Jones: interaction_count 5 vs ground truth 4 (25% higher)",
+      "John Smith: interaction_count 4 vs ground truth 2 (100% higher)",
+      "Claire Fontaine: interaction_count 4 vs ground truth 3 (33% higher)",
+      "Terminology: Added definitions for GDPR, CSP, GraphQL, OAuth2, Rate limiting, POC (not in ground truth)",
+      "Added 'frequent_topics' array (not in ground truth schema)"
+    ],
+    "details": "The system captured 13 of 13 contacts with highly accurate information. Contact details are mostly correct with minor discrepancies in interaction counts and some topic variations. All 5 major projects were identified but with slightly different structures. The system added useful extras like 'frequent_topics' and expanded terminology definitions. Missing items are minimal - mainly Pierre's involvement in PartnerTech project and some specific topic keywords. Title discrepancies exist (e.g., 'Lead Technique' vs 'Lead Developer', 'CEO' vs 'PDG', 'Développeur' vs null) but don't significantly impact usefulness. Interaction counts differ by 20-50% but capture relative importance correctly."
+  },
+  "rules": {
+    "completeness": 92,
+    "precision": 88,
+    "usefulness": 90,
+    "overall": 90,
+    "missing": [
+      "Auto-reply pattern: Conge/absence acknowledgment"
+    ],
+    "incorrect": [
+      "pierre.durand@techcorp.fr: closing shows 'Sophi' (likely typo, should be 'Sophie')",
+      "pierre.durand@techcorp.fr: greeting includes 'Salut l'equipe,' which is not in ground truth",
+      "Auto-reply patterns: 'Support IT' and 'Demande RH/Compta' are not in ground truth (may be hallucinated or inferred)"
+    ],
+    "details": "The system captured 12/13 contact rules perfectly and 1 with minor issues (pierre.durand has 'Sophi' typo and extra greeting variant). All 8 general rules are present with correct logic, though descriptions are in French vs English (style choice, not error). Auto-reply patterns: found 1/2 from ground truth but added 2 extra patterns that seem plausible but aren't verified. The output is highly usable for email generation with accurate tone, language, and greeting/closing patterns. Minor deductions for: the 'Sophi' typo, missing 'Conge/absence' auto-reply pattern, and including unverified auto-reply patterns."
+  },
+  "overall": 90
+}

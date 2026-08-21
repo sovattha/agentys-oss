@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 600" width="500" height="600">
+  <defs>
+    <!-- Gradient principal -->
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7B61FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF00FF;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Gradient secondaire -->
+    <linearGradient id="innerGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7B61FF;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Gradient pour le texte -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7B61FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF00FF;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Glow effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Soft glow -->
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Text glow -->
+    <filter id="textGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Ambient glow behind logo -->
+    <radialGradient id="ambientGlow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" style="stop-color:#7B61FF;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#0D1421;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Fond sombre -->
+  <rect width="500" height="600" fill="#0D1421"/>
+
+  <!-- Ambient glow -->
+  <ellipse cx="250" cy="220" rx="200" ry="180" fill="url(#ambientGlow)"/>
+
+  <!-- Triangle extérieur (style néon) -->
+  <polygon
+    points="250,60 430,380 70,380"
+    fill="none"
+    stroke="url(#mainGradient)"
+    stroke-width="6"
+    stroke-linejoin="round"
+    filter="url(#softGlow)"
+  />
+
+  <!-- Triangle intérieur -->
+  <polygon
+    points="250,120 380,340 120,340"
+    fill="none"
+    stroke="url(#innerGradient)"
+    stroke-width="4"
+    stroke-linejoin="round"
+    filter="url(#glow)"
+  />
+
+  <!-- Barre du A -->
+  <line
+    x1="155" y1="270"
+    x2="345" y2="270"
+    stroke="url(#mainGradient)"
+    stroke-width="4"
+    stroke-linecap="round"
+    filter="url(#glow)"
+  />
+
+  <!-- Point d'agent/IA (sommet) -->
+  <circle cx="250" cy="120" r="10" fill="#00D4FF" filter="url(#glow)"/>
+
+  <!-- Points connectés -->
+  <circle cx="380" cy="340" r="7" fill="#7B61FF" filter="url(#glow)"/>
+  <circle cx="120" cy="340" r="7" fill="#FF00FF" filter="url(#glow)"/>
+
+  <!-- Ligne centrale -->
+  <line x1="250" y1="130" x2="250" y2="220" stroke="#00D4FF" stroke-width="2" opacity="0.5"/>
+
+  <!-- Texte Agentys -->
+  <text
+    x="250" y="470"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="52"
+    font-weight="bold"
+    fill="url(#textGradient)"
+    text-anchor="middle"
+    filter="url(#textGlow)"
+  >Agentys</text>
+
+  <!-- Sous-titre -->
+  <text
+    x="250" y="510"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="16"
+    font-weight="300"
+    fill="#FFFFFF"
+    text-anchor="middle"
+    letter-spacing="6"
+    opacity="0.6"
+  >AI AUTOMATION</text>
+</svg>

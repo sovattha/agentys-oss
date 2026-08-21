@@ -1,0 +1,67 @@
+{
+  "profile": {
+    "completeness": 62,
+    "precision": 55,
+    "usefulness": 50,
+    "overall": 56,
+    "missing": [
+      "formal_en greeting style: 'Dear [Name],'",
+      "formal_en closing style: 'Best regards,'",
+      "uses_emoji: false",
+      "addressing field at top level (present in tone block but missing from root)"
+    ],
+    "incorrect": [
+      "language_variant: 'en-GB' should be 'en-US'",
+      "greeting_styles semi_formal_en mapped to 'Dear {first_name},' (should be 'Hi [Name],')",
+      "greeting_styles casual_en mapped to 'Hi {first_name},' (should be '[Name],')",
+      "closing_styles semi_formal_en mapped to 'Best regards,' (should be 'Best,')",
+      "closing_styles casual_en mapped to 'Cheers,' (missing 'J.' variant)",
+      "profession field is a hallucination not present in ground truth",
+      "profession_confirmed field is a hallucination not present in ground truth"
+    ],
+    "details": "The system captured most core profile fields correctly (email, name, preferred_name, signature, languages, average_response_length, default_tone). However, several important details are wrong or missing. The greeting/closing styles are mismatched: the system maps 'semi_formal' to 'Dear [Name]' (which is actually the formal style in ground truth) and 'casual' to 'Hi [Name]' (which is the semi-formal style). The formal greeting/closing styles are entirely absent. The language variant is wrong (en-GB vs en-US). The system added fields not in ground truth (profession, profession_confirmed) which are minor hallucinations. The uses_emoji field is missing. The addressing field was placed inside tone in the output rather than at the top level, though the value is correct."
+  },
+  "knowledge": {
+    "completeness": 72,
+    "precision": 58,
+    "usefulness": 55,
+    "overall": 62,
+    "missing": [
+      "noreply@outlook.com (Microsoft Outlook) - system notification contact",
+      "notifications@slack.com (Slack) - system notification contact",
+      "calendar@strategyco.com (StrategyCo Calendar) - system calendar contact",
+      "Titles for: Anika Patel (Associate), Richard Hayes (Managing Partner), Ben Crawford (Senior Consultant), Emma Phillips (PA/Executive Assistant), Isabelle Moreau (Chief Human Resources Officer), Jennifer Walsh (VP Operations), Wei Lin (Consultant), Klaus Weber (VP Corporate Strategy), Takeshi Yamamoto (Director, International Business Development), David Chen (Analyst)"
+    ],
+    "incorrect": [
+      "Anika Patel: preferred_tone should be 'casual', not 'semi-formal'",
+      "Ben Crawford: preferred_tone should be 'casual', not 'semi-formal'",
+      "Isabelle Moreau: preferred_language should be 'en' not 'fr'; preferred_tone should be 'formal' not 'semi-formal'",
+      "Jennifer Walsh: preferred_tone should be 'semi-formal' not 'formal'",
+      "Wei Lin: preferred_tone should be 'casual' not 'semi-formal'",
+      "David Chen: preferred_tone should be 'casual' not 'semi-formal'",
+      "Michael Torres: title should be 'Chief Financial Officer' not 'CFO'",
+      "language_variant field is fabricated and not present in ground truth for all contacts"
+    ],
+    "details": "The system found 11 of 14 contacts, missing 3 (noreply@outlook.com, notifications@slack.com, calendar@strategyco.com). Among found contacts, there are multiple inaccuracies: titles are missing for most contacts (only Michael Torres has a title, abbreviated as 'CFO' instead of 'Chief Financial Officer'); preferred tones are wrong for several contacts (Anika Patel should be 'casual' not 'semi-formal', Ben Crawford should be 'casual' not 'semi-formal', Isabelle Moreau should be 'formal' not 'semi-formal', Jennifer Walsh should be 'semi-formal' not 'formal', Wei Lin should be 'casual' not 'semi-formal', David Chen should be 'casual' not 'semi-formal'); Isabelle Moreau's preferred_language is incorrectly set to 'fr' instead of 'en'; the system adds a fabricated 'language_variant' field not present in ground truth. The tone errors are particularly impactful for email drafting usefulness, as casual vs. semi-formal vs. formal distinctions directly affect draft quality."
+  },
+  "rules": {
+    "completeness": 82,
+    "precision": 78,
+    "usefulness": 80,
+    "overall": 80,
+    "missing": [
+      "Richard Hayes tone should be 'semi-formal', not 'casual'",
+      "Named general rule 'consultant_frameworks' (McKinsey 7S, RACI matrix, 2x2 prioritisation)",
+      "Named general rule 'action_items' (explicit next steps with dates and owners for client emails)",
+      "Full signature block specification: 'James Conseil\\nSenior Consultant\\nStrategyCo | London'",
+      "Structured general_rules format with name, trigger, and action fields"
+    ],
+    "incorrect": [
+      "r.hayes@strategyco.com tone listed as 'casual' instead of 'semi-formal'",
+      "a.patel@strategyco.com closing includes 'Well done' — hallucinated phrase not supported by ground truth",
+      "Emma Phillips greeting listed as 'Hi Emma, / Emma,' — ground truth specifies only 'Hi Emma,'"
+    ],
+    "details": "The system correctly identified all 11 contact rules with accurate emails, tones, languages, greetings, and closings in most cases. All contacts from ground truth are present. The general rules capture the spirit of the ground truth rules but are structured differently (no name/trigger/action fields) and miss some specific named rules like 'consultant_frameworks' and 'action_items' as explicit rules. The system adds extra useful rules (cultural sensitivity for non-English regions, feedback specificity) not in ground truth. Key issues: (1) Richard Hayes is marked 'casual' instead of 'semi-formal' — a meaningful error; (2) Anika Patel's closing includes 'Well done' which is a hallucinated phrase not derived from patterns; (3) The general_rules lack structured trigger/action format making them less machine-usable; (4) The 'consultant_frameworks' rule (McKinsey 7S, RACI, 2x2) is missing; (5) The full signature format 'James Conseil\\nSenior Consultant\\nStrategyCo | London' is partially captured but not fully specified. The forbidden_phrases match (both empty). Overall the output is largely useful for drafting emails but has some inaccuracies."
+  },
+  "overall": 66
+}

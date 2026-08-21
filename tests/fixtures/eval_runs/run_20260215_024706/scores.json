@@ -1,0 +1,78 @@
+{
+  "profile": {
+    "completeness": 85,
+    "precision": 75,
+    "usefulness": 80,
+    "overall": 80,
+    "missing": [
+      "Active hours timezone context: '(multi-timezone)' - system shows narrower hours without timezone note",
+      "Average response length qualifier: 'medium-long' reported as just 'medium'",
+      "Faster response time: '< 2h' vs '< 4h'",
+      "Exact closing style for semi-formal: 'Best,' (ground truth) vs 'Cheers,' (system output)",
+      "Exact casual closing: 'Cheers, / J.' (ground truth) vs 'J.' (system output)"
+    ],
+    "incorrect": [
+      "Greeting/closing template syntax: uses {first_name} instead of [Name]",
+      "Semi-formal closing style: 'Cheers,' instead of 'Best,'",
+      "Casual closing style: 'J.' instead of 'Cheers, / J.'",
+      "Active hours: '08:00-18:30' instead of '08:00-20:00 (multi-timezone)'",
+      "Response time: '< 4h' instead of '< 2h'",
+      "Average response length: 'medium' instead of 'medium-long'"
+    ],
+    "details": "The system captures most core profile elements correctly: user_email, user_name, signature details (name, title, company), default_tone (semi-formal), language (en), uses_first_name (true), uses_emoji (false). However, there are several deviations: (1) Greeting/closing style templates use {first_name} instead of [Name], (2) Closing styles differ - ground truth has 'Best,' for semi-formal but system has 'Cheers,', and casual differs ('Cheers, / J.' vs 'J.'), (3) Response length is 'medium' vs 'medium-long', (4) Active hours are narrower '08:00-18:30' vs '08:00-20:00 (multi-timezone)', (5) Response time is slower '< 4h' vs '< 2h'. The system also adds an extra 'signature_en' field and 'department' field (null) which aren't in ground truth but don't harm precision. The closing style discrepancies and timing/availability differences could impact draft quality."
+  },
+  "knowledge": {
+    "completeness": 78,
+    "precision": 82,
+    "usefulness": 80,
+    "overall": 80,
+    "missing": [
+      "Contact: noreply@outlook.com (Microsoft Outlook) - automated",
+      "Contact: notifications@slack.com (Slack) - automated",
+      "Contact: calendar@strategyco.com (StrategyCo Calendar) - automated",
+      "Project: AcmeCorp Cost Transformation as single unified project (system split into Phase 1/Phase 2)",
+      "Project keywords: '$50M savings target', 'steering committee'",
+      "Terminology: 'Stakeholder', 'Deck', 'Deliverable', 'Offramp', 'Boil the ocean', 'Pre-read', 'War room', 'RAG status', 'Bubble chart', 'Pipeline', 'Utilisation'",
+      "Multiple contact job titles (Anika Patel: Associate, Ben Crawford: Senior Consultant, Wei Lin: Consultant, Emma Phillips: PA/Executive Assistant, David Chen: Analyst)",
+      "LuxeGroup project budget: EUR 800K (system has EUR 2.5M)"
+    ],
+    "incorrect": [
+      "Project: 'Singtel CX Transformation' exists in system output but not in ground truth (hallucinated - should be part of Wei Lin's APAC pipeline discussions, not standalone project)",
+      "Project: AcmeCorp split into 'Phase 1 Diagnostic' (completed) + 'Phase 2 Operating Model' (active) - ground truth shows single active project",
+      "Project: IndustrieWerke status 'prospecting' vs ground truth 'pipeline'",
+      "Project: Nippon Partners status 'negotiation' vs ground truth 'early-stage'",
+      "Project: LuxeGroup budget 'EUR 2.5M' vs ground truth 'EUR 800K'",
+      "Contact: Ben Crawford type 'direct_report' should be 'colleague'",
+      "Contact: David Chen type 'colleague' should be 'direct_report'",
+      "Contact: Emma Phillips preferred_tone 'semi-formal' should be 'casual'",
+      "Contact: Jennifer Walsh preferred_tone 'formal' should be 'semi-formal'",
+      "System added 'frequent_topics' section not present in ground truth schema",
+      "Terminology definitions differ significantly - system focuses on implementation terms, ground truth includes strategic frameworks"
+    ],
+    "details": "The system captured 11 of 14 contacts (79%) with good detail on interaction counts and topics. Missing 3 automated contacts (Microsoft Outlook, Slack, StrategyCo Calendar) which are lower priority. Contact metadata is mostly accurate but missing some job titles. Projects show significant discrepancies: system split AcmeCorp into Phase 1/Phase 2 (reasonable interpretation) but created projects not in ground truth (Singtel CX Transformation) and missed key details. The ground truth has 4 projects while system has 6. Terminology section shows good overlap (~40% match) but different selections - system chose more specific consulting terms while ground truth included broader frameworks. The 'frequent_topics' addition in system output is useful but not in ground truth schema. Overall, the output would be moderately useful for email drafting with correct tone preferences and contact relationships, though some details need verification."
+  },
+  "rules": {
+    "completeness": 75,
+    "precision": 85,
+    "usefulness": 80,
+    "overall": 80,
+    "missing": [
+      "General rule: formal_clients (categorical rule for all client contacts)",
+      "General rule: casual_colleagues (categorical rule for all internal colleagues)",
+      "General rule: semi_formal_partner (specific rule for Managing Partner)",
+      "General rule: structured_updates (numbered lists for analytical content)",
+      "General rule: consultant_frameworks (McKinsey 7S, RACI, 2x2 matrices)",
+      "General rule: action_items (next steps with dates/owners)",
+      "General rule: full_signature_external (signature block trigger)",
+      "General rule: no_signature_internal (no signature block trigger)",
+      "Auto-reply pattern: 'OOO auto-reply: do not respond'"
+    ],
+    "incorrect": [
+      "Emma Phillips tone: marked 'semi-formal' but should be 'casual'",
+      "Contact closing format: system expanded 'full signature' to literal text 'James Conseil\\nSenior Consultant\\nStrategyCo | London' instead of keeping shorthand '+ full signature'",
+      "General rules are overly specific (e.g., 'project_code_references', 'subject_line_clarity') rather than the higher-level categorical rules in ground truth"
+    ],
+    "details": "CONTACT RULES: System found all 11 contacts with correct emails, tones, and languages. Greetings are accurate. Closings are mostly correct but system expanded 'full signature' into the literal text instead of keeping the shorthand notation. GENERAL RULES: System found 10 rules vs ground truth's 8, showing good extraction. However, system missed some key conceptual rules (formal_clients, casual_colleagues categories) and added some overly specific ones (project_code_references, subject_line_clarity) that may be too granular. The core communication patterns are captured well. MISSING: The categorical rules (formal_clients, casual_colleagues, semi_formal_partner) that group contacts by relationship type, structured_updates, consultant_frameworks, action_items, full_signature_external, no_signature_internal, and auto_reply_patterns. PRECISION: Emma Phillips tone differs (semi-formal vs casual in ground truth). Closing formats show literal expansion vs conceptual notation."
+  },
+  "overall": 80
+}

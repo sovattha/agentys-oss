@@ -1,0 +1,231 @@
+{
+  "aggregate": {
+    "critic": {
+      "coherence": 83,
+      "tone": 77,
+      "completeness": 75,
+      "errors": 84,
+      "conciseness": 82,
+      "emotional_intelligence": 61,
+      "overall": 76
+    },
+    "judge": {
+      "faithfulness": 87,
+      "completeness": 76,
+      "tone_match": 58,
+      "conciseness": 77,
+      "overall": 75
+    }
+  },
+  "cases": [
+    {
+      "case_id": "msg-001",
+      "subject": "Restructuration des pôles d'activité",
+      "draft": "Bien reçu pour cette démarche de réflexion sur notre organisation interne.\n\nJe préparerai la note demandée d'ici la fin du mois, en couvrant les trois points que vous avez listés : état des lieux de la répartition actuelle, recommandations pour une nouvelle structure, et calendrier de mise en œuvre.\n\nSi vous avez des orientations particulières à intégrer — périmètre de pôles envisagé, contraintes RH ou délais opérationnels à respecter — n'hésitez pas à me les communiquer en amont, cela me permettra d'affiner l'analyse.\n",
+      "elapsed_draft_s": 14.81,
+      "critic": {
+        "coherence": 92,
+        "tone": 88,
+        "completeness": 85,
+        "errors": 95,
+        "conciseness": 88,
+        "over_commitment": 82,
+        "emotional_intelligence": 72,
+        "overall": 86,
+        "decision": "valid",
+        "suggestions": [
+          "Accusé réception chaleureux",
+          "Confirmer délai précis"
+        ]
+      },
+      "judge": {
+        "faithfulness": 95,
+        "completeness": 88,
+        "tone_match": 72,
+        "conciseness": 90,
+        "overall": 87,
+        "strengths": [
+          "Aucune information inventée : aucune date, nom, chiffre ou fait halluciné",
+          "Les trois points demandés (état des lieux, recommandations, calendrier) sont explicitement repris et confirmés",
+          "La demande de précisions en amont est pertinente et apporte une vraie valeur actionnable",
+          "Réponse concise, sans remplissage ni répétition"
+        ],
+        "weaknesses": [
+          "Ton trop familier / insuffisamment formel pour un email d'un associé fondateur : absence de formule d'appel ('Monsieur Dumont,' ou 'Cher Philippe,') et de signature professionnelle complète",
+          "Pas de formule de politesse finale structurée (le brouillon se termine abruptement après la parenthèse)",
+          "L'engagement de livraison est implicite ('je préparerai') alors que le contexte hiérarchique appellerait une formulation plus affirmative et respectueuse"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-002",
+      "subject": "Opération d'acquisition — engagement du cabinet",
+      "draft": "Nous prenons bonne note de votre souhait de formaliser le mandat de Nexus Group pour l'acquisition de DataFlow SAS, dans le prolongement de notre entretien du 3 janvier.\n\nVous trouverez ci-joint notre lettre de mission précisant le périmètre de l'intervention, les honoraires ainsi que les conditions générales d'engagement du cabinet. [À confirmer : joindre la lettre de mission finalisée]\n\nCalendrier prévisionnel de due diligence :\n\n• Démarrage des travaux : [À confirmer]\n• Phase de due diligence juridique et financière : [À confirmer — durée estimée]\n• Remise du rapport de due diligence : [À confirmer]\n• Closing cible : avant fin mars 2026\n\nCompte tenu du délai contraint pour atteindre le closing avant fin mars, nous vous recommandons de confirmer le mandat dans les meilleurs délais afin d'engager les travaux préparatoires sans délai.\n\nVeuillez agréer, Monsieur le Directeur Général, l'expression de mes salutations distinguées.\n",
+      "elapsed_draft_s": 18.19,
+      "critic": {
+        "coherence": 88,
+        "tone": 82,
+        "completeness": 85,
+        "errors": 90,
+        "conciseness": 78,
+        "over_commitment": 72,
+        "emotional_intelligence": 70,
+        "overall": 80,
+        "decision": "valid",
+        "suggestions": [
+          "Confirmer l'adresse",
+          "Délais à compléter"
+        ]
+      },
+      "judge": {
+        "faithfulness": 92,
+        "completeness": 88,
+        "tone_match": 90,
+        "conciseness": 78,
+        "overall": 88,
+        "strengths": [
+          "Aucune information inventée : le montant (12M€), la société cible (DataFlow SAS), la date de l'entretien (3 janvier) et le closing (fin mars 2026) sont fidèlement repris de l'email entrant",
+          "Les deux demandes explicites (lettre de mission + calendrier prévisionnel) sont adressées",
+          "Le ton est formellement approprié pour une communication cabinet d'avocats / directeur général, avec formule de politesse adaptée",
+          "L'utilisation de balises '[À confirmer]' est honnête et évite d'inventer des dates ou des durées"
+        ],
+        "weaknesses": [
+          "Le calendrier présenté avec des '[À confirmer]' multiples apporte peu de valeur concrète à ce stade — un calendrier générique ou une fourchette estimative aurait été plus utile",
+          "La formule de politesse finale s'adresse à 'Monsieur le Directeur Général' alors que l'email entrant se terminait par 'Maître' — un miroir plus précis aurait fermé avec 'Maître Barreau' dans le bloc signataire ou maintenu la cohérence protocolaire",
+          "Absence de bloc signataire (nom, cabinet, coordonnées) attendu dans un contexte de correspondance juridique formelle",
+          "Légère redondance : 'sans délai' après 'dans les meilleurs délais' en fin de brouillon"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-012",
+      "subject": "Re: Re: Opération d'acquisition — accord",
+      "draft": "Nous accusons bonne réception de la lettre de mission signée, et vous en remercions.\n\nNous attendrons la prise de contact de Mme Vernier pour débuter la collecte de la documentation relative à DataFlow SAS. Dès réception des premiers éléments, nous engagerons la due diligence conformément au calendrier convenu.\n",
+      "elapsed_draft_s": 10.75,
+      "critic": {
+        "coherence": 88,
+        "tone": 85,
+        "completeness": 72,
+        "errors": 92,
+        "conciseness": 85,
+        "over_commitment": 70,
+        "emotional_intelligence": 60,
+        "overall": 78,
+        "decision": "valid",
+        "suggestions": [
+          "Accuser réception calendrier",
+          "Confirmer disponibilité",
+          "Formule de politesse"
+        ]
+      },
+      "judge": {
+        "faithfulness": 90,
+        "completeness": 72,
+        "tone_match": 52,
+        "conciseness": 85,
+        "overall": 76,
+        "strengths": [
+          "Aucune information inventée : la mention de Mme Vernier et de DataFlow SAS est bien présente dans l'email entrant",
+          "Accusé de réception de la lettre de mission clairement exprimé",
+          "Longueur proportionnée à la demande, sans remplissage inutile"
+        ],
+        "weaknesses": [
+          "Ton inadapté : le brouillon utilise 'Nous' collectif et un registre semi-formel alors que l'historique montre que Maître Barreau écrit à la première personne et utilise les formules de politesse complètes ('Je vous prie d'agréer, Monsieur le Directeur Général...')",
+          "Absence totale de formule de salutation finale et de signature (nom, titre, cabinet, coordonnées, mention de confidentialité) — éléments systématiquement présents dans les précédentes réponses de l'utilisateur",
+          "Absence d'une formule d'appel en ouverture ('Monsieur le Directeur Général,') pourtant constante dans l'historique",
+          "La diligence évoquée par M. Castellan ('Je compte sur votre diligence pour respecter le calendrier fixé') n'est pas explicitement adressée ou rassurée",
+          "Posture attentiste ('Nous attendrons') alors que le contexte (closing fin mars 2026, calendrier contraint) appelle une réponse proactive"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-007",
+      "subject": "Re: Recherches préalables — dossier Nexus Group",
+      "draft": "Les contrats de travail des dirigeants [À confirmer : à inclure ou exclure de l'analyse] dans le périmètre de la revue des contrats commerciaux significatifs.\n\nPour les autres points, vous pouvez procéder selon les instructions initiales.\n",
+      "elapsed_draft_s": 16.05,
+      "critic": {
+        "coherence": 55,
+        "tone": 40,
+        "completeness": 45,
+        "errors": 70,
+        "conciseness": 75,
+        "over_commitment": 85,
+        "emotional_intelligence": 30,
+        "overall": 57,
+        "decision": "reject",
+        "suggestions": [
+          "Répondre la question",
+          "Confirmer le délai",
+          "Salutation appropriée"
+        ]
+      },
+      "judge": {
+        "faithfulness": 85,
+        "completeness": 45,
+        "tone_match": 20,
+        "conciseness": 55,
+        "overall": 53,
+        "strengths": [
+          "N'invente aucune information factuelle non présente dans les emails",
+          "Identifie correctement la question centrale sur les contrats de travail des dirigeants"
+        ],
+        "weaknesses": [
+          "La question d'Élise Fontaine sur les contrats de travail des dirigeants n'est pas répondue — le brouillon laisse un placeholder '[À confirmer : à inclure ou exclure]' au lieu de donner une réponse claire",
+          "Aucune salutation ni formule de politesse : le ton est inexistant alors que l'échange est formel entre collègues d'un même cabinet",
+          "Pas de signature (nom, titre, coordonnées) alors que l'historique montre une signature complète systématique",
+          "La phrase 'Pour les autres points, vous pouvez procéder selon les instructions initiales' est redondante — Élise Fontaine n'a pas remis en cause les autres points",
+          "Le brouillon ressemble à une note interne plutôt qu'à un email professionnel envoyable"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-006",
+      "subject": "Demande de consultation — litige commercial",
+      "draft": "Votre dossier présente des éléments favorables : un contrat écrit, un montant déterminé et des relances documentées constituent une base solide pour engager une procédure.\n\nTrois voies s'offrent à vous, selon le degré d'urgence et la situation de Distribex :\n\n1. L'injonction de payer — procédure rapide et peu coûteuse, adaptée aux créances certaines, liquides et exigibles. Sur la base de vos factures impayées, une ordonnance peut être obtenue en quelques semaines sans audience contradictoire préalable.\n\n2. Le référé-provision — si Distribex est susceptible de contester la dette, cette voie permet d'obtenir une provision judiciaire en urgence, sous réserve que l'obligation ne soit pas sérieusement contestable.\n\n3. L'assignation au fond — procédure plus longue (12 à 24 mois selon les juridictions), mais qui permet d'obtenir un jugement définitif assorti de dommages et intérêts si le préjudice le justifie.\n\nAvant d'engager toute action, je vous recommande de vérifier la situation financière de Distribex (extrait Kbis, éventuelles procédures collectives en cours). Un débiteur en cessation de paiements modifie substantiellement la stratégie à adopter.\n\nQuant aux chances de succès : sur le principe de la condamnation, elles sont élevées dès lors que le contrat et les factures sont en règle. La vraie question est celle de la solvabilité de Distribex et donc de l'exécution effective du jugement.\n\nPour avancer, merci de me faire parvenir les documents suivants :\n• Le contrat signé avec Distribex\n• Les factures impayées et leurs accusés de réception\n• Les courriers de relance envoyés\n\nUn rendez-vous de [À confirmer] pourra être fixé à votre convenance après réception de ces éléments.\n",
+      "elapsed_draft_s": 20.01,
+      "critic": {
+        "coherence": 92,
+        "tone": 88,
+        "completeness": 90,
+        "errors": 72,
+        "conciseness": 85,
+        "over_commitment": 68,
+        "emotional_intelligence": 72,
+        "overall": 81,
+        "decision": "valid",
+        "suggestions": [
+          "Retirer [À confirmer]",
+          "Valider disponibilités"
+        ]
+      },
+      "judge": {
+        "faithfulness": 72,
+        "completeness": 85,
+        "tone_match": 55,
+        "conciseness": 78,
+        "overall": 73,
+        "strengths": [
+          "Les trois voies de recours (injonction de payer, référé-provision, assignation au fond) sont présentées de façon claire et pédagogique",
+          "La recommandation de vérifier la solvabilité de Distribex est pertinente et non présente dans l'email entrant — elle constitue un conseil de bon sens, pas une hallucination",
+          "La demande de documents (contrat, factures, courriers) est actionnable et logique",
+          "Les chances de succès sont abordées avec nuance (principe vs exécution effective)"
+        ],
+        "weaknesses": [
+          "Le ton est trop informel pour une réponse d'avocat à un client : absence de formule d'appel ('Monsieur Garnier,'), absence de formule de politesse finale, absence de signature — rupture majeure avec les usages professionnels du barreau",
+          "L'email entrant utilise 'Maître Barreau' et une formule de politesse très formelle : le brouillon devrait impérativement refléter ce niveau de formalité et adopter une salutation finale équivalente",
+          "Le délai '12 à 24 mois selon les juridictions' pour l'assignation au fond, bien que plausible, n'est pas sourcé dans le dossier et constitue une approximation potentiellement trompeuse",
+          "Le placeholder '[À confirmer]' laissé tel quel dans le brouillon est une faiblesse d'exécution",
+          "L'absence de mention d'une mise en demeure préalable (étape classique avant toute action) est un oubli notable par rapport aux usages professionnels"
+        ],
+        "hallucinations": [
+          "Délai de 'quelques semaines' pour l'injonction de payer : non sourcé, présenté comme factuel",
+          "Délai de '12 à 24 mois selon les juridictions' pour l'assignation au fond : chiffre précis non justifié par le dossier"
+        ]
+      }
+    }
+  ]
+}

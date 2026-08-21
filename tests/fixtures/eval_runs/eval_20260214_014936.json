@@ -1,0 +1,259 @@
+{
+  "timestamp": "20260214_014936",
+  "agents": [
+    "profile",
+    "knowledge",
+    "rules"
+  ],
+  "llm_judge": false,
+  "scores": {
+    "profile": {
+      "completeness": 100,
+      "precision": 100,
+      "usefulness": 100,
+      "overall": 100,
+      "missing": [],
+      "incorrect": []
+    },
+    "knowledge": {
+      "completeness": 0,
+      "precision": 0,
+      "usefulness": 0,
+      "overall": 0,
+      "missing": [
+        "contact@prospect-startup.io",
+        "lucas.bernard@techcorp.fr",
+        "john.smith@globaltech.com",
+        "marie.leclerc@clientcorp.com",
+        "david.kim@partnertech.co.kr",
+        "sarah.jones@globaltech.com",
+        "claire.fontaine@clientcorp.com",
+        "ceo@techcorp.fr",
+        "amelie.petit@fournisseur.fr",
+        "nicolas.moreau@techcorp.fr",
+        "camille.roux@techcorp.fr",
+        "elena.volkov@eupartner.de",
+        "pierre.durand@techcorp.fr"
+      ],
+      "incorrect": []
+    },
+    "rules": {
+      "completeness": 0,
+      "precision": 0,
+      "usefulness": 0,
+      "overall": 0,
+      "missing": [
+        "contact@prospect-startup.io",
+        "lucas.bernard@techcorp.fr",
+        "john.smith@globaltech.com",
+        "marie.leclerc@clientcorp.com",
+        "david.kim@partnertech.co.kr",
+        "sarah.jones@globaltech.com",
+        "claire.fontaine@clientcorp.com",
+        "amelie.petit@fournisseur.fr",
+        "ceo@techcorp.fr",
+        "camille.roux@techcorp.fr",
+        "nicolas.moreau@techcorp.fr",
+        "elena.volkov@eupartner.de",
+        "pierre.durand@techcorp.fr"
+      ],
+      "incorrect": []
+    },
+    "overall": 33
+  },
+  "output": {
+    "profile": {
+      "name": "Sophie Martin",
+      "position": "Chef de projet - Division Digitale",
+      "company": "TechCorp",
+      "email_patterns": [
+        {
+          "recipients": [
+            "ceo@techcorp.fr"
+          ],
+          "formal_level": 10,
+          "includes_report": true
+        },
+        {
+          "recipients": [
+            "equipe-digitale@techcorp.fr"
+          ],
+          "formal_level": 6,
+          "sprint_related": true
+        },
+        {
+          "recipients": [
+            "claire.fontaine@clientcorp.com"
+          ],
+          "formal_level": 5,
+          "project_related": true
+        },
+        {
+          "recipients": [
+            "camille.roux@techcorp.fr",
+            "pierre.durand@techcorp.fr",
+            "lucas.bernard@techcorp.fr"
+          ],
+          "formal_level": 4,
+          "team_related": true
+        },
+        {
+          "recipients": [
+            "it-support@techcorp.fr",
+            "recrutement@techcorp.fr"
+          ],
+          "formal_level": 3,
+          "service_related": true
+        }
+      ],
+      "email_style": {
+        "greeting_formula": [
+          "Bonjour",
+          "Salut"
+        ],
+        "parting_formula": [
+          "Cordialement",
+          "Au plaisir d'échanger",
+          "Bonne journée"
+        ],
+        "politeness_formula": [
+          "Merci",
+          "S'il vous plaît"
+        ],
+        "signature": [
+          "Sophie Martin<br>Chef de projet - Division Digitale<br>TechCorp | +33 6 12 34 56 78"
+        ]
+      },
+      "preferences": {
+        "avoid_humor": true,
+        "avoid_emoticons": true,
+        "avoid_colloquialisms": true,
+        "avoid_first_name_in_replies": false
+      },
+      "user_email": "sophie.martin@techcorp.fr",
+      "languages": [
+        "fr"
+      ]
+    },
+    "knowledge": {
+      "Emails": 50,
+      "UniqueContacts": 19,
+      "EmailThreads": [
+        {
+          "ThreadId": 1,
+          "Participants": [
+            "you@example.com",
+            "sophie.martin@techcorp.fr"
+          ],
+          "Messages": [
+            {
+              "Sender": "you@example.com",
+              "Subject": "Question about your API integration services",
+              "Timestamp": "2023-01-01T10:00:00Z",
+              "Content": "Hi Sophie, I'm interested in learning more about your API integration services."
+            },
+            {
+              "Sender": "sophie.martin@techcorp.fr",
+              "Subject": "Re: Question about your API integration services",
+              "Timestamp": "2023-01-01T12:00:00Z",
+              "Content": "Hello! Yes, I'd be happy to help. Our API integration services allow for seamless connectivity between different systems and applications."
+            }
+          ]
+        },
+        {
+          "ThreadId": 2,
+          "Participants": [
+            "sophie.martin@techcorp.fr",
+            "pierre.dupond@techcorp.fr"
+          ],
+          "Messages": [
+            {
+              "Sender": "sophie.martin@techcorp.fr",
+              "Subject": "Request for assistance with GraphQL schema migration",
+              "Timestamp": "2023-01-02T14:30:00Z",
+              "Content": "Hi Pierre, I need help with the GraphQL schema migration for Project Alpha. Can you take a look?"
+            },
+            {
+              "Sender": "pierre.dupond@techcorp.fr",
+              "Subject": "Re: Request for assistance with GraphQL schema migration",
+              "Timestamp": "2023-01-02T15:00:00Z",
+              "Content": "Sure Sophie, I'll take a look and get back to you."
+            }
+          ]
+        },
+        {
+          "ThreadId": 3,
+          "Participants": [
+            "sophie.martin@techcorp.fr",
+            "it-support@techcorp.fr"
+          ],
+          "Messages": [
+            {
+              "Sender": "sophie.martin@techcorp.fr",
+              "Subject": "Problem with VPN - Connexion intermittente",
+              "Timestamp": "2023-01-03T09:30:00Z",
+              "Content": "Hi IT Support, I'm having issues with my VPN connection. It keeps dropping every 15-20 minutes."
+            },
+            {
+              "Sender": "it-support@techcorp.fr",
+              "Subject": "Re: Problem with VPN - Connexion intermittente",
+              "Timestamp": "2023-01-03T10:00:00Z",
+              "Content": "Hi Sophie, we've identified the issue and deployed a fix. Please restart your VPN client."
+            }
+          ]
+        },
+        {
+          "ThreadId": 4,
+          "Participants": [
+            "sophie.martin@techcorp.fr",
+            "claire.fontaine@clientcorp.com"
+          ],
+          "Messages": [
+            {
+              "Sender": "sophie.martin@techcorp.fr",
+              "Subject": "Introduction and project kick-off for Project Beta",
+              "Timestamp": "2023-01-04T16:00:00Z",
+              "Content": "Hi Claire, I'm Sophie, the project manager for Project Beta. I propose that we have a call to align our working methods before the kick-off."
+            },
+            {
+              "Sender": "claire.fontaine@clientcorp.com",
+              "Subject": "Re: Introduction and project kick-off for Project Beta",
+              "Timestamp": "2023-01-04T16:30:00Z",
+              "Content": "Hi Sophie, that sounds great. I'm available on Thursday at 15:00."
+            }
+          ]
+        },
+        {
+          "ThreadId": 5,
+          "Participants": [
+            "sophie.martin@techcorp.fr",
+            "marie.leclerc@clientcorp.com"
+          ],
+          "Messages": [
+            {
+              "Sender": "sophie.martin@techcorp.fr",
+              "Subject": "Request for introduction to the client project manager for Project Beta",
+              "Timestamp": "2023-01-05T10:00:00Z",
+              "Content": "Hi Marie, could you please introduce me to the client project manager for Project Beta?"
+            },
+            {
+              "Sender": "marie.leclerc@clientcorp.com",
+              "Subject": "Re: Request for introduction to the client project manager for Project Beta",
+              "Timestamp": "2023-01-05T10:30:00Z",
+              "Content": "Hi Sophie, I've introduced you to Claire Fontaine. She's the project manager for Project Beta on the client side."
+            }
+          ]
+        }
+      ],
+      "contacts": [],
+      "projects": [],
+      "terminology": {},
+      "frequent_topics": []
+    },
+    "rules": {
+      "contact_rules": [],
+      "general_rules": [],
+      "forbidden_phrases": []
+    }
+  }
+}

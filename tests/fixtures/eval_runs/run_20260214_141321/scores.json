@@ -1,0 +1,67 @@
+{
+  "profile": {
+    "completeness": 95,
+    "precision": 85,
+    "usefulness": 88,
+    "overall": 89,
+    "missing": [],
+    "incorrect": [
+      "tone.closing_styles.casual_fr: Expected '(no closing or just name)' but got '{first_name}'",
+      "tone.closing_styles.semi_formal_en: Expected 'Best,' but got 'Regards,'",
+      "active_hours: Expected '08:00-18:00' but got '08:00-17:00'",
+      "response_time_avg: Expected '< 1h' but got '< 2h'"
+    ],
+    "details": "The system output is very close to ground truth with near-perfect extraction of user profile, signatures, and tone preferences. However, there are several minor discrepancies: (1) casual_fr closing style differs ('{first_name}' vs '(no closing or just name)'), (2) semi_formal_en closing differs ('Regards,' vs 'Best,'), (3) active_hours is off by 1 hour (ends at 17:00 instead of 18:00), and (4) response_time_avg is less precise ('< 2h' vs '< 1h'). The core information needed for email generation is accurate and usable."
+  },
+  "knowledge": {
+    "completeness": 85,
+    "precision": 92,
+    "usefulness": 88,
+    "overall": 88,
+    "missing": [
+      "Contact topic variations: 'demo' (Pierre), 'recrutement' (Pierre), 'PartnerTech' (Pierre), 'sprint' (Lucas), 'pentest' (Camille), 'kick-off' (Marie) - though similar topics were captured",
+      "Project 'Migration Cloud' as a standalone entry - content was merged into GlobalTech Partnership",
+      "Terminology entries: 'Daily' (daily standup meeting), 'Retro' (retrospective), 'PR' (Pull Request) - common Agile/dev terms"
+    ],
+    "incorrect": [
+      "Pierre Durand title: 'Tech Lead' vs ground truth 'Lead Developer' (minor semantic difference)",
+      "Pierre interaction_count: 27 vs ground truth 20 (35% overcount)",
+      "Lucas interaction_count: 15 vs ground truth 10 (50% overcount)",
+      "Lucas title: 'Developer' vs ground truth null (inferred but not stated in GT)",
+      "Camille interaction_count: 11 vs ground truth 6 (83% overcount)",
+      "Marie interaction_count: 8 vs ground truth 6 (33% overcount)",
+      "Nicolas interaction_count: 7 vs ground truth 4 (75% overcount)",
+      "Marc (CEO) interaction_count: 6 vs ground truth 4 (50% overcount)",
+      "Marc title: 'CEO' vs ground truth 'PDG' (English vs French, semantic equivalent)",
+      "Sarah interaction_count: 5 vs ground truth 4 (25% overcount)",
+      "Project restructuring: Created 'PartnerTech Integration' as separate project when ground truth has it within broader partnerships context"
+    ],
+    "details": "The system output demonstrates strong performance with high accuracy and usefulness. **Contacts**: Found 13 of 13 contacts (100%), with mostly accurate details. Minor discrepancies in titles (Tech Lead vs Lead Developer), interaction counts (slightly inflated), and some topic variations. **Projects**: Identified all 5 major project areas but restructured one (split PartnerTech from GlobalTech partnership). Project descriptions and keywords are accurate and comprehensive. **Terminology**: Excellent expansion - includes all 10 ground truth terms plus 6 additional relevant terms (PKCE, OAuth2, GraphQL, CSP, Rate limiting, POC, Backward compatibility) with accurate definitions. **Extra value**: Added useful 'frequent_topics' section not in ground truth. Overall, the output would be highly effective for email drafting with correct tone rules, accurate contact preferences, and comprehensive context."
+  },
+  "rules": {
+    "completeness": 75,
+    "precision": 70,
+    "usefulness": 80,
+    "overall": 75,
+    "missing": [
+      "Alternative greetings for pierre.durand: 'Pierre,' option",
+      "Alternative greetings for lucas.bernard: 'Lucas,' option",
+      "Alternative greetings for amelie.petit: 'Bonjour Amelie,' option",
+      "Alternative greetings for nicolas.moreau: 'Nicolas,' option",
+      "Alternative closings for nicolas.moreau: 'Cordialement,' option",
+      "Alternative closings for sarah.jones: 'Best,' option",
+      "Alternative closings for david.kim: 'Best regards,' option (only has 'Best,')",
+      "Alternative greetings for claire.fontaine: 'Parfait Claire,' option",
+      "Flexible closing for pierre.durand: '(name only or none)'"
+    ],
+    "incorrect": [
+      "Hallucinated contact: support@cloudprovider.com (not in ground truth)",
+      "Extra general rule: recap_meetings (not in ground truth)",
+      "Extra general rule: technical_details_to_team (not in ground truth)",
+      "Extra general rule: proactive_reminders (not in ground truth)",
+      "Extra general rule: budget_validation_formal (not in ground truth)"
+    ],
+    "details": "Contact rules: System found all 13 contacts but added 1 hallucinated contact (support@cloudprovider.com). Multiple contacts have incomplete greeting/closing variations - GT shows alternative forms (e.g., 'Pierre, / Salut Pierre,') indicating flexibility, but output only captures one form per contact. General rules: All 8 GT rules are present with accurate mappings, but system added 4 extra rules not in GT (recap_meetings, technical_details_to_team, proactive_reminders, budget_validation_formal) which could be useful but are fabrications. The core communication patterns are captured correctly (formal/casual tone, tutoiement/vouvoiement, signatures, language switching), making this reasonably useful for email drafting despite the missing variations and extra rules."
+  },
+  "overall": 84
+}

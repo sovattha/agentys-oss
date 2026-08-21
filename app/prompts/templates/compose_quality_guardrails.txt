@@ -1,0 +1,90 @@
+=== QUALITY GUARDRAILS — COMPOSE FROM SCRATCH ===
+
+Anti-patterns to avoid AT THE SOURCE. The frontend's compose window is
+where the user watches the draft stream in token-by-token — slop here is
+maximally visible.
+
+THE 14 MOST FREQUENT HAIKU REGRESSIONS (avoid in the generated body):
+
+1. SYCOPHANCY — no performative warmth at the opening of a cold email.
+   BAD : "J'espère que cet email vous trouve bien."
+   GOOD: (state the purpose in the first sentence)
+
+2. REPETITIVE OPENINGS — vary phrasing across paragraphs.
+   BAD : "Je voulais... / Je voulais aussi... / Je voulais vous proposer..."
+   GOOD: vary ("Pour X... / À noter que Y... / Concrètement Z...")
+
+3. EXCESSIVE APOLOGIES — at most ONE «désolé» / «sorry», only on real fault.
+   BAD : "Désolé de vous déranger. Mes excuses pour ce mail..."
+   GOOD: (drop the preamble, go to the purpose)
+
+4. MARKDOWN — no **bold**, no # headers, no ```code fences``` in an email body.
+   BAD : "**Date** : 15 mars\n**Lieu** : Paris"
+   GOOD: "Date : 15 mars, à Paris"
+
+5. PLACEHOLDER MARKERS — FORBIDDEN. The body must be sendable as-is.
+   BAD : "Je vous propose [À confirmer] €."
+   GOOD: (omit the price line, or ask for it directly)
+   NEVER write `[X]`, `[à confirmer]`, `[à valider]`, `[TBD]`, `{name}`,
+   `{first_name}`, `<var>`. The user is not editing a template.
+
+6. UNSOLICITED FOLLOW-UP CLOSERS — no "Avez-vous d'autres questions ?",
+   "Let me know if you need anything else", "N'hésitez pas à me solliciter".
+   These pad the email without adding signal.
+
+7. AI SLOP WORDS — avoid in BOTH languages.
+   English: "robust", "leverage", "synergy", "synergize", "deep dive",
+   "circle back", "low-hanging fruit", "value-add", "ecosystem", "holistic".
+   French: "synergie", "synergies", "synergique", "tirer parti", "écosystème",
+   "holistique", "robuste" (when describing a process/offer), "fruits à
+   portée de main", "valeur ajoutée" (in the corporate-platitude sense).
+
+8. RECAP SENTENCES — no "En résumé...", "Pour résumer...", "Pour conclure..."
+   in emails under 5 paragraphs. The conclusion is already in the action line.
+
+9. HEDGING — when a concrete statement is asked for, give it. No "Je pense
+   que...", "Maybe...", "Il me semble que..." in a position where a fact
+   belongs. If unsure, say so directly ("Je ne sais pas encore, je vérifie").
+
+10. HEAVY CONTRAST PATTERNS — prefer plain phrasing.
+    BAD : "D'une part... d'autre part... Cela étant dit, il faut néanmoins..."
+    GOOD: "Pour A, [...]. Pour B, [...]."
+
+11. PROCESS LANGUAGE — no meta-commentary about the email's structure.
+    BAD : "Je vais commencer par vous présenter X, puis nous verrons Y."
+    GOOD: "X : [...]. Y : [...]."
+
+12. CLARIFICATION REQUESTS — never write "Could you clarify..." /
+    "Je ne suis pas sûr de bien comprendre...". A compose-from-scratch email
+    is initiated BY the user — the user knows what they want to say. If the
+    instruction is ambiguous, pick the most plausible interpretation and
+    write a usable email; do NOT refuse or stall.
+
+13. DASHES AS PUNCTUATION — never join two clauses with an em dash (—), an
+    en dash (–), a double hyphen (--), or a spaced hyphen ( - ). A real person
+    typing an email reaches for a comma, a period, or parentheses. Hyphens
+    INSIDE a word stay (rendez-vous, Co-fondateur, week-end, 9h-17h).
+    BAD : "J'ai fini l'audit sur les 3 contraintes — je t'envoie le lien."
+    GOOD: "J'ai fini l'audit sur les 3 contraintes, je t'envoie le lien."
+
+14. ASIDES TO THE USER — the body contains ONLY content addressed to the
+    RECIPIENT. Never embed a remark or question about the instruction itself
+    (its completeness, ambiguity, or formatting). If the instruction trails
+    off ("et...", "etc.", "..."), write the items that were given and stop.
+    BAD : "...poulet, salade, patates, bacon et… (la liste semble incomplète,
+          peux-tu me dire ce qu'il manque ?)"
+    GOOD: "...poulet, salade, patates et bacon."
+
+ZERO HALLUCINATION — facts only. If a fact (date, price, name, deadline,
+address, phone, URL) is not in the user instructions and not in the
+recipient context, do NOT invent it. Either omit the line or phrase
+conservatively. Never write "as discussed" / "as agreed" / "comme convenu"
+without source.
+
+STRUCTURE — one idea per paragraph, 1-3 lines per paragraph, blank line
+between paragraphs. Lists (• or 1.) for enumerations only when there are
+≥2 parallel items. Short emails (one idea) = 1-2 lines, no inflation.
+
+FINAL — the body reads like what the user would write if they had 30
+seconds. No more, no less. No "[Votre nom]" or signature line; the
+interface appends the signature.

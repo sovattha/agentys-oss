@@ -1,0 +1,1416 @@
+/* ============================================================================
+   DEEP WORK MODAL — Premium configuration dialog
+   Centered overlay with refined glassmorphism and timeline visualization
+   ============================================================================ */
+
+/* ---- Overlay backdrop ---- */
+.dwm-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-medium);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* +1 over the base modal layer: this panel opens FROM the Settings modal
+     (Productivité → Mode concentration) while Settings stays mounted, but it
+     renders earlier in App.tsx's DOM than the Settings overlay. With an equal
+     z-index, DOM order made Settings paint on top, leaving Deep Work hidden
+     behind it. Sibling settings sub-panels (Shortcuts, Meeting reminders)
+     render after Settings so they layer correctly by DOM order; Deep Work
+     needs the explicit bump. Harmless when opened standalone from the top bar. */
+  z-index: calc(var(--z-modal) + 1);
+  animation: dwmFadeIn 0.2s var(--ease-settle, ease-out);
+}
+
+.dwm-overlay.dwm-closing {
+  animation: dwmFadeOut 0.18s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes dwmFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes dwmFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* ---- Modal container ---- */
+.dwm-modal {
+  position: relative;
+  width: 92%;
+  max-width: 540px;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-primary);
+  border-radius: var(--radius-xl, 16px);
+  overflow: hidden;
+  box-shadow: var(--shadow-modal);
+  animation: dwmSlideIn 0.28s var(--ease-settle, cubic-bezier(0.22, 1, 0.36, 1));
+  container-type: inline-size;
+  container-name: deep-work;
+}
+
+.dwm-modal--closing {
+  animation: dwmSlideOut 0.18s ease forwards;
+}
+
+@keyframes dwmSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(var(--scale-dramatic)) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+@keyframes dwmSlideOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(8px) scale(var(--scale-press)); }
+}
+
+
+/* ============================================================================
+   HEADER
+   ============================================================================ */
+
+.dwm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5) var(--space-6) var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+  background:
+    linear-gradient(135deg,
+      var(--surface-secondary) 0%,
+      var(--surface-primary) 100%);
+}
+
+.dwm-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.dwm-back {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: var(--radius-md, 6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.dwm-shield-wrap {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--accent-primary) 12%, transparent),
+      color-mix(in srgb, var(--accent-primary) 6%, transparent));
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.dwm-title {
+  margin: 0;
+  font-size: var(--font-size-lg, 18px);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+}
+
+.dwm-subtitle {
+  margin: 2px 0 0;
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+}
+
+.dwm-close {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md, 6px);
+  border: none;
+  background: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-xl);
+  font-weight: 400;
+  line-height: var(--leading-none);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  flex-shrink: 0;
+  padding: 0;
+}
+
+
+/* ============================================================================
+   TIMELINE TOP — Shared above tabs
+   ============================================================================ */
+
+.dwm-timeline-top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 14px var(--space-6) 0;
+}
+
+
+/* ============================================================================
+   TAB BAR — Segmented pill
+   ============================================================================ */
+
+.dwm-tab-bar {
+  position: relative;
+  display: flex;
+  padding: var(--space-1);
+  margin: 0 var(--space-6);
+  margin-top: var(--space-4);
+  border-radius: var(--radius-lg, 12px);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.dwm-tab-slider {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-primary);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.28s ease;
+}
+/* 100% of the slider's own width (50% - 4px) lands the right edge 4px inside
+   the bar — symmetric with the resting left:4px. The previous +8px offset
+   pushed the chip 4px past the track edge ("la chip dépasse"). */
+.dwm-tab-slider--work {
+  transform: translateX(100%);
+  box-shadow: var(--shadow-sm);
+}
+
+.dwm-tab-seg {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 0;
+  border: none;
+  background: none;
+  font-size: var(--font-size-xs);
+  font-weight: 550;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: color var(--transition-base);
+  font-family: inherit;
+}
+
+.dwm-tab-seg svg {
+  flex: 0 0 auto;
+}
+
+.dwm-tab-label {
+  display: block;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Active state is rendered by the slider underneath — drop the global
+   focus-visible ring so it doesn't read as an extra green border. */
+.dwm-tab-seg:focus-visible {
+  box-shadow: none;
+  outline: none;
+}
+.dwm-tab-seg--active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.dwm-tab-seg svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  transition: color var(--transition-base);
+}
+.dwm-tab-seg--active svg {
+  color: var(--accent-primary);
+}
+/* Work tab active → amber accent on icon */
+.dwm-tab-slider--work ~ .dwm-tab-seg--active svg {
+  color: var(--accent-secondary);
+}
+
+
+/* ============================================================================
+   BODY
+   ============================================================================ */
+
+@keyframes dwmTabFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dwm-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  animation: dwmTabFadeIn 0.22s ease;
+}
+
+.dwm-body::-webkit-scrollbar { width: 6px; }
+.dwm-body::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 3px;
+}
+
+/* Firefox : pas de ::-webkit-scrollbar — ré-active l'équivalent fin par-dessus
+   le `* { scrollbar-width: none }` global. Scopé hors WebKit/Blink : en
+   Blink >= 121, scrollbar-width/color non-auto désactiveraient le styling
+   ::-webkit-scrollbar ci-dessus. */
+@supports not selector(::-webkit-scrollbar) {
+  .dwm-body {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-default) transparent;
+  }
+}
+
+
+/* ---- Mode toggle card ---- */
+
+.dwm-mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-lg, 12px);
+  background: var(--surface-secondary);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-family: inherit;
+  text-align: left;
+}
+.dwm-mode-toggle--on {
+  border-color: color-mix(in srgb, var(--accent-primary) 30%, transparent);
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--accent-primary) 6%, var(--surface-primary)),
+      color-mix(in srgb, var(--accent-primary) 2%, var(--surface-primary)));
+}
+
+/* Work variant active state */
+.dwm-mode-toggle--work.dwm-mode-toggle--on {
+  border-color: color-mix(in srgb, var(--accent-secondary) 30%, transparent);
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--accent-secondary) 6%, var(--surface-primary)),
+      color-mix(in srgb, var(--accent-secondary) 2%, var(--surface-primary)));
+}
+
+/* Track (inline toggle) */
+.dwm-mode-toggle-track {
+  position: relative;
+  width: 40px;
+  height: 24px;
+  border-radius: 12px;
+  background: var(--surface-tertiary);
+  flex-shrink: 0;
+  transition: background var(--transition-base), box-shadow var(--transition-base);
+}
+.dwm-mode-toggle-track.on {
+  background: var(--accent-primary);
+  box-shadow: var(--shadow-focus);
+}
+.dwm-mode-toggle-track--work.on {
+  background: var(--accent-secondary);
+  box-shadow: var(--shadow-focus);
+}
+
+.dwm-mode-toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--surface-primary);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base);
+}
+.dwm-mode-toggle-track.on .dwm-mode-toggle-knob {
+  transform: translateX(16px);
+}
+
+/* Text block */
+.dwm-mode-toggle-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.dwm-mode-toggle-title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: var(--leading-tight);
+}
+.dwm-mode-toggle-hint {
+  font-size: var(--font-size-2xs);
+  font-weight: 450;
+  color: var(--text-tertiary);
+  line-height: var(--leading-snug);
+}
+
+/* Mode icon */
+.dwm-mode-toggle-icon {
+  flex-shrink: 0;
+  color: var(--text-placeholder);
+  opacity: 0.5;
+  transition: opacity var(--transition-base), color var(--transition-base);
+}
+.dwm-mode-toggle--on .dwm-mode-toggle-icon {
+  color: var(--accent-primary);
+  opacity: 0.7;
+}
+.dwm-mode-toggle--work.dwm-mode-toggle--on .dwm-mode-toggle-icon {
+  color: var(--accent-secondary);
+}
+
+/* Tab content wrapper — gently recedes when the mode is paused, but stays
+   fully interactive so you can set up frequency + slots first, then flip the
+   toggle on and watch the timeline populate. (Was opacity .3 + grayscale +
+   pointer-events:none, which made a paused panel look broken and un-editable.) */
+.dwm-tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  transition: opacity var(--transition-base);
+}
+.dwm-tab-content--off {
+  opacity: 0.62;
+}
+
+/* ---- Summary strip ---- */
+
+.dwm-summary-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg, 12px);
+  background:
+    linear-gradient(135deg,
+      var(--surface-secondary) 0%,
+      color-mix(in srgb, var(--accent-primary) 4%, var(--surface-secondary)) 100%);
+  border: 1px solid var(--border-subtle);
+}
+
+.dwm-summary-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.dwm-summary-value {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tighter);
+  line-height: var(--leading-none);
+}
+
+.dwm-summary-value--accent {
+  color: var(--accent-primary);
+}
+
+.dwm-summary-value--work {
+  color: var(--accent-secondary);
+}
+
+/* Work summary strip — amber accent */
+.dwm-summary-strip--work {
+  background:
+    linear-gradient(135deg,
+      var(--surface-secondary) 0%,
+      color-mix(in srgb, var(--accent-secondary) 4%, var(--surface-secondary)) 100%);
+}
+
+.dwm-summary-label {
+  font-size: var(--font-size-2xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--text-tertiary);
+}
+
+.dwm-summary-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border-default);
+  flex-shrink: 0;
+  margin: 0 var(--space-1);
+}
+
+
+/* ---- Section pattern ---- */
+
+.dwm-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dwm-section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-tertiary);
+}
+
+.dwm-section-header svg {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.dwm-section-title {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--text-tertiary);
+}
+
+
+/* ---- Frequency selector ---- */
+
+.dwm-freq-row {
+  display: flex;
+  gap: 6px;
+}
+
+.dwm-freq-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 10px 0 var(--space-2);
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-lg, 12px);
+  background: var(--surface-primary);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+.dwm-freq-btn.active {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.dwm-freq-num {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-tight);
+}
+.dwm-freq-btn.active .dwm-freq-num {
+  color: var(--text-inverse);
+}
+
+.dwm-freq-unit {
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--text-tertiary);
+}
+.dwm-freq-btn.active .dwm-freq-unit {
+  color: color-mix(in srgb, var(--text-inverse) 70%, transparent);
+}
+.dwm-freq-btn--work.active {
+  background: var(--accent-secondary);
+  border-color: var(--accent-secondary);
+  box-shadow: var(--shadow-md);
+}
+
+
+/* ---- Slot rows ---- */
+
+.dwm-slots {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.dwm-slot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius-lg, 12px);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-subtle);
+  transition: border-color var(--transition-fast);
+}
+.dwm-slot:focus-within {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-primary-glow);
+}
+
+.dwm-slot-badge {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full, 9999px);
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.dwm-slot-fields {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+  min-width: 0;
+}
+
+.dwm-slot-time {
+  width: 110px;
+  padding: 6px var(--space-2);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+.dwm-slot-time:focus {
+  border-color: var(--accent-primary);
+}
+
+/* Resting display in the house "9:00" format — the native time control
+   always renders a zero-padded hour, so at rest its text is hidden and an
+   overlay shows the unpadded value. Focus reveals the native segments for
+   editing (the picker icon keeps working in both states). */
+.dwm-slot-time-wrap {
+  position: relative;
+  display: inline-flex;
+}
+.dwm-slot-time-wrap .dwm-slot-time:not(:focus) {
+  color: transparent;
+}
+.dwm-slot-time-display {
+  position: absolute;
+  top: 50%;
+  left: calc(var(--space-2) + 1px);
+  transform: translateY(-50%);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  pointer-events: none;
+}
+.dwm-slot-time-wrap:focus-within .dwm-slot-time-display {
+  display: none;
+}
+
+.dwm-slot-dur {
+  width: 100px;
+  padding: 6px var(--space-2);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+.dwm-slot-dur:focus {
+  border-color: var(--accent-primary);
+}
+
+.dwm-slot-range {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  margin-left: auto;
+}
+
+
+/* ---- Two columns ---- */
+
+.dwm-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+
+/* ---- Weekdays ---- */
+
+.dwm-weekdays {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.dwm-day {
+  flex: 1;
+  padding: 7px 0;
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-primary);
+  color: var(--text-tertiary);
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+  letter-spacing: var(--tracking-wide);
+}
+.dwm-day.active {
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+
+/* ---- VIP Card (in body) ---- */
+
+.dwm-vip-card {
+  gap: var(--space-2);
+}
+
+.dwm-vip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dwm-vip-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background var(--transition-fast);
+}
+
+.dwm-vip-row-email {
+  flex: 1;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dwm-vip-row-remove {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  color: var(--text-placeholder);
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: var(--font-size-lg);
+  line-height: var(--leading-none);
+  padding: 0;
+  opacity: 1;
+  transition: all var(--transition-fast);
+}
+
+/* Empty state */
+.dwm-vip-empty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  border: 1.5px dashed var(--border-default);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-secondary);
+}
+.dwm-vip-empty span {
+  font-size: var(--font-size-xs);
+  font-style: italic;
+  color: var(--text-placeholder);
+}
+
+/* Add contact row */
+.dwm-vip-add {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 2px 2px 2px 10px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-primary);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+.dwm-vip-add:focus-within {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-primary-glow);
+}
+
+.dwm-vip-add-icon {
+  flex-shrink: 0;
+  color: var(--text-placeholder);
+}
+
+.dwm-vip-add-input {
+  flex: 1;
+  min-width: 0;
+}
+.dwm-vip-add-input input {
+  width: 100%;
+  padding: var(--space-2) var(--space-2);
+  border: none !important;
+  background: transparent !important;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  outline: none;
+  box-shadow: none !important;
+}
+.dwm-vip-add-input input::placeholder {
+  color: var(--text-placeholder);
+}
+
+/* VIP label suggestions */
+.dwm-vip-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.dwm-vip-suggestions-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--success-text);
+}
+.dwm-vip-suggestions-label svg {
+  flex-shrink: 0;
+}
+
+.dwm-vip-suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dwm-vip-suggestion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border: 1.5px dashed color-mix(in srgb, var(--success-text) 30%, var(--border-default));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--success-text) 4%, transparent);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.dwm-vip-suggestion-email {
+  flex: 1;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.dwm-vip-suggestion-add {
+  flex-shrink: 0;
+  color: var(--success-text);
+  opacity: 1;
+  transition: opacity var(--transition-fast);
+}
+
+/* Hint */
+.dwm-vip-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-2xs);
+  color: var(--text-placeholder);
+  font-style: italic;
+}
+.dwm-vip-hint svg {
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+
+/* ============================================================================
+   TIMELINE VISUALIZATION
+   ============================================================================ */
+
+.dwm-timeline-label {
+  display: block;
+}
+
+.dwm-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.dwm-timeline-track {
+  position: relative;
+  height: 40px;
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  /* Dim "night" base so the lit daylight band reads as the working day */
+  background: var(--surface-tertiary);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Lit working-hours band behind the slots */
+.dwm-timeline-daylight {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--accent-primary) 7%, var(--surface-secondary)),
+      color-mix(in srgb, var(--accent-primary) 3%, var(--surface-secondary)));
+  border-left: 1px solid color-mix(in srgb, var(--border-default) 60%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--border-default) 60%, transparent);
+}
+
+.dwm-timeline-slot {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  z-index: 2;
+  min-width: 7px;
+  border-radius: var(--radius-sm, 6px);
+  background:
+    linear-gradient(135deg,
+      var(--accent-primary),
+      var(--accent-primary-hover));
+  box-shadow:
+    0 1px 3px color-mix(in srgb, var(--accent-primary) 30%, transparent);
+  transition: opacity var(--transition-slow), background var(--transition-slow);
+}
+
+/* Ghost = mode paused: outlined, hollow pill so the plan stays visible
+   without claiming it's currently being enforced. */
+.dwm-timeline-slot--ghost {
+  background: color-mix(in srgb, var(--accent-primary) 8%, transparent);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--accent-primary) 45%, transparent);
+}
+
+/* "Now" marker — same visual language as the calendar's current-time
+   indicator (.calendar-now-line): accent line fading out at the far end +
+   pulsing halo dot at its origin. Vertical here (the bar is a 24h strip).
+   Kept inside the track (overflow:hidden) — halo sized so the pulse peak
+   stays unclipped. */
+.dwm-timeline-now {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 4;
+  width: 2px;
+  margin-left: -1px;
+  border-radius: 1px;
+  background: linear-gradient(
+    180deg,
+    var(--accent-primary) 0%,
+    var(--accent-primary) 60%,
+    color-mix(in srgb, var(--accent-primary) 20%, transparent) 100%
+  );
+}
+.dwm-timeline-now::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 1px;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--accent-primary);
+  transform: translateX(-50%);
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--accent-primary) 15%, transparent),
+    0 0 10px color-mix(in srgb, var(--accent-primary) 30%, transparent);
+  animation: dwmNowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes dwmNowPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 2px color-mix(in srgb, var(--accent-primary) 15%, transparent),
+      0 0 10px color-mix(in srgb, var(--accent-primary) 30%, transparent);
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--accent-primary) 8%, transparent),
+      0 0 16px color-mix(in srgb, var(--accent-primary) 20%, transparent);
+    transform: translateX(-50%) scale(1.15);
+  }
+}
+
+.dwm-timeline-hours {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2px;
+}
+
+.dwm-timeline-hours span {
+  font-size: var(--font-size-2xs);
+  font-weight: 500;
+  color: var(--text-placeholder);
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* Status banner removed (2026-06-09) — the "Active — N min of focus" strip
+   duplicated the summary numbers and read as noise. */
+
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+
+.dwm-footer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: var(--space-4) var(--space-6);
+  border-top: 1px solid var(--border-subtle);
+  background: var(--surface-primary);
+}
+
+
+/* Accent gradient separator line */
+.dwm-footer-accent {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent-primary) 15%, transparent) 20%,
+    var(--accent-primary) 50%,
+    color-mix(in srgb, var(--accent-primary) 15%, transparent) 80%,
+    transparent 100%
+  );
+  opacity: 0.5;
+}
+
+
+/* ---- Button base ---- */
+
+.dwm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+.dwm-btn:active {
+  transform: scale(var(--scale-press));
+}
+
+/* Ghost */
+.dwm-btn--ghost {
+  background: transparent;
+  color: var(--text-tertiary);
+}
+
+/* Secondary (save) */
+.dwm-btn--secondary {
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-default);
+}
+.dwm-btn--secondary:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.dwm-btn--saved {
+  background: color-mix(in srgb, var(--success) 10%, transparent) !important;
+  border-color: var(--success) !important;
+  color: var(--success) !important;
+  opacity: 1 !important;
+}
+
+/* Primary (activate) */
+.dwm-btn--primary {
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Bypass variant */
+.dwm-btn--bypass {
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  color: var(--accent-primary);
+  box-shadow: none;
+}
+
+/* ============================================================================
+   WORK BLOCKS SECTION
+   ============================================================================ */
+
+.dwm-add-block-btn {
+  margin-left: auto;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-primary);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+.dwm-add-block-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.dwm-work-empty {
+  font-size: var(--font-size-xs);
+  color: var(--text-placeholder);
+  font-style: italic;
+  margin: 0;
+  padding: var(--space-2) 0 0;
+}
+
+.dwm-work-hint {
+  font-size: var(--font-size-2xs);
+  color: var(--text-placeholder);
+  font-style: italic;
+  margin-top: -4px;
+}
+
+.dwm-slot--work {
+  border-left: 3px solid var(--accent-secondary);
+}
+.dwm-slot--work:focus-within {
+  border-color: var(--accent-secondary);
+  border-left-color: var(--accent-secondary);
+  box-shadow: var(--shadow-focus);
+}
+
+.dwm-slot-badge--work {
+  background: var(--accent-secondary);
+}
+
+.dwm-slot-fields--work {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.dwm-slot-label {
+  width: 100%;
+  padding: 5px var(--space-2);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 550;
+  font-family: inherit;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+.dwm-slot-label::placeholder {
+  color: var(--text-placeholder);
+  font-weight: 400;
+}
+.dwm-slot-label:focus {
+  border-color: var(--accent-secondary);
+}
+
+.dwm-slot-time-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.dwm-slot-remove {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  color: var(--text-placeholder);
+  cursor: pointer;
+  border-radius: var(--radius-md, 8px);
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  padding: 0;
+}
+
+/* Timeline work blocks */
+.dwm-timeline-work {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  z-index: 1;
+  min-width: 7px;
+  border-radius: var(--radius-sm, 6px);
+  background:
+    linear-gradient(135deg, var(--accent-secondary), var(--accent-secondary-hover));
+  opacity: 0.85;
+  box-shadow: var(--shadow-sm);
+  transition: opacity var(--transition-slow), background var(--transition-slow);
+}
+
+/* Ghost = work mode paused: outlined, hollow */
+.dwm-timeline-work--ghost {
+  background: color-mix(in srgb, var(--accent-secondary) 8%, transparent);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--accent-secondary) 45%, transparent);
+  opacity: 1;
+}
+
+/* Timeline legend */
+.dwm-timeline-legend {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 2px;
+}
+
+.dwm-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--font-size-2xs);
+  font-weight: 500;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+}
+
+.dwm-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.dwm-legend-dot--check {
+  background: var(--accent-primary);
+}
+
+.dwm-legend-dot--work {
+  background: var(--accent-secondary);
+}
+
+
+/* ---- Timeline emphasis by active tab ----
+   The track carries dwm-timeline-track--emails / --work; the active tab brings
+   its own layer forward and recedes the other so the bar always foregrounds
+   what you're editing. (Previously authored against .dwm-timeline-section--*,
+   a class that was never rendered — so this had no effect at all.) */
+
+/* Tab emails: work blocks recede */
+.dwm-timeline-track--emails .dwm-timeline-work {
+  opacity: 0.3;
+}
+.dwm-timeline-track--emails .dwm-timeline-work--ghost {
+  opacity: 0.45;
+}
+
+/* Tab work: email slots recede */
+.dwm-timeline-track--work .dwm-timeline-slot {
+  opacity: 0.35;
+}
+.dwm-timeline-track--work .dwm-timeline-slot--ghost {
+  opacity: 0.5;
+}
+
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+@media (max-width: 560px) {
+  .dwm-modal {
+    width: 96%;
+    max-height: 92vh;
+  }
+  .dwm-header,
+  .dwm-body,
+  .dwm-footer {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+  .dwm-tab-bar,
+  .dwm-timeline-top {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+  .dwm-tab-bar {
+    margin-left: var(--space-4);
+    margin-right: var(--space-4);
+  }
+  .dwm-columns {
+    grid-template-columns: 1fr;
+  }
+  .dwm-slot {
+    flex-wrap: wrap;
+  }
+  .dwm-slot-range {
+    width: 100%;
+    margin-left: var(--space-8);
+  }
+}
+
+/* ── Forced Colors (Windows High Contrast) ── */
+@media (forced-colors: active) {
+  .dwm-panel {
+    border: 2px solid ButtonText;
+  }
+  .dwm-close {
+    border: 1px solid ButtonText;
+  }
+  .dwm-slot {
+    border: 1px solid ButtonText;
+  }
+  .dwm-toggle-track {
+    border: 1px solid ButtonText;
+  }
+  .dwm-primary-btn {
+    border: 1px solid ButtonText;
+  }
+}
+
+/* ============================================================================
+   CONTAINER QUERIES — Component-intrinsic responsive behavior
+   ============================================================================ */
+@container deep-work (max-width: 480px) {
+  .dwm-header {
+    padding: var(--space-3) var(--space-4) var(--space-2);
+  }
+  .dwm-body {
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-3);
+  }
+  .dwm-footer {
+    padding: var(--space-3) var(--space-4);
+  }
+  .dwm-tab-bar {
+    margin-left: var(--space-4);
+    margin-right: var(--space-4);
+  }
+  .dwm-summary-strip {
+    padding: var(--space-2) var(--space-3);
+  }
+  .dwm-summary-value {
+    font-size: var(--font-size-xl);
+  }
+  .dwm-slot {
+    padding: var(--space-2) 10px;
+    gap: var(--space-2);
+  }
+  .dwm-slot-time,
+  .dwm-slot-time-display,
+  .dwm-slot-dur {
+    font-size: var(--font-size-xs);
+  }
+  .dwm-title {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@container deep-work (max-width: 360px) {
+  .dwm-header-left {
+    gap: var(--space-2);
+  }
+  .dwm-shield-wrap {
+    width: 32px;
+    height: 32px;
+  }
+  .dwm-slot-fields {
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .dwm-freq-grid {
+    gap: var(--space-1);
+  }
+  .dwm-freq-btn {
+    padding: var(--space-2) 0 var(--space-1);
+  }
+}

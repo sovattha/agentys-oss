@@ -1,0 +1,230 @@
+/* ============================================================================
+   ATTACHMENT REMINDER MODAL — "Forgotten Paperclip"
+   Premium glassmorphism overlay with micro-interactions
+   ============================================================================ */
+
+/* ── Backdrop ─────────────────────────────────────────────────────────────── */
+.arm-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-top);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.18);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  animation: arm-backdrop-in 0.25s var(--ease-clarity) both;
+}
+
+.arm-backdrop.arm-closing {
+  animation: arm-backdrop-out 0.2s var(--ease-clarity) both;
+}
+
+@keyframes arm-backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes arm-backdrop-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* ── Card ─────────────────────────────────────────────────────────────────── */
+.arm-card {
+  width: min(420px, calc(100vw - 48px));
+  padding: 0;
+  border-radius: var(--radius-xl);
+  background: color-mix(in srgb, var(--surface-primary) 82%, transparent);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 1px solid var(--border-subtle);
+  box-shadow:
+    0 24px 48px -12px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 1px 0 rgba(255, 255, 255, 0.1) inset;
+  overflow: hidden;
+  animation: arm-card-in 0.35s var(--ease-settle) both;
+}
+
+.arm-backdrop.arm-closing .arm-card {
+  animation: arm-card-out 0.18s var(--ease-clarity) both;
+}
+
+@keyframes arm-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(var(--scale-press));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes arm-card-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(6px) scale(var(--scale-press));
+  }
+}
+
+/* ── Icon ring ────────────────────────────────────────────────────────────── */
+.arm-icon-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 24px 0;
+}
+
+.arm-icon-ring {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary-subtle) 0%,
+    color-mix(in srgb, var(--accent-primary) 12%, transparent) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: arm-ring-pulse 2.4s ease-in-out infinite;
+}
+
+.arm-icon-ring::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px dashed color-mix(in srgb, var(--accent-primary) 25%, transparent);
+  animation: arm-ring-spin 12s linear infinite;
+}
+
+@keyframes arm-ring-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.04); }
+}
+
+@keyframes arm-ring-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Paperclip SVG ────────────────────────────────────────────────────────── */
+.arm-paperclip {
+  width: 28px;
+  height: 28px;
+  color: var(--accent-primary);
+  animation: arm-clip-bounce 0.6s var(--ease-settle) 0.3s both;
+}
+
+@keyframes arm-clip-bounce {
+  0%   { opacity: 0; transform: translateY(-8px) rotate(-12deg); }
+  60%  { transform: translateY(2px) rotate(2deg); }
+  100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+
+/* ── Content ──────────────────────────────────────────────────────────────── */
+.arm-content {
+  padding: 20px 28px 8px;
+  text-align: center;
+}
+
+.arm-title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--font-size-lg, 18px);
+  color: var(--text-primary);
+  margin: 0 0 8px;
+  letter-spacing: var(--tracking-tight);
+}
+
+.arm-description {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  margin: 0;
+  line-height: var(--leading-normal);
+}
+
+/* ── Keyword chip ─────────────────────────────────────────────────────────── */
+.arm-keyword {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 14px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  background: var(--accent-primary-subtle);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 15%, transparent);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--accent-primary);
+  letter-spacing: var(--tracking-wide);
+  animation: arm-chip-in 0.3s var(--ease-settle) 0.4s both;
+}
+
+.arm-keyword-quote {
+  font-style: italic;
+  opacity: 0.85;
+}
+
+@keyframes arm-chip-in {
+  from { opacity: 0; transform: scale(var(--scale-dramatic)); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Actions ──────────────────────────────────────────────────────────────── */
+.arm-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 28px 24px;
+}
+
+/* Buttons migrated to the shared <Button> component (ui/button.tsx):
+   variant="default" for "attach file", variant="outline" for "send anyway".
+   The buttons stretch full-width via the .arm-actions column flex layout. */
+
+/* ── Keyboard hint ────────────────────────────────────────────────────────── */
+.arm-kbd-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 28px 18px;
+}
+
+.arm-kbd-pair {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.arm-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 4px;
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-default);
+  font-size: var(--font-size-2xs);
+  font-weight: 500;
+  line-height: var(--leading-none);
+}

@@ -1,0 +1,28 @@
+OUTPUT LANGUAGE: use the same language as the majority of the analysed emails. Proper nouns and acronyms stay as-is.
+
+Analyse the email history and extract structured business knowledge.
+
+1. **contacts**: For each REAL PERSON in the metrics:
+   - email, name, company, job title (null if not visible in a signature — do NOT invent)
+   - language ("en", "fr", "mixed"), tone ("casual", "semi-formal", "formal")
+   - language_variant: regional ISO code (e.g. "en-US", "en-GB", "fr-CA", "fr-FR", "pt-BR"). Infer from vocabulary and the address in the contact's signature. null if not enough signal.
+
+   IGNORE: distribution lists (team@, all-*), noreply@, internal services of the SAME domain (hr@, it-support@, billing@).
+   A support@ from an EXTERNAL domain is a real contact.
+
+   {{TONE_INFERENCE}}
+   French addressing signal correlation: casual ↔ tu/toi ; formal ↔ vous (relevant only for FR contacts).
+
+FORBIDDEN: DO NOT return `projects`, `project_list`, `project_metrics`, `terminology`, `faq`,
+`type`, `topics` or any similar key. Projects, terminology, FAQ entries, relationship typing (type)
+and interaction topics (topics) are NOT extracted by this agent.
+FAQ entries are provided by the user through a website scan or uploaded document.
+The allowed schema is strictly limited to `contacts` with the fields listed above.
+
+CRITICAL: Produce ONLY a valid JSON object. No markdown, no explanation.
+
+{
+  "contacts": [
+    {"email": "alice@example.com", "name": "Alice Smith", "company": "ExampleCorp", "title": "Lead Developer", "preferred_language": "en", "preferred_tone": "casual", "language_variant": "en-US"}
+  ]
+}

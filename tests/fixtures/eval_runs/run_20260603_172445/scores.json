@@ -1,0 +1,74 @@
+{
+  "profile": {
+    "completeness": 78,
+    "precision": 82,
+    "usefulness": 75,
+    "overall": 78,
+    "missing": [
+      "greeting_style key 'formal_fr_client' with examples like 'Monsieur le Directeur Général'",
+      "greeting_style key 'formal_fr_colleague' with examples like 'Chère Madame Fontaine'",
+      "closing_style key 'formal_fr_external' distinct from lawyer closing",
+      "closing for formal_fr_lawyer uses 'sentiments les plus distingués' (not 'salutations distinguées')",
+      "uses_emoji: false",
+      "average_response_length 'long' (output says 'medium-long')",
+      "top-level 'addressing' field (placed inside tone instead)"
+    ],
+    "incorrect": [
+      "formal_fr_master closing uses 'salutations distinguées' instead of 'sentiments les plus distingués'",
+      "average_response_length is 'medium-long' instead of 'long'",
+      "greeting/closing taxonomy loses client vs. colleague vs. lawyer distinctions"
+    ],
+    "details": "The system correctly captured core profile fields (email, name, preferred_name, signature, default_tone, languages, language_variant, addressing). However, greeting styles are simplified and use template placeholders rather than the richer, context-specific examples in ground truth (e.g., missing 'Monsieur le Directeur Général', 'Chère Madame Fontaine', colleague vs. client distinctions). The closing for formal_fr_master differs slightly ('salutations distinguées' vs. 'sentiments les plus distingués'). The 'addressing' field was placed inside tone in the output rather than at the top level. The system added extra fields (profession, profession_confirmed, department) not in ground truth, which are minor additions but not harmful. The average_response_length is 'medium-long' vs. ground truth 'long', a minor discrepancy. The greeting/closing taxonomy uses different keys (formal_fr_client, formal_fr_colleague, formal_fr_lawyer vs. formal_fr, formal_fr_madam, formal_fr_master), losing important contextual distinctions that would affect draft quality."
+  },
+  "knowledge": {
+    "completeness": 85,
+    "precision": 52,
+    "usefulness": 45,
+    "overall": 60,
+    "missing": [
+      "Nathalie Vernier: title 'Directrice juridique'",
+      "Philippe Dumont: title 'Associé fondateur'",
+      "Élise Fontaine: title 'Collaboratrice senior'",
+      "Jean-Louis Garnier: title 'Gérant'",
+      "Maxime Leroux: title 'Stagiaire'",
+      "Dominique Perrin: full name with 'Maître' honorific and full title 'Avocat au Barreau de Paris'",
+      "Sophie Renard: 'Maître' honorific in name",
+      "Greffe du Tribunal de Commerce de Paris: name, company, preferred_language='fr', preferred_tone='formal'"
+    ],
+    "incorrect": [
+      "Nathalie Vernier: preferred_tone should be 'formal', not 'semi-formal'",
+      "Philippe Dumont: preferred_tone should be 'formal', not 'semi-formal'",
+      "Élise Fontaine: preferred_tone should be 'formal', not 'semi-formal'",
+      "Jean-Louis Garnier: preferred_tone should be 'formal', not 'semi-formal'",
+      "Friedrich Braun: preferred_language should be 'fr', not 'en'; preferred_tone should be 'formal', not 'semi-formal'",
+      "Maxime Leroux: preferred_tone should be 'formal', not 'semi-formal'",
+      "Sophie Renard: company should be 'Étude Renard', not 'Notaire Renard'",
+      "Greffe contact: all fields except email and interaction_count are null/missing"
+    ],
+    "details": "The system found all 10 contacts present in the ground truth, which is good for completeness. However, there are numerous precision issues: (1) Multiple contacts are missing their titles (Nathalie Vernier, Philippe Dumont, Élise Fontaine, Jean-Louis Garnier, Maxime Leroux). (2) Several contacts have wrong preferred_tone — 'semi-formal' instead of 'formal' for Nathalie Vernier, Philippe Dumont, Élise Fontaine, Jean-Louis Garnier, Friedrich Braun, and Maxime Leroux. In a legal/formal French professional context, this is a significant error. (3) Friedrich Braun's preferred_language is listed as 'en' instead of 'fr', which is incorrect per ground truth. (4) Dominique Perrin is missing the 'Maître' honorific in the name, and title is simplified to 'Avocat' instead of 'Avocat au Barreau de Paris'. (5) Sophie Renard is missing the 'Maître' honorific. (6) The greffe contact is missing name, company, preferred_language, and preferred_tone — all of which are present in ground truth. (7) Élise Fontaine's title 'Collaboratrice senior' is missing. (8) Jean-Louis Garnier's title 'Gérant' is missing. The tone errors are particularly damaging for usefulness since drafting emails with 'semi-formal' tone to French legal professionals would be inappropriate and potentially damaging to professional relationships."
+  },
+  "rules": {
+    "completeness": 82,
+    "precision": 78,
+    "usefulness": 80,
+    "overall": 80,
+    "missing": [
+      "Named rule 'zero_emoji_zero_abreviation' (no emoji, no familiar abbreviations)",
+      "Named rule 'signature_avec_disclaimer' with explicit disclaimer mention",
+      "Named rule 'maitre_entre_avocats' as explicit standalone rule",
+      "Full closing formulas for h.castellan, n.vernier, jl.garnier, greffe, f.braun, s.renard, d.perrin (truncated, missing 'Je vous prie d'agréer, [title],')"
+    ],
+    "incorrect": [
+      "m.leroux@dumont-associes.fr tone set to 'semi-formal' instead of 'formal'",
+      "Closing for h.castellan@nexus-group.fr is truncated: missing 'Je vous prie d'agréer, Monsieur le Directeur Général,'",
+      "Closing for n.vernier@nexus-group.fr is truncated: missing 'Je vous prie d'agréer, Madame,'",
+      "Closing for jl.garnier@sarl-garnier.fr is truncated: missing 'Je vous prie d'agréer, Monsieur,'",
+      "Closing for greffe@tc-paris.justice.fr is truncated: missing 'Je vous prie d'agréer, Madame, Monsieur,'",
+      "Closing for f.braun@braun-partner.de is truncated: missing 'Je vous prie d'agréer, cher Maître,'",
+      "Closing for s.renard@notaire-renard.fr is truncated: missing 'Je vous prie d'agréer, chère Maître,'",
+      "Closing for d.perrin@perrin-avocats.fr is truncated: missing 'Je vous prie d'agréer, cher Maître,'"
+    ],
+    "details": "The system found all 10 contact rules and correctly identified greetings for all contacts. However, several closing formulas are truncated (missing the full 'Je vous prie d'agréer...' preamble) for external contacts. The tone for m.leroux@dumont-associes.fr is incorrectly marked as 'semi-formal' instead of 'formal'. General rules are captured in spirit but restructured without named identifiers, making them harder to reference programmatically. The system adds useful extra rules (French-only policy, M&A jargon) not in ground truth but these are reasonable inferences. The 'zero_emoji_zero_abreviation' rule and 'signature_avec_disclaimer' rule are present but not explicitly named. The 'maitre_entre_avocats' rule is implicit rather than explicit."
+  },
+  "overall": 73
+}

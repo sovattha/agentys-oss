@@ -1,0 +1,324 @@
+{
+  "description": "Expected outputs from the onboarding KB analysis of test_emails.json",
+  "expected_profile": {
+    "user_email": "sophie.martin@techcorp.fr",
+    "user_name": "Sophie Martin",
+    "signature": {
+      "name": "Sophie Martin",
+      "title": "Chef de projet",
+      "department": "Division Digitale",
+      "company": "TechCorp"
+    },
+    "tone": {
+      "default_tone": "semi-formal",
+      "greeting_styles": {
+        "formal_fr": "Bonjour Madame/Monsieur {last_name},",
+        "semi_formal_fr": "Bonjour {first_name},",
+        "casual_fr": "Salut {first_name},",
+        "formal_en": "Dear {first_name},",
+        "semi_formal_en": "Hi {first_name},"
+      },
+      "closing_styles": {
+        "formal_fr": "Cordialement,",
+        "semi_formal_fr": "Merci,",
+        "casual_fr": "(no closing or just name)",
+        "formal_en": "Best regards,",
+        "semi_formal_en": "Best,"
+      },
+      "uses_emoji": false,
+      "average_response_length": "medium"
+    },
+    "languages": [
+      "fr",
+      "en"
+    ],
+    "preferred_name": "Sophie",
+    "addressing": "mixed",
+    "language_variant": "fr-FR"
+  },
+  "expected_contacts": [
+    {
+      "email": "pierre.durand@techcorp.fr",
+      "name": "Pierre Durand",
+      "company": "TechCorp",
+      "title": "Lead Developer",
+      "preferred_language": "fr",
+      "preferred_tone": "casual",
+      "interaction_count": 27
+    },
+    {
+      "email": "lucas.bernard@techcorp.fr",
+      "name": "Lucas Bernard",
+      "company": "TechCorp",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "casual",
+      "interaction_count": 15
+    },
+    {
+      "email": "camille.roux@techcorp.fr",
+      "name": "Camille Roux",
+      "company": "TechCorp",
+      "title": "Responsable Securite",
+      "preferred_language": "fr",
+      "preferred_tone": "casual",
+      "interaction_count": 11
+    },
+    {
+      "email": "marie.leclerc@clientcorp.com",
+      "name": "Marie Leclerc",
+      "company": "ClientCorp SA",
+      "title": "Directrice des Achats",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 8
+    },
+    {
+      "email": "nicolas.moreau@techcorp.fr",
+      "name": "Nicolas Moreau",
+      "company": "TechCorp",
+      "title": "Directeur Financier",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 7
+    },
+    {
+      "email": "ceo@techcorp.fr",
+      "name": "Marc Dupont",
+      "company": "TechCorp",
+      "title": "PDG",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 6
+    },
+    {
+      "email": "john.smith@globaltech.com",
+      "name": "John Smith",
+      "company": "GlobalTech Inc.",
+      "title": "VP Business Development",
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 4
+    },
+    {
+      "email": "sarah.jones@globaltech.com",
+      "name": "Sarah Jones",
+      "company": "GlobalTech Inc.",
+      "title": "Senior Solutions Architect",
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 5
+    },
+    {
+      "email": "amelie.petit@fournisseur.fr",
+      "name": "Amelie Petit",
+      "company": "Maintenance Pro SARL",
+      "title": "Responsable Comptes Cles",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 4
+    },
+    {
+      "email": "contact@prospect-startup.io",
+      "name": "Thomas Renard",
+      "company": "ProspectStartup",
+      "title": "CTO",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 3
+    },
+    {
+      "email": "david.kim@partnertech.co.kr",
+      "name": "David Kim",
+      "company": "PartnerTech Co., Ltd.",
+      "title": "Integration Lead",
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 4
+    },
+    {
+      "email": "elena.volkov@eupartner.de",
+      "name": "Elena Volkov",
+      "company": "EUPartner GmbH",
+      "title": "Business Development Director",
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "interaction_count": 3
+    },
+    {
+      "email": "claire.fontaine@clientcorp.com",
+      "name": "Claire Fontaine",
+      "company": "ClientCorp SA",
+      "title": "Chef de projet IT",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 4
+    }
+  ],
+  "expected_rules": {
+    "contact_rules": [
+      {
+        "contact_email": "marie.leclerc@clientcorp.com",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Bonjour Madame Leclerc,",
+        "closing": "Cordialement,"
+      },
+      {
+        "contact_email": "amelie.petit@fournisseur.fr",
+        "tone": "formal",
+        "language": "fr",
+        "greeting": "Bonjour Madame Petit, / Bonjour Amelie,",
+        "closing": "Cordialement,"
+      },
+      {
+        "contact_email": "pierre.durand@techcorp.fr",
+        "tone": "casual",
+        "language": "fr",
+        "greeting": "Pierre, / Salut Pierre,",
+        "closing": "(name only or none)"
+      },
+      {
+        "contact_email": "lucas.bernard@techcorp.fr",
+        "tone": "casual",
+        "language": "fr",
+        "greeting": "Salut Lucas, / Lucas,",
+        "closing": "Sophie"
+      },
+      {
+        "contact_email": "camille.roux@techcorp.fr",
+        "tone": "casual",
+        "language": "fr",
+        "greeting": "Camille,",
+        "closing": "Sophie"
+      },
+      {
+        "contact_email": "ceo@techcorp.fr",
+        "tone": "semi-formal",
+        "language": "fr",
+        "greeting": "Bonjour Marc,",
+        "closing": "Cordialement,"
+      },
+      {
+        "contact_email": "nicolas.moreau@techcorp.fr",
+        "tone": "semi-formal",
+        "language": "fr",
+        "greeting": "Bonjour Nicolas, / Nicolas,",
+        "closing": "Cordialement, / Sophie Martin"
+      },
+      {
+        "contact_email": "john.smith@globaltech.com",
+        "tone": "semi-formal",
+        "language": "en",
+        "greeting": "Hi John,",
+        "closing": "Best regards,"
+      },
+      {
+        "contact_email": "sarah.jones@globaltech.com",
+        "tone": "semi-formal",
+        "language": "en",
+        "greeting": "Hi Sarah,",
+        "closing": "Best regards, / Best,"
+      },
+      {
+        "contact_email": "david.kim@partnertech.co.kr",
+        "tone": "semi-formal",
+        "language": "en",
+        "greeting": "Hi David,",
+        "closing": "Best regards, / Best,"
+      },
+      {
+        "contact_email": "elena.volkov@eupartner.de",
+        "tone": "formal",
+        "language": "en",
+        "greeting": "Dear Elena,",
+        "closing": "Best regards,"
+      },
+      {
+        "contact_email": "contact@prospect-startup.io",
+        "tone": "semi-formal",
+        "language": "fr",
+        "greeting": "Bonjour Thomas,",
+        "closing": "Cordialement,"
+      },
+      {
+        "contact_email": "claire.fontaine@clientcorp.com",
+        "tone": "semi-formal",
+        "language": "fr",
+        "greeting": "Bonjour Claire, / Parfait Claire,",
+        "closing": "Cordialement,"
+      },
+      {
+        "contact_email": "support@cloudprovider.com",
+        "tone": "semi-formal",
+        "language": "en",
+        "greeting": "Hi,",
+        "closing": "Regards,"
+      }
+    ],
+    "general_rules": [
+      {
+        "name": "signature_formal",
+        "description": "Use full signature with title and phone for formal/semi-formal external emails",
+        "trigger": "External email with formal or semi-formal tone",
+        "action": "Append full signature block"
+      },
+      {
+        "name": "signature_casual",
+        "description": "Use first name only or no signature for casual internal emails",
+        "trigger": "Internal email with casual tone to team members",
+        "action": "Sign with first name only or omit signature"
+      },
+      {
+        "name": "language_switch",
+        "description": "Switch to English for international contacts",
+        "trigger": "Contact from non-French company (GlobalTech, PartnerTech, EUPartner, CloudProvider)",
+        "action": "Write entire email in English, including EN version of signature"
+      },
+      {
+        "name": "structured_updates",
+        "description": "Use numbered lists and bullet points for status updates and action items",
+        "trigger": "Status reports, meeting recaps, sprint summaries",
+        "action": "Structure content with numbered lists and clear sections"
+      },
+      {
+        "name": "cc_relevant_people",
+        "description": "CC relevant team members when introducing cross-functional topics",
+        "trigger": "Technical discussion involving team lead, or client discussions involving legal/finance",
+        "action": "Add relevant stakeholders in CC"
+      },
+      {
+        "name": "action_items",
+        "description": "End client emails with clear next steps",
+        "trigger": "Client-facing emails after meetings or decisions",
+        "action": "Include 'Actions a suivre' section with owner for each action"
+      },
+      {
+        "name": "vouvoiement_clients",
+        "description": "Use 'vous' form with external clients and suppliers",
+        "trigger": "First interactions with clients (Mme Leclerc, Mme Petit)",
+        "action": "Maintain vouvoiement throughout the relationship"
+      },
+      {
+        "name": "tutoiement_equipe",
+        "description": "Use 'tu' form with direct team members",
+        "trigger": "Internal emails to Pierre, Lucas, Camille",
+        "action": "Use casual tu form and first names"
+      }
+    ],
+    "forbidden_phrases": []
+  },
+  "expected_statistics": {
+    "total_emails": 100,
+    "sent_emails": 60,
+    "received_emails": 40,
+    "threads": 43,
+    "french_emails": 80,
+    "english_emails": 20,
+    "emails_with_signature": 40,
+    "emails_with_attachments": 12,
+    "unique_contacts": 16,
+    "internal_contacts": 7,
+    "external_contacts": 9
+  }
+}

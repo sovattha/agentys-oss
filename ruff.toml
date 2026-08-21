@@ -1,0 +1,14 @@
+# Ruff linter configuration for Agentys
+
+[lint]
+# Ignore specific rules
+ignore = [
+    "E402",  # Module level import not at top of file (needed for path/env setup)
+]
+
+[lint.per-file-ignores]
+# Scripts that need to set up path/env before imports
+"tests/conftest.py" = ["E402"]
+"tests/test_domain_entities.py" = ["E402"]
+"tests/test_fine_tuning.py" = ["E402"]
+"tests/test_wizard_config.py" = ["E402"]

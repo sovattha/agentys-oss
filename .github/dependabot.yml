@@ -1,0 +1,144 @@
+# Dependabot configuration — https://docs.github.com/en/code-security/dependabot
+# Regroupe les mises à jour critiques pour limiter le bruit de PR et faciliter
+# la validation conjointe des SDK qui font souvent des breaking changes mineurs.
+
+version: 2
+updates:
+  # Backend Python
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Paris"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "python"
+    groups:
+      critical-llm-providers:
+        patterns:
+          - "anthropic"
+          - "openai"
+          - "msgraph-sdk"
+          - "azure-identity"
+          - "google-auth*"
+          - "google-api-python-client"
+          - "stripe"
+        update-types:
+          - "minor"
+          - "patch"
+      dev-tooling:
+        patterns:
+          - "pytest*"
+          - "bandit"
+          - "ruff"
+          - "black"
+          - "mypy"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Frontend Tauri
+  - package-ecosystem: "npm"
+    directory: "/agentys-app"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Paris"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "frontend"
+    ignore:
+      # undici v8 a supprimé wrap-handler.js → casse jsdom@29 (qui requiert ^7).
+      # Ré-ouvrir ce pin quand jsdom@30+ sortira avec support undici v8.
+      - dependency-name: "undici"
+        versions: [">=8.0.0"]
+    groups:
+      react-ecosystem:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react*"
+          - "react-router*"
+        update-types:
+          - "minor"
+          - "patch"
+      tauri:
+        patterns:
+          - "@tauri-apps/*"
+        update-types:
+          - "minor"
+          - "patch"
+      dev-tooling:
+        patterns:
+          - "vite*"
+          - "@vitejs/*"
+          - "typescript"
+          - "eslint*"
+          - "@types/*"
+          - "vitest*"
+          - "@playwright/*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Mobile (Expo / React Native)
+  # Expo fait des breaking changes mineurs réguliers entre SDK majors,
+  # d'où le groupage par cluster pour faciliter la validation conjointe.
+  - package-ecosystem: "npm"
+    directory: "/agentys-mobile"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Paris"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "mobile"
+    ignore:
+      # Les versions Expo SDK + React Native sont pilotées par `npx expo install`
+      # (alignement SDK), PAS par "latest npm". Laisser Dependabot les bumper
+      # désynchronise le SDK et casse le build natif (ex: RN 0.86.0 poussé sur
+      # SDK 54 qui attend RN 0.81.5 → erreur native CallInvoker). Mise à jour de
+      # ces paquets uniquement via `npx expo install --fix` lors des montées de SDK.
+      - dependency-name: "expo"
+      - dependency-name: "expo-*"
+      - dependency-name: "@expo/*"
+      - dependency-name: "@expo-google-fonts/*"
+      - dependency-name: "react"
+      - dependency-name: "react-dom"
+      - dependency-name: "react-native"
+      - dependency-name: "react-native-*"
+      - dependency-name: "react-test-renderer"
+    groups:
+      i18n:
+        patterns:
+          - "i18next"
+          - "react-i18next"
+        update-types:
+          - "minor"
+          - "patch"
+      dev-tooling:
+        patterns:
+          - "jest"
+          - "jest-expo"
+          - "@testing-library/*"
+          - "@types/*"
+          - "typescript"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    labels:
+      - "dependencies"
+      - "ci"

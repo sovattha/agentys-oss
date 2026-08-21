@@ -1,0 +1,16 @@
+{
+  "timestamp": "20260603_172626",
+  "agents": [
+    "profile",
+    "knowledge",
+    "style"
+  ],
+  "llm_mode": "api:claude",
+  "llm_model": "default",
+  "llm_judge": true,
+  "timing": {
+    "analysis_s": 11.2,
+    "evaluation_s": 38.3,
+    "total_s": 49.5
+  }
+}

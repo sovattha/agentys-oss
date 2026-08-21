@@ -1,0 +1,223 @@
+.pillar-autolabel {
+  padding: 0;
+}
+
+.pillar-autolabel .pillar-context-banner {
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent-primary) 8%, transparent) 0%,
+    color-mix(in srgb, var(--accent-primary) 3%, transparent) 100%);
+  border-color: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+}
+
+.pillar-autolabel .pillar-context-icon {
+  color: var(--accent-primary);
+}
+
+/* ── Accuracy card ── */
+.autolabel-accuracy {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: color-mix(in srgb, var(--accent-primary) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  border-radius: 10px;
+  margin-bottom: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.autolabel-accuracy-label {
+  font-size: var(--font-size-xs, 0.74rem);
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
+.autolabel-accuracy-bar {
+  flex: 1;
+  height: 4px;
+  background: var(--border-subtle);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+/* ── Accuracy bar gradient fill with glow ── */
+.autolabel-accuracy-fill {
+  height: 100%;
+  background: linear-gradient(90deg,
+    var(--accent-primary),
+    var(--accent-primary-hover));
+  border-radius: 2px;
+  transition: width 0.3s;
+  box-shadow: 0 0 4px color-mix(in srgb, var(--accent-primary) 25%, transparent);
+  position: relative;
+  overflow: hidden;
+}
+
+.autolabel-accuracy-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+  animation: shimmerSweep 2.5s ease-in-out infinite;
+}
+
+.autolabel-accuracy-value {
+  font-size: var(--font-size-xs, 0.74rem);
+  font-weight: 600;
+  color: var(--accent-primary);
+  white-space: nowrap;
+  min-width: 32px;
+  text-align: right;
+}
+
+/* ── Per-label email-volume breakdown ── */
+.autolabel-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.autolabel-label-stat {
+  display: grid;
+  grid-template-columns: 84px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 2px;
+}
+
+.autolabel-label-stat-name {
+  font-size: var(--font-size-xs, 0.74rem);
+  font-weight: 500;
+  color: color-mix(in srgb, var(--label-color) 80%, var(--text-primary));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.autolabel-label-stat-bar {
+  height: 4px;
+  background: var(--border-subtle);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.autolabel-label-stat-fill {
+  height: 100%;
+  background: linear-gradient(90deg,
+    var(--accent-primary),
+    var(--accent-primary-hover));
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+
+.autolabel-label-stat-count {
+  font-size: var(--font-size-xs, 0.74rem);
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  min-width: 92px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Share percentage shown before the email count: "35 % · 12 e-mails" */
+.autolabel-label-stat-pct {
+  color: var(--text-primary);
+}
+
+.autolabel-label-stat-pct::after {
+  content: '·';
+  margin: 0 4px;
+  color: var(--text-tertiary, var(--text-secondary));
+  font-weight: 400;
+}
+
+.autolabel-rule-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.autolabel-rule-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm, 6px);
+  transition: background 0.15s, border-left 0.15s, padding-left 0.15s;
+}
+
+.autolabel-rule-item:last-child {
+  border-bottom: none;
+}
+
+.autolabel-rule-text {
+  flex: 1;
+  font-size: var(--font-size-xs, 0.76rem);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.autolabel-rule-text.editable {
+  cursor: text;
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin: -2px -4px;
+  transition: background 0.15s;
+}
+
+.autolabel-rule-edit-input {
+  font-size: var(--font-size-xs, 0.76rem);
+  color: var(--text-primary);
+  line-height: 1.4;
+  background: color-mix(in srgb, var(--accent-primary) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 30%, transparent);
+  border-radius: 4px;
+  padding: 3px 6px;
+  width: 100%;
+  outline: none;
+}
+
+.autolabel-rule-edit-input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-primary) 15%, transparent);
+}
+
+.pillar-autolabel .pillar-toggle.active {
+  background: var(--accent-primary);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent-primary) 30%, transparent);
+}
+
+.pillar-autolabel .pillar-confidence-fill {
+  background: linear-gradient(90deg,
+    var(--accent-primary),
+    var(--accent-primary-hover));
+  box-shadow: 0 0 4px color-mix(in srgb, var(--accent-primary) 20%, transparent);
+}
+
+.pillar-autolabel .pillar-empty-icon {
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 8%, transparent);
+}
+
+/* ── Per-rule precision — small muted % shown only when the rule has data ── */
+.autolabel-rule-precision {
+  font-size: var(--font-size-2xs, 0.62rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-tertiary, var(--text-secondary));
+  white-space: nowrap;
+}
+
+/* ── Label badge — uses per-label color via --label-color ── */
+.autolabel-label-badge {
+  font-size: var(--font-size-2xs, 0.62rem);
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  background: color-mix(in srgb, var(--label-color) 18%, var(--surface-primary, #fff));
+  color: color-mix(in srgb, var(--label-color) 75%, #333);
+}

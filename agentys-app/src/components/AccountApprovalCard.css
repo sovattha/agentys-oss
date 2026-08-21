@@ -1,0 +1,222 @@
+/* ── AccountApprovalCard ──────────────────────────────────────────────────── */
+
+.account-card {
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #6366f1) 35%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent-primary, #6366f1) 5%, var(--bg-primary, #fff));
+  overflow: hidden;
+  font-size: 0.82rem;
+}
+
+.account-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: color-mix(in srgb, var(--accent-primary, #6366f1) 15%, transparent);
+  color: var(--accent-primary, #6366f1);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.account-card-body {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.account-card-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.account-label {
+  color: var(--text-secondary, #6b7280);
+  min-width: 70px;
+  flex-shrink: 0;
+}
+
+.account-value {
+  color: var(--text-primary, #111827);
+  font-weight: 500;
+}
+
+.account-mono {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  background: var(--bg-secondary, #f3f4f6);
+  padding: 1px 5px;
+  border-radius: 4px;
+  color: var(--text-primary, #111827);
+}
+
+.account-action {
+  font-weight: 700;
+  color: var(--accent-primary, #6366f1);
+}
+
+.account-highlight {
+  color: var(--accent-primary, #6366f1);
+}
+
+/* Status badges */
+.account-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 0.73rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.account-badge--pending {
+  background: color-mix(in srgb, var(--accent-primary, #6366f1) 15%, transparent);
+  color: var(--accent-primary, #6366f1);
+}
+
+.account-badge--executed {
+  background: color-mix(in srgb, var(--success, #16a34a) 15%, transparent);
+  color: var(--success-text, #16a34a);
+}
+
+.account-badge--rejected {
+  background: color-mix(in srgb, var(--text-tertiary, #9ca3af) 15%, transparent);
+  color: var(--text-secondary, #6b7280);
+}
+
+.account-badge--not_found {
+  background: color-mix(in srgb, var(--error, #dc2626) 12%, transparent);
+  color: var(--error, #dc2626);
+}
+
+.account-badge--approved,
+.account-badge--done {
+  background: color-mix(in srgb, var(--success, #16a34a) 15%, transparent);
+  color: var(--success-text, #16a34a);
+}
+
+.account-warn-reason {
+  margin: 4px 0 0;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--error, #dc2626) 8%, transparent);
+  color: var(--error, #dc2626);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.account-password-reveal {
+  margin: 6px 0 0;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--success, #16a34a) 8%, transparent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.account-password {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--success-text, #16a34a);
+  user-select: all;
+}
+
+.account-error {
+  margin: 4px 0 0;
+  color: var(--error, #dc2626);
+  font-size: 0.78rem;
+}
+
+/* Actions */
+.account-card-actions {
+  padding: 8px 12px 10px;
+  border-top: 1px solid color-mix(in srgb, var(--accent-primary, #6366f1) 20%, transparent);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.account-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.account-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.account-btn--confirm {
+  background: var(--accent-primary, #6366f1);
+  color: #fff;
+}
+
+.account-btn--reject {
+  background: color-mix(in srgb, var(--text-tertiary, #9ca3af) 15%, transparent);
+  color: var(--text-secondary, #6b7280);
+}
+
+.account-btn--cancel {
+  background: transparent;
+  color: var(--text-tertiary, #9ca3af);
+}
+
+/* Reject form */
+.account-reject-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.account-reject-textarea {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 6px;
+  background: var(--bg-primary, #fff);
+  color: var(--text-primary, #111827);
+  font-size: 0.78rem;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.account-reject-textarea:focus {
+  outline: none;
+  border-color: var(--accent-primary, #6366f1);
+}
+
+.account-reject-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+/* Spinner */
+.account-spinner {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: account-spin 0.6s linear infinite;
+}
+
+@keyframes account-spin {
+  to { transform: rotate(360deg); }
+}

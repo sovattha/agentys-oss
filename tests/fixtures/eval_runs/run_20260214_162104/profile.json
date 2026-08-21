@@ -1,0 +1,45 @@
+{
+  "user_email": "ma.barreau@dumont-associes.fr",
+  "user_name": "Marc-Antoine Barreau",
+  "signature": {
+    "full_text": "Marc-Antoine Barreau\nAvocat au Barreau de Paris\nDumont & Associés\n24 rue du Faubourg Saint-Honoré, 75008 Paris\nTél. +33 1 42 65 78 90\n\nCe message et ses pièces jointes sont confidentiels et destinés exclusivement à leur destinataire. Si vous n'êtes pas le destinataire de ce message, merci de le supprimer et d'en informer l'expéditeur.",
+    "name": "Marc-Antoine Barreau",
+    "title": "Avocat au Barreau de Paris",
+    "department": null,
+    "company": "Dumont & Associés",
+    "phone": "+33 1 42 65 78 90"
+  },
+  "signature_en": {
+    "full_text": "Marc-Antoine Barreau\nAttorney at the Paris Bar\nDumont & Associés\n24 rue du Faubourg Saint-Honoré, 75008 Paris\nTel. +33 1 42 65 78 90\n\nThis message and its attachments are confidential and intended exclusively for the addressee. If you are not the intended recipient of this message, please delete it and inform the sender.",
+    "name": "Marc-Antoine Barreau",
+    "title": "Attorney at the Paris Bar",
+    "department": null,
+    "company": "Dumont & Associés",
+    "phone": "+33 1 42 65 78 90"
+  },
+  "tone": {
+    "default_tone": "formal",
+    "greeting_styles": {
+      "formal_fr": "Monsieur/Madame {last_name},",
+      "semi_formal_fr": "Cher Maître {last_name},",
+      "casual_fr": "Chère Madame {last_name},",
+      "formal_en": "Dear Mr./Ms. {last_name},",
+      "semi_formal_en": "Dear {first_name},"
+    },
+    "closing_styles": {
+      "formal_fr": "Je vous prie d'agréer, Monsieur/Madame, l'expression de mes salutations distinguées.",
+      "semi_formal_fr": "Bien cordialement,",
+      "casual_fr": "Cordialement,",
+      "formal_en": "Yours sincerely,",
+      "semi_formal_en": "Best,"
+    },
+    "uses_first_name": false,
+    "uses_emoji": false,
+    "average_response_length": "long"
+  },
+  "languages": [
+    "fr"
+  ],
+  "active_hours": "09:00-14:30",
+  "response_time_avg": "< 2h"
+}

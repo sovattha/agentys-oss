@@ -1,0 +1,456 @@
+/* ============================================================================
+   SNOOZED VIEW — inbox-style layout
+   ============================================================================ */
+
+/* ── Container card ── */
+.snoozed-view {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-default);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Ligne lumineuse en haut (même pattern que draft-list-container) */
+.snoozed-view::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.snoozed-view--loading,
+.snoozed-view--empty {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-muted);
+}
+
+/* ── Loading state ── */
+.snoozed-view--loading span {
+  animation: svPulse 1.4s ease-in-out infinite;
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+}
+
+@keyframes svPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ── Empty state ── rendered by the shared <EmptyState> component
+   (EmptyState.css), same recipe as the inbox/sent/drafts folders. */
+
+/* ── Header ── matches .email-list-header so Later/Inbox share alignment. */
+.sv-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  min-height: 40px;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.sv-header-title {
+  /* Match .header-tab.active / .header-location so Later's title shares the
+     exact look + padding of the Inbox label. */
+  display: inline-flex;
+  align-items: center;
+  padding: 6px var(--space-3) var(--space-2);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+  /* Reset h1 browser defaults */
+  margin: 0;
+  line-height: inherit;
+}
+
+.sv-header-count {
+  font-size: var(--font-size-xs);
+  color: var(--text-disabled, var(--text-muted));
+  background: var(--surface-secondary);
+  border-radius: 999px;
+  padding: 0 7px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.sv-refresh-btn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.1s, color 0.1s;
+}
+
+/* ── Filter tabs — text-only, inbox-style. Active state uses the
+   category's brand colour (snooze → violet, reminder → amber,
+   scheduled → green, all → teal). ── */
+.sv-filters {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.sv-filters::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mirrors .header-tab in EmailList.css so the Later tab strip reads
+   identically to the Inbox tabs: muted inactive, near-black active (no
+   per-category colour), tight count. (2026-05-25, "full match") */
+.sv-filter {
+  display: inline-flex;
+  align-items: center;
+  /* gap = label↔count spacing; matches .header-tab-count margin-left: 4px */
+  gap: 4px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: var(--font-size-md);
+  font-weight: 400;
+  color: var(--text-tertiary);
+  opacity: 0.55;
+  transition: color 0.12s, opacity 0.12s, font-weight 0.12s;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+/* Empty tabs (count 0) sit one notch below inactive — same as the dimmed
+   Reminders/Sending look before the unification. */
+.sv-filter--empty {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Active: near-black + heavier, like .header-tab.active (no category hue). */
+.sv-filter--active {
+  font-weight: 600;
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+/* Count matches .header-tab-count: smaller, muted, tabular. */
+.sv-filter-count {
+  background: transparent;
+  padding: 0;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+.sv-filter--active .sv-filter-count {
+  color: var(--text-secondary);
+}
+
+/* Filter-empty message inside the list */
+.sv-filter-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 48px 16px;
+  color: var(--text-muted);
+}
+
+.sv-filter-empty-title {
+  font-size: var(--font-size-sm, 13px);
+  margin: 0;
+}
+
+.sv-filter-empty-reset {
+  background: none;
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: var(--font-size-xs, 12px);
+  cursor: pointer;
+  transition: background-color 0.12s, color 0.12s, border-color 0.12s;
+}
+
+/* ── List panel ── */
+.snoozed-list-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+  min-width: 0;
+  animation: svEnter 0.35s ease both;
+  transition: max-width 0.25s ease;
+}
+
+.snoozed-view.has-detail {
+  display: grid;
+  grid-template-columns: 1fr 6px var(--detail-panel-width, 560px);
+}
+
+.snoozed-view.has-detail .snoozed-list-panel {
+  border-right: 1px solid var(--border-subtle);
+}
+
+@keyframes svEnter {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Section separator — mirrors inbox .email-date-separator (transparent, no uppercase) ── */
+.sv-section-separator {
+  display: flex;
+  align-items: center;
+  padding: 6px var(--space-4) 4px;
+  background: transparent;
+}
+
+.sv-section-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: 0;
+  text-transform: none;
+  flex: 1;
+}
+
+.sv-section-label--overdue {
+  color: var(--error);
+}
+
+/* ── Section count badge ── */
+.snoozed-section-count {
+  font-size: var(--font-size-xs);
+  color: var(--text-disabled, var(--text-muted));
+  background: var(--surface-tertiary, var(--border-subtle));
+  border-radius: 999px;
+  padding: 0 6px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+/* ── Email row — same height as inbox ── */
+/* Spécificité 0,2,0 pour écraser .email-row.gmail-style { height: 100% } de SwipeableEmailItem.css */
+.sv-row.email-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 36px 0 12px;
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: background-color 0.1s, opacity 0.2s, transform 0.2s;
+}
+
+.sv-row.unread::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: var(--success-text, #16a34a);
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 6px rgba(22, 163, 74, 0.35);
+}
+
+.sv-row.selected {
+  /* Bumped from --accent-primary-subtle (8%) to --accent-primary-glow (15%)
+     to mirror the inbox SwipeableEmailItem selected state and give the
+     hover bg below (which uses subtle) visual hierarchy below selected. */
+  background: var(--accent-primary-glow);
+}
+
+/* Row hover background — scanning affordance for a dense list. Mirrors
+   SwipeableEmailItem.css:37-45 (the documented exception to the global
+   no-hover rule). :not(.selected) preserves the brighter selected bg
+   when the row is both selected and hovered. */
+.sv-row:not(.selected):hover {
+  background: var(--accent-primary-subtle);
+}
+
+.sv-row.is-removing {
+  opacity: 0;
+  transform: translateX(8px);
+  pointer-events: none;
+}
+
+/* Unread text styles */
+.sv-row.unread .email-sender {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sv-row.unread .email-subject {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Fix email-content-line margin (inbox compensates for checkbox, we don't need it) */
+.sv-row .email-content-line {
+  margin-left: 0;
+}
+
+/* ⚡Auto chip → its own right-aligned column, just before the date slot.
+   margin-left:auto pins it to the content-line's (constant) right edge so
+   every Auto chip lines up vertically instead of riding the end of each
+   variable-length subject. The subject needs min-width:0 so a long subject
+   ellipsizes and yields space to the pinned chip rather than shoving it
+   under content-line's overflow:hidden clip. */
+.sv-row .email-content-line .email-subject {
+  min-width: 0;
+}
+
+.sv-row .email-content-line .auto-badge-chip {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+
+
+/* ── Wake date — texte discret, pas de pill ── */
+/* Fixed width so the sender column starts at the same X on every row,
+   regardless of whether the day is "Friday" or "Wednesday" or a short date. */
+.sv-wake {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  width: 160px;
+  min-width: 160px;
+  max-width: 160px;
+  overflow: hidden;
+}
+
+.sv-wake-day {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+}
+
+.sv-wake-time {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+/* Scheduled chip — matches snooze/reminder chip pattern (white icon on colored square) */
+.email-badge-scheduled {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border-radius: 3px;
+  background: #6ee7b7;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.email-badge-scheduled svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.sv-row--scheduled .email-sender {
+  color: var(--text-primary);
+}
+
+/* Clickable date badge for scheduled rows — replaces the dedicated
+   reschedule icon. Subtle hover affordance signals interactivity. */
+/* Clickable date badge for scheduled rows — uses ::before pseudo-element so
+   the hover background does not affect flex layout (no width/margin shift). */
+.sv-wake--clickable {
+  cursor: pointer;
+  position: relative;
+}
+
+.sv-wake--clickable::before {
+  content: '';
+  position: absolute;
+  inset: -2px -6px;
+  border-radius: 6px;
+  background: transparent;
+  transition: background-color 0.12s;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.sv-wake--clickable:focus-visible {
+  outline: none;
+}
+
+.sv-wake--clickable:focus-visible::before {
+  background: color-mix(in srgb, var(--success-text, #16a34a) 12%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--success-text, #16a34a) 50%, transparent);
+}
+
+/* Stable .email-time slot — wide enough for "Apr 24th" / "May 30th" without
+   wrapping, fixed so scheduled rows (empty receivedAt) keep the same column
+   position as snooze/reminder rows. Uses .snoozed-view in the selector to
+   beat .email-row.gmail-style .email-time { min-width: 60px } from
+   SwipeableEmailItem.css. */
+.snoozed-view .sv-row.email-row .email-time {
+  width: 76px;
+  min-width: 76px;
+  max-width: 76px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Action button (hover) ── */
+.sv-action-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  opacity: 1;
+  transition: opacity 0.1s, background-color 0.1s, color 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.snoozed-view .email-detail-panel {
+  min-width: 0;
+  overflow: hidden;
+}

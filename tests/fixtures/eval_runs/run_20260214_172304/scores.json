@@ -1,0 +1,85 @@
+{
+  "profile": {
+    "completeness": 75,
+    "precision": 70,
+    "usefulness": 65,
+    "overall": 70,
+    "missing": [
+      "Specific greeting styles by recipient type (formal_fr_client, formal_fr_colleague, formal_fr_lawyer)",
+      "Specific closing styles by context (formal_fr_external, formal_fr_lawyer, formal_fr_colleague)",
+      "Accurate active hours (09:00-19:30)",
+      "Accurate response time (< 4h)"
+    ],
+    "incorrect": [
+      "Active hours: system says '09:00-14:30' but should be '09:00-19:30'",
+      "Response time: system says '< 2h' but should be '< 4h'",
+      "Greeting styles: uses generic templates with placeholders instead of specific examples by recipient type",
+      "Closing styles: uses generic templates instead of context-specific formulations",
+      "Added 'signature_en' (English signature) not present in ground truth",
+      "Added 'department: null' field not in ground truth"
+    ],
+    "details": "The system correctly extracted core profile information (email, name, signature details, formal tone, French language, no emoji/first-name usage). However, it has significant issues: (1) Active hours are wrong (09:00-14:30 vs 09:00-19:30), (2) Response time is wrong (< 2h vs < 4h), (3) Greeting and closing styles are oversimplified and don't match the nuanced ground truth examples - the system uses generic templates with {last_name} placeholders instead of the specific, context-aware greetings from ground truth (formal_fr_client, formal_fr_colleague, formal_fr_lawyer), (4) Added an unnecessary English signature not in ground truth, (5) Added a null 'department' field not present in ground truth."
+  },
+  "knowledge": {
+    "completeness": 85,
+    "precision": 75,
+    "usefulness": 80,
+    "overall": 80,
+    "missing": [
+      "Contact: greffe@tc-paris.justice.fr (Greffe du Tribunal de Commerce de Paris)",
+      "Terminology: AIPD (Analyse d'Impact relative à la Protection des Données)",
+      "Terminology: CCT (Clauses Contractuelles Types)",
+      "Terminology: Earn-out (Complément de prix conditionné)",
+      "Terminology: Article 700 CPC (Indemnité de procédure)",
+      "Terminology: Assignation (full definition with 'acte de procédure')",
+      "Terminology: Protocole d'accord (full definition as 'contrat préliminaire')",
+      "Terminology: Conclusions (Écritures déposées par les avocats)",
+      "Terminology: Greffe (Service administratif du tribunal)"
+    ],
+    "incorrect": [
+      "Tone preference: Nearly all contacts marked 'semi-formal' instead of 'formal' (affects 9 out of 9 contacts in output)",
+      "Philippe Dumont type: 'manager' instead of 'colleague'",
+      "Sophie Renard company: null instead of 'Étude Renard'",
+      "Dominique Perrin title: null instead of 'Avocat au Barreau de Paris'",
+      "Extra project: 'Recrutement associé pôle contentieux' - appears as standalone project when it's part of 'Restructuration interne cabinet' in ground truth",
+      "Terminology GAP: Definition differs slightly - output says 'clause contractuelle' and 'passifs non révélés' vs ground truth 'mécanisme de protection' (both valid but not matching)",
+      "Terminology Due diligence: 'Audit juridique approfondi' vs ground truth 'Audit préalable' (both valid but not matching)",
+      "Terminology Closing: 'Réunion finale de signature' vs ground truth 'Réalisation définitive de l'opération' (different focus)",
+      "Schema difference: Added 'frequent_topics' array not present in ground truth schema"
+    ],
+    "details": "The system output is quite comprehensive and captures most key information from the ground truth. CONTACTS: Found 9 out of 10 contacts (missing greffe@tc-paris.justice.fr). All identified contacts have correct basic information (name, email, company, title). PROJECTS: Identified all 4 main projects with good descriptions and correct contact associations. Added 1 extra project (recrutement associé) which is mentioned in Philippe Dumont's topics but not as a standalone project in ground truth. TERMINOLOGY: Captured 12 definitions, matching 8 from ground truth exactly and adding 4 new ones (Data room, Conditions suspensives, Séquestre, Kbis, Golden parachute, AMF) that are contextually relevant. Major precision issues: (1) Systematically assigned 'semi-formal' tone to nearly all contacts when ground truth specifies 'formal' for everyone, (2) Changed Philippe Dumont's type from 'colleague' to 'manager' (reasonable interpretation but not matching ground truth), (3) Missing complete company name for Sophie Renard ('Étude Renard' in ground truth, null in output), (4) Missing title for Dominique Perrin ('Avocat au Barreau de Paris' in ground truth, null in output). The output added 'frequent_topics' section which is useful but not in ground truth schema."
+  },
+  "rules": {
+    "completeness": 45,
+    "precision": 40,
+    "usefulness": 50,
+    "overall": 45,
+    "missing": [
+      "Contact: All contacts should be 'formal' tone, not 'semi-formal'",
+      "Contact: h.castellan closing is truncated (missing 'l'expression de mes salutations distinguées')",
+      "Contact: Multiple lawyers (d.perrin, f.braun, s.renard) have wrong closing ('Bien cordialement' instead of full formal with 'sentiments les plus distingués')",
+      "Rule: vouvoiement_systematique - systematic use of formal 'vous' with everyone",
+      "Rule: signature_avec_disclaimer - signature with confidentiality disclaimer on all emails",
+      "Rule: maitre_entre_avocats - use of 'Maître' title between lawyers and notaries",
+      "Rule: formules_politesse_externes - complete formal closings for external contacts",
+      "Rule: formules_politesse_internes - simpler closings for internal colleagues",
+      "Rule: emails_structures - structured emails with numbered lists",
+      "Rule: references_juridiques - citations of legal texts and jurisprudence",
+      "Rule: zero_emoji_zero_abreviation - no emojis or casual abbreviations"
+    ],
+    "incorrect": [
+      "Contact e.fontaine: tone should be 'formal' not 'semi-formal'",
+      "Contact m.leroux: tone should be 'formal' not 'semi-formal'",
+      "Contact n.vernier: tone should be 'formal' not 'semi-formal'",
+      "Contact d.perrin: tone should be 'formal' not 'semi-formal', closing should be full formal phrase",
+      "Contact jl.garnier: tone should be 'formal' not 'semi-formal'",
+      "Contact s.renard: tone should be 'formal' not 'semi-formal', closing should be full formal phrase",
+      "Contact f.braun: tone should be 'formal' not 'semi-formal', closing should be full formal phrase",
+      "Contact h.castellan: closing is incomplete (truncated)",
+      "Rule 'tutoiement_equipe': contradicts ground truth - should use vouvoiement with everyone including internal team",
+      "General rules are completely different from ground truth - wrong names, wrong descriptions, missing key legal communication conventions"
+    ],
+    "details": "CONTACT RULES: All 10 contacts found (100%), but 7/10 have wrong tone ('semi-formal' vs 'formal'), and 3 have truncated closings missing the full formal phrase. GENERAL RULES: 0/8 ground truth rules correctly identified. System created 8 different rules that partially overlap conceptually (e.g., 'vouvoiement_clients' and 'tutoiement_equipe' vs 'vouvoiement_systematique') but miss critical legal communication rules like 'maitre_entre_avocats', 'references_juridiques', and 'zero_emoji_zero_abreviation'. The system output would generate emails with incorrect formality levels and missing professional legal conventions."
+  },
+  "overall": 65
+}

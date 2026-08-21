@@ -1,0 +1,221 @@
+{
+  "aggregate": {
+    "critic": {
+      "coherence": 90,
+      "tone": 85,
+      "completeness": 83,
+      "errors": 87,
+      "conciseness": 90,
+      "emotional_intelligence": 70,
+      "overall": 84
+    },
+    "judge": {
+      "faithfulness": 90,
+      "completeness": 85,
+      "tone_match": 80,
+      "conciseness": 87,
+      "overall": 86
+    }
+  },
+  "cases": [
+    {
+      "case_id": "msg-002",
+      "subject": "Re: board deck",
+      "draft": "yes add the cohort retention graph, Marcus always asks for it anyway\n\n1.2M€ 🔥 good timing before the board\n",
+      "elapsed_draft_s": 4.81,
+      "critic": {
+        "coherence": 92,
+        "tone": 90,
+        "completeness": 85,
+        "errors": 95,
+        "conciseness": 95,
+        "over_commitment": 95,
+        "emotional_intelligence": 88,
+        "overall": 91,
+        "decision": "valid",
+        "suggestions": [
+          "Ajouter deadline deck",
+          "Confirmer envoi final"
+        ]
+      },
+      "judge": {
+        "faithfulness": 90,
+        "completeness": 85,
+        "tone_match": 92,
+        "conciseness": 88,
+        "overall": 89,
+        "strengths": [
+          "Ton décontracté et familier parfaitement aligné avec le registre de la conversation (yaar, accha, emojis)",
+          "Répond directement aux deux points soulevés : validation du cohort graph et réaction au chiffre ARR",
+          "Brièveté adaptée à l'échange informel, pas de remplissage"
+        ],
+        "weaknesses": [
+          "La phrase 'Marcus always asks for it anyway' reformule ce qu'Arjun vient de dire — légère redondance sans valeur ajoutée",
+          "La question implicite sur le churn (Arjun dit qu'il va le corriger ce soir) n'est pas acquittée, même brièvement (ex: un simple 'thx' ou 'parfait')"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-004",
+      "subject": "Series A - Next Steps",
+      "draft": "Glad the meeting was productive.\n\nOn your three items:\n\n1. January numbers are ready — I'll add them to the data room by [À confirmer].\n2. I can line up [À confirmer] enterprise references. I'll brief them and share contacts directly.\n3. Technical architecture doc is in progress — targeting [À confirmer] for a first draft.\n\nOn board composition: understood on the one seat. Happy to discuss structure early. [À confirmer] works on our end for a follow-up call — let me know what fits your schedule.\n",
+      "elapsed_draft_s": 9.49,
+      "critic": {
+        "coherence": 92,
+        "tone": 88,
+        "completeness": 90,
+        "errors": 85,
+        "conciseness": 90,
+        "over_commitment": 78,
+        "emotional_intelligence": 72,
+        "overall": 85,
+        "decision": "valid",
+        "suggestions": [
+          "Compléter placeholders",
+          "Valoriser NRR 130%"
+        ]
+      },
+      "judge": {
+        "faithfulness": 82,
+        "completeness": 95,
+        "tone_match": 78,
+        "conciseness": 88,
+        "overall": 85,
+        "strengths": [
+          "Adresse les 3 points actionnables de Marcus dans le même ordre que sa demande",
+          "Aborde la question de la composition du board sans l'esquiver",
+          "Pas d'informations inventées — les placeholders [À confirmer] signalent explicitement l'incertitude",
+          "Structure claire et lisible, sans remplissage"
+        ],
+        "weaknesses": [
+          "Ton légèrement trop neutre/formel pour un email qui commence par 'Hi' et signe 'Best' — manque un peu de chaleur ou d'enthousiasme post-meeting",
+          "Pas de salutation nominale ('Hi Marcus') ni de closing signé — l'email se termine abruptement",
+          "La phrase d'ouverture 'Glad the meeting was productive' est molle comparée au registre d'un fondateur en mode Series A qui veut montrer de l'élan",
+          "Le nombre de références enterprise est laissé en [À confirmer] là où la réponse de référence propose un chiffre concret (5) — mais c'est un choix prudent si le chiffre n'est pas connu"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-007",
+      "subject": "Re: v2 features prioritization",
+      "draft": "yes perfect, exactly what I needed\n\nle one-pager c'est parfait, go pour demain. ajoute juste un slide sur le timeline estimé pour chaque feature si t'as les données\n",
+      "elapsed_draft_s": 13.86,
+      "critic": {
+        "coherence": 90,
+        "tone": 85,
+        "completeness": 78,
+        "errors": 95,
+        "conciseness": 92,
+        "over_commitment": 88,
+        "emotional_intelligence": 72,
+        "overall": 85,
+        "decision": "valid",
+        "suggestions": [
+          "Ajouter validation liste",
+          "Confirmer deadline demain"
+        ]
+      },
+      "judge": {
+        "faithfulness": 95,
+        "completeness": 90,
+        "tone_match": 97,
+        "conciseness": 92,
+        "overall": 94,
+        "strengths": [
+          "Ton parfaitement calibré : mélange naturel français/anglais, même registre décontracté que l'historique",
+          "Valide le one-pager et la deadline demain sans inventer de nouvelles contraintes",
+          "Ajoute une demande actionnelle (timeline estimé) qui est raisonnable et dans le contexte du board",
+          "Très court et proportionné à un email de confirmation simple"
+        ],
+        "weaknesses": [
+          "La demande d'ajouter un 'slide sur le timeline estimé' introduit une légère imprécision : Léa a proposé un one-pager, pas une présentation à slides — 'section' aurait été plus fidèle au format",
+          "La condition 'si t'as les données' est prudente mais légèrement superflue dans un échange aussi informel"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-010",
+      "subject": "Re: SSO integration for GrandeCorp",
+      "draft": "go, no time for a spec with end of month deadline\n\n3 weeks puts us past JM Tessier's POC date tho - can you ship just SAML first as a functional POC and layer SCIM after?\n",
+      "elapsed_draft_s": 14.14,
+      "critic": {
+        "coherence": 88,
+        "tone": 82,
+        "completeness": 78,
+        "errors": 72,
+        "conciseness": 95,
+        "over_commitment": 85,
+        "emotional_intelligence": 60,
+        "overall": 80,
+        "decision": "valid",
+        "suggestions": [
+          "Confirmer deadline Tom",
+          "Accuser réception timeline"
+        ]
+      },
+      "judge": {
+        "faithfulness": 92,
+        "completeness": 95,
+        "tone_match": 90,
+        "conciseness": 88,
+        "overall": 91,
+        "strengths": [
+          "Répond directement à la question principale (spec ou go → go)",
+          "Soulève intelligemment le conflit de timeline entre les 3 semaines de Tom et la deadline fin de mois de JM Tessier",
+          "Propose une solution concrète et actionnée (SAML en POC d'abord, SCIM en phase 2)",
+          "Ton décontracté et direct, cohérent avec l'échange Slack-like entre collègues"
+        ],
+        "weaknesses": [
+          "Ne précise pas la date limite exacte ('end of month' = fin janvier 2026) alors que l'information est dans l'historique — une mention aurait renforcé l'urgence",
+          "Pas d'accusé de réception de l'effort estimé de Tom, ce qui aurait pu fluidifier la relation",
+          "Légèrement plus long que la réponse de référence, mais reste acceptable"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-012",
+      "subject": "POC HeyVibe - Préparation",
+      "draft": "Sur les quatre points que vous mentionnez :\n\n1. SSO / SAML 2.0 — l'intégration avec Active Directory via SAML 2.0 est [À confirmer] selon votre configuration AD et les attributs à mapper.\n2. SCIM — le provisioning automatique des utilisateurs est [À confirmer] ; nous pouvons préciser les versions SCIM supportées et les opérations disponibles (Create, Update, Deactivate).\n3. Hébergement en France — les données sont hébergées [À confirmer : région / datacenter à préciser] ; nous pouvons fournir notre DPA et les éléments de conformité RGPD sur demande.\n4. SLA 99.9% — ce niveau est [À confirmer] selon la formule contractuelle envisagée.\n\nConcernant le calendrier : une démo fonctionnelle avant votre comité du 15 février est réalisable à condition de valider les accès techniques nécessaires (metadata SAML, endpoint IdP, tenant AD) rapidement.\n\nProchaines étapes : pouvez-vous nous transmettre vos metadata SAML et préciser le volume d'utilisateurs à provisionner ? Cela nous permettra de cadrer le périmètre exact de la démo.\n",
+      "elapsed_draft_s": 15.94,
+      "critic": {
+        "coherence": 88,
+        "tone": 82,
+        "completeness": 85,
+        "errors": 90,
+        "conciseness": 80,
+        "over_commitment": 85,
+        "emotional_intelligence": 60,
+        "overall": 81,
+        "decision": "valid",
+        "suggestions": [
+          "Ajouter salutation",
+          "Mentionner deadline"
+        ]
+      },
+      "judge": {
+        "faithfulness": 90,
+        "completeness": 60,
+        "tone_match": 45,
+        "conciseness": 80,
+        "overall": 69,
+        "strengths": [
+          "Aucune information inventée : les placeholders [À confirmer] évitent toute hallucination sur des capacités techniques non vérifiées",
+          "Les quatre points techniques de Jean-Marc sont tous adressés structurellement, dans le même ordre que sa demande",
+          "La condition posée pour la démo du 15 février est logique et actionnée (demande de metadata SAML, volume utilisateurs)",
+          "Proposition de prochaines étapes concrètes et orientées action"
+        ],
+        "weaknesses": [
+          "Absence totale de salutation ('Bonjour Jean-Marc') et de formule de clôture ('Cordialement, Priya') — indispensables dans un email B2B français formel",
+          "Les quatre [À confirmer] signifient que la question principale ('pouvez-vous confirmer la faisabilité ?') reste sans réponse : le brouillon n'est pas envoyable en l'état",
+          "Le ton du contenu, bien que professionnel, manque de l'accueil attendu ('Merci pour ce cadrage', etc.) qui reflète le registre formel et courtois de Jean-Marc",
+          "L'absence de formule d'ouverture crée une rupture de ton par rapport à l'email reçu qui commence par 'Bonjour Priya'"
+        ],
+        "hallucinations": []
+      }
+    }
+  ]
+}

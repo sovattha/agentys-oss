@@ -1,0 +1,92 @@
+.voice-lang-badge-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.voice-lang-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: color 120ms ease;
+}
+
+.voice-lang-badge:active:not(:disabled) {
+  opacity: 0.7;
+}
+
+.voice-lang-badge:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.voice-lang-badge:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.voice-lang-code {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.voice-lang-menu {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  right: 0;
+  z-index: 1000;
+  min-width: 180px;
+  max-height: 320px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--color-bg-elevated, var(--bg-elevated, #fff));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+  animation: voice-lang-menu-in 120ms ease-out;
+}
+
+@keyframes voice-lang-menu-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.voice-lang-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--color-text-primary, var(--text-primary));
+  transition: background 80ms ease;
+}
+
+.voice-lang-item.is-active {
+  background: var(--accent-primary-light);
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.voice-lang-label {
+  flex: 1;
+}
+
+.voice-lang-check {
+  font-size: 12px;
+  color: var(--accent-primary);
+}

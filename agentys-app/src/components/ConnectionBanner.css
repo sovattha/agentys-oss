@@ -1,0 +1,68 @@
+/* Y001 — full-width top strip surfacing a backend-unreachable state.
+   Distinct from the floating MeetingImminentBanner pill so the two never
+   collide. No :hover rules (project CSS convention — audit 2026-05-14). */
+.connection-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* 2026-06-13 : au-dessus de TOUT (onboarding .po-shell 9999, CalendarView
+     10001, overlays 9999) — à 9020 le bandeau était recouvert pendant
+     l'onboarding : présent dans l'arbre a11y mais invisible à l'écran.
+     Une bande de 33px d'état de connexion doit toujours rester visible. */
+  z-index: calc(var(--z-overlay, 9000) + 1010);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: var(--accent-primary, #0d9488);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.3;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  animation: connection-banner-slide-in 180ms ease-out;
+}
+
+@keyframes connection-banner-slide-in {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.connection-banner__icon {
+  flex-shrink: 0;
+}
+
+.connection-banner__text {
+  font-weight: 500;
+}
+
+.connection-banner__btn {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: transparent;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.connection-banner__btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .connection-banner {
+    animation: none;
+  }
+}

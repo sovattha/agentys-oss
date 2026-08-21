@@ -1,0 +1,46 @@
+{
+  "user_email": "sophie.martin@techcorp.fr",
+  "user_name": "Sophie Martin",
+  "signature": {
+    "full_text": "Sophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78",
+    "name": "Sophie Martin",
+    "title": "Chef de projet",
+    "department": "Division Digitale",
+    "company": "TechCorp",
+    "phone": "+33 6 12 34 56 78"
+  },
+  "signature_en": {
+    "full_text": "Sophie Martin\nProject Manager - Digital Division\nTechCorp | +33 6 12 34 56 78",
+    "name": "Sophie Martin",
+    "title": "Project Manager",
+    "department": "Digital Division",
+    "company": "TechCorp",
+    "phone": "+33 6 12 34 56 78"
+  },
+  "tone": {
+    "default_tone": "semi-formal",
+    "greeting_styles": {
+      "formal_fr": "Bonjour Madame/Monsieur {last_name},",
+      "semi_formal_fr": "Bonjour {first_name},",
+      "casual_fr": "Salut {first_name},",
+      "formal_en": "Dear {first_name},",
+      "semi_formal_en": "Hi {first_name},"
+    },
+    "closing_styles": {
+      "formal_fr": "Cordialement,",
+      "semi_formal_fr": "Merci,",
+      "casual_fr": "{first_name}",
+      "formal_en": "Best regards,",
+      "semi_formal_en": "Regards,"
+    },
+    "uses_first_name": true,
+    "uses_emoji": false,
+    "average_response_length": "medium"
+  },
+  "languages": [
+    "fr",
+    "en"
+  ],
+  "active_hours": "08:00-17:00",
+  "response_time_avg": "same day"
+}

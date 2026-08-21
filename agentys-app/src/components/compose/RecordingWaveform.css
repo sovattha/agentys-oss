@@ -1,0 +1,271 @@
+/* Recording waveform strip — must reserve its own row in any parent flex
+   column. Without `flex-shrink: 0` + `min-height`, a constrained ancestor
+   (e.g. `.new-message-modal.gmail-style { max-height: 580px }` or the
+   composer panel inside `.email-detail-inline`) compresses the strip to
+   0 height — the SVG mounts but renders into nothing. We also bump it
+   above the sticky `.rc-action-bar` (z-index: 10) so it never gets hidden
+   behind the floating buttons row. */
+.nmm-rec-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 16px;
+  background: #ffffff;
+  animation: nmm-rec-fadein 140ms ease-out;
+  flex-shrink: 0;
+  min-height: 42px;
+  position: relative;
+  z-index: 11;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.nmm-rec-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #14b8a6;
+  box-shadow: 0 0 6px rgba(20, 184, 166, 0.5);
+  animation: nmm-dot-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  flex-shrink: 0;
+}
+
+.nmm-rec-timer {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-primary, #0d9488);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  min-width: 28px;
+}
+
+
+.nmm-rec-waveform {
+  flex: 1;
+  height: 28px;
+  position: relative;
+  overflow: visible; /* burst effects extend beyond the 28px row */
+}
+
+.nmm-wave-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: saturate(1.1) contrast(1.05);
+}
+
+/* CSS-only animations — pas de SMIL pour éviter conflits React */
+.nmm-wf-outer {
+  animation: nmm-aurora-breathe 2.5s ease-in-out infinite;
+}
+
+.nmm-wf-core {
+  animation: nmm-aurora-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes nmm-aurora-breathe {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 0.9; }
+}
+
+@keyframes nmm-aurora-pulse {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+@keyframes nmm-rec-fadein {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes nmm-dot-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 6px rgba(20, 184, 166, 0.5); }
+  50%       { transform: scale(1.4); opacity: 0.3; box-shadow: 0 0 12px rgba(20, 184, 166, 0.3); }
+}
+
+/* ── "Liquid Crystallization" exit animation ──────────────────────── */
+
+/* Strip holds 60% (660ms of 1100ms) — burst begins 10ms before fade, fully visible */
+.nmm-rec-exiting {
+  animation: nmm-strip-exit 1100ms ease-in-out forwards;
+}
+@keyframes nmm-strip-exit {
+  0%   { opacity: 1; transform: translateY(0); }
+  60%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-6px); }
+}
+
+/* Inner wrap clips the waveform SVG — overflow moves here so burst can bleed out */
+.nmm-wave-svg-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Waveform collapses toward the floor — transform-origin bottom */
+.nmm-wf-draining {
+  transform-origin: bottom center;
+  animation: nmm-wf-drain 240ms cubic-bezier(0.55, 0, 1, 0.45) 0ms forwards;
+}
+.nmm-wf-draining .nmm-wf-outer,
+.nmm-wf-draining .nmm-wf-core {
+  animation-play-state: paused;
+}
+@keyframes nmm-wf-drain {
+  0%   { transform: scaleY(1);    opacity: 1; }
+  60%  { transform: scaleY(0.12); opacity: 0.5; }
+  100% { transform: scaleY(0);    opacity: 0; }
+}
+
+/* ── Logo: CW convergence + BURST ─────────────────────────────────── */
+
+.nmm-logo-liquid {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* Energy pool glows at the floor as the waveform drains into it */
+.nmm-floor-pool {
+  animation: nmm-floor-anim 420ms ease-in-out 0ms forwards;
+}
+@keyframes nmm-floor-anim {
+  0%   { opacity: 0; }
+  28%  { opacity: 0.65; }
+  100% { opacity: 0; }
+}
+
+/* CW draw — M16,29.5 → L30.5,29.5 → L16,2.5 → L1.5,29.5 → L16,29.5 ≈ 90.3 units
+   Traces clockwise starting from bottom-center: right base → apex → left base → home  */
+@keyframes nmm-cw-draw {
+  from { stroke-dashoffset: 90.4; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* Diffuse outer glow leads 20ms — creates the "luminous tip pulling the liquid" effect */
+.nmm-cglow {
+  stroke-dasharray: 90.4;
+  stroke-dashoffset: 90.4;
+  animation: nmm-cw-draw 430ms cubic-bezier(0.35, 0, 0.3, 1) 60ms forwards;
+}
+/* Core path layers — start 20ms after glow */
+.nmm-cpath {
+  stroke-dasharray: 90.4;
+  stroke-dashoffset: 90.4;
+  animation: nmm-cw-draw 430ms cubic-bezier(0.35, 0, 0.3, 1) 80ms forwards;
+}
+
+/* Triangle fills crystallize in — complete by ~565ms, giving 85ms of visible logo */
+.nmm-cfill  { opacity: 0; animation: nmm-cfill-in 140ms ease-out 400ms forwards; }
+.nmm-cmid   { opacity: 0; animation: nmm-cfill-in 112ms ease-out 436ms forwards; }
+.nmm-cinner { opacity: 0; animation: nmm-cfill-in  95ms ease-out 470ms forwards; }
+@keyframes nmm-cfill-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Glow peaks at ~583ms — logo glowing fully for ~67ms before burst */
+.nmm-logo-liquid svg {
+  animation: nmm-triangle-glow 260ms ease-out 440ms both;
+}
+@keyframes nmm-triangle-glow {
+  0%   { filter: drop-shadow(0 0 2px  rgba(45,212,191,0.4)); }
+  55%  { filter: drop-shadow(0 0 15px rgba(45,212,191,1))
+                 drop-shadow(0 0 30px rgba(45,212,191,0.5))
+                 drop-shadow(0 0 6px  rgba(255,255,255,0.65)); }
+  100% { filter: drop-shadow(0 0 5px  rgba(45,212,191,0.6)); }
+}
+
+/* ── BURST ────────────────────────────────────────────────────────── */
+/*                                                                      */
+/* Implosion (0 → 24% = 79ms): spring compresses                       */
+/*   scale 1.0 → 0.87, brightness → 3.2× — energy concentrates        */
+/*   timing: ease-out (fast initial contraction, decelerates to peak)   */
+/*                                                                      */
+/* Explosion (24% → 100% = 251ms): spring releases                     */
+/*   scale 0.87 → 2.0, opacity → 0                                     */
+/*   timing: aggressive ease-out (instantaneous snap, long tail)        */
+
+.nmm-burst-group {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: nmm-burst-exit 330ms linear 650ms both;
+}
+@keyframes nmm-burst-exit {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1);
+    animation-timing-function: cubic-bezier(0.25, 0, 0.5, 1);
+  }
+  24% {
+    /* Spring fully loaded — maximum contraction, energy at peak */
+    opacity: 1;
+    transform: scale(0.87);
+    filter: brightness(3.2);
+    animation-timing-function: cubic-bezier(0.08, 0, 0.2, 1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.0);
+    filter: brightness(1);
+  }
+}
+
+/* Flash covers the implosion phase — triangle brightens as it compresses */
+.nmm-burst-flash {
+  opacity: 0;
+  animation: nmm-flash 220ms ease-in-out 650ms forwards;
+}
+@keyframes nmm-flash {
+  0%   { opacity: 0; }
+  20%  { opacity: 0.88; }
+  100% { opacity: 0; }
+}
+
+/* Apex micro-burst — fires when the CW stroke tip reaches (16, 2.5) ~t=268ms
+   Energy concentrates at the sharpest point: a subliminal milestone mid-trace */
+.nmm-apex-micro {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: nmm-apex-micro 210ms ease-in-out 268ms forwards;
+}
+@keyframes nmm-apex-micro {
+  0%   { opacity: 0;   transform: scale(0); }
+  28%  { opacity: 0.9; transform: scale(2);   filter: drop-shadow(0 0 5px #2dd4bf); }
+  100% { opacity: 0;   transform: scale(0.5); }
+}
+
+/* Ring and shards start at explosion (t=730ms = 650 + 80ms implosion) */
+.nmm-burst-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: nmm-ring-expand 400ms ease-out 730ms forwards;
+}
+/* Echo ring — 65ms later, softer amplitude — physical resonance */
+.nmm-burst-ring-2 {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: nmm-ring-expand 360ms ease-out 795ms forwards;
+}
+@keyframes nmm-ring-expand {
+  0%   { opacity: 0.88; transform: scale(0.2); }
+  100% { opacity: 0;    transform: scale(3.2); }
+}
+
+.nmm-shard {
+  animation: nmm-shard-fly 340ms cubic-bezier(0.15, 0, 0.85, 1) 740ms both;
+}
+@keyframes nmm-shard-fly {
+  from { transform: translate(0, 0); opacity: 0.95; }
+  to   { transform: translate(var(--tx), var(--ty)); opacity: 0; }
+}

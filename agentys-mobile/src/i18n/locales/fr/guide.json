@@ -1,0 +1,33 @@
+{
+  "title": "Guide",
+  "intro": "Agentys se pilote à la voix et au toucher. Aucun bouton à chercher : parlez, ou touchez l'écran.",
+  "speakSection": "Parler",
+  "speakIntro": "Dites simplement le mot, à tout moment :",
+  "speak": {
+    "reply": { "cmd": "« répondre »", "desc": "dicter une réponse à l'email en cours" },
+    "replyAll": { "cmd": "« répondre à tous »", "desc": "réponse à tous les destinataires" },
+    "forward": { "cmd": "« transférer »", "desc": "transférer l'email (il demande à qui)" },
+    "next": { "cmd": "« suivant » / « précédent »", "desc": "naviguer entre les emails" },
+    "archive": { "cmd": "« archiver » / « supprimer »", "desc": "classer l'email et passer au suivant" },
+    "send": { "cmd": "« envoyer »", "desc": "après la dictée : rédige et envoie la réponse" },
+    "cancel": { "cmd": "« annule »", "desc": "annuler la réponse en cours ou un envoi imminent" },
+    "repeat": { "cmd": "« répète »", "desc": "réécouter l'email en cours" },
+    "stop": { "cmd": "« pause » / « stop »", "desc": "suspendre ou terminer la session" }
+  },
+  "touchSection": "Toucher",
+  "touch": {
+    "interrupt": { "gesture": "Toucher l'écran pendant la lecture", "desc": "coupe la voix et ouvre le micro" },
+    "finish": { "gesture": "Toucher l'écran pendant la dictée", "desc": "termine votre message — dites ensuite « envoyer »" },
+    "swipe": { "gesture": "Glisser vers la gauche / droite", "desc": "email suivant / précédent" },
+    "logo": { "gesture": "Appui long sur le triangle", "desc": "ouvre les réglages" },
+    "undo": { "gesture": "Toucher « Annuler »", "desc": "annule la dernière action (envoi, archivage…)" }
+  },
+  "soundsSection": "Les bips",
+  "soundsIntro": "Agentys remplace les questions parlées par des sons courts :",
+  "sounds": {
+    "turn": { "name": "Montée deux tons", "desc": "à vous — je vous écoute" },
+    "tick": { "name": "Blip court", "desc": "c'est noté" },
+    "done": { "name": "Accord", "desc": "fait — envoyé" },
+    "alert": { "name": "Descente grave", "desc": "erreur ou action destructive" }
+  }
+}

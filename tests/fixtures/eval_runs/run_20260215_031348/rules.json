@@ -1,0 +1,145 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "r.hayes@strategyco.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi Richard, / Richard,",
+      "closing": "Cheers, / J."
+    },
+    {
+      "contact_email": "a.patel@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "greeting": "Anika,",
+      "closing": "J."
+    },
+    {
+      "contact_email": "m.torres@acmecorp.com",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Michael,",
+      "closing": "Best regards, / James Conseil / Senior Consultant / StrategyCo | London"
+    },
+    {
+      "contact_email": "b.crawford@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "greeting": "Ben,",
+      "closing": "Cheers, / J."
+    },
+    {
+      "contact_email": "e.phillips@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "greeting": "Hi Emma, / Emma,",
+      "closing": "Thanks, / Cheers, / J."
+    },
+    {
+      "contact_email": "i.moreau@luxegroup.fr",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Isabelle,",
+      "closing": "Best regards, / James Conseil / Senior Consultant / StrategyCo | London"
+    },
+    {
+      "contact_email": "w.lin@strategyco.sg",
+      "tone": "casual",
+      "language": "en",
+      "greeting": "Wei,",
+      "closing": "Cheers, / J."
+    },
+    {
+      "contact_email": "j.walsh@acmecorp.com",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Jennifer,",
+      "closing": "Best regards, / James Conseil / Senior Consultant / StrategyCo | London"
+    },
+    {
+      "contact_email": "k.weber@industriewerke.de",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Klaus,",
+      "closing": "Best regards, / James Conseil / Senior Consultant / StrategyCo | London"
+    },
+    {
+      "contact_email": "t.yamamoto@nipponpartners.jp",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Takeshi,",
+      "closing": "Best regards, / James Conseil / Senior Consultant / StrategyCo | London"
+    },
+    {
+      "contact_email": "d.chen@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "greeting": "David,",
+      "closing": "J."
+    }
+  ],
+  "general_rules": [
+    {
+      "name": "internal_vs_external_signature",
+      "description": "Use abbreviated signature 'J.' or 'Cheers, J.' with internal colleagues (strategyco.com domain). Use full formal signature block with title and company for external clients and partners.",
+      "trigger": "Email recipient domain",
+      "action": "Internal: sign 'J.' or 'Cheers, J.' | External: sign 'Best regards, James Conseil / Senior Consultant / StrategyCo | London'"
+    },
+    {
+      "name": "structured_bullet_points_internal",
+      "description": "Use bullet points and structured lists extensively in internal communications, especially for updates, action items, and multi-point requests",
+      "trigger": "Internal update or request email",
+      "action": "Format content as bulleted lists with clear, concise points and action items"
+    },
+    {
+      "name": "numbered_formal_structure_external",
+      "description": "Use numbered sections and formal paragraph structure for external client communications, especially proposals and strategic documents",
+      "trigger": "External client email with strategic content",
+      "action": "Structure content with numbered sections (1., 2., 3.) and complete sentences in paragraph form"
+    },
+    {
+      "name": "gratitude_opening_external",
+      "description": "Open external client emails with gratitude or acknowledgment ('Thank you for...', 'I appreciate...', 'Thank you for the detailed feedback')",
+      "trigger": "Reply to external client",
+      "action": "Begin with a thank-you statement acknowledging the client's previous message or action"
+    },
+    {
+      "name": "direct_imperative_tone_internal",
+      "description": "Use direct imperative verbs and short requests with internal team ('Please pull together', 'Can you refine', 'Prepare your 5-min intro')",
+      "trigger": "Internal task assignment or request",
+      "action": "Use imperative mood, direct requests without extensive preamble"
+    },
+    {
+      "name": "diplomatic_language_external",
+      "description": "Use diplomatic, consultative language with external clients ('I would suggest', 'I propose', 'We recommend', 'You raise an excellent point')",
+      "trigger": "External client recommendation or feedback response",
+      "action": "Frame recommendations as suggestions, acknowledge client input diplomatically"
+    },
+    {
+      "name": "deadline_clarity",
+      "description": "Always specify clear deadlines and timeframes for deliverables ('by Wednesday', 'by Friday', 'by close of business on the 14th')",
+      "trigger": "Email containing action items or deliverable requests",
+      "action": "Include specific deadline with each request (day, date, or time)"
+    },
+    {
+      "name": "subject_line_brevity",
+      "description": "Keep subject lines brief and project-focused, often using 'Re:' format with project name and topic ('Re: AcmeCorp Engagement Update', 'Q2 pipeline and staffing')",
+      "trigger": "All emails",
+      "action": "Use concise subject lines with project context, avoid lengthy descriptions"
+    },
+    {
+      "name": "no_emoji_usage",
+      "description": "Never use emoji in any professional communication, internal or external",
+      "trigger": "All emails",
+      "action": "Avoid emoji entirely, maintain text-only professional communication"
+    },
+    {
+      "name": "encouragement_peer_communication",
+      "description": "Use encouraging, positive language with peers and international colleagues ('Brilliant news', 'Good work', 'Nice job today', 'Go get it')",
+      "trigger": "Communication with peers or recognition of good work",
+      "action": "Include brief positive reinforcement and encouragement"
+    }
+  ],
+  "forbidden_phrases": [],
+  "auto_reply_patterns": []
+}

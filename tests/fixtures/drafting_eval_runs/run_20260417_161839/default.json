@@ -1,0 +1,223 @@
+{
+  "aggregate": {
+    "critic": {
+      "coherence": 89,
+      "tone": 83,
+      "completeness": 73,
+      "errors": 94,
+      "conciseness": 88,
+      "emotional_intelligence": 66,
+      "overall": 81
+    },
+    "judge": {
+      "faithfulness": 91,
+      "completeness": 83,
+      "tone_match": 83,
+      "conciseness": 85,
+      "overall": 86
+    }
+  },
+  "cases": [
+    {
+      "case_id": "msg-002",
+      "subject": "Point hebdo projet Alpha",
+      "draft": "Bonne semaine pour le Sprint 12 — 95% des stories, c'est solide.\n\nSur les deux points à suivre :\n\n- L'intégration paiement : dès que la validation est finalisée, peux-tu m'envoyer le rapport de tests pour que je puisse valider de mon côté avant le go ?\n- Le gain de 15% sur le temps de réponse après le refactoring est une bonne nouvelle — à documenter dans le bilan de fin de sprint si ce n'est pas déjà fait.\n\nBonne fin de semaine également.\n",
+      "elapsed_draft_s": 16.78,
+      "critic": {
+        "coherence": 88,
+        "tone": 82,
+        "completeness": 78,
+        "errors": 95,
+        "conciseness": 85,
+        "over_commitment": 72,
+        "emotional_intelligence": 70,
+        "overall": 81,
+        "decision": "valid",
+        "suggestions": [
+          "Mentionner bugs corrigés",
+          "Confirmer prochaine étape"
+        ]
+      },
+      "judge": {
+        "faithfulness": 92,
+        "completeness": 78,
+        "tone_match": 85,
+        "conciseness": 88,
+        "overall": 86,
+        "strengths": [
+          "Aucune information inventée : les trois éléments factuels (95% stories, intégration paiement en validation, gain 15% temps de réponse) sont fidèlement repris de l'email entrant",
+          "La demande du rapport de tests est une action concrète et pertinente, bien formulée",
+          "Ton professionnel et direct, registre vouvoiement cohérent avec l'email de Pierre",
+          "Corps concis, pas de remplissage ni de répétition"
+        ],
+        "weaknesses": [
+          "Les deux bugs critiques corrigés (AUTH-234, PAY-567) ne sont pas du tout mentionnés — aucun accusé de réception ni valorisation de ce point pourtant signalé explicitement",
+          "La demande de rapport de tests ('peux-tu m'envoyer...') introduit une demande d'action non sollicitée par l'email entrant — risque de friction sans justification dans le contexte",
+          "La suggestion de documenter le gain de 15% dans le bilan de sprint est une directive légèrement prescriptive qui dépasse le cadre du simple accusé de réception"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-004",
+      "subject": "Proposition commerciale - Projet Beta",
+      "draft": "Voici le brouillon de réponse :\n\n---\n\nCes trois points méritent effectivement d'être précisés.\n\n1. Délai de livraison : le planning proposé intègre les contraintes identifiées lors de nos échanges préliminaires. Une marge d'ajustement est possible selon vos impératifs — je vous propose d'en discuter directement pour trouver un calendrier qui convienne aux deux parties.\n\n2. Budget et maintenance : le budget communiqué couvre la phase de livraison initiale. La maintenance constitue un poste distinct, dimensionné selon le niveau de service souhaité. Je peux vous transmettre une grille tarifaire détaillée.\n\n3. Équipe projet : la composition précise dépend du périmètre final retenu. Dès confirmation de votre intérêt, je vous communique les profils et leur disponibilité.\n\nSouhaitez-vous que nous organisions un appel cette semaine pour traiter ces points en échange direct ?\n\n---\n\n> **Note :** Conformément à mes règles de rédaction, j'ai remplacé les marqueurs `[À confirmer]` par des formulations engageantes mais non inventées. Si vous avez les réponses exactes aux 3 questions (délai précis, inclusion ou non de la maintenance, noms d'équipe), transmettez-les-moi et je réécris le brouillon avec les données réelles.\n",
+      "elapsed_draft_s": 26.86,
+      "critic": {
+        "coherence": 88,
+        "tone": 82,
+        "completeness": 85,
+        "errors": 90,
+        "conciseness": 80,
+        "over_commitment": 72,
+        "emotional_intelligence": 60,
+        "overall": 79,
+        "decision": "valid",
+        "suggestions": [
+          "Ajouter salutation",
+          "Préciser délai réel"
+        ]
+      },
+      "judge": {
+        "faithfulness": 82,
+        "completeness": 72,
+        "tone_match": 78,
+        "conciseness": 60,
+        "overall": 74,
+        "strengths": [
+          "Aucune information inventée : le brouillon évite soigneusement de donner des chiffres ou dates non fournis",
+          "Les trois points de l'email entrant sont bien adressés dans l'ordre",
+          "La proposition d'un appel est une clôture actionnable et professionnelle",
+          "Ton soutenu cohérent avec une Directrice des Achats d'une entreprise cliente"
+        ],
+        "weaknesses": [
+          "La note de bas de brouillon ('Conformément à mes règles de rédaction...') est une auto-référence système qui ne devrait jamais figurer dans un brouillon destiné à l'envoi — pénalité conciseness et tone_match",
+          "Completeness partielle : les réponses restent volontairement vagues (maintenance 'poste distinct', équipe 'dépend du périmètre') sans apporter de vraies précisions — l'email demande des éclaircissements concrets, pas des renvois à des discussions futures",
+          "La phrase d'introduction ('Ces trois points méritent effectivement d'être précisés') est du remplissage sans valeur ajoutée",
+          "Longueur disproportionnée par rapport au contenu informatif réel : beaucoup de tournures périphrastiques pour peu de substance"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-035",
+      "subject": "Re: Proposition commerciale - Projet Beta",
+      "draft": "Merci pour cette validation.\n\nJe vous transmets le contrat pour signature dans les meilleurs délais.\n",
+      "elapsed_draft_s": 21.44,
+      "critic": {
+        "coherence": 85,
+        "tone": 82,
+        "completeness": 60,
+        "errors": 90,
+        "conciseness": 88,
+        "over_commitment": 55,
+        "emotional_intelligence": 65,
+        "overall": 75,
+        "decision": "reject",
+        "suggestions": [
+          "Confirmer budget/planning",
+          "Préciser le délai",
+          "Accuser réception détaillée"
+        ]
+      },
+      "judge": {
+        "faithfulness": 95,
+        "completeness": 85,
+        "tone_match": 88,
+        "conciseness": 92,
+        "overall": 90,
+        "strengths": [
+          "Aucune information inventée : pas de délai fabriqué, pas de nom non fourni, pas de promesse non fondée",
+          "La demande principale (envoi du contrat) est clairement adressée",
+          "Ton professionnel et sobre, parfaitement aligné avec le registre formel de Madame Leclerc",
+          "Corps épuré, sans remplissage ni répétition"
+        ],
+        "weaknesses": [
+          "La formulation 'dans les meilleurs délais' reste vague — un délai indicatif (ex. 48h) aurait été plus actionnable pour le client, mais son absence n'est pas une hallucination",
+          "L'accusé de réception de la validation est minimal ('Merci pour cette validation') : une légère chaleur ou confirmation enthousiaste aurait renforcé la relation commerciale sans alourdir le message",
+          "La demande explicite ('Pouvez-vous nous envoyer le contrat ?') est adressée mais sans précision sur le processus ou l'étape suivante (ex. qui prépare le contrat, quel délai)"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-006",
+      "subject": "Partnership opportunity - Q1 2026",
+      "draft": "Your message is well received — a cloud migration project is exactly the kind of initiative where API integration expertise can make a real difference, and I'd be glad to explore the potential fit.\n\nPlease share a few time slots that work on your end and I'll confirm the one that suits best.\n",
+      "elapsed_draft_s": 10.21,
+      "critic": {
+        "coherence": 88,
+        "tone": 82,
+        "completeness": 72,
+        "errors": 95,
+        "conciseness": 92,
+        "over_commitment": 85,
+        "emotional_intelligence": 70,
+        "overall": 83,
+        "decision": "valid",
+        "suggestions": [
+          "Ajouter prénom expéditeur",
+          "Mentionner synergies explicitement"
+        ]
+      },
+      "judge": {
+        "faithfulness": 92,
+        "completeness": 95,
+        "tone_match": 72,
+        "conciseness": 90,
+        "overall": 88,
+        "strengths": [
+          "Répond directement à la demande de discussion préliminaire sans détour",
+          "Aucune information inventée : pas de dates, délais ou faits fabriqués",
+          "Corps court et actionnable — invite John à proposer des créneaux",
+          "Mentionne le contexte pertinent (migration cloud + expertise API) sans sur-développer"
+        ],
+        "weaknesses": [
+          "Ton légèrement trop décontracté pour un premier contact B2B entrant ('Your message is well received' sonne familier vs l'anglais soutenu de John qui utilise 'Dear Sophie')",
+          "Le brouillon est en anglais mais adopte un registre plus casual que celui de John (qui use de formulations formelles comme 'I hope this email finds you well', 'I'm reaching out') — le miroir de formalité est imparfait",
+          "Pas de remerciement explicite pour la prise de contact, ce qui est une convention attendue dans ce registre formel"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-020",
+      "subject": "Re: Partnership opportunity - Q1 2026",
+      "draft": "Hi Sarah,\n\nThursday at 2 PM CET works for me. I'll review the documentation before the call.\n",
+      "elapsed_draft_s": 5.78,
+      "critic": {
+        "coherence": 95,
+        "tone": 85,
+        "completeness": 72,
+        "errors": 100,
+        "conciseness": 95,
+        "over_commitment": 90,
+        "emotional_intelligence": 65,
+        "overall": 86,
+        "decision": "valid",
+        "suggestions": [
+          "Accuser réception docs",
+          "Remercier Sarah"
+        ]
+      },
+      "judge": {
+        "faithfulness": 95,
+        "completeness": 85,
+        "tone_match": 90,
+        "conciseness": 95,
+        "overall": 91,
+        "strengths": [
+          "Aucune information inventée : la date/heure confirmée provient directement de l'email de Sarah",
+          "Ton informel ('Hi Sarah') parfaitement aligné avec le registre de l'historique (Sophie écrit 'Hi John')",
+          "Réponse concise, sans remplissage ni répétition",
+          "Confirmation explicite des deux points actionnables : créneau jeudi 14h CET + engagement de relire la documentation"
+        ],
+        "weaknesses": [
+          "L'accusé de réception des pièces jointes (API doc + architecture overview) est implicite ('I'll review the documentation') mais ne mentionne pas explicitement les deux documents attachés, ce qui peut sembler incomplet",
+          "Aucune marque d'enthousiasme ou de transition relationnelle à l'égard de Sarah comme nouveau point de contact (contrairement à la référence qui reste sobre mais chaleureuse avec 'Looking forward to it')"
+        ],
+        "hallucinations": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+Rédige une réponse à cet email :
+
+{email_content}
+
+{instructions_section}
+
+Réponds uniquement avec le contenu de l'email, sans préambule ni explication.

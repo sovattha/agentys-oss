@@ -1,0 +1,62 @@
+{
+  "profile": {
+    "completeness": 65,
+    "precision": 72,
+    "usefulness": 58,
+    "overall": 65,
+    "missing": [
+      "signature_en (entire English signature structure)",
+      "greeting_styles (structured templates with placeholders for formal_fr, semi_formal_fr, casual_fr, formal_en, semi_formal_en)",
+      "closing_styles (structured templates for all tone/language contexts)",
+      "Precise response_time_avg format ('< 1h' vs narrative description)"
+    ],
+    "incorrect": [
+      "active_hours: '08:00-17:00' should be '08:00-18:00' (off by 1 hour)",
+      "response_time_avg: Too vague ('Same-day or within 24 hours') instead of specific '< 1h'",
+      "greeting_style/closing_style: Free-text descriptions instead of actionable structured templates with {first_name}/{last_name} placeholders"
+    ],
+    "details": "The system captured core identity fields (email, name, French signature, languages, tone defaults) correctly. However, it MISSED the entire English signature structure (critical for bilingual support) and replaced structured greeting/closing templates with narrative descriptions. Active hours are incorrect (17:00 vs 18:00), and response time is less precise. The lack of structured templates with placeholders (e.g., 'Bonjour {first_name},') makes it harder for an email drafting system to apply consistent rules automatically."
+  },
+  "knowledge": {
+    "completeness": 0,
+    "precision": 100,
+    "usefulness": 0,
+    "overall": 0,
+    "missing": [
+      "All 13 contacts (Pierre Durand, Lucas Bernard, Camille Roux, Marie Leclerc, Nicolas Moreau, Marc Dupont, John Smith, Sarah Jones, Amelie Petit, Thomas Renard, David Kim, Elena Volkov, Claire Fontaine)",
+      "All contact metadata (relationship types: colleague/client/manager/partner/supplier/prospect)",
+      "All tone preferences (casual/formal/semi-formal)",
+      "All language preferences (fr/en)",
+      "All interaction counts (ranging from 2 to 20)",
+      "All topics per contact (e.g., Pierre: projet Alpha, API v2, code review, etc.)",
+      "All 5 projects (Projet Alpha, Projet Beta, Partenariat GlobalTech, Partenariat EUPartner, Migration Cloud)",
+      "All project descriptions and status information",
+      "All project-contact relationships",
+      "All 10 terminology definitions (Sprint, Daily, Retro, PR, WAF, SLA, mTLS, PSD2, DACH, DPA)",
+      "All project keywords and technical details"
+    ],
+    "incorrect": [],
+    "details": "The system output is completely empty - it found absolutely nothing from the ground truth data. While there are no hallucinations or incorrect items (hence perfect precision score), the system failed to extract any of the 13 contacts, 5 projects, 10 terminology entries, or any relationship information that exists in the ground truth. This represents a total system failure. The output would be completely useless for generating email drafts as it provides no context about: communication partners, their roles/relationships, tone preferences, project information, or domain-specific terminology. A functional system should have extracted at minimum the most frequent contacts (Pierre Durand - 20 interactions, Lucas Bernard - 10 interactions) and the active projects (Projet Alpha, Projet Beta)."
+  },
+  "rules": {
+    "completeness": 0,
+    "precision": 100,
+    "usefulness": 0,
+    "overall": 0,
+    "missing": [
+      "All 13 contact_rules for specific individuals (marie.leclerc@clientcorp.com, amelie.petit@fournisseur.fr, pierre.durand@techcorp.fr, lucas.bernard@techcorp.fr, camille.roux@techcorp.fr, ceo@techcorp.fr, nicolas.moreau@techcorp.fr, john.smith@globaltech.com, sarah.jones@globaltech.com, david.kim@partnertech.co.kr, elena.volkov@eupartner.de, contact@prospect-startup.io, claire.fontaine@clientcorp.com)",
+      "signature_formal rule: Full signature with title and phone for formal/semi-formal external emails",
+      "signature_casual rule: First name only or no signature for casual internal emails",
+      "language_switch rule: Switch to English for international contacts",
+      "structured_updates rule: Use numbered lists and bullet points for status updates",
+      "cc_relevant_people rule: CC relevant team members for cross-functional topics",
+      "action_items rule: End client emails with clear next steps",
+      "vouvoiement_clients rule: Use 'vous' form with external clients",
+      "tutoiement_equipe rule: Use 'tu' form with direct team members",
+      "auto_reply_patterns: Congé/absence acknowledgment and JIRA notification forwarding patterns"
+    ],
+    "incorrect": [],
+    "details": "The system output is completely empty across all three categories (contact_rules, general_rules, forbidden_phrases). While this means there are no hallucinations or incorrect information (hence perfect precision), it provides zero value for generating email drafts. The ground truth contains 13 detailed contact rules with specific tone, language, greeting, and closing preferences; 8 general rules covering signature style, language switching, email structure, CC protocols, and formality levels (tu/vous); and auto-reply patterns. None of these critical communication guidelines were captured by the system. This represents a total failure to extract communication rules from the analyzed content."
+  },
+  "overall": 22
+}

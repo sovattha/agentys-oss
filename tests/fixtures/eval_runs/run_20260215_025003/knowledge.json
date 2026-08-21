@@ -1,0 +1,382 @@
+{
+  "contacts": [
+    {
+      "email": "arjun@heyvibe.io",
+      "name": "Arjun Mehta",
+      "type": "co-founder",
+      "company": "HeyVibe",
+      "title": null,
+      "preferred_language": "mixed",
+      "preferred_tone": "casual",
+      "interaction_count": 20,
+      "topics": [
+        "board deck",
+        "ARR metrics",
+        "churn analysis",
+        "grandecorp deal",
+        "infrastructure scaling",
+        "data residency",
+        "Scaleway",
+        "demo day",
+        "Station F pitch",
+        "security documentation",
+        "SOC2",
+        "pentest",
+        "ISO 27001",
+        "AWS security",
+        "IAM keys rotation",
+        "WAF",
+        "S3 bucket policies"
+      ]
+    },
+    {
+      "email": "lea@heyvibe.io",
+      "name": "Léa Dupont",
+      "type": "colleague",
+      "company": "HeyVibe",
+      "title": null,
+      "preferred_language": "mixed",
+      "preferred_tone": "casual",
+      "interaction_count": 14,
+      "topics": [
+        "v2 features prioritization",
+        "beta feedback synthesis",
+        "user interviews",
+        "team workspace",
+        "onboarding flow redesign",
+        "Slack integration",
+        "custom templates",
+        "API publique",
+        "NPS score",
+        "conversion rates",
+        "trial to paid",
+        "activation rate",
+        "time to value",
+        "analytics dashboard",
+        "product roadmap"
+      ]
+    },
+    {
+      "email": "tom@heyvibe.io",
+      "name": "Tom Nguyen",
+      "type": "colleague",
+      "company": "HeyVibe",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 9,
+      "topics": [
+        "SSO integration",
+        "SAML",
+        "SCIM provisioning",
+        "GrandeCorp POC",
+        "v2 launch timeline",
+        "backend development",
+        "websockets",
+        "real-time collaboration",
+        "Slack integration",
+        "staging auto-shutdown",
+        "AWS security",
+        "S3 bucket policies",
+        "CloudTrail alerts",
+        "CloudFront"
+      ]
+    },
+    {
+      "email": "marcus@sequoiacap.com",
+      "name": "Marcus Chen",
+      "type": "investor",
+      "company": "Sequoia Capital",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 8,
+      "topics": [
+        "Series A fundraising",
+        "term sheet",
+        "data room",
+        "ARR metrics",
+        "cohort retention",
+        "investor updates",
+        "NPS score",
+        "board deck"
+      ]
+    },
+    {
+      "email": "ines@heyvibe.io",
+      "name": "Inès Belkacem",
+      "type": "colleague",
+      "company": "HeyVibe",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "casual",
+      "interaction_count": 7,
+      "topics": [
+        "churn analysis Q4",
+        "customer success",
+        "GrandeCorp account management",
+        "customer stories",
+        "pitch deck",
+        "churn reasons",
+        "feature gaps",
+        "pricing feedback",
+        "competitor analysis"
+      ]
+    },
+    {
+      "email": "jm.tessier@grandecorp.fr",
+      "name": "Jean-Marc Tessier",
+      "type": "client",
+      "company": "GrandeCorp",
+      "title": "DSI",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 6,
+      "topics": [
+        "POC HeyVibe",
+        "SSO integration",
+        "Active Directory",
+        "SAML 2.0",
+        "SCIM provisioning",
+        "RGPD compliance",
+        "data residency France",
+        "SLA 99.9%",
+        "security policy",
+        "encryption",
+        "SOC 2",
+        "penetration testing",
+        "demo preparation"
+      ]
+    },
+    {
+      "email": "claire.beaumont@venturefr.com",
+      "name": "Claire Beaumont",
+      "type": "investor",
+      "company": "VentureFR",
+      "title": "Analyste",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 5,
+      "topics": [
+        "due diligence",
+        "cap table",
+        "prévisionnel financier 2026-2028",
+        "contrats clients",
+        "organigramme équipe",
+        "historique MRR",
+        "data room",
+        "net retention",
+        "scénarios bull/bear",
+        "hypothèses acquisition"
+      ]
+    },
+    {
+      "email": "sarah@stationf.co",
+      "name": "Sarah Liu",
+      "type": "partner",
+      "company": "Station F",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 4,
+      "topics": [
+        "Demo Day February 20",
+        "slot confirmation",
+        "investor list",
+        "logistics",
+        "pitch preparation"
+      ]
+    },
+    {
+      "email": "philippe@bancapital.fr",
+      "name": "Philippe Renaud",
+      "type": "banker",
+      "company": "BanCapital",
+      "title": "Directeur Associé",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "interaction_count": 3,
+      "topics": [
+        "convention de prêt BPI France",
+        "signature électronique",
+        "DocuSign",
+        "attestation RC Pro",
+        "K-bis",
+        "virement 150k€",
+        "garanties juridiques"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Series A Fundraising",
+      "description": "Levée de fonds Series A avec Sequoia Capital et VentureFR, term sheet en négociation, due diligence en cours",
+      "contacts": [
+        "marcus@sequoiacap.com",
+        "claire.beaumont@venturefr.com"
+      ],
+      "status": "active",
+      "keywords": [
+        "Series A",
+        "term sheet",
+        "data room",
+        "due diligence",
+        "cap table",
+        "prévisionnel",
+        "ARR",
+        "MRR",
+        "churn",
+        "cohort retention",
+        "board deck",
+        "investor update"
+      ]
+    },
+    {
+      "name": "GrandeCorp POC",
+      "description": "Proof of concept pour GrandeCorp (120k€ ARR), intégration SSO/SCIM, 2000 utilisateurs, démo prévue, deal stratégique pour Series A",
+      "contacts": [
+        "jm.tessier@grandecorp.fr",
+        "tom@heyvibe.io",
+        "arjun@heyvibe.io",
+        "ines@heyvibe.io"
+      ],
+      "status": "active",
+      "keywords": [
+        "POC",
+        "SSO",
+        "SAML",
+        "SCIM",
+        "Active Directory",
+        "data residency",
+        "RGPD",
+        "SLA",
+        "security whitepaper",
+        "SOC 2",
+        "pentest",
+        "120k ARR",
+        "2000 users"
+      ]
+    },
+    {
+      "name": "HeyVibe v2 Launch",
+      "description": "Lancement de la version 2 du produit avec team workspace, onboarding redesign, real-time collaboration, prévu pour le 17 février (3 jours avant Demo Day)",
+      "contacts": [
+        "lea@heyvibe.io",
+        "tom@heyvibe.io",
+        "arjun@heyvibe.io"
+      ],
+      "status": "active",
+      "keywords": [
+        "v2",
+        "MVP",
+        "team workspace",
+        "onboarding flow",
+        "Slack integration",
+        "custom templates",
+        "API publique",
+        "real-time collaboration",
+        "websockets",
+        "beta users",
+        "feature prioritization",
+        "Feb 17 launch"
+      ]
+    },
+    {
+      "name": "Demo Day Station F",
+      "description": "Présentation pitch au Demo Day de Station F le 20 février devant 80 investisseurs, préparation du pitch et démo live v2",
+      "contacts": [
+        "sarah@stationf.co",
+        "arjun@heyvibe.io"
+      ],
+      "status": "active",
+      "keywords": [
+        "Demo Day",
+        "Station F",
+        "Feb 20",
+        "80 investors",
+        "pitch",
+        "live demo",
+        "v2 workspace feature"
+      ]
+    },
+    {
+      "name": "Prêt BPI France",
+      "description": "Convention de prêt BPI France de 150k€ avec BanCapital, signature finalisée, virement sous 5 jours",
+      "contacts": [
+        "philippe@bancapital.fr"
+      ],
+      "status": "active",
+      "keywords": [
+        "BPI France",
+        "prêt",
+        "150k€",
+        "convention",
+        "DocuSign",
+        "RC Pro",
+        "K-bis",
+        "garanties"
+      ]
+    },
+    {
+      "name": "SOC 2 Type II Certification",
+      "description": "Processus de certification SOC 2 Type II en cours avec Vanta, prévu pour Q2 2026, requis pour deals enterprise et Series A",
+      "contacts": [
+        "arjun@heyvibe.io"
+      ],
+      "status": "active",
+      "keywords": [
+        "SOC 2 Type II",
+        "Vanta",
+        "security certification",
+        "compliance",
+        "enterprise deals",
+        "Q2 2026"
+      ]
+    }
+  ],
+  "terminology": {
+    "ARR": "Annual Recurring Revenue - revenu récurrent annuel",
+    "MRR": "Monthly Recurring Revenue - revenu récurrent mensuel",
+    "Churn": "Taux d'attrition clients (pourcentage de clients perdus sur une période)",
+    "NPS": "Net Promoter Score - indicateur de satisfaction et recommandation client",
+    "Series A": "Premier tour de financement institutionnel majeur pour une startup (après seed)",
+    "Term sheet": "Document de synthèse non contraignant décrivant les termes principaux d'un investissement",
+    "Data room": "Espace sécurisé de partage de documents pour due diligence investisseurs",
+    "Cap table": "Table de capitalisation - répartition du capital de l'entreprise entre actionnaires",
+    "Due diligence": "Processus d'audit et vérification mené par les investisseurs avant investissement",
+    "Cohort retention": "Analyse de la rétention par cohorte d'utilisateurs dans le temps",
+    "SSO": "Single Sign-On - authentification unique permettant d'accéder à plusieurs applications avec un seul login",
+    "SAML": "Security Assertion Markup Language - standard pour l'échange de données d'authentification SSO",
+    "SCIM": "System for Cross-domain Identity Management - standard pour le provisioning automatique d'utilisateurs",
+    "RGPD": "Règlement Général sur la Protection des Données - réglementation européenne sur les données personnelles",
+    "SLA": "Service Level Agreement - accord définissant le niveau de service garanti (ex: 99.9% uptime)",
+    "SOC 2": "Service Organization Control 2 - standard d'audit de sécurité pour les fournisseurs SaaS",
+    "Pentest": "Penetration testing - tests de pénétration pour identifier les vulnérabilités de sécurité",
+    "WAF": "Web Application Firewall - pare-feu applicatif web",
+    "MVP": "Minimum Viable Product - version minimale fonctionnelle d'un produit",
+    "POC": "Proof of Concept - projet pilote pour démontrer la faisabilité d'une solution",
+    "DSI": "Directeur des Systèmes d'Information - Chief Information Officer",
+    "BPI": "Bpifrance - banque publique d'investissement française",
+    "K-bis": "Extrait du registre du commerce et des sociétés français",
+    "RC Pro": "Responsabilité Civile Professionnelle - assurance professionnelle",
+    "IAM": "Identity and Access Management - gestion des identités et des accès",
+    "CloudTrail": "Service AWS d'audit et monitoring des appels API",
+    "Time to value": "Temps nécessaire pour qu'un utilisateur obtienne de la valeur du produit",
+    "Activation rate": "Taux d'utilisateurs qui complètent l'onboarding et deviennent actifs",
+    "Trial to paid conversion": "Taux de conversion des utilisateurs en période d'essai vers abonnement payant",
+    "Board deck": "Présentation pour le conseil d'administration ou les investisseurs",
+    "ISO 27001": "Norme internationale de management de la sécurité de l'information"
+  },
+  "frequent_topics": [
+    "Series A fundraising et levée de fonds",
+    "Métriques SaaS (ARR, MRR, churn, NPS, conversion)",
+    "Produit v2 et roadmap features",
+    "GrandeCorp deal et intégration enterprise (SSO/SCIM)",
+    "Demo Day Station F et pitch investisseurs",
+    "Sécurité et compliance (SOC 2, pentest, RGPD)",
+    "Customer success et churn analysis",
+    "Infrastructure et scalabilité (Scaleway, AWS)",
+    "Beta feedback et user research",
+    "Onboarding et activation utilisateurs"
+  ]
+}

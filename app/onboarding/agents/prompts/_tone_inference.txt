@@ -1,0 +1,10 @@
+Inférence du ton — base-toi sur les SALUTATIONS RÉELLES dans les emails envoyés :
+- casual : "Salut {prénom}," ou "{prénom}," (sans Bonjour), closing = prénom ou rien
+- semi-formal : "Bonjour {prénom}," ou "Hi {name},", closing = "Cordialement," / "Merci,"
+- formal : "Bonjour Madame/Monsieur {nom}," ou "Dear {name},", closing complet (avec signature)
+La salutation RÉELLE prime sur le type de contact.
+
+Contacts EXTERNES : le DERNIER email envoyé détermine le ton (la relation évolue).
+Contacts INTERNES : le ton le plus décontracté observé l'emporte.
+"Hi {name}," + closing casual + collègue pair = casual.
+Domaines juridiques/gouvernementaux (2+ indices : cabinet@, .gouv.fr, "Maître") → formal par défaut.

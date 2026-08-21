@@ -1,0 +1,1350 @@
+.swipeable-email-item {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
+  user-select: none;
+  height: 36px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.swipeable-email-item.selected {
+  position: relative;
+}
+
+.swipeable-email-item.selected::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block: 0;
+  width: 3px;
+  background: var(--accent-primary);
+  box-shadow: 0 0 6px var(--accent-primary-glow);
+  z-index: 2;
+  animation: selectionBarIn 0.15s var(--ease-settle, ease-out) both;
+}
+
+@keyframes selectionBarIn {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+.swipeable-email-item.selected .email-content {
+  background: var(--accent-primary-glow);
+}
+
+/* Mouse hover — subtle green tint so users can see where the click will land
+   in a dense list. Exception to the global no-hover rule (rows are scanning
+   affordances, not decorative). Selected wins via higher specificity below. */
+.swipeable-email-item:hover .email-content {
+  background: var(--accent-primary-subtle);
+}
+
+.swipeable-email-item.selected:hover .email-content {
+  background: var(--accent-primary-glow);
+}
+
+.swipeable-email-item.triage-pending {
+  cursor: progress;
+}
+
+.swipeable-email-item.triage-pending .email-content {
+  background: color-mix(in srgb, var(--accent-primary) 7%, transparent);
+  opacity: 0.82;
+}
+
+/* Unread vertical bar (Outlook-style) */
+.swipeable-email-item.unread {
+  position: relative;
+}
+
+.swipeable-email-item.unread::after {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: var(--accent-primary);
+  border-radius: 0 2px 2px 0;
+  z-index: 2;
+  box-shadow: 0 0 4px rgba(13, 148, 136, 0.4);
+}
+
+/* Pinned vertical bar — red, overrides unread bar */
+.swipeable-email-item.pinned {
+  position: relative;
+}
+
+.swipeable-email-item.pinned::after {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: #dc2626;
+  border-radius: 0 2px 2px 0;
+  z-index: 3;
+  box-shadow: 0 0 6px rgba(220, 38, 38, 0.4);
+}
+
+.swipeable-email-item.hovered .email-content {
+  background: var(--accent-primary-subtle);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-1px);
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+/* Visual indicator for keyboard shortcut active state */
+.swipeable-email-item.hovered::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent-primary);
+  z-index: 2;
+}
+
+/* Keyboard activation pulse — brief haptic-like feedback (5.2) */
+.swipeable-email-item.keyboard-activate .email-content {
+  animation: keyboardPulse 0.12s var(--ease-clarity, ease) both;
+}
+
+@keyframes keyboardPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.985); }
+  100% { transform: scale(1); }
+}
+
+.email-content {
+  padding: 2px var(--space-3) 2px var(--space-4);
+  cursor: pointer;
+  transition: background-color var(--transition-base), transform var(--transition-base);
+  background: transparent;
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(13, 148, 136, 0.12);
+}
+
+.email-content:focus { outline: none; }
+.email-content:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--accent-primary);
+  background: var(--accent-primary-subtle);
+}
+
+/* Gmail-style single row layout */
+.email-row.gmail-style {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: var(--space-2);
+}
+
+/* Sender - fixed width */
+.email-row.gmail-style .email-sender {
+  width: 210px;
+  min-width: 210px;
+  max-width: 210px;
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+/* Read state — muted text for scanned emails */
+.swipeable-email-item:not(.unread) .email-row.gmail-style .email-sender {
+  font-weight: 400;
+  color: var(--text-tertiary);
+}
+
+.swipeable-email-item:not(.unread) .email-row.gmail-style .email-subject {
+  font-weight: 400;
+  color: var(--text-tertiary);
+}
+
+/* Unread state — bold + full contrast */
+.swipeable-email-item.unread .email-row.gmail-style .email-sender {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.swipeable-email-item.unread .email-row.gmail-style .email-subject {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Subject + Preview line — fills remaining space */
+.email-content-line {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.email-row.gmail-style .email-subject {
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Body preview — hidden by default, revealed in Deep Focus hero card */
+.email-body-preview {
+  display: none;
+}
+
+.email-separator {
+  color: var(--text-tertiary);
+  margin: 0 var(--space-1);
+  flex-shrink: 0;
+}
+
+.email-row.gmail-style .email-preview {
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Label column - between sender and subject, auto-sized */
+.email-row.gmail-style .email-label-column {
+  width: 90px;
+  min-width: 90px;
+  max-width: 90px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Label badges in email row */
+.email-row.gmail-style .label-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+  line-height: 1;
+  min-height: 16px;
+}
+
+.email-row.gmail-style .label-badge-group .label-badge {
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  min-height: 16px;
+  height: auto;
+  line-height: 1.2;
+  border-radius: 4px;
+  letter-spacing: 0;
+}
+
+.email-row.gmail-style .label-badge-group .label-badge-name {
+  line-height: 1.2;
+}
+
+/* Secondary-label squares match the text badge height (min-height 16px
+   above) — smaller squares read as misaligned specks next to Action/Info. */
+.email-row.gmail-style .label-badge-group .label-badge-chip {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+/* Attachment indicator — subtle paperclip (9.2) */
+.attachment-indicator {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  opacity: 0.6;
+  transition: opacity var(--transition-base);
+}
+
+/* Thread count badge (9.3) — small gray pill after subject */
+.email-row .thread-count-badge {
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-tertiary);
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  min-width: unset;
+  height: auto;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Time */
+.email-row.gmail-style .email-time {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+  min-width: 60px;
+  text-align: right;
+}
+
+.email-read-toggle-btn {
+  width: 24px;
+  height: 24px;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text-tertiary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0;
+  cursor: pointer;
+  transition:
+    opacity var(--transition-fast),
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.email-read-toggle-btn:hover {
+  color: var(--accent-primary);
+  background: var(--accent-primary-subtle);
+}
+
+.email-read-toggle-btn:focus-visible {
+  opacity: 1;
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--accent-primary);
+}
+
+.swipeable-email-item:hover .email-read-toggle-btn,
+.swipeable-email-item.hovered .email-read-toggle-btn,
+.swipeable-email-item:focus-within .email-read-toggle-btn {
+  opacity: 0.9;
+}
+
+@media (hover: none) {
+  .email-read-toggle-btn {
+    opacity: 0.75;
+  }
+}
+
+/* Context menu */
+.email-context-menu {
+  z-index: var(--z-modal);
+  min-width: 180px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  padding: 0.25rem 0;
+  overflow: hidden;
+}
+
+.context-menu-item {
+  width: 100%;
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  transition: background-color 0.15s;
+}
+
+.context-menu-item:focus {
+  outline: none;
+  background: var(--accent-primary-subtle);
+}
+
+.context-menu-item.danger {
+  color: var(--error, var(--error-hover));
+}
+
+.context-menu-item:disabled {
+  color: var(--text-tertiary, #9ca3af);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.context-menu-separator {
+  border: none;
+  border-top: 1px solid var(--border-default);
+  margin: 0.25rem 0;
+}
+
+.context-menu-item--quickstep {
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.context-menu-item--has-submenu {
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.context-menu-item.is-active {
+  background: var(--surface-secondary);
+}
+
+.context-menu-item__chevron {
+  color: var(--text-tertiary);
+  font-size: 14px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.context-menu-item__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+.context-menu-item__kbd {
+  background: var(--surface-secondary, #f5f4f1);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-secondary, #374151);
+  flex-shrink: 0;
+}
+
+/* Multi-select checkbox — Gmail-style affordance: hidden until the row is
+ * hovered, focused, checked, or multi-select mode is active. Same rule
+ * across every folder that renders SwipeableEmailItem (inbox / sent /
+ * drafts / snoozed / spam / trash). Reserve the 18px slot at all times
+ * so showing the checkbox doesn't reflow the row contents. */
+.email-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  margin-right: var(--space-2);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  width: 18px;
+  min-width: 18px;
+}
+
+/* Hover-affordance — mirrors the email-read-toggle-btn pattern further up
+ * in this file. Two selectors so we cover both CSS :hover and the
+ * JS-managed `.hovered` class that the row sets during swipe gestures. */
+.swipeable-email-item:hover .email-checkbox,
+.swipeable-email-item.hovered .email-checkbox {
+  opacity: 1;
+}
+
+/* Show checkbox on keyboard focus */
+.swipeable-email-item:focus-within .email-checkbox {
+  opacity: 1;
+}
+
+/* Keep unread bar visible even on hover/checkbox (non-competing position) */
+
+/* Always visible when checked or in multi-select mode */
+.email-checkbox.visible {
+  opacity: 1;
+}
+
+.email-checkbox input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkbox-custom {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--text-muted);
+  border-radius: var(--radius-xs, 4px);
+  position: relative;
+  transition: all var(--transition-fast, 0.1s);
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.email-checkbox input:checked + .checkbox-custom {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  animation: checkboxPop 0.15s var(--ease-spring, ease) both;
+}
+
+@keyframes checkboxPop {
+  0% { transform: scale(0.85); }
+  60% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.email-checkbox input:checked + .checkbox-custom::after {
+  content: '';
+  position: absolute;
+  left: 4.5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Checked row highlight */
+.swipeable-email-item.checked .email-content {
+  background: var(--accent-primary-subtle);
+}
+
+/* Draft ready badge — 18×18 square sharing Auto's visual language.
+   2026-05-13 visual pass: previously 16×16 with flat teal + opacity 0.85.
+   Now aligns to the same baseline as `.auto-badge-chip` and `.deadline-chip`
+   (height 18, radius 4) and adopts the teal gradient / border / shadow /
+   shine / pop entrance so Auto + Draft Ready feel like a matched pair.
+   The chip stays icon-only (no text) so the row stays compact. */
+.draft-ready-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: 6px;
+  width: 18px;
+  height: 18px;
+  min-height: unset;
+  border-radius: 4px;
+  /* Same teal gradient + edge as .auto-badge-chip — keeps the two chips
+     coherent on the row instead of one solid square next to a polished pill. */
+  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 45%, #2dd4bf 100%);
+  border: 1px solid rgba(13, 148, 136, 0.55);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.18) inset,
+    0 0 0 1px rgba(20, 184, 166, 0.18),
+    0 2px 6px -2px rgba(13, 148, 136, 0.6);
+  color: #ffffff;
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+  z-index: 4;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 0;
+  /* One-shot entrance — same cadence as .auto-badge-chip so a freshly-arrived
+     draft and a freshly-auto-actioned email read with the same micro-motion
+     vocabulary. */
+  animation: auto-badge-pop 380ms cubic-bezier(0.18, 0.89, 0.32, 1.18) both;
+}
+
+/* One-shot shine sweep — identical recipe to .auto-badge-chip::before. */
+.draft-ready-badge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 62%
+  );
+  transform: translateX(-120%);
+  animation: auto-badge-shine 1.6s ease-out 220ms forwards;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.draft-ready-icon {
+  display: block;
+  stroke: #fff;
+  opacity: 1;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 0.5px 0 rgba(13, 148, 136, 0.7));
+}
+
+/* ── Draft skipped badge (robot barré) — même forme que .draft-ready-badge ──
+   Kept the dimensions in lockstep with the ready variant so a row that
+   switches between "draft ready" and "draft skipped" doesn't jiggle 2px. */
+.draft-skipped-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: 6px;
+  width: 18px;
+  height: 18px;
+  min-height: unset;
+  border-radius: 4px;
+  background: var(--color-text-tertiary, #6b7280);
+  opacity: 0.65;
+  transition: opacity var(--transition-base);
+  z-index: 4;
+}
+
+.draft-skipped-icon {
+  display: block;
+  stroke: #fff;
+  opacity: 1;
+}
+
+.email-badges-group .draft-skipped-badge {
+  margin-left: 0;
+}
+
+/* Noise unsubscribe hover action — hidden by default, shown on row hover */
+.noise-unsubscribe-btn {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--error);
+  color: var(--text-inverse);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  z-index: 3;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ============================================================================
+   BALANCED VIEW — 2-line compact with subject + preview snippet (~52px)
+   ============================================================================ */
+
+.swipeable-email-item.balanced {
+  height: 52px;
+}
+
+.swipeable-email-item.balanced .email-content {
+  padding: var(--space-1) var(--space-3) var(--space-1) var(--space-4);
+}
+
+.swipeable-email-item.balanced .email-row.gmail-style {
+  flex-wrap: wrap;
+  height: auto;
+  align-content: center;
+  row-gap: 1px;
+}
+
+.swipeable-email-item.balanced .email-row.gmail-style .email-preview {
+  flex-basis: 100%;
+  margin-left: 0;
+  font-size: var(--font-size-xs);
+  opacity: 0.65;
+  order: 10;
+}
+
+/* ============================================================================
+   COMFORTABLE VIEW — 3-line layout with avatar (sender+time, subject, preview)
+   ============================================================================ */
+
+.swipeable-email-item.comfortable {
+  height: 94px;
+}
+
+.swipeable-email-item.comfortable .email-content {
+  padding: 0 var(--space-4) 0 var(--space-3);
+  align-items: center;
+}
+
+.email-row.comfortable-style {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  gap: var(--space-3);
+  height: 100%;
+  padding: var(--space-3) 0;
+  box-sizing: border-box;
+}
+
+/* ── Avatar circle ── */
+.comfortable-avatar {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  flex-shrink: 0;
+  letter-spacing: var(--tracking-tight);
+  user-select: none;
+  margin-top: 2px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Hide avatar when checkbox visible, show checkbox in its place */
+.swipeable-email-item.comfortable .comfortable-checkbox {
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  margin-right: 0;
+  width: 38px;
+  min-width: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swipeable-email-item.comfortable .comfortable-checkbox.visible ~ .comfortable-avatar {
+  opacity: 0;
+}
+
+/* ── Text body ── */
+.comfortable-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow: hidden;
+}
+
+/* Line 1: Sender + meta (labels, draft badge, time) */
+.comfortable-line-1 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  line-height: var(--leading-normal);
+  min-height: 20px;
+}
+
+.comfortable-line-1 .email-sender {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 1;
+  min-width: 0;
+  letter-spacing: var(--tracking-wide);
+}
+
+.swipeable-email-item.comfortable.unread .comfortable-line-1 .email-sender {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.swipeable-email-item.comfortable:not(.unread) .comfortable-line-1 .email-sender {
+  font-weight: 500;
+  color: var(--text-tertiary);
+}
+
+/* ── Draft badge in comfortable line 1 (between sender and meta) ── */
+.comfortable-line-1 > .draft-ready-badge {
+  margin-left: var(--space-1);
+  margin-right: 2px;
+  flex-shrink: 0;
+}
+
+/* Badge group (lune/cloche + crayon) — même gap que labels */
+.email-badges-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+/* Audit 2026-05-18: spoofed-sender warning glyph, rendered between the
+   sender name and the badge group when the backend flags
+   `sender_spoofed: true`. Yellow ⚠ keeps the row scannable without
+   stealing the row's accent colour. */
+.email-spoof-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  color: #d97706;
+  font-size: 0.85em;
+  line-height: 1;
+  flex-shrink: 0;
+  cursor: help;
+}
+
+.email-badges-group .snooze-badge,
+.email-badges-group .draft-ready-badge {
+  margin-left: 0;
+}
+
+/* ── Meta: time (right side of line 1) ── */
+.comfortable-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.comfortable-meta .email-time {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.swipeable-email-item.comfortable.unread .comfortable-meta .email-time {
+  color: var(--accent-primary);
+  font-weight: 500;
+}
+
+/* Line 2: Subject + Labels */
+.comfortable-line-2 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  line-height: var(--leading-snug);
+  min-height: 18px;
+  overflow: hidden;
+}
+
+.comfortable-line-2 .email-subject {
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.swipeable-email-item.comfortable.unread .comfortable-line-2 .email-subject {
+  font-weight: 500;
+}
+
+.swipeable-email-item.comfortable:not(.unread) .comfortable-line-2 .email-subject {
+  font-weight: 400;
+  color: var(--text-tertiary);
+}
+
+/* Labels on line 2 — right of subject */
+.comfortable-labels {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.comfortable-labels .label-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1;
+  min-height: 16px;
+}
+
+.comfortable-labels .label-badge-group .label-badge {
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  min-height: 16px;
+  height: auto;
+  line-height: 1.2;
+  border-radius: 4px;
+}
+
+.comfortable-labels .label-badge-group .label-badge-name {
+  line-height: 1.2;
+}
+
+/* Same height as the text badge (min-height 16px) — see gmail-style note. */
+.comfortable-labels .label-badge-group .label-badge-chip {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+/* Line 3: Body preview */
+.comfortable-line-3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: var(--leading-snug);
+  min-height: 16px;
+  margin-top: 1px;
+}
+
+.comfortable-line-3 .email-preview-text {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: var(--leading-snug);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Comfortable view: ring replaces bar */
+.swipeable-email-item.comfortable.unread::after {
+  display: none;
+}
+
+/* Avatar ring on unread items (comfortable view) */
+.swipeable-email-item.comfortable.unread .comfortable-avatar {
+  box-shadow:
+    0 0 0 2.5px var(--accent-primary),
+    0 0 8px color-mix(in srgb, var(--accent-primary) 35%, transparent);
+  transition: box-shadow var(--transition-base), opacity var(--transition-base);
+}
+
+/* Dim avatar for read emails (visual contrast) */
+.swipeable-email-item.comfortable:not(.unread) .comfortable-avatar {
+  filter: saturate(0.55) brightness(0.95);
+  opacity: 0.7;
+  transition: filter var(--transition-base), opacity var(--transition-base);
+}
+
+/* Comfortable: selected state */
+.swipeable-email-item.comfortable.selected::before {
+  width: 3px;
+}
+
+/* Responsive - reduce sender width on smaller screens */
+@media (max-width: 768px) {
+  .email-row.gmail-style .email-sender {
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
+  }
+
+  .email-row.gmail-style .email-label-column {
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+  }
+
+}
+
+/* Container queries — component-intrinsic responsive behavior */
+@container email-list (max-width: 500px) {
+  .email-row.gmail-style .email-sender {
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+  }
+
+  .email-row.gmail-style .email-label-column {
+    width: 70px;
+    min-width: 70px;
+    max-width: 70px;
+  }
+
+  .email-row.gmail-style .email-preview {
+    display: none;
+  }
+
+  .email-separator {
+    display: none;
+  }
+}
+
+@container email-list (max-width: 380px) {
+  .email-row.gmail-style .email-sender {
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+    font-size: var(--font-size-sm);
+  }
+
+  .email-row.gmail-style .email-label-column {
+    display: none;
+  }
+
+  .draft-ready-badge {
+    display: none;
+  }
+}
+
+/* ============================================================================
+   SNOOZE BADGE  — même forme que .draft-ready-badge
+   ============================================================================ */
+
+.snooze-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: 6px;
+  /* Bumped 16 → 18 + radius 3 → 4 so every right-side row chip
+     (Auto, Deadline, Snooze, Draft Ready, Draft Skipped) shares the
+     exact same baseline. Codex 2026-05-13: any 2px wobble is an audit hit. */
+  height: 18px;
+  border-radius: 4px;
+  opacity: 1;
+  transition: opacity var(--transition-base), box-shadow var(--transition-base);
+  z-index: 4;
+  position: relative;
+  white-space: nowrap;
+  gap: 4px;
+  padding: 0 5px;
+}
+
+/* sleeping : amber désaturé */
+.snooze-badge--sleeping {
+  background: #e8a020;
+  color: #fff;
+}
+
+/* woken : conteneur transparent — le badge intérieur porte la couleur */
+.snooze-badge--woken {
+  background: transparent;
+  padding: 0;
+  animation: snooze-pulse 2s ease infinite;
+}
+
+/* zzz badge — même dimensions que .draft-ready-badge (18×18). */
+.email-badge-zzz {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border-radius: 4px;
+  background: #c4b5fd;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.email-badge-zzz svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+/* followup badge — même dimensions que .draft-ready-badge (18×18). */
+.email-badge-followup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border-radius: 4px;
+  background: #fcd34d;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.email-badge-followup svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+@keyframes snooze-pulse {
+  0%, 100% { opacity: 0.88; }
+  50%       { opacity: 0.55; }
+}
+
+.snooze-badge-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  color: #fff;
+}
+
+.snooze-badge-icon svg {
+  stroke: #fff;
+}
+
+.snooze-badge-date {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #fff;
+  line-height: 1;
+}
+
+/* ── Pending Send Badge ── */
+.triage-pending-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 28%, transparent);
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.triage-pending-spinner {
+  width: 10px;
+  height: 10px;
+  border: 2px solid currentColor;
+  border-block-start-color: transparent;
+  border-radius: 50%;
+  animation: triage-pending-spin 0.75s linear infinite;
+}
+
+@keyframes triage-pending-spin {
+  to { transform: rotate(360deg); }
+}
+
+.pending-send-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  background: var(--accent-muted, rgba(14, 165, 233, 0.12));
+  color: var(--accent, #0ea5e9);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  animation: pending-send-pulse 2s ease-in-out infinite;
+}
+
+.pending-send-badge svg {
+  flex-shrink: 0;
+}
+
+.pending-send-text {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes pending-send-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.followup-nudge-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 6px;
+  height: 18px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 4px;
+  background: #fef08a;
+  color: #713f12;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ⚡ Auto badge — shipped 2026-05-12 alongside the per-rule `showAutoBadge`
+   toggle. Teal gradient + a one-shot shine sweep on mount surfaces "the AI
+   just touched this row" without competing with hover/selection state on
+   every render (no infinite animation loop). Sits in the same visual slot
+   as `.followup-nudge-chip` so the inbox row geometry doesn't shift. */
+.auto-badge-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+  padding: 0 7px;
+  height: 18px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: #ffffff;
+  /* Teal gradient — slightly off-axis so the highlight band reads as polished
+     rather than flat. Pair with the shine overlay below for the shipped feel. */
+  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 45%, #2dd4bf 100%);
+  border: 1px solid rgba(13, 148, 136, 0.55);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.18) inset,
+    0 0 0 1px rgba(20, 184, 166, 0.18),
+    0 2px 6px -2px rgba(13, 148, 136, 0.6);
+  overflow: hidden;
+  isolation: isolate;
+  /* Subtle entrance — small upward slide so a freshly-actioned email feels
+     "punched in". Plays once. */
+  animation: auto-badge-pop 380ms cubic-bezier(0.18, 0.89, 0.32, 1.18) both;
+}
+
+.auto-badge-chip::before {
+  /* One-shot shine sweep. `forwards` lets it park at the off-state so
+     subsequent re-renders don't restart the animation (the badge is mounted
+     once per email row, but virtualization can swap rows in/out). */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 62%
+  );
+  transform: translateX(-120%);
+  animation: auto-badge-shine 1.6s ease-out 220ms forwards;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.auto-badge-chip__zap {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 0.5px 0 rgba(13, 148, 136, 0.7));
+}
+
+.auto-badge-chip__text {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
+}
+
+/* ── Deadline chip ─────────────────────────────────────────────────────────
+   Clock + date pill stamped automatically by the ingest-time deadline
+   extractor. Visual weight kept lower than .auto-badge-chip — it's an
+   informational marker, not an action announcement — so it sits next to
+   it without competing. */
+.deadline-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 7px;
+  height: 18px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--accent-primary, #0f766e);
+  background: color-mix(in srgb, var(--accent-primary, #14b8a6) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #14b8a6) 30%, transparent);
+}
+
+.deadline-chip__clock {
+  flex-shrink: 0;
+}
+
+/* ── Emoji marker chip ─────────────────────────────────────────────────────
+   Stamped by the `mark_with_emoji` action. Sits right after the subject so
+   it reads like part of the email title. Lighter background than label
+   badges; the emoji carries most of the visual weight. */
+.emoji-marker-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 6px;
+  height: 18px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  background: var(--surface-secondary, rgba(148, 163, 184, 0.12));
+  border: 1px solid var(--border-subtle, rgba(148, 163, 184, 0.25));
+  margin-inline-start: 4px;
+}
+
+/* Colored variant — tint the quiet chip with the chosen palette color
+   (--marker-color, set inline by EmojiMarkerChip only for a valid hex). The
+   text mixes 55% color + 45% --text-primary so it stays legible in BOTH
+   themes: light mode darkens it onto the pale tint, dark mode lightens it.
+   The 55/16 split was tuned against a WCAG sweep over the full LABEL_COLORS
+   palette (tasks/audit-screenshots/contrast_check.py) — worst-case text/chip
+   contrast is 4.4:1, AA across every swatch in both themes (75% color failed
+   on light yellow + dark slate). Declared BEFORE --bare so a bare+colored
+   marker keeps the colored text while --bare wins the background reset. */
+.emoji-marker-chip--colored {
+  background: color-mix(in srgb, var(--marker-color) 16%, transparent);
+  border-color: color-mix(in srgb, var(--marker-color) 40%, transparent);
+  color: color-mix(in srgb, var(--marker-color) 55%, var(--text-primary));
+}
+
+/* Bare variant — no pill. Drop the background, border and inline padding so
+   the emoji + text read inline next to the subject. */
+.emoji-marker-chip--bare {
+  background: none;
+  border-color: transparent;
+  padding-inline: 0;
+}
+
+.emoji-marker-chip__emoji {
+  font-size: 12px;
+  line-height: 1;
+  /* Emoji rendering needs a slight nudge to align with text baseline. */
+  transform: translateY(0.5px);
+}
+
+/* The follow-up marker renders FollowUpIcon (SVG) instead of the 🔁 emoji.
+   `display:block` drops the inline-SVG descender gap so it centres cleanly. */
+.emoji-marker-chip__emoji svg {
+  display: block;
+}
+
+.emoji-marker-chip__text {
+  line-height: 1;
+}
+
+.deadline-chip__text {
+  line-height: 1;
+}
+
+@keyframes auto-badge-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(2px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes auto-badge-shine {
+  0%   { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+
+/* Respect users who asked for less motion — drop both the entrance pop and
+   the shine sweep ; the gradient + glow alone still carry the "AI touched
+   this" signal without animation. */
+@media (prefers-reduced-motion: reduce) {
+  .auto-badge-chip,
+  .auto-badge-chip::before,
+  .draft-ready-badge,
+  .draft-ready-badge::before {
+    animation: none;
+  }
+}

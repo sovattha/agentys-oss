@@ -1,0 +1,150 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "pierre.durand@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "greeting": "Bonjour Pierre, / Salut l'equipe, / Pierre,",
+      "closing": "(name only or none)"
+    },
+    {
+      "contact_email": "lucas.bernard@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "greeting": "Salut Lucas, / Lucas,",
+      "closing": "(name only or none)"
+    },
+    {
+      "contact_email": "camille.roux@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "greeting": "Camille,",
+      "closing": "(name only or none)"
+    },
+    {
+      "contact_email": "marie.leclerc@clientcorp.com",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Madame Leclerc,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "sarah.jones@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi Sarah,",
+      "closing": "Best regards, / Best,"
+    },
+    {
+      "contact_email": "nicolas.moreau@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Nicolas, / Nicolas,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "ceo@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Marc,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "amelie.petit@fournisseur.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Madame Petit, / Bonjour Amelie,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "contact@prospect-startup.io",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Thomas,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "david.kim@partnertech.co.kr",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi David,",
+      "closing": "Best regards, / Best,"
+    },
+    {
+      "contact_email": "elena.volkov@eupartner.de",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Elena,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "claire.fontaine@clientcorp.com",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Claire, / Parfait Claire,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "john.smith@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi John,",
+      "closing": "Best regards,"
+    }
+  ],
+  "general_rules": [
+    {
+      "name": "signature_formal",
+      "description": "Utiliser la signature complete avec titre et coordonnees",
+      "trigger": "Emails externes formels (clients, fournisseurs, prospects, CEO)",
+      "action": "Ajouter signature : Sophie Martin | Chef de projet - Division Digitale | TechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "name": "signature_casual",
+      "description": "Utiliser uniquement le prenom ou pas de signature",
+      "trigger": "Emails internes casuales avec l'equipe directe",
+      "action": "Signer avec prenom uniquement (Sophie, Sophi) ou sans signature"
+    },
+    {
+      "name": "language_switch",
+      "description": "Passer en anglais pour les contacts internationaux",
+      "trigger": "Emails avec des contacts hors France (GlobalTech, PartnerTech, EUPartner)",
+      "action": "Rediger entierement en anglais avec salutations et formules anglaises"
+    },
+    {
+      "name": "structured_updates",
+      "description": "Utiliser des listes numerotees pour les rapports et plans d'action",
+      "trigger": "Rapports de sprint, comptes-rendus de reunion, plans d'action, objectifs",
+      "action": "Structurer avec listes numerotees et sections claires (Faits marquants, Actions, Blocker, etc.)"
+    },
+    {
+      "name": "cc_relevant_people",
+      "description": "Mettre en copie les parties prenantes techniques ou hierarchiques",
+      "trigger": "Discussions techniques avec clients externes ou negociations",
+      "action": "Mettre en copie Pierre (lead technique) ou autres membres concernes"
+    },
+    {
+      "name": "action_items",
+      "description": "Terminer les emails clients avec une section Actions explicite",
+      "trigger": "Emails clients apres reunions ou demos",
+      "action": "Ajouter section 'Actions a suivre :' avec points d'action clairs"
+    },
+    {
+      "name": "vouvoiement_clients",
+      "description": "Utiliser le vouvoiement avec les clients et fournisseurs externes",
+      "trigger": "Emails vers clients (ClientCorp), fournisseurs (Fournisseur.fr), prospects",
+      "action": "Utiliser 'vous' et les titres de civilite (Madame, Monsieur)"
+    },
+    {
+      "name": "tutoiement_equipe",
+      "description": "Utiliser le tutoiement avec les membres directs de l'equipe",
+      "trigger": "Emails vers Pierre, Lucas, Camille (equipe Digitale interne)",
+      "action": "Utiliser 'tu' et les prenoms sans formalite"
+    }
+  ],
+  "forbidden_phrases": [],
+  "auto_reply_patterns": [
+    "Conge/absence : reponse casual courte d'accuse de reception",
+    "Notification JIRA ou ticket : transfert au membre d'equipe concerne avec demande d'action"
+  ]
+}

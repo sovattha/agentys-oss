@@ -1,0 +1,114 @@
+{
+  "contacts": [
+    {
+      "email": "a.patel@strategyco.com",
+      "name": "Anika Patel",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "language_variant": "en-GB",
+      "interaction_count": 11
+    },
+    {
+      "email": "r.hayes@strategyco.com",
+      "name": "Richard Hayes",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "language_variant": "en-GB",
+      "interaction_count": 10
+    },
+    {
+      "email": "b.crawford@strategyco.com",
+      "name": "Ben Crawford",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "language_variant": "en-GB",
+      "interaction_count": 8
+    },
+    {
+      "email": "e.phillips@strategyco.com",
+      "name": "Emma Phillips",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "language_variant": "en-GB",
+      "interaction_count": 8
+    },
+    {
+      "email": "m.torres@acmecorp.com",
+      "name": "Michael Torres",
+      "company": "AcmeCorp",
+      "title": "CFO",
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "language_variant": "en-US",
+      "interaction_count": 8
+    },
+    {
+      "email": "i.moreau@luxegroup.fr",
+      "name": "Isabelle Moreau",
+      "company": "LuxeGroup",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 7
+    },
+    {
+      "email": "j.walsh@acmecorp.com",
+      "name": "Jennifer Walsh",
+      "company": "AcmeCorp",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "language_variant": "en-GB",
+      "interaction_count": 6
+    },
+    {
+      "email": "w.lin@strategyco.sg",
+      "name": "Wei Lin",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "language_variant": "en-SG",
+      "interaction_count": 6
+    },
+    {
+      "email": "k.weber@industriewerke.de",
+      "name": "Klaus Weber",
+      "company": "IndustrieWerke",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "language_variant": "en-DE",
+      "interaction_count": 4
+    },
+    {
+      "email": "t.yamamoto@nipponpartners.jp",
+      "name": "Takeshi Yamamoto",
+      "company": "Nippon Partners",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "language_variant": "en-JP",
+      "interaction_count": 4
+    },
+    {
+      "email": "d.chen@strategyco.com",
+      "name": "David Chen",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "language_variant": "en-GB",
+      "interaction_count": 3
+    }
+  ]
+}

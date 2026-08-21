@@ -1,0 +1,347 @@
+.pillar-savoir {
+  padding: 0;
+}
+
+/* Override block layout to flex so import button sits next to title */
+.pillar-savoir .pillar-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* GhostAddRow spacing + FAQ empty caption (replaces the boxed empty state,
+   which would otherwise double-dash with the ghost row). */
+.pillar-savoir .ghost-add-row {
+  margin-bottom: 12px;
+}
+
+.pillar-savoir-empty {
+  text-align: center;
+  padding: 22px 16px;
+  font-size: 0.82rem;
+  color: var(--text-placeholder);
+}
+
+.pillar-savoir-divider {
+  height: 1px;
+  margin: 22px 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent-primary) 18%, var(--border-subtle)) 50%,
+    transparent 100%);
+}
+
+.savoir-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.savoir-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg, 12px);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: slideIn 0.25s ease both;
+}
+
+.savoir-card:nth-child(1) { animation-delay: 0.03s; }
+.savoir-card:nth-child(2) { animation-delay: 0.06s; }
+.savoir-card:nth-child(3) { animation-delay: 0.09s; }
+.savoir-card:nth-child(4) { animation-delay: 0.12s; }
+.savoir-card:nth-child(5) { animation-delay: 0.15s; }
+
+.savoir-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed color-mix(in srgb, var(--accent-primary) 14%, transparent);
+}
+
+.savoir-question {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md, 8px);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm, 0.8rem);
+  font-weight: 500;
+  outline: none;
+  padding: 7px 10px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.savoir-question:focus {
+  border-color: var(--accent-primary);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent-primary) 10%, transparent),
+    0 0 12px color-mix(in srgb, var(--accent-primary) 6%, transparent);
+}
+
+.savoir-question::placeholder {
+  color: var(--text-placeholder);
+}
+
+.savoir-answer {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md, 8px);
+  padding: 10px 12px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 56px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  line-height: 1.55;
+}
+
+.savoir-answer:focus {
+  border-color: var(--accent-primary);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent-primary) 10%, transparent),
+    0 0 12px color-mix(in srgb, var(--accent-primary) 6%, transparent);
+}
+
+.savoir-context {
+  background: none;
+  border: none;
+  border-top: 1px dashed var(--border-subtle);
+  padding: 6px 0 0;
+  color: var(--text-placeholder);
+  font-size: var(--font-size-2xs, 0.68rem);
+  font-style: italic;
+  outline: none;
+  transition: color 0.15s, border-top-color 0.15s;
+}
+
+.savoir-context:focus {
+  color: var(--text-secondary);
+  border-top-color: color-mix(in srgb, var(--accent-primary) 40%, var(--border-subtle));
+}
+
+.savoir-context::placeholder {
+  color: var(--text-placeholder);
+  opacity: 0.6;
+}
+
+.savoir-learned-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-subtle);
+  gap: 12px;
+  border-radius: var(--radius-md, 8px);
+  transition: background 0.15s, transform 0.15s, border-color 0.15s;
+}
+
+.savoir-learned-item:last-child {
+  border-bottom: none;
+}
+
+.savoir-learned-badge {
+  font-size: var(--font-size-2xs, 0.6rem);
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  color: var(--accent-primary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.savoir-learned-text {
+  font-size: var(--font-size-xs, 0.76rem);
+  color: var(--text-tertiary);
+  flex: 1;
+  line-height: 1.4;
+}
+
+.savoir-learned-time {
+  font-size: var(--font-size-2xs, 0.65rem);
+  color: var(--text-placeholder);
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+/* Import FAQ button in header */
+.pillar-import-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+  font-size: var(--font-size-2xs, 0.68rem);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+/* ── FAQ Import Modal ── */
+
+.faq-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: faqModalFadeIn 0.2s ease;
+}
+
+@keyframes faqModalFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.faq-modal-container {
+  position: relative;
+  width: 90%;
+  max-width: 520px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-primary, #fff);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl, 16px);
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, 0.18),
+    0 8px 16px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.04);
+  animation: faqModalSlideUp 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+}
+
+@keyframes faqModalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.faq-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--accent-primary) 3%, var(--surface-primary)) 0%,
+    var(--surface-primary) 100%);
+}
+
+.faq-modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.faq-modal-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  animation: faqBackSlideIn 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faq-modal-back:active {
+  transform: translateX(-1px) scale(0.94);
+}
+
+@keyframes faqBackSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.faq-modal-title {
+  margin: 0;
+  font-size: var(--font-size-md, 1rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.faq-modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.faq-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Ensure compact mode inside modal doesn't overflow */
+.faq-modal-body .faq-source-compact .faq-source-preview-list {
+  max-height: 240px;
+}
+
+/* Empty state hint */
+.pillar-empty-hint {
+  font-size: var(--font-size-2xs, 0.68rem);
+  color: var(--text-placeholder);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* Static category badge (no dropdown) */
+.savoir-static-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 10px;
+  border-radius: var(--radius-full, 999px);
+  font-size: var(--font-size-2xs, 11px);
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}

@@ -1,0 +1,125 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "r.hayes@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Richard,",
+      "closing": "Cheers, / J."
+    },
+    {
+      "contact_email": "a.patel@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Anika,",
+      "closing": "J. / Well done."
+    },
+    {
+      "contact_email": "m.torres@acmecorp.com",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Michael,",
+      "closing": "Best regards, / James Conseil"
+    },
+    {
+      "contact_email": "b.crawford@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Ben,",
+      "closing": "J. / Cheers,"
+    },
+    {
+      "contact_email": "e.phillips@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi Emma, / Emma,",
+      "closing": "Thanks, / J."
+    },
+    {
+      "contact_email": "i.moreau@luxegroup.fr",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Isabelle,",
+      "closing": "Best regards, / James Conseil"
+    },
+    {
+      "contact_email": "w.lin@strategyco.sg",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Wei,",
+      "closing": "J. / Cheers,"
+    },
+    {
+      "contact_email": "j.walsh@acmecorp.com",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Jennifer,",
+      "closing": "Best regards, / James Conseil"
+    },
+    {
+      "contact_email": "k.weber@industriewerke.de",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Klaus,",
+      "closing": "Best regards, / James Conseil"
+    },
+    {
+      "contact_email": "t.yamamoto@nipponpartners.jp",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Takeshi,",
+      "closing": "Best regards, / James Conseil"
+    },
+    {
+      "contact_email": "d.chen@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "addressing": null,
+      "greeting": "David,",
+      "closing": "J."
+    }
+  ],
+  "general_rules": [
+    {
+      "description": "Internal team members (same domain @strategyco.com) receive casual greetings (first name only) and casual closings (initials or 'Cheers'), regardless of seniority."
+    },
+    {
+      "description": "External clients and senior stakeholders receive formal greetings ('Dear [First Name]' or 'Dear [Title] [Last Name]') with full signature block closings ('Best regards, James Conseil Senior Consultant StrategyCo | London')."
+    },
+    {
+      "description": "Administrative/support staff (Emma Phillips) receive casual tone with brief, action-oriented requests and minimal formality despite being internal."
+    },
+    {
+      "description": "Emails to clients include detailed context, structured sections with bullet points, and clear action items or next steps."
+    },
+    {
+      "description": "Internal team communications are concise, use numbered action items, and often include direct feedback or coaching language ('Well done', 'Good work', 'Nice job')."
+    },
+    {
+      "description": "Travel and logistics requests to Emma are ultra-brief with specific details (dates, times, preferences) and no greeting formality."
+    },
+    {
+      "description": "Client-facing emails include full signature block with title and company; internal emails omit signature block entirely."
+    },
+    {
+      "description": "Emails to non-English speaking contacts (Klaus Weber, Takeshi Yamamoto) maintain formal English tone with careful, respectful language and cultural acknowledgment."
+    },
+    {
+      "description": "Project status updates to internal stakeholders (Richard Hayes) use bullet-point summaries with financial metrics, risk flags, and utilisation data."
+    },
+    {
+      "description": "Feedback on deliverables to team members is specific, references slide numbers, and includes both praise and constructive suggestions."
+    }
+  ],
+  "forbidden_phrases": []
+}

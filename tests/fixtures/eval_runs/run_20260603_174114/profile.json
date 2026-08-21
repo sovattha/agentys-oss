@@ -1,0 +1,31 @@
+{
+  "user_email": "ma.barreau@dumont-associes.fr",
+  "user_name": "Marc-Antoine Barreau",
+  "preferred_name": "Marc-Antoine",
+  "profession": "avocat en droit des affaires",
+  "signature": {
+    "name": "Marc-Antoine Barreau",
+    "title": "Avocat au Barreau de Paris",
+    "company": "Dumont & Associés"
+  },
+  "tone": {
+    "default_tone": "formal",
+    "addressing": "vous",
+    "greeting_styles": {
+      "formal_fr": "Monsieur {last_name},",
+      "formal_fr_maître": "Cher Maître {last_name},",
+      "formal_fr_madame": "Madame {first_name},"
+    },
+    "closing_styles": {
+      "formal_fr": "Je vous prie d'agréer, Monsieur/Madame, l'expression de mes salutations distinguées.",
+      "formal_fr_maître": "Je vous prie d'agréer, cher Maître, l'expression de mes salutations distinguées.",
+      "semi_formal_fr": "Bien cordialement,"
+    },
+    "average_response_length": "medium-long"
+  },
+  "languages": [
+    "fr"
+  ],
+  "language_variant": "fr-FR",
+  "profession_confirmed": false
+}

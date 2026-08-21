@@ -1,0 +1,228 @@
+/* ============================================================================
+   THOUGHT STREAM — vertical storytelling of the AI drafting pipeline
+   Replaces the generic horizontal StageFlow with a narrative timeline that
+   reveals what each agent is doing, live.
+   ============================================================================ */
+
+.thought-stream {
+  list-style: none;
+  padding: 14px 20px 6px;
+  margin: 12px 20px 4px;
+  border-radius: 14px;
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--accent-primary, #0d9488) 6%, transparent) 0%, transparent 60%),
+    var(--surface-secondary);
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 12%, var(--border-subtle));
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  position: relative;
+  overflow: hidden;
+  animation: tsIn 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes tsIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Ambient teal sweep on the container */
+.thought-stream::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent-primary, #0d9488) 8%, transparent) 45%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  animation: tsSweep 3.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes tsSweep {
+  0%, 10%  { transform: translateX(-100%); }
+  60%, 100% { transform: translateX(120%); }
+}
+
+/* ── Step ──────────────────────────────────────────────────────────────── */
+
+.thought-step {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 7px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Vertical guide line between markers */
+.thought-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 22px;
+  bottom: -2px;
+  width: 1.5px;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--accent-primary, #0d9488) 22%, transparent),
+    color-mix(in srgb, var(--accent-primary, #0d9488) 6%, transparent)
+  );
+  border-radius: 1px;
+}
+
+/* ── Marker dot ───────────────────────────────────────────────────────── */
+
+.thought-marker {
+  width: 12px;
+  height: 12px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--surface-primary, #fff);
+  border: 1.5px solid color-mix(in srgb, var(--text-muted, #94a3b8) 50%, transparent);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  transition: all 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Active: teal + pulsing halo */
+.thought-step.is-active .thought-marker {
+  border-color: var(--accent-primary, #0d9488);
+  background: var(--accent-primary, #0d9488);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-primary, #0d9488) 22%, transparent);
+  animation: tsMarkerPulse 1.8s ease-in-out infinite;
+}
+
+/* Warn state (critic rejected) */
+.thought-step.is-warn .thought-marker {
+  border-color: var(--color-amber, #f59e0b);
+  background: var(--color-amber, #f59e0b);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-amber, #f59e0b) 22%, transparent);
+}
+
+/* Done: solid teal, no halo */
+.thought-step.is-done .thought-marker {
+  border-color: var(--accent-primary, #0d9488);
+  background: var(--accent-primary, #0d9488);
+}
+
+@keyframes tsMarkerPulse {
+  0%, 100% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-primary, #0d9488) 22%, transparent); }
+  50%      { box-shadow: 0 0 0 7px color-mix(in srgb, var(--accent-primary, #0d9488) 8%, transparent); }
+}
+
+/* ── Body ──────────────────────────────────────────────────────────────── */
+
+.thought-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding-top: 1px;
+}
+
+.thought-body--with-ring {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.thought-title {
+  font-size: var(--font-size-sm, 13px);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: var(--leading-tight, 1.35);
+  letter-spacing: -0.005em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  animation: tsTitleIn 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes tsTitleIn {
+  from { opacity: 0; transform: translateY(-2px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Pending steps: dim */
+.thought-step:not(.is-active):not(.is-done):not(.is-warn) .thought-title {
+  color: var(--text-muted);
+  opacity: 0.55;
+}
+
+/* Warn step: amber tint */
+.thought-step.is-warn .thought-title {
+  color: var(--color-amber-dark, #b45309);
+}
+
+/* ── Version pill ─────────────────────────────────────────────────────── */
+
+.thought-version-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 14%, transparent);
+  color: var(--accent-primary, #0d9488);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  animation: tsPillIn 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes tsPillIn {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Live preview (extracted draft text) ───────────────────────────────── */
+
+.thought-preview {
+  font-size: var(--font-size-xs, 12px);
+  color: var(--text-secondary, #475569);
+  line-height: 1.55;
+  font-style: italic;
+  padding-left: 10px;
+  border-left: 2px solid color-mix(in srgb, var(--accent-primary, #0d9488) 30%, transparent);
+  margin-top: 3px;
+  max-width: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  animation: tsPreviewFade 280ms ease both;
+}
+
+@keyframes tsPreviewFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Reduced motion ────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .thought-stream,
+  .thought-stream::before,
+  .thought-step .thought-marker,
+  .thought-title,
+  .thought-version-pill,
+  .thought-preview {
+    animation: none !important;
+  }
+  .thought-stream::before { display: none; }
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+  .thought-stream { margin: 8px 12px; padding: 12px 14px 4px; }
+  .thought-title { font-size: var(--font-size-xs, 12px); }
+}

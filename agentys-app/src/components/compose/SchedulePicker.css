@@ -1,0 +1,194 @@
+.schedule-picker {
+  width: 320px;
+  background: var(--surface-primary, #1a1a1e);
+  color: var(--text-primary, #e5e7eb);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  font-size: 13px;
+}
+
+.schedule-picker__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.06));
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.schedule-picker__close {
+  background: none;
+  border: none;
+  color: var(--text-secondary, #9ca3af);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+.schedule-picker__presets {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+}
+
+.schedule-picker__preset,
+.schedule-picker__custom-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 12px 16px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 13px;
+}
+
+.schedule-picker__preset-label {
+  font-weight: 500;
+  /* Audit 2026-05-18: the row was `justify-content: space-between` with
+     `gap: 16px`, so the time chip got squeezed into the same line as the
+     label and rendered as "Demain matin · 09 mai" where the day-of-month
+     digits were clipped (read as 09 instead of 19). Letting the label take
+     all leftover space and keeping the time at its natural width fixes the
+     truncation without changing the visual hierarchy. */
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.schedule-picker__preset-time {
+  color: var(--text-secondary, #9ca3af);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.schedule-picker__custom-btn {
+  border-top: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.06));
+  margin-top: 4px;
+  padding-top: 14px;
+  color: var(--accent-primary, #2dd4bf);
+}
+
+.schedule-picker__custom-btn svg {
+  flex-shrink: 0;
+}
+
+.schedule-picker__custom {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.schedule-picker__custom-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary, #9ca3af);
+}
+
+.schedule-picker__custom-label input {
+  background: var(--surface-elevated, rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+  border-radius: 8px;
+  color: var(--text-primary, #e5e7eb);
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.schedule-picker__custom-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.schedule-picker__custom-back,
+.schedule-picker__custom-confirm {
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.schedule-picker__custom-back {
+  background: transparent;
+  color: var(--text-secondary, #9ca3af);
+}
+
+.schedule-picker__custom-confirm {
+  background: var(--accent-primary, #0d9488);
+  color: white;
+}
+
+/* ── Bouton split (chevron a cote du Send) ───────────────────────────── */
+.send-pill-split {
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: 9999px;
+  background: var(--accent-primary, #0d9488);
+  color: white;
+  padding: 0;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.send-pill-split__main {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Override .send-pill base styles when inside the split — remove the
+ * inner button's own rounded right side and box-shadow to flow with
+ * the chevron. The outer .send-pill-split owns the pill background/shape. */
+.send-pill.send-pill-split__main {
+  border-radius: 9999px 0 0 9999px;
+  background: transparent;
+  box-shadow: none;
+  transform: none !important;
+}
+
+.send-pill-split__chevron {
+  background: transparent;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  color: inherit;
+  cursor: pointer;
+  padding: 0 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.send-pill-split[disabled],
+.send-pill-split__main[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

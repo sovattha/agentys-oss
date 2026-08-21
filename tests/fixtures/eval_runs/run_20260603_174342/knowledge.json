@@ -1,0 +1,114 @@
+{
+  "contacts": [
+    {
+      "email": "v.sanchez@bcp-banque.fr",
+      "name": "Valérie Sanchez",
+      "company": "BCP (Banque Centrale de Paris)",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 12
+    },
+    {
+      "email": "a.mercier@bcp-banque.fr",
+      "name": "Antoine Mercier",
+      "company": "BCP (Banque Centrale de Paris)",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 11
+    },
+    {
+      "email": "g.montfort@bcp-banque.fr",
+      "name": "Gérard Montfort",
+      "company": "BCP (Banque Centrale de Paris)",
+      "title": "Directeur Général",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 11
+    },
+    {
+      "email": "m.petit@bcp-banque.fr",
+      "name": "Marine Petit",
+      "company": "BCP (Banque Centrale de Paris)",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 10
+    },
+    {
+      "email": "b.lefevre@cgt-bcp.fr",
+      "name": "Bruno Lefèvre",
+      "company": "CGT-BCP",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 8
+    },
+    {
+      "email": "s.morel@cgt-bcp.fr",
+      "name": "Sylvie Morel",
+      "company": "CGT-BCP",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 7
+    },
+    {
+      "email": "f.delacroix@bcp-banque.fr",
+      "name": "François Delacroix",
+      "company": "BCP (Banque Centrale de Paris)",
+      "title": "Directeur des Risques",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 6
+    },
+    {
+      "email": "m.dubois@bcp-banque.fr",
+      "name": "Marie Dubois",
+      "company": "BCP (Banque Centrale de Paris)",
+      "title": "Responsable Conformité",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 5
+    },
+    {
+      "email": "c.tessier@tessier-avocats.fr",
+      "name": "Caroline Tessier",
+      "company": "Tessier Avocats",
+      "title": "Avocate",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 4
+    },
+    {
+      "email": "i.fontaine@formapro.fr",
+      "name": "Isabelle Fontaine",
+      "company": "FormaPro",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 4
+    },
+    {
+      "email": "p.laurent@medecine-travail.fr",
+      "name": "Philippe Laurent",
+      "company": "Médecine du Travail",
+      "title": "Médecin",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 3
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+Analyse cette réponse email.
+
+EMAIL ORIGINAL :
+{email_content}
+
+RÉPONSE PROPOSÉE :
+{draft}
+
+Si la réponse est satisfaisante, réponds exactement : VALID
+
+Si la réponse a des problèmes, réponds : REJET : [explication concise du problème]
+
+Réponds uniquement avec VALID ou REJET : [raison], rien d'autre.

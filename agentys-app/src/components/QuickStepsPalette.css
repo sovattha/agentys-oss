@@ -1,0 +1,186 @@
+/* QuickStepsPalette — Cmd+K command palette overlay. */
+
+.qs-palette {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9998;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 12vh;
+  animation: qs-palette-fade 0.12s ease-out;
+}
+
+@keyframes qs-palette-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.qs-palette__panel {
+  width: 92%;
+  max-width: 580px;
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 12px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  animation: qs-palette-rise 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes qs-palette-rise {
+  from { transform: translateY(-8px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.qs-palette__input {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  padding: 14px 18px;
+  font-size: 15px;
+  color: var(--text-primary, #111827);
+  outline: none;
+}
+
+.qs-palette__input::placeholder {
+  color: var(--text-placeholder, #9ca3af);
+}
+
+.qs-palette__list {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.qs-palette__item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 10px;
+  align-items: center;
+  padding: 9px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-primary, #111827);
+  transition: background 0.1s ease;
+}
+
+.qs-palette__item[data-active] {
+  background: var(--accent-primary-subtle, rgba(13, 148, 136, 0.08));
+}
+
+.qs-palette__name { font-weight: 600; }
+
+.qs-palette__summary {
+  font-size: 11px;
+  color: var(--text-secondary, #374151);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.qs-palette__kbd {
+  background: var(--surface-tertiary, #ebe9e5);
+  border-radius: 4px;
+  padding: 2px 7px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-primary, #111827);
+}
+
+.qs-palette__empty {
+  padding: 20px;
+  font-size: 13px;
+  color: var(--text-secondary, #374151);
+  text-align: center;
+}
+
+.qs-palette__footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 9px 14px;
+  border-top: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  font-size: 11px;
+  color: var(--text-secondary, #374151);
+  background: var(--surface-secondary, #f5f4f1);
+}
+
+.qs-palette__footer kbd {
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 3px;
+  padding: 0 5px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-primary, #111827);
+  margin: 0 2px;
+}
+
+.qs-palette__confirm {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.qs-palette__confirm-panel {
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 12px;
+  padding: 22px;
+  max-width: 440px;
+  width: 90%;
+  color: var(--text-primary, #111827);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+}
+
+.qs-palette__confirm-panel h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: var(--text-primary, #111827);
+  font-weight: 600;
+}
+
+.qs-palette__confirm-panel ul {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 10px 14px;
+  background: var(--surface-secondary, #f5f4f1);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text-primary, #111827);
+}
+
+.qs-palette__confirm-cta {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.qs-palette__confirm-cta button {
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-primary, #111827);
+}
+
+.qs-palette__confirm-cta .primary {
+  background: var(--accent-primary, #0d9488);
+  border-color: transparent;
+  color: var(--text-inverse, #ffffff);
+  font-weight: 600;
+}

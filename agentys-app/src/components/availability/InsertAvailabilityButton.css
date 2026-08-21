@@ -1,0 +1,98 @@
+/* ============================================================================
+   INSERT-AVAILABILITY BUTTON — toolbar dropdown for compose surfaces.
+   Three modes: insert booking link only / insert free times / both.
+   ============================================================================ */
+
+/* Icon-only trigger — inherits sizing/spacing from .rc-icon-btn (same as
+   the surrounding mic, attach, snippet, bell buttons). The only thing this
+   layer adds is an accent state when the menu is open, so the user has a
+   clear "this is the active control" cue. */
+.iab-trigger.is-open {
+  color: var(--accent-primary, #0d9488);
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 10%, transparent);
+}
+
+.iab-trigger.is-open svg {
+  color: var(--accent-primary, #0d9488);
+}
+
+/* ── Menu (portal'd to body) ──────────────────────────────── */
+.iab-menu {
+  position: fixed;
+  min-width: 240px;
+  padding: 4px;
+  border: 1px solid var(--border-default, #e2e8f0);
+  border-radius: 10px;
+  background: var(--surface-primary, #fff);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.05);
+  z-index: 10000;
+  animation: iab-menu-in 120ms ease-out;
+}
+
+@keyframes iab-menu-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.iab-menu-item {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-primary, #0f172a);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  text-align: left;
+  transition: background 100ms ease;
+}
+
+.iab-menu-item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.iab-menu-item:focus-visible {
+  outline: none;
+  background: var(--surface-secondary, #f8fafc);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--accent-primary, #0d9488) 50%, transparent);
+}
+
+.iab-menu-item--combo {
+  border-top: 1px solid var(--border-subtle, #e2e8f0);
+  margin-top: 2px;
+  padding-top: 10px;
+}
+
+.iab-menu-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 10%, transparent);
+  color: var(--accent-primary, #0d9488);
+  flex-shrink: 0;
+}
+
+.iab-menu-label {
+  flex: 1 1 auto;
+}
+
+.iab-menu-badge {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-tertiary, #94a3b8);
+  background: var(--surface-secondary, #f8fafc);
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}

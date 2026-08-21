@@ -1,0 +1,1240 @@
+/* ============================================================================
+   AGENTYS CLARITY — App Layout & Components
+   ============================================================================ */
+
+/* Legacy variable aliases removed — use --accent-primary, --surface-base, etc. directly */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================================================
+   APP LAYOUT
+   ============================================================================ */
+.app {
+  height: 100vh;
+  height: 100dvh;
+  background: var(--surface-base);
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.app-main {
+  flex: 1;
+  padding: var(--space-4);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Calendrier full-bleed — pas de padding dans app-main */
+.app-main--calendar {
+  padding: 0;
+}
+
+/* ============================================================================
+   INBOX LAYOUT
+   ============================================================================ */
+.inbox-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(0, 1fr);
+  gap: var(--space-4);
+  flex: 1;
+  min-height: 0;
+  /* Minimum width of the detail/draft zone — wide enough to keep the whole
+     reply/compose toolbar on one row without clipping icons. Kept in sync with
+     MIN_WIDTH in hooks/useResizePanel.ts. The list column shrinks to honour it. */
+  --detail-panel-min: 560px;
+}
+
+.inbox-layout.has-detail {
+  /* BUG-P002 fix: clamp panel width so it never overflows the viewport at any zoom level.
+     clamp() keeps the user-chosen width but (a) never goes below --detail-panel-min so
+     the toolbar always fits, and (b) caps at (100vw - 400px) to reserve room for the
+     sidebar + email list. minmax(0,1fr) lets the list shrink so the floor always wins. */
+  grid-template-columns: minmax(0, 1fr) 6px clamp(var(--detail-panel-min), var(--detail-panel-width, 560px), calc(100vw - 400px));
+}
+
+/* Hide detail panel from grid flow when no item is selected.
+   Direct-child selector so this rule only targets panels managed at the
+   inbox-layout level (inbox/sent/spam/trash) — not nested panels rendered
+   by views that manage their own grid (e.g. SnoozedView). */
+.inbox-layout:not(.has-detail) > .email-detail-panel {
+  display: none;
+}
+
+/* ---- Resize handle between list and detail ---- */
+.resize-handle {
+  width: 6px;
+  margin: 0 -3px;
+  cursor: col-resize;
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resize-handle::after {
+  content: '';
+  width: 3px;
+  height: 40px;
+  border-radius: 3px;
+  background: var(--border-subtle, #ddd);
+  transition: background 0.15s, height 0.15s;
+}
+
+.resize-handle.dragging::after {
+  background: var(--accent-primary, #0d9488);
+  height: 60px;
+}
+
+.resize-handle.dragging {
+  cursor: col-resize;
+}
+
+.email-list-panel {
+  overflow: hidden;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  container-type: inline-size;
+  container-name: email-list;
+  contain: layout style;
+}
+
+.email-list-panel.full-width {
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================================================
+   EMAIL DETAIL PANEL (Draft Review)
+   ============================================================================ */
+.email-detail-panel {
+  position: relative;
+  background: var(--surface-primary);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  contain: layout style;
+}
+
+/* SCROLL-UNIFIED — Contexte panel inbox
+   height: 0 force le conteneur à ignorer sa taille naturelle et activer overflow-y: auto.
+   Sans height: 0, l'élément s'étend et aucun scroll n'apparaît.
+   Voir aussi : PendingDraftDetail.css L5, EmailDetailModal.css L523 */
+.email-detail-panel > .pending-draft-detail,
+.email-detail-panel > .email-detail-inline {
+  flex: 1 1 0;
+  min-height: 0;
+  height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.email-detail {
+  padding: var(--space-5);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Subject in detail panel — display font */
+.email-subject-row .email-subject {
+  font-size: var(--font-size-2xl);
+  font-weight: 500;
+  letter-spacing: var(--tracking-tight, -0.015em);
+  color: var(--text-primary);
+  line-height: var(--leading-snug);
+}
+
+.email-from {
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+}
+
+.email-actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.action-btn {
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  border: none;
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-weight: 500;
+}
+
+.action-btn.primary {
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+}
+
+.action-btn.secondary {
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+}
+
+.email-detail-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-muted);
+  font-size: var(--font-size-base);
+}
+
+.email-detail-loading {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--space-6);
+  gap: var(--space-4);
+}
+
+.email-detail-loading .skeleton-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.email-detail-loading .skeleton-bar {
+  height: 14px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--surface-secondary) 25%, var(--surface-tertiary) 50%, var(--surface-secondary) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite;
+}
+
+.email-detail-loading .skeleton-bar.title {
+  width: 60%;
+  height: 20px;
+}
+
+.email-detail-loading .skeleton-bar.sender {
+  width: 35%;
+}
+
+.email-detail-loading .skeleton-bar.date {
+  width: 20%;
+}
+
+.email-detail-loading .skeleton-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.email-detail-loading .skeleton-bar.line {
+  width: 100%;
+}
+
+.email-detail-loading .skeleton-bar.line:nth-child(2) { width: 92%; }
+.email-detail-loading .skeleton-bar.line:nth-child(3) { width: 87%; }
+.email-detail-loading .skeleton-bar.line:nth-child(4) { width: 95%; }
+.email-detail-loading .skeleton-bar.line:nth-child(5) { width: 40%; }
+
+/* ============================================================================
+   LOADING SCREEN — Branded Agentys splash
+   ============================================================================ */
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  height: 100dvh;
+  gap: 0;
+  animation: loadingFadeIn 0.6s ease-out;
+}
+
+@keyframes loadingFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.loading-brand-mark {
+  width: 48px;
+  height: 48px;
+  animation: brandPulse 2.4s ease-in-out infinite;
+  margin-bottom: var(--space-4);
+  line-height: var(--leading-none);
+}
+
+.loading-brand-mark img,
+.loading-brand-mark svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@keyframes brandPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.08); }
+}
+
+.loading-brand-name {
+  font-family: var(--font-sans, 'Instrument Sans', 'Plus Jakarta Sans', sans-serif);
+  font-size: var(--font-size-2xl);
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-wider);
+  margin-bottom: var(--space-6);
+  opacity: 0.88;
+}
+
+.loading-brand-gentys {
+  font-family: var(--font-sans, 'Instrument Sans', 'Plus Jakarta Sans', sans-serif);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wider);
+}
+
+.loading-bar-track {
+  width: 140px;
+  height: 3px;
+  background: var(--border-subtle);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.loading-bar-fill {
+  width: 40%;
+  height: 100%;
+  background: var(--accent-primary);
+  border-radius: 2px;
+  animation: loadingSlide 1.4s ease-in-out infinite;
+}
+
+@keyframes loadingSlide {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+.loading-hint {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  letter-spacing: var(--tracking-wider);
+}
+
+/* ============================================================================
+   STATUS CARD — Disconnected / error states
+   ============================================================================ */
+.status-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: var(--space-2);
+  animation: loadingFadeIn 0.6s ease-out;
+}
+
+.status-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--surface-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-2);
+}
+
+.status-card-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  opacity: 0.5;
+}
+
+.status-card h2 {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.help-text {
+  margin-top: var(--space-1);
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+}
+
+.help-text code {
+  background: var(--surface-secondary);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+}
+
+/* ============================================================================
+   STATUS INDICATOR
+   ============================================================================ */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+}
+
+.status-indicator::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-indicator.checking {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.status-indicator.checking::before {
+  background: var(--warning);
+  animation: pulse 1.5s infinite;
+}
+
+.status-indicator.connected {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.status-indicator.connected::before {
+  background: var(--success);
+}
+
+.status-indicator.disconnected {
+  background: var(--error-bg);
+  color: var(--error);
+}
+
+.status-indicator.disconnected::before {
+  background: var(--error);
+}
+
+/* ============================================================================
+   SETTINGS MODAL
+   ============================================================================ */
+.settings-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.8);
+  backdrop-filter: blur(12px) saturate(1.8);
+  -webkit-backdrop-filter: blur(12px) saturate(1.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+  animation: fadeIn var(--transition-base);
+}
+
+/* Tab crossfade animation */
+@keyframes tabCrossfade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.tab-content-animated {
+  animation: tabCrossfade 0.2s ease;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.settings-modal,
+.settings-modal-content {
+  background: var(--surface-primary);
+  border-radius: var(--radius-xl, 16px);
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: settingsModalIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.settings-modal-wide {
+  max-width: 860px;
+}
+
+@keyframes settingsModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(var(--scale-dramatic));
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(1px) scale(1.005);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---- Modal exit animations ---- */
+.settings-modal-overlay.closing {
+  animation: fadeOut 0.15s ease forwards;
+  pointer-events: none;
+}
+
+.settings-modal-overlay.closing .settings-modal {
+  animation: settingsModalOut 0.15s ease forwards;
+}
+
+/* fadeOut moved to animations.css */
+
+@keyframes settingsModalOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(var(--scale-press));
+  }
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.settings-header h2 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+}
+
+.settings-close {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color var(--transition-fast);
+}
+
+.settings-content {
+  padding: var(--space-5);
+  overflow-y: auto;
+}
+
+.settings-section {
+  margin-bottom: var(--space-6);
+}
+
+.settings-section:last-child {
+  margin-bottom: 0;
+}
+
+.settings-section h3 {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+}
+
+/* ============================================================================
+   TOGGLE SWITCH
+   ============================================================================ */
+.autostart-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.autostart-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.autostart-label {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+}
+
+.autostart-container input {
+  display: none;
+}
+
+.autostart-switch {
+  width: 44px;
+  height: 24px;
+  background: var(--surface-tertiary);
+  border-radius: 12px;
+  position: relative;
+  transition: background var(--transition-base);
+}
+
+.autostart-switch::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  transition: transform var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.autostart-container input:checked + .autostart-switch {
+  background: var(--accent-primary);
+}
+
+.autostart-container input:checked + .autostart-switch::after {
+  transform: translateX(20px);
+}
+
+.autostart-loading {
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.autostart-error {
+  color: var(--error);
+  font-size: var(--font-size-xs);
+}
+
+/* ============================================================================
+   SHORTCUTS HELP PANEL
+   ============================================================================ */
+.shortcuts-help-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-medium);
+  -webkit-backdrop-filter: blur(12px) saturate(1.8);
+  backdrop-filter: blur(12px) saturate(1.8);
+  contain: paint;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-popover);
+}
+
+.shortcuts-help-panel {
+  background: var(--surface-primary);
+  border-radius: var(--radius-xl);
+  width: 90%;
+  max-width: 540px;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-xl);
+  animation: panelSlideIn 0.25s var(--ease-settle) both;
+}
+
+.shortcuts-help-panel.closing {
+  animation: panelSlideOut 0.18s var(--ease-clarity) both;
+}
+
+@keyframes panelSlideIn {
+  from { opacity: 0; transform: translateY(12px) scale(var(--scale-press)); }
+}
+
+@keyframes panelSlideOut {
+  to { opacity: 0; transform: translateY(6px) scale(var(--scale-press)); }
+}
+
+.shortcuts-help-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.shortcuts-help-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.shortcuts-help-back {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: var(--radius-md, 6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.shortcuts-help-header h2 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+}
+
+.shortcuts-help-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.shortcuts-help-header .close-button {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-lg);
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color var(--transition-fast);
+}
+
+.shortcuts-help-content {
+  padding: var(--space-5);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.shortcuts-section {
+  margin-bottom: var(--space-5);
+}
+
+.shortcuts-section:last-child {
+  margin-bottom: 0;
+}
+
+.shortcuts-section h3 {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--accent-primary);
+  margin-bottom: var(--space-2);
+}
+
+.shortcuts-section .section-note {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+  font-style: italic;
+}
+
+.shortcuts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.shortcut-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.shortcut-item:last-child {
+  border-bottom: none;
+}
+
+/* shortcut-key styles moved to EmailList.css */
+
+.shortcut-description {
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+  flex: 1;
+  text-align: end;
+  padding-inline-start: var(--space-4);
+}
+
+.shortcuts-help-footer {
+  padding: var(--space-3) var(--space-5);
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
+  background: var(--surface-secondary);
+}
+
+.shortcuts-help-footer p {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+.shortcuts-help-footer kbd {
+  background: var(--surface-primary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  border: 1px solid var(--border-subtle);
+}
+
+/* ============================================================================
+   RESPONSIVE STYLES
+   ============================================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .inbox-layout.has-detail {
+    /* Same floor as the base layout; reserve a little less for the list here. */
+    grid-template-columns: minmax(0, 1fr) 6px clamp(var(--detail-panel-min), var(--detail-panel-width, 560px), calc(100vw - 240px));
+  }
+
+  .app-main {
+    padding: var(--space-3);
+  }
+}
+
+/* Compact split — narrow tablets / small laptops */
+@media (max-width: 900px) {
+  .inbox-layout.has-detail {
+    /* Detail takes the rest but never drops below --detail-panel-min; the list
+       column shrinks from 280px down toward 0 to keep the toolbar intact.
+       column-gap:0 reclaims the 2×16px inter-column gaps so the floored panel
+       still fits inside the 800px minimum window without horizontal scroll. */
+    grid-template-columns: minmax(0, 280px) 6px minmax(var(--detail-panel-min), 1fr);
+    column-gap: 0;
+  }
+}
+
+/* Mobile — stack layout + sidebar drawer */
+@media (max-width: 768px) {
+  .inbox-layout {
+    grid-template-columns: 1fr;
+    height: 100%;
+    gap: 0;
+  }
+
+  .inbox-layout.has-detail {
+    grid-template-columns: 1fr;
+  }
+
+  /* Hide list when detail is open — full-width detail */
+  .inbox-layout.has-detail .email-list-panel {
+    display: none;
+  }
+
+  .inbox-layout.has-detail .email-detail-panel {
+    grid-column: 1;
+    min-height: 0;
+    height: 100%;
+  }
+
+  .resize-handle {
+    display: none;
+  }
+
+  .app-main {
+    padding: var(--space-2);
+    margin-inline-start: 0;
+  }
+
+  .email-detail {
+    padding: var(--space-4);
+  }
+
+  .email-actions {
+    flex-direction: column;
+  }
+
+  .action-btn {
+    width: 100%;
+  }
+
+  .settings-modal,
+  .shortcuts-help-panel {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .settings-modal-wide {
+    max-width: 95%;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .app-main {
+    padding: 6px;
+  }
+
+  .email-list-panel {
+    height: 100%;
+    max-height: none;
+  }
+
+  .email-detail {
+    padding: var(--space-3);
+  }
+
+  .email-detail-header h2 {
+    font-size: var(--font-size-md);
+  }
+
+  /* shortcut-key responsive styles moved to EmailList.css */
+
+  .shortcut-description {
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* ============================================================================
+   EMAIL DETAIL MODAL WITH PENDING DRAFT
+   ============================================================================ */
+.email-detail-modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.email-detail-modal-wrapper .email-detail-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.email-detail-modal-content {
+  position: relative;
+  background: var(--surface-primary);
+  border-radius: var(--radius-xl);
+  width: 90%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+  z-index: 1;
+}
+
+.email-detail-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  padding: 0;
+  background: none;
+  color: var(--text-secondary);
+  font-size: var(--font-size-2xl);
+  border-radius: var(--radius-md, 6px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* ============================================================================
+   DETAIL PANEL CLOSE BUTTON (shared by PendingDraftDetail + EmailDetailModal)
+   ============================================================================ */
+.detail-panel-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  padding: 0;
+  background: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-2xl);
+  font-weight: 300;
+  border-radius: var(--radius-md, 6px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: color 0.15s;
+}
+
+.email-detail-modal-content .email-detail-loading {
+  padding: 60px var(--space-5);
+  text-align: center;
+}
+
+.email-detail-modal-content .pending-draft-detail {
+  padding: var(--space-5);
+}
+
+/* Make EmailDetailModal render inline when wrapped */
+.email-detail-modal-content .email-detail-modal {
+  position: static;
+}
+
+.email-detail-modal-content .email-detail-modal .email-detail-backdrop {
+  display: none;
+}
+
+.email-detail-modal-content .email-detail-modal .email-detail-content {
+  position: static;
+  max-width: none;
+  max-height: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* ============================================================================
+   VIEW TRANSITIONS — Detail Panel Reveal (class-based)
+   ============================================================================ */
+.email-detail-panel {
+  opacity: 0;
+  transform: translateX(12px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.email-detail-panel.detail-ready {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ---- Detail Panel Accent Bar ---- */
+.email-detail-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-primary-glow) 60%, transparent 100%);
+  z-index: 1;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  opacity: 0;
+  animation: accentBarReveal 1.2s ease-out 0.4s forwards;
+}
+
+@keyframes accentBarReveal {
+  from { opacity: 0; width: 0; }
+  to   { opacity: 0.7; width: 100%; }
+}
+
+/* ============================================================================
+   PAGE-LOAD CHOREOGRAPHY — Staggered entrance
+   ============================================================================ */
+.sidebar {
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  contain: layout style;
+}
+
+.app-loaded .sidebar {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.email-list-panel {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+}
+
+.app-loaded .email-list-panel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Performance: respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* ---- Generic modal/overlay exit animations ---- */
+.email-detail-modal-wrapper.closing .email-detail-backdrop {
+  animation: fadeOut 0.15s ease forwards;
+}
+
+.email-detail-modal-wrapper.closing .email-detail-modal-content {
+  animation: settingsModalOut 0.15s ease forwards;
+}
+
+/* ============================================================================
+   MICRO-INTERACTIONS — Utility Classes (Phase 3)
+   ============================================================================ */
+.hover-lift {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hover-glow {
+  transition: box-shadow 0.2s ease;
+}
+
+.press-scale {
+  transition: transform 0.1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.press-scale:active {
+  transform: scale(var(--scale-press));
+}
+
+.spring-transition {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─── Icon button reset ─────────────────────────────────────────────────────
+ * Global override: ensures all known icon/close buttons are not crushed by
+ * the global `button { padding: var(--space-3) var(--space-5) }` rule.
+ * This rule must live in App.css (always loaded) so it applies even when
+ * the component's CSS file hasn't been imported yet (e.g. in E2E tests).
+ */
+.sig-close,
+.autoreply-close,
+.clean-inbox-close,
+.ash-close,
+.newsletters-close,
+.subscriptions-close,
+.recap-close,
+.ssc-close,
+.spdm-close,
+.calendar-close-btn,
+.fdp-nav,
+.send-confirmation-modal-close,
+.regenerate-modal-close,
+.share-dialog-close,
+.close-button,
+.email-detail-close,
+.gmail-header-btn,
+.gmail-icon-btn,
+.df2-exit-btn,
+.cg-close-btn,
+.snippet-icon-btn,
+.snippet-nav-btn {
+  padding: 0;
+}
+
+/* ── LLM Error Banner ── */
+.llm-error-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: rgba(255, 69, 58, 0.08);
+  border-left: 3px solid var(--color-error, #ff453a);
+  animation: recapBannerSlideDown 0.3s ease both;
+}
+
+.llm-error-banner-icon {
+  font-size: 16px;
+  color: var(--color-error, #ff453a);
+  flex-shrink: 0;
+}
+
+.llm-error-banner-text {
+  font-size: var(--font-size-sm, 13px);
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
+}
+
+.llm-error-banner-btn {
+  font-size: var(--font-size-sm, 13px);
+  font-weight: 600;
+  color: var(--accent-primary, #0d9488);
+  background: none;
+  border: 1px solid var(--accent-primary, #0d9488);
+  border-radius: 6px;
+  padding: 4px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.llm-error-banner-close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.llm-error-banner--auth {
+  background: rgba(245, 158, 11, 0.08);
+  border-left-color: #f59e0b;
+}
+
+.llm-error-banner--auth .llm-error-banner-icon {
+  color: #f59e0b;
+}

@@ -1,0 +1,168 @@
+.pillar-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.pillar-nav-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 14px 16px;
+  background: color-mix(in srgb, var(--surface-secondary) 92%, transparent);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg, 14px);
+  cursor: pointer;
+  text-align: left;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: slideIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.pillar-nav-card:nth-child(1) { animation-delay: 0.03s; }
+.pillar-nav-card:nth-child(2) { animation-delay: 0.06s; }
+.pillar-nav-card:nth-child(3) { animation-delay: 0.09s; }
+.pillar-nav-card:nth-child(4) { animation-delay: 0.12s; }
+
+/* ── Press feedback ── */
+.pillar-nav-card:active {
+  transform: scale(var(--scale-press));
+}
+
+/* ── Active state: gradient bg + editorial glow ── */
+.pillar-nav-card.active {
+  background: linear-gradient(145deg,
+    color-mix(in srgb, var(--accent-primary) 14%, var(--surface-primary)) 0%,
+    color-mix(in srgb, var(--accent-primary) 5%, var(--surface-primary)) 100%);
+  border-color: color-mix(in srgb, var(--accent-primary) 38%, transparent);
+}
+
+/* ── Active luminous bottom bar ── */
+.pillar-nav-card.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--accent-primary);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent-primary) 32%, transparent);
+  z-index: 1;
+}
+
+.pillar-nav-card.active {
+  box-shadow: 0 2px 12px color-mix(in srgb, var(--accent-primary) 10%, transparent);
+}
+
+/* ── Icon ── */
+.pillar-nav-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  color: var(--text-tertiary);
+  transition: all 0.25s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.active .pillar-nav-icon {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-primary-hover) 100%);
+  color: var(--text-inverse, white);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Label & hint ── */
+.pillar-nav-label {
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+  color: var(--text-primary);
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pillar-nav-hint {
+  font-family: inherit;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-tertiary);
+  line-height: 1.35;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Badge with gradient ── */
+.pillar-nav-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-primary-hover));
+  color: white;
+  font-size: var(--font-size-2xs, 0.65rem);
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 8px;
+  min-width: 18px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  z-index: 1;
+}
+
+/* ── Completion status badge (fixed top-right corner, aligns across cards) ── */
+.pillar-nav-status {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.pillar-nav-status svg {
+  display: block;
+}
+
+/* Configured: solid success check */
+.pillar-nav-status.is-done {
+  color: var(--accent-success, #10b981);
+}
+
+/* Not configured yet: muted hollow dashed ring = "to do" */
+.pillar-nav-status.is-todo {
+  color: var(--text-placeholder, #9ca3af);
+}
+
+/* Screen-reader-only status label (no global utility exists) */
+.pillar-nav-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 600px) {
+  .pillar-nav {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

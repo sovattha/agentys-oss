@@ -1,0 +1,33 @@
+{
+  "user_email": "priya@heyvibe.io",
+  "user_name": "Priya Pivot",
+  "preferred_name": "Priya",
+  "profession": "SaaS founder / CEO",
+  "signature": {
+    "name": "Priya Pivot",
+    "title": "CEO",
+    "company": "HeyVibe",
+    "department": null
+  },
+  "tone": {
+    "default_tone": "semi-formal",
+    "addressing": "tu",
+    "greeting_styles": {
+      "casual_en": "yo",
+      "semi_formal_en": "Hi {first_name},",
+      "formal_fr": "Bonjour {first_name},"
+    },
+    "closing_styles": {
+      "casual_en": "(no closing or just name)",
+      "semi_formal_en": "Priya",
+      "formal_fr": "Bien cordialement,"
+    },
+    "average_response_length": "medium"
+  },
+  "languages": [
+    "en",
+    "fr"
+  ],
+  "language_variant": "fr-FR",
+  "profession_confirmed": false
+}

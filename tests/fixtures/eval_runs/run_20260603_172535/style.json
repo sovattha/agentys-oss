@@ -1,0 +1,149 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "samira@immoplus-lyon.fr",
+      "tone": "casual",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Samira,",
+      "closing": "Merci ! / Karim"
+    },
+    {
+      "contact_email": "delphine.mercier@gmail.com",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Madame Moreau, / Bonjour Delphine,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "julien@immoplus-lyon.fr",
+      "tone": "casual",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Julien,",
+      "closing": "Karim / (none)"
+    },
+    {
+      "contact_email": "jp.astier@promoval.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": null,
+      "greeting": "Bonjour Jean-Philippe,",
+      "closing": "Cordialement, / Karim"
+    },
+    {
+      "contact_email": "famille.lambert@orange.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur et Madame Laurent, / Monsieur Laurent,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "hugo.m@immoplus-lyon.fr",
+      "tone": "casual",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Hugo,",
+      "closing": "Karim / (none)"
+    },
+    {
+      "contact_email": "e.blanchard@diagimmo.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": null,
+      "greeting": "Bonjour Éric,",
+      "closing": "Cordialement, / Merci Éric !"
+    },
+    {
+      "contact_email": "nadia.ferhat@bnp-immo.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": null,
+      "greeting": "Bonjour Nadia,",
+      "closing": "Merci d'avance, / Karim"
+    },
+    {
+      "contact_email": "direction@immoplus-lyon.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": null,
+      "greeting": "Bonjour Catherine,",
+      "closing": "Cordialement, / Karim"
+    },
+    {
+      "contact_email": "p.cassagne@notaire-cassagne.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Maître Cassagne,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "photo.vernier@gmail.com",
+      "tone": "casual",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Salut Stéphane,",
+      "closing": "Karim / (none)"
+    },
+    {
+      "contact_email": "a.fournier@sfr.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Madame Fournier,",
+      "closing": "Bien cordialement, / À jeudi,"
+    },
+    {
+      "contact_email": "t.nakamura@investcorp.jp",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Nakamura,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "celine.dupuis@laposte.net",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Madame Dupuis, / Bonjour Céline,",
+      "closing": "Cordialement, / À samedi,"
+    }
+  ],
+  "general_rules": [
+    {
+      "description": "Tutoyer l'équipe interne (collègues) avec salutation prénom seul et closing minimaliste (prénom ou rien)"
+    },
+    {
+      "description": "Vouvoyer les clients externes et utiliser signature complète (titre + coordonnées) dans tous les emails formels"
+    },
+    {
+      "description": "Utiliser le vouvoiement avec les notaires et professionnels du secteur juridique (Maître + nom)"
+    },
+    {
+      "description": "Adopter un ton semi-formel avec les partenaires commerciaux externes (prestataires, financiers) : salutation formelle mais closing court"
+    },
+    {
+      "description": "Structurer les emails clients avec listes à puces, données chiffrées (prix, surfaces, pourcentages) et appels à action clairs"
+    },
+    {
+      "description": "Inclure des emojis uniquement en communication interne (équipe) : 👍 🎉 😉 pour marquer l'enthousiasme ou la décontraction"
+    },
+    {
+      "description": "Utiliser un jargon immobilier spécialisé sans définition : mandat exclusif, avis de valeur, DPE, compromis, séquestre, rendement locatif brut, offre d'achat, diagnostics techniques (pack complet : DPE, amiante, plomb, électricité, gaz, ERP)"
+    },
+    {
+      "description": "Adapter le ton lors de transitions relationnelles : passer de formel à semi-formel une fois la relation établie (ex : Delphine Mercier passe de 'Madame Moreau' à 'Delphine' après signature du compromis)"
+    },
+    {
+      "description": "Fournir des données contextuelles précises dans les emails clients : références cadastrales, montants exacts, dates/horaires, adresses complètes, conditions financières"
+    },
+    {
+      "description": "Utiliser des formules de clôture courtes et directes avec les collègues en cas d'urgence ou de demande simple (pas de signature complète)"
+    }
+  ],
+  "forbidden_phrases": []
+}

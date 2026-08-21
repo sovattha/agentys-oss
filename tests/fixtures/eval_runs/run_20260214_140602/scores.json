@@ -1,0 +1,70 @@
+{
+  "profile": {
+    "completeness": 95,
+    "precision": 85,
+    "usefulness": 88,
+    "overall": 89,
+    "missing": [],
+    "incorrect": [
+      "closing_styles.casual_fr: system has '{first_name}' but ground truth indicates '(no closing or just name)' - format differs",
+      "closing_styles.semi_formal_en: system has 'Regards,' but ground truth has 'Best,'",
+      "active_hours: system has '08:00-17:00' but ground truth has '08:00-18:00' (1 hour discrepancy)",
+      "response_time_avg: system has 'same day' but ground truth has '< 1h' (less precise/accurate)"
+    ],
+    "details": "The system output captures nearly all critical profile information correctly, including user identity, bilingual signatures, tone preferences, and language support. However, there are three notable discrepancies: (1) casual_fr closing style differs ('{first_name}' vs '(no closing or just name)'), (2) semi_formal_en closing differs ('Regards,' vs 'Best,'), and (3) active hours are slightly off ('08:00-17:00' vs '08:00-18:00'), and (4) response time is less precise ('same day' vs '< 1h'). These differences would have minor but noticeable impacts on email generation quality, particularly for timing-sensitive communications and casual French emails."
+  },
+  "knowledge": {
+    "completeness": 85,
+    "precision": 82,
+    "usefulness": 88,
+    "overall": 85,
+    "missing": [
+      "Migration Cloud project (separate project with Pierre and Nicolas as contacts, AWS/infrastructure/budget/ROI keywords)",
+      "Topics: 'demo' and 'recrutement' for Pierre",
+      "Topics: 'formation GraphQL' and 'sprint' for Lucas",
+      "Topic: 'pentest' for Camille",
+      "Topics: 'API integration' and 'webhooks' for Sarah Jones",
+      "Topic: 'testing' for David Kim",
+      "Topic: 'methodes de travail' for Claire Fontaine",
+      "Project keywords 'mTLS', 'JSON-LD', 'webhooks' under 'Partenariat GlobalTech' (system placed these in separate 'Integration PartnerTech' project instead)"
+    ],
+    "incorrect": [
+      "Interaction counts systematically inflated: Pierre (27 vs 20), Lucas (15 vs 10), Camille (11 vs 6), Marie (8 vs 6), Nicolas (7 vs 4), CEO Marc (6 vs 4)",
+      "Pierre's title: 'Lead Technique' instead of 'Lead Developer'",
+      "Lucas's title: 'Développeur' (inferred) instead of null",
+      "CEO title: 'CEO' instead of 'PDG'",
+      "Elena Volkov's tone: 'semi-formal' instead of 'formal'",
+      "Project structure: 'Partenariat GlobalTech' split into two projects ('Partnership GlobalTech' and 'Integration PartnerTech'), losing the holistic view of the GlobalTech partnership",
+      "Missing entire 'Migration Cloud' project as a distinct entity (infrastructure migration with Pierre and Nicolas)"
+    ],
+    "details": "The system captured all 13 contacts from ground truth with good accuracy on core fields (name, email, type, company, language, tone). However, interaction counts are consistently inflated across multiple contacts (Pierre: 27 vs 20, Lucas: 15 vs 10, Camille: 11 vs 6, Marie: 8 vs 6, Nicolas: 7 vs 4, CEO: 6 vs 4). Some titles differ slightly: Pierre is 'Lead Technique' vs 'Lead Developer', Lucas has 'Développeur' vs null, CEO is 'CEO' vs 'PDG'. Topic coverage is strong but missing some specifics like 'demo', 'recrutement', 'formation GraphQL', 'pentest', 'webhooks', 'testing', 'methodes de travail'. Elena's tone is 'semi-formal' vs 'formal'. Projects section shows good coverage but with structural differences: 'Migration Cloud' project is missing entirely, and 'Partenariat GlobalTech' appears restructured into 'Partnership GlobalTech' + 'Integration PartnerTech'. Contact associations in projects are mostly accurate with minor omissions. Terminology section is enhanced with additional useful terms (PKCE, POC, CSP, rate limiting, burst, chunked transfer encoding, GDPR) beyond ground truth. The added 'frequent_topics' section is not in ground truth but provides high value for email generation context."
+  },
+  "rules": {
+    "completeness": 75,
+    "precision": 70,
+    "usefulness": 72,
+    "overall": 72,
+    "missing": [
+      "Pierre Durand's greeting variation 'Pierre,' (only has 'Bonjour Pierre,')",
+      "Amelie Petit's greeting variation 'Bonjour Amelie,' (only has 'Bonjour Madame Petit,')",
+      "Pierre's closing '(name only or none)' - system has 'Cordialement,'",
+      "Nicolas Moreau's greeting variation 'Nicolas,' (only has 'Bonjour Nicolas,')",
+      "Nicolas Moreau's closing variation 'Sophie Martin' (only has 'Cordialement,')",
+      "Sarah Jones closing variation 'Best,' (only has 'Best regards,')",
+      "David Kim closing variation 'Best,' (only has 'Best regards,')",
+      "Claire Fontaine's greeting variation 'Parfait Claire,' (only has 'Bonjour Claire,')",
+      "Specific auto-reply pattern: 'Conge/absence acknowledgment: short casual response'",
+      "Specific auto-reply pattern: 'JIRA notification: forward to relevant team member with action item'"
+    ],
+    "incorrect": [
+      "Pierre Durand: tone should be 'casual' not 'semi-formal'",
+      "Pierre Durand: closing should be '(name only or none)' not 'Cordialement,'",
+      "Amelie Petit: tone should be 'formal' not 'semi-formal'",
+      "support@cloudprovider.com contact is hallucinated - not in ground truth",
+      "Auto-reply patterns are different from ground truth (IT tickets, budget validation, HR requests vs conge acknowledgment and JIRA notifications)",
+      "General rules are heavily rephrased and some are split/merged differently from ground truth structure"
+    ],
+    "details": "The system captured 13/13 contacts (100%) but missed key nuances in tone classifications and greeting/closing variations. Pierre's tone is marked 'semi-formal' instead of 'casual', and Amelie's tone is 'semi-formal' instead of 'formal'. The system added one hallucinated contact (support@cloudprovider.com). For general rules, the system captured the core concepts (8/8 categories) but rephrased them heavily in French and added extra granularity. The system correctly identified no forbidden phrases and captured auto-reply patterns conceptually but with different examples. Overall, the output would be moderately useful for email generation but could lead to slightly incorrect tone in some cases."
+  },
+  "overall": 82
+}

@@ -1,0 +1,73 @@
+{
+  "profile": {
+    "completeness": 95,
+    "precision": 90,
+    "usefulness": 92,
+    "overall": 92,
+    "missing": [],
+    "incorrect": [
+      "closing_styles.casual_fr: '{first_name}' instead of '(no closing or just name)' - While this is semantically similar, the ground truth provides a descriptive note rather than a template",
+      "closing_styles.semi_formal_en: 'Regards,' instead of 'Best,' - Different closing formality level",
+      "active_hours: '08:00-16:30' instead of '08:00-18:00' - 1.5 hour difference in work hours",
+      "response_time_avg: '< 2h' instead of '< 1h' - Doubled response time estimate"
+    ],
+    "details": "The system output captures nearly all structural elements correctly including user identity, both French and English signatures with proper parsing, tone settings, greeting/closing styles, and language preferences. However, there are minor discrepancies in the closing styles (casual_fr shows '{first_name}' instead of descriptive text about no closing), active_hours (16:30 vs 18:00 end time), and response_time_avg (< 2h vs < 1h). The signature parsing is excellent with all fields correctly extracted. The tone analysis correctly identifies semi-formal default and provides appropriate greeting/closing templates. These minor differences would have minimal impact on email draft generation quality."
+  },
+  "knowledge": {
+    "completeness": 75,
+    "precision": 70,
+    "usefulness": 72,
+    "overall": 72,
+    "missing": [
+      "Migration Cloud project (contacts: Pierre Durand, Nicolas Moreau)",
+      "Terminology entries: Sprint definition, Daily, Retro, PR",
+      "Some contact topics: Pierre's 'demo', 'recrutement', 'PartnerTech'; Lucas's 'conges', 'objectifs Q1', 'sprint'; Camille's 'pentest'; Marie's 'proposition commerciale', 'contrat'; Nicolas's 'budget Q1'; Marc's 'resultats annuels', 'budget division', 'rapport mensuel'; Sarah's 'webhooks'",
+      "Project keywords: Alpha missing 'dashboard', 'module de notifications'; Beta missing 'front-end', 'back-end'; GlobalTech missing 'webhooks'"
+    ],
+    "incorrect": [
+      "Pierre Durand: type should be 'colleague' not 'direct_report', interaction_count 27 vs 20",
+      "Lucas Bernard: interaction_count 15 vs 10",
+      "Camille Roux: interaction_count 11 vs 6",
+      "Marie Leclerc: interaction_count 8 vs 6",
+      "Nicolas Moreau: type should be 'manager' not 'colleague', interaction_count 7 vs 4",
+      "Marc Dupont (CEO): preferred_tone should be 'semi-formal' not 'formal', interaction_count 6 vs 4",
+      "Sarah Jones: preferred_tone should be 'semi-formal' not 'casual', interaction_count 5 vs 4",
+      "John Smith: preferred_tone should be 'semi-formal' not 'casual', interaction_count 4 vs 2",
+      "Claire Fontaine: interaction_count 4 vs 3",
+      "Thomas Renard: preferred_tone should be 'semi-formal' not 'formal'",
+      "Project name mismatch: 'GlobalTech Partnership' vs 'Partenariat GlobalTech', 'PartnerTech Integration' vs not a standalone project in ground truth",
+      "PartnerTech Integration is not a separate project in ground truth - David Kim interactions are part of broader context"
+    ],
+    "details": "The system captured most contacts (13/13 present) and projects (4/5 major ones), but has several issues: (1) Wrong relationship types for Pierre (direct_report vs colleague) and Nicolas (colleague vs manager), (2) Wrong tone preferences for CEO (formal vs semi-formal), Sarah Jones (casual vs semi-formal), and John Smith (casual vs semi-formal), and Thomas Renard (formal vs semi-formal), (3) Inflated interaction counts across multiple contacts, (4) Missing some key topics and combining others incorrectly, (5) Missing the 'Migration Cloud' project entirely, (6) Some terminology definitions are expanded but miss some ground truth entries (Daily, Retro, PR), (7) Added 'frequent_topics' field not in ground truth which is useful but not requested. The output would be moderately useful for email generation but the incorrect relationship types and tone preferences could lead to inappropriately formal/informal emails."
+  },
+  "rules": {
+    "completeness": 75,
+    "precision": 70,
+    "usefulness": 78,
+    "overall": 74,
+    "missing": [
+      "Pierre Durand's casual tone (marked as semi-formal instead)",
+      "Camille Roux's casual tone (marked as semi-formal instead)",
+      "CEO's semi-formal tone (marked as formal instead)",
+      "Nicolas Moreau's semi-formal tone (marked as formal instead)",
+      "John Smith's semi-formal tone (marked as formal instead)",
+      "Prospect startup's semi-formal tone (marked as formal instead)",
+      "Pierre's casual greeting variants ('Pierre, / Salut Pierre,' simplified to 'Bonjour Pierre,')",
+      "Camille's simple greeting 'Camille,' (changed to 'Merci Camille,')",
+      "JIRA notification auto-reply pattern",
+      "CC legal/finance context in cc_relevant_people rule"
+    ],
+    "incorrect": [
+      "support@cloudprovider.com contact (not in ground truth - hallucinated)",
+      "Pierre Durand tone should be casual, not semi-formal",
+      "Camille Roux tone should be casual, not semi-formal",
+      "Camille's greeting should be 'Camille,' not 'Merci Camille,'",
+      "CEO tone should be semi-formal, not formal",
+      "Nicolas Moreau tone should be semi-formal, not formal",
+      "John Smith tone should be semi-formal, not formal",
+      "Prospect startup tone should be semi-formal, not formal"
+    ],
+    "details": "The system captured most contacts (13/13 present, though 1 hallucinated) and all 8 core general rules. However, several tone classifications were escalated from casual/semi-formal to formal (Pierre, Camille, CEO, Nicolas, John, prospect), which could result in overly stiff emails. The system inferred 4 additional reasonable general rules not in ground truth. Missing: JIRA-specific auto-reply pattern. The hallucinated CloudProvider contact and tone escalations reduce precision. Overall the output would generate functional but slightly too formal emails in several cases."
+  },
+  "overall": 79
+}

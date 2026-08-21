@@ -1,0 +1,145 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "r.hayes@strategyco.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi Richard, / Richard,",
+      "closing": "Cheers, / J."
+    },
+    {
+      "contact_email": "a.patel@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "greeting": "Anika,",
+      "closing": "J."
+    },
+    {
+      "contact_email": "m.torres@acmecorp.com",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Michael,",
+      "closing": "Best regards, / James Conseil\nSenior Consultant\nStrategyCo | London"
+    },
+    {
+      "contact_email": "b.crawford@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "greeting": "Ben,",
+      "closing": "Cheers, / J."
+    },
+    {
+      "contact_email": "e.phillips@strategyco.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi Emma, / Emma,",
+      "closing": "Thanks, / Cheers, / J."
+    },
+    {
+      "contact_email": "i.moreau@luxegroup.fr",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Isabelle,",
+      "closing": "Best regards, / James Conseil\nSenior Consultant\nStrategyCo | London"
+    },
+    {
+      "contact_email": "w.lin@strategyco.sg",
+      "tone": "casual",
+      "language": "en",
+      "greeting": "Wei,",
+      "closing": "Cheers, / J."
+    },
+    {
+      "contact_email": "j.walsh@acmecorp.com",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Jennifer,",
+      "closing": "Best regards, / James Conseil\nSenior Consultant\nStrategyCo | London"
+    },
+    {
+      "contact_email": "k.weber@industriewerke.de",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Klaus,",
+      "closing": "Best regards, / James Conseil\nSenior Consultant\nStrategyCo | London"
+    },
+    {
+      "contact_email": "t.yamamoto@nipponpartners.jp",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Takeshi,",
+      "closing": "Best regards, / James Conseil\nSenior Consultant\nStrategyCo | London"
+    },
+    {
+      "contact_email": "d.chen@strategyco.com",
+      "tone": "casual",
+      "language": "en",
+      "greeting": "David,",
+      "closing": "J."
+    }
+  ],
+  "general_rules": [
+    {
+      "name": "internal_vs_external_signature",
+      "description": "Use 'J.' signature with 'Cheers' for internal StrategyCo colleagues; use full signature block 'James Conseil\\nSenior Consultant\\nStrategyCo | London' with 'Best regards' for external clients and partners",
+      "trigger": "Email recipient domain",
+      "action": "Internal (@strategyco.com): sign 'J.' or 'Cheers, J.' — External (clients, partners): sign 'Best regards,' + full title block"
+    },
+    {
+      "name": "bullet_point_internal_updates",
+      "description": "Use bullet points and structured lists for internal status updates and portfolio reporting",
+      "trigger": "Internal email to manager or team providing project updates",
+      "action": "Format with bullet points, numbered lists, clear section headers (e.g., 'Confirmed:', 'Probable:', 'Pipeline:')"
+    },
+    {
+      "name": "consulting_jargon_appropriateness",
+      "description": "Use consulting terminology (workstream, strawman, quick wins, target-state, governance) freely in internal emails; use more accessible language with clients unless they have adopted the terminology",
+      "trigger": "Technical consulting concepts",
+      "action": "Internal: use full jargon (workstream charter, RACI, 7S framework) — Client: explain or contextualize terms"
+    },
+    {
+      "name": "client_communication_formality",
+      "description": "Maintain structured, professional formatting for client emails with numbered lists, clear sections, and complete sentences",
+      "trigger": "Email to client contact",
+      "action": "Use 'Dear [First name],' greeting, structured paragraphs or numbered lists, formal closing with full signature"
+    },
+    {
+      "name": "action_oriented_internal",
+      "description": "Keep internal emails brief, action-oriented, and directive with clear next steps and deadlines",
+      "trigger": "Email to team member assigning work",
+      "action": "Lead with action items, specify deadlines ('by Wednesday', 'by Friday'), use imperative verbs"
+    },
+    {
+      "name": "diplomatic_framing_for_sensitive_issues",
+      "description": "Use diplomatic, partnership-oriented language when addressing client concerns or resistance",
+      "trigger": "Client feedback involving resistance, pushback, or sensitive organizational issues",
+      "action": "Frame recommendations as 'enabling' not 'directing', acknowledge concerns explicitly, use phrases like 'You are absolutely right that...'"
+    },
+    {
+      "name": "project_code_references",
+      "description": "Reference project codes for financial/administrative requests (e.g., expense processing, resource allocation)",
+      "trigger": "Email involving expenses, billing, or project charging",
+      "action": "Include project code in format XX-YYYY-NNN (e.g., 'AC-2026-001')"
+    },
+    {
+      "name": "minimal_greeting_for_peers",
+      "description": "Use first name only as greeting (no 'Hi' or 'Hello') for peer-level internal colleagues",
+      "trigger": "Email to same-level or junior StrategyCo colleagues",
+      "action": "Start with '[Name],' directly, no 'Hi' prefix"
+    },
+    {
+      "name": "subject_line_clarity",
+      "description": "Use descriptive subject lines with project name, topic, and context (e.g., 'AcmeCorp Phase 2 — Kick-off and Governance', 'Re: Quick wins deck for AcmeCorp')",
+      "trigger": "All emails",
+      "action": "Format as '[Project/Client] — [Specific Topic]' or 'Re: [Specific deliverable/discussion]'"
+    },
+    {
+      "name": "pre_read_and_agenda_structure",
+      "description": "For client meetings, proactively provide agendas with time allocations and commit to circulating pre-read materials with specific deadlines",
+      "trigger": "Scheduling or confirming client presentations or workshops",
+      "action": "Include numbered agenda with time estimates (e.g., '10 min', '20 min'), specify pre-read circulation deadline ('by close of business on [date]')"
+    }
+  ],
+  "forbidden_phrases": [],
+  "auto_reply_patterns": []
+}

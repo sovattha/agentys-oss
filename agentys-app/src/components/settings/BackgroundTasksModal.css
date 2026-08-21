@@ -1,0 +1,72 @@
+.bg-tasks-modal {
+  max-width: 720px !important;
+  width: calc(100% - 2rem);
+  padding: 0 !important;
+  gap: 0 !important;
+  background: var(--surface-primary, #fff) !important;
+  color: var(--text-primary);
+  border: 1px solid color-mix(in srgb, var(--border-default, #e5e7eb) 70%, transparent) !important;
+  max-height: 85vh;
+  overflow: hidden;
+  display: flex !important;
+  flex-direction: column;
+}
+
+.bg-tasks-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-default, #e5e7eb) 50%, transparent);
+  flex-shrink: 0;
+}
+
+.bg-tasks-modal-title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.bg-tasks-modal-back,
+.bg-tasks-modal-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.bg-tasks-modal-body {
+  padding: 18px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Inside the modal we drop the embedded panel's card chrome and
+   redundant title (modal header already shows it). */
+.bg-tasks-modal-body .bulk-actions-panel {
+  padding: 0;
+  background: transparent;
+  border: none;
+  margin: 0;
+}
+
+.bg-tasks-modal-body .bulk-actions-panel__header h3 {
+  display: none;
+}
+
+.bg-tasks-modal-body .bulk-actions-panel__header {
+  justify-content: flex-end;
+}

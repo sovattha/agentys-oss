@@ -1,0 +1,258 @@
+/**
+ * Toast Component Styles
+ *
+ * Story 7-7: Plain Language Error Messages
+ * Enhanced toast with action buttons, warning type, and click-to-expand.
+ */
+
+.toast-container {
+  position: fixed;
+  bottom: 8px;
+  right: 16px;
+  z-index: var(--z-notification, 1300);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  /* Widened from 220px → 320px (max 380px) so subject-bearing toasts like
+     "Archived: {long subject}" don't clip after one or two words once the
+     spinner + Undo button are also on the row. */
+  max-width: 380px;
+  width: 320px;
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: var(--radius-md, 8px);
+  background: color-mix(in srgb, var(--surface-primary) 85%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6);
+  backdrop-filter: blur(16px) saturate(1.6);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,0.06) inset;
+  pointer-events: auto;
+  animation: toast-enter 0.25s var(--ease-settle, ease-out);
+}
+
+.toast-clickable {
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.toast-clickable:active {
+  transform: scale(var(--scale-press));
+}
+
+.toast-exit {
+  animation: toast-exit 0.2s ease-in forwards;
+}
+
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(var(--scale-dramatic));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toast-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(var(--scale-press));
+  }
+}
+
+.toast-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.toast-success .toast-icon {
+  background: color-mix(in srgb, var(--success) 20%, transparent);
+  color: var(--success);
+}
+
+.toast-error .toast-icon {
+  background: color-mix(in srgb, var(--error) 20%, transparent);
+  color: var(--error);
+}
+
+.toast-warning .toast-icon {
+  background: color-mix(in srgb, var(--warning) 20%, transparent);
+  color: var(--warning);
+}
+
+.toast-info .toast-icon {
+  background: color-mix(in srgb, var(--accent-primary) 20%, transparent);
+  color: var(--accent-primary);
+}
+
+.toast-text {
+  flex: 1;
+  min-width: 0;          /* required so ellipsis can clip in a flex child */
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.toast-message {
+  font-size: var(--font-size-xs);
+  color: var(--text-primary);
+  /* Wrap up to 2 lines for "Archived: very long subject" cases instead of
+     ellipsizing after one word; -webkit-line-clamp is standardized in all
+     modern browsers despite the vendor prefix. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  line-height: 1.3;
+}
+
+.toast-detail {
+  font-size: var(--font-size-2xs);
+  color: var(--text-tertiary);
+  opacity: 0.85;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Countdown ring next to action button — visualizes the auto-dismiss
+   window during which the user can still click Undo. The animation duration
+   is bound to the toast's `duration` via inline style. */
+.toast-progress {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transform: rotate(-90deg);
+}
+
+.toast-progress-bg {
+  fill: none;
+  stroke: color-mix(in srgb, currentColor 18%, transparent);
+  stroke-width: 2;
+}
+
+.toast-progress-ring {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 50.265;       /* 2π·r where r=8 */
+  stroke-dashoffset: 0;
+  animation-name: toastProgressDeplete;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.toast-success .toast-progress { color: var(--success); }
+.toast-error   .toast-progress { color: var(--error); }
+.toast-warning .toast-progress { color: var(--warning); }
+.toast-info    .toast-progress { color: var(--accent-primary); }
+
+@keyframes toastProgressDeplete {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: 50.265; }
+}
+
+/* Action button in toast */
+.toast-action {
+  background: transparent;
+  border: 1px solid currentColor;
+  color: inherit;
+  cursor: pointer;
+  padding: 2px 7px;
+  font-size: 11px;
+  border-radius: 4px;
+  opacity: 0.9;
+  transition: opacity 0.15s, background-color 0.15s;
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+.toast-action:active {
+  transform: scale(var(--scale-dramatic));
+}
+
+.toast-action:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.toast-error .toast-action {
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.toast-warning .toast-action {
+  border-color: var(--warning);
+  color: var(--warning);
+}
+
+.toast-success .toast-action {
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.toast-info .toast-action {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+/* Expand hint for clickable toasts */
+.toast-expand-hint {
+  font-size: var(--font-size-2xs);
+  opacity: 0.5;
+  flex-shrink: 0;
+  font-style: italic;
+}
+
+.toast-dismiss {
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 2px;
+  font-size: 12px;
+  opacity: 0.8;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
+}
+
+/* Type-specific border colors */
+.toast-success {
+  border-left: 3px solid var(--success);
+}
+
+.toast-error {
+  border-left: 3px solid var(--error);
+}
+
+.toast-warning {
+  border-left: 3px solid var(--warning);
+}
+
+.toast-info {
+  border-left: 3px solid var(--accent-primary);
+}

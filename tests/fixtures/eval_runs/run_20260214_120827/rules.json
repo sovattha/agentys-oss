@@ -1,0 +1,172 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "pierre.durand@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Pierre,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "lucas.bernard@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "greeting": "Lucas,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "equipe-digitale@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour a tous,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "marie.leclerc@clientcorp.com",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Madame Leclerc,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "camille.roux@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Camille,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "sarah.jones@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi Sarah,",
+      "closing": "Best regards,\nSophie Martin\nProject Manager - Digital Division\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "nicolas.moreau@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Nicolas,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "ceo@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Marc,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "amelie.petit@fournisseur.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Madame Petit,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "contact@prospect-startup.io",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Thomas,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "david.kim@partnertech.co.kr",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi David,",
+      "closing": "Best regards,\nSophie"
+    },
+    {
+      "contact_email": "recrutement@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour,",
+      "closing": "Merci,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "elena.volkov@eupartner.de",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Elena,",
+      "closing": "Best regards,\nSophie Martin\nProject Manager - Digital Division\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "it-support@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale"
+    },
+    {
+      "contact_email": "claire.fontaine@clientcorp.com",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Claire,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    }
+  ],
+  "general_rules": [
+    {
+      "name": "tutoiement_equipe_interne",
+      "description": "Use tu form with direct team members (Pierre, Lucas, Camille) in internal emails",
+      "trigger": "Internal techcorp.fr email to direct reports or peers",
+      "action": "Use casual tone, first name greeting, first name only closing"
+    },
+    {
+      "name": "vouvoiement_clients_externes",
+      "description": "Always use vous form with external clients and formal title on first contact",
+      "trigger": "External email to clients (non-techcorp domain)",
+      "action": "Use Madame/Monsieur on first emails, full signature with title and phone"
+    },
+    {
+      "name": "signature_complete_externe",
+      "description": "Always include full signature (name, title, company, phone) for external contacts",
+      "trigger": "Email to external domain (clients, suppliers, partners)",
+      "action": "Add full signature: Sophie Martin / Chef de projet - Division Digitale / TechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "name": "signature_prenom_interne",
+      "description": "Use first name only for internal team emails",
+      "trigger": "Email to techcorp.fr direct team members",
+      "action": "Close with just 'Sophie'"
+    },
+    {
+      "name": "anglais_partenaires_internationaux",
+      "description": "Switch to English for international partners (non-French companies)",
+      "trigger": "Email to .com, .co.kr, .de domains of tech companies",
+      "action": "Write entire email in English, adapt greeting to Hi/Dear based on formality"
+    },
+    {
+      "name": "listes_numerotees_actions",
+      "description": "Use numbered lists for action items and structured information",
+      "trigger": "Email containing multiple action points or decisions",
+      "action": "Format as numbered list (1. 2. 3.) for clarity"
+    },
+    {
+      "name": "cc_lead_technique",
+      "description": "CC Pierre Durand (lead technique) on technical discussions with external partners",
+      "trigger": "External email involving technical architecture or API integration",
+      "action": "Add Pierre in CC with explanation in email body"
+    },
+    {
+      "name": "formule_politesse_ceo",
+      "description": "Use formal greeting and closing for CEO communication",
+      "trigger": "Email to ceo@techcorp.fr",
+      "action": "Bonjour Marc + Cordialement + full signature"
+    },
+    {
+      "name": "recap_reunions_structure",
+      "description": "Structure meeting recaps with clear sections and action items",
+      "trigger": "Email subject contains 'compte-rendu', 'recap', or 'meeting notes'",
+      "action": "Use sections: Faits marquants, Actions a suivre, Prochaines etapes"
+    },
+    {
+      "name": "disponibilite_creneaux_precis",
+      "description": "Provide precise time slots when proposing meetings",
+      "trigger": "Email proposing a meeting or call",
+      "action": "Give specific date/time options with format: Jour JJ/MM : HHhMM-HHhMM"
+    }
+  ],
+  "forbidden_phrases": []
+}

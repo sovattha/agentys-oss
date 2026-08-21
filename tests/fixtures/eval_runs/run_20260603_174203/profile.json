@@ -1,0 +1,30 @@
+{
+  "user_email": "karim.mandat@immoplus-lyon.fr",
+  "user_name": "Karim Mandat",
+  "preferred_name": "Karim",
+  "profession": "agent immobilier commercial",
+  "signature": {
+    "name": "Karim Mandat",
+    "title": "Directeur Commercial",
+    "company": "ImmoPlus Lyon",
+    "department": null
+  },
+  "tone": {
+    "default_tone": "semi-formal",
+    "addressing": "vous",
+    "greeting_styles": {
+      "semi_formal_fr": "Bonjour {first_name},",
+      "formal_fr": "Bonjour Madame/Monsieur {last_name},"
+    },
+    "closing_styles": {
+      "semi_formal_fr": "Bien cordialement,",
+      "formal_fr": "Bien cordialement,"
+    },
+    "average_response_length": "medium"
+  },
+  "languages": [
+    "fr"
+  ],
+  "language_variant": "fr-FR",
+  "profession_confirmed": false
+}

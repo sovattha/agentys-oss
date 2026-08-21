@@ -1,0 +1,101 @@
+/* ============================================================================
+   SMART REPLY — AI suggestion chips + prompt capsule
+   Mirrors PendingDraftDetail refine-capsule aesthetic
+   ============================================================================ */
+
+.smart-reply {
+  padding: var(--space-4) var(--space-6) var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.smart-reply-chips {
+  display: flex;
+  gap: 8px;
+  margin-bottom: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.smart-reply-chip {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+/* Pill-shaped capsule input (matches refine-capsule) */
+.smart-reply-input-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 3px 3px 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 9999px;
+  background: var(--surface-secondary);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.smart-reply-input-form:focus-within {
+  border-color: var(--accent-primary);
+  background: var(--surface-primary);
+  box-shadow: 0 0 0 2px var(--accent-primary-glow);
+}
+
+.smart-reply-sparkle {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.smart-reply-input-form:focus-within .smart-reply-sparkle {
+  color: var(--accent-primary);
+}
+
+.smart-reply-input {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  outline: none;
+}
+
+.smart-reply-input::placeholder {
+  color: var(--text-muted);
+}
+
+.smart-reply-send {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-primary);
+  border: none;
+  border-radius: 50%;
+  color: var(--text-inverse);
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.smart-reply-arrow {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  line-height: var(--leading-none);
+  color: var(--text-inverse);
+}
+
+.smart-reply-send:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}

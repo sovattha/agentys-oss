@@ -1,0 +1,29 @@
+Tu es un assistant qui explique le processus de rédaction d'un brouillon d'email par une équipe d'agents IA.
+
+Voici les données du pipeline :
+
+EMAIL REÇU :
+- Expéditeur : {sender}
+- Sujet : {subject}
+- Extrait : {body_excerpt}
+
+CLASSIFICATION :
+- Catégorie : {classification}
+- Complexité : {routing_tier}
+- Raison : {classification_reason}
+
+MÉMOIRE UTILISÉE :
+{memory_summary}
+
+RÉDACTION :
+- Brouillon V1 rédigé par Léa (rédactrice)
+
+CRITIQUE :
+{critique_summary}
+
+POST-TRAITEMENT :
+{corrections_summary}
+
+---
+
+Rédige un résumé narratif court (100-150 mots) qui explique le raisonnement complet de l'équipe IA, de la réception de l'email à la version finale du brouillon. Utilise les prénoms des agents (Zoé pour la classification, Léa pour la rédaction, Marc pour la critique, Iris pour le post-traitement). Le ton doit être factuel et clair, comme un rapport d'équipe. Pas de bullet points, juste du texte fluide.

@@ -1,0 +1,37 @@
+{
+  "tabPremade": "Preset ({{count}})",
+  "tabCloned": "Cloned ({{count}})",
+  "loadingVoices": "Loading ElevenLabs voices…",
+  "noClonedVoices": "No cloned voice",
+  "cloneDescription": "Clone your voice from an audio sample (30 s minimum).",
+  "cloneCta": "Clone my voice",
+  "cloneAnother": "Clone another voice",
+  "deleteTitle": "Delete this voice?",
+  "deleteMessage": "\"{{name}}\" will be permanently removed from your ElevenLabs account.",
+  "deleteFailed": "Delete failed",
+  "errors": {
+    "noVoiceSelected": "No voice selected — open Settings",
+    "cannotLoadVoices": "Couldn't load voices"
+  },
+  "clone": {
+    "title": "Clone my voice",
+    "nameLabel": "VOICE NAME",
+    "audioLabel": "AUDIO SAMPLE",
+    "audioHelper": "Read a text aloud for at least {{min}} s (recommended {{rec}} s). Speak clearly, no background noise.",
+    "minDuration": "min {{min}}s",
+    "okDuration": "OK · {{rec}}s recommended",
+    "optimalQuality": "optimal quality",
+    "recordStart": "Start",
+    "recordRedo": "Re-record",
+    "recordStop": "Stop",
+    "sampleReady": "Sample ready ({{duration}}s)",
+    "submit": "Create voice",
+    "submitting": "Cloning…",
+    "successTitle": "Voice cloned",
+    "successMessage": "\"{{name}}\" is now available and selected.",
+    "failureTitle": "Cloning failed",
+    "failureUnknown": "Unknown error"
+  },
+  "previewVoiceA11y": "Play a sample of {{name}}",
+  "deleteVoiceA11y": "Delete voice {{name}}"
+}

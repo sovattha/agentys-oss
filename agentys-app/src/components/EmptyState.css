@@ -1,0 +1,56 @@
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 8px;
+  animation: emptyStateIn 0.4s ease-out;
+  padding: 40px 20px;
+}
+
+@keyframes emptyStateIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.empty-state-icon {
+  font-size: var(--font-size-4xl);
+  color: var(--text-placeholder);
+  opacity: 0.4;
+  line-height: var(--leading-none);
+  margin-bottom: 8px;
+  animation: emptyIconFloat 2.5s ease-in-out infinite;
+}
+
+.empty-state-icon svg {
+  display: block;
+  color: var(--text-placeholder);
+}
+
+@keyframes emptyIconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.empty-state-title {
+  font-size: var(--font-size-xl, 1.125rem);
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight, -0.015em);
+  margin: 0;
+}
+
+.empty-state-subtitle {
+  font-size: var(--font-size-sm, 0.8125rem);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* prefers-reduced-motion handled globally in index.css */

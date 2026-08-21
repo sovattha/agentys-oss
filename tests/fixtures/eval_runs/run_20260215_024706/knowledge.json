@@ -1,0 +1,378 @@
+{
+  "contacts": [
+    {
+      "email": "a.patel@strategyco.com",
+      "name": "Anika Patel",
+      "type": "direct_report",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "interaction_count": 11,
+      "topics": [
+        "AcmeCorp cost model",
+        "data gaps",
+        "quick wins deck",
+        "diagnostic findings",
+        "savings waterfall",
+        "prioritisation matrix",
+        "LuxeGroup data request",
+        "FTE numbers",
+        "facilities data",
+        "indirect cost allocation"
+      ]
+    },
+    {
+      "email": "r.hayes@strategyco.com",
+      "name": "Richard Hayes",
+      "type": "manager",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 10,
+      "topics": [
+        "AcmeCorp engagement update",
+        "Phase 1 diagnostic",
+        "quick wins",
+        "partners meeting debrief",
+        "Q2 pipeline",
+        "staffing",
+        "resourcing",
+        "portfolio review"
+      ]
+    },
+    {
+      "email": "m.torres@acmecorp.com",
+      "name": "Michael Torres",
+      "type": "client",
+      "company": "AcmeCorp",
+      "title": "Chief Financial Officer",
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "interaction_count": 8,
+      "topics": [
+        "Phase 2 scope",
+        "timeline compression",
+        "operating model redesign",
+        "quick wins presentation",
+        "procurement deep-dive",
+        "kick-off",
+        "governance",
+        "board approval",
+        "resource allocation"
+      ]
+    },
+    {
+      "email": "b.crawford@strategyco.com",
+      "name": "Ben Crawford",
+      "type": "direct_report",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "interaction_count": 8,
+      "topics": [
+        "AcmeCorp engagement",
+        "operating model strawman",
+        "McKinsey 7S framework",
+        "target-state design",
+        "workstream charter",
+        "Meridian case",
+        "RACI matrix",
+        "spans and layers analysis",
+        "value streams"
+      ]
+    },
+    {
+      "email": "e.phillips@strategyco.com",
+      "name": "Emma Phillips",
+      "type": "colleague",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 8,
+      "topics": [
+        "travel to Singapore",
+        "flight bookings",
+        "Stuttgart travel",
+        "IndustrieWerke meeting logistics",
+        "hotel reservations",
+        "calendar management",
+        "expenses",
+        "Eurostar",
+        "ICE train"
+      ]
+    },
+    {
+      "email": "i.moreau@luxegroup.fr",
+      "name": "Isabelle Moreau",
+      "type": "client",
+      "company": "LuxeGroup",
+      "title": "Chief Human Resources Officer",
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "interaction_count": 7,
+      "topics": [
+        "digital strategy roadmap",
+        "board presentation",
+        "employee experience",
+        "quick wins",
+        "upskilling programme",
+        "digital champions network",
+        "change management",
+        "HR platform",
+        "budget EUR 2.5M"
+      ]
+    },
+    {
+      "email": "w.lin@strategyco.sg",
+      "name": "Wei Lin",
+      "type": "colleague",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "interaction_count": 6,
+      "topics": [
+        "APAC pipeline",
+        "Singtel proposal",
+        "customer experience transformation",
+        "DBS Bank lead",
+        "cost optimisation",
+        "regional telco benchmarking",
+        "Grab engagement",
+        "Singapore office"
+      ]
+    },
+    {
+      "email": "j.walsh@acmecorp.com",
+      "name": "Jennifer Walsh",
+      "type": "client",
+      "company": "AcmeCorp",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "interaction_count": 6,
+      "topics": [
+        "change management approach",
+        "plant visit schedule",
+        "plant visits feedback",
+        "union engagement",
+        "employee communication",
+        "resistance management"
+      ]
+    },
+    {
+      "email": "k.weber@industriewerke.de",
+      "name": "Klaus Weber",
+      "type": "prospect",
+      "company": "IndustrieWerke AG",
+      "title": "Vice President, Corporate Strategy",
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "interaction_count": 4,
+      "topics": [
+        "StrategyCo capabilities",
+        "strategic transformation proposal",
+        "German market consolidation",
+        "operational efficiency",
+        "proof of concept",
+        "Munich Strategy Forum",
+        "market entry strategy"
+      ]
+    },
+    {
+      "email": "t.yamamoto@nipponpartners.jp",
+      "name": "Takeshi Yamamoto",
+      "type": "partner",
+      "company": "Nippon Partners Co., Ltd.",
+      "title": "Director, International Business Development",
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "interaction_count": 4,
+      "topics": [
+        "strategic alliance",
+        "APAC consulting landscape",
+        "joint market study",
+        "Tokyo meeting",
+        "European client base",
+        "complementary strengths",
+        "phased approach",
+        "pilot collaboration"
+      ]
+    },
+    {
+      "email": "d.chen@strategyco.com",
+      "name": "David Chen",
+      "type": "colleague",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "interaction_count": 3,
+      "topics": [
+        "change management research",
+        "LuxeGroup kick-off prep",
+        "methodology",
+        "best practices"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "AcmeCorp Phase 1 Diagnostic",
+      "description": "Cost diagnostic engagement identifying $18M in quick wins across procurement and facilities for AcmeCorp, completed with Phase 2 approval secured",
+      "contacts": [
+        "m.torres@acmecorp.com",
+        "a.patel@strategyco.com",
+        "r.hayes@strategyco.com"
+      ],
+      "status": "completed",
+      "keywords": [
+        "cost model",
+        "diagnostic",
+        "quick wins",
+        "procurement",
+        "facilities",
+        "$18M savings",
+        "Phase 1"
+      ]
+    },
+    {
+      "name": "AcmeCorp Phase 2 Operating Model",
+      "description": "10-week operating model redesign and procurement deep-dive engagement for AcmeCorp, kicked off February 2026",
+      "contacts": [
+        "m.torres@acmecorp.com",
+        "b.crawford@strategyco.com",
+        "j.walsh@acmecorp.com",
+        "a.patel@strategyco.com"
+      ],
+      "status": "active",
+      "keywords": [
+        "operating model",
+        "McKinsey 7S",
+        "target-state",
+        "workstream charter",
+        "change management",
+        "governance",
+        "10 weeks",
+        "Phase 2"
+      ]
+    },
+    {
+      "name": "LuxeGroup Digital Strategy",
+      "description": "EUR 2.5M digital transformation roadmap for LuxeGroup focused on employee experience, upskilling, and HR platform modernisation with board presentation",
+      "contacts": [
+        "i.moreau@luxegroup.fr",
+        "d.chen@strategyco.com"
+      ],
+      "status": "active",
+      "keywords": [
+        "digital strategy",
+        "employee experience",
+        "board presentation",
+        "upskilling",
+        "digital champions",
+        "change management",
+        "EUR 2.5M",
+        "90-day quick wins"
+      ]
+    },
+    {
+      "name": "IndustrieWerke Strategic Transformation",
+      "description": "Proposal for German market consolidation and operational efficiency programme across 12 plants for IndustrieWerke AG, in decision phase",
+      "contacts": [
+        "k.weber@industriewerke.de"
+      ],
+      "status": "prospecting",
+      "keywords": [
+        "German market consolidation",
+        "operational efficiency",
+        "strategic transformation",
+        "proof of concept",
+        "12 plants",
+        "market entry"
+      ]
+    },
+    {
+      "name": "Singtel CX Transformation",
+      "description": "8-week customer experience transformation diagnostic for Singtel covering journey mapping across 6 channels and regional telco benchmarking",
+      "contacts": [
+        "w.lin@strategyco.sg"
+      ],
+      "status": "proposal",
+      "keywords": [
+        "customer experience",
+        "Singtel",
+        "journey mapping",
+        "6 channels",
+        "telco benchmarking",
+        "8-week diagnostic",
+        "APAC"
+      ]
+    },
+    {
+      "name": "Nippon Partners Strategic Alliance",
+      "description": "Phased strategic partnership with Nippon Partners including joint APAC market study and pilot collaboration, planned for Q1 2026",
+      "contacts": [
+        "t.yamamoto@nipponpartners.jp"
+      ],
+      "status": "negotiation",
+      "keywords": [
+        "strategic alliance",
+        "Nippon Partners",
+        "APAC",
+        "joint market study",
+        "pilot collaboration",
+        "Tokyo",
+        "Q1 2026"
+      ]
+    }
+  ],
+  "terminology": {
+    "engagement": "Client consulting mission or project",
+    "Phase 1 / Phase 2": "Sequential project stages (diagnostic then implementation)",
+    "workstream": "Distinct work track or project component within an engagement",
+    "quick wins": "High-impact, low-effort initiatives delivering rapid results",
+    "diagnostic": "Initial assessment phase to identify issues and opportunities",
+    "strawman": "Draft proposal or framework for discussion and refinement",
+    "target-state / current-state": "Future desired state vs. present situation in transformation projects",
+    "steering committee": "Client governance body overseeing project direction",
+    "governance": "Decision-making framework and oversight structure",
+    "change management": "Approach to managing organizational and people impacts of transformation",
+    "operating model": "How an organization structures, processes, and resources work",
+    "BU head interviews": "Interviews with Business Unit leaders",
+    "FTE numbers": "Full-Time Equivalent employee counts",
+    "indirect cost allocation": "Method of assigning overhead costs to business units",
+    "context pack": "Briefing document providing project background",
+    "workstream charter": "Document defining scope, objectives, and deliverables for a workstream",
+    "deliverables": "Outputs or work products from a project",
+    "dependencies": "Elements that must be completed before subsequent work can proceed",
+    "McKinsey 7S framework": "Strategy consulting tool analyzing seven organizational elements (Strategy, Structure, Systems, Shared Values, Skills, Style, Staff)",
+    "revenue: on budget": "Project revenue tracking vs. planned amount",
+    "portfolio": "Collection of active client engagements",
+    "anchor too low": "Setting fees below appropriate market rate for scope",
+    "benchmark": "Comparative analysis against similar projects or industry standards",
+    "RACI matrix": "Responsibility assignment chart (Responsible, Accountable, Consulted, Informed)",
+    "spans and layers": "Analysis of organizational hierarchy and management control spans",
+    "value streams": "End-to-end processes that create value for customers",
+    "CX transformation": "Customer Experience transformation initiative",
+    "proof of concept": "Small-scale trial project to demonstrate viability before full commitment"
+  },
+  "frequent_topics": [
+    "operating model redesign and organizational transformation",
+    "cost reduction and procurement optimization",
+    "quick wins identification and implementation",
+    "change management and employee engagement",
+    "digital strategy and technology roadmaps",
+    "APAC market expansion and pipeline development",
+    "client governance and steering committees",
+    "strategic alliance and partnership development",
+    "board presentations and executive stakeholder management",
+    "proposal development and business development",
+    "workstream planning and resource allocation",
+    "diagnostic methodologies and frameworks"
+  ]
+}

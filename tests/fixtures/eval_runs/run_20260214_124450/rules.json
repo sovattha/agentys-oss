@@ -1,0 +1,172 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "pierre.durand@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Pierre,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "lucas.bernard@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "greeting": "Salut Lucas,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "equipe-digitale@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour a tous,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "marie.leclerc@clientcorp.com",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Madame Leclerc,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "camille.roux@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Camille,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "sarah.jones@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi Sarah,",
+      "closing": "Best,\nSophie"
+    },
+    {
+      "contact_email": "nicolas.moreau@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Nicolas,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "ceo@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Marc,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale"
+    },
+    {
+      "contact_email": "amelie.petit@fournisseur.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Madame Petit,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "contact@prospect-startup.io",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Thomas,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "david.kim@partnertech.co.kr",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi David,",
+      "closing": "Best,\nSophie"
+    },
+    {
+      "contact_email": "recrutement@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour,",
+      "closing": "Merci,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "elena.volkov@eupartner.de",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Elena,",
+      "closing": "Best regards,\nSophie Martin\nProject Manager - Digital Division\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "it-support@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale"
+    },
+    {
+      "contact_email": "claire.fontaine@clientcorp.com",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Claire,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    }
+  ],
+  "general_rules": [
+    {
+      "name": "tutoiement_equipe_directe",
+      "description": "Use tu form with direct team members (developers, close colleagues)",
+      "trigger": "Internal email to Lucas Bernard and similar direct reports",
+      "action": "Use casual greeting 'Salut', tu form throughout, first name only as closing"
+    },
+    {
+      "name": "vouvoiement_hierarchie",
+      "description": "Use vous form with hierarchy (CEO, managers), external clients, vendors, and new contacts",
+      "trigger": "Email to CEO, external clients (ClientCorp), vendors (Fournisseur), or prospects",
+      "action": "Use formal greeting with title, vous form, full signature block with title and contact"
+    },
+    {
+      "name": "signature_externe",
+      "description": "Full signature block for external contacts and formal internal contexts",
+      "trigger": "Email to external clients, vendors, prospects, or hierarchy",
+      "action": "Include: Cordialement, full name, title 'Chef de projet - Division Digitale', company 'TechCorp', phone '+33 6 12 34 56 78'"
+    },
+    {
+      "name": "signature_interne_collegues",
+      "description": "First name only for internal peer-level colleagues",
+      "trigger": "Email to team members (Pierre, Lucas, Camille) or team distribution list",
+      "action": "Close with just 'Sophie' without title or contact info"
+    },
+    {
+      "name": "langue_anglais_international",
+      "description": "Use English for international contacts outside France",
+      "trigger": "Email to .com, .co.kr, .de domains (GlobalTech, PartnerTech, EUPartner)",
+      "action": "Write in English, use 'Hi [First name]' or 'Dear [First name]' based on formality, close with 'Best,' or 'Best regards,'"
+    },
+    {
+      "name": "structure_listes_numerotees",
+      "description": "Use numbered lists for action items, options, or multi-part questions",
+      "trigger": "Email presenting multiple points, options, or requesting structured feedback",
+      "action": "Format as numbered list (1. 2. 3.) for clarity"
+    },
+    {
+      "name": "structure_tirets_simples",
+      "description": "Use simple dash lists for status updates or bullet points",
+      "trigger": "Status updates, summaries, or listing items without hierarchy",
+      "action": "Use dash '-' for bullet points"
+    },
+    {
+      "name": "ton_semi_formel_pairs_techniques",
+      "description": "Semi-formal tone with technical peers (Pierre, Camille)",
+      "trigger": "Email to technical leads or peers within same company",
+      "action": "Use first name only as greeting, vous form, first name as closing, no full signature"
+    },
+    {
+      "name": "questions_fin_email",
+      "description": "End emails with questions to prompt action or response",
+      "trigger": "When expecting response or action from recipient",
+      "action": "Close with question like 'On en reparle lundi ?' or 'Cette date vous convient-elle ?'"
+    },
+    {
+      "name": "rappel_equipe_informel",
+      "description": "Informal team reminders start with 'Hello tout le monde' or 'Team'",
+      "trigger": "Team-wide reminder or announcement to internal team",
+      "action": "Use 'Hello tout le monde,' or 'Team,' as greeting for team distribution list"
+    }
+  ],
+  "forbidden_phrases": []
+}

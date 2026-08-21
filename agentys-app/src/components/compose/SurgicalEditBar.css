@@ -1,0 +1,390 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   SurgicalEditBar — Single-row inline editor for surgical draft modifications.
+
+   DESIGN POINT-OF-VIEW
+   ────────────────────
+   Refined-minimal teal stationery. The bar should feel like a drawer that
+   slid out of the document — same paper, slightly different elevation, a
+   single thin teal accent stroke that signals intent without shouting.
+
+   Hierarchy:
+     • Submit (↑)     — primary CTA, raised pill, teal gradient with glow
+     • Mic            — secondary, ghost button, fills with coral when live
+     • Pencil icon    — passive marker, subtle teal
+     • Close (×)      — tertiary, lowest visual weight, light hover
+
+   Motion is restrained: 150–200ms eases, no bounce, no parallax. The only
+   "motion event" is the recording pulse — a slow, breathing red glow that
+   tells the user "I'm listening" without distracting from their typing.
+   ────────────────────────────────────────────────────────────────────── */
+
+.surgical-bar {
+  --sb-teal-50:   #f0fdfa;
+  --sb-teal-100:  #ccfbf1;
+  --sb-teal-200:  #99f6e4;
+  --sb-teal-300:  #5eead4;
+  --sb-teal-400:  #2dd4bf;
+  --sb-teal-500:  #14b8a6;
+  --sb-teal-600:  #0d9488;
+  --sb-teal-700:  #0f766e;
+  --sb-teal-800:  #115e59;
+  --sb-coral-500: #f43f5e;
+  --sb-coral-600: #e11d48;
+  --sb-rose-50:   #fff1f2;
+  --sb-rose-100:  #ffe4e6;
+  --sb-slate-100: #f1f5f9;
+  --sb-slate-200: #e2e8f0;
+  --sb-slate-400: #94a3b8;
+  --sb-slate-500: #64748b;
+  --sb-slate-600: #475569;
+  --sb-slate-900: #0f172a;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  /* Asymmetric padding — accent bar takes the left edge, content breathes
+     comfortably to the right. Tightened from 7→5 for a sharper "command
+     palette" density. Effective bar height ≈ 38-40px. */
+  padding: 5px 7px 5px 0;
+  margin: 8px 0;
+
+  /* Pure teinte teal — pas de border, pas de ring, juste le fond.
+     L'utilisateur ne voit aucune "box" enserrant l'input : seul le curseur
+     marque la zone d'écriture. L'accent vertical à gauche reste le seul
+     marqueur visuel structurant. */
+  background: linear-gradient(135deg, #f0fdfa 0%, #ecfdf5 100%);
+
+  border: none;
+  /* Coins légèrement arrondis — entre carré strict et pill ronde, juste de
+     quoi adoucir les angles sans dessiner une box prononcée. */
+  border-radius: 6px;
+
+  /* Plus d'inset highlight, plus d'ambient glow : on garde uniquement une
+     ombre très légère pour donner un soupçon de profondeur sans dessiner
+     de contour. */
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.025);
+
+  transition: background 200ms ease;
+
+  /* Snappier entrance — 240→180ms, plus serré, ressenti plus réactif. */
+  animation: sb-enter 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+@keyframes sb-enter {
+  from { opacity: 0; transform: translateY(3px) scale(0.997); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Focus-within — pas de ring, juste un léger renforcement du teint teal.
+   L'interaction visuelle reste subtile : la bar passe à un teal très
+   légèrement plus saturé pour signaler qu'on tape dedans, sans dessiner
+   de contour. */
+.surgical-bar:focus-within {
+  background: linear-gradient(135deg, #ccfbf1 0%, #d1fae5 100%);
+}
+
+/* ─── Accent bar — the only saturated element in idle state ─────────────── */
+
+.surgical-bar__accent {
+  width: 3px;
+  align-self: stretch;
+  border-radius: 0 3px 3px 0;
+  flex-shrink: 0;
+  margin-right: 8px;
+  /* Three-stop gradient: light at the top, deep at the bottom. Reads like
+     a gem in a setting — the eye finds it instantly without it being loud. */
+  background: linear-gradient(
+    180deg,
+    var(--sb-teal-400) 0%,
+    var(--sb-teal-600) 55%,
+    var(--sb-teal-800) 100%
+  );
+  /* Hairline edge to deepen the gradient against the bar's background */
+  box-shadow:
+    inset -1px 0 0 rgba(15, 118, 110, 0.18),
+    0 0 0 1px rgba(13, 148, 136, 0.05);
+}
+
+/* ─── Pencil icon — passive marker, sans wash ───────────────────────────── */
+
+.surgical-bar__icon {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--sb-teal-700);
+  /* Icône nue maintenant — plus de wash teal de fond. Plus aéré, laisse
+     le travail "d'identité de mode" à l'accent vertical à gauche. */
+}
+
+/* ─── Input — the typographic centerpiece ───────────────────────────────── */
+
+.surgical-bar__input {
+  flex: 1;
+  min-width: 0;
+  height: 26px;
+  padding: 0 8px 0 10px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  color: var(--sb-slate-900);
+  outline: none;
+  /* Subtle text rendering polish */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.surgical-bar__input::placeholder {
+  color: var(--sb-slate-400);
+  font-weight: 400;
+  /* Slightly lighter weight reads as "ghost" — clearly distinct from
+     real input text without resorting to italic (avoiding AI cliché). */
+}
+
+.surgical-bar__input:disabled {
+  color: var(--sb-slate-500);
+  cursor: not-allowed;
+}
+
+.surgical-bar__input--error::placeholder {
+  color: var(--sb-coral-600);
+}
+
+/* ─── Kbd hint "Espace" — discoverability du PTT ─────────────────────────
+   Visible uniquement quand l'input est vide, idle, sans erreur. Disparaît
+   dès que l'utilisateur tape, dicte, ou qu'une erreur fire. Sert à indiquer
+   "tu peux maintenir Espace pour dicter" sans cluttered un mic icon. */
+
+.surgical-bar__kbd-hint {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin: 0 4px 0 -2px;
+  user-select: none;
+  pointer-events: none;
+  /* Animation in : fade léger, ne pas attirer l'attention. */
+  animation: sb-kbd-fade-in 180ms ease 60ms backwards;
+}
+
+@keyframes sb-kbd-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.surgical-bar__kbd-hint kbd {
+  display: inline-block;
+  padding: 1px 6px 2px;
+  background: rgba(13, 148, 136, 0.07);
+  border: 1px solid rgba(13, 148, 136, 0.18);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  color: var(--sb-teal-700);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  /* Subtle inset highlight to suggest a physical key. */
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+
+/* ─── Mic button — ghost → coral ────────────────────────────────────────── */
+
+.surgical-bar__mic {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--sb-slate-500);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease,
+    transform 80ms ease;
+}
+
+.surgical-bar__mic:active:not(:disabled) {
+  transform: scale(0.93);
+}
+
+.surgical-bar__mic:disabled {
+  opacity: 0.40;
+  cursor: not-allowed;
+}
+
+/* Recording — coral fill with a soft pulsing halo. The wave SVG inside
+   stays white via fill: currentColor on a white-text button. */
+.surgical-bar__mic--active {
+  background: linear-gradient(135deg, var(--sb-coral-500) 0%, var(--sb-coral-600) 100%);
+  color: #ffffff;
+  border-color: var(--sb-coral-600);
+  box-shadow:
+    0 1px 2px rgba(225, 29, 72, 0.22),
+    0 0 0 3px rgba(244, 63, 94, 0.18);
+  animation: sb-mic-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes sb-mic-pulse {
+  0%, 100% {
+    box-shadow:
+      0 1px 2px rgba(225, 29, 72, 0.22),
+      0 0 0 3px rgba(244, 63, 94, 0.18);
+  }
+  50% {
+    box-shadow:
+      0 1px 2px rgba(225, 29, 72, 0.28),
+      0 0 0 6px rgba(244, 63, 94, 0.06);
+  }
+}
+
+/* Waveform animation — bars breathe asynchronously to suggest live audio. */
+.sb-wf-1 { transform-origin: center; animation: sb-wf 0.9s ease-in-out infinite; animation-delay: 0s;    }
+.sb-wf-2 { transform-origin: center; animation: sb-wf 0.9s ease-in-out infinite; animation-delay: 0.15s; }
+.sb-wf-3 { transform-origin: center; animation: sb-wf 0.9s ease-in-out infinite; animation-delay: 0.30s; }
+.sb-wf-4 { transform-origin: center; animation: sb-wf 0.9s ease-in-out infinite; animation-delay: 0.45s; }
+
+@keyframes sb-wf {
+  0%, 100% { transform: scaleY(0.45); }
+  50%      { transform: scaleY(1);    }
+}
+
+/* Transcription spinner — replaces the mic icon while audio is processed. */
+.surgical-bar__mic-spinner {
+  width: 12px;
+  height: 12px;
+  border: 1.8px solid rgba(13, 148, 136, 0.20);
+  border-top-color: var(--sb-teal-600);
+  border-radius: 50%;
+  animation: sb-spin 0.7s linear infinite;
+}
+
+@keyframes sb-spin { to { transform: rotate(360deg); } }
+
+/* ─── Submit — primary action, raised pill ──────────────────────────────── */
+
+.surgical-bar__submit {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  /* Small inner highlight + outer shadow create the "raised key" feel. */
+  border: 1px solid var(--sb-teal-700);
+  background: linear-gradient(180deg, var(--sb-teal-500) 0%, var(--sb-teal-700) 100%);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.18) inset,
+    0 1px 2px rgba(13, 148, 136, 0.30),
+    0 0 0 1px rgba(13, 148, 136, 0.05);
+  transition:
+    background 160ms ease,
+    box-shadow 160ms ease,
+    transform 80ms ease;
+}
+
+.surgical-bar__submit:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.10) inset,
+    0 1px 1px rgba(13, 148, 136, 0.20);
+}
+
+.surgical-bar__submit:disabled {
+  background: var(--sb-slate-200);
+  border-color: var(--sb-slate-200);
+  color: #ffffff;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.surgical-bar__submit-spinner {
+  width: 12px;
+  height: 12px;
+  border: 1.8px solid rgba(255, 255, 255, 0.32);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: sb-spin 0.7s linear infinite;
+}
+
+/* ─── Close — tertiary, ghosts away when not hovered ────────────────────── */
+
+.surgical-bar__close {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--sb-slate-400);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  margin-left: 2px;
+  transition: background 140ms ease, color 140ms ease;
+}
+
+.surgical-bar__close:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ─── Recording state — coral takes over ────────────────────────────────── */
+
+.surgical-bar--recording {
+  /* Pas de border (cohérent avec le state idle) — juste le fond rose qui
+     remplace le teal pour signaler le recording. Pulse gardé pour le feel
+     "écoute active" mais sans tracer de contour. */
+  background: linear-gradient(135deg, var(--sb-rose-50) 0%, var(--sb-rose-100) 100%);
+  animation:
+    sb-enter 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    sb-bar-pulse 1.6s ease-in-out 0.2s infinite;
+}
+
+.surgical-bar--recording .surgical-bar__accent {
+  background: linear-gradient(
+    180deg,
+    #fb7185 0%,
+    var(--sb-coral-500) 55%,
+    var(--sb-coral-600) 100%
+  );
+}
+
+.surgical-bar--recording .surgical-bar__icon {
+  color: var(--sb-coral-600);
+  background: rgba(244, 63, 94, 0.08);
+}
+
+@keyframes sb-bar-pulse {
+  /* Pulse uniquement sur l'ombre ambient — pas de border ring. Le breathing
+     est porté par l'ombre soft, le fond reste flat. */
+  0%, 100% { box-shadow: 0 1px 2px rgba(15, 23, 42, 0.025), 0 4px 12px rgba(244, 63, 94, 0.06); }
+  50%      { box-shadow: 0 1px 2px rgba(15, 23, 42, 0.025), 0 6px 20px rgba(244, 63, 94, 0.12); }
+}
+
+/* ─── Loading state — restraint, slight desaturation ───────────────────── */
+
+.surgical-bar--loading {
+  opacity: 0.94;
+}
+
+.surgical-bar--loading .surgical-bar__input::placeholder {
+  color: var(--sb-slate-500);
+}

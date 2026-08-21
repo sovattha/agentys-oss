@@ -1,0 +1,570 @@
+{
+  "timestamp": "20260214_091454",
+  "agents": [
+    "profile",
+    "knowledge",
+    "rules"
+  ],
+  "llm_judge": false,
+  "scores": {
+    "profile": {
+      "completeness": 100,
+      "precision": 100,
+      "usefulness": 100,
+      "overall": 100,
+      "missing": [],
+      "incorrect": []
+    },
+    "knowledge": {
+      "completeness": 100,
+      "precision": 100,
+      "usefulness": 100,
+      "overall": 100,
+      "missing": [],
+      "incorrect": []
+    },
+    "rules": {
+      "completeness": 92,
+      "precision": 92,
+      "usefulness": 92,
+      "overall": 92,
+      "missing": [
+        "john.smith@globaltech.com"
+      ],
+      "incorrect": []
+    },
+    "overall": 97
+  },
+  "output": {
+    "profile": {
+      "user_email": "sophie.martin@techcorp.fr",
+      "user_name": "Sophie Martin",
+      "signature": {
+        "full_text": "Sophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78",
+        "name": "Sophie Martin",
+        "title": "Chef de projet",
+        "department": "Division Digitale",
+        "company": "TechCorp",
+        "phone": "+33 6 12 34 56 78"
+      },
+      "tone": {
+        "default_tone": "semi-formal",
+        "greeting_style": "Bonjour [Name] for formal/external, Salut [Name] for casual/internal",
+        "closing_style": "Cordialement for formal, Sophie for casual, Best regards for English",
+        "uses_first_name": true,
+        "uses_emoji": false,
+        "average_response_length": "medium"
+      },
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "active_hours": "08:00-17:00",
+      "response_time_avg": "Same day to 2-3 days depending on urgency and recipient type"
+    },
+    "knowledge": {
+      "contacts": [
+        {
+          "email": "pierre.durand@techcorp.fr",
+          "name": "Pierre Durand",
+          "type": "direct_report",
+          "company": "TechCorp",
+          "title": "Lead Developer",
+          "preferred_language": "fr",
+          "preferred_tone": "casual",
+          "interaction_count": 27,
+          "topics": [
+            "projet Alpha",
+            "API v2",
+            "GraphQL",
+            "code review",
+            "architecture"
+          ]
+        },
+        {
+          "email": "lucas.bernard@techcorp.fr",
+          "name": "Lucas Bernard",
+          "type": "direct_report",
+          "company": "TechCorp",
+          "title": "Developer",
+          "preferred_language": "fr",
+          "preferred_tone": "casual",
+          "interaction_count": 15,
+          "topics": [
+            "API v2",
+            "code review",
+            "streaming CSV",
+            "GraphQL formation",
+            "projet Beta"
+          ]
+        },
+        {
+          "email": "camille.roux@techcorp.fr",
+          "name": "Camille Roux",
+          "type": "colleague",
+          "company": "TechCorp",
+          "title": "Responsable Securite",
+          "preferred_language": "fr",
+          "preferred_tone": "professional",
+          "interaction_count": 11,
+          "topics": [
+            "audit securite",
+            "vulnerabilites",
+            "WAF",
+            "projet Beta"
+          ]
+        },
+        {
+          "email": "marie.leclerc@clientcorp.com",
+          "name": "Marie Leclerc",
+          "type": "client",
+          "company": "ClientCorp SA",
+          "title": "Directrice des Achats",
+          "preferred_language": "fr",
+          "preferred_tone": "formal",
+          "interaction_count": 8,
+          "topics": [
+            "proposition commerciale",
+            "projet Beta",
+            "budget",
+            "contrat"
+          ]
+        },
+        {
+          "email": "nicolas.moreau@techcorp.fr",
+          "name": "Nicolas Moreau",
+          "type": "manager",
+          "company": "TechCorp",
+          "title": "Directeur Financier",
+          "preferred_language": "fr",
+          "preferred_tone": "professional",
+          "interaction_count": 7,
+          "topics": [
+            "budget Q1",
+            "validation",
+            "recrutement",
+            "WAF"
+          ]
+        },
+        {
+          "email": "ceo@techcorp.fr",
+          "name": "Marc Dupont",
+          "type": "manager",
+          "company": "TechCorp",
+          "title": "CEO",
+          "preferred_language": "fr",
+          "preferred_tone": "formal",
+          "interaction_count": 6,
+          "topics": [
+            "resultats annuels",
+            "budget division",
+            "rapport mensuel"
+          ]
+        },
+        {
+          "email": "sarah.jones@globaltech.com",
+          "name": "Sarah Jones",
+          "type": "partner",
+          "company": "GlobalTech Inc.",
+          "title": "Senior Solutions Architect",
+          "preferred_language": "en",
+          "preferred_tone": "professional",
+          "interaction_count": 5,
+          "topics": [
+            "partnership",
+            "integration",
+            "API documentation"
+          ]
+        },
+        {
+          "email": "john.smith@globaltech.com",
+          "name": "John Smith",
+          "type": "partner",
+          "company": "GlobalTech Inc.",
+          "title": "VP Business Development",
+          "preferred_language": "en",
+          "preferred_tone": "professional",
+          "interaction_count": 4,
+          "topics": [
+            "partnership opportunity",
+            "cloud migration"
+          ]
+        },
+        {
+          "email": "amelie.petit@fournisseur.fr",
+          "name": "Amelie Petit",
+          "type": "supplier",
+          "company": "Maintenance Pro SARL",
+          "title": "Responsable Comptes Cles",
+          "preferred_language": "fr",
+          "preferred_tone": "professional",
+          "interaction_count": 4,
+          "topics": [
+            "renouvellement contrat",
+            "maintenance",
+            "SLA"
+          ]
+        },
+        {
+          "email": "david.kim@partnertech.co.kr",
+          "name": "David Kim",
+          "type": "partner",
+          "company": "PartnerTech Co., Ltd.",
+          "title": "Integration Lead",
+          "preferred_language": "en",
+          "preferred_tone": "professional",
+          "interaction_count": 4,
+          "topics": [
+            "technical integration",
+            "JSON-LD",
+            "mTLS",
+            "API testing"
+          ]
+        },
+        {
+          "email": "claire.fontaine@clientcorp.com",
+          "name": "Claire Fontaine",
+          "type": "client",
+          "company": "ClientCorp SA",
+          "title": "Chef de projet IT",
+          "preferred_language": "fr",
+          "preferred_tone": "professional",
+          "interaction_count": 4,
+          "topics": [
+            "projet Beta",
+            "JIRA",
+            "collaboration"
+          ]
+        },
+        {
+          "email": "contact@prospect-startup.io",
+          "name": "Thomas Renard",
+          "type": "prospect",
+          "company": "ProspectStartup",
+          "title": "CTO",
+          "preferred_language": "fr",
+          "preferred_tone": "professional",
+          "interaction_count": 3,
+          "topics": [
+            "fintech",
+            "PSD2",
+            "API integration",
+            "salon tech"
+          ]
+        },
+        {
+          "email": "elena.volkov@eupartner.de",
+          "name": "Elena Volkov",
+          "type": "partner",
+          "company": "EUPartner GmbH",
+          "title": "Business Development Director",
+          "preferred_language": "en",
+          "preferred_tone": "formal",
+          "interaction_count": 3,
+          "topics": [
+            "EU market expansion",
+            "GDPR",
+            "DACH region"
+          ]
+        },
+        {
+          "email": "recrutement@techcorp.fr",
+          "name": "Recrutement TechCorp",
+          "type": "colleague",
+          "company": "TechCorp",
+          "title": "HR Recruitment",
+          "preferred_language": "fr",
+          "preferred_tone": "professional",
+          "interaction_count": 3,
+          "topics": [
+            "recrutement",
+            "dev senior",
+            "entretiens"
+          ]
+        },
+        {
+          "email": "it-support@techcorp.fr",
+          "name": "IT Support TechCorp",
+          "type": "colleague",
+          "company": "TechCorp",
+          "title": "IT Support",
+          "preferred_language": "fr",
+          "preferred_tone": "professional",
+          "interaction_count": 3,
+          "topics": [
+            "VPN",
+            "support technique",
+            "firewall"
+          ]
+        },
+        {
+          "email": "support@cloudprovider.com",
+          "name": "Cloud Provider Support",
+          "type": "supplier",
+          "company": "Cloud Provider",
+          "title": "Support Team",
+          "preferred_language": "en",
+          "preferred_tone": "professional",
+          "interaction_count": 2,
+          "topics": [
+            "production incident",
+            "cloud infrastructure"
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "name": "Projet Alpha",
+          "description": "Main internal project with API v2 migration to GraphQL, security audit, and streaming CSV export",
+          "contacts": [
+            "pierre.durand@techcorp.fr",
+            "lucas.bernard@techcorp.fr",
+            "camille.roux@techcorp.fr"
+          ],
+          "status": "active",
+          "keywords": [
+            "GraphQL",
+            "API v2",
+            "streaming CSV",
+            "security audit",
+            "WAF"
+          ]
+        },
+        {
+          "name": "Projet Beta",
+          "description": "Client project for ClientCorp with 85k EUR budget, starting March 2026",
+          "contacts": [
+            "marie.leclerc@clientcorp.com",
+            "claire.fontaine@clientcorp.com",
+            "lucas.bernard@techcorp.fr"
+          ],
+          "status": "active",
+          "keywords": [
+            "ClientCorp",
+            "full-stack development",
+            "JIRA",
+            "kick-off"
+          ]
+        },
+        {
+          "name": "GlobalTech Partnership",
+          "description": "Partnership opportunity for cloud migration project with API integration",
+          "contacts": [
+            "john.smith@globaltech.com",
+            "sarah.jones@globaltech.com",
+            "pierre.durand@techcorp.fr"
+          ],
+          "status": "active",
+          "keywords": [
+            "partnership",
+            "cloud migration",
+            "API integration",
+            "Teams"
+          ]
+        },
+        {
+          "name": "PartnerTech Integration",
+          "description": "Technical integration project with JSON-LD data exchange and mTLS authentication",
+          "contacts": [
+            "david.kim@partnertech.co.kr",
+            "pierre.durand@techcorp.fr"
+          ],
+          "status": "active",
+          "keywords": [
+            "JSON-LD",
+            "mTLS",
+            "integration testing",
+            "Postman"
+          ]
+        },
+        {
+          "name": "EU Market Expansion",
+          "description": "European market expansion collaboration with EUPartner for DACH region",
+          "contacts": [
+            "elena.volkov@eupartner.de"
+          ],
+          "status": "active",
+          "keywords": [
+            "GDPR",
+            "DACH",
+            "distribution",
+            "compliance"
+          ]
+        }
+      ],
+      "terminology": {
+        "WAF": "Web Application Firewall",
+        "SLA": "Service Level Agreement",
+        "mTLS": "Mutual Transport Layer Security",
+        "PKCE": "Proof Key for Code Exchange",
+        "PSD2": "Payment Services Directive 2",
+        "GDPR": "General Data Protection Regulation",
+        "DPA": "Data Processing Agreement",
+        "DACH": "Germany, Austria, Switzerland region",
+        "JSON-LD": "JSON for Linked Data",
+        "CSP": "Content Security Policy",
+        "POC": "Proof of Concept"
+      },
+      "frequent_topics": [
+        "API development and migration",
+        "project management and planning",
+        "security audits and vulnerabilities",
+        "budget validation and recruitment",
+        "client relationships and proposals",
+        "technical integrations and partnerships",
+        "GraphQL implementation",
+        "code reviews and development",
+        "sprint planning and retrospectives",
+        "GDPR compliance and legal requirements"
+      ]
+    },
+    "rules": {
+      "contact_rules": [
+        {
+          "contact_email": "pierre.durand@techcorp.fr",
+          "tone": "casual",
+          "language": "fr",
+          "greeting": "Pierre,",
+          "closing": "Sophie"
+        },
+        {
+          "contact_email": "lucas.bernard@techcorp.fr",
+          "tone": "casual",
+          "language": "fr",
+          "greeting": "Salut Lucas,",
+          "closing": "Sophie"
+        },
+        {
+          "contact_email": "equipe-digitale@techcorp.fr",
+          "tone": "casual",
+          "language": "fr",
+          "greeting": "Hello tout le monde,",
+          "closing": "Sophie"
+        },
+        {
+          "contact_email": "marie.leclerc@clientcorp.com",
+          "tone": "formal",
+          "language": "fr",
+          "greeting": "Bonjour Madame Leclerc,",
+          "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+        },
+        {
+          "contact_email": "camille.roux@techcorp.fr",
+          "tone": "casual",
+          "language": "fr",
+          "greeting": "Camille,",
+          "closing": "Sophie"
+        },
+        {
+          "contact_email": "sarah.jones@globaltech.com",
+          "tone": "formal",
+          "language": "en",
+          "greeting": "Hi Sarah,",
+          "closing": "Best regards,\nSophie Martin\nProject Manager - Digital Division\nTechCorp | +33 6 12 34 56 78"
+        },
+        {
+          "contact_email": "nicolas.moreau@techcorp.fr",
+          "tone": "formal",
+          "language": "fr",
+          "greeting": "Bonjour Nicolas,",
+          "closing": "Sophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+        },
+        {
+          "contact_email": "ceo@techcorp.fr",
+          "tone": "formal",
+          "language": "fr",
+          "greeting": "Bonjour Marc,",
+          "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale"
+        },
+        {
+          "contact_email": "amelie.petit@fournisseur.fr",
+          "tone": "formal",
+          "language": "fr",
+          "greeting": "Bonjour Madame Petit,",
+          "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+        },
+        {
+          "contact_email": "contact@prospect-startup.io",
+          "tone": "formal",
+          "language": "fr",
+          "greeting": "Bonjour Thomas,",
+          "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+        },
+        {
+          "contact_email": "david.kim@partnertech.co.kr",
+          "tone": "formal",
+          "language": "en",
+          "greeting": "Hi David,",
+          "closing": "Best,\nSophie"
+        },
+        {
+          "contact_email": "recrutement@techcorp.fr",
+          "tone": "formal",
+          "language": "fr",
+          "greeting": "Bonjour,",
+          "closing": "Sophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+        },
+        {
+          "contact_email": "elena.volkov@eupartner.de",
+          "tone": "formal",
+          "language": "en",
+          "greeting": "Dear Elena,",
+          "closing": "Best regards,\nSophie"
+        },
+        {
+          "contact_email": "it-support@techcorp.fr",
+          "tone": "formal",
+          "language": "fr",
+          "greeting": "Bonjour,",
+          "closing": "Sophie Martin\nChef de projet - Division Digitale"
+        },
+        {
+          "contact_email": "claire.fontaine@clientcorp.com",
+          "tone": "formal",
+          "language": "fr",
+          "greeting": "Bonjour Claire,",
+          "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+        }
+      ],
+      "general_rules": [
+        {
+          "name": "internal_casual_tone",
+          "description": "Use casual tone and tu form with internal team members",
+          "trigger": "Internal email to direct team members (@techcorp.fr domain)",
+          "action": "Use casual greetings, first name only closing, tu form"
+        },
+        {
+          "name": "external_formal_tone",
+          "description": "Use formal tone with external contacts",
+          "trigger": "Email to external domains",
+          "action": "Use formal greetings, full signature with title and contact info"
+        },
+        {
+          "name": "management_formal_tone",
+          "description": "Use formal tone with management even if internal",
+          "trigger": "Email to CEO or management roles",
+          "action": "Use formal greeting, full signature, vous form"
+        },
+        {
+          "name": "english_for_international",
+          "description": "Use English for international partners",
+          "trigger": "Email to non-French domains (.com, .de, .co.kr)",
+          "action": "Write in English with appropriate formal tone"
+        },
+        {
+          "name": "numbered_lists_for_structure",
+          "description": "Use numbered lists for action items and structured content",
+          "trigger": "Multiple points or action items to communicate",
+          "action": "Format as numbered list for clarity"
+        },
+        {
+          "name": "cc_technical_lead",
+          "description": "CC technical lead Pierre for technical discussions with external parties",
+          "trigger": "Technical discussions with external partners",
+          "action": "Add Pierre Durand in CC"
+        }
+      ],
+      "forbidden_phrases": []
+    }
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "pierre.durand@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Pierre,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "lucas.bernard@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "greeting": "Salut Lucas,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "camille.roux@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "greeting": "Camille,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "marie.leclerc@clientcorp.com",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Madame Leclerc,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "sarah.jones@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi Sarah,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "nicolas.moreau@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Nicolas,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "ceo@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Marc,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "amelie.petit@fournisseur.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Madame Petit,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "contact@prospect-startup.io",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Thomas,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "david.kim@partnertech.co.kr",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi David,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "elena.volkov@eupartner.de",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Elena,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "claire.fontaine@clientcorp.com",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Claire,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "john.smith@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi John,",
+      "closing": "Best regards,"
+    }
+  ],
+  "general_rules": [
+    {
+      "name": "signature_formal",
+      "description": "Utiliser la signature complete avec clients externes et fournisseurs",
+      "trigger": "Email vers contact externe ou client",
+      "action": "Ajouter signature complete : Sophie Martin | Chef de projet - Division Digitale | TechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "name": "signature_casual",
+      "description": "Utiliser uniquement le prenom avec l'equipe interne en mode casual",
+      "trigger": "Email casual vers collegue interne (Lucas, Camille)",
+      "action": "Signer uniquement 'Sophie' ou 'Sophi'"
+    },
+    {
+      "name": "tutoiement_equipe",
+      "description": "Utiliser le tutoiement avec les membres directs de l'equipe",
+      "trigger": "Email vers Lucas ou Camille",
+      "action": "Utiliser tu et les prenoms sans formalite"
+    },
+    {
+      "name": "vouvoiement_clients",
+      "description": "Utiliser le vouvoiement avec tous les clients et fournisseurs externes",
+      "trigger": "Email vers contact externe francophone",
+      "action": "Utiliser vous systematiquement"
+    },
+    {
+      "name": "structured_updates",
+      "description": "Utiliser des listes numerotees pour les rapports d'avancement et plannings",
+      "trigger": "Email de status update ou planning",
+      "action": "Organiser en points numerotes avec tirets pour les sous-points"
+    },
+    {
+      "name": "action_items",
+      "description": "Terminer les emails clients avec une section Actions a suivre",
+      "trigger": "Email recapitulatif vers client",
+      "action": "Inclure section 'Actions a suivre :' avec liste des prochaines etapes"
+    },
+    {
+      "name": "cc_relevant_people",
+      "description": "Mettre en copie les parties prenantes techniques quand pertinent",
+      "trigger": "Email client necessitant expertise technique",
+      "action": "CC Pierre Durand pour aspects techniques, mentionner explicitement dans le corps"
+    },
+    {
+      "name": "language_switch",
+      "description": "Passer en anglais pour tous les contacts internationaux",
+      "trigger": "Email vers domaines non-francais (.com, .de, .co.kr)",
+      "action": "Rediger entierement en anglais"
+    },
+    {
+      "name": "semi_formal_management",
+      "description": "Adopter un ton semi-formel avec CEO et direction financiere",
+      "trigger": "Email vers CEO ou direction",
+      "action": "Utiliser Bonjour + prenom, vouvoiement implicite, signature complete"
+    },
+    {
+      "name": "technical_precision",
+      "description": "Fournir des details techniques precis dans les discussions d'architecture",
+      "trigger": "Email concernant specifications ou architecture",
+      "action": "Inclure points numerotes avec details techniques (endpoints, protocols, outils)"
+    },
+    {
+      "name": "short_acknowledgments",
+      "description": "Reponses tres breves pour les simples confirmations entre collegues",
+      "trigger": "Reponse de validation ou accord simple",
+      "action": "Message court type 'Parfait', 'OK pour...', 'Merci' + prenom"
+    },
+    {
+      "name": "kick_off_structure",
+      "description": "Structurer les emails de kick-off avec ordre du jour detaille",
+      "trigger": "Email d'invitation kick-off projet",
+      "action": "Inclure date/format/ordre du jour numerote"
+    }
+  ],
+  "forbidden_phrases": [],
+  "auto_reply_patterns": [
+    "Conge/absence collegue : accusé de reception casual tres court (Pas de souci, Profite bien)",
+    "Ticket IT resolu : confirmation breve de cloture sans formalite",
+    "Validation simple interne : reponse courte type OK/Parfait + prenom uniquement"
+  ]
+}

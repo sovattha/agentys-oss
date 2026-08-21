@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-05-04T07:19:25Z",
+  "config": {
+    "persona": "multi",
+    "drafter_model": "claude-haiku-4-5",
+    "judge_model": "sonnet",
+    "use_claude_cli": true,
+    "with_gold": true,
+    "gold_dir": "/Users/you/dev/agentys/tests/fixtures/drafting_eval",
+    "repeat": 3,
+    "warmup": true,
+    "no_llm_judge": false,
+    "use_orchestrator": true,
+    "gate_mode": "off"
+  },
+  "cases": [
+    {
+      "case_id": "msg-012",
+      "subject": "Re: Re: Opération d'acquisition — accord",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 10373,
+          "judge_overall": 77,
+          "iterations": 3,
+          "critique_decisions": [
+            "reject",
+            "reject",
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 6243,
+          "judge_overall": 75,
+          "iterations": 2,
+          "critique_decisions": [
+            "reject",
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 7693,
+          "judge_overall": 73,
+          "iterations": 2,
+          "critique_decisions": [
+            "reject",
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 7693.0,
+        "p95_ms": 10373.0,
+        "mean_ms": 8103.0,
+        "std_ms": 1710.8087755990343
+      },
+      "critic_overall": 85,
+      "judge_overall_mean": 75,
+      "last_draft": "Je vous remercie de la signature rapide de la lettre de mission.\n\nNous attendons le contact de Mme Vernier et tiendrons prêts à débuter la due diligence dès réception de la documentation. Notre équipe respectera le calendrier convenu.\n\nMerci de votre confiance.",
+      "pipeline_info": {
+        "iterations": 2,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "reject",
+          "valid"
+        ],
+        "critique_scores": [
+          78,
+          85
+        ]
+      }
+    },
+    {
+      "case_id": "msg-001",
+      "subject": "Restructuration des pôles d'activité",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 11023,
+          "judge_overall": 31,
+          "iterations": 3,
+          "critique_decisions": [
+            "reject",
+            "reject",
+            "reject"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 8928,
+          "judge_overall": 26,
+          "iterations": 3,
+          "critique_decisions": [
+            "reject",
+            "reject",
+            "reject"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 11984,
+          "judge_overall": 44,
+          "iterations": 3,
+          "critique_decisions": [
+            "reject",
+            "reject",
+            "reject"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 11023.0,
+        "p95_ms": 11984.0,
+        "mean_ms": 10645.0,
+        "std_ms": 1275.917186445369
+      },
+      "critic_overall": 40,
+      "judge_overall_mean": 34,
+      "last_draft": "Je dois clarifier : l'email de Philippe Dumont vous est adressé en tant que \"Marc-Antoine\", mais votre profil indique que vous êtes Nathan Roy, Consultant chez Sonrysa SA.\n\nCes identités ne correspondent pas. Je ne peux pas rédiger une réponse authentique sans savoir :\n- Êtes-vous Marc-Antoine (et le profil est incomplet) ?\n- Êtes-vous un consultant externe contacté par Philippe Dumont ?\n- Y a-t-il une erreur dans l'email reçu ?\n\nPouvez-vous confirmer votre identité et votre relation avec Philippe Dumont pour que je produise un brouillon envoyable ?",
+      "pipeline_info": {
+        "iterations": 3,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "reject",
+          "reject",
+          "reject"
+        ],
+        "critique_scores": [
+          22,
+          40,
+          22
+        ]
+      }
+    },
+    {
+      "case_id": "msg-007",
+      "subject": "Re: Recherches préalables — dossier Nexus Group",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 4769,
+          "judge_overall": 58,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 3242,
+          "judge_overall": 79,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 3622,
+          "judge_overall": 74,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 3622.0,
+        "p95_ms": 4769.0,
+        "mean_ms": 3877.6666666666665,
+        "std_ms": 649.0795191825284
+      },
+      "critic_overall": 92,
+      "judge_overall_mean": 70,
+      "last_draft": "Chère Élise,\n\nMerci de votre réactivité. Concernant votre question : oui, veuillez inclure les contrats de travail des dirigeants dans votre analyse des contrats commerciaux significatifs. Ces éléments sont essentiels pour évaluer les risques de continuité opérationnelle post-acquisition.\n\nN'hésitez pas à me solliciter si d'autres points nécessitent une clarification avant le 17 janvier.\n\nBien cordialement,\n\nMarc-Antoine Barreau\nAvocat au Barreau de Paris\nDumont & Associés\n24 rue du Faubourg Saint-Honoré, 75008 Paris\nTél. +33 1 42 65 78 90",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          91
+        ]
+      }
+    },
+    {
+      "case_id": "msg-008",
+      "subject": "Re: Tes objectifs janvier",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 3029,
+          "judge_overall": 86,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 3151,
+          "judge_overall": 69,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 3155,
+          "judge_overall": 87,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 3151.0,
+        "p95_ms": 3155.0,
+        "mean_ms": 3111.6666666666665,
+        "std_ms": 58.47696602556904
+      },
+      "critic_overall": 92,
+      "judge_overall_mean": 81,
+      "last_draft": "Parfait, 9h demain ça marche. Bon boulot sur le Garibaldi, continue comme ça pour les deux autres.\n\nÀ demain.",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          92
+        ]
+      }
+    },
+    {
+      "case_id": "msg-002",
+      "subject": "Opération d'acquisition — engagement du cabinet",
+      "has_instructions": false,
+      "runs": [
+        {
+          "run_idx": 0,
+          "latency_ms": 3267,
+          "judge_overall": 69,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 1,
+          "latency_ms": 3467,
+          "judge_overall": 79,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        },
+        {
+          "run_idx": 2,
+          "latency_ms": 3551,
+          "judge_overall": 63,
+          "iterations": 1,
+          "critique_decisions": [
+            "valid"
+          ]
+        }
+      ],
+      "stats": {
+        "n": 3,
+        "p50_ms": 3467.0,
+        "p95_ms": 3551.0,
+        "mean_ms": 3428.3333333333335,
+        "std_ms": 119.12271916902426
+      },
+      "critic_overall": 87,
+      "judge_overall_mean": 70,
+      "last_draft": "Merci pour votre email du 3 janvier et cette formalisation du mandat.\n\nNous confirmons notre engagement pour accompagner Nexus Group dans cette acquisition de DataFlow SAS. Nous avons bien noté le montant de 12 millions d'euros et l'objectif de closing avant fin mars 2026.\n\nNous vous transmettrons sous peu :\n• La lettre de mission détaillant nos conditions d'intervention et nos honoraires\n• Le calendrier prévisionnel de la due diligence\n\nNous vous recontacterons cette semaine pour convenir d'une réunion de lancement et préciser les modalités opérationnelles.",
+      "pipeline_info": {
+        "iterations": 1,
+        "status": "completed",
+        "gate_mode": "off",
+        "critique_decisions": [
+          "valid"
+        ],
+        "critique_scores": [
+          86
+        ]
+      }
+    }
+  ],
+  "aggregate": {
+    "p50_ms": 3622.0,
+    "p95_ms": 11984.0,
+    "mean_ms": 5833.133333333333,
+    "n_total_runs": 15,
+    "judge_overall_mean": 66.0,
+    "judge_overall_p25": 34.0,
+    "instructions_coverage_pct": 0.0
+  }
+}

@@ -1,0 +1,205 @@
+.my-style {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  max-width: 560px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.my-style-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.my-style-header h2 {
+  margin: 0;
+  font-size: var(--font-size-2xl);
+  color: var(--text-primary);
+}
+
+.my-style-close {
+  background: none;
+  border: none;
+  font-size: var(--font-size-3xl);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 0;
+  line-height: var(--leading-none);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color var(--transition-base);
+}
+
+.my-style-content {
+  padding: var(--space-4) var(--space-6);
+}
+
+.my-style-loading,
+.my-style-error {
+  text-align: center;
+  padding: var(--space-8);
+  color: var(--text-tertiary);
+}
+
+.my-style-error {
+  color: var(--error);
+}
+
+.my-style-section {
+  margin-bottom: var(--space-6);
+}
+
+.my-style-section:last-child {
+  margin-bottom: 0;
+}
+
+.my-style-section h3 {
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps, 0.08em);
+}
+
+.my-style-maturity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.my-style-maturity-bar {
+  flex: 1;
+  height: 12px;
+  background: var(--surface-tertiary);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.my-style-maturity-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-primary-hover));
+  border-radius: 6px;
+  transition: width var(--transition-slow);
+}
+
+.my-style-maturity-label {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--accent-primary);
+  min-width: 50px;
+  text-align: right;
+}
+
+.my-style-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.my-style-stat {
+  background: var(--surface-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  text-align: center;
+}
+
+.my-style-stat-value {
+  display: block;
+  font-size: var(--font-size-3xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.my-style-stat-label {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  margin-top: var(--space-1);
+}
+
+.my-style-empty {
+  color: var(--text-tertiary);
+  font-style: italic;
+  padding: var(--space-4);
+  text-align: center;
+  background: var(--surface-secondary);
+  border-radius: var(--radius-md);
+}
+
+.my-style-patterns {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.my-style-pattern {
+  background: var(--surface-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  border-left: 3px solid var(--accent-primary);
+}
+
+.my-style-pattern-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+.my-style-pattern-type {
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-transform: capitalize;
+}
+
+.my-style-pattern-confidence {
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--success-text, var(--success));
+  background: var(--success-bg);
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-xs);
+}
+
+.my-style-pattern-description {
+  margin: 0 0 var(--space-2);
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+}
+
+.my-style-pattern-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.my-style-pattern-example {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  background: var(--surface-primary);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-xs);
+  font-style: italic;
+}
+
+.my-style-timeline {
+  background: var(--surface-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.my-style-timeline p {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-base);
+}

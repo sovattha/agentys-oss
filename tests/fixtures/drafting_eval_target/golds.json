@@ -1,0 +1,92 @@
+[
+  {
+    "case_id": "msg-008",
+    "gold_body": "9h c'est bon. Prépare-moi un récap de tes prospects en cours stp",
+    "rationale": "PROVISIONAL — copied from reference_reply.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-005",
+    "gold_body": "Bonjour Madame Moreau,\n\nOui, la villa dispose d'un garage double + un emplacement extérieur. Le bus C1 passe à 200m et le métro Cuire est à 10 min à pied.\n\nVous pourrez constater tout cela lors de la visite. À mardi !\n\nCordialement,\n\nKarim Mandat\nDirecteur Commercial\nImmoPlus Lyon\n04 72 XX XX XX | 06 XX XX XX XX",
+    "rationale": "PROVISIONAL — copied from reference_reply.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-033",
+    "gold_body": "Bonjour Catherine,\n\nBien noté. Je prépare le point d'avancement pour le 20.\n\nPour info, on est bien partis : 3 mandats signés depuis le 1er janvier et 2 compromis en cours de finalisation (dont la villa Caluire à 580k).\n\nJe te fais un tableau détaillé.\n\nCordialement,\nKarim",
+    "rationale": "PROVISIONAL — copied from reference_reply.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-012",
+    "gold_body": "Bonjour Jean-Marc,\n\nMerci pour ce cadrage, c'est très clair.\n\nJe vous confirme que nous pouvons répondre à l'ensemble de vos critères :\n- SSO SAML 2.0 : déjà supporté en production\n- SCIM : notre équipe technique démarre le développement cette semaine\n- RGPD : nos données sont hébergées chez Scaleway (Paris)\n- SLA : nous garantissons 99.95% sur notre offre Enterprise\n\nNous serons prêts pour une démo avant le 15 février, sans problème.\n\nJe vous propose un point d'étape le 22 janvier pour vous montrer l'avancement. Est-ce que mercredi 14h vous conviendrait ?\n\nBien cordialement,\nPriya Pivot",
+    "rationale": "PROVISIONAL — copied from reference_reply.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-078",
+    "gold_body": "Top 👍",
+    "rationale": "PROVISIONAL — copied from reference_reply.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-076",
+    "gold_body": "Hi Marcus,\n\nPerfect, we're aligned. End of February for signing works great for us.\n\nI'll have our lawyer prepare the definitive docs and send them over next week.\n\nExcited to make this official 🚀\n\nPriya",
+    "rationale": "PROVISIONAL — copied from reference_reply.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-002",
+    "gold_body": "Hi Richard,\n\nQuick update on AcmeCorp:\n\n- Phase 1 diagnostic is complete. We identified $18M in quick wins across procurement and facilities.\n- Michael Torres (their CFO) has signed off on the next phase.\n- We'll need Ben on the operating model workstream starting mid-Jan.\n\nHappy to walk you through the details on Monday.\n\nCheers,\nJ.",
+    "rationale": "PROVISIONAL — copied from reference_reply.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-008",
+    "gold_body": "Chère Maître,\n\nNous venons de recevoir la convocation devant le Conseil de Prud'hommes de Paris concernant le licenciement pour faute grave de M. Jean-Marc Renault, ancien Responsable Middle Office.\n\nPour rappel, les faits reprochés :\n- Manquements graves aux procédures de contrôle interne (3 incidents documentés)\n- Non-respect des limites d'engagement (dépassement de 2,3M€ sur opérations de change)\n- Falsification d'un rapport de risques\n\nL'audience de conciliation est fixée au 15 mars 2026.\n\nLe demandeur réclame environ 150 000€ au total (dommages et intérêts, indemnités de licenciement et de préavis).\n\nPourrions-nous convenir d'un rendez-vous cette semaine pour examiner le dossier et définir notre stratégie ?\n\nJe vous transmets en pièce jointe la convocation et le dossier disciplinaire.\n\nCordialement,\n\nCatherine Carrière\nDirectrice des Ressources Humaines\nBanque Centrale de Paris\nTél. 01 44 XX XX XX\n\nCe message peut contenir des informations confidentielles.",
+    "rationale": "PROVISIONAL — copied from reference_reply.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-031",
+    "gold_body": "Super Nadia, merci pour la réactivité !\n\nJe transmets à ma cliente et je te reviens avec les pièces dès qu'elle me les fournit.\n\nBonne semaine,\nKarim",
+    "rationale": "PROVISIONAL — copied from reference_reply.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-027",
+    "gold_body": "Merci JP, je regarde la plaquette et la grille ce soir.\n\nDispo mardi ou jeudi prochain pour un rdv. Tu préfères chez vous ou chez nous ?\n\nKarim",
+    "rationale": "PROVISIONAL — copied from reference_reply.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-002",
+    "gold_body": "Parfait 15h30 ça marche 👍",
+    "rationale": "PROVISIONAL — copied from reference_reply.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-070",
+    "gold_body": "This is incredible, Sarah! Index and Accel in the room 😱 perfect\n\nWe'll be there for AV check at 13h. Deck will be in your inbox by Feb 13 as promised.\n\nThanks for putting this together!\n\nPriya",
+    "rationale": "PROVISIONAL — copied from reference_reply.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-004",
+    "gold_body": "Hi Marcus,\n\nThanks for the call today. Really excited about the alignment on vision.\n\nAs discussed, here's what we'll send over this week:\n- Updated data room with Jan metrics\n- Customer reference list (5 enterprise accounts)\n- Technical architecture overview\n\nRe: board composition, we're open to discussing a board seat for Sequoia. Arjun and I will chat and come back to you.\n\nLooking forward to moving fast on this 💪\n\nPriya",
+    "rationale": "PROVISIONAL — copied from reference_reply.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-022",
+    "gold_body": "Hi Sarah,\n\nAmazing, we're in! Confirming our participation 🙏\n\n14:30 slot works perfectly. We'll have the deck ready by Feb 13.\n\nQuick question - is there an investor list we could see in advance? Would love to prep targeted talking points.\n\nThanks!\nPriya",
+    "rationale": "PROVISIONAL — copied from reference_reply.",
+    "edge_cases_handled": []
+  },
+  {
+    "case_id": "msg-004",
+    "gold_body": "Dear Michael,\n\nThank you for the detailed feedback on the Phase 2 proposal.\n\nI have incorporated your comments and would like to highlight the following adjustments:\n\n1. Timeline: We have compressed the operating model redesign from 12 to 10 weeks, as requested.\n2. Resource allocation: An additional analyst will be assigned to the procurement workstream.\n3. Governance: We propose fortnightly steering committee meetings with your leadership team.\n\nI have also taken Jennifer's point about change management into account — we will embed a dedicated change lead from Week 3.\n\nPlease find the revised scope document attached. I would welcome the opportunity to walk through it at your convenience.\n\nBest regards,\nJames Conseil\nSenior Consultant\nStrategyCo | London",
+    "rationale": "PROVISIONAL — copied from reference_reply.",
+    "edge_cases_handled": []
+  }
+]

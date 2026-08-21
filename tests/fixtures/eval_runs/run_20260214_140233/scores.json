@@ -1,0 +1,64 @@
+{
+  "profile": {
+    "completeness": 85,
+    "precision": 75,
+    "usefulness": 80,
+    "overall": 80,
+    "missing": [],
+    "incorrect": [
+      "active_hours: '08:00-16:30' (should be '08:00-18:00' - 1.5 hours shorter work day)",
+      "response_time_avg: 'le jour même' (should be '< 1h' - language mismatch and less precise)",
+      "greeting_styles.formal_fr: uses '{nom}' instead of '{last_name}' - inconsistent placeholder",
+      "greeting_styles.semi_formal_fr: uses '{prenom}' instead of '{first_name}' - inconsistent placeholder",
+      "greeting_styles.casual_fr: uses '{prenom}' instead of '{first_name}' - inconsistent placeholder",
+      "closing_styles.casual_fr: '{prenom}' instead of '(no closing or just name)' - altered meaning",
+      "closing_styles.semi_formal_en: 'Regards,' instead of 'Best,' - different closing style"
+    ],
+    "details": "The system captured most core profile information correctly including user identity, signatures, languages, and tone structure. However, there are several issues: (1) Active hours differ (08:00-16:30 vs 08:00-18:00), (2) Response time is in French ('le jour même') vs English ('< 1h') and slightly less precise, (3) Greeting/closing styles use inconsistent placeholder syntax ({nom}/{prenom} vs {last_name}/{first_name}), (4) Casual French closing changed from '(no closing or just name)' to '{prenom}'. The signatures are perfect matches. Overall, the output would be usable for email generation but may produce inconsistent results due to placeholder mismatches and slightly inaccurate timing preferences."
+  },
+  "knowledge": {
+    "completeness": 85,
+    "precision": 88,
+    "usefulness": 90,
+    "overall": 88,
+    "missing": [
+      "Contact-project mapping precision: Marie Leclerc appears in 'Projet Alpha' contacts in output but not in ground truth",
+      "Project 'Migration Cloud' from ground truth is not explicitly listed as a separate project (though cloud migration appears under GlobalTech Partnership)",
+      "Some specific topic keywords from ground truth contacts: 'demo', 'PartnerTech' (for Pierre), 'conges', 'sprint' (for Lucas), 'pentest' (for Camille), 'webhooks' (for Sarah Jones)",
+      "Terminology items from ground truth: 'Daily', 'Retro', 'PR' definitions",
+      "Ground truth has specific terminology definition for 'Sprint' as '2 semaines' which is more precise than output's 'généralement 2 semaines'"
+    ],
+    "incorrect": [
+      "Pierre Durand title: 'Tech Lead' in output vs 'Lead Developer' in ground truth",
+      "Sarah Jones preferred_tone: 'casual' in output vs 'semi-formal' in ground truth",
+      "Amelie Petit preferred_tone: 'semi-formal' in output vs 'formal' in ground truth",
+      "Marc Dupont title: 'CEO' in output vs 'PDG' in ground truth (semantic equivalent but inconsistent language)",
+      "Interaction counts are systematically higher in output (e.g., Pierre 27 vs 20, Lucas 15 vs 10, Camille 11 vs 6) - likely different counting methodology",
+      "Output includes 'frequent_topics' array not present in ground truth schema",
+      "Claire Fontaine in Projet Alpha contacts in output but not in ground truth"
+    ],
+    "details": "The system output demonstrates strong performance with most contacts, projects, and terminology correctly identified. It captured 13/13 contacts from ground truth with accurate core details (email, name, type, company, language, tone). Interaction counts are higher than ground truth (likely counting all messages vs unique threads), which is acceptable. All 5 major project themes are present, though organized slightly differently (e.g., 'Partenariat GlobalTech' split into 'GlobalTech Partnership' and mentions within Projet Alpha context). Terminology section is enhanced with additional useful definitions beyond ground truth (GraphQL, OAuth2, Rate limiting, etc.). Minor discrepancies include: Pierre's title ('Tech Lead' vs 'Lead Developer'), Sarah Jones' tone ('casual' vs 'semi-formal'), Amelie Petit's tone ('semi-formal' vs 'formal'), and some topic wording variations. The output would be highly useful for email generation with accurate tone rules, correct contact preferences, and comprehensive project context."
+  },
+  "rules": {
+    "completeness": 75,
+    "precision": 65,
+    "usefulness": 70,
+    "overall": 70,
+    "missing": [
+      "Alternative greeting 'Bonjour Amelie,' for amelie.petit@fournisseur.fr",
+      "Alternative greeting 'Nicolas,' for nicolas.moreau@techcorp.fr",
+      "Alternative closing 'Sophie Martin' for nicolas.moreau@techcorp.fr",
+      "Alternative greeting 'Parfait Claire,' for claire.fontaine@clientcorp.com",
+      "Alternative closing 'Best,' for sarah.jones@globaltech.com and david.kim@partnertech.co.kr",
+      "Specific auto-reply patterns details (JIRA forwarding, specific acknowledgment formats)"
+    ],
+    "incorrect": [
+      "pierre.durand@techcorp.fr: tone should be 'casual' not 'semi-formal', greeting should be 'Pierre, / Salut Pierre,' not 'Bonjour Pierre,'",
+      "support@cloudprovider.com: Completely fabricated contact not in ground truth",
+      "General rules have different names/descriptions than ground truth (though similar intent)",
+      "Auto-reply patterns are vague compared to ground truth specifics"
+    ],
+    "details": "System captured 13/13 contacts from ground truth but added 1 fabricated contact (support@cloudprovider.com). Major issue: pierre.durand@techcorp.fr incorrectly marked as semi-formal instead of casual. Multiple contacts missing alternative greetings/closings that appear in ground truth (e.g., 'Parfait Claire,' for Claire, 'Best,' for Sarah/David). General rules cover the right concepts but with different naming and some added verbosity. Auto-reply patterns are less specific than ground truth. Overall would generate reasonable drafts but with some tone mismatches and less flexibility."
+  },
+  "overall": 79
+}

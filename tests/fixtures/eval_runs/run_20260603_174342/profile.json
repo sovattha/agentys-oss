@@ -1,0 +1,30 @@
+{
+  "user_email": "c.carriere@bcp-banque.fr",
+  "user_name": "Catherine Carrière",
+  "preferred_name": "Catherine",
+  "profession": "Directrice des Ressources Humaines",
+  "signature": {
+    "name": "Catherine Carrière",
+    "title": "Directrice des Ressources Humaines",
+    "company": "Banque Centrale de Paris",
+    "department": null
+  },
+  "tone": {
+    "default_tone": "semi-formal",
+    "addressing": "vous",
+    "greeting_styles": {
+      "semi_formal_fr": "Bonjour {first_name},",
+      "formal_fr": "Monsieur le Directeur Général,"
+    },
+    "closing_styles": {
+      "semi_formal_fr": "Bien cordialement,",
+      "formal_fr": "Cordialement,"
+    },
+    "average_response_length": "medium-long"
+  },
+  "languages": [
+    "fr"
+  ],
+  "language_variant": "fr-FR",
+  "profession_confirmed": false
+}

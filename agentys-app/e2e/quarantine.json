@@ -1,0 +1,880 @@
+{
+  "_comment": "Tests en échec chronique, exclus du run par défaut via grepInvert (playwright.config.ts). Générée depuis les runs nocturnes 06-09→06-12 + validation 06-13, puis purgée des 146 tests récupérés par le passage du e2e en mode API absolu (CSP relaxée en dev — vite.config.ts cspDevRelaxPlugin). Pour exécuter la quarantaine : E2E_QUARANTINE=only yarn test:e2e. Retirer une entrée une fois le test réparé.",
+  "_generated": "2026-06-13",
+  "_source_runs": [
+    "2026-06-09_0312",
+    "2026-06-10_0314",
+    "2026-06-11_0316",
+    "2026-06-12_1843"
+  ],
+  "tests": [
+    {
+      "file": "e2e/accessibility.spec.ts",
+      "title": "Accessibility - Compose Modal › should auto-focus To field in compose modal"
+    },
+    {
+      "file": "e2e/accessibility.spec.ts",
+      "title": "Accessibility - Settings Modal › should trap focus within settings modal when tabbing"
+    },
+    {
+      "file": "e2e/account-manager.spec.ts",
+      "title": "Account Manager - Empty State › should show empty state when no accounts"
+    },
+    {
+      "file": "e2e/auto-archive-after-send.spec.ts",
+      "title": "Auto-archive après envoi › POST /validate contient archive:true quand pas de relance programmée"
+    },
+    {
+      "file": "e2e/auto-archive-after-send.spec.ts",
+      "title": "Auto-archive après envoi › POST /validate ne contient PAS archive:true quand une relance est programmée"
+    },
+    {
+      "file": "e2e/auto-cleanup-toggles.spec.ts",
+      "title": "Auto-cleanup OFF — bannières affichent la suggestion paramètres › brouillons : bannière affiche \"paramètres\" au lieu de \"7 jours\""
+    },
+    {
+      "file": "e2e/auto-cleanup-toggles.spec.ts",
+      "title": "Auto-cleanup ON — bannières affichent le message actif › brouillons : bannière affiche \"supprimés après 7 jours\""
+    },
+    {
+      "file": "e2e/bulk-operations.spec.ts",
+      "title": "Bulk Operations — dossier Spam › affiche des emails dans le dossier spam"
+    },
+    {
+      "file": "e2e/calendar-full-features.spec.ts",
+      "title": "Gmail — ASAP \"Au plus tôt\" › crée l'événement après sélection ASAP (un seul POST)"
+    },
+    {
+      "file": "e2e/calendar-full-features.spec.ts",
+      "title": "Gmail — ASAP \"Au plus tôt\" › double-clic sur un créneau ferme le picker et affiche la confirmation"
+    },
+    {
+      "file": "e2e/calendar-full-features.spec.ts",
+      "title": "Gmail — ASAP \"Au plus tôt\" › le meilleur créneau (.is-best) est visible dans le PickATimePicker"
+    },
+    {
+      "file": "e2e/cleanup-drafts.spec.ts",
+      "title": "Bouton \"Clean up\" — comportement après purge › aucun brouillon n'est visible dans .draft-list-scroll après la purge"
+    },
+    {
+      "file": "e2e/cleanup-drafts.spec.ts",
+      "title": "Bouton \"Clean up\" — comportement après purge › la liste est vide après avoir cliqué sur \"Clean up\""
+    },
+    {
+      "file": "e2e/cleanup-drafts.spec.ts",
+      "title": "Bouton \"Clean up\" — visibilité de la bannière › la bannière .drafts-banner est visible quand des brouillons existent"
+    },
+    {
+      "file": "e2e/cleanup-drafts.spec.ts",
+      "title": "Bouton \"Clean up\" — visibilité de la bannière › le bouton .drafts-cleanup-btn est visible quand des brouillons existent"
+    },
+    {
+      "file": "e2e/cleanup-drafts.spec.ts",
+      "title": "Bouton \"Clean up\" — visibilité de la bannière › le bouton affiche une icône poubelle"
+    },
+    {
+      "file": "e2e/cleanup-noise.spec.ts",
+      "title": "Noise — Bouton désactivé quand liste vide › le bouton est activé quand des emails Noise existent"
+    },
+    {
+      "file": "e2e/cleanup-noise.spec.ts",
+      "title": "Noise — Clic appelle l'API directement (sans confirmation) › l'URL appelée est exactement /api/emails/clean-noise"
+    },
+    {
+      "file": "e2e/cleanup-noise.spec.ts",
+      "title": "Noise — Clic appelle l'API directement (sans confirmation) › le clic sur le bouton appelle POST /api/emails/clean-noise sans dialog"
+    },
+    {
+      "file": "e2e/cleanup-noise.spec.ts",
+      "title": "Noise — Intégration complète › scénario complet : navigation → nettoyage → toast → liste vide"
+    },
+    {
+      "file": "e2e/cleanup-noise.spec.ts",
+      "title": "Noise — Rafraîchissement de la liste après nettoyage › la liste d'emails devient vide après un nettoyage réussi"
+    },
+    {
+      "file": "e2e/cleanup-noise.spec.ts",
+      "title": "Noise — Toast erreur quand l'API retourne 500 › aucun toast de succès n'apparaît quand l'API retourne 500"
+    },
+    {
+      "file": "e2e/cleanup-noise.spec.ts",
+      "title": "Noise — Toast erreur quand l'API retourne 500 › un toast d'erreur apparaît quand l'API clean-noise retourne 500"
+    },
+    {
+      "file": "e2e/cleanup-noise.spec.ts",
+      "title": "Noise — Toast succès après nettoyage › le toast de succès mentionne le nombre d'emails nettoyés"
+    },
+    {
+      "file": "e2e/cleanup-noise.spec.ts",
+      "title": "Noise — Toast succès après nettoyage › un toast de succès apparaît après le nettoyage"
+    },
+    {
+      "file": "e2e/cleanup-spam.spec.ts",
+      "title": "Bouton Nettoyer — annulation › annuler ferme la dialog sans appeler l'API"
+    },
+    {
+      "file": "e2e/cleanup-spam.spec.ts",
+      "title": "Bouton Nettoyer — annulation › appuyer sur Échap ferme la dialog sans appeler l'API"
+    },
+    {
+      "file": "e2e/cleanup-spam.spec.ts",
+      "title": "Bouton Nettoyer — bannière et visibilité › la bannière contient le texte de suppression automatique à 30 jours"
+    },
+    {
+      "file": "e2e/cleanup-spam.spec.ts",
+      "title": "Bouton Nettoyer — ouverture de la confirmation › la dialog présente un bouton Annuler et un bouton de confirmation destructif"
+    },
+    {
+      "file": "e2e/cleanup-trash.spec.ts",
+      "title": "Corbeille — bannière et bouton \"Clean up\" › la bannière affiche le texte d'information sur la suppression automatique"
+    },
+    {
+      "file": "e2e/cleanup-trash.spec.ts",
+      "title": "Corbeille — boîte de confirmation › annuler ferme la boîte de confirmation sans appeler l'API"
+    },
+    {
+      "file": "e2e/cleanup-trash.spec.ts",
+      "title": "Corbeille — état de chargement pendant le vidage › le bouton est désactivé pendant que l'API répond"
+    },
+    {
+      "file": "e2e/close-buttons.spec.ts",
+      "title": "CSS global — audit régression padding boutons icônes › Tous les boutons icônes connus ont padding: 0px",
+      "note": "Déterministe, pré-existant, hors périmètre : .fdp-nav a paddingTop/Bottom=2px, viole l'invariant \"boutons icônes padding:0\". Constat CSS mineur à trier séparément (soit corriger .fdp-nav, soit exclure du set audité)."
+    },
+    {
+      "file": "e2e/comprehensive-compose.spec.ts",
+      "title": "Compose — champs du formulaire › permet de saisir un objet"
+    },
+    {
+      "file": "e2e/comprehensive-compose.spec.ts",
+      "title": "Compose — header › n'affiche que l'action de fermeture"
+    },
+    {
+      "file": "e2e/comprehensive-connection.spec.ts",
+      "title": "Connexion — magic link flow › affiche une erreur si le serveur échoue"
+    },
+    {
+      "file": "e2e/comprehensive-connection.spec.ts",
+      "title": "Connexion — magic link flow › envoie le magic link avec un email valide"
+    },
+    {
+      "file": "e2e/comprehensive-connection.spec.ts",
+      "title": "Connexion — page de login › affiche le bouton magic link"
+    },
+    {
+      "file": "e2e/comprehensive-connection.spec.ts",
+      "title": "Connexion — page de login › affiche le champ email"
+    },
+    {
+      "file": "e2e/comprehensive-connection.spec.ts",
+      "title": "Connexion — page de login › affiche les boutons OAuth (Google/Outlook)"
+    },
+    {
+      "file": "e2e/comprehensive-connection.spec.ts",
+      "title": "Connexion — page de login › le bouton est désactivé sans email"
+    },
+    {
+      "file": "e2e/comprehensive-performance.spec.ts",
+      "title": "Performance — pas de loading bloquant › pas de spinner bloquant après chargement initial"
+    },
+    {
+      "file": "e2e/contact-groups-ui-smoke.spec.ts",
+      "title": "Contact Groups manager shows new UI (search + actions + emoji badge)"
+    },
+    {
+      "file": "e2e/delete-to-trash.spec.ts",
+      "title": "Delete → Trash flow › Inbox affiche les emails cibles"
+    },
+    {
+      "file": "e2e/draft-generation-multi-account.spec.ts",
+      "title": "Génération de brouillon multi-compte › génère le draft avec le compte de réponse actif"
+    },
+    {
+      "file": "e2e/dropdown-audit-visual.spec.ts",
+      "title": "Dropdown UX audit (visual) › 3. UpdateBell — fits in narrow viewport (400px)"
+    },
+    {
+      "file": "e2e/email-compose.spec.ts",
+      "title": "Email Compose - Form Fields › should have AI prompt field"
+    },
+    {
+      "file": "e2e/email-compose.spec.ts",
+      "title": "Email Compose - Form Fields › should have body field"
+    },
+    {
+      "file": "e2e/email-compose.spec.ts",
+      "title": "Email Compose - Form Fields › should have recipient (To) field"
+    },
+    {
+      "file": "e2e/email-compose.spec.ts",
+      "title": "Email Compose - Form Validation › should enable send button with recipient"
+    },
+    {
+      "file": "e2e/email-compose.spec.ts",
+      "title": "Email Compose - Keyboard Shortcuts › should focus To field on open"
+    },
+    {
+      "file": "e2e/email-compose.spec.ts",
+      "title": "Email Compose - Submit › should fill and submit compose form"
+    },
+    {
+      "file": "e2e/email-compose.spec.ts",
+      "title": "Email Compose - Submit › should handle submission error gracefully"
+    },
+    {
+      "file": "e2e/email-compose.spec.ts",
+      "title": "Email Compose - Submit › should show loading state during submission"
+    },
+    {
+      "file": "e2e/email-detail.spec.ts",
+      "title": "Email Detail - Modal View › should open email in modal on double-click"
+    },
+    {
+      "file": "e2e/email-detail.spec.ts",
+      "title": "Email Detail - Performance (prefetch) › should not show loading spinner when detail API responds quickly"
+    },
+    {
+      "file": "e2e/email-flow-integration.spec.ts",
+      "title": "Email Flow Integration (real backend) › charge inbox sans erreur"
+    },
+    {
+      "file": "e2e/email-rendering-1000.spec.ts",
+      "title": "1000 Emails — Rendering & Presentation › email with images shows attachment chips"
+    },
+    {
+      "file": "e2e/email-rendering-1000.spec.ts",
+      "title": "1000 Emails — Rendering & Presentation › list shows 1000 emails with sender, subject visible"
+    },
+    {
+      "file": "e2e/email-rendering-1000.spec.ts",
+      "title": "1000 Emails — Rendering & Presentation › plain text email renders with correct French accents"
+    },
+    {
+      "file": "e2e/email-send-reply-forward.spec.ts",
+      "title": "Ctrl+Enter sends instead of running AI pipeline › Forward — Ctrl+Enter sends",
+      "note": "Reply/ReplyAll Ctrl+Enter passent ; le forward ne déclenche pas l'envoi malgré chip destinataire présent et bouton activé — suspicion de bug réel (forwardTo non lu par handleSend ?) à investiguer côté ReplyComposer, pas un souci de test."
+    },
+    {
+      "file": "e2e/error-states.spec.ts",
+      "title": "Error States - Backend Disconnected › should show disconnected state when backend is down"
+    },
+    {
+      "file": "e2e/faq-import-ui-smoke.spec.ts",
+      "title": "Training page shows FAQs stored in knowledge_entries"
+    },
+    {
+      "file": "e2e/followup-reminder.spec.ts",
+      "title": "createReminder — appel backend après envoi › localStorage contient une entrée type:followup après envoi avec rappel"
+    },
+    {
+      "file": "e2e/inbox-freshness.spec.ts",
+      "title": "Inbox freshness - no stale data on first open › revalidates immediately when backend returns cached data on first load"
+    },
+    {
+      "file": "e2e/inbox-freshness.spec.ts",
+      "title": "Inbox freshness - skip_cache parameter › soft refresh sends skip_cache=true instead of force_refresh=true"
+    },
+    {
+      "file": "e2e/label-library.spec.ts",
+      "title": "Label Library › should close label library"
+    },
+    {
+      "file": "e2e/label-library.spec.ts",
+      "title": "Label Library › should display label items"
+    },
+    {
+      "file": "e2e/label-library.spec.ts",
+      "title": "Label Library › should have favorite star toggle"
+    },
+    {
+      "file": "e2e/label-library.spec.ts",
+      "title": "Label Library › should open label library"
+    },
+    {
+      "file": "e2e/learning-dashboard.spec.ts",
+      "title": "Learning Dashboard › should close learning dashboard"
+    },
+    {
+      "file": "e2e/learning-dashboard.spec.ts",
+      "title": "Learning Dashboard › should display hero stats"
+    },
+    {
+      "file": "e2e/learning-dashboard.spec.ts",
+      "title": "Learning Dashboard › should have period selector buttons"
+    },
+    {
+      "file": "e2e/learning-dashboard.spec.ts",
+      "title": "Learning Dashboard › should open learning dashboard"
+    },
+    {
+      "file": "e2e/login.spec.ts",
+      "title": "Login Page - Display › should have OAuth buttons"
+    },
+    {
+      "file": "e2e/login.spec.ts",
+      "title": "Login Page - Display › should have email input"
+    },
+    {
+      "file": "e2e/login.spec.ts",
+      "title": "Login Page - Display › should have magic link submit button"
+    },
+    {
+      "file": "e2e/login.spec.ts",
+      "title": "Login Page - Magic Link Flow › should keep form visible with empty email"
+    },
+    {
+      "file": "e2e/login.spec.ts",
+      "title": "Login Page - Magic Link Flow › should show error on server failure"
+    },
+    {
+      "file": "e2e/login.spec.ts",
+      "title": "Login Page - Magic Link Flow › should submit magic link request"
+    },
+    {
+      "file": "e2e/mic-and-aicmd-smoke.spec.ts",
+      "title": "NewMessageModal › mic + wand : visibles + toggle + popover"
+    },
+    {
+      "file": "e2e/mic-and-aicmd-smoke.spec.ts",
+      "title": "PendingDraftDetail › mic + wand : visibles + toggle + popover (mock draft)"
+    },
+    {
+      "file": "e2e/mic-and-aicmd-smoke.spec.ts",
+      "title": "ReplyComposer — Forward › mic + wand : visibles + toggle + popover"
+    },
+    {
+      "file": "e2e/mic-and-aicmd-smoke.spec.ts",
+      "title": "ReplyComposer — Reply All › mic + wand : visibles + toggle + popover"
+    },
+    {
+      "file": "e2e/mic-and-aicmd-smoke.spec.ts",
+      "title": "ReplyComposer — Reply › mic + wand : visibles + toggle + popover"
+    },
+    {
+      "file": "e2e/mobile-touch-ux.spec.ts",
+      "title": "Mobile touch UX › ouvre une pièce jointe PDF en preview mobile avec auth"
+    },
+    {
+      "file": "e2e/my-style.spec.ts",
+      "title": "My Style - Modal › should close My Style with close button"
+    },
+    {
+      "file": "e2e/my-style.spec.ts",
+      "title": "My Style - Modal › should display maturity progress bar"
+    },
+    {
+      "file": "e2e/my-style.spec.ts",
+      "title": "My Style - Modal › should open My Style modal"
+    },
+    {
+      "file": "e2e/new-message-signature.spec.ts",
+      "title": "NewMessage — Signature insertion › insère la signature après fermeture et réouverture"
+    },
+    {
+      "file": "e2e/new-message-signature.spec.ts",
+      "title": "NewMessage — Signature insertion › insère la signature au premier affichage"
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Callback - Code exchange (SPA flow) › exchanges code for Gmail via /complete",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Callback - Code exchange (SPA flow) › exchanges code for Outlook via /complete",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Callback - Code exchange (SPA flow) › handles backend error during exchange",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Callback - Code exchange (SPA flow) › handles unreachable backend",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Callback - Error handling › displays error param",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Callback - Error handling › displays error_description",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Callback - Error handling › invalid OAuth result (no params)",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Callback - Mobile Safari fallback › Return to Agentys button navigates away from callback",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Callback - Mobile Safari fallback › countdown completes and leaves OAuth screen (Safari mobile fix)",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Callback - Mobile Safari fallback › never shows \"window will close\" when no opener",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Callback - Mobile Safari fallback › shows \"Redirecting\" message when no window.opener (same-tab flow)",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Callback - Mobile Safari fallback › shows Return to Agentys button immediately on success",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Callback - Success (backend redirect) › displays success for Gmail",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Callback - Success (backend redirect) › displays success for Outlook",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Callback - window.close() failure fallback › shows Return to Agentys button when window.close() fails",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Full Mobile Flow — same-tab auth › JWT is stored in localStorage after callback",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Full Mobile Flow — same-tab auth › no unnecessary page reload after successful auth (same-tab)",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-callback.spec.ts",
+      "title": "OAuth Full Mobile Flow — same-tab auth › user does NOT land on login page after OAuth callback",
+      "note": "Au callback (?success=true&...), l'app affiche la page de LOGIN au lieu de .oauth-callback-title : OAuthCallback complète puis redirige vers / (auth non réelle car token mocké), ou ne monte pas. 18 tests d'un flux OAuth intriqué (PKCE exchange, JWT storage, suppression reload same-tab) dépendant de réponses backend que le catch-all {} ne satisfait pas. Nécessite une session dédiée (fidélité des mocks readiness/complete + vérif comportement reload same-tab — possible vrai bug). Déféré, non mécanique."
+    },
+    {
+      "file": "e2e/oauth-troubleshoot.spec.ts",
+      "title": "OAuth Troubleshooting — popup blocker › shows \"popup blocked, redirecting…\" notice and triggers same-tab redirect"
+    },
+    {
+      "file": "e2e/oauth-troubleshoot.spec.ts",
+      "title": "OAuth Troubleshooting — stalled polling › after ~16s of silent polling, panel offers redirect flow + cancel"
+    },
+    {
+      "file": "e2e/onboarding-training-scan.spec.ts",
+      "title": "Onboarding Training Scan — Entraînement de votre IA › Audit extraction scan — toutes les données remontent à l'UI › Aucun champ critique manquant — assertion globale sur tous les onglets"
+    },
+    {
+      "file": "e2e/onboarding-training-scan.spec.ts",
+      "title": "Onboarding Training Scan — Entraînement de votre IA › Audit extraction scan — toutes les données remontent à l'UI › Style: tone (greeting/closing), contact rules, general rules, forbidden phrases"
+    },
+    {
+      "file": "e2e/onboarding-training-scan.spec.ts",
+      "title": "Onboarding Training Scan — Entraînement de votre IA › Cas d'erreur › Recommencer repart de zéro et relance l'analyse"
+    },
+    {
+      "file": "e2e/onboarding-training-scan.spec.ts",
+      "title": "Onboarding Training Scan — Entraînement de votre IA › Cas d'erreur › serveur HS — stall error apparaît après timeout"
+    },
+    {
+      "file": "e2e/onboarding-training-scan.spec.ts",
+      "title": "Onboarding Training Scan — Entraînement de votre IA › Gmail — happy path › PAS d'erreur de stall quand le serveur répond dans les 5s"
+    },
+    {
+      "file": "e2e/onboarding-training-scan.spec.ts",
+      "title": "Onboarding Training Scan — Entraînement de votre IA › Gmail — happy path › affiche les règles de réponse et les contacts identifiés via les tabs"
+    },
+    {
+      "file": "e2e/onboarding-training-scan.spec.ts",
+      "title": "Onboarding Training Scan — Entraînement de votre IA › Gmail — happy path › démarre et affiche le spinner global + les 4 étapes en cours"
+    },
+    {
+      "file": "e2e/onboarding-training-scan.spec.ts",
+      "title": "Onboarding Training Scan — Entraînement de votre IA › Outlook — happy path › Outlook: démarre et complète l'analyse sans erreur"
+    },
+    {
+      "file": "e2e/onboarding-training-scan.spec.ts",
+      "title": "Onboarding Training Scan — Entraînement de votre IA › Visuel — états des étapes › progress bar avance de 0% à 100%"
+    },
+    {
+      "file": "e2e/onboarding-training-scan.spec.ts",
+      "title": "Onboarding Training Scan — Entraînement de votre IA › Visuel — états des étapes › steps pending dimmed, running teal, completed vert"
+    },
+    {
+      "file": "e2e/pin-and-del-hover.spec.ts",
+      "title": "Unpin via context menu › désépingler via le menu contextuel retire l'email des épinglés"
+    },
+    {
+      "file": "e2e/priority-features.spec.ts",
+      "title": "Send New Message › fills to, subject, body and sends successfully"
+    },
+    {
+      "file": "e2e/protected-attachment-download.spec.ts",
+      "title": "Pièce jointe protégée — téléchargement via API authentifiée"
+    },
+    {
+      "file": "e2e/refine-text.spec.ts",
+      "title": "Refine Text — NewMessageModal › lance le refine via Enter dans le popover"
+    },
+    {
+      "file": "e2e/refine-text.spec.ts",
+      "title": "Refine Text — ReplyComposer › affiche le champ refine dans le reply composer"
+    },
+    {
+      "file": "e2e/refine-text.spec.ts",
+      "title": "Refine Text — ReplyComposer › affiche le menu slash dans le reply composer"
+    },
+    {
+      "file": "e2e/refine-text.spec.ts",
+      "title": "Refine Text — ReplyComposer › peut taper une instruction de refine"
+    },
+    {
+      "file": "e2e/regression-20agents.spec.ts",
+      "title": "B — EmailList : sélection effacée au changement de dossier › la sélection bulk est vide après changement de dossier"
+    },
+    {
+      "file": "e2e/regression-20agents.spec.ts",
+      "title": "B — EmailList : sélection effacée au changement de dossier › le mode multi-select est désactivé après changement de dossier",
+      "note": "Sélecteur multi-select obsolète : .multi-select-toggle/[data-testid=\"bulk-select\"] inexistants dans EmailList. Trouver le vrai déclencheur du mode multi-select."
+    },
+    {
+      "file": "e2e/regression-20agents.spec.ts",
+      "title": "C — EmailDetailModal : clic intérieur ne ferme pas le modal › cliquer sur le backdrop ferme le modal",
+      "note": "Idem : .email-detail-backdrop existe (EmailDetailModal:2486) mais le modal n'est pas ouvert."
+    },
+    {
+      "file": "e2e/regression-20agents.spec.ts",
+      "title": "C — EmailDetailModal : clic intérieur ne ferme pas le modal › cliquer sur le corps du modal ne le ferme pas",
+      "note": "Le modal ne s'ouvre pas au clic [data-testid=\"email-item\"] (.email-detail-content existe mais non monté). Investiguer email-item click → setSelectedEmail."
+    },
+    {
+      "file": "e2e/regression-20agents.spec.ts",
+      "title": "G — PendingDraft : pas de double-envoi sur double-clic › le bouton Annuler reste actif pendant la génération",
+      "note": "Idem G : .draft-item non rendu."
+    },
+    {
+      "file": "e2e/regression-20agents.spec.ts",
+      "title": "G — PendingDraft : pas de double-envoi sur double-clic › le bouton envoyer est désactivé après le premier clic",
+      "note": "nav-drafts ajouté mais .draft-item ne se rend toujours pas malgré setupWithDrafts — MÊME énigme que cleanup-drafts (mapping item.kind dans PendingDraftList). À résoudre une fois pour les deux."
+    },
+    {
+      "file": "e2e/regression-20agents.spec.ts",
+      "title": "H — Search : résultats de la bonne requête affichés › une requête abandonnée n'écrase pas les résultats récents",
+      "note": "Search input s'ouvre maintenant (fix / + smart-search-input), mais .search-result/.search-suggestion non rendus — investiguer le rendu des résultats de requête tapée vs suggestions."
+    },
+    {
+      "file": "e2e/regression-20agents.spec.ts",
+      "title": "I — Calendar : pas de fuite d'état entre modals d'événements › fermer puis rouvrir un autre événement efface l'email lié",
+      "note": "nav-calendar OK mais [data-event-id]/.calendar-event non visible — events non rendus (mock /api/calendar/events ?)."
+    },
+    {
+      "file": "e2e/regression-20agents.spec.ts",
+      "title": "K — MyStyle : champs API cohérents › MyStyle affiche le taux de validation sans 'undefined'",
+      "note": "Pas de lien UI MyStyle ([data-testid=\"mystyle-link\"] inexistant) ; MyStyle s'ouvre via deep-link /my-style (App.tsx:928). Remplacer le clic par page.goto('/my-style') ou trouver le déclencheur réel."
+    },
+    {
+      "file": "e2e/regression-20agents.spec.ts",
+      "title": "M — WebSocket : reconnexion après navigation › les événements WebSocket sont reçus après changement de route",
+      "note": "Clic nav-inbox timeout après nav websocket — état/timing à investiguer."
+    },
+    {
+      "file": "e2e/regression-20agents.spec.ts",
+      "title": "O — Spam : bulk not-spam met à jour la liste › les emails déplacés de spam→inbox disparaissent de la liste spam",
+      "note": "nav-spam OK mais .select-all-checkbox/[data-testid=\"select-all\"] non visible — entrée du mode sélection multiple à corriger."
+    },
+    {
+      "file": "e2e/regression-20agents.spec.ts",
+      "title": "R — Compose : sauvegarde brouillon avec signature › la signature est présente dans le brouillon sauvegardé",
+      "note": "Assertion textContent null — brouillon sauvegardé non relu correctement, investiguer le flux save/draftStorage."
+    },
+    {
+      "file": "e2e/regression-20agents.spec.ts",
+      "title": "T — Modal : fermeture uniquement sur mousedown backdrop › un drag intérieur→extérieur ne ferme pas le modal",
+      "note": "Dépend de l'ouverture du modal détail (même cause que C)."
+    },
+    {
+      "file": "e2e/regression-lessons.spec.ts",
+      "title": "Régression — Settings UI clean › affiche deux jauges de crédits avec libellés neutres"
+    },
+    {
+      "file": "e2e/regression-optimization.spec.ts",
+      "title": "Search & Compose — functional after component removal › SmartSearchBar opens and accepts input"
+    },
+    {
+      "file": "e2e/reminder-sync.spec.ts",
+      "title": "syncRemindersFromBackend — synchro localStorage au démarrage › injecte l'entrée localStorage depuis le backend si absente"
+    },
+    {
+      "file": "e2e/reminder-sync.spec.ts",
+      "title": "syncRemindersFromBackend — synchro localStorage au démarrage › l'email réveillé affiche le badge 🔔 après synchro backend"
+    },
+    {
+      "file": "e2e/reminder-sync.spec.ts",
+      "title": "syncRemindersFromBackend — synchro localStorage au démarrage › ne crée pas de doublon si l'entrée existe déjà en localStorage"
+    },
+    {
+      "file": "e2e/reply-process-async.spec.ts",
+      "title": "Processus IA — polling fallback › async /process sans draft_id → polling récupère le brouillon"
+    },
+    {
+      "file": "e2e/reply-process.spec.ts",
+      "title": "Reply Process — génération IA de brouillon › affiche le reply composer avec le prompt AI visible"
+    },
+    {
+      "file": "e2e/reply-process.spec.ts",
+      "title": "Reply Process — génération IA de brouillon › affiche une erreur quand /process retourne 404"
+    },
+    {
+      "file": "e2e/reply-process.spec.ts",
+      "title": "Reply Process — génération IA de brouillon › ouvre le reply composer et génère un brouillon via Processus IA"
+    },
+    {
+      "file": "e2e/reply-send.spec.ts",
+      "title": "Répondre à un email — flux complet › affiche une erreur si la génération échoue"
+    },
+    {
+      "file": "e2e/reply-send.spec.ts",
+      "title": "Répondre à un email — flux complet › envoie le brouillon après génération IA"
+    },
+    {
+      "file": "e2e/reply-send.spec.ts",
+      "title": "Répondre à un email — flux complet › génère un brouillon avec instructions personnalisées"
+    },
+    {
+      "file": "e2e/reply-send.spec.ts",
+      "title": "Répondre à un email — flux complet › ouvre le composer, génère un brouillon IA, et affiche le texte"
+    },
+    {
+      "file": "e2e/reply-send.spec.ts",
+      "title": "Répondre à un email — échec d'envoi › affiche une erreur si l'envoi échoue"
+    },
+    {
+      "file": "e2e/resilience.spec.ts",
+      "title": "Connection Lifecycle › Retry button triggers reconnection"
+    },
+    {
+      "file": "e2e/resilience.spec.ts",
+      "title": "Connection Lifecycle › auto-reconnects when backend comes back online"
+    },
+    {
+      "file": "e2e/resilience.spec.ts",
+      "title": "Connection Lifecycle › shows disconnected state when backend is down at startup"
+    },
+    {
+      "file": "e2e/resilience.spec.ts",
+      "title": "Connection Lifecycle › treats 500 on /api/ping as disconnected"
+    },
+    {
+      "file": "e2e/schedule-send.spec.ts",
+      "title": "Schedule send — bouton split › cliquer le chevron ouvre le SchedulePicker avec 3 presets"
+    },
+    {
+      "file": "e2e/schedule-send.spec.ts",
+      "title": "Schedule send — bouton split › selectionner 'Demain matin' programme l'email et ferme le modal"
+    },
+    {
+      "file": "e2e/schedule-send.spec.ts",
+      "title": "Schedule send — vue Plus tard › un email programme apparait dans la liste unifiee"
+    },
+    {
+      "file": "e2e/search-all-folders.spec.ts",
+      "title": "Palette d'opérateurs — dates › 1. \"Après:\" visible dans les suggestions à vide"
+    },
+    {
+      "file": "e2e/search-all-folders.spec.ts",
+      "title": "Palette d'opérateurs — dates › 2. \"Avant:\" visible dans les suggestions à vide"
+    },
+    {
+      "file": "e2e/search-all-folders.spec.ts",
+      "title": "Palette d'opérateurs — dates › 5. Sélectionner \"Cette semaine\" crée un chip \"Après\" (avec accent)"
+    },
+    {
+      "file": "e2e/search-all-folders.spec.ts",
+      "title": "Palette d'opérateurs — dates › 6. Chip \"Avant\" a l'accent correct"
+    },
+    {
+      "file": "e2e/search-inline-filter.spec.ts",
+      "title": "Inline filter panel — interactions › N7. Cliquer \"Après :\" → grille de dates visible, pas d'input texte",
+      "note": "UI redesignée : .inline-date-grid + chips presets remplacés par un date-picker natif (.inline-date-picker, SearchSuggestionsDropdown:233). Fonctionnalité date couverte en unit (SmartSearchBar.test.tsx:338). Réécrire vers .inline-date-picker ou supprimer."
+    },
+    {
+      "file": "e2e/search-inline-filter.spec.ts",
+      "title": "Inline filter panel — interactions › N8. Cliquer \"Cette semaine\" → chip after: créé, inline panel fermé",
+      "note": "Idem N7 : preset \"Cette semaine\" (inline-date-chip) retiré au profit du date-picker natif."
+    },
+    {
+      "file": "e2e/search-inline-filter.spec.ts",
+      "title": "Inline filter panel — ouverture › N2. Groupes Personnes, Contenu, Date visibles dans la palette",
+      "note": "Comportemental : groupe \"Contenu\" non visible dans le dropdown — vérifier la condition d'affichage des group headers."
+    },
+    {
+      "file": "e2e/search-inline-filter.spec.ts",
+      "title": "Régression — flux type-based › R1. Taper \"from:john\" dans la barre → dropdown visible, pas de inline panel",
+      "note": "Comportemental : .search-suggestions-dropdown non visible après fill \"from:jo\" — à investiguer (le dropdown se ferme peut-être au parse de l'opérateur complet)."
+    },
+    {
+      "file": "e2e/sent-folder.spec.ts",
+      "title": "Dossier Envoyés — détail headers-only puis body chargé › ne reste pas bloqué sur Chargement quand le detail retourne un body vide"
+    },
+    {
+      "file": "e2e/settings-parameters.spec.ts",
+      "title": "Settings > Compte › signature modal charge la signature existante"
+    },
+    {
+      "file": "e2e/settings-parameters.spec.ts",
+      "title": "Settings > Compte › signature modal charge sans erreur"
+    },
+    {
+      "file": "e2e/settings-parameters.spec.ts",
+      "title": "Settings > Compte › signature modal se ferme avec Back"
+    },
+    {
+      "file": "e2e/settings-parameters.spec.ts",
+      "title": "Settings > Compte › signature modal se ferme avec X"
+    },
+    {
+      "file": "e2e/settings-parameters.spec.ts",
+      "title": "Settings > Console Errors › pas d'erreurs console critiques lors de la navigation settings"
+    },
+    {
+      "file": "e2e/shortcuts-help.spec.ts",
+      "title": "Shortcuts Help Panel › should close panel with close button"
+    },
+    {
+      "file": "e2e/shortcuts-help.spec.ts",
+      "title": "Shortcuts Help Panel › should have reset all shortcuts button"
+    },
+    {
+      "file": "e2e/shortcuts.spec.ts",
+      "title": "Keyboard Shortcuts › should show shortcuts help with Cmd+/"
+    },
+    {
+      "file": "e2e/signature-fixes.spec.ts",
+      "title": "Bug #1 — stripEmbeddedSignature : pas de signature dupliquée › signature avec divs imbriqués → une seule occurrence dans l'éditeur"
+    },
+    {
+      "file": "e2e/signature-fixes.spec.ts",
+      "title": "Bug #1 — stripEmbeddedSignature : pas de signature dupliquée › signature simple → une seule occurrence dans l'éditeur"
+    },
+    {
+      "file": "e2e/signature-fixes.spec.ts",
+      "title": "Bug #2 — Corps mentionnant le signataire → signature quand même affichée › corps contenant le nom du signataire → signature présente dans l'éditeur"
+    },
+    {
+      "file": "e2e/signature-fixes.spec.ts",
+      "title": "Bug #3 — Compte avec seulement signature_html → signature affichée › signature HTML uniquement → texte de signature visible dans l'éditeur"
+    },
+    {
+      "file": "e2e/signature-fixes.spec.ts",
+      "title": "Bug #4 — current_account_id correct → bonne signature affichée › signature du compte actif (id=42) et non du compte par défaut (id=1)"
+    },
+    {
+      "file": "e2e/signature-fixes.spec.ts",
+      "title": "Régression — comportement global des signatures › smoke — reply composer avec signature s'ouvre sans erreur"
+    },
+    {
+      "file": "e2e/signature-preview.spec.ts",
+      "title": "Signature Preview — PendingDraftDetail › signature a une opacité réduite"
+    },
+    {
+      "file": "e2e/signature-preview.spec.ts",
+      "title": "Signature Preview — PendingDraftDetail › signature est non-interactive (pointer-events: none)"
+    },
+    {
+      "file": "e2e/snippet-library.spec.ts",
+      "title": "Snippet Library › should close snippet library"
+    },
+    {
+      "file": "e2e/snippet-library.spec.ts",
+      "title": "Snippet Library › should display snippets list"
+    },
+    {
+      "file": "e2e/snippet-library.spec.ts",
+      "title": "Snippet Library › should have create button"
+    },
+    {
+      "file": "e2e/snippet-library.spec.ts",
+      "title": "Snippet Library › should have search input"
+    },
+    {
+      "file": "e2e/snippet-library.spec.ts",
+      "title": "Snippet Library › should have tab switcher"
+    },
+    {
+      "file": "e2e/snippet-library.spec.ts",
+      "title": "Snippet Library › should open snippet library"
+    },
+    {
+      "file": "e2e/snooze-badges.spec.ts",
+      "title": "API /api/reminders — follow-up backend › POST /api/reminders accepte email_id + subject + reminder_date"
+    },
+    {
+      "file": "e2e/snooze-badges.spec.ts",
+      "title": "Régression — snooze via context menu cache l'email › après snooze via clic droit, l'email disparaît immédiatement de la liste"
+    },
+    {
+      "file": "e2e/snooze-badges.spec.ts",
+      "title": "Régression — snooze via context menu cache l'email › le StorageEvent est bien dispatché (useSnooze réactif sans reload)"
+    },
+    {
+      "file": "e2e/snooze-badges.spec.ts",
+      "title": "Snooze badges — zzz et 🔔 › badge 🔔 a les bonnes couleurs CSS (ambre)"
+    },
+    {
+      "file": "e2e/snooze-badges.spec.ts",
+      "title": "Snooze badges — zzz et 🔔 › badge 🔔 affiché pour un rappel follow-up révéillé"
+    },
+    {
+      "file": "e2e/snooze-badges.spec.ts",
+      "title": "Snooze badges — zzz et 🔔 › badges zzz et 🔔 coexistent pour deux emails différents"
+    },
+    {
+      "file": "e2e/snooze-badges.spec.ts",
+      "title": "Snooze badges — zzz et 🔔 › follow-up révéillé déclenche automatiquement la génération du brouillon"
+    },
+    {
+      "file": "e2e/spam-folder.spec.ts",
+      "title": "Indésirables — affichage liste › affiche la bannière spam avec info 30 jours"
+    },
+    {
+      "file": "e2e/support-panel.spec.ts",
+      "title": "Support Panel - Chat Home › should display Browse all help link"
+    },
+    {
+      "file": "e2e/support-panel.spec.ts",
+      "title": "Support Panel - Chat Home › should display popular articles section"
+    },
+    {
+      "file": "e2e/support-panel.spec.ts",
+      "title": "Support Panel - Chat Home › welcome cards should have subtitles"
+    },
+    {
+      "file": "e2e/thread-collapsing.spec.ts",
+      "title": "Thread Collapsing — Gmail-style › le badge thread count affiche le nombre correct"
+    },
+    {
+      "file": "e2e/trash-folder.spec.ts",
+      "title": "Corbeille — comportements spécifiques › affiche une bannière ou information relative à la Corbeille"
+    },
+    {
+      "file": "e2e/wizard-stuck-recovery.spec.ts",
+      "title": "Wizard — En attente recovery › auth:login_success event re-runs /api/init and unblocks the wizard"
+    },
+    {
+      "file": "e2e/wizard-stuck-recovery.spec.ts",
+      "title": "Wizard — En attente recovery › visibility change refreshes account data when wizard is stuck without accountId"
+    }
+  ]
+}

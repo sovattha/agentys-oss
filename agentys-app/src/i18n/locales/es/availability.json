@@ -1,0 +1,23 @@
+{
+  "button_label": "Insertar disponibilidad",
+  "button_title": "Insertar enlace de reserva o horas libres en tu respuesta",
+  "mode_link_only": "Insertar enlace de reserva",
+  "mode_free_times": "Insertar horas libres",
+  "mode_free_times_and_link": "Insertar horas + enlace",
+  "mode_link_missing_badge": "Sin enlace",
+  "no_booking_link_warning": "Añade un enlace en Ajustes → Productividad primero.",
+
+  "picker_title": "Elige los horarios que quieres ofrecer",
+  "picker_hint": "Haz clic en un horario libre para añadirlo. × para quitar.",
+  "select_times_hint": "Selecciona horarios para insertar en tu respuesta.",
+  "selected_count_one": "{{count}} horario seleccionado",
+  "selected_count_other": "{{count}} horarios seleccionados",
+  "insert": "Insertar",
+
+  "duration_minutes_one": "{{count}} min",
+  "duration_minutes_other": "{{count}} min",
+
+  "busy_unnamed": "Ocupado",
+  "emails_check": "Emails",
+  "personal_work": "Trabajo personal"
+}

@@ -1,0 +1,227 @@
+{
+  "aggregate": {
+    "critic": {
+      "coherence": 87,
+      "tone": 80,
+      "completeness": 75,
+      "errors": 84,
+      "conciseness": 87,
+      "emotional_intelligence": 64,
+      "overall": 78
+    },
+    "judge": {
+      "faithfulness": 87,
+      "completeness": 81,
+      "tone_match": 77,
+      "conciseness": 87,
+      "overall": 83
+    }
+  },
+  "cases": [
+    {
+      "case_id": "msg-002",
+      "subject": "Point hebdo projet Alpha",
+      "draft": "Bonne progression sur le sprint 12, le taux de 95% est solide.\n\nLa correction des deux bugs critiques est une bonne nouvelle, notamment AUTH-234 côté authentification. La validation de l'intégration paiement reste le point à surveiller en priorité pour la semaine prochaine.\n\nLes +15% sur le temps de réponse suite au refactoring, c'est un gain concret — à intégrer dans le reporting projet.\n\nPour le sprint 13, les priorités côté [À confirmer] restent à aligner en début de semaine.\n\nBonne fin de semaine également.\n",
+      "elapsed_draft_s": 13.53,
+      "critic": {
+        "coherence": 82,
+        "tone": 78,
+        "completeness": 75,
+        "errors": 72,
+        "conciseness": 80,
+        "over_commitment": 65,
+        "emotional_intelligence": 60,
+        "overall": 73,
+        "decision": "valid",
+        "suggestions": [
+          "Supprimer sprint 13",
+          "Alléger conclusion"
+        ]
+      },
+      "judge": {
+        "faithfulness": 72,
+        "completeness": 78,
+        "tone_match": 82,
+        "conciseness": 75,
+        "overall": 77,
+        "strengths": [
+          "Ton semi-formel approprié, miroir du mail de Pierre (ni trop formel ni familier)",
+          "Les éléments factuels repris sont exacts : 95% sprint 12, AUTH-234, PAY-567, +15% temps de réponse",
+          "La priorisation de l'intégration paiement pour la semaine suivante est une inférence logique du contexte"
+        ],
+        "weaknesses": [
+          "Aucune question ni demande actionnable dans l'email entrant, donc completeness structurellement limitée — le brouillon comble ce vide avec des relances non sollicitées",
+          "Le placeholder '[À confirmer]' est une faiblesse rédactionnelle laissée en suspens, ce qui affaiblit la qualité du brouillon",
+          "Légère tendance au remplissage : 'à intégrer dans le reporting projet' est une reformulation sans valeur ajoutée",
+          "Absence de salutation initiale ('Bonjour Pierre') alors que l'email entrant en comporte une — légère rupture de symétrie"
+        ],
+        "hallucinations": [
+          "Mention implicite que AUTH-234 concerne 'côté authentification' — c'est une déduction du préfixe du ticket, pas une information fournie explicitement, borderline mais acceptable",
+          "Aucune hallucination franche détectée"
+        ]
+      }
+    },
+    {
+      "case_id": "msg-004",
+      "subject": "Proposition commerciale - Projet Beta",
+      "draft": "Voici les précisions demandées concernant notre proposition pour le projet Beta :\n\n1. Délai de livraison : [À confirmer] — nous pouvons examiner les marges de flexibilité selon vos contraintes opérationnelles.\n\n2. Budget : [À confirmer] — la maintenance n'est pas incluse dans l'enveloppe initiale et ferait l'objet d'un contrat distinct.\n\n3. Équipe affectée : [À confirmer] — la composition précise dépend du périmètre final validé.\n\nNous pouvons organiser un échange pour lever ces points rapidement si vous le souhaitez.\n",
+      "elapsed_draft_s": 9.33,
+      "critic": {
+        "coherence": 88,
+        "tone": 82,
+        "completeness": 78,
+        "errors": 72,
+        "conciseness": 85,
+        "over_commitment": 78,
+        "emotional_intelligence": 60,
+        "overall": 77,
+        "decision": "valid",
+        "suggestions": [
+          "Combler les [À confirmer]",
+          "Ajouter salutation chaleureuse"
+        ]
+      },
+      "judge": {
+        "faithfulness": 85,
+        "completeness": 72,
+        "tone_match": 62,
+        "conciseness": 88,
+        "overall": 77,
+        "strengths": [
+          "Aucune information inventée : les placeholders [À confirmer] signalent explicitement l'absence de données plutôt que de les fabriquer",
+          "Toutes les trois questions sont adressées dans le même ordre que l'email entrant",
+          "Longueur proportionnée à la demande, sans remplissage ni répétition"
+        ],
+        "weaknesses": [
+          "Ton trop informel : l'email entrant est signé 'Cordialement' avec titre complet (Directrice des Achats) et en-tête formel — le brouillon n'ouvre ni ne ferme avec une formule de politesse, ce qui crée un décrochage de formalité",
+          "Absence de salutation ('Bonjour Madame Leclerc') et de signature de l'expéditeur — éléments attendus dans une correspondance professionnelle B2B formelle",
+          "Les réponses aux trois questions restent vagues via '[À confirmer]' sans apporter de valeur réelle : la complétude est formelle mais pas substantielle, l'email ne peut pas avancer sans ces informations",
+          "La phrase de proposition d'échange, bien que utile, reste conditionnelle ('si vous le souhaitez') là où une invitation proactive serait plus engageante"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-035",
+      "subject": "Re: Proposition commerciale - Projet Beta",
+      "draft": "Bonjour Madame Leclerc,\n\nJe prends note de votre validation et vous transmets le contrat pour signature dans les prochains jours.\n\nUne fois signé, nous procéderons à la mise en place de l'équipe pour le démarrage du 3 mars.\n",
+      "elapsed_draft_s": 10.01,
+      "critic": {
+        "coherence": 85,
+        "tone": 88,
+        "completeness": 72,
+        "errors": 90,
+        "conciseness": 85,
+        "over_commitment": 55,
+        "emotional_intelligence": 70,
+        "overall": 77,
+        "decision": "valid",
+        "suggestions": [
+          "Préciser délai contrat",
+          "Supprimer «prochains jours»"
+        ]
+      },
+      "judge": {
+        "faithfulness": 92,
+        "completeness": 85,
+        "tone_match": 88,
+        "conciseness": 90,
+        "overall": 89,
+        "strengths": [
+          "Aucune information inventée : le budget (85k EUR) et la date de démarrage (3 mars) sont repris fidèlement de l'historique",
+          "La demande principale (envoi du contrat) est bien adressée",
+          "Ton professionnel et formel cohérent avec l'échange entre Mme Martin et Mme Leclerc",
+          "Réponse concise, sans remplissage inutile"
+        ],
+        "weaknesses": [
+          "L'expression 'dans les prochains jours' est vague — aucun délai précis n'est donné, là où la référence mentionne 48h (bien que ce délai ne figure pas dans l'email entrant non plus)",
+          "Absence de signature (nom, titre, coordonnées) alors que toutes les réponses précédentes de Sophie Martin incluent une signature complète",
+          "Pas d'accusé enthousiaste de la validation — ton légèrement plat par rapport au contexte positif",
+          "La mention 'mise en place de l'équipe' n'est pas explicitement demandée par Mme Leclerc et introduit une information non sollicitée, bien qu'elle soit cohérente avec l'historique"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-006",
+      "subject": "Partnership opportunity - Q1 2026",
+      "draft": "A preliminary discussion makes sense — API integration and cloud migration are areas where our teams could find meaningful overlap.\n\nI'm available [À confirmer : dates/créneaux] for a first call. Feel free to share a few time slots that work on your end and I'll confirm one.\n",
+      "elapsed_draft_s": 9.83,
+      "critic": {
+        "coherence": 88,
+        "tone": 72,
+        "completeness": 78,
+        "errors": 90,
+        "conciseness": 92,
+        "over_commitment": 85,
+        "emotional_intelligence": 65,
+        "overall": 81,
+        "decision": "valid",
+        "suggestions": [
+          "Ajouter prénom",
+          "Reconnaître la flatterie"
+        ]
+      },
+      "judge": {
+        "faithfulness": 90,
+        "completeness": 85,
+        "tone_match": 62,
+        "conciseness": 88,
+        "overall": 81,
+        "strengths": [
+          "Aucune information inventée : pas de dates, noms, titres ou faits hallucinés",
+          "La question centrale (discussion préliminaire) est adressée positivement et directement",
+          "Très concis, sans remplissage ni répétition",
+          "Le placeholder '[À confirmer : dates/créneaux]' est honnête plutôt qu'une date fabriquée"
+        ],
+        "weaknesses": [
+          "Ton trop décontracté pour un premier contact B2B formel : l'email entrant utilise 'Dear Sophie', 'Kind regards', signalant un registre professionnel soutenu ; le brouillon n'a ni salutation, ni formule de politesse, ni signature",
+          "Absence de remerciement ou d'accusé de réception, ce qui est attendu dans un échange formel entrant",
+          "Pas de signature (nom, titre, coordonnées), ce qui est standard dans ce type de correspondance",
+          "La phrase d'ouverture plonge directement dans le sujet sans transition — rupture de protocole pour un premier contact"
+        ],
+        "hallucinations": []
+      }
+    },
+    {
+      "case_id": "msg-020",
+      "subject": "Re: Partnership opportunity - Q1 2026",
+      "draft": "Hi Sarah,\n\nThursday 2 PM CET works for me. I'll review the documentation before the call.\n",
+      "elapsed_draft_s": 4.53,
+      "critic": {
+        "coherence": 90,
+        "tone": 82,
+        "completeness": 72,
+        "errors": 95,
+        "conciseness": 95,
+        "over_commitment": 88,
+        "emotional_intelligence": 65,
+        "overall": 83,
+        "decision": "valid",
+        "suggestions": [
+          "Accuser réception docs",
+          "Confirmer Teams invite"
+        ]
+      },
+      "judge": {
+        "faithfulness": 95,
+        "completeness": 85,
+        "tone_match": 90,
+        "conciseness": 95,
+        "overall": 91,
+        "strengths": [
+          "Aucune information inventée ou hallucinée",
+          "Confirme les deux points actionnables clés : la disponibilité jeudi 14h CET et la relecture de la documentation",
+          "Ton informel cohérent avec l'email entrant ('Hi Sarah') et avec la réponse précédente de Sophie ('Hi John')",
+          "Extrêmement concis, sans remplissage"
+        ],
+        "weaknesses": [
+          "Ne remercie pas Sarah pour l'envoi de la documentation ni pour avoir pris le relais de John, ce qui aurait renforcé la courtoisie",
+          "Absence de signature professionnelle (nom, titre, coordonnées) alors que Sophie en utilisait une dans l'historique",
+          "N'accuse pas réception explicitement du changement d'interlocuteur (Sarah remplace John pour les discussions techniques), ce qui pourrait sembler légèrement abrupt"
+        ],
+        "hallucinations": []
+      }
+    }
+  ]
+}

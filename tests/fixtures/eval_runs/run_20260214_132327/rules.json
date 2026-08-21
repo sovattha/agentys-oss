@@ -1,0 +1,184 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "pierre.durand@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour Pierre,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "lucas.bernard@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "greeting": "Salut Lucas,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "equipe-digitale@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Bonjour a tous,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "marie.leclerc@clientcorp.com",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Madame Leclerc,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "camille.roux@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "greeting": "Camille,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "sarah.jones@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi Sarah,",
+      "closing": "Best regards,\nSophie Martin\nProject Manager - Digital Division\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "nicolas.moreau@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Nicolas,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "ceo@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Marc,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale"
+    },
+    {
+      "contact_email": "amelie.petit@fournisseur.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Madame Petit,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "contact@prospect-startup.io",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Thomas,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "david.kim@partnertech.co.kr",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi David,",
+      "closing": "Best regards,\nSophie"
+    },
+    {
+      "contact_email": "recrutement@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour,",
+      "closing": "Merci,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "elena.volkov@eupartner.de",
+      "tone": "formal",
+      "language": "en",
+      "greeting": "Dear Elena,",
+      "closing": "Best regards,\nSophie"
+    },
+    {
+      "contact_email": "it-support@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale"
+    },
+    {
+      "contact_email": "claire.fontaine@clientcorp.com",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Claire,",
+      "closing": "Cordialement,\nSophie Martin\nChef de projet - Division Digitale\nTechCorp | +33 6 12 34 56 78"
+    }
+  ],
+  "general_rules": [
+    {
+      "name": "tutoiement_equipe_proche",
+      "description": "Use tu form and casual tone with direct team members (Lucas)",
+      "trigger": "Internal email to direct reports or close team members",
+      "action": "Use Salut greeting, tu form, first name only as closing"
+    },
+    {
+      "name": "vouvoiement_externe",
+      "description": "Always use vous form with external clients and partners",
+      "trigger": "Email to external contacts (non-@techcorp.fr)",
+      "action": "Use formal greeting with title (Madame/Monsieur), vous form, full signature"
+    },
+    {
+      "name": "vouvoiement_hierarchie",
+      "description": "Use vous form with management and formal internal departments",
+      "trigger": "Email to CEO, finance, HR, or IT support",
+      "action": "Use Bonjour + first name or service name, vous form, full signature"
+    },
+    {
+      "name": "semi_formal_pairs",
+      "description": "Use semi-formal tone with peer colleagues (Pierre, Camille)",
+      "trigger": "Internal email to same-level colleagues",
+      "action": "Use Bonjour + first name or just first name, vous form, first name only as closing"
+    },
+    {
+      "name": "signature_externe",
+      "description": "Include full signature block for external contacts",
+      "trigger": "Email to external domains",
+      "action": "Add full signature: Sophie Martin + title + company + phone"
+    },
+    {
+      "name": "signature_interne_casual",
+      "description": "Use first name only for internal casual contacts",
+      "trigger": "Internal email to team members (casual tone)",
+      "action": "Sign with just Sophie or Sophi"
+    },
+    {
+      "name": "signature_interne_formal",
+      "description": "Use full signature for internal formal contacts",
+      "trigger": "Internal email to management, finance, or formal departments",
+      "action": "Add full signature with title and contact"
+    },
+    {
+      "name": "english_external_partners",
+      "description": "Switch to English for international partners",
+      "trigger": "Email to non-French domains (.com, .co.kr, .de)",
+      "action": "Write in English with Hi/Dear greeting and Best regards closing"
+    },
+    {
+      "name": "numbered_lists_technical",
+      "description": "Use numbered lists for action items and specifications",
+      "trigger": "Technical discussions, specifications, or action items",
+      "action": "Structure content with numbered lists for clarity"
+    },
+    {
+      "name": "bullet_points_status",
+      "description": "Use bullet points for status updates and summaries",
+      "trigger": "Sprint planning, status reports, meeting recaps",
+      "action": "Use dashes or bullets for list items"
+    },
+    {
+      "name": "cc_for_technical_lead",
+      "description": "CC Pierre (technical lead) on technical or external discussions",
+      "trigger": "External partnerships with technical aspects or internal technical validation",
+      "action": "Add Pierre Durand in CC"
+    },
+    {
+      "name": "concise_replies",
+      "description": "Keep replies short and direct for quick exchanges",
+      "trigger": "Follow-up or confirmation emails",
+      "action": "Brief response with minimal formality"
+    }
+  ],
+  "forbidden_phrases": []
+}

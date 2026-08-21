@@ -1,0 +1,144 @@
+{
+  "contacts": [
+    {
+      "email": "samira@immoplus-lyon.fr",
+      "name": "Samira Bensaid",
+      "company": "ImmoPlus Lyon",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "casual",
+      "language_variant": "fr-FR",
+      "interaction_count": 13
+    },
+    {
+      "email": "delphine.mercier@gmail.com",
+      "name": "Delphine Mercier",
+      "company": null,
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 10
+    },
+    {
+      "email": "julien@immoplus-lyon.fr",
+      "name": "Julien Roche",
+      "company": "ImmoPlus Lyon",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "casual",
+      "language_variant": "fr-FR",
+      "interaction_count": 9
+    },
+    {
+      "email": "jp.astier@promoval.fr",
+      "name": "Jean-Philippe Astier",
+      "company": "Promoval",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 7
+    },
+    {
+      "email": "famille.lambert@orange.fr",
+      "name": "Famille Laurent",
+      "company": null,
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 7
+    },
+    {
+      "email": "hugo.m@immoplus-lyon.fr",
+      "name": "Hugo Martin",
+      "company": "ImmoPlus Lyon",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "casual",
+      "language_variant": "fr-FR",
+      "interaction_count": 5
+    },
+    {
+      "email": "p.cassagne@notaire-cassagne.fr",
+      "name": "Pierre Cassagne",
+      "company": "Notaire Cassagne",
+      "title": "Notaire",
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 6
+    },
+    {
+      "email": "direction@immoplus-lyon.fr",
+      "name": "Catherine Vernet",
+      "company": "ImmoPlus Lyon",
+      "title": "Direction",
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 5
+    },
+    {
+      "email": "e.blanchard@diagimmo.fr",
+      "name": "Éric Blanchard",
+      "company": "DiagImmo",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 5
+    },
+    {
+      "email": "nadia.ferhat@bnp-immo.fr",
+      "name": "Nadia Ferhat",
+      "company": "BNP Paribas Immobilier",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 5
+    },
+    {
+      "email": "a.fournier@sfr.fr",
+      "name": "Anne Fournier",
+      "company": null,
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 3
+    },
+    {
+      "email": "celine.dupuis@laposte.net",
+      "name": "Céline Dupuis",
+      "company": null,
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "semi-formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 3
+    },
+    {
+      "email": "photo.vernier@gmail.com",
+      "name": "Stéphane Vernier",
+      "company": null,
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "casual",
+      "language_variant": "fr-FR",
+      "interaction_count": 3
+    },
+    {
+      "email": "t.nakamura@investcorp.jp",
+      "name": "Takeshi Nakamura",
+      "company": "InvestCorp",
+      "title": null,
+      "preferred_language": "fr",
+      "preferred_tone": "formal",
+      "language_variant": "fr-FR",
+      "interaction_count": 3
+    }
+  ]
+}

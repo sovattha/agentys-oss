@@ -1,0 +1,21 @@
+.agent-avatar {
+  width: var(--avatar-size, 28px);
+  height: var(--avatar-size, 28px);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--avatar-color) 15%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--avatar-color) 40%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.agent-avatar-initials {
+  font-size: calc(var(--avatar-size, 28px) * 0.36);
+  font-weight: 700;
+  color: var(--avatar-color);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  user-select: none;
+}

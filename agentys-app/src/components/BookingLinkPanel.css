@@ -1,0 +1,341 @@
+/* ============================================================================
+   BOOKING LINK PANEL — modal, status card, helper card
+   ============================================================================ */
+
+.booking-link-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-light, rgba(15, 23, 42, 0.4));
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal, 9000);
+  animation: booking-link-overlay-in 180ms ease-out;
+}
+
+@keyframes booking-link-overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.booking-link-panel {
+  background: var(--surface-primary, #ffffff);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  border-radius: var(--radius-xl, 16px);
+  max-width: 540px;
+  width: 92%;
+  max-height: 85vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18), 0 6px 16px rgba(0, 0, 0, 0.08);
+  animation: booking-link-panel-in 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.booking-link-panel.closing {
+  animation: booking-link-panel-out 160ms ease-in forwards;
+}
+
+@keyframes booking-link-panel-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+@keyframes booking-link-panel-out {
+  from { opacity: 1; transform: translateY(0)   scale(1); }
+  to   { opacity: 0; transform: translateY(8px) scale(0.98); }
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+.booking-link-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid var(--border-subtle, #e2e8f0);
+}
+
+.booking-link-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.booking-link-header h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary, #0f172a);
+  letter-spacing: -0.01em;
+}
+
+.booking-link-back,
+.booking-link-close {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 6px;
+  border-radius: 8px;
+  color: var(--text-secondary, #64748b);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+/* ── Body ─────────────────────────────────────────────────── */
+.booking-link-content {
+  padding: 16px 22px 22px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.booking-link-intro {
+  font-size: 13px;
+  color: var(--text-secondary, #64748b);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Saved pill (replaces the floating status dot) ────────── */
+.booking-link-saved-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px 2px 6px;
+  border-radius: 9999px;
+  background: color-mix(in srgb, #16a34a 12%, transparent);
+  color: #16a34a;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  border: 1px solid color-mix(in srgb, #16a34a 30%, transparent);
+  transition: all 200ms ease;
+  flex-shrink: 0;
+}
+
+.booking-link-saved-pill.just-saved {
+  background: color-mix(in srgb, #16a34a 22%, transparent);
+  border-color: color-mix(in srgb, #16a34a 50%, transparent);
+  animation: booking-link-pill-flash 600ms ease-out;
+}
+
+@keyframes booking-link-pill-flash {
+  0%   { transform: scale(0.92); opacity: 0.6; }
+  60%  { transform: scale(1.04); opacity: 1; }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+.booking-link-saved-pill.is-pending {
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 12%, transparent);
+  color: var(--accent-primary, #0d9488);
+  border-color: color-mix(in srgb, var(--accent-primary, #0d9488) 30%, transparent);
+}
+
+.booking-link-spinner {
+  animation: booking-link-spin 700ms linear infinite;
+}
+
+@keyframes booking-link-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Status row (validation message + clear text-link) ─────── */
+.booking-link-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 18px;
+  margin-top: 4px;
+}
+
+.booking-link-row-status {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.booking-link-clear-link {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary, #94a3b8);
+  font-size: 11.5px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: inherit;
+  flex-shrink: 0;
+  transition: color 120ms ease, background 120ms ease;
+}
+
+/* ── Inline hint / warn / error ────────────────────────────── */
+.booking-link-hint {
+  font-size: 11.5px;
+  margin: 0;
+  line-height: 1.4;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.booking-link-hint--ok {
+  color: #16a34a;
+}
+
+.booking-link-hint--warn {
+  color: #b45309;
+}
+
+.booking-link-error {
+  font-size: 11.5px;
+  margin: 0;
+  line-height: 1.4;
+  color: var(--text-danger, #dc2626);
+}
+
+/* ── Help card (provider-tailored steps) ───────────────────── */
+.booking-link-help-card {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 20%, transparent);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.booking-link-help-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.booking-link-help-logo {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  padding: 2px;
+  border-radius: 6px;
+  background: var(--surface-primary, #fff);
+  border: 1px solid color-mix(in srgb, var(--border-default, #e2e8f0) 60%, transparent);
+}
+
+.booking-link-help-logo--generic {
+  color: var(--accent-primary, #0d9488);
+  padding: 3px;
+}
+
+.booking-link-help-head-text {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.booking-link-help-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary, #0f172a);
+  line-height: 1.3;
+}
+
+.booking-link-help-intro {
+  font-size: 12.5px;
+  color: var(--text-secondary, #64748b);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Numbered chip-style steps — guaranteed visible regardless of any
+   global `ol` reset that might strip default markers. */
+.booking-link-help-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.booking-link-help-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 12.5px;
+  color: var(--text-primary, #0f172a);
+  line-height: 1.5;
+}
+
+.booking-link-help-step-num {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-primary, #0d9488);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+.booking-link-help-step-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.booking-link-help-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.booking-link-help-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 120ms ease;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.booking-link-help-btn--primary {
+  background: var(--accent-primary, #0d9488);
+  border: 1px solid var(--accent-primary, #0d9488);
+  color: #fff;
+}
+
+.booking-link-help-btn--secondary {
+  background: transparent;
+  border: 1px solid var(--border-default, #e2e8f0);
+  color: var(--text-primary, #0f172a);
+}
+
+.booking-link-help-footnote {
+  font-size: 11.5px;
+  color: var(--text-tertiary, #94a3b8);
+  margin: 4px 0 0;
+  line-height: 1.4;
+}

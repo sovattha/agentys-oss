@@ -1,0 +1,107 @@
+/* ============================================================================
+   GHOST ADD CARD — dashed "add" affordance shaped like a content card.
+   Sits as the first cell of a card grid (Label library, Snippet library):
+   one visual system instead of a full-width bar fighting the grid.
+   ============================================================================ */
+
+.ghost-add-card {
+  /* neutralise les styles globaux de <button> (padding 12/20, min-height 32) */
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  min-height: 92px;
+  padding: 16px 14px;
+  /* contenu centré : contraste volontaire avec les cartes de contenu (alignées en haut) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  /* carte fantôme : pointillés au repos, pleine et teintée au survol */
+  background: var(--surface-secondary);
+  border: 1.5px dashed var(--border-strong);
+  border-radius: var(--radius-lg, 12px);
+  cursor: pointer;
+  transition: border-color var(--transition-base),
+              background var(--transition-base),
+              box-shadow var(--transition-base),
+              transform var(--transition-base);
+}
+
+.ghost-add-card:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+  background: color-mix(in srgb, var(--accent-primary) 10%, var(--surface-secondary));
+}
+
+/* Hover and focus-visible share the "card lights up" treatment.
+   Focus-visible additionally renders the keyboard-accessible focus ring. */
+.ghost-add-card:hover,
+.ghost-add-card:focus-visible {
+  border-color: var(--accent-primary);
+  border-style: solid;
+}
+
+.ghost-add-card:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 22%, transparent);
+}
+
+/* pastille d'icône — élément héros : s'allume à l'accent au survol */
+.ghost-add-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--surface-tertiary);
+  color: var(--text-tertiary);
+  transition: background var(--transition-base),
+              color var(--transition-base),
+              transform var(--transition-base);
+}
+
+/* lesson 2026-05-07 : un SVG inline dans un parent flex doit être dimensionné en CSS */
+.ghost-add-card__icon svg {
+  display: block;
+  width: 17px;
+  height: 17px;
+}
+
+.ghost-add-card:active .ghost-add-card__icon {
+  transform: rotate(90deg) scale(0.98);
+}
+
+.ghost-add-card__label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: var(--tracking-tight);
+  transition: color var(--transition-base);
+}
+
+.ghost-add-card:hover .ghost-add-card__icon,
+.ghost-add-card:focus-visible .ghost-add-card__icon {
+  background: color-mix(in srgb, var(--accent-primary) 12%, var(--surface-tertiary));
+  color: var(--accent-primary);
+}
+
+.ghost-add-card:hover .ghost-add-card__label,
+.ghost-add-card:focus-visible .ghost-add-card__label {
+  color: var(--accent-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ghost-add-card,
+  .ghost-add-card__icon,
+  .ghost-add-card__label {
+    transition: none;
+  }
+  .ghost-add-card:active {
+    transform: none;
+  }
+  .ghost-add-card:active .ghost-add-card__icon {
+    transform: none;
+  }
+}

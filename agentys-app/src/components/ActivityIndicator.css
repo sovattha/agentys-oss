@@ -1,0 +1,137 @@
+/* ============================================================================
+   ACTIVITY INDICATOR — Sidebar background activity widget
+   ============================================================================ */
+
+.activity-indicator {
+  position: relative;
+  padding: 0;
+  margin: 0 0 var(--space-2);
+}
+
+.activity-indicator__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 5px 7px;
+  border-radius: var(--radius-md);
+  cursor: default;
+  border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, transparent);
+  background: color-mix(in srgb, var(--surface-secondary) 70%, transparent);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+  min-height: 28px;
+}
+
+/* ============================================================================
+   ICON
+   ============================================================================ */
+
+.activity-indicator__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-sm);
+}
+
+.activity-indicator--active .activity-indicator__icon {
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+}
+
+.activity-indicator--done .activity-indicator__icon {
+  color: var(--success);
+  background: color-mix(in srgb, var(--success) 12%, transparent);
+}
+
+.activity-indicator--error .activity-indicator__icon {
+  color: var(--error);
+  background: color-mix(in srgb, var(--error) 12%, transparent);
+}
+
+/* ============================================================================
+   LABEL
+   ============================================================================ */
+
+.activity-indicator__label {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+.sidebar.collapsed .activity-indicator {
+  margin: 0 auto var(--space-2);
+}
+
+.sidebar.collapsed .activity-indicator__inner {
+  justify-content: center;
+  width: calc(30px * var(--app-zoom, 1));
+  height: calc(30px * var(--app-zoom, 1));
+  min-height: 0;
+  padding: 0;
+  border-radius: var(--radius-full);
+}
+
+.sidebar.collapsed .activity-indicator__label {
+  display: none;
+}
+
+.activity-indicator--active .activity-indicator__label {
+  color: var(--text-secondary);
+}
+
+.activity-indicator--done .activity-indicator__label {
+  color: var(--success);
+}
+
+.activity-indicator--error .activity-indicator__label {
+  color: var(--error);
+}
+
+/* ============================================================================
+   ICON ANIMATIONS
+   ============================================================================ */
+
+.activity-icon--spin {
+  animation: activitySpin 1.5s linear infinite;
+}
+
+.activity-icon--pulse {
+  animation: activityPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes activitySpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes activityPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ============================================================================
+   ENTER / EXIT
+   ============================================================================ */
+
+.activity-indicator {
+  animation: activityFadeIn 0.2s ease-out;
+}
+
+.activity-indicator--done {
+  animation: activityFadeIn 0.2s ease-out, activityFadeOut 0.3s ease-in 1.7s forwards;
+}
+
+@keyframes activityFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes activityFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}

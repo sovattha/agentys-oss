@@ -1,0 +1,165 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "pierre.durand@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Salut l'equipe, / Pierre,",
+      "closing": "Sophie / Merci,"
+    },
+    {
+      "contact_email": "lucas.bernard@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Salut Lucas,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "camille.roux@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Camille,",
+      "closing": "Sophie / Merci,"
+    },
+    {
+      "contact_email": "marie.leclerc@clientcorp.com",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Madame Leclerc,",
+      "closing": "Cordialement, / Cordialement,"
+    },
+    {
+      "contact_email": "sarah.jones@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi Sarah,",
+      "closing": "Best regards, / Best,"
+    },
+    {
+      "contact_email": "nicolas.moreau@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Nicolas,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "ceo@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Marc,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "amelie.petit@fournisseur.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Madame Petit,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "contact@prospect-startup.io",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Thomas,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "david.kim@partnertech.co.kr",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi David,",
+      "closing": "Best regards, / Best,"
+    },
+    {
+      "contact_email": "recrutement@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": null,
+      "greeting": "Bonjour,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "elena.volkov@eupartner.de",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Elena,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "it-support@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": null,
+      "greeting": "Bonjour,",
+      "closing": "Cordialement, / Sophie"
+    },
+    {
+      "contact_email": "claire.fontaine@clientcorp.com",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Claire,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "john.smith@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi John,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "support@cloudprovider.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi,",
+      "closing": "Regards,"
+    }
+  ],
+  "general_rules": [
+    {
+      "description": "Utiliser le tutoiement avec l'équipe interne (collègues pairs et juniors) et le vouvoiement avec les clients externes et la direction."
+    },
+    {
+      "description": "Signature complète (nom, titre, entreprise, téléphone) obligatoire pour les contacts externes et la direction ; prénom seul ou absence de signature pour les collègues internes."
+    },
+    {
+      "description": "Code-switching français/anglais selon le contact : français pour les clients et partenaires français, anglais pour les partenaires internationaux (GlobalTech, PartnerTech, EUPartner)."
+    },
+    {
+      "description": "Structurer les emails longs avec des listes à puces numérotées, des sections claires (Completed/In progress/Blocker) et un appel à l'action explicite."
+    },
+    {
+      "description": "Utiliser la formule 'Cordialement,' pour les communications formelles (clients, direction, fournisseurs) et 'Best regards,' en anglais ; prénom seul ou absence de closing pour les collègues internes."
+    },
+    {
+      "description": "Inclure des métriques quantifiées (points de sprint, pourcentages, montants EUR, NPS) dans les rapports et communications de gestion."
+    },
+    {
+      "description": "Mentionner explicitement les noms des participants ou des responsables (ex: 'Pierre, peux-tu...', 'Camille, pour les 12 recommandations...') pour clarifier les propriétaires de tâches."
+    },
+    {
+      "description": "Utiliser le jargon technique SaaS/DevOps sans définition : GraphQL, OAuth2, PKCE, mTLS, WAF, CI/CD, rate limiting, versioning, streaming, JSON-LD, webhook, SLA, NPS, ARR, DPA, GDPR."
+    },
+    {
+      "description": "Proposer des créneaux de réunion avec des horaires précis et des formats explicites (visioconférence, durée, ordre du jour) dans les invitations."
+    },
+    {
+      "description": "Utiliser des références de projets internes (Alpha, Beta) et des identifiants de tickets (ALPHA-456, JIRA) pour tracer les actions et les livrables."
+    }
+  ],
+  "forbidden_phrases": []
+}

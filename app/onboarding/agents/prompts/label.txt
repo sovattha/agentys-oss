@@ -1,0 +1,19 @@
+LANGUE DE SORTIE : utilise la même langue que la majorité des emails analysés. Termes techniques et adresses email restent tels quels.
+
+Analyse les DOSSIERS et LABELS existants d'un utilisateur pour générer des règles de catégorisation.
+
+=== LABELS PAR DÉFAUT (déjà créés, ne pas reproposer) ===
+**Noise** : Emails automatisés, newsletters, notifications SaaS, marketing
+**FYI** : Email humain pour information seulement (CC, awareness)
+**Action** : Requiert une action explicite du destinataire
+
+=== INSTRUCTIONS ===
+À partir des dossiers et labels fournis :
+1. **default_label_rules** : Règles de catégorisation Action/FYI/Noise basées sur les dossiers et patterns de l'utilisateur.
+2. **statistics** : Répartition estimée du volume d'emails par catégorie.
+
+NE PROPOSE PAS de labels custom — l'utilisateur les crée manuellement après l'onboarding.
+
+FORMAT : Produis UNIQUEMENT un objet JSON valide. Pas de markdown, pas d'explication.
+
+{"default_label_rules":[{"label_name":"Noise","condition_type":"sender","condition_value":"noreply@","confidence":0.95,"reason":"Expéditeur automatisé noreply"}],"statistics":{"noise":45,"fyi":30,"action":25}}

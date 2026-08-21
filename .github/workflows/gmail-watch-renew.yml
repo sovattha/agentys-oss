@@ -1,0 +1,111 @@
+name: Gmail watch renew
+
+# Gmail forces users.watch() to expire after at most 7 days. This cron
+# re-issues watch() on every Gmail account whose watch expires within 24h,
+# so the Pub/Sub push notifications never stop (see GitHub issue #183 and
+# docs/operations/gmail-push-setup.md).
+#
+# Security note: no untrusted github.event.* inputs are used anywhere —
+# all dynamic values come from repository secrets/vars (JWT_SECRET,
+# OBSERVABILITY_TOKEN, API_BASE_URL). Safe against workflow
+# injection even if an attacker opens an issue/PR with a crafted title.
+
+on:
+  schedule:
+    # Daily at 04:00 UTC (06:00 Europe/Paris summer, 05:00 winter)
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+    # Allow manual trigger from the Actions tab for ad-hoc renewal / debug.
+
+permissions:
+  contents: read
+
+jobs:
+  renew:
+    name: Renew expiring Gmail watches
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Forge admin JWT and hit renew endpoint
+        env:
+          # Same internal token used by the L3 sentinels. Stored in GitHub
+          # Actions secrets and mirrored in Railway as OBSERVABILITY_TOKEN.
+          OBSERVABILITY_TOKEN: ${{ secrets.OBSERVABILITY_TOKEN }}
+          # JWT_SECRET passes the global API auth guard; OBSERVABILITY_TOKEN
+          # authorizes the cron operation itself.
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          API_BASE_URL: ${{ vars.API_BASE_URL || 'https://api.agentys.io' }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${JWT_SECRET:-}" ]; then
+            echo "::error::JWT_SECRET secret is not set in the repository"
+            exit 1
+          fi
+
+          if [ -z "${OBSERVABILITY_TOKEN:-}" ]; then
+            echo "::error::OBSERVABILITY_TOKEN secret is not set in the repository"
+            exit 1
+          fi
+
+          VENV_DIR="${RUNNER_TEMP:-/tmp}/gmail-watch-renew-venv"
+          python3 -m venv "$VENV_DIR"
+          PYTHON_BIN="$VENV_DIR/bin/python"
+          "$PYTHON_BIN" -m pip install --quiet --upgrade pip pyjwt
+
+          TOKEN=$("$PYTHON_BIN" - <<'PY'
+          import jwt, os, time
+          payload = {
+              "sub": "0",
+              "email": "gmail-watch-renew@agentys.internal",
+              "iat": int(time.time()),
+              "exp": int(time.time()) + 300,
+          }
+          print(jwt.encode(payload, os.environ["JWT_SECRET"], algorithm="HS256"))
+          PY
+          )
+
+          # Synchronous call (no async=1): the endpoint iterates every Gmail
+          # account inline and returns the real {renewed:[], failed:[]} body,
+          # so a failed watch renewal actually fails this workflow instead of
+          # being masked by a fire-and-forget 202 (the old async=1 path only
+          # logged failures to Railway, invisible here). --max-time keeps the
+          # job under its 5-min budget. NOTE: if the account count grows large
+          # enough to risk a gateway timeout, switch to a paginated/queued
+          # renewal with a status endpoint to poll, rather than reverting to
+          # async fire-and-forget.
+          echo "Calling POST $API_BASE_URL/api/gmail/watch/renew-due"
+          HTTP_CODE=$(curl -sS --max-time 280 -o /tmp/response.json -w "%{http_code}" \
+            -X POST "$API_BASE_URL/api/gmail/watch/renew-due" \
+            -H "Authorization: Bearer $TOKEN" \
+            -H "X-Observability-Token: ${OBSERVABILITY_TOKEN}" \
+            -H "Content-Type: application/json")
+
+          echo "HTTP $HTTP_CODE"
+          cat /tmp/response.json
+          echo
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "::error::renew-due endpoint returned HTTP $HTTP_CODE"
+            exit 1
+          fi
+
+          FAILED_COUNT=$(python3 -c "import json;d=json.load(open('/tmp/response.json'));print(len(d.get('failed',[])))")
+          RENEWED_COUNT=$(python3 -c "import json;d=json.load(open('/tmp/response.json'));print(len(d.get('renewed',[])))")
+          DEACTIVATED_COUNT=$(python3 -c "import json;d=json.load(open('/tmp/response.json'));print(len(d.get('deactivated',[])))")
+          echo "Renewed: $RENEWED_COUNT, Failed: $FAILED_COUNT, Deactivated: $DEACTIVATED_COUNT"
+
+          # Un compte dont l'OAuth a été révoqué hors de l'app est désactivé
+          # par l'endpoint (état terminal, aucun retry ne le réparera). Le
+          # signaler en warning et non en error : le faire échouer laissait ce
+          # cron rouge tous les jours — 12 jours d'affilée constatés — donc
+          # incapable d'alerter sur une VRAIE panne. Il est désactivé une fois
+          # puis disparaît du périmètre.
+          if [ "$DEACTIVATED_COUNT" != "0" ]; then
+            echo "::warning::$DEACTIVATED_COUNT account(s) deactivated — OAuth revoked, user must reconnect (see response above)"
+          fi
+
+          if [ "$FAILED_COUNT" != "0" ]; then
+            echo "::error::At least one watch failed to renew — check response above"
+            exit 1
+          fi

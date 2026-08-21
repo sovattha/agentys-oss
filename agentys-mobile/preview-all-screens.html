@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentys Mobile — All Screens V3</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root {
+    --bg: #06080A;
+    --surface: #0d1117;
+    --surface-high: #161b22;
+    --border: #1a2333;
+    --cyan: #22d3ee;
+    --cyan-light: #67e8f9;
+    --green: #34d399;
+    --red: #ef4444;
+    --amber: #fbbf24;
+    --text-primary: #F0FAFA;
+    --text-secondary: #9ca3af;
+    --text-muted: #4a5568;
+    --text-dim: #374151;
+    --cyan-glow: rgba(34,211,238,0.12);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: #0a0c10;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+  }
+
+  h1 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--cyan);
+    letter-spacing: 4px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .page-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .page-thesis {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto 48px;
+    opacity: 0.75;
+  }
+
+  .screens-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    justify-content: center;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+  .screen-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .screen-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+  }
+  .screen-desc {
+    font-size: 11px;
+    color: var(--text-dim);
+    max-width: 220px;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* ── Phone Frame ── */
+  .phone {
+    width: 320px;
+    height: 692px;
+    background: var(--bg);
+    border-radius: 40px;
+    border: 2px solid var(--border);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow:
+      0 0 80px rgba(34,211,238,0.03),
+      0 24px 64px rgba(0,0,0,0.5);
+  }
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 28px;
+    background: #000;
+    border-radius: 16px;
+    z-index: 100;
+  }
+  .phone-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── Tab Bar ── */
+  .tab-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 52px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    opacity: 0.4;
+  }
+  .tab-item.active { opacity: 1; }
+  .tab-item svg { width: 20px; height: 20px; }
+  .tab-dot {
+    width: 3px; height: 3px; border-radius: 2px;
+    background: var(--cyan);
+    opacity: 0;
+  }
+  .tab-item.active .tab-dot { opacity: 1; }
+
+  /* ── Animations ── */
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.08; }
+    50% { transform: scale(1.15); opacity: 0.24; }
+  }
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(34,211,238,0.2); }
+    50% { box-shadow: 0 0 16px rgba(34,211,238,0.5); }
+  }
+
+  /* ══════════════════════════
+     SCREEN: LOGIN
+     ══════════════════════════ */
+  .login-screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 32px;
+    gap: 32px;
+  }
+  .login-logo-wrap {
+    width: 160px; height: 160px;
+    display: flex; align-items: center; justify-content: center;
+    animation: breathe 4.8s ease-in-out infinite;
+  }
+  .login-logo-wrap svg {
+    width: 160px; height: 160px;
+  }
+  .login-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 8px; color: var(--text-primary);
+  }
+  .login-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 2px;
+    color: var(--text-muted); text-transform: uppercase;
+  }
+  .login-input {
+    width: 100%; border: none;
+    border-bottom: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px; padding: 12px 4px; outline: none;
+  }
+  .login-input::placeholder { color: var(--text-muted); }
+  .login-hint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text-muted);
+  }
+
+  /* ── OAuth buttons (login) ── */
+  .login-oauth-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .login-oauth-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    background: transparent;
+    cursor: pointer;
+    transition: transform .15s ease, opacity .15s ease;
+  }
+  .login-oauth-btn:hover { transform: translateY(-1px); }
+  .login-oauth-btn svg {
+    width: 18px; height: 18px;
+    flex-shrink: 0;
+  }
+  .login-oauth-btn.gmail,
+  .login-oauth-btn.outlook {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.18);
+  }
+  .login-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .login-divider::before,
+  .login-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ══════════════════════════
+     SCREEN: DRIVE (IDLE + ACTIVE + REVIEW)
+     ══════════════════════════ */
+  .drive-idle {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 64px;
+    padding-bottom: 16px;
+  }
+  .drive-mode-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 4px; color: var(--cyan);
+    margin-bottom: 16px;
+  }
+  .drive-idle-summary {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--text-secondary);
+    letter-spacing: 1px; margin-top: 16px;
+  }
+  .drive-idle-hint {
+    margin-top: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text-muted); opacity: 0.5;
+  }
+  .breathe-wrap {
+    width: 200px; height: 200px;
+  }
+  .breathe-wrap canvas { width: 200px; height: 200px; }
+
+  .drive-active {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 24px 24px;
+  }
+  .state-row {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
+  }
+  .state-dot { width: 6px; height: 6px; border-radius: 3px; }
+  .state-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 3.5px;
+  }
+  .drive-sender {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px; font-weight: 700;
+    color: var(--text-primary); margin-top: 16px;
+  }
+  .drive-subject {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; color: var(--text-secondary);
+    margin-top: 4px; text-align: center;
+  }
+  .drive-counter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--text-dim);
+    letter-spacing: 2px; margin-top: 6px;
+  }
+  .drive-spacer { flex: 1; }
+  .actions-row {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 10px;
+  }
+  .action-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.5px;
+    padding: 7px 14px;
+    border: 1px solid; border-radius: 20px;
+    background: transparent; cursor: pointer;
+    transition: background 0.15s;
+  }
+  .action-chip:hover { background: rgba(34,211,238,0.08); }
+  .voice-hint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+  .voice-hint::before {
+    content: '◉ ';
+    opacity: 0.6;
+  }
+
+  /* ══════════════════════════
+     SCREEN: DRIVE DICTÉE (STT live)
+     ══════════════════════════ */
+  .dictee-transcript {
+    width: 100%;
+    margin-top: 14px;
+    padding: 16px;
+    background: rgba(34,211,238,0.04);
+    border: 1px solid rgba(34,211,238,0.15);
+    border-radius: 14px;
+    min-height: 88px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--text-primary);
+    position: relative;
+  }
+  .dictee-transcript .dim { color: var(--text-muted); opacity: 0.6; }
+  .dictee-caret {
+    display: inline-block;
+    width: 7px;
+    height: 16px;
+    background: var(--cyan);
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: caret-blink 0.9s steps(2, end) infinite;
+  }
+  @keyframes caret-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  .dictee-waveform {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 26px;
+    margin-top: 12px;
+  }
+  .dictee-waveform span {
+    flex: 1;
+    background: var(--cyan);
+    border-radius: 2px;
+    opacity: 0.8;
+    animation: wave 1.2s ease-in-out infinite;
+  }
+  .dictee-waveform span:nth-child(1)  { animation-delay: 0s;    height: 40%; }
+  .dictee-waveform span:nth-child(2)  { animation-delay: .08s;  height: 70%; }
+  .dictee-waveform span:nth-child(3)  { animation-delay: .16s;  height: 55%; }
+  .dictee-waveform span:nth-child(4)  { animation-delay: .24s;  height: 90%; }
+  .dictee-waveform span:nth-child(5)  { animation-delay: .32s;  height: 45%; }
+  .dictee-waveform span:nth-child(6)  { animation-delay: .40s;  height: 75%; }
+  .dictee-waveform span:nth-child(7)  { animation-delay: .48s;  height: 60%; }
+  .dictee-waveform span:nth-child(8)  { animation-delay: .56s;  height: 85%; }
+  .dictee-waveform span:nth-child(9)  { animation-delay: .64s;  height: 35%; }
+  .dictee-waveform span:nth-child(10) { animation-delay: .72s;  height: 65%; }
+  .dictee-waveform span:nth-child(11) { animation-delay: .80s;  height: 80%; }
+  .dictee-waveform span:nth-child(12) { animation-delay: .88s;  height: 50%; }
+  .dictee-waveform span:nth-child(13) { animation-delay: .96s;  height: 90%; }
+  .dictee-waveform span:nth-child(14) { animation-delay: 1.04s; height: 42%; }
+  .dictee-waveform span:nth-child(15) { animation-delay: 1.12s; height: 68%; }
+  @keyframes wave {
+    0%, 100% { transform: scaleY(0.4); }
+    50%      { transform: scaleY(1); }
+  }
+  .dictee-mic {
+    width: 88px; height: 88px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(34,211,238,0.25) 0%, rgba(34,211,238,0.06) 70%);
+    border: 1.5px solid var(--cyan);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 40px rgba(34,211,238,0.25);
+    animation: mic-pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes mic-pulse {
+    0%, 100% { transform: scale(1);    box-shadow: 0 0 40px rgba(34,211,238,0.2); }
+    50%      { transform: scale(1.06); box-shadow: 0 0 60px rgba(34,211,238,0.45); }
+  }
+  .dictee-fireworks-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(34,211,238,0.25);
+    background: rgba(34,211,238,0.06);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--cyan);
+  }
+
+  /* ══════════════════════════
+     V4 · WORLD-CLASS SYSTEM
+     Persistent header · Progress ring · Action hierarchy
+     Heard indicator · Countdown · Session done
+     ══════════════════════════ */
+
+  /* Drive header — persistent top bar on every drive screen */
+  .drive-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 44px 20px 0;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .progress-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: rgba(0,0,0,0.3);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+  }
+  .progress-pill .pill-sep { opacity: 0.35; }
+  .progress-pill .pill-total { color: var(--text-muted); }
+
+  .mini-orb {
+    width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .mini-orb svg { width: 100%; height: 100%; }
+  .mini-orb::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    opacity: 0.55;
+    animation: mini-pulse 1.8s ease-in-out infinite;
+  }
+  .mini-orb.cyan::after  { background: radial-gradient(circle, rgba(34,211,238,0.6) 0%, transparent 70%); }
+  .mini-orb.amber::after { background: radial-gradient(circle, rgba(251,191,36,0.55) 0%, transparent 70%); }
+  .mini-orb.green::after { background: radial-gradient(circle, rgba(52,211,153,0.55) 0%, transparent 70%); }
+  .mini-orb.red::after   { background: radial-gradient(circle, rgba(239,68,68,0.55) 0%, transparent 70%); }
+  @keyframes mini-pulse {
+    0%, 100% { opacity: 0.25; transform: scale(1); }
+    50%      { opacity: 0.70; transform: scale(1.25); }
+  }
+
+  .pause-btn {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: rgba(0,0,0,0.35);
+    padding: 0;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all .2s;
+  }
+  .pause-btn:hover { background: rgba(255,255,255,0.04); color: var(--text-primary); }
+
+  /* Heard indicator — shows last recognized voice command */
+  .heard-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    margin-top: 10px;
+    border-radius: 20px;
+    background: rgba(52,211,153,0.08);
+    border: 1px solid rgba(52,211,153,0.25);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--green);
+    opacity: 0;
+    animation: heard-in 0.4s ease-out 0.3s forwards;
+  }
+  .heard-bar::before {
+    content: '✓';
+    font-size: 11px;
+    opacity: 0.8;
+  }
+  @keyframes heard-in {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Orb wrapper — container for main triangle + progress ring */
+  .orb-wrap {
+    position: relative;
+    width: 220px; height: 220px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 8px 0 4px;
+  }
+  .orb-wrap canvas { width: 200px; height: 200px; }
+
+  .progress-ring {
+    position: absolute;
+    inset: 0;
+    transform: rotate(-90deg);
+    pointer-events: none;
+  }
+  .progress-ring circle {
+    fill: none;
+    stroke-width: 1;
+    stroke-linecap: round;
+  }
+  .progress-ring .ring-bg   { stroke: rgba(255,255,255,0.05); }
+  .progress-ring .ring-fill {
+    transition: stroke-dashoffset 0.6s cubic-bezier(.4,0,.2,1);
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+
+  /* Action hierarchy: primary hero + secondary chips */
+  .primary-action {
+    width: 100%;
+    height: 54px;
+    border-radius: 16px;
+    border: 1.5px solid currentColor;
+    background: transparent;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform .15s, background .2s;
+  }
+  .primary-action::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: currentColor;
+    opacity: 0.06;
+    transition: opacity .2s;
+  }
+  .primary-action:hover { transform: translateY(-1px); }
+  .primary-action:hover::before { opacity: 0.12; }
+  .primary-action:active { transform: scale(0.99); }
+
+  .secondary-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .secondary-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 1px;
+    padding: 6px 11px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .secondary-chip:hover {
+    border-color: rgba(255,255,255,0.18);
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.03);
+  }
+
+  /* Identity block — sender + subject unified */
+  .identity-block {
+    text-align: center;
+    margin-top: 14px;
+    width: 100%;
+  }
+  .identity-sender {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.2px;
+  }
+  .identity-subject {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-top: 3px;
+    line-height: 1.4;
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .identity-snippet {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 10px;
+    line-height: 1.55;
+    max-width: 260px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Drive screen layout */
+  .drive-v4 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px 24px;
+  }
+  .drive-v4 .drive-header { padding-left: 0; padding-right: 0; }
+  .drive-v4-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 14px;
+  }
+  .drive-state-row {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .drive-state-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 3.5px;
+    font-weight: 500;
+  }
+
+  /* Send countdown screen */
+  .countdown-screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 24px 24px;
+  }
+  .countdown-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+  }
+  .countdown-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 120px;
+    line-height: 1;
+    font-weight: 400;
+    color: #ef4444;
+    text-shadow: 0 0 30px rgba(239,68,68,0.35);
+    animation: count-pulse 1s ease-in-out infinite;
+  }
+  @keyframes count-pulse {
+    0%, 100% { transform: scale(1);    opacity: 1;   }
+    50%      { transform: scale(0.94); opacity: 0.75;}
+  }
+  .countdown-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+  }
+  .countdown-cancel-hint {
+    margin-top: 28px;
+    padding: 14px 20px;
+    border: 1.5px dashed rgba(239,68,68,0.45);
+    border-radius: 16px;
+    background: rgba(239,68,68,0.04);
+    width: 100%;
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .countdown-cancel-hint strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .countdown-draft-peek {
+    width: 100%;
+    margin-top: 18px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.02);
+    border-left: 2px solid rgba(239,68,68,0.4);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  /* Session done screen */
+  .done-screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 28px 28px;
+  }
+  .done-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    text-align: center;
+  }
+  .done-triangle {
+    width: 96px;
+    height: 96px;
+    position: relative;
+    animation: done-settle 1.2s ease-out;
+  }
+  @keyframes done-settle {
+    0%   { transform: scale(0.4) rotate(-20deg); opacity: 0; }
+    60%  { transform: scale(1.08) rotate(2deg);  opacity: 1; }
+    100% { transform: scale(1)    rotate(0);     opacity: 1; }
+  }
+  .done-hero {
+    font-family: 'DM Serif Display', serif;
+    font-size: 92px;
+    line-height: 1;
+    color: var(--green);
+    text-shadow: 0 0 24px rgba(52,211,153,0.3);
+    margin-top: 8px;
+  }
+  .done-hero-unit {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+  }
+  .done-stats {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+    padding: 14px 20px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .done-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .done-stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--text-primary);
+  }
+  .done-stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .done-stat-sep {
+    width: 1px; height: 26px;
+    background: rgba(255,255,255,0.08);
+  }
+  .done-tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 24px;
+    font-style: italic;
+  }
+
+  /* Polished settings (V4) */
+  .settings-v4 {
+    flex: 1;
+    padding: 52px 20px 20px;
+    overflow-y: auto;
+  }
+  .settings-v4::-webkit-scrollbar { display: none; }
+  .settings-v4 .s-page-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+  .settings-v4 .s-page-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .settings-v4 .row {
+    display: flex;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    gap: 14px;
+  }
+  .settings-v4 .row:last-child { border-bottom: none; }
+  .settings-v4 .row-info { flex: 1; }
+  .settings-v4 .row-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+  .settings-v4 .row-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    color: var(--text-secondary);
+  }
+  .settings-v4 .row-value.danger { color: var(--red); }
+  .settings-v4 .row-chevron {
+    color: var(--text-muted);
+    font-size: 20px;
+  }
+  .settings-v4 .seg-group {
+    display: flex;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 2px;
+  }
+  .settings-v4 .seg-btn {
+    padding: 6px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    border-radius: 7px;
+    transition: all .2s;
+  }
+  .settings-v4 .seg-btn.active {
+    background: rgba(34,211,238,0.12);
+    color: var(--cyan);
+  }
+  .settings-v4 .ios-toggle {
+    width: 42px; height: 24px;
+    border-radius: 14px;
+    background: rgba(52,211,153,0.3);
+    position: relative;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .settings-v4 .ios-toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: calc(100% - 22px);
+    width: 20px; height: 20px;
+    background: var(--text-primary);
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    transition: left .2s;
+  }
+  .settings-v4 .ios-toggle.off { background: rgba(255,255,255,0.08); }
+  .settings-v4 .ios-toggle.off::after { left: 2px; }
+
+  .settings-v4 .account-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    margin: 24px 0 16px;
+    background: rgba(34,211,238,0.04);
+    border: 1px solid rgba(34,211,238,0.15);
+    border-radius: 14px;
+  }
+  .settings-v4 .account-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(34,211,238,0.15);
+    color: var(--cyan);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .settings-v4 .account-info-email {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+  .settings-v4 .account-info-provider {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--cyan);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* ══════════════════════════
+     V5 · ZEN — Pure voice focus
+     No buttons, no chrome, no chips.
+     Orb is the interface. Typography
+     only when it IS the message.
+     ══════════════════════════ */
+
+  .drive-zen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  /* Ambient color bleed — the orb's energy fills the screen */
+  .drive-zen::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 140%; height: 95%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, currentColor 0%, transparent 55%);
+    opacity: 0.11;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(36px);
+  }
+  /* Film grain — adds warmth and physicality */
+  .drive-zen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+    z-index: 4;
+  }
+
+  /* Particles drifting around the orb */
+  .zen-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    color: inherit;
+  }
+  .zen-particles span {
+    position: absolute;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 6px currentColor, 0 0 14px currentColor;
+    opacity: 0;
+    animation: zen-drift 9s ease-in-out infinite;
+  }
+  .zen-particles span:nth-child(1) { top: 16%; left: 22%; width: 2px;   height: 2px;   animation-delay: 0s;    }
+  .zen-particles span:nth-child(2) { top: 24%; left: 76%; width: 1px;   height: 1px;   animation-delay: -1.5s; }
+  .zen-particles span:nth-child(3) { top: 78%; left: 20%; width: 2.5px; height: 2.5px; animation-delay: -3s;   }
+  .zen-particles span:nth-child(4) { top: 74%; left: 80%; width: 1.5px; height: 1.5px; animation-delay: -4.5s; }
+  .zen-particles span:nth-child(5) { top: 48%; left: 10%; width: 1px;   height: 1px;   animation-delay: -6s;   }
+  .zen-particles span:nth-child(6) { top: 52%; left: 88%; width: 2px;   height: 2px;   animation-delay: -7.5s; }
+  .zen-particles span:nth-child(7) { top: 10%; left: 55%; width: 1.5px; height: 1.5px; animation-delay: -2.2s; }
+  .zen-particles span:nth-child(8) { top: 88%; left: 50%; width: 1px;   height: 1px;   animation-delay: -5.5s; }
+  @keyframes zen-drift {
+    0%, 100% { opacity: 0;    transform: translate(0, 0) scale(0.8); }
+    40%      { opacity: 0.75; transform: translate(-2px, -4px) scale(1.1); }
+    50%      { opacity: 1;    transform: translate(-4px, -10px) scale(1.3); }
+    60%      { opacity: 0.6;  transform: translate(-2px, -6px) scale(1.1); }
+  }
+
+  /* The orb — massive breathing triangle, the sole interface */
+  .zen-orb {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+  .zen-orb canvas { width: 280px; height: 280px; display: block; }
+
+  /* Hero sender — LECTURE state */
+  .zen-hero-sender {
+    font-family: 'DM Serif Display', serif;
+    font-size: 38px;
+    line-height: 1.1;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-top: 36px;
+    letter-spacing: -0.5px;
+    z-index: 2;
+    position: relative;
+    animation: zen-rise 1.2s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes zen-rise {
+    from { opacity: 0; transform: translateY(14px); filter: blur(4px); }
+    to   { opacity: 1; transform: translateY(0);    filter: blur(0);   }
+  }
+
+  /* Live transcript — DICTÉE state */
+  .zen-transcript {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--text-primary);
+    margin-top: 28px;
+    max-width: 260px;
+    z-index: 2;
+    position: relative;
+  }
+  .zen-transcript .dim { color: var(--text-muted); opacity: 0.5; }
+
+  /* Waveform — DICTÉE state */
+  .zen-wave {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    height: 18px;
+    margin-top: 22px;
+    z-index: 2;
+    position: relative;
+  }
+  .zen-wave span {
+    width: 2px;
+    background: currentColor;
+    border-radius: 1px;
+    animation: zen-wave-anim 1.2s ease-in-out infinite;
+  }
+  .zen-wave span:nth-child(1)  { animation-delay: 0s;    }
+  .zen-wave span:nth-child(2)  { animation-delay: .07s;  }
+  .zen-wave span:nth-child(3)  { animation-delay: .14s;  }
+  .zen-wave span:nth-child(4)  { animation-delay: .21s;  }
+  .zen-wave span:nth-child(5)  { animation-delay: .28s;  }
+  .zen-wave span:nth-child(6)  { animation-delay: .35s;  }
+  .zen-wave span:nth-child(7)  { animation-delay: .42s;  }
+  .zen-wave span:nth-child(8)  { animation-delay: .49s;  }
+  .zen-wave span:nth-child(9)  { animation-delay: .56s;  }
+  .zen-wave span:nth-child(10) { animation-delay: .63s;  }
+  .zen-wave span:nth-child(11) { animation-delay: .70s;  }
+  .zen-wave span:nth-child(12) { animation-delay: .77s;  }
+  .zen-wave span:nth-child(13) { animation-delay: .84s;  }
+  @keyframes zen-wave-anim {
+    0%, 100% { height: 2px;  opacity: 0.3; }
+    50%      { height: 16px; opacity: 1;   }
+  }
+
+  /* Hero count — IDLE / DONE states */
+  .zen-hero-count {
+    font-family: 'DM Serif Display', serif;
+    font-size: 140px;
+    line-height: 0.9;
+    color: currentColor;
+    text-shadow: 0 0 45px currentColor;
+    margin-top: 30px;
+    letter-spacing: -5px;
+    z-index: 2;
+    position: relative;
+    animation: zen-rise 1.3s cubic-bezier(.2,.8,.2,1);
+  }
+  .zen-hero-count .unit {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 5px;
+    color: var(--text-muted);
+    margin-top: 16px;
+    text-shadow: none;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  /* Countdown — SEND CONFIRM state, no orb, the number IS the state */
+  .zen-countdown {
+    font-family: 'DM Serif Display', serif;
+    font-size: 220px;
+    line-height: 0.88;
+    color: currentColor;
+    text-shadow: 0 0 80px currentColor, 0 0 40px currentColor;
+    letter-spacing: -10px;
+    z-index: 2;
+    position: relative;
+    animation: zen-countdown-pulse 1s ease-in-out infinite;
+  }
+  @keyframes zen-countdown-pulse {
+    0%, 100% { transform: scale(1);    opacity: 1;    }
+    50%      { transform: scale(0.94); opacity: 0.65; }
+  }
+
+  /* Draft body — REVIEW state, ghost italic reading */
+  .zen-draft {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-primary);
+    margin-top: 28px;
+    max-width: 248px;
+    z-index: 2;
+    position: relative;
+    opacity: 0.92;
+  }
+  .zen-draft::before {
+    content: '\201C';
+    font-size: 44px;
+    color: currentColor;
+    opacity: 0.35;
+    line-height: 0;
+    vertical-align: -0.2em;
+    margin-right: 3px;
+    font-style: normal;
+  }
+
+  /* ══════════════════════════
+     SCREEN: INBOX V3 (legacy, unused)
+     ══════════════════════════ */
+  .inbox-screen {
+    flex: 1; overflow-y: auto; padding: 0;
+  }
+  .inbox-screen::-webkit-scrollbar { display: none; }
+
+  .inbox-topbar {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    padding: 52px 20px 10px;
+  }
+  .inbox-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 3px; color: var(--text-primary);
+  }
+  .sync-pill {
+    display: flex; align-items: center; gap: 6px;
+    padding: 4px 10px; border-radius: 20px;
+    border: 1px solid rgba(34,211,238,0.14);
+    background: rgba(34,211,238,0.07);
+  }
+  .sync-dot {
+    width: 6px; height: 6px; border-radius: 3px;
+    background: var(--green);
+  }
+  .sync-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--green); letter-spacing: 1px;
+  }
+
+  /* Metrics V3: 2 chips */
+  .metrics-v3 {
+    display: flex; gap: 10px;
+    padding: 0 20px 8px;
+  }
+  .metric-v3 {
+    flex: 1; padding: 12px 0;
+    text-align: center;
+    background: var(--surface);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .metric-v3-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+  }
+  .metric-v3-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 26px; font-weight: 700;
+  }
+  .metric-v3-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; color: var(--text-muted);
+    letter-spacing: 2px; margin-top: 2px;
+  }
+
+  /* Time divider */
+  .time-div {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 24px;
+  }
+  .time-div-line {
+    flex: 1; height: 1px; background: var(--border);
+  }
+  .time-div-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text-dim); letter-spacing: 1px;
+  }
+
+  /* Compact card row */
+  .card-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px;
+    margin: 0 12px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .card-row:last-child { border-bottom: none; }
+  .card-accent-v3 {
+    position: absolute;
+    top: 10px; left: 0; bottom: 10px;
+    width: 2px; border-radius: 1px; opacity: 0.6;
+  }
+  .avatar-v3 {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; font-weight: 700;
+    flex-shrink: 0; position: relative;
+  }
+  .avatar-dot-v3 {
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 9px; height: 9px; border-radius: 4.5px;
+    border: 2px solid var(--bg);
+  }
+  .card-body-v3 { flex: 1; min-width: 0; }
+  .card-top-v3 {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 2px;
+  }
+  .card-sender-v3 {
+    font-size: 14px; font-weight: 700; color: var(--text-primary);
+  }
+  .card-time-v3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text-dim);
+  }
+  .card-subject-v3 {
+    font-size: 13px; color: var(--text-secondary);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .card-chevron {
+    color: var(--text-dim); font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  /* Swipe hint */
+  .swipe-hint {
+    display: flex; align-items: center;
+    justify-content: center; gap: 6px;
+    padding: 8px 20px;
+  }
+  .swipe-hint-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; color: var(--text-dim);
+    letter-spacing: 1px;
+  }
+  .swipe-hint-arrow {
+    color: var(--green); font-size: 12px;
+  }
+
+  /* "Tout envoyer" pill */
+  .send-all-pill {
+    position: absolute;
+    bottom: 64px;
+    left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 6px;
+    padding: 11px 22px;
+    background: var(--cyan);
+    border-radius: 28px;
+    box-shadow: 0 4px 16px rgba(34,211,238,0.35);
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+  .send-all-pill:hover {
+    transform: translateX(-50%) scale(1.03);
+    box-shadow: 0 6px 24px rgba(34,211,238,0.5);
+  }
+  .send-all-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 700;
+    color: var(--bg);
+  }
+  .send-all-icon {
+    font-size: 15px; color: var(--bg);
+  }
+
+  /* ══════════════════════════
+     SCREEN: SETTINGS
+     ══════════════════════════ */
+  .settings-screen {
+    flex: 1; overflow-y: auto;
+    padding: 52px 16px 24px;
+  }
+  .settings-screen::-webkit-scrollbar { display: none; }
+  .s-page-title {
+    font-size: 28px; font-weight: 700;
+    color: var(--text-primary);
+    padding: 8px 4px 20px;
+  }
+  .s-section-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 0 4px; margin-bottom: 8px;
+  }
+  .s-section-bar {
+    width: 3px; height: 14px;
+    background: var(--cyan); border-radius: 2px;
+  }
+  .s-section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 600;
+    color: var(--text-muted); letter-spacing: 1.5px;
+  }
+  .s-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden; margin-bottom: 16px;
+  }
+  .s-row {
+    display: flex; align-items: center;
+    padding: 14px 16px; gap: 12px;
+  }
+  .s-divider {
+    height: 1px; background: var(--border);
+    margin-left: 60px;
+  }
+  .s-icon-box {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 14px;
+  }
+  .s-row-info { flex: 1; }
+  .s-row-name {
+    font-size: 14px; font-weight: 500;
+    color: var(--text-primary);
+  }
+  .s-row-desc {
+    font-size: 11px; color: var(--text-muted); margin-top: 1px;
+  }
+  .s-chevron { color: var(--text-dim); font-size: 14px; }
+  .s-toggle {
+    width: 44px; height: 24px;
+    border-radius: 12px;
+    background: rgba(34,211,238,0.35);
+    position: relative; flex-shrink: 0;
+  }
+  .s-toggle::after {
+    content: '';
+    position: absolute; top: 2px; right: 2px;
+    width: 20px; height: 20px;
+    border-radius: 10px; background: var(--cyan);
+  }
+  .seg-row {
+    display: flex; gap: 2px;
+    background: var(--surface-high);
+    border-radius: 8px; padding: 2px;
+    border: 1px solid var(--border);
+  }
+  .seg {
+    padding: 6px 8px; border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 500;
+    color: var(--text-muted);
+  }
+  .seg.active {
+    background: rgba(34,211,238,0.14);
+    border: 1px solid rgba(34,211,238,0.2);
+    color: var(--cyan);
+  }
+  .s-version {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--text-dim);
+    text-align: center; letter-spacing: 1px;
+    margin-top: 16px;
+  }
+
+  /* ── SVG tab icons ── */
+  .tab-svg { width: 20px; height: 20px; }
+
+  /* ══════════════════════════
+     UX v4 — halo, progress, hints, drive-mode, counter
+     ══════════════════════════ */
+  :root { --cyan-warm: #5EEAD4; }
+
+  /* Listening halo — diffused ring pulse, visible périphérique */
+  .listen-halo {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 320px; height: 320px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, currentColor 0%, transparent 60%);
+    opacity: 0;
+    animation: listen-halo-pulse 1.8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: screen;
+  }
+  @keyframes listen-halo-pulse {
+    0%, 100% { opacity: 0.08; transform: translate(-50%, -50%) scale(0.9); }
+    50%      { opacity: 0.22; transform: translate(-50%, -50%) scale(1.08); }
+  }
+
+  /* TTS progress bar — thin underline showing reading position */
+  .tts-progress {
+    position: absolute;
+    left: 40px; right: 40px;
+    bottom: 32px;
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 1px;
+    overflow: hidden;
+    z-index: 3;
+  }
+  .tts-progress::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 45%;
+    background: linear-gradient(90deg, transparent 0%, currentColor 50%, currentColor 100%);
+    animation: tts-fill 6s linear infinite;
+    border-radius: 1px;
+  }
+  @keyframes tts-fill {
+    0%   { width: 0%;   opacity: 0.4; }
+    50%  { width: 65%;  opacity: 0.8; }
+    100% { width: 100%; opacity: 0.4; }
+  }
+
+  /* Voice hint — footer monospace, reminds des commandes */
+  .voice-hint {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 50px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    color: var(--text-muted);
+    opacity: 0.55;
+    z-index: 3;
+    text-transform: uppercase;
+  }
+  .voice-hint .sep { opacity: 0.35; margin: 0 6px; }
+
+  /* Drive counter — badge in-top-right, unobtrusive */
+  .drive-counter {
+    position: absolute;
+    top: 60px; right: 28px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-secondary);
+    z-index: 3;
+  }
+  .drive-counter .pulse {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 6px var(--cyan);
+    animation: counter-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes counter-pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50%      { opacity: 1;   transform: scale(1.25); }
+  }
+
+  /* Barge-in mic indicator — flashes to signal "I heard you" */
+  .barge-mic {
+    position: absolute;
+    top: 62px; left: 28px;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(94,234,212,0.1);
+    border: 1px solid rgba(94,234,212,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cyan-warm);
+    animation: barge-breathe 2.6s ease-in-out infinite;
+    z-index: 3;
+  }
+  .barge-mic svg { width: 12px; height: 12px; }
+  @keyframes barge-breathe {
+    0%, 100% { opacity: 0.45; }
+    50%      { opacity: 0.85; box-shadow: 0 0 8px rgba(94,234,212,0.35); }
+  }
+
+  /* Countdown ring — encircle SEND countdown numeral */
+  .countdown-ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 240px; height: 240px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    opacity: 0.25;
+    animation: ring-tighten 1s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes ring-tighten {
+    0%   { transform: translate(-50%, -50%) scale(1.1); opacity: 0.3;  }
+    100% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.05; }
+  }
+
+  /* Mode Conduite — hero toggle in settings */
+  .drive-mode-hero {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, rgba(34,211,238,0.08), rgba(94,234,212,0.04));
+    border: 1px solid rgba(94,234,212,0.28);
+    border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .drive-mode-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
+  }
+  .drive-mode-hero-icon {
+    width: 38px; height: 38px;
+    border-radius: 12px;
+    background: rgba(94,234,212,0.12);
+    color: var(--cyan-warm);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .drive-mode-hero-info { flex: 1; }
+  .drive-mode-hero-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .drive-mode-hero-desc {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+    opacity: 0.75;
+  }
+  .drive-mode-hero .ios-toggle.on {
+    background: rgba(94,234,212,0.5);
+  }
+  .drive-mode-hero .ios-toggle.on::after {
+    background: var(--cyan-warm);
+  }
+
+  /* Coaching overlay — first launch hints, overlays the phone */
+  .coach-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(6,8,10,0.7);
+    backdrop-filter: blur(8px);
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 28px;
+    gap: 18px;
+  }
+  .coach-overlay .coach-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--text-primary);
+    text-align: center;
+  }
+  .coach-overlay .coach-hint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--cyan-warm);
+    text-align: center;
+  }
+  .coach-overlay .coach-cmds {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 8px;
+  }
+  .coach-overlay .coach-cmd {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text-secondary);
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    text-align: center;
+    font-style: italic;
+  }
+  .coach-overlay .coach-dismiss {
+    margin-top: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    opacity: 0.6;
+    text-transform: uppercase;
+  }
+
+  /* Respect reduced motion — swap everything to static pulses */
+  @media (prefers-reduced-motion: reduce) {
+    .listen-halo,
+    .tts-progress::after,
+    .zen-particles span,
+    .countdown-ring,
+    .barge-mic,
+    .drive-counter .pulse {
+      animation: none !important;
+    }
+    .listen-halo { opacity: 0.1; }
+  }
+</style>
+</head>
+<body>
+
+<h1>AGENTYS MOBILE</h1>
+<p class="page-sub">ZÉRO BOUTON · ZÉRO CHROME · LA VOIX EST L'INTERFACE</p>
+<p class="page-thesis">L'orbe respire. La typographie apparaît uniquement quand elle EST le message.<br>Tout le reste est silence. La voix fait le travail.</p>
+
+<div class="screens-grid">
+
+  <!-- ════════════════════
+       1. LOGIN
+       ════════════════════ -->
+  <div class="screen-wrapper">
+    <span class="screen-label">01 — LOGIN</span>
+    <div class="phone">
+      <div class="phone-content">
+        <div class="login-screen">
+          <div class="login-logo-wrap">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="loginTriGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                  <stop offset="0%" stop-color="#22d3ee"/>
+                  <stop offset="100%" stop-color="#3DBEAC" stop-opacity="0.4"/>
+                </linearGradient>
+              </defs>
+              <polygon points="50,28 76,70 24,70" fill="none" stroke="url(#loginTriGrad)" stroke-width="1.4" stroke-linejoin="round" opacity="0.75"/>
+              <polygon points="50,43 63,62 37,62" fill="none" stroke="url(#loginTriGrad)" stroke-width="1.2" stroke-linejoin="round" opacity="0.95"/>
+            </svg>
+          </div>
+          <div style="text-align:center">
+            <div class="login-title">AGENTYS</div>
+          </div>
+          <div class="login-oauth-group">
+            <button class="login-oauth-btn gmail" type="button">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+              </svg>
+              <span>Continuer avec Gmail</span>
+            </button>
+            <button class="login-oauth-btn outlook" type="button">
+              <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="1" y="1" width="9" height="9" fill="#f25022"/>
+                <rect x="11" y="1" width="9" height="9" fill="#7fba00"/>
+                <rect x="1" y="11" width="9" height="9" fill="#00a4ef"/>
+                <rect x="11" y="11" width="9" height="9" fill="#ffb900"/>
+              </svg>
+              <span>Continuer avec Outlook</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="screen-desc">Setup unique · OAuth Gmail / Outlook<br>Après ça, plus jamais de clavier.</p>
+  </div>
+
+  <!-- ════════════════════
+       1b. FIRST LAUNCH — COACHING
+       ════════════════════ -->
+  <div class="screen-wrapper">
+    <span class="screen-label">01b — FIRST LAUNCH</span>
+    <div class="phone">
+      <div class="phone-content">
+        <div class="drive-zen" style="color:var(--cyan)">
+          <div class="zen-particles">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="coach-overlay">
+            <div class="coach-hint">3 COMMANDES POUR COMMENCER</div>
+            <div class="coach-title">Parlez, Agentys écoute.</div>
+            <div class="coach-cmds">
+              <div class="coach-cmd">« lis mon mail »</div>
+              <div class="coach-cmd">« réponds oui »</div>
+              <div class="coach-cmd">« envoie »</div>
+            </div>
+            <div class="coach-dismiss">Tap pour continuer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="screen-desc">Coaching unique au premier lancement.<br>3 phrases types, plus jamais de tutoriel.</p>
+  </div>
+
+  <!-- ════════════════════
+       2. DRIVE IDLE · zen
+       ════════════════════ -->
+  <div class="screen-wrapper">
+    <span class="screen-label">02 — IDLE</span>
+    <div class="phone">
+      <div class="phone-content">
+        <div class="drive-zen" style="color:var(--cyan)">
+          <div class="drive-counter"><span class="pulse"></span>3 NOUVEAUX</div>
+          <div class="zen-particles">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="zen-orb">
+            <canvas id="c-idle" width="280" height="280"></canvas>
+          </div>
+          <div class="voice-hint">« agentys »<span class="sep">·</span>tap pour démarrer</div>
+        </div>
+      </div>
+    </div>
+    <p class="screen-desc">Veille. Compteur discret top-right.<br>Wake-word ou tap = entrée dans la boucle.</p>
+  </div>
+
+  <!-- ════════════════════
+       3. DRIVE ACTIVE
+       ════════════════════ -->
+  <div class="screen-wrapper">
+    <span class="screen-label">03 — LECTURE</span>
+    <div class="phone">
+      <div class="phone-content">
+        <div class="drive-zen" style="color:var(--cyan-warm)">
+          <div class="listen-halo"></div>
+          <div class="zen-particles">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="zen-orb">
+            <canvas id="c-listen" width="280" height="280"></canvas>
+          </div>
+          <div class="zen-hero-sender">Marie<br>Laurent</div>
+          <div class="tts-progress"></div>
+          <div class="voice-hint">« répondre »<span class="sep">·</span>« suivant »<span class="sep">·</span>« pause »</div>
+        </div>
+      </div>
+    </div>
+    <p class="screen-desc">TTS lit · barre de progression en bas.<br>Barge-in possible à tout moment.</p>
+  </div>
+
+  <!-- ════════════════════
+       4. DRIVE DICTÉE (STT)
+       ════════════════════ -->
+  <div class="screen-wrapper">
+    <span class="screen-label">04 — DICTÉE</span>
+    <div class="phone">
+      <div class="phone-content">
+        <div class="drive-zen" style="color:var(--cyan)">
+          <div class="listen-halo"></div>
+          <div class="zen-particles">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="zen-orb">
+            <canvas id="c-dictee" width="280" height="280"></canvas>
+          </div>
+          <div class="zen-transcript">
+            Oui Marie, la proposition me convient.<span class="dim"> Je te renvoie le contrat signé…</span>
+          </div>
+          <div class="zen-wave">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+          </div>
+          <div class="voice-hint">pause naturelle = fin<span class="sep">·</span>« efface »<span class="sep">·</span>« recommence »</div>
+        </div>
+      </div>
+    </div>
+    <p class="screen-desc">STT live · halo périphérique = écoute active.<br>Vibration haptique sur début/fin de capture.</p>
+  </div>
+
+  <!-- ════════════════════
+       5. DRIVE REVIEW
+       ════════════════════ -->
+  <div class="screen-wrapper">
+    <span class="screen-label">05 — REVIEW</span>
+    <div class="phone">
+      <div class="phone-content">
+        <div class="drive-zen" style="color:var(--green)">
+          <div class="barge-mic" title="écoute barge-in">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="4" width="6" height="12" rx="3"/>
+              <path d="M6 11a6 6 0 0 0 12 0"/>
+              <line x1="12" y1="19" x2="12" y2="22"/>
+            </svg>
+          </div>
+          <div class="zen-particles">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="zen-orb">
+            <canvas id="c-review" width="280" height="280"></canvas>
+          </div>
+          <div class="zen-draft">Bonjour Thomas, merci pour l'envoi du contrat. J'ai lu les termes et tout me semble en ordre.</div>
+          <div class="tts-progress"></div>
+          <div class="voice-hint">« envoyer »<span class="sep">·</span>« corrige phrase 2 »<span class="sep">·</span>« relis »</div>
+        </div>
+      </div>
+    </div>
+    <p class="screen-desc">Barge-in actif (mic en haut-gauche)<br>Correction par phrase ciblée possible.</p>
+  </div>
+
+  <!-- ════════════════════
+       6. SEND COUNTDOWN · zen
+       ════════════════════ -->
+  <div class="screen-wrapper">
+    <span class="screen-label">06 — SEND</span>
+    <div class="phone">
+      <div class="phone-content">
+        <div class="drive-zen" style="color:var(--red)">
+          <div class="zen-particles">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="countdown-ring"></div>
+          <div class="zen-countdown">3</div>
+          <div class="voice-hint">« annuler » · tap partout = annuler</div>
+        </div>
+      </div>
+    </div>
+    <p class="screen-desc">Compte à rebours 3-2-1 · anneau contracté.<br>Vibration haptique à chaque seconde.</p>
+  </div>
+
+  <!-- ════════════════════
+       7. SESSION DONE · zen
+       ════════════════════ -->
+  <div class="screen-wrapper">
+    <span class="screen-label">07 — DONE</span>
+    <div class="phone">
+      <div class="phone-content">
+        <div class="drive-zen" style="color:var(--green)">
+          <div class="zen-particles">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="zen-orb">
+            <canvas id="c-done" width="280" height="280"></canvas>
+          </div>
+          <div class="zen-hero-count">5<span class="unit">emails · 8 min</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="screen-desc">L'orbe se calme, le chiffre apparaît.<br>Rien d'autre. Bonne route.</p>
+  </div>
+
+  <!-- ════════════════════
+       8. SETTINGS (minimal)
+       ════════════════════ -->
+  <div class="screen-wrapper">
+    <span class="screen-label">08 — SETTINGS</span>
+    <div class="phone">
+      <div class="phone-content">
+        <div class="settings-v4">
+          <div class="s-page-title">Réglages</div>
+          <div class="s-page-sub">LEAN · VOICE-ONLY</div>
+
+          <div class="account-card">
+            <div class="account-avatar">M</div>
+            <div style="flex:1">
+              <div class="account-info-email">marie@agentys.io</div>
+              <div class="account-info-provider">◆ GMAIL · CONNECTÉ</div>
+            </div>
+            <span style="color:var(--text-muted);font-size:18px">›</span>
+          </div>
+
+          <div class="drive-mode-hero">
+            <div class="drive-mode-hero-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/>
+                <circle cx="6.5" cy="16.5" r="2.5"/>
+                <circle cx="16.5" cy="16.5" r="2.5"/>
+              </svg>
+            </div>
+            <div class="drive-mode-hero-info">
+              <div class="drive-mode-hero-title">Mode Conduite</div>
+              <div class="drive-mode-hero-desc">Confirmation vocale · compte à rebours · re-lecture TTS</div>
+            </div>
+            <div class="ios-toggle on"></div>
+          </div>
+
+          <div class="row">
+            <div class="row-info">
+              <div class="row-title">Voix TTS</div>
+              <div class="row-value">Sonia · FR féminin</div>
+            </div>
+            <span class="row-chevron">›</span>
+          </div>
+
+          <div class="row">
+            <div class="row-info">
+              <div class="row-title">Vitesse de lecture</div>
+            </div>
+            <div class="seg-group">
+              <span class="seg-btn">0.75×</span>
+              <span class="seg-btn active">1×</span>
+              <span class="seg-btn">1.25×</span>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:12px">
+            <div class="row-info">
+              <div class="row-title" style="color:var(--red)">Déconnexion</div>
+              <div class="row-value danger">Révoquer OAuth</div>
+            </div>
+            <span class="row-chevron" style="color:var(--red)">›</span>
+          </div>
+
+          <div style="margin-top:32px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--text-muted);opacity:0.4">
+            AGENTYS MOBILE · v1.2.0
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="screen-desc">Mode Conduite en hero · reste manuel.<br>Safety = un seul toggle, tout ou rien.</p>
+  </div>
+
+</div>
+
+<!-- ── Nested Breathe Animation ── -->
+<script>
+function nestedBreathe(id, rgb, speed, amp) {
+  const c = document.getElementById(id);
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height, cx = W/2, cy = H/2;
+  const layers = [
+    {s:0.46, sm:1.29, ph:1.6, a:0.70, lw:1.4},
+    {s:0.22, sm:1.47, ph:2.4, a:0.95, lw:1.6},
+  ];
+  function tri(s) {
+    const h=W*0.38*s, w=W*0.40*s;
+    return [[cx,cy-h],[cx-w,cy+h*0.6],[cx+w,cy+h*0.6]];
+  }
+  let t = Math.random()*10;
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<layers.length;i++){
+      const L=layers[i];
+      const b=Math.sin(t*speed*L.sm+L.ph);
+      const sc=L.s*(1+b*amp);
+      const al=L.a+b*0.08;
+      const v=tri(sc);
+      ctx.beginPath();
+      ctx.moveTo(v[0][0],v[0][1]);
+      ctx.lineTo(v[1][0],v[1][1]);
+      ctx.lineTo(v[2][0],v[2][1]);
+      ctx.closePath();
+      if(i===layers.length-1){
+        ctx.fillStyle=`rgba(${rgb},${al*0.12})`;
+        ctx.fill();
+        ctx.shadowColor=`rgba(${rgb},0.4)`;
+        ctx.shadowBlur=18;
+      }
+      ctx.strokeStyle=`rgba(${rgb},${al})`;
+      ctx.lineWidth=L.lw;
+      ctx.stroke();
+      ctx.shadowBlur=0;
+    }
+    t+=0.016;
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+nestedBreathe('c-idle',  '34,211,238',  0.5,  0.06);  // idle — cyan, deep slow breath
+nestedBreathe('c-listen','94,234,212',  1.3,  0.10);  // lecture — warm cyan (TTS speaking)
+nestedBreathe('c-dictee','34,211,238',  1.9,  0.14);  // dictée — cyan, fast speech pulse
+nestedBreathe('c-review','52,211,153',  0.6,  0.07);  // review — green, confident
+nestedBreathe('c-done',  '52,211,153',  0.25, 0.04);  // done — green, settling to rest
+</script>
+</body>
+</html>

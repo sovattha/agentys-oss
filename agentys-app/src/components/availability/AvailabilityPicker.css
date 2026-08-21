@@ -1,0 +1,499 @@
+/* ============================================================================
+   AVAILABILITY PICKER — full-screen calendar takeover for selecting free
+   time to insert into an email reply.
+
+   Visual treatment is delegated to CalendarView.css (calendar-week-header,
+   calendar-time-column, calendar-day-column, calendar-hour-slot,
+   calendar-event, calendar-now-line) so the picker is pixel-identical to
+   the user's existing Calendar tab. This file only adds:
+     - The full-screen panel chrome (overlay, header, dock)
+     - The selection layer (.av-slot + resize handles + ghost)
+     - The read-only override on busy events (no hover/click)
+   ============================================================================ */
+
+.av-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal, 9000);
+  display: flex;
+  background: var(--surface-primary, #fff);
+  animation: av-fade-in 180ms ease-out;
+}
+
+.av-overlay.closing { animation: av-fade-out 140ms ease-in forwards; }
+
+@keyframes av-fade-in  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes av-fade-out { from { opacity: 1; } to { opacity: 0; } }
+
+.av-panel {
+  width: 100vw;
+  height: 100vh;
+  /* `dvh` is the post-mobile-browser-chrome unit and gracefully matches
+     `vh` on desktop. Listed second so engines that don't understand it
+     fall back to the first declaration. */
+  height: 100dvh;
+  background: var(--surface-primary, #fff);
+  /* Flex column instead of CSS grid. The earlier grid template had five
+     row slots (header / week-header / optional all-day banner / 1fr body
+     / auto dock) but the all-day banner is conditionally rendered — when
+     there were no all-day events, only 4 children landed in the grid:
+     header, week-header, week-body, dock. CSS grid then placed the
+     week-body into row 3 (auto) at its natural ~912px height (19 hours
+     × 48px) and the dock into row 4 (1fr), squeezing the dock to a few
+     pixels that `overflow: hidden` clipped away — so the Cancel/Insert
+     bar disappeared at default browser zoom on the user's machine.
+     Flex column dodges the issue entirely: every child gets the height
+     it needs, and the week-body shrinks via `flex: 1; min-height: 0`. */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: av-slide-up 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+/* All non-body sections keep their natural height — they must never
+   shrink, so the dock stays anchored at the bottom even on short
+   viewports. */
+.av-panel > .av-header,
+.av-panel > .calendar-week-header,
+.av-panel > .calendar-allday-section,
+.av-panel > .av-dock-floating {
+  flex-shrink: 0;
+}
+
+@keyframes av-slide-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* The shared .calendar-week-body now lives inside a flex column. It owns
+   the 1fr slot — `flex: 1 1 0` so it can shrink as well as grow, and
+   `min-height: 0` to unlock the shrink (without it, the body's
+   912 px content height forces the whole panel taller than 100vh and
+   the dock at the bottom falls off-screen). */
+.av-week-body.calendar-week-body {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* Existing busy events should look exactly like they do in the user's
+   Calendar tab — but they must NOT be clickable inside the picker (the
+   picker is for selecting your OWN free time, not editing events). The
+   .av-event-readonly modifier neutralizes pointer-events and hover. */
+.av-event-readonly {
+  pointer-events: none;
+  cursor: default;
+}
+
+/* ── Header — mirrors CalendarView's .calendar-header so the picker
+   chrome is typographically identical to the user's main Calendar tab. */
+.av-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px var(--space-6, 24px);
+  border-bottom: 1px solid var(--border-subtle, #e2e8f0);
+  min-height: 52px;
+}
+
+.av-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.av-header-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Month label — matches .calendar-month-title typography (large display
+   weight, tight tracking) so the picker's header reads like the Calendar
+   tab's header rather than an alien modal. */
+.av-header-month {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  letter-spacing: var(--tracking-tight, -0.02em);
+  line-height: var(--leading-none, 1);
+  margin-left: 6px;
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+
+/* Nav button base — ghost like .calendar-chevron-btn. No border, no fill,
+   icon-only. The `.av-nav-today` modifier brings back an accent pill
+   identical to .calendar-today-btn. */
+.av-nav-btn {
+  appearance: none;
+  border: none;
+  background: none;
+  color: var(--text-primary, #0f172a);
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-md, 8px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 120ms ease;
+  font-family: inherit;
+}
+
+/* Defensive SVG visibility rule — copies .calendar-chevron-btn svg from
+   CalendarView.css. Without it the icon collapses to 0×0 in this surface
+   (the original implementation worked around the same bug by using a
+   Unicode chevron via .av-nav-chevron; the ActionIcons migration removed
+   that wrapper, so the bug came back until this rule was added). */
+.av-nav-btn svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+.av-nav-today {
+  width: auto;
+  height: 32px;
+  padding: 0 var(--space-4, 14px);
+  margin-right: 4px;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 30%, transparent);
+  color: var(--accent-primary, #0d9488);
+  font-size: var(--font-size-2xs, 10px);
+  font-weight: 700;
+  letter-spacing: var(--tracking-mega, 0.08em);
+  text-transform: uppercase;
+}
+
+.av-close {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary, #64748b);
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-md, 8px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 120ms ease;
+}
+
+.av-close svg {
+  display: block;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+/* ── Selection layer — green slots overlaid on day columns ──
+   Layout: time label fills the slot, × button is positioned absolutely
+   in the top-right corner. This keeps the × visible and well-placed
+   regardless of slot height (a 15-min slot is only 12 px tall — flex
+   layout would clip the button). */
+.av-slot {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  background: color-mix(in srgb, #22c55e 35%, transparent);
+  border: 1.5px solid #16a34a;
+  border-radius: 6px;
+  cursor: default;
+  z-index: 4;
+  overflow: visible; /* allow × to extend slightly outside if needed */
+  animation: av-slot-pop 160ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes av-slot-pop {
+  from { transform: scale(0.92); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.av-slot-time {
+  position: absolute;
+  /* Vertically centered to match the × remove button (which already uses
+     top: 50% + translateY(-50%)). Short slots (15–30 min) still bleed
+     past the edges either way; centering at least keeps the label
+     aligned with the × on tall slots (≥45 min) instead of clinging to
+     the top with an empty green block underneath. */
+  top: 50%;
+  transform: translateY(-50%);
+  left: 7px;
+  right: 22px; /* reserve room for the × in the top-right corner */
+  font-size: 11px;
+  font-weight: 600;
+  color: #14532d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+/* The × — bare glyph, vertically centered in the slot. No circle, no
+   background, no border — just the cross. Vertical centering matters
+   for very short slots (30 min = 24 px tall) where any off-center
+   placement looks clipped. */
+.av-slot-remove {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: #14532d;
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  z-index: 6;
+}
+.av-slot-remove:focus,
+.av-slot-remove:active { background: transparent; outline: none; }
+
+.av-slot-remove:focus-visible {
+  outline: 2px solid var(--accent-primary, #0d9488);
+  outline-offset: 1px;
+  border-radius: 3px;
+}
+
+.av-slot-remove svg {
+  display: block;
+  width: 10px;
+  height: 10px;
+  stroke-width: 3;
+}
+
+/* Resize handles — top + bottom edges of every selected slot */
+.av-slot-resize {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 6px;
+  cursor: ns-resize;
+  z-index: 5;
+  transition: background 100ms ease;
+}
+
+.av-slot-resize--top    { top: -3px; }
+.av-slot-resize--bottom { bottom: -3px; }
+
+/* Drag-create ghost preview — dashed border + subtle pulse */
+.av-slot--ghost {
+  background: color-mix(in srgb, #22c55e 22%, transparent);
+  border: 1.5px dashed #16a34a;
+  pointer-events: none;
+  animation: av-ghost-pulse 1100ms ease-in-out infinite;
+}
+
+@keyframes av-ghost-pulse {
+  0%, 100% { background: color-mix(in srgb, #22c55e 22%, transparent); }
+  50%      { background: color-mix(in srgb, #22c55e 32%, transparent); }
+}
+
+.av-slot--ghost .av-slot-time {
+  color: #14532d;
+  opacity: 0.95;
+}
+
+/* Suppress text selection across day columns while dragging so a fast
+   drag doesn't accidentally highlight surrounding hour labels. */
+.calendar-day-column.av-is-dragging,
+.calendar-day-column.av-is-dragging * {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ── Dock row — pinned to the bottom of the panel as a real grid row.
+       No more floating overlay; the calendar grid above is fully
+       interactive end-to-end. */
+.av-dock-floating {
+  /* still center the pill horizontally inside the row */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px 16px;
+  background: var(--surface-primary, #fff);
+  border-top: 1px solid var(--border-subtle, #e2e8f0);
+}
+
+.av-dock-hint {
+  background: rgba(15, 23, 42, 0.92);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  animation: av-dock-hint-in 220ms ease-out;
+}
+
+@keyframes av-dock-hint-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hide the global EmailList/CalendarView shortcuts-ribbon while the
+   availability picker is open — it leaks visually under the dock and
+   creates UI noise that doesn't apply in this view. */
+body:has(.av-overlay:not(.closing)) .shortcuts-ribbon {
+  display: none !important;
+}
+
+.av-dock {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px 8px 8px;
+  border-radius: 9999px;
+  background: var(--surface-primary, #fff);
+  border: 1px solid var(--border-default, #e2e8f0);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.10),
+              0 2px 6px rgba(0, 0, 0, 0.06);
+  pointer-events: auto;
+}
+
+.av-dock-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 18%, transparent);
+  color: var(--accent-primary, #0d9488);
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.av-dock-tz {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary, #64748b);
+  padding: 5px 10px;
+  border-radius: 9999px;
+  background: var(--surface-primary, #fff);
+  border: 1px solid var(--border-default, #e2e8f0);
+  font-variant-numeric: tabular-nums;
+}
+
+.av-dock-cancel {
+  appearance: none;
+  border: 1px solid var(--border-default, #e2e8f0);
+  background: var(--surface-primary, #fff);
+  color: var(--text-primary, #0f172a);
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 120ms ease;
+}
+
+.av-dock-insert {
+  appearance: none;
+  border: 1px solid var(--accent-primary, #0d9488);
+  background: var(--accent-primary, #0d9488);
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 120ms ease;
+}
+
+.av-dock-insert:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Duration chip + popover menu ──────────────────────── */
+.av-duration-chip {
+  position: relative;
+}
+
+.av-duration-trigger {
+  appearance: none;
+  border: 1px solid var(--border-default, #e2e8f0);
+  background: var(--surface-primary, #fff);
+  color: var(--text-primary, #0f172a);
+  padding: 7px 14px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: inherit;
+  transition: all 120ms ease;
+}
+
+.av-duration-menu {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  min-width: 130px;
+  padding: 4px;
+  border: 1px solid var(--border-default, #e2e8f0);
+  border-radius: 8px;
+  background: var(--surface-primary, #fff);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+  z-index: 5;
+}
+
+.av-duration-option {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-primary, #0f172a);
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-family: inherit;
+}
+
+.av-duration-option.selected {
+  color: var(--accent-primary, #0d9488);
+  font-weight: 500;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .av-header { padding: 12px 14px; }
+  .av-header-month { display: none; }
+  .av-dock { flex-direction: column; align-items: stretch; gap: 8px; }
+  .av-dock-controls { justify-content: space-between; }
+}

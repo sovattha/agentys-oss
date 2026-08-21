@@ -1,0 +1,885 @@
+/* ── AI Command Menu ─────────────────────────────────────────────────────── */
+
+.ai-cmd {
+  position: relative;
+  z-index: 20;
+}
+
+/* ── Trigger button ──────────────────────────────────────────────────────── */
+
+.ai-cmd-btn {
+  position: relative; /* anchor for the .ai-cmd-lock paywall badge */
+  width: 32px;
+  height: 32px;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full, 9999px);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-base), opacity 0.15s;
+  box-shadow: none;
+}
+
+/* Le fade disabled vit sur le GLYPHE, pas sur le bouton : une opacity sur le
+   bouton composite tout le sous-arbre et estomperait aussi le badge cadenas
+   (.ai-cmd-lock), dont la raison d'être est de rester lisible. */
+.ai-cmd-btn:disabled { cursor: not-allowed; }
+.ai-cmd-btn:disabled > svg,
+.ai-cmd-btn:disabled > .ai-cmd-spinner { opacity: 0.3; }
+
+/* Mini-cadenas « plan payant » — rendu uniquement quand disabledReason est
+   fourni (paywall), jamais pour un disabled opérationnel. Pastille pleine
+   pour rester lisible malgré l'opacity 0.3 du bouton désactivé. */
+.ai-cmd-lock {
+  position: absolute;
+  right: 1px;
+  bottom: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--surface-primary);
+  color: var(--text-secondary);
+  box-shadow: 0 0 0 1px var(--border-primary, rgba(15, 23, 42, 0.12));
+}
+
+/* Taille du glyphe verrouillée en (0,2,1) : les boutons hôtes ont des règles
+   génériques `<btn> svg { width/height: 16px }` (ReplyComposer.css:1028) qui
+   écraseraient les attributs 9px du cadenas — le badge doit être identique
+   sur tous les boutons (baguette, Generate with AI, …). */
+.rc-icon-btn .ai-cmd-lock svg,
+.ai-cmd-btn .ai-cmd-lock svg,
+.ai-cmd-lock svg {
+  width: 9px;
+  height: 9px;
+  min-width: 0;
+}
+
+.ai-cmd-btn.ai-cmd-active { opacity: 0.65; }
+
+.ai-cmd-btn.ai-cmd-recording {
+  background: transparent;
+  color: #ef4444;
+}
+
+/* ── Waveform recording animation ────────────────────────────────────────── */
+
+.ai-wf-1, .ai-wf-2, .ai-wf-3, .ai-wf-4 {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ai-waveform 0.7s ease-in-out infinite alternate;
+}
+.ai-wf-1 { animation-delay: 0s; }
+.ai-wf-2 { animation-delay: 0.18s; }
+.ai-wf-3 { animation-delay: 0.09s; }
+.ai-wf-4 { animation-delay: 0.27s; }
+
+@keyframes ai-waveform {
+  0%   { transform: scaleY(0.2); }
+  100% { transform: scaleY(1); }
+}
+
+.ai-cmd-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: ai-cmd-spin 0.6s linear infinite;
+}
+
+/* Variante « busy » (refine LLM en cours) : le bouton baguette au repos a un
+   fond clair/transparent, le spinner blanc y est invisible — version accent. */
+.ai-cmd-spinner--accent {
+  border-color: color-mix(in srgb, var(--accent-primary, #0d9488) 25%, transparent);
+  border-top-color: var(--accent-primary, #0d9488);
+}
+
+@keyframes ai-cmd-spin { to { transform: rotate(360deg); } }
+
+/* ── Recording indicator ─────────────────────────────────────────────────── */
+
+.ai-cmd-rec {
+  position: absolute;
+  top: 36px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--surface-primary, #fff);
+  border: 1px solid var(--border-secondary, #e5e7eb);
+  border-radius: 12px;
+  padding: 3px 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+.ai-cmd-rec-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ef4444;
+  animation: ai-cmd-dot-breathe 1.5s ease-in-out infinite;
+}
+
+@keyframes ai-cmd-dot-breathe {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(1.3); }
+}
+
+.ai-cmd-rec-time {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary, #6b7280);
+  font-variant-numeric: tabular-nums;
+}
+
+.ai-cmd-rec-time.ai-cmd-silence {
+  color: #f59e0b;
+  animation: ai-cmd-silence-pulse 1s ease-in-out infinite;
+}
+
+@keyframes ai-cmd-silence-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+/* ── Error ────────────────────────────────────────────────────────────────── */
+
+.ai-cmd-error {
+  position: absolute;
+  top: 36px;
+  right: 0;
+  background: #fef2f2;
+  color: #dc2626;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid #fecaca;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Popover ─────────────────────────────────────────────────────────────── */
+
+.ai-cmd-popover {
+  position: absolute;
+  bottom: 42px;
+  top: auto;
+  right: 0;
+  width: min(360px, calc(100vw - 32px));
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.02),
+    0 4px 8px rgba(0,0,0,0.04),
+    0 12px 32px rgba(0,0,0,0.10),
+    0 24px 48px rgba(0,0,0,0.04);
+  padding: 10px 10px 8px;
+  animation: ai-cmd-in 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  max-height: min(420px, 60vh);
+}
+
+/* Portal variant — escapes overflow:hidden containers */
+.ai-cmd-popover.ai-cmd-popover--portal {
+  position: fixed;
+  right: auto;
+  z-index: var(--z-popover, 1100);
+  /* bottom/left set via inline style */
+}
+
+@keyframes ai-cmd-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+/* ── Keyboard shortcut badge ─────────────────────────────────────────────── */
+
+.ai-cmd-kbd {
+  font-size: 10px;
+  font-weight: 500;
+  color: #a1a1aa;
+  background: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  border-radius: 4px;
+  padding: 1px 5px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+  opacity: 1;
+  transition: opacity 0.12s;
+}
+
+/* ── Separator ────────────────────────────────────────────────────────────── */
+
+.ai-cmd-sep {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.05);
+  margin: 5px 12px;
+}
+
+/* ── Row ─────────────────────────────────────────────────────────────────── */
+
+.ai-cmd-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 34px;
+  padding: 0 10px 0 14px;
+  cursor: pointer;
+  transition: background 0.08s;
+  user-select: none;
+  border-radius: 8px;
+  margin: 0 4px;
+}
+
+/* ── Row icon ─────────────────────────────────────────────────────────────── */
+
+.ai-cmd-row-icon {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border-radius: 7px;
+  background: #f0efed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #71717a;
+  flex-shrink: 0;
+}
+
+.ai-cmd-row-icon-saved {
+  background: #ccfbf1;
+  color: #0d9488;
+}
+
+/* ── Row label ────────────────────────────────────────────────────────────── */
+
+.ai-cmd-row-label {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 450;
+  color: #18181b;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ai-cmd-row-label-saved {
+  color: color-mix(in srgb, var(--accent-primary, #0d9488) 80%, #18181b);
+}
+
+/* ── Inline edit input (saved commands) ──────────────────────────────────── */
+
+.ai-cmd-row-editing {
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 6%, transparent);
+}
+
+.ai-cmd-edit-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 450;
+  color: color-mix(in srgb, var(--accent-primary, #0d9488) 80%, #18181b);
+  letter-spacing: -0.015em;
+  font-family: inherit;
+  padding: 0;
+  caret-color: var(--accent-primary, #0d9488);
+}
+
+/* ── Row delete button ────────────────────────────────────────────────────── */
+
+.ai-cmd-row-del {
+  width: 18px;
+  height: 18px;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 1;
+  transition: opacity 0.1s, color 0.1s, background 0.1s;
+}
+
+/* ── Chips row (top of popover) ───────────────────────────────────────────
+   Pill chips for built-in slash commands (Draft from notes, Correct,
+   Shorter), the Modifier preset, saved user instructions, and a "+ New"
+   affordance. Featured chip uses a teal fill; the others are neutral. */
+
+.ai-cmd-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 0 8px;
+  margin: 0 0 6px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  align-items: center;
+}
+
+.ai-cmd-chip {
+  /* The global `button { padding: 12px 20px }` rule would erase the chip
+     content — explicit reset is mandatory. */
+  padding: 0 10px;
+  height: 28px;
+  min-height: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #e4e4e7;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #3f3f46;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition:
+    background 0.12s,
+    border-color 0.12s,
+    color 0.12s,
+    box-shadow 0.12s,
+    transform 0.06s;
+  font-family: inherit;
+  line-height: 1;
+}
+
+.ai-cmd-chip:active:not(:disabled):not(.ai-cmd-chip--disabled) {
+  transform: scale(0.97);
+}
+
+.ai-cmd-chip:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-primary, #0d9488) 55%, transparent);
+  outline-offset: 1px;
+}
+
+.ai-cmd-chip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: currentColor;
+  opacity: 0.85;
+}
+
+.ai-cmd-chip-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+}
+
+.ai-cmd-chip-kbd {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #a1a1aa;
+  background: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  border-radius: 4px;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  /* Hidden until the chip is hovered or keyboard-focused — keeps the row
+     denser when idle while preserving discoverability. */
+  opacity: 1;
+  max-width: 60px;
+  padding: 1px 4px;
+  border-width: 1px;
+  margin-left: 2px;
+  overflow: hidden;
+  transition:
+    opacity 0.14s ease,
+    max-width 0.18s ease,
+    padding 0.18s ease,
+    border-width 0.18s ease,
+    margin-left 0.18s ease;
+}
+
+.ai-cmd-chip:focus-visible .ai-cmd-chip-kbd,
+.ai-cmd-chip:focus .ai-cmd-chip-kbd {
+  opacity: 1;
+  max-width: 60px;
+  padding: 1px 4px;
+  border-width: 1px;
+  margin-left: 2px;
+}
+
+/* All chips share the base neutral styling defined on `.ai-cmd-chip` above.
+   The `--featured`, `--modifier`, `--saved` modifiers stay as classes so
+   the TSX hooks keep working (saved still needs `--saved` for the × hover
+   reveal, modifier still needs `--disabled` for the empty-body state) but
+   they no longer carry distinct color palettes. */
+
+.ai-cmd-chip--disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.ai-cmd-chip--saved {
+  /* Tighter right padding leaves room for the × delete button without
+     making the chip wider than the others. */
+  padding-right: 4px;
+}
+
+.ai-cmd-chip--saved.ai-cmd-chip--editing {
+  border-color: var(--accent-primary, #0d9488);
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 6%, #ffffff);
+}
+
+.ai-cmd-chip--saved .ai-cmd-edit-input {
+  /* Override the row-style edit input so it sits cleanly inside the chip */
+  background: transparent;
+  font-size: 12px;
+  width: auto;
+  min-width: 60px;
+}
+
+.ai-cmd-chip-del {
+  width: 16px;
+  height: 16px;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: 2px;
+  opacity: 1;
+  transition: opacity 0.12s, color 0.12s, background 0.12s;
+}
+
+/* ── "+" chip (icon-only, dashed, anchors to the right) ───────────────── */
+
+.ai-cmd-chip--new {
+  background: transparent;
+  border: 1px dashed #d4d4d8;
+  color: #71717a;
+  margin-left: auto; /* pushes the chip to the right edge of the row */
+  /* Square button — same height as the other chips so the row baseline
+     stays aligned, but width collapses to fit just the + glyph. */
+  width: 28px;
+  padding: 0;
+  justify-content: center;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.ai-cmd-chip--new:hover,
+.ai-cmd-chip--new:focus-visible {
+  border-color: var(--accent-primary);
+  border-style: solid;
+  color: var(--accent-primary);
+}
+
+/* ── Custom prompt input ──────────────────────────────────────────────────── */
+
+.ai-cmd-input-wrap {
+  display: flex;
+  align-items: center;
+  margin: 2px 0 0;
+  height: 34px;
+  border: 1.5px solid #e4e4e7;
+  border-radius: 10px;
+  background: var(--surface-base, #faf9f7);
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+  overflow: hidden;
+}
+
+/* ── Save-as row (inline pin flow) ────────────────────────────────────
+   Shown when the user clicks the 📌 button. Slides in below the main
+   input, lets them rename the chip before it's persisted. Enter / ✓
+   commits, Esc / ✕ cancels (restores the instruction above). */
+
+.ai-cmd-saveas-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 0 0;
+  padding: 0 4px 0 10px;
+  height: 30px;
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 35%, #e4e4e7);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 4%, #ffffff);
+  /* Slide-in : start collapsed + fading, settle into place. The keyframe
+     animates max-height + opacity together so the row feels like it
+     extrudes out of the input above. */
+  animation: ai-cmd-saveas-slidein 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+@keyframes ai-cmd-saveas-slidein {
+  from {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-4px);
+    margin-top: 0;
+  }
+  to {
+    max-height: 30px;
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: 4px;
+  }
+}
+
+.ai-cmd-saveas-prefix {
+  font-size: 11px;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--accent-primary, #0d9488) 60%, #71717a);
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: -0.01em;
+}
+
+.ai-cmd-saveas-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #18181b;
+  font-family: inherit;
+  height: 100%;
+  padding: 0;
+}
+
+.ai-cmd-saveas-input::placeholder {
+  color: #a1a1aa;
+  font-weight: 400;
+}
+
+.ai-cmd-saveas-btn {
+  width: 22px;
+  height: 22px;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.12s, color 0.12s, transform 0.06s;
+}
+
+.ai-cmd-saveas-btn:active { transform: scale(0.92); }
+
+.ai-cmd-saveas-btn--cancel {
+  background: transparent;
+  color: #9ca3af;
+}
+
+.ai-cmd-saveas-btn--confirm {
+  background: var(--accent-primary, #0d9488);
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(13, 148, 136, 0.25);
+}
+
+/* One-shot teal pulse — fired when the user clicks the "+ New" chip so
+   their attention follows the focus down to the input. The animation is
+   `forwards`-free (idle state recovers naturally), so the wrap returns to
+   its default appearance when the 3s hint timer expires. */
+.ai-cmd-input-wrap--pulse {
+  animation: ai-cmd-input-pulse 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  border-color: var(--accent-primary, #0d9488);
+  background: #ffffff;
+}
+
+@keyframes ai-cmd-input-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-primary, #0d9488) 35%, transparent);
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.015);
+  }
+  100% {
+    box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent-primary, #0d9488) 0%, transparent);
+    transform: scale(1);
+  }
+}
+
+.ai-cmd-input-wrap:focus-within {
+  border-color: var(--accent-primary, #0d9488);
+  background: #fff;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary, #0d9488) 12%, transparent);
+}
+
+.ai-cmd-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0 4px 0 12px;
+  font-size: 12.5px;
+  background: transparent;
+  color: #18181b;
+  min-width: 0;
+  height: 100%;
+  font-family: inherit;
+}
+
+.ai-cmd-input::placeholder {
+  color: #a1a1aa;
+}
+
+.ai-cmd-pin-btn {
+  width: 26px;
+  height: 26px;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #c4c4c8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: color 0.12s, background 0.12s;
+}
+
+.ai-cmd-pin-btn:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.ai-cmd-send-btn {
+  width: 26px;
+  height: 26px;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: 7px;
+  background: var(--accent-primary, #0d9488);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+  flex-shrink: 0;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.ai-cmd-send-btn:disabled {
+  opacity: 0.22;
+  cursor: not-allowed;
+}
+
+.ai-cmd-send-arrow {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ─── Mode surgical ────────────────────────────────────────────────────────
+   Quand l'utilisateur clique "Modifier" dans la popup, on affiche un bandeau
+   ambré au-dessus de l'input + on conditionne l'apparence pour signaler
+   visuellement le changement de contexte. */
+
+.ai-cmd-popover--surgical {
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(245, 158, 11, 0.06),
+    0 4px 12px rgba(245, 158, 11, 0.10),
+    0 16px 40px rgba(0, 0, 0, 0.10);
+}
+
+.ai-cmd-surgical-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: -4px 4px 8px;
+  padding: 8px 10px;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  color: #92400e;
+  font-size: 11.5px;
+  line-height: 1.35;
+}
+
+.ai-cmd-surgical-banner svg {
+  flex-shrink: 0;
+  color: #b45309;
+}
+
+.ai-cmd-surgical-banner-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.ai-cmd-surgical-banner-text strong {
+  font-weight: 600;
+}
+
+.ai-cmd-surgical-banner-back {
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  color: #92400e;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: background 0.12s, color 0.12s;
+}
+
+.ai-cmd-surgical-hint {
+  margin: -2px 4px 6px;
+  padding: 0 4px;
+  font-size: 10.5px;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Quand surgical mode est actif, l'input lui-même prend une teinte ambrée
+   subtile pour cohérence visuelle */
+.ai-cmd-popover--surgical .ai-cmd-input-wrap {
+  border-color: rgba(245, 158, 11, 0.4);
+  background: #fffdf7;
+}
+
+.ai-cmd-popover--surgical .ai-cmd-input:focus,
+.ai-cmd-popover--surgical .ai-cmd-input-wrap:focus-within {
+  border-color: #f59e0b;
+}
+
+/* ─── Row "Modifier" ──────────────────────────────────────────────────────── */
+
+.ai-cmd-row--modifier {
+  /* Hover spécifique amber pour aligner avec le mode surgical */
+}
+
+.ai-cmd-row--modifier:focus {
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.06), rgba(245, 158, 11, 0.02));
+}
+
+/* État désactivé : pas de body à modifier. La row reste visible (le
+   raccourci Ctrl+M garde sa visibilité pour la discoverability) mais
+   l'interaction est neutralisée. */
+.ai-cmd-row--modifier.ai-cmd-row--disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.ai-cmd-row--modifier.ai-cmd-row--disabled:focus {
+  background: transparent;
+}
+
+.ai-cmd-row-icon-modifier {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.ai-cmd-row-sublabel {
+  margin-left: auto;
+  font-size: 10.5px;
+  color: #9ca3af;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+/* ─── Inline mic dans l'input wrap ────────────────────────────────────────
+   Bouton micro intégré à l'input de la popup AI Commands. Permet de dicter
+   directement la commande/modification sans passer par le mic du toolbar. */
+
+.ai-cmd-inline-mic {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 2px;
+  flex-shrink: 0;
+  transition: background 0.12s, color 0.12s, transform 0.08s;
+}
+
+.ai-cmd-inline-mic:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.ai-cmd-inline-mic:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ai-cmd-inline-mic--active {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.ai-cmd-inline-mic-spinner {
+  width: 11px;
+  height: 11px;
+  border: 2px solid rgba(13, 148, 136, 0.25);
+  border-top-color: #0d9488;
+  border-radius: 50%;
+  animation: ai-cmd-inline-mic-spin 0.7s linear infinite;
+}
+
+@keyframes ai-cmd-inline-mic-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Waveform animation when recording */
+.ai-cmd-wf-1 { transform-origin: center; animation: ai-cmd-wf-bar 0.9s ease-in-out infinite; animation-delay: 0s;    }
+.ai-cmd-wf-2 { transform-origin: center; animation: ai-cmd-wf-bar 0.9s ease-in-out infinite; animation-delay: 0.15s; }
+.ai-cmd-wf-3 { transform-origin: center; animation: ai-cmd-wf-bar 0.9s ease-in-out infinite; animation-delay: 0.3s;  }
+.ai-cmd-wf-4 { transform-origin: center; animation: ai-cmd-wf-bar 0.9s ease-in-out infinite; animation-delay: 0.45s; }
+
+@keyframes ai-cmd-wf-bar {
+  0%, 100% { transform: scaleY(0.5); }
+  50%      { transform: scaleY(1.0); }
+}
+
+/* Quand recording, l'input wrap entier prend une teinte rouge subtile */
+.ai-cmd-input-wrap:has(.ai-cmd-inline-mic--active) {
+  border-color: rgba(239, 68, 68, 0.35);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.10);
+}

@@ -1,0 +1,104 @@
+/* ============================================================================
+   LABEL BADGE — "Quiet Luxury" style
+   Pale tinted background, colored text, thin accent border.
+   Designed to complement the bold "Draft prêt" teal pill without competing.
+   ============================================================================ */
+
+.label-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--label-color) 25%, var(--surface-primary, #fff));
+  color: color-mix(in srgb, var(--label-color) 70%, #333);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all var(--transition-base);
+  border: none;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: var(--tracking-wide);
+}
+
+.label-badge-small {
+  font-size: var(--font-size-xs);
+  padding: 2px 8px;
+}
+
+.label-badge-medium {
+  font-size: var(--font-size-xs);
+  padding: 3px 11px;
+}
+
+.label-badge.clickable {
+  cursor: pointer;
+}
+
+.label-badge-name {
+  line-height: var(--leading-tight);
+}
+
+.label-badge-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  margin-left: 2px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--label-color);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all var(--transition-base);
+}
+
+/* ============================================================================
+   LABEL BADGE GROUP
+   ============================================================================ */
+
+.label-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+/* Compact square chip for secondary labels — matches badge style */
+.label-badge-chip {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  cursor: default;
+  background: color-mix(in srgb, var(--label-color) 25%, var(--surface-primary, #fff));
+  transition: all var(--transition-base);
+}
+
+.label-badge-chip.clickable {
+  cursor: pointer;
+}
+
+.label-badge-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  border-radius: 9999px;
+  background: var(--surface-secondary);
+  color: var(--text-tertiary);
+  font-weight: 500;
+  border: 1px solid var(--border-subtle, #eee);
+}
+
+.label-badge-more.label-badge-small {
+  font-size: var(--font-size-2xs);
+  padding: 1px 5px;
+}
+
+.label-badge-more.label-badge-medium {
+  font-size: var(--font-size-xs);
+  padding: 3px 8px;
+}

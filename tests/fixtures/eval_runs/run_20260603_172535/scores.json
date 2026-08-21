@@ -1,0 +1,75 @@
+{
+  "profile": {
+    "completeness": 72,
+    "precision": 75,
+    "usefulness": 70,
+    "overall": 72,
+    "missing": [
+      "uses_emoji: true",
+      "addressing: mixed (top-level)",
+      "casual_fr greeting style: '{first_name}, / Salut {first_name},'",
+      "formal_fr closing: 'Bien cordialement, / Cordialement,'"
+    ],
+    "incorrect": [
+      "addressing placed inside tone as 'vous' instead of top-level 'mixed'",
+      "average_response_length is 'medium' instead of 'short'",
+      "closing_styles semi_formal_fr is 'Bien cordialement,' instead of 'Cordialement, / Karim'",
+      "closing_styles casual_fr is 'Cordialement,' instead of '(no closing or just name)'",
+      "profession field is fabricated/unconfirmed ('courtier immobilier' not in ground truth)",
+      "profession_confirmed field is fabricated"
+    ],
+    "details": "The system correctly captured core profile elements: user email, name, preferred name, signature (name/title/company), default tone, semi-formal and formal greeting styles, languages, and language variant. However, several issues reduce quality: (1) The 'uses_emoji: true' field is missing entirely, which is relevant for drafting. (2) The 'addressing' field is misplaced inside 'tone' as 'vous' instead of being a top-level 'mixed' value — this is a meaningful error since 'mixed' indicates both tu/vous usage depending on contact. (3) The casual greeting style is missing. (4) The closing styles are incorrect: semi_formal_fr should be 'Cordialement, / Karim' and casual_fr should be '(no closing or just name)', but the system swapped/altered these. (5) 'average_response_length' is 'medium' instead of 'short'. (6) Extra fields like 'profession' and 'profession_confirmed' are fabricated/unverified additions not in ground truth."
+  },
+  "knowledge": {
+    "completeness": 72,
+    "precision": 74,
+    "usefulness": 68,
+    "overall": 71,
+    "missing": [
+      "alertes@seloger.com (SeLoger Alertes) - completely absent",
+      "contact@meilleursagents.com (MeilleursAgents) - completely absent",
+      "Samira Bensaid title: 'Assistante commerciale'",
+      "Julien Roche title: 'Agent immobilier junior'",
+      "Jean-Philippe Astier title: 'Directeur des ventes'",
+      "Hugo Martin title: 'Agent immobilier senior'",
+      "Éric Blanchard title: 'Diagnostiqueur immobilier'",
+      "Nadia Ferhat title: 'Conseillère Immobilier'",
+      "Catherine Vernet title: 'Directrice'",
+      "Stéphane Vernier company: 'Freelance'"
+    ],
+    "incorrect": [
+      "Delphine Mercier preferred_tone: 'semi-formal' (should be 'formal')",
+      "famille.lambert name: 'Famille Laurent' (should be 'M. et Mme Laurent')",
+      "famille.lambert preferred_tone: 'semi-formal' (should be 'formal')",
+      "Anne Fournier preferred_tone: 'semi-formal' (should be 'formal')",
+      "Pierre Cassagne company: 'Notaire Cassagne' (should be 'Étude Cassagne')",
+      "Nadia Ferhat company: 'BNP Paribas Immobilier' (should be 'BNP Paribas')",
+      "Takeshi Nakamura preferred_language: 'en' (should be 'fr')"
+    ],
+    "details": "The system found 14 out of 16 contacts, missing SeLoger Alertes and MeilleursAgents (automated/platform contacts). Several contacts are missing their titles (Samira Bensaid, Julien Roche, Jean-Philippe Astier, Hugo Martin, Éric Blanchard, Nadia Ferhat, Catherine Vernet). Tone errors include: Delphine Mercier marked as semi-formal instead of formal, famille.lambert marked as semi-formal instead of formal, Anne Fournier marked as semi-formal instead of formal. Nadia Ferhat's company is slightly wrong ('BNP Paribas Immobilier' vs 'BNP Paribas'). Pierre Cassagne's company is 'Notaire Cassagne' instead of 'Étude Cassagne'. Takeshi Nakamura's preferred language is marked as 'en' instead of 'fr' — this is a significant error that would cause wrong-language emails. Stéphane Vernier is missing his 'Freelance' company. The system adds a 'language_variant' field not in ground truth, which is harmless but unnecessary. The tone misclassifications (formal→semi-formal for multiple contacts) and the Nakamura language error are the most impactful issues for email drafting quality."
+  },
+  "rules": {
+    "completeness": 82,
+    "precision": 78,
+    "usefulness": 80,
+    "overall": 80,
+    "missing": [
+      "Samira closing: '(no closing or emoji 👍)' - system has wrong closing",
+      "Nakamura closing variant: 'Restant à votre disposition'",
+      "jp.astier greeting variant: 'Merci JP,'",
+      "General rule: 'emails_courts_internes' (very short 1-2 line internal emails)",
+      "General rule: 'horaires_etendus' (extended working hours 07h-22h)",
+      "General rule: 'structured_commercial_reports' (KPIs and metrics for direction)",
+      "General rule: 'signature_externe_uniquement' as explicit structured rule"
+    ],
+    "incorrect": [
+      "celine.dupuis@laposte.net tone listed as 'formal' but should be 'semi-formal'",
+      "a.fournier@sfr.fr closing includes 'À jeudi' (specific instance, not a reusable rule)",
+      "celine.dupuis@laposte.net closing includes 'À samedi' (specific instance, not a reusable rule)",
+      "samira@immoplus-lyon.fr closing 'Merci ! / Karim' does not match ground truth '(no closing or emoji 👍)'",
+      "General rules lack structured fields (name, trigger, action) making them less machine-readable"
+    ],
+    "details": "The system found all 14 contacts present in the ground truth and correctly identified tone, language, and most greeting/closing patterns. General rules are largely covered though expressed differently and with some additions not in ground truth. Key issues: (1) Samira's closing is wrong ('Merci ! / Karim' vs '(no closing or emoji 👍)'); (2) Nakamura's closing is incomplete (missing 'Restant à votre disposition'); (3) Fournier's closing adds 'À jeudi' which is a specific instance, not a rule; (4) Dupuis's tone is listed as 'formal' but ground truth says 'semi-formal'; (5) Dupuis's closing adds 'À samedi' similarly; (6) jp.astier greeting is incomplete (missing 'Merci JP,' variant); (7) General rules are expressed as free-text descriptions without structured fields (name, trigger, action), reducing machine-readability; (8) Some general rules from ground truth are missing or merged (e.g., 'emails_courts_internes', 'horaires_etendus', 'structured_commercial_reports' as distinct rules); (9) Extra rules added (jargon immobilier, données contextuelles) not in ground truth but not harmful. The output is still largely usable for drafting emails."
+  },
+  "overall": 74
+}

@@ -1,0 +1,260 @@
+{
+  "timestamp": "20260214_015513",
+  "agents": [
+    "profile",
+    "knowledge",
+    "rules"
+  ],
+  "llm_judge": false,
+  "scores": {
+    "profile": {
+      "completeness": 100,
+      "precision": 100,
+      "usefulness": 100,
+      "overall": 100,
+      "missing": [],
+      "incorrect": []
+    },
+    "knowledge": {
+      "completeness": 0,
+      "precision": 0,
+      "usefulness": 0,
+      "overall": 0,
+      "missing": [
+        "sarah.jones@globaltech.com",
+        "marie.leclerc@clientcorp.com",
+        "amelie.petit@fournisseur.fr",
+        "camille.roux@techcorp.fr",
+        "contact@prospect-startup.io",
+        "david.kim@partnertech.co.kr",
+        "pierre.durand@techcorp.fr",
+        "ceo@techcorp.fr",
+        "claire.fontaine@clientcorp.com",
+        "lucas.bernard@techcorp.fr",
+        "john.smith@globaltech.com",
+        "nicolas.moreau@techcorp.fr",
+        "elena.volkov@eupartner.de"
+      ],
+      "incorrect": []
+    },
+    "rules": {
+      "completeness": 0,
+      "precision": 0,
+      "usefulness": 0,
+      "overall": 0,
+      "missing": [
+        "sarah.jones@globaltech.com",
+        "marie.leclerc@clientcorp.com",
+        "camille.roux@techcorp.fr",
+        "contact@prospect-startup.io",
+        "david.kim@partnertech.co.kr",
+        "pierre.durand@techcorp.fr",
+        "ceo@techcorp.fr",
+        "john.smith@globaltech.com",
+        "claire.fontaine@clientcorp.com",
+        "lucas.bernard@techcorp.fr",
+        "amelie.petit@fournisseur.fr",
+        "nicolas.moreau@techcorp.fr",
+        "elena.volkov@eupartner.de"
+      ],
+      "incorrect": []
+    },
+    "overall": 33
+  },
+  "output": {
+    "profile": {
+      "name": "Sophie Martin",
+      "position": "Chef de projet - Division Digitale",
+      "company": "TechCorp",
+      "email_patterns": [
+        {
+          "recipients": [
+            "ceo@techcorp.fr"
+          ],
+          "formal_level": 10,
+          "greeting_formality": 10,
+          "salutation_formality": 10
+        },
+        {
+          "recipients": [
+            "camille.roux@techcorp.fr",
+            "claire.fontaine@clientcorp.com"
+          ],
+          "formal_level": 8,
+          "greeting_formality": 8,
+          "salutation_formality": 8
+        },
+        {
+          "recipients": [
+            "pierre.durand@techcorp.fr",
+            "lucas.bernard@techcorp.fr",
+            "recrutement@techcorp.fr"
+          ],
+          "formal_level": 6,
+          "greeting_formality": 6,
+          "salutation_formality": 6
+        },
+        {
+          "recipients": [
+            "it-support@techcorp.fr",
+            "claire.fontaine@clientcorp.com"
+          ],
+          "formal_level": 4,
+          "greeting_formality": 4,
+          "salutation_formality": 4
+        }
+      ],
+      "signatures": [
+        {
+          "email": "Sophie Martin<[sophie.martin@techcorp.fr](mailto:sophie.martin@techcorp.fr)>",
+          "name": "Sophie Martin",
+          "position": "Chef de projet - Division Digitale",
+          "company": "TechCorp",
+          "phone_number": "+33 6 12 34 56 78"
+        }
+      ],
+      "languages": [
+        {
+          "language": "French",
+          "preference": 90,
+          "used_for_emails": [
+            "All emails"
+          ]
+        },
+        {
+          "language": "English",
+          "preference": 10,
+          "used_for_emails": []
+        }
+      ],
+      "keywords": {
+        "positive": [
+          "bien marche",
+          "reussi",
+          "excellent",
+          "bonne"
+        ],
+        "negative": [
+          "a ameliorer",
+          "probleme",
+          "difficultes"
+        ],
+        "other": [
+          "attente",
+          "action",
+          "suivi"
+        ]
+      },
+      "email_length": {
+        "average_words_per_sentence": 15,
+        "average_sentences_per_email": 4
+      },
+      "user_email": "sophie.martin@techcorp.fr"
+    },
+    "knowledge": {
+      "Emails": 50,
+      "UniqueContacts": 19,
+      "EmailThreads": [
+        {
+          "ThreadId": "ALPHA-456",
+          "Participants": [
+            "sophie.martin@techcorp.fr",
+            "lucas.bernard@techcorp.fr"
+          ],
+          "Messages": [
+            {
+              "Sender": "sophie.martin@techcorp.fr",
+              "Subject": "Sprint 13 Planning",
+              "Timestamp": "2023-01-26T09:00:00Z",
+              "Content": "Voici le plan du sprint 13 (27 jan - 7 fev) :\n\nProjet Alpha :\n- ALPHA-456 : Export streaming (Lucas) - 5 pts"
+            },
+            {
+              "Sender": "lucas.bernard@techcorp.fr",
+              "Subject": "Re: Sprint 13 Planning",
+              "Timestamp": "2023-01-26T10:30:00Z",
+              "Content": "Sophie, Pour ALPHA-456, c'est deja en bonne voie (la PR est en review). Je devrais pouvoir commencer sur un autre ticket des mardi. Est-ce qu'on a des taches Beta a anticiper ?"
+            }
+          ]
+        },
+        {
+          "ThreadId": "VPN-Issue",
+          "Participants": [
+            "sophie.martin@techcorp.fr",
+            "it-support@techcorp.fr"
+          ],
+          "Messages": [
+            {
+              "Sender": "sophie.martin@techcorp.fr",
+              "Subject": "Probleme VPN - Connexion intermittente",
+              "Timestamp": "2023-01-30T08:00:00Z",
+              "Content": "Depuis ce matin, j'ai des deconnexions VPN frequentes (toutes les 15-20 min). Je suis en teletravail et ca impacte fortement ma productivite. Config : MacBook Pro M3, macOS 15.2, client VPN v4.2.1 Merci de traiter en priorite."
+            },
+            {
+              "Sender": "it-support@techcorp.fr",
+              "Subject": "Re: Probleme VPN - Connexion intermittente",
+              "Timestamp": "2023-01-30T10:00:00Z",
+              "Content": "Bonjour Sophie, Nous avons identifie le probleme : une mise a jour du firewall a cause des timeouts sur les sessions VPN. Le correctif a ete deploye. Merci de redemarrer votre client VPN. Si le probleme persiste, contactez-nous au 01 23 45 67 89."
+            },
+            {
+              "Sender": "sophie.martin@techcorp.fr",
+              "Subject": "Re: Probleme VPN - Connexion intermittente",
+              "Timestamp": "2023-01-30T10:30:00Z",
+              "Content": "Merci, ca fonctionne apres redemarrage. Vous pouvez clore le ticket."
+            }
+          ]
+        },
+        {
+          "ThreadId": "ClientCorp-Project-Beta",
+          "Participants": [
+            "sophie.martin@techcorp.fr",
+            "claire.fontaine@clientcorp.com"
+          ],
+          "Messages": [
+            {
+              "Sender": "sophie.martin@techcorp.fr",
+              "Subject": "Prise de contact - Projet Beta",
+              "Timestamp": "2023-02-01T14:00:00Z",
+              "Content": "Bonjour Claire, Marie Leclerc m'a transmis vos coordonnees. En tant que chef de projet cote ClientCorp, vous serez mon interlocutrice principale pour le projet Beta. Je vous propose qu'on echange en amont du kick-off pour aligner nos methodes de travail. Etes-vous disponible pour un call de 30 min ?"
+            },
+            {
+              "Sender": "claire.fontaine@clientcorp.com",
+              "Subject": "Re: Prise de contact - Projet Beta",
+              "Timestamp": "2023-02-02T10:00:00Z",
+              "Content": "Bonjour Sophie, Ravie de faire votre connaissance ! Je suis disponible jeudi a 15h si ca vous convient. De notre cote, nous utilisons JIRA pour le suivi de projet. On pourrait creer un espace partage. A bientot,"
+            }
+          ]
+        },
+        {
+          "ThreadId": "EUPartner-Collaboration",
+          "Participants": [
+            "sophie.martin@techcorp.fr",
+            "elena.volkov@eupartner.de"
+          ],
+          "Messages": [
+            {
+              "Sender": "elena.volkov@eupartner.de",
+              "Subject": "Collaboration proposal - EU market expansion",
+              "Timestamp": "2023-02-03T16:00:00Z",
+              "Content": "Dear Sophie, I am reaching out regarding a potential collaboration for expanding TechCorp's services in the European market. EUPartner has established distribution channels in Germany, Austria, and Switzerland. We believe your API integration solutions would be well received in the DACH region."
+            },
+            {
+              "Sender": "sophie.martin@techcorp.fr",
+              "Subject": "Re: Collaboration proposal - EU market expansion",
+              "Timestamp": "2023-02-06T14:00:00Z",
+              "Content": "Thank you for the detailed proposal. The European market expansion is definitely aligned with our 2026 strategy. I've discussed it with our CEO and we're keen to explore further. A few points:\n\n1. We'd need a GDPR compliance assessment for the data sharing aspects\n2. The revenue split"
+            }
+          ]
+        }
+      ],
+      "contacts": [],
+      "projects": [],
+      "terminology": {},
+      "frequent_topics": []
+    },
+    "rules": {
+      "contact_rules": [],
+      "general_rules": [],
+      "forbidden_phrases": []
+    }
+  }
+}

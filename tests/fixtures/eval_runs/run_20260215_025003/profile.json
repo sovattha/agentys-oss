@@ -1,0 +1,30 @@
+{
+  "user_email": "priya@heyvibe.io",
+  "user_name": "Priya Pivot",
+  "signature": null,
+  "signature_en": null,
+  "tone": {
+    "default_tone": "semi-formal",
+    "greeting_styles": {
+      "formal_fr_external": "Bonjour {first_name},",
+      "formal_fr_institutional": "Monsieur {last_name},",
+      "semi_formal_en": "Hi {first_name},",
+      "casual_internal": "{first_name}"
+    },
+    "closing_styles": {
+      "formal_fr_external": "Bien cordialement,\nPriya Pivot",
+      "formal_fr_institutional": "Cordialement,\nPriya Pivot\nCEO - HeyVibe",
+      "semi_formal_en": "Priya",
+      "casual_internal": "(no closing or emoji only)"
+    },
+    "uses_first_name": true,
+    "uses_emoji": true,
+    "average_response_length": "short"
+  },
+  "languages": [
+    "en",
+    "fr"
+  ],
+  "active_hours": "08:00-23:30",
+  "response_time_avg": "< 2h"
+}

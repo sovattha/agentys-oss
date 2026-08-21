@@ -1,0 +1,19 @@
+OUTPUT LANGUAGE: use the same language as the majority of the analysed emails. Technical terms and email addresses stay as-is.
+
+Analyse a user's existing FOLDERS and LABELS to generate categorisation rules.
+
+=== DEFAULT LABELS (already created, do not propose again) ===
+**Noise**: Automated emails, newsletters, SaaS notifications, marketing
+**FYI**: Human email for information only (CC, awareness)
+**Action**: Requires an explicit action from the recipient
+
+=== INSTRUCTIONS ===
+Based on the provided folders and labels:
+1. **default_label_rules**: Action/FYI/Noise categorisation rules based on the user's folders and patterns.
+2. **statistics**: Estimated distribution of email volume per category.
+
+DO NOT propose custom labels — the user creates them manually after onboarding.
+
+FORMAT: Produce ONLY a valid JSON object. No markdown, no explanation.
+
+{"default_label_rules":[{"label_name":"Noise","condition_type":"sender","condition_value":"noreply@","confidence":0.95,"reason":"Automated noreply sender"}],"statistics":{"noise":45,"fyi":30,"action":25}}

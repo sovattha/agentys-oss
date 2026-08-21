@@ -1,0 +1,545 @@
+/* ============================================================================
+   LEARNING PROGRESS SCREEN — Premium real-time onboarding display
+   Redesigned: orbital spinner, connected timeline, shimmer progress bar
+   ============================================================================ */
+
+.learning-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: learning-fade-in 0.35s cubic-bezier(.22,1,.36,1);
+}
+
+@keyframes learning-fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Header (spinner + optional title/subtitle) ── */
+.learning-progress-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  border-bottom: none;
+  position: relative;
+}
+
+/* Atmospheric radial glow behind spinner */
+.learning-progress-header::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(13,148,136,.08) 0%, transparent 65%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: lp-core-pulse 4s ease-in-out infinite;
+}
+
+.learning-progress-header h3 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.learning-progress-phase {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-md);
+  max-width: 420px;
+}
+
+/* ── Progress Ring — SVG circle with percentage ── */
+.learning-progress-ring-wrap {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.learning-progress-ring {
+  transform: rotate(-90deg);
+  filter: drop-shadow(0 0 6px rgba(45,212,191,.3));
+}
+
+.learning-progress-ring-fill {
+  transition: stroke-dashoffset 0.8s var(--ease-settle);
+}
+
+/* Mode indéterminé : arc de 28% qui tourne en continu autour du ring
+   pour signaler "vivant" pendant les phases backend non-mesurables
+   (sync Gmail, récup sent cache). L'animation s'applique au <circle>
+   lui-même, centrée sur le viewBox 52×52. */
+.learning-progress-ring-fill-indet {
+  transform-origin: 26px 26px;
+  animation: lp-ring-spin 1.2s linear infinite;
+}
+
+.learning-progress-ring-wrap-indet {
+  animation: lp-ring-breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes lp-ring-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes lp-ring-breathe {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(45,212,191,.3)); }
+  50%      { filter: drop-shadow(0 0 14px rgba(45,212,191,.55)); }
+}
+
+.learning-progress-ring-pct {
+  position: absolute;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent-primary, #0d9488);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Stats row ── */
+.learning-progress-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  padding: 0 2px;
+}
+
+.learning-progress-stat {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Step counter accent */
+.learning-progress-stat:last-child {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+/* Live email count during processing */
+.learning-progress-count-live {
+  color: var(--accent-primary, #0d9488);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Progress bar with shimmer sweep ── */
+.learning-progress-bar-track {
+  height: 6px;
+  background: var(--surface-tertiary, rgba(0,0,0,.06));
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: -8px;
+  position: relative;
+}
+
+.learning-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0d9488, #2dd4bf);
+  border-radius: 99px;
+  transition: width 0.8s var(--ease-settle);
+  box-shadow: 0 0 8px rgba(45,212,191,.4);
+  position: relative;
+}
+
+/* Shimmer sweep overlay */
+.learning-progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,.35) 50%,
+    transparent 100%);
+  animation: shimmerSweep 2s ease-in-out infinite;
+  border-radius: inherit;
+}
+
+.learning-progress-bar-error {
+  background: var(--error);
+  box-shadow: none;
+}
+
+.learning-progress-bar-error::after {
+  display: none;
+}
+
+/* ── Steps — Connected timeline layout ── */
+.learning-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 13px;
+}
+
+/* Vertical timeline connector line */
+.learning-steps::before {
+  content: '';
+  position: absolute;
+  top: 31px;
+  bottom: 31px;
+  left: 28px;
+  width: 2px;
+  background: rgba(13,148,136,.18);
+  border-radius: 1px;
+  z-index: 0;
+}
+
+/* Base step — clean timeline row */
+.learning-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 18px 14px 0;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.4s var(--ease-settle), transform 0.3s var(--ease-settle);
+  /* Staggered entrance */
+  animation: lp-step-enter 0.45s var(--ease-settle) both;
+}
+
+.learning-step:nth-child(1) { animation-delay: 0.05s; }
+.learning-step:nth-child(2) { animation-delay: 0.12s; }
+.learning-step:nth-child(3) { animation-delay: 0.19s; }
+.learning-step:nth-child(4) { animation-delay: 0.26s; }
+
+/* Pending — slightly dimmed */
+.learning-step-pending {
+  opacity: 0.5;
+}
+
+/* Active-pending — slightly more visible */
+.learning-step-active-pending {
+  opacity: 0.6;
+}
+
+.learning-step-active-pending .learning-step-icon-pending {
+  animation: active-pending-pulse 2s ease-in-out infinite;
+}
+
+@keyframes active-pending-pulse {
+  0%, 100% { border-color: var(--border-default, rgba(0,0,0,.1)); }
+  50%       { border-color: rgba(45,212,191,.4); }
+}
+
+/* Running — active step */
+.learning-step-running {
+  opacity: 1;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.learning-step-running .learning-step-title {
+  color: #0d9488;
+  font-weight: 600;
+}
+
+.learning-step-running .learning-step-description {
+  color: var(--text-secondary);
+}
+
+/* Completed — subtle finish */
+.learning-step-completed {
+  opacity: 0.55;
+}
+
+.learning-step-completed .learning-step-title {
+  text-decoration: line-through;
+  text-decoration-color: rgba(13,148,136,.3);
+  text-decoration-thickness: 1.5px;
+}
+
+/* Failed */
+.learning-step-failed {
+  opacity: 0.75;
+}
+
+/* ── Step icon ── */
+.learning-step-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+  background: var(--surface-primary);
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
+}
+
+.learning-step-icon-pending {
+  border: 1.5px solid var(--border-default, rgba(0,0,0,.1));
+  background: var(--surface-primary);
+}
+
+.learning-step-icon-running {
+  border: 2.5px solid rgba(45,212,191,.3);
+  border-top-color: #2dd4bf;
+  animation: spin 0.75s linear infinite;
+  box-shadow: 0 0 0 4px rgba(13,148,136,.08), 0 0 12px rgba(45,212,191,.2);
+}
+
+.learning-step-icon-completed {
+  background: linear-gradient(135deg, #0d9488, #2dd4bf);
+  color: #fff;
+  box-shadow: 0 0 8px rgba(45,212,191,.35);
+  animation: lp-icon-complete 0.4s var(--ease-spring);
+}
+
+.learning-step-icon-failed {
+  background: var(--error);
+  color: #fff;
+}
+
+/* ── Step content ── */
+.learning-step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.learning-step-title {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.learning-step-description {
+  font-size: .78rem;
+  color: var(--text-tertiary);
+  line-height: 1.5;
+}
+
+/* ── Error message ── */
+.learning-progress-error-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.learning-progress-error {
+  padding: 12px 16px;
+  background: rgba(239,68,68,.08);
+  border: 1px solid rgba(239,68,68,.25);
+  border-radius: var(--radius-md);
+  color: var(--error);
+  font-size: var(--font-size-sm);
+}
+
+.oauth-guidance {
+  padding: 16px;
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 7%, var(--surface-primary, #fff));
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 28%, transparent);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.oauth-guidance__badge {
+  align-self: flex-start;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 12%, transparent);
+  color: var(--accent-primary, #0d9488);
+  font-size: .72rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.oauth-guidance h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.oauth-guidance__intro,
+.oauth-guidance__resolution p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: .86rem;
+  line-height: 1.55;
+}
+
+.oauth-guidance__choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.oauth-guidance__choice {
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-default, rgba(0,0,0,.12));
+  border-radius: 8px;
+  background: var(--surface-primary, #fff);
+  color: var(--text-secondary);
+  font-size: .82rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease, color .15s ease;
+}
+
+.oauth-guidance__choice--selected {
+  border-color: var(--accent-primary, #0d9488);
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 10%, var(--surface-primary, #fff));
+  color: var(--text-primary);
+}
+
+.oauth-guidance__resolution {
+  padding: 12px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface-primary, #fff) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 18%, transparent);
+}
+
+.oauth-guidance__resolution ol {
+  margin: 10px 0 0;
+  padding-left: 20px;
+  color: var(--text-secondary);
+  font-size: .84rem;
+  line-height: 1.55;
+}
+
+.oauth-guidance__resolution li + li {
+  margin-top: 4px;
+}
+
+.oauth-guidance__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.oauth-guidance__link {
+  color: var(--accent-primary, #0d9488);
+  font-size: .84rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.oauth-guidance__details {
+  color: var(--text-tertiary);
+  font-size: .78rem;
+}
+
+.oauth-guidance__details summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.oauth-guidance__details code {
+  display: block;
+  margin-top: 8px;
+  padding: 10px;
+  max-height: 130px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, .05);
+  color: var(--text-secondary);
+}
+
+/* ── Actions ── */
+.learning-retry-actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.learning-cancel-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.learning-cancel-btn {
+  padding: 6px 18px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.learning-cancel-hint {
+  font-size: .7rem;
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  .oauth-guidance {
+    padding: 14px;
+  }
+
+  .oauth-guidance__choices {
+    grid-template-columns: 1fr;
+  }
+
+  .oauth-guidance__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .oauth-guidance__actions .onboarding-btn {
+    width: 100%;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .learning-progress-spinner,
+  .learning-progress-spinner::before,
+  .learning-progress-spinner::after,
+  .learning-progress-header::before,
+  .learning-progress-bar-fill::after,
+  .learning-step,
+  .learning-step-icon-running,
+  .learning-step-icon-completed,
+  .learning-step-active-pending .learning-step-icon-pending {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

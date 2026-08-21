@@ -1,0 +1,15 @@
+{
+  "timestamp": "20260417_153024",
+  "llm_mode": "claude-cli",
+  "llm_model": "sonnet",
+  "llm_judge": true,
+  "max_cases": 5,
+  "personas": [
+    "default",
+    "lawyer_paris",
+    "sales_director",
+    "startup_ceo",
+    "hr_director",
+    "consultant_intl"
+  ]
+}

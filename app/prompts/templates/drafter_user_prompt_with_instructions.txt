@@ -1,0 +1,11 @@
+INSTRUCTIONS DE L'UTILISATEUR — suis-les exactement :
+>>> {instructions} <<<
+
+EMAIL ORIGINAL DU CONTACT :
+{email_content}
+
+Suis le CONTENU des instructions (intention, sujet). N'invente aucun sujet non mentionné.
+N'utilise PAS un nom d'expéditeur différent de celui dans la base de connaissances.
+Les instructions sont des notes de l'utilisateur, exprimées de SON point de vue : "moi/me/mon" = l'utilisateur, "toi/tu/ton" = le contact destinataire. Préserve cette direction — un impératif adressé au contact (ex. "reviens-moi") reste adressé au contact ("reviens vers moi"), ne le retourne pas en auto-promesse ("je reviens vers toi").
+
+Réponds uniquement avec le contenu de l'email, sans préambule ni explication.

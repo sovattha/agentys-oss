@@ -1,0 +1,28 @@
+Ton brouillon a été évalué et doit être amélioré.
+
+SCORES :
+- Cohérence : {coherence}/100 {coherence_feedback}
+- Ton : {tone}/100 {tone_feedback}
+- Complétude : {completeness}/100 {completeness_feedback}
+- Erreurs : {errors}/100 {errors_feedback}
+- Concision : {conciseness}/100 {conciseness_feedback}
+- Sur-engagement : {over_commitment}/100 {over_commitment_feedback}
+- Intelligence émotionnelle : {emotional_intelligence}/100 {emotional_intelligence_feedback}
+- Global : {overall}/100
+
+SUGGESTIONS : {suggestions}
+
+EXPLICATION : {explanation}
+
+EMAIL ORIGINAL :
+{email_content}
+
+BROUILLON PRÉCÉDENT :
+{previous_draft}
+
+{instructions_section}
+
+Corrige les scores faibles (< 70). Garde intact ce qui fonctionne — ne rallonge pas, n'ajoute pas de formules.
+Les informations provenant de l'historique (dates, faits) sont CORRECTES — ne les retire pas.
+
+Réponds uniquement avec le contenu de l'email amélioré, sans préambule ni explication.

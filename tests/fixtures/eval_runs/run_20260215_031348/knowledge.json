@@ -1,0 +1,388 @@
+{
+  "contacts": [
+    {
+      "email": "a.patel@strategyco.com",
+      "name": "Anika Patel",
+      "type": "direct_report",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "interaction_count": 11,
+      "topics": [
+        "AcmeCorp cost model",
+        "data gaps",
+        "quick wins deck",
+        "LuxeGroup data request",
+        "diagnostic findings",
+        "savings analysis",
+        "implementation roadmap",
+        "facilities data",
+        "FTE reconciliation"
+      ]
+    },
+    {
+      "email": "r.hayes@strategyco.com",
+      "name": "Richard Hayes",
+      "type": "manager",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "semi-formal",
+      "interaction_count": 10,
+      "topics": [
+        "AcmeCorp engagement update",
+        "partners meeting debrief",
+        "Q2 pipeline",
+        "staffing",
+        "quick wins breakdown",
+        "resource allocation",
+        "manager availability",
+        "engagement oversight"
+      ]
+    },
+    {
+      "email": "m.torres@acmecorp.com",
+      "name": "Michael Torres",
+      "type": "client",
+      "company": "AcmeCorp",
+      "title": "Chief Financial Officer",
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "interaction_count": 8,
+      "topics": [
+        "Phase 2 scope and timeline",
+        "quick wins presentation",
+        "kick-off and governance",
+        "operating model redesign",
+        "procurement deep-dive",
+        "board approval",
+        "steering committee",
+        "implementation roadmap"
+      ]
+    },
+    {
+      "email": "b.crawford@strategyco.com",
+      "name": "Ben Crawford",
+      "type": "direct_report",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "interaction_count": 8,
+      "topics": [
+        "AcmeCorp engagement",
+        "operating model strawman",
+        "workstream charter",
+        "McKinsey 7S framework",
+        "target-state design",
+        "Meridian case",
+        "value chain mapping",
+        "RACI matrix",
+        "spans and layers analysis"
+      ]
+    },
+    {
+      "email": "e.phillips@strategyco.com",
+      "name": "Emma Phillips",
+      "type": "colleague",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "interaction_count": 8,
+      "topics": [
+        "travel to Singapore",
+        "Stuttgart travel",
+        "IndustrieWerke meeting",
+        "expenses",
+        "flight booking",
+        "hotel reservations",
+        "calendar management",
+        "travel logistics"
+      ]
+    },
+    {
+      "email": "i.moreau@luxegroup.fr",
+      "name": "Isabelle Moreau",
+      "type": "client",
+      "company": "LuxeGroup",
+      "title": "Chief Human Resources Officer",
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "interaction_count": 7,
+      "topics": [
+        "digital strategy roadmap",
+        "board presentation",
+        "employee experience",
+        "quick wins",
+        "upskilling programme",
+        "change management",
+        "HR transformation",
+        "digital champions network",
+        "technology roadmap"
+      ]
+    },
+    {
+      "email": "w.lin@strategyco.sg",
+      "name": "Wei Lin",
+      "type": "colleague",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "interaction_count": 6,
+      "topics": [
+        "APAC pipeline update",
+        "Singtel proposal",
+        "customer experience transformation",
+        "DBS Bank lead",
+        "cost optimisation",
+        "proposal support",
+        "customer journey mapping",
+        "pricing benchmarking"
+      ]
+    },
+    {
+      "email": "j.walsh@acmecorp.com",
+      "name": "Jennifer Walsh",
+      "type": "client",
+      "company": "AcmeCorp",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "interaction_count": 6,
+      "topics": [
+        "change management approach",
+        "plant visit schedule",
+        "feedback from plant visits",
+        "operational resistance",
+        "stakeholder engagement",
+        "implementation support"
+      ]
+    },
+    {
+      "email": "k.weber@industriewerke.de",
+      "name": "Klaus Weber",
+      "type": "prospect",
+      "company": "IndustrieWerke AG",
+      "title": "Vice President, Corporate Strategy",
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "interaction_count": 4,
+      "topics": [
+        "StrategyCo capabilities",
+        "IndustrieWerke strategic transformation",
+        "German market consolidation",
+        "operational efficiency",
+        "Munich Strategy Forum",
+        "market entry strategy",
+        "proposal development"
+      ]
+    },
+    {
+      "email": "t.yamamoto@nipponpartners.jp",
+      "name": "Takeshi Yamamoto",
+      "type": "partner",
+      "company": "Nippon Partners Co., Ltd.",
+      "title": "Director, International Business Development",
+      "preferred_language": "en",
+      "preferred_tone": "formal",
+      "interaction_count": 4,
+      "topics": [
+        "strategic alliance discussion",
+        "Tokyo meeting",
+        "APAC consulting landscape",
+        "joint market study",
+        "pilot engagement",
+        "European client base",
+        "complementary strengths"
+      ]
+    },
+    {
+      "email": "d.chen@strategyco.com",
+      "name": "David Chen",
+      "type": "colleague",
+      "company": "StrategyCo",
+      "title": null,
+      "preferred_language": "en",
+      "preferred_tone": "casual",
+      "interaction_count": 3,
+      "topics": [
+        "change management research",
+        "LuxeGroup kick-off prep",
+        "engagement support"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "AcmeCorp Phase 2 — Operating Model Redesign",
+      "description": "Multi-workstream engagement including operating model redesign, procurement deep-dive, and quick wins implementation. Phase 1 diagnostic identified $18M in savings. Phase 2 compressed to 10-week timeline with multiple workstreams and steering committee governance.",
+      "contacts": [
+        "m.torres@acmecorp.com",
+        "j.walsh@acmecorp.com",
+        "a.patel@strategyco.com",
+        "b.crawford@strategyco.com",
+        "r.hayes@strategyco.com"
+      ],
+      "status": "active",
+      "keywords": [
+        "operating model",
+        "quick wins",
+        "procurement",
+        "facilities",
+        "cost optimization",
+        "McKinsey 7S",
+        "change management",
+        "governance",
+        "Phase 2",
+        "diagnostic",
+        "target-state",
+        "current-state"
+      ]
+    },
+    {
+      "name": "LuxeGroup Digital Strategy",
+      "description": "Digital strategy roadmap for LuxeGroup focusing on employee experience, HR transformation, and technology enablement. EUR 2.5M budget over 18 months with 90-day quick wins requirement. Board presentation scheduled for January.",
+      "contacts": [
+        "i.moreau@luxegroup.fr",
+        "a.patel@strategyco.com",
+        "d.chen@strategyco.com"
+      ],
+      "status": "active",
+      "keywords": [
+        "digital strategy",
+        "employee experience",
+        "HR transformation",
+        "upskilling",
+        "digital champions",
+        "change management",
+        "board presentation",
+        "quick wins",
+        "technology roadmap"
+      ]
+    },
+    {
+      "name": "Singtel Customer Experience Transformation",
+      "description": "8-week diagnostic phase for Singtel covering customer journey mapping across 6 channels and benchmarking against regional telcos. Singapore-based team of 4 consultants. Proposal development in progress.",
+      "contacts": [
+        "w.lin@strategyco.sg"
+      ],
+      "status": "active",
+      "keywords": [
+        "customer experience",
+        "CX transformation",
+        "journey mapping",
+        "telco",
+        "APAC",
+        "diagnostic",
+        "benchmarking",
+        "Singtel",
+        "proposal"
+      ]
+    },
+    {
+      "name": "IndustrieWerke Strategic Transformation",
+      "description": "Three-workstream proposal covering German market consolidation strategy (8 weeks), operational efficiency programme across 12 plants, and market entry strategy. Likely to start with Workstream 1 as proof of concept. In-person meeting in Stuttgart completed.",
+      "contacts": [
+        "k.weber@industriewerke.de",
+        "e.phillips@strategyco.com"
+      ],
+      "status": "proposal",
+      "keywords": [
+        "strategic transformation",
+        "market consolidation",
+        "operational efficiency",
+        "Germany",
+        "IndustrieWerke",
+        "proposal",
+        "Stuttgart",
+        "proof of concept"
+      ]
+    },
+    {
+      "name": "Nippon Partners Strategic Alliance",
+      "description": "Exploration of strategic alliance between StrategyCo and Nippon Partners covering joint market study of APAC consulting landscape (Q1 2026), pilot engagement, and potential long-term partnership. Phased approach with Tokyo meeting planned for February.",
+      "contacts": [
+        "t.yamamoto@nipponpartners.jp"
+      ],
+      "status": "discussion",
+      "keywords": [
+        "strategic alliance",
+        "partnership",
+        "APAC",
+        "Japan",
+        "joint market study",
+        "pilot engagement",
+        "Tokyo",
+        "international expansion"
+      ]
+    },
+    {
+      "name": "Q2 Pipeline and APAC Business Development",
+      "description": "Ongoing pipeline development across APAC region including Singtel (CX transformation), DBS Bank (cost optimisation lead), and other opportunities. Coordination between London and Singapore offices for regional growth.",
+      "contacts": [
+        "w.lin@strategyco.sg",
+        "r.hayes@strategyco.com"
+      ],
+      "status": "active",
+      "keywords": [
+        "pipeline",
+        "APAC",
+        "business development",
+        "DBS Bank",
+        "Singapore",
+        "deal sizing",
+        "staffing"
+      ]
+    }
+  ],
+  "terminology": {
+    "Engagement": "Client mandate or project, typically structured in multiple phases",
+    "Phase": "Distinct stage of a client engagement with defined scope and timeline",
+    "Workstream": "Sub-project or thematic track within an engagement",
+    "Steering committee": "Client governance body overseeing engagement progress and decisions",
+    "Quick wins": "Rapid, high-impact improvements identifiable early in diagnostic phase",
+    "Operating model": "Organizational structure, processes, and systems defining how a company operates",
+    "Target-state strawman": "Initial draft of proposed future-state operating model",
+    "Diagnostic": "Initial assessment phase analyzing current-state operations",
+    "Current-state": "Existing organizational structure, processes, and performance baseline",
+    "Deliverable": "Formal output or document provided to client (deck, report, charter)",
+    "Workstream charter": "Scoping document defining objectives, approach, and resources for a workstream",
+    "Context pack": "Background materials and data provided to project team",
+    "BU head interviews": "Stakeholder interviews with business unit leaders",
+    "FTE": "Full-Time Equivalent — headcount measurement",
+    "Indirect cost allocation": "Method of distributing overhead costs across business units",
+    "Actuals": "Actual financial results or spending (vs. budget or forecast)",
+    "McKinsey 7S framework": "Strategic analysis model covering Strategy, Structure, Systems, Skills, Style, Staff, Shared Values",
+    "Change management": "Discipline managing organizational transition and stakeholder adoption",
+    "Change lead": "Person responsible for change management workstream",
+    "RACI matrix": "Responsibility assignment chart (Responsible, Accountable, Consulted, Informed)",
+    "Spans and layers": "Analysis of management hierarchy depth and span of control",
+    "Value chain": "Sequence of activities creating value from inputs to customer delivery",
+    "Revenue: On budget": "Engagement financials tracking to planned revenue targets",
+    "Anchor too low": "Pricing negotiation term — setting initial price point too conservatively",
+    "Proof of concept": "Initial limited-scope engagement to demonstrate value before full commitment",
+    "Customer journey mapping": "Analysis of end-to-end customer experience across touchpoints",
+    "Pipeline": "Portfolio of prospective client engagements in various stages of development",
+    "Deal size": "Expected revenue value of a client engagement"
+  },
+  "frequent_topics": [
+    "AcmeCorp engagement delivery and governance",
+    "Operating model design and transformation",
+    "Quick wins identification and implementation",
+    "Cost optimization and procurement strategy",
+    "Change management and stakeholder engagement",
+    "Digital strategy and HR transformation",
+    "APAC pipeline development and business development",
+    "Proposal development and pricing strategy",
+    "Client presentations and steering committees",
+    "Team resourcing and staffing allocation",
+    "Travel logistics and international meetings",
+    "Customer experience transformation",
+    "Strategic partnerships and alliances",
+    "Data analysis and cost modeling",
+    "Workstream planning and execution"
+  ]
+}

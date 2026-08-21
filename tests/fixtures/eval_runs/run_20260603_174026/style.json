@@ -1,0 +1,173 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "pierre.durand@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Salut l'equipe, / Pierre,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "lucas.bernard@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Salut Lucas,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "equipe-digitale@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": null,
+      "greeting": "Bonjour a tous,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "marie.leclerc@clientcorp.com",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Madame Leclerc,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "camille.roux@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Camille,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "sarah.jones@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi Sarah,",
+      "closing": "Best regards, / Best,"
+    },
+    {
+      "contact_email": "nicolas.moreau@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Bonjour Nicolas,",
+      "closing": "Sophie Martin"
+    },
+    {
+      "contact_email": "ceo@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Marc,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "amelie.petit@fournisseur.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Madame Petit,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "contact@prospect-startup.io",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Thomas,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "david.kim@partnertech.co.kr",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi David,",
+      "closing": "Best regards, / Best,"
+    },
+    {
+      "contact_email": "recrutement@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": null,
+      "greeting": "Bonjour,",
+      "closing": "Sophie Martin"
+    },
+    {
+      "contact_email": "elena.volkov@eupartner.de",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Elena,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "it-support@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": null,
+      "greeting": "Bonjour,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "claire.fontaine@clientcorp.com",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Claire,",
+      "closing": "Cordialement,"
+    },
+    {
+      "contact_email": "john.smith@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi John,",
+      "closing": "Best regards,"
+    },
+    {
+      "contact_email": "support@cloudprovider.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi,",
+      "closing": "Regards,"
+    }
+  ],
+  "general_rules": [
+    {
+      "description": "Utiliser le tutoiement et le prénom seul en closing avec l'équipe interne (pairs et juniors) ; vouvoiement et formule complète avec les clients externes et la direction."
+    },
+    {
+      "description": "Structurer les emails longs avec des listes à puces numérotées et des sections claires (Completed / In progress / Blocker, Ce qui a bien marché / À améliorer / Actions)."
+    },
+    {
+      "description": "Inclure systématiquement la signature complète (nom, titre, entreprise, téléphone) dans les emails clients externes et vers la direction ; signature minimale (prénom ou rien) en interne."
+    },
+    {
+      "description": "Utiliser l'anglais semi-formel (Hi {prénom}, … Best regards,) pour les partenaires techniques internationaux ; français formel pour les clients français."
+    },
+    {
+      "description": "Employer un vocabulaire métier spécialisé en gestion de projet et DevOps sans définition : sprint, velocity, story points, backlog, Definition of Done, CI/CD, mTLS, WAF, SLA, GraphQL, OAuth2, PKCE, rate limiting, versioning, streaming, refactoring, pentest, DPA, GDPR compliance, NPS, ROI."
+    },
+    {
+      "description": "Proposer des rendez-vous avec des créneaux multiples (ex : Mardi 10h-12h et 14h-17h) et utiliser des outils de planification (Calendly, invitations formelles) pour les clients et partenaires."
+    },
+    {
+      "description": "Demander des confirmations explicites et des précisions (timelines, préférences, disponibilités) dans les emails de coordination avec les partenaires techniques."
+    },
+    {
+      "description": "Utiliser des formules de transition courtes et directes en interne (Merci, Sophie / OK pour le WAF, on le met dans le sprint 13) ; plus développées avec les clients (Restant à votre disposition, Nous sommes ravis de demarrer cette collaboration)."
+    },
+    {
+      "description": "Inclure des références chiffrées et des métriques (budget en EUR, points de story, pourcentages, délais en semaines) dans les rapports et propositions commerciales."
+    },
+    {
+      "description": "Adapter la longueur : ultra-courte en interne (1-2 phrases), détaillée avec les clients (paragraphes structurés, contexte complet, prochaines étapes explicites)."
+    }
+  ],
+  "forbidden_phrases": []
+}

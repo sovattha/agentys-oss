@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <!-- Gradient principal -->
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7B61FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF00FF;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Gradient secondaire pour le A intérieur -->
+    <linearGradient id="innerGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7B61FF;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Glow effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Soft glow -->
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background circle (optional, dark) -->
+  <circle cx="200" cy="200" r="180" fill="#0D1117" opacity="0"/>
+
+  <!-- Triangle extérieur (style néon) -->
+  <polygon
+    points="200,45 350,310 50,310"
+    fill="none"
+    stroke="url(#mainGradient)"
+    stroke-width="6"
+    stroke-linejoin="round"
+    filter="url(#softGlow)"
+  />
+
+  <!-- Triangle intérieur -->
+  <polygon
+    points="200,95 310,280 90,280"
+    fill="none"
+    stroke="url(#innerGradient)"
+    stroke-width="4"
+    stroke-linejoin="round"
+    filter="url(#glow)"
+  />
+
+  <!-- Barre du A -->
+  <line
+    x1="120" y1="220"
+    x2="280" y2="220"
+    stroke="url(#mainGradient)"
+    stroke-width="4"
+    stroke-linecap="round"
+    filter="url(#glow)"
+  />
+
+  <!-- Point d'agent/IA (comme un noeud de réseau) -->
+  <circle cx="200" cy="95" r="8" fill="#00D4FF" filter="url(#glow)"/>
+
+  <!-- Points connectés (style réseau neuronal) -->
+  <circle cx="310" cy="280" r="6" fill="#7B61FF" filter="url(#glow)"/>
+  <circle cx="90" cy="280" r="6" fill="#FF00FF" filter="url(#glow)"/>
+
+  <!-- Lignes de connexion subtiles -->
+  <line x1="200" y1="103" x2="200" y2="180" stroke="#00D4FF" stroke-width="1.5" opacity="0.6"/>
+</svg>

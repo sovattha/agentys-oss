@@ -1,0 +1,71 @@
+{
+  "profile": {
+    "completeness": 72,
+    "precision": 82,
+    "usefulness": 78,
+    "overall": 77,
+    "missing": [
+      "uses_emoji: false",
+      "addressing field at top level (moved inside tone)",
+      "formal_fr_client greeting style with multiple variants (Monsieur Garnier, Madame Vernier, Madame Monsieur)",
+      "formal_fr_colleague greeting style (Monsieur Dumont, Chère Madame Fontaine, Monsieur Leroux)",
+      "formal_fr_lawyer closing style with 'sentiments les plus distingués' wording",
+      "average_response_length: 'long' (system says 'medium-long')"
+    ],
+    "incorrect": [
+      "average_response_length reported as 'medium-long' instead of 'long'",
+      "Greeting/closing taxonomy uses different category names than ground truth, potentially misrouting style selection",
+      "profession and profession_confirmed fields are fabricated (not in ground truth)",
+      "formal_fr_maître closing uses 'salutations distinguées' instead of ground truth 'sentiments les plus distingués'"
+    ],
+    "details": "The system correctly captures core profile fields (email, name, preferred_name, signature, default_tone, languages, language_variant, uses_vous). However, several ground truth items are missing or restructured. The 'addressing' field was moved inside 'tone' rather than at the top level. The 'uses_emoji: false' field is absent. The greeting/closing style categories don't fully align with ground truth (e.g., 'formal_fr_client', 'formal_fr_colleague', 'formal_fr_lawyer' vs the system's different taxonomy). The system adds extra fields not in ground truth (profession, profession_confirmed, department: null) which are minor hallucinations but not harmful. The average_response_length is 'medium-long' vs ground truth 'long' — a minor discrepancy. The greeting styles are partially correct but miss the multi-option format (e.g., 'Madame Vernier, / Madame, Monsieur,') and the colleague-specific greeting ('Chère Madame Fontaine'). Closing styles are mostly correct but the colleague closing is labeled 'semi_formal_fr' instead of 'formal_fr_colleague', which could cause misapplication."
+  },
+  "knowledge": {
+    "completeness": 85,
+    "precision": 62,
+    "usefulness": 58,
+    "overall": 68,
+    "missing": [
+      "type field for all contacts (client/colleague/partner/institution)",
+      "topics arrays for all contacts",
+      "Nathalie Vernier title: Directrice juridique",
+      "Philippe Dumont title: Associé fondateur",
+      "Élise Fontaine title: Collaboratrice senior",
+      "Jean-Louis Garnier title: Gérant",
+      "Maxime Leroux title: Stagiaire"
+    ],
+    "incorrect": [
+      "preferred_tone for Nathalie Vernier: 'semi-formal' should be 'formal'",
+      "preferred_tone for Philippe Dumont: 'semi-formal' should be 'formal'",
+      "preferred_tone for Élise Fontaine: 'semi-formal' should be 'formal'",
+      "preferred_tone for Jean-Louis Garnier: 'semi-formal' should be 'formal'",
+      "preferred_tone for Maxime Leroux: 'semi-formal' should be 'formal'",
+      "Friedrich Braun preferred_language: 'de' should be 'fr'",
+      "Dominique Perrin name missing 'Maître' honorific",
+      "Sophie Renard name missing 'Maître' honorific",
+      "Sophie Renard company: 'Notaire Renard' should be 'Étude Renard'",
+      "Dominique Perrin title: 'Avocat' should be 'Avocat au Barreau de Paris'"
+    ],
+    "details": "All 10 contacts from ground truth are present in the output, which is good for completeness. However, several fields are missing or incorrect: (1) 'type' field (client/colleague/partner/institution) is entirely absent from all contacts; (2) 'topics' arrays are missing for all contacts; (3) preferred_tone is incorrectly set to 'semi-formal' for 6 contacts (Nathalie Vernier, Philippe Dumont, Élise Fontaine, Jean-Louis Garnier, Maxime Leroux) who should all be 'formal'; (4) Friedrich Braun's preferred_language is listed as 'de' but ground truth says 'fr'; (5) Titles are missing or simplified for several contacts (Maître Dominique Perrin → 'Avocat', Maître Sophie Renard → 'Sophie Renard'/'Notaire', Nathalie Vernier missing 'Directrice juridique', Jean-Louis Garnier missing 'Gérant', Maxime Leroux missing 'Stagiaire', Philippe Dumont missing 'Associé fondateur', Élise Fontaine missing 'Collaboratrice senior'); (6) Company name for Renard is 'Notaire Renard' instead of 'Étude Renard'. The missing 'type' and 'topics' fields significantly reduce usefulness for email drafting, as tone/relationship context and subject matter are critical for generating appropriate emails."
+  },
+  "rules": {
+    "completeness": 78,
+    "precision": 72,
+    "usefulness": 75,
+    "overall": 75,
+    "missing": [
+      "Full closing formulas for h.castellan, n.vernier, jl.garnier, greffe, f.braun, s.renard, d.perrin (truncated, missing the full 'Je vous prie d'agréer...' prefix)",
+      "General rule 'zero_emoji_zero_abreviation' (no emoji, no familiar abbreviations)",
+      "General rule 'maitre_entre_avocats' as an explicit named rule",
+      "Structured general rule format with 'name', 'trigger', 'action' fields"
+    ],
+    "incorrect": [
+      "e.fontaine@dumont-associes.fr tone set to 'semi-formal' instead of 'formal'",
+      "m.leroux@dumont-associes.fr tone set to 'semi-formal' instead of 'formal'",
+      "Closing formulas for external contacts are truncated (missing 'Je vous prie d'agréer, [title],' prefix)",
+      "Extra fabricated general rules not in ground truth: 'jargon sans définition', 'proposer des actions concrètes et délais'"
+    ],
+    "details": "The system found all 10 contact rules and correctly identified greetings for all contacts. However, several closing formulas are truncated (missing the full formula like 'Je vous prie d'agréer, Monsieur le Directeur Général, l'expression de mes salutations distinguées.' — only the tail end is present). Two internal contacts (e.fontaine, m.leroux) are incorrectly marked as 'semi-formal' instead of 'formal'. The general rules are present in spirit but lack the structured format (name, trigger, action fields) of the ground truth, and some specific rules are missing or merged (e.g., 'zero_emoji_zero_abreviation', 'maitre_entre_avocats' as explicit rules). The system adds extra rules not in ground truth (jargon usage, concrete deadlines) which are not harmful but represent minor hallucinations. Forbidden phrases correctly returned as empty."
+  },
+  "overall": 73
+}

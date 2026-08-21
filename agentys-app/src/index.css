@@ -1,0 +1,936 @@
+@import "tailwindcss";
+
+/* ===== TAILWIND v4 THEME — Maps Agentys tokens to Tailwind utilities ===== */
+@theme {
+  /* Surfaces → bg-surface-*, text-surface-* */
+  --color-surface-base: var(--surface-base);
+  --color-surface-primary: var(--surface-primary);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-tertiary: var(--surface-tertiary);
+  --color-surface-elevated: var(--surface-elevated);
+
+  /* Accents → bg-accent-primary, text-accent-primary, etc. */
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-primary-hover: var(--accent-primary-hover);
+  --color-accent-primary-light: var(--accent-primary-light);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-secondary-hover: var(--accent-secondary-hover);
+
+  /* Text → text-content-primary, text-content-secondary, etc. */
+  --color-content-primary: var(--text-primary);
+  --color-content-secondary: var(--text-secondary);
+  --color-content-tertiary: var(--text-tertiary);
+  --color-content-muted: var(--text-muted);
+  --color-content-inverse: var(--text-inverse);
+
+  /* Borders → border-subtle, border-default, border-strong */
+  --color-border-subtle: var(--border-subtle);
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
+
+  /* Semantic → bg-success, text-error, etc. */
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-error: var(--error);
+  --color-error-bg: var(--error-bg);
+  --color-info: var(--info);
+  --color-info-bg: var(--info-bg);
+
+  /* Radii → rounded-sm, rounded-md, rounded-lg, etc. */
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+
+  /* Shadows → shadow-sm, shadow-md, etc. */
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+
+  /* Fonts → font-display, font-sans, font-mono */
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+/* ============================================================================
+   AGENTYS CLARITY — Premium Light Theme
+   "Calm Authority" — You approve, AI handles the rest
+   ============================================================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Balanced text wrapping for headings */
+h1, h2, h3, h4,
+.loading-brand-name,
+.status-card h2,
+.section-title,
+.modal-title {
+  text-wrap: balance;
+}
+
+:root {
+  /* ===== IN-APP ZOOM ===== */
+  /* Piloté par useZoom — scale proportionnel appliqué au font-size racine (rem),
+     aux tokens --space-* et aux largeurs des chromes (sidebar, detail panel). */
+  --app-zoom: 1;
+
+  /* ===== TYPOGRAPHY ===== */
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-sans: 'Instrument Sans', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', Monaco, 'Cascadia Code', 'Courier New', monospace;
+  /* --font-body est un alias stable de --font-sans, conservé pour que les
+     nombreux `var(--font-body)` de l'app résolvent correctement. */
+  --font-body: var(--font-sans);
+  font-family: var(--font-sans);
+  line-height: var(--leading-normal);
+  font-weight: 400;
+  font-size: calc(14px * var(--app-zoom));
+
+  color-scheme: light;
+  color: #374151;
+  background-color: #faf9f7;
+
+  /* ===== SURFACES — Warm ivory undertone ===== */
+  --surface-base: #faf9f7;       /* App background, lowest layer */
+  --surface-primary: #ffffff;    /* Cards, panels, modals — main "content on" color */
+  --surface-secondary: #f5f4f1; /* Hover states, secondary panels, subtle contrast */
+  --surface-tertiary: #ebe9e5;  /* Dividers, inset areas, deeper contrast */
+  --surface-elevated: #ffffff;  /* Floating elements (dropdowns, popovers) */
+  --surface-hover: var(--surface-secondary);  /* Hover state background (rows, items) */
+
+  /* ===== PRIMARY ACCENT — Teal ===== */
+  --accent-primary: #0d9488;
+  --accent-primary-hover: #0f766e;
+  --accent-primary-light: #ccfbf1;
+  --accent-primary-subtle: rgba(13, 148, 136, 0.08);
+  --accent-primary-glow: rgba(13, 148, 136, 0.15);
+
+  /* ===== SECONDARY ACCENT — Amber (AI) ===== */
+  --accent-secondary: #d97706;
+  --accent-secondary-hover: #b45309;
+  --accent-secondary-light: #fef3c7;
+  --accent-secondary-subtle: rgba(217, 119, 6, 0.08);
+
+  /* ===== CALENDAR EVENT CONTRAST ===== */
+  --calendar-event-text: #ffffff;
+  --calendar-allday-text: #ffffff;
+
+  /* ===== TEXT HIERARCHY ===== */
+  --text-primary: #111827;       /* Headings, important content */
+  --text-secondary: #374151;     /* Body text, descriptions */
+  --text-tertiary: #4b5563;      /* Labels, captions — WCAG AAA (8.2:1 on white) */
+  --text-muted: #4b5563;         /* De-emphasized text — WCAG AAA (8.2:1 on white) */
+  --text-placeholder: #9ca3af;   /* Placeholder text (exempt from WCAG) */
+  --text-inverse: #ffffff;       /* Text on dark/accent backgrounds */
+
+  /* ===== BORDERS ===== */
+  --border-subtle: rgba(0, 0, 0, 0.03);   /* Dividers, section separators */
+  --border-default: rgba(0, 0, 0, 0.1);   /* Card borders, input borders */
+  --border-strong: rgba(0, 0, 0, 0.15);   /* Hover states, emphasis */
+  --border-focus: var(--accent-primary);   /* Focus ring color */
+
+  /* ===== NEUTRAL GRAY SCALE ===== */
+  --gray-50:  #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-500: #6b7280;
+  --gray-800: #1f2937;
+
+  /* ===== SEMANTIC COLORS ===== */
+  --success: #059669;
+  --success-bg: #d1fae5;
+  --success-text: #16a34a;
+  --success-bg-subtle: #f0fdf4;
+  --success-border: #bbf7d0;
+  --warning: #d97706;
+  --warning-bg: #fef3c7;
+  --warning-subtle: rgba(217, 119, 6, 0.1);
+  --warning-light: #fde68a;
+  --warning-border: #fcd34d;
+  --error: #dc2626;
+  --error-hover: #ef4444;
+  --error-bg: #fee2e2;
+  --error-bg-subtle: #fef2f2;
+  --error-border: #fecaca;
+  --info: #0284c7;
+  --info-bg: #e0f2fe;
+
+  /* ===== PALETTE — Accent colors for categories ===== */
+  --color-blue: #3b82f6;
+  --color-indigo: #6366f1;
+  --color-indigo-light: #818cf8;
+  --color-violet: #8b5cf6;
+  --color-violet-bg: #ede9fe;
+  --color-amber: #f59e0b;
+  --color-amber-light: #fbbf24;
+  --color-amber-hover: #fde047;
+  --color-emerald: #10b981;
+  --color-pink: #ec4899;
+  --color-orange: #ea580c;
+  --color-slate: #64748b;
+  --color-teal: #14b8a6;
+
+  /* ===== SCALE TOKENS — Press feedback ===== */
+  --scale-press: 0.97;
+  --scale-dramatic: 0.95;
+
+  /* ===== OVERLAYS — For modals and backdrops ===== */
+  --overlay-light: rgba(0, 0, 0, 0.3);
+  --overlay-medium: rgba(0, 0, 0, 0.5);
+  --overlay-heavy: rgba(0, 0, 0, 0.65);
+
+  /* ===== SHADOWS — Warm-tinted (2.2) ===== */
+  --shadow-xs: 0 1px 2px rgba(30, 20, 10, 0.04);
+  --shadow-sm: 0 1px 3px rgba(30, 20, 10, 0.06), 0 1px 2px rgba(30, 20, 10, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(30, 20, 10, 0.07), 0 2px 4px -1px rgba(30, 20, 10, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(30, 20, 10, 0.08), 0 4px 6px -2px rgba(30, 20, 10, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(30, 20, 10, 0.08), 0 10px 10px -5px rgba(30, 20, 10, 0.03);
+  --shadow-2xl: 0 25px 50px -12px rgba(30, 20, 10, 0.15), 0 12px 24px -8px rgba(30, 20, 10, 0.08);
+  --shadow-inner: inset 0 2px 4px rgba(30, 20, 10, 0.04);
+  --shadow-inner-lg: inset 0 4px 8px rgba(30, 20, 10, 0.06);
+  --shadow-glow-primary: 0 0 20px rgba(13, 148, 136, 0.15);
+  --shadow-glow-secondary: 0 0 20px rgba(217, 119, 6, 0.15);
+  --shadow-card: 0 1px 3px rgba(30, 20, 10, 0.04), 0 1px 2px rgba(30, 20, 10, 0.03);
+  --shadow-card-hover: 0 8px 16px rgba(30, 20, 10, 0.08), 0 4px 8px rgba(30, 20, 10, 0.04);
+  --shadow-modal: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06), 0 16px 32px rgba(0, 0, 0, 0.08), 0 32px 64px rgba(0, 0, 0, 0.06);
+  --shadow-focus: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 12%, transparent), inset 0 1px 2px rgba(0, 0, 0, 0.04);
+
+  /* ===== RADII ===== */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+  --radius-2xl: 20px;
+
+  /* ===== LEGACY ALIASES (consumed by 15+ component files) ===== */
+  --bg-primary: var(--surface-primary);
+  --bg-secondary: var(--surface-secondary);
+  --border-color: var(--border-default);
+  --border-light: var(--border-subtle);
+  --accent-color: var(--accent-primary);
+  --accent-hover: var(--accent-primary-hover);
+  --accent-light: var(--accent-primary-subtle);
+  --text-color: var(--text-primary);
+  --error-text: var(--error);
+  --error-border: var(--error-bg);
+  --success-color: var(--success);
+
+  /* ===== SHADCN/UI ALIASES — Maps Radix/shadcn tokens to Agentys design system ===== */
+  --background: var(--surface-base);
+  --foreground: var(--text-primary);
+  --card: var(--surface-primary);
+  --card-foreground: var(--text-primary);
+  --popover: var(--surface-elevated);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--accent-primary);
+  --primary-foreground: var(--text-inverse);
+  --secondary: var(--surface-secondary);
+  --secondary-foreground: var(--text-secondary);
+  --muted: var(--surface-tertiary);
+  --muted-foreground: var(--text-muted);
+  --accent: var(--accent-primary-subtle);
+  --accent-foreground: var(--text-primary);
+  --destructive: var(--error);
+  --destructive-foreground: var(--text-inverse);
+  --border: var(--border-default);
+  --input: var(--border-default);
+  --ring: var(--accent-primary);
+  --radius: var(--radius-md);
+
+  /* ===== OPACITY ===== */
+  --opacity-disabled: 0.5;
+  --opacity-muted: 0.65;
+  --opacity-hover-overlay: 0.08;
+
+  /* ===== HOVER SHADOW ===== */
+  --shadow-hover: 0 4px 12px rgba(30, 20, 10, 0.1);
+
+  /* ===== Z-INDEX SCALE ===== */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 1000;
+  --z-popover: 1100;
+  --z-tooltip: 1200;
+  --z-notification: 1300;
+  --z-overlay: 9000;
+  --z-spotlight: 9001;
+  --z-top: 9999;
+  --detail-panel-width: calc(560px * var(--app-zoom));   /* Inline detail panel — also used as fallback in App.css */
+
+  /* ===== SPACING SCALE — 4px base unit, multiplié par --app-zoom ===== */
+  --space-1: calc(4px * var(--app-zoom));    /* Tight gaps, inline spacing */
+  --space-2: calc(8px * var(--app-zoom));    /* Icon gaps, small padding */
+  --space-3: calc(12px * var(--app-zoom));   /* Compact padding (list items, badges) */
+  --space-4: calc(16px * var(--app-zoom));   /* Default padding (cards, sections) */
+  --space-5: calc(20px * var(--app-zoom));   /* Medium padding */
+  --space-6: calc(24px * var(--app-zoom));   /* Spacious padding (modals, detail panels) */
+  --space-8: calc(32px * var(--app-zoom));   /* Large gaps */
+  --space-10: calc(40px * var(--app-zoom));  /* Section spacing */
+  --space-12: calc(48px * var(--app-zoom));  /* Page-level spacing */
+
+  /* ===== EASING — Calm Authority curves ===== */
+  --ease-clarity: cubic-bezier(0.25, 0.1, 0.25, 1);   /* Confident, smooth */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);    /* Energetic response */
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);       /* Graceful deceleration */
+
+  /* ===== TRANSITIONS — Strict 3-tier system (5.1) ===== */
+  /* Instant: color/opacity, small state shifts */
+  --transition-fast: 0.1s var(--ease-clarity);
+  /* Quick: element entrances, size changes, focus states */
+  --transition-base: 0.2s var(--ease-clarity);
+  /* Dramatic: modals, page transitions, complex choreography */
+  --transition-slow: 0.35s var(--ease-settle);
+  --transition-spring: 0.3s var(--ease-spring);
+
+  /* ===== TYPOGRAPHY SCALE — Fluid with clamp() ===== */
+  /* Small sizes: fixed (no fluid scaling needed at body text level) */
+  --font-size-2xs: 0.625rem;   /* 10px */
+  --font-size-xs: 0.6875rem;   /* 11px */
+  --font-size-sm: 0.8125rem;   /* 13px */
+  --font-size-base: 0.875rem;  /* 14px */
+  --font-size-md: 0.9375rem;   /* 15px */
+  --font-size-lg: 1rem;        /* 16px */
+  /* Display sizes: fluid scaling between 480px–1440px viewport */
+  --font-size-xl: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);        /* 16→18px */
+  --font-size-2xl: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);       /* 18→22px */
+  --font-size-3xl: clamp(1.375rem, 1.15rem + 0.75vw, 1.75rem);    /* 22→28px */
+  --font-size-4xl: clamp(1.75rem, 1.4rem + 1vw, 2.25rem);         /* 28→36px */
+
+  /* ===== LINE HEIGHTS ===== */
+  --leading-none: 1;
+  --leading-xs: 1.1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 1.75;
+  --leading-spacious: 2;
+
+  /* ===== FONT WEIGHT HIERARCHY ===== */
+  --font-weight-normal: 400;     /* Body text */
+  --font-weight-medium: 500;     /* Labels, navigation, buttons */
+  --font-weight-semibold: 600;   /* Modal titles, section headers (de-facto convention) */
+  --font-weight-bold: 700;       /* Headings, emphasis */
+
+  /* ===== LETTER SPACING ===== */
+  --tracking-tighter: -0.03em;
+  --tracking-tight: -0.015em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.01em;
+  --tracking-wider: 0.025em;
+  --tracking-widest: 0.05em;
+  --tracking-caps: 0.08em;
+  --tracking-mega: 0.1em;
+  --tracking-display: 0.15em;
+  --tracking-super: 0.2em;
+
+  font-synthesis: none;
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent-primary) 30%, transparent);
+  color: var(--text-primary);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ===== SCROLLBAR — Hidden (scroll still works via wheel/trackpad) ===== */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: none;
+}
+
+/* ===== TABULAR NUMS — Prevent layout shift on counters/timers (1.4) ===== */
+.email-time,
+.header-tab-count,
+.draft-header-count,
+.draft-date-count,
+.header-select-count,
+.email-count,
+.sidebar-count,
+[data-numeric],
+.timer-display,
+.metric-value,
+.progress-count,
+.streak-value {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== GLOBAL FOCUS RING — defined once in the FOCUS-VISIBLE section below ===== */
+
+/* ===== MINIMUM TOUCH TARGETS — Desktop 32px, Mobile WCAG 44px (6.6) ===== */
+button, [role="button"], a, input, select, textarea {
+  min-height: 32px;
+}
+
+/* Mobile: increase touch targets to WCAG 44px minimum */
+@media (max-width: 768px) {
+  button, [role="button"], a {
+    min-height: 44px;
+  }
+}
+
+/* ===== INPUT INNER SHADOW — Recessed depth (4.2) ===== */
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="password"],
+input[type="url"],
+input[type="number"],
+textarea,
+select {
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="search"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--border-focus, var(--accent-primary));
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent-primary) 12%, transparent),
+    inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+}
+
+a {
+  font-weight: 500;
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+/* Global checkbox styling — consistent accent color and size */
+input[type="checkbox"] {
+  accent-color: var(--accent-primary);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Base button styles */
+button {
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition-base), transform 0.1s var(--ease-spring);
+}
+
+button:active,
+[role="button"]:active {
+  transform: scale(var(--scale-press));
+}
+
+button:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Primary button — Teal */
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: var(--text-inverse);
+}
+
+/* Secondary button */
+.btn-secondary {
+  background-color: var(--surface-primary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-default);
+}
+
+/* Ghost button */
+.btn-ghost {
+  background: transparent;
+  color: var(--text-tertiary);
+}
+
+/* Keyboard shortcut hint in buttons */
+.btn .kbd,
+button .kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  margin-left: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+}
+
+.btn-secondary .kbd {
+  background: var(--surface-secondary);
+  color: var(--text-muted);
+}
+
+/* ===== SUBTLE GRAIN TEXTURE ===== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-overlay);
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ===== WARM AMBIENT LAYER — Subtle ivory glow at top ===== */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: calc(var(--z-overlay) - 1);
+  background: radial-gradient(ellipse at 50% 0%, rgba(253, 245, 230, 0.12), transparent 55%);
+}
+
+/* ===== SKIP-TO-CONTENT LINK (Accessibility) ===== */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  padding: 8px 16px;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  z-index: var(--z-top);
+  transition: top 0.2s ease;
+  border-radius: 0 0 var(--radius-md) 0;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* AUTO DARK MODE removed: Agentys uses a single explicit theme (Clarity /
+   "default") set via Settings. We do NOT want the OS dark-mode preference to
+   override it. main.tsx sets `data-theme="default"` synchronously before render
+   to guarantee no pre-mount FOUC where this block previously fired. */
+
+/* ===== GLOBAL REDUCED MOTION ===== */
+/* Responsive type scale now handled by clamp() in :root — no breakpoints needed */
+@media (max-width: 480px) {
+  :root {
+    --leading-normal: 1.6;
+  }
+}
+
+/* prefers-reduced-motion: global wildcard rule at end of file (line ~721) */
+
+/* Windows High Contrast Mode support */
+@media (forced-colors: active) {
+  .label-badge,
+  .draft-ready-badge {
+    border: 1px solid ButtonText;
+  }
+
+  .swipeable-email-item.selected .email-content {
+    outline: 2px solid Highlight;
+  }
+
+  .swipeable-email-item.unread::after {
+    background: Highlight;
+  }
+
+  .checkbox-custom {
+    border-color: ButtonText;
+  }
+
+  .email-checkbox input:checked + .checkbox-custom {
+    background: Highlight;
+    border-color: Highlight;
+  }
+
+  *:focus-visible {
+    outline: 2px solid Highlight !important;
+    outline-offset: 2px;
+  }
+
+  .sidebar,
+  .email-list-toolbar,
+  .email-action-footer {
+    border: 1px solid ButtonText;
+  }
+
+  .command-palette-item.selected {
+    outline: 2px solid Highlight;
+  }
+
+  .header-tab.active {
+    border-bottom: 2px solid Highlight;
+  }
+}
+
+/* ============================================================================
+   VIEW TRANSITIONS API — Smooth crossfade for theme & folder switching
+   ============================================================================ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.2s;
+  animation-timing-function: var(--ease-clarity, ease);
+}
+
+::view-transition-old(root) {
+  animation-name: viewFadeOut;
+}
+
+::view-transition-new(root) {
+  animation-name: viewFadeIn;
+}
+
+@keyframes viewFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes viewFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* View transition reduced-motion handled by global wildcard rule above */
+
+/* ============================================================================
+   DISPLAY P3 WIDE-GAMUT COLORS — Richer accent on capable displays
+   ============================================================================ */
+@media (color-gamut: p3) {
+  :root {
+    --accent-primary: color(display-p3 0.05 0.58 0.53);
+    --accent-primary-hover: color(display-p3 0.04 0.50 0.46);
+    --success: color(display-p3 0.13 0.72 0.30);
+    --error: color(display-p3 0.85 0.18 0.15);
+    --warning: color(display-p3 0.92 0.60 0.04);
+  }
+}
+
+/* LCH perceptually uniform colors — used for gradient midpoints & dynamic accents */
+@supports (color: lch(50% 40 180)) {
+  :root {
+    --accent-primary-lch: lch(55% 40 180);
+    --accent-primary-hover-lch: lch(48% 38 178);
+    --success-lch: lch(62% 55 145);
+    --error-lch: lch(50% 65 30);
+    --warning-lch: lch(72% 65 85);
+  }
+}
+
+/* ============================================================================
+   CONTENT-VISIBILITY — Skip layout/paint for off-screen content
+   ============================================================================ */
+.pending-draft-sections,
+.email-skeleton-list {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* ============================================================================
+   PREFERS-REDUCED-MOTION — Accessibility: disable ALL animations globally
+   This single wildcard rule covers every component CSS file in the app.
+   No per-file @media rules needed — this catches everything.
+   ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Disable view transitions */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================================
+   FOCUS-VISIBLE — Keyboard navigation indicators
+   ============================================================================ */
+:focus-visible {
+  outline: none;
+  border-radius: inherit;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  transition: box-shadow 0.18s;
+}
+
+button:focus-visible,
+[role="button"]:focus-visible,
+a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-primary) 20%, transparent);
+  transition: box-shadow 0.18s;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  border-color: var(--border-focus, var(--accent-primary));
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent-primary) 12%, transparent),
+    inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+/* Remove focus ring for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+/* ============================================================================
+   MODAL MULTI-LAYER SHADOWS — Depth perception
+   ============================================================================ */
+.email-detail-content,
+.send-confirmation-overlay .send-confirmation-modal,
+.compose-email-modal-overlay .compose-email-modal,
+.regenerate-modal-backdrop .regenerate-modal,
+.settings,
+.command-palette-backdrop .command-palette {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 4px 8px rgba(0, 0, 0, 0.06),
+    0 16px 32px rgba(0, 0, 0, 0.08),
+    0 32px 64px rgba(0, 0, 0, 0.06);
+}
+
+/* ============================================================================
+   UNIFIED BUTTON SYSTEM — Pill variants
+   Base .btn-pill + modifiers: --primary, --ghost, --danger
+   ============================================================================ */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 22px;
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+.btn-pill:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+.btn-pill--primary {
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+}
+
+.btn-pill--primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-pill--ghost {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.btn-pill--ghost:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-pill--danger {
+  background: var(--error);
+  color: var(--text-inverse);
+}
+
+/* ============================================================================
+   STANDARDIZED ICON SIZES — 16px (inline) / 20px (standalone)
+   ============================================================================ */
+.icon-sm { width: 16px; height: 16px; }
+.icon-md { width: 20px; height: 20px; }
+
+/* ===== ICON BUTTON FOCUS — Consistent keyboard accessibility ===== */
+.icon-btn:focus-visible,
+.header-icon-btn:focus-visible,
+.draft-header-icon-btn:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.icon-btn--delete:focus-visible:not(:disabled) {
+  color: var(--text-primary);
+}
+
+/* ── Signature block — line spacing ─────────────────────────────── */
+.agentys-signature p,
+.agentys-signature div {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.agentys-signature p + p,
+.agentys-signature p + div,
+.agentys-signature div + p,
+.agentys-signature div + div {
+  margin-top: 6px;
+}
+.agentys-signature br {
+  display: none;
+}
+
+/* Signature typography unified with body text across every composer surface.
+   User-saved signatures carry inline `color: #6b7280`, custom font-size,
+   or custom font-family from SignatureModal. We force the signature to
+   match the draft body's primary color + base font + base size so it
+   reads as part of the same text block.
+
+   Scoping strategy: target the top-level composer container classes so
+   every `.agentys-signature` rendered inside them is caught — regardless
+   of whether it lives in the editor body, a dedicated footer, or a preview
+   sibling. This covers:
+     • ReplyComposer (.reply-composer) — reply, reply-all, forward
+     • NewMessageModal (.new-message-modal) — new message
+     • PendingDraftDetail (.pending-draft-detail) — drafts tab, deep focus,
+       snoozed view (both the sibling preview and any inline body signature)
+   Plus the dedicated footer/preview wrapper classes themselves, in case
+   the signature lives outside `.agentys-signature`.
+
+   Rendered emails sit inside isolated iframes, so their signature styling
+   is not affected. */
+/* ── SIGNATURE: always-forced properties (root + descendants) ────────────
+   Force color/weight/line-height to match the composer body, overriding any
+   inline color:#6b7280 that Gmail-synced or template signatures embed. */
+.reply-composer .agentys-signature,
+.reply-composer .agentys-signature *,
+.new-message-modal .agentys-signature,
+.new-message-modal .agentys-signature *,
+.pending-draft-detail .agentys-signature,
+.pending-draft-detail .agentys-signature *,
+.email-reply-composer-container .agentys-signature,
+.email-reply-composer-container .agentys-signature *,
+.rc-signature-footer,
+.rc-signature-html,
+.rc-signature-html *,
+.rc-signature-footer .agentys-signature,
+.rc-signature-footer .agentys-signature *,
+.nm-signature-footer,
+.nm-signature-footer *,
+.pdd-signature-preview,
+.pdd-signature-text {
+  color: inherit !important;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.reply-composer .agentys-signature *,
+.new-message-modal .agentys-signature *,
+.email-reply-composer-container .agentys-signature *,
+.rc-signature-html,
+.rc-signature-html *,
+.rc-signature-footer .agentys-signature,
+.rc-signature-footer .agentys-signature *,
+.nm-signature-footer * {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Strip any border-top from signature containers and their direct children — prevents
+   inline styles or theme variables from rendering a separator line above the signature. */
+.rc-signature-footer,
+.rc-signature-footer > .rc-signature-html:first-child,
+.rc-signature-footer .agentys-signature,
+.nm-signature-footer,
+.nm-signature-footer > *:first-child,
+.agentys-signature,
+.agentys-signature > *:first-child {
+  border-top: none !important;
+  padding-top: 0 !important;
+}
+
+/* ── SIGNATURE: PendingDraftDetail path ──────────────────────────────────
+   Since the 2026-06-09 parity migration the PDD body is the shared TipTap
+   DraftEditor carrying the user's compose font prefs as an INLINE style.
+   `.pdd-signature-preview` (plain-text, no embedded HTML to neutralize)
+   now receives the same prefs inline in PendingDraftDetail.tsx — pinning
+   it here to var(--font-size-base) (14px) made it render smaller than the
+   16px body. Only embedded `.agentys-signature` HTML still needs its
+   Gmail-sourced inline font styles neutralized; `inherit` matches it to
+   whichever body view contains it. */
+.pending-draft-detail .agentys-signature,
+.pending-draft-detail .agentys-signature * {
+  font-family: inherit !important;
+  font-size: inherit !important;
+}
+
+/* ── SIGNATURE: revert Tailwind Preflight on replaced elements ───────────
+   Preflight resets <img>/<svg> to `display: block`, which stacks the
+   social icons in Gmail-style signatures vertically instead of letting
+   them flow in a horizontal row inside their <td> / inline container.
+   Revert to inline so the signature renders the way the email client
+   shows it. Width/height attributes on the <img> still apply because
+   replaced elements always honour their intrinsic dimensions. */
+.agentys-signature img,
+.agentys-signature svg,
+.rc-signature-footer img,
+.rc-signature-footer svg,
+.nm-signature-footer img,
+.nm-signature-footer svg,
+.qs-signature-footer img,
+.qs-signature-footer svg,
+.autoreply-signature-footer img,
+.autoreply-signature-footer svg,
+.pdd-signature-preview img,
+.pdd-signature-preview svg,
+.sig-editor img,
+.sig-editor svg,
+.sig-preview img,
+.sig-preview svg {
+  display: inline;
+  vertical-align: middle;
+}

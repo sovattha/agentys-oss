@@ -1,0 +1,157 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "pierre.durand@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Salut l'equipe, / Pierre,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "lucas.bernard@techcorp.fr",
+      "tone": "casual",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Salut Lucas,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "camille.roux@techcorp.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "tu",
+      "greeting": "Camille,",
+      "closing": "Sophie"
+    },
+    {
+      "contact_email": "marie.leclerc@clientcorp.com",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Madame Leclerc, bonjour Claire,",
+      "closing": "Cordialement, / Sophie Martin Chef de projet - Division Digitale TechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "sarah.jones@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi Sarah,",
+      "closing": "Best regards, / Best,"
+    },
+    {
+      "contact_email": "nicolas.moreau@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Nicolas,",
+      "closing": "Cordialement, Sophie Martin Chef de projet - Division Digitale TechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "ceo@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Marc,",
+      "closing": "Cordialement, Sophie Martin Chef de projet - Division Digitale TechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "amelie.petit@fournisseur.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Madame Petit, / Bonjour Amelie,",
+      "closing": "Cordialement, Sophie Martin Chef de projet - Division Digitale TechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "contact@prospect-startup.io",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Thomas,",
+      "closing": "Cordialement, Sophie Martin Chef de projet - Division Digitale TechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "david.kim@partnertech.co.kr",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi David,",
+      "closing": "Best regards, / Best,"
+    },
+    {
+      "contact_email": "recrutement@techcorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": null,
+      "greeting": "Bonjour,",
+      "closing": "Cordialement, Sophie Martin Chef de projet - Division Digitale TechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "elena.volkov@eupartner.de",
+      "tone": "formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Dear Elena,",
+      "closing": "Best regards, Sophie Martin Project Manager - Digital Division TechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "claire.fontaine@clientcorp.com",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Bonjour Claire,",
+      "closing": "Cordialement, Sophie Martin Chef de projet - Division Digitale TechCorp | +33 6 12 34 56 78 / A jeudi !"
+    },
+    {
+      "contact_email": "john.smith@globaltech.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi John,",
+      "closing": "Best regards, Sophie Martin Project Manager - Digital Division TechCorp | +33 6 12 34 56 78"
+    },
+    {
+      "contact_email": "support@cloudprovider.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "addressing": null,
+      "greeting": "Hi,",
+      "closing": "Regards, Sophie Martin Project Manager - Digital Division TechCorp"
+    }
+  ],
+  "general_rules": [
+    {
+      "description": "Tutoyer les collegues internes de meme niveau ou juniors (Pierre, Lucas, Camille) avec salutation courte et signature reduite au prenom seul."
+    },
+    {
+      "description": "Vouvoyer les contacts externes, les superieurs hierarchiques (CEO, direction financiere) et les fournisseurs avec signature complete incluant titre et coordonnees."
+    },
+    {
+      "description": "Utiliser le francais pour les contacts internes et externes francophones, l'anglais pour les partenaires internationaux (GlobalTech, PartnerTech, EUPartner)."
+    },
+    {
+      "description": "Structurer les emails longs avec listes a puces numerotees, sections claires (Completed/In progress/Blocker, Faits marquants/Metriques) et appels a l'action explicites."
+    },
+    {
+      "description": "Inclure des details techniques precis (noms de tickets JIRA, points de story, noms de modules, versions logicielles) sans definitions, supposant une comprehension partagee du contexte."
+    },
+    {
+      "description": "Adapter la longueur : ultra-courtes pour les collegues proches (1-2 phrases), detaillees avec structure pour les clients et direction."
+    },
+    {
+      "description": "Utiliser un vocabulaire SaaS/DevOps specifique au secteur (GraphQL, OAuth2, PKCE, mTLS, WAF, rate limiting, versioning, streaming, E2E, NPS, ROI, SLA, DPA, GDPR) sans explication, refletant une expertise technique partagee."
+    },
+    {
+      "description": "Proposer des dates/creneaux concrets et demander confirmation explicite plutot que de laisser ouvert (ex: 'Vendredi 28 fevrier a 10h' ou 'Mardi 11/02 : 10h-12h et 14h-17h')."
+    },
+    {
+      "description": "Inclure des donnees chiffrees (budgets, metriques, points de story, pourcentages) pour justifier les decisions et montrer la rigueur de gestion."
+    },
+    {
+      "description": "Copier les parties prenantes techniques (Pierre pour architecture/securite, Lucas pour frontend) dans les emails clients ou strategiques pour assurer l'alignement."
+    }
+  ],
+  "forbidden_phrases": []
+}

@@ -1,0 +1,124 @@
+/* ============================================================================
+   GHOST ADD ROW — dashed "add" affordance shaped like a list row.
+   Sits as the first row of a row list (Contact groups, Training FAQ):
+   the row-list counterpart to GhostAddCard.
+   ============================================================================ */
+
+.ghost-add-row {
+  /* neutralise les styles globaux de <button> (padding 12/20) */
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 14px;
+  /* rangée fantôme : pointillés au repos, pleine et teintée au survol */
+  background: var(--surface-secondary);
+  border: 1.5px dashed var(--border-strong);
+  border-radius: var(--radius-lg, 12px);
+  cursor: pointer;
+  transition: border-color var(--transition-base),
+              background var(--transition-base),
+              box-shadow var(--transition-base),
+              transform var(--transition-base);
+}
+
+.ghost-add-row:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+  background: color-mix(in srgb, var(--accent-primary) 10%, var(--surface-secondary));
+}
+
+/* Hover and focus-visible share the "row lights up" treatment.
+   Focus-visible additionally renders the keyboard-accessible focus ring. */
+.ghost-add-row:hover,
+.ghost-add-row:focus-visible {
+  border-color: var(--accent-primary);
+  border-style: solid;
+}
+
+.ghost-add-row:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 22%, transparent);
+}
+
+/* pastille d'icône — même langage visuel que GhostAddCard, proportionnée pour une rangée */
+.ghost-add-row__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--surface-tertiary);
+  color: var(--text-tertiary);
+  transition: background var(--transition-base),
+              color var(--transition-base),
+              transform var(--transition-base);
+}
+
+/* lesson 2026-05-07 : un SVG inline dans un parent flex doit être dimensionné en CSS */
+.ghost-add-row__icon svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+}
+
+.ghost-add-row:active .ghost-add-row__icon {
+  transform: rotate(90deg) scale(0.98);
+}
+
+.ghost-add-row__label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: var(--tracking-tight);
+  transition: color var(--transition-base);
+}
+
+.ghost-add-row:hover .ghost-add-row__icon,
+.ghost-add-row:focus-visible .ghost-add-row__icon {
+  background: color-mix(in srgb, var(--accent-primary) 12%, var(--surface-tertiary));
+  color: var(--accent-primary);
+}
+
+/* One-shot plus-icon wobble on keyboard focus — affordance hint that the
+   ghost row is the path to creating a new item. Single iteration so it
+   reads as an invitation, not as ambient motion.
+   :hover removed: the wobble's transform composes with the :active rotate
+   on the icon parent and produces a double-rotation flicker on click. */
+.ghost-add-row:focus-visible .ghost-add-row__icon svg {
+  animation: ghostAddPulse 0.5s var(--ease-settle, ease-out) 1;
+}
+
+@keyframes ghostAddPulse {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(90deg) scale(1.08); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+.ghost-add-row:hover .ghost-add-row__label,
+.ghost-add-row:focus-visible .ghost-add-row__label {
+  color: var(--accent-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ghost-add-row,
+  .ghost-add-row__icon,
+  .ghost-add-row__label {
+    transition: none;
+  }
+  .ghost-add-row:active {
+    transform: none;
+  }
+  .ghost-add-row:active .ghost-add-row__icon {
+    transform: none;
+  }
+  .ghost-add-row:hover .ghost-add-row__icon svg,
+  .ghost-add-row:focus-visible .ghost-add-row__icon svg {
+    animation: none;
+  }
+}

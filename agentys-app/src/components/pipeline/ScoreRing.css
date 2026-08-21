@@ -1,0 +1,41 @@
+.score-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.score-ring svg {
+  display: block;
+  overflow: visible;
+}
+
+.score-ring-value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono, ui-monospace, "SF Mono", Menlo, monospace);
+  font-size: calc(var(--font-size-xs, 0.76rem));
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+/* Entry pop when score reveals */
+.score-ring--animate {
+  animation: scoreRingIn 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes scoreRingIn {
+  from { opacity: 0; transform: scale(0.75); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .score-ring--animate { animation: none; }
+  .score-ring svg circle { transition: none !important; }
+}

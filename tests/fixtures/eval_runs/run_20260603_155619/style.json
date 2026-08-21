@@ -1,0 +1,117 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "p.dumont@dumont-associes.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Dumont,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "e.fontaine@dumont-associes.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Chère Madame Fontaine,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "h.castellan@nexus-group.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur le Directeur Général,",
+      "closing": "l'expression de mes salutations distinguées"
+    },
+    {
+      "contact_email": "jl.garnier@sarl-garnier.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Garnier,",
+      "closing": "l'expression de mes salutations distinguées"
+    },
+    {
+      "contact_email": "n.vernier@nexus-group.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Madame Vernier,",
+      "closing": "l'expression de mes salutations distinguées"
+    },
+    {
+      "contact_email": "m.leroux@dumont-associes.fr",
+      "tone": "semi-formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Monsieur Leroux,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "greffe@tc-paris.justice.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Madame, Monsieur,",
+      "closing": "l'expression de mes salutations distinguées"
+    },
+    {
+      "contact_email": "f.braun@braun-partner.de",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Cher Maître Braun,",
+      "closing": "l'expression de mes salutations distinguées"
+    },
+    {
+      "contact_email": "s.renard@notaire-renard.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Chère Maître,",
+      "closing": "l'expression de mes sentiments les plus distingués"
+    },
+    {
+      "contact_email": "d.perrin@perrin-avocats.fr",
+      "tone": "formal",
+      "language": "fr",
+      "addressing": "vous",
+      "greeting": "Cher Maître,",
+      "closing": "l'expression de mes sentiments les plus distingués"
+    }
+  ],
+  "general_rules": [
+    {
+      "description": "Utiliser systématiquement le vouvoiement avec tous les contacts externes et internes, sans exception."
+    },
+    {
+      "description": "Adopter une signature complète (nom, titre, cabinet, adresse, téléphone) pour tous les emails formels et clients."
+    },
+    {
+      "description": "Structurer les contenus longs avec des listes numérotées et des sections clairement délimitées pour la lisibilité."
+    },
+    {
+      "description": "Utiliser des formules de politesse complètes et distinguées : « l'expression de mes salutations distinguées » pour les clients externes et magistrats, « Bien cordialement » pour les collaborateurs internes."
+    },
+    {
+      "description": "Employer un vocabulaire juridique précis et technique sans simplification, en supposant l'expertise du destinataire."
+    },
+    {
+      "description": "Inclure systématiquement des références légales (articles du Code civil, RGPD, Code de procédure civile) et des numéros de dossier dans les communications relatives aux litiges."
+    },
+    {
+      "description": "Proposer des actions concrètes et des délais précis dans chaque email (dates, rendez-vous, délais de remise)."
+    },
+    {
+      "description": "Utiliser le jargon juridique et transactionnel sans définition : due diligence, GAP (garantie actif/passif), closing, protocole d'accord, AIPD, clause de changement de contrôle, earn-out, séquestre, conditions suspensives."
+    },
+    {
+      "description": "Ajouter une clause de confidentialité standardisée en pied de message pour tous les emails contenant des informations sensibles."
+    },
+    {
+      "description": "Adapter le registre de fermeture selon le type de destinataire : « sentiments les plus distingués » pour les notaires et confrères, « salutations distinguées » pour les clients et administrations."
+    }
+  ],
+  "forbidden_phrases": []
+}

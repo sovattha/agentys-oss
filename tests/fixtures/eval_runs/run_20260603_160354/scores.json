@@ -1,0 +1,83 @@
+{
+  "profile": {
+    "completeness": 72,
+    "precision": 68,
+    "usefulness": 65,
+    "overall": 68,
+    "missing": [
+      "uses_emoji: false",
+      "casual_fr greeting style: 'Salut {first_name},'",
+      "top-level addressing: 'mixed'",
+      "correct semi_formal_fr closing: 'Merci,'",
+      "correct casual_fr closing: '(no closing or just name)'"
+    ],
+    "incorrect": [
+      "signature.title merged with department: 'Chef de projet - Division Digitale' instead of 'Chef de projet'",
+      "closing_styles.semi_formal_fr: 'Cordialement,' should be 'Merci,'",
+      "closing_styles.semi_formal_en: 'Best regards,' should be 'Best,'",
+      "closing_styles.casual_fr: 'Sophie' should be '(no closing or just name)'",
+      "greeting_styles.formal_fr: 'Bonjour Madame {last_name},' should be 'Bonjour Madame/Monsieur {last_name},'",
+      "tone.addressing: 'vous' is incorrect and misplaced (should be top-level 'mixed')",
+      "average_response_length: 'medium-long' should be 'medium'"
+    ],
+    "details": "The system correctly identified core profile elements (email, name, preferred name, languages, language variant, default tone, semi-formal greeting styles). However, several issues reduce quality: (1) The signature title was merged ('Chef de projet - Division Digitale') rather than keeping title and department separate as in ground truth. (2) Closing styles have notable errors: semi_formal_fr should be 'Merci,' not 'Cordialement,'; formal_fr should be 'Cordialement,' (correct but misassigned); semi_formal_en should be 'Best,' not 'Best regards,'; casual_fr should be '(no closing or just name)' not 'Sophie'. (3) The formal_fr greeting uses 'Madame {last_name}' instead of 'Madame/Monsieur {last_name}'. (4) Missing: uses_emoji field (false), casual_fr greeting style ('Salut {first_name},'), and the top-level 'addressing' field ('mixed'). (5) Added fields not in ground truth: 'profession', 'profession_confirmed', and 'addressing' nested inside tone (with incorrect value 'vous' vs ground truth 'mixed' at top level). (6) average_response_length is 'medium-long' vs ground truth 'medium'. These closing style errors are particularly impactful for email drafting usefulness."
+  },
+  "knowledge": {
+    "completeness": 72,
+    "precision": 58,
+    "usefulness": 60,
+    "overall": 63,
+    "missing": [
+      "type field for all contacts (colleague, client, manager, direct_report, partner, supplier, prospect)",
+      "topics for all contacts",
+      "title for Pierre Durand (Lead Developer)",
+      "title for Lucas Bernard",
+      "title for Camille Roux (Responsable Securite)",
+      "title for Marie Leclerc (Directrice des Achats)",
+      "title for Nicolas Moreau (Directeur Financier)",
+      "title for Sarah Jones (Senior Solutions Architect)",
+      "title for Claire Fontaine (Chef de projet IT)",
+      "title for Amelie Petit (Responsable Comptes Cles)",
+      "title for David Kim (Integration Lead)",
+      "title for John Smith (VP Business Development)",
+      "title for Thomas Renard (CTO)"
+    ],
+    "incorrect": [
+      "support@cloudprovider.com (Cloud Provider Support) - hallucinated contact not in ground truth",
+      "Amelie Petit preferred_tone: 'semi-formal' should be 'formal'",
+      "Marc Dupont title: 'CEO' should be 'PDG'",
+      "Marie Leclerc company: 'ClientCorp' should be 'ClientCorp SA'",
+      "Claire Fontaine company: 'ClientCorp' should be 'ClientCorp SA'",
+      "Amelie Petit company: 'Fournisseur' should be 'Maintenance Pro SARL'"
+    ],
+    "details": "The system found all 13 ground truth contacts plus one hallucinated contact (support@cloudprovider.com). However, the output is missing several critical fields: 'type' (relationship type) is absent for all contacts, 'topics' are missing for all contacts, and most 'title' fields are null despite being known. Company names are often truncated/simplified (e.g., 'ClientCorp' instead of 'ClientCorp SA', 'Fournisseur' instead of 'Maintenance Pro SARL'). One tone is wrong: Amelie Petit is marked 'semi-formal' instead of 'formal'. Marc Dupont's title is given as 'CEO' instead of 'PDG'. The absence of relationship types (colleague, client, manager, direct_report, etc.) significantly reduces usefulness for email drafting, as tone and formality decisions depend heavily on this. Topics are entirely missing, which limits context for drafting. The hallucinated contact adds noise."
+  },
+  "rules": {
+    "completeness": 72,
+    "precision": 74,
+    "usefulness": 76,
+    "overall": 74,
+    "missing": [
+      "pierre.durand: tone should be 'casual' (not semi-formal)",
+      "camille.roux: tone should be 'casual' (not semi-formal)",
+      "nicolas.moreau: tone should be 'semi-formal' (not formal), greeting should include 'Nicolas,' variant",
+      "ceo@techcorp.fr: tone should be 'semi-formal' (not formal)",
+      "elena.volkov: tone should be 'formal' (not semi-formal)",
+      "pierre.durand: closing should be '(name only or none)' not 'Sophie / Merci,'",
+      "general_rule: cc_relevant_people (CC team leads on technical discussions, legal/finance on client topics)",
+      "general_rule: action_items (end client emails with 'Actions a suivre' section)",
+      "amelie.petit: greeting variant 'Bonjour Amelie,' missing from output"
+    ],
+    "incorrect": [
+      "recrutement@techcorp.fr: fabricated contact not in ground truth",
+      "it-support@techcorp.fr: fabricated contact not in ground truth",
+      "pierre.durand: tone classified as 'semi-formal' instead of 'casual'",
+      "camille.roux: tone classified as 'semi-formal' instead of 'casual'",
+      "nicolas.moreau: tone classified as 'formal' instead of 'semi-formal', addressing as 'vous' (should be tu/semi-formal internal)",
+      "ceo@techcorp.fr: tone classified as 'formal' instead of 'semi-formal', addressing as 'vous'",
+      "elena.volkov: tone classified as 'semi-formal' instead of 'formal'"
+    ],
+    "details": "The system found most contacts from ground truth (12/14 matched) and added 2 fabricated contacts (recrutement@techcorp.fr, it-support@techcorp.fr). Several tone classifications are wrong: pierre.durand should be 'casual' not 'semi-formal', camille.roux should be 'casual' not 'semi-formal', nicolas.moreau should be 'semi-formal' not 'formal', ceo@techcorp.fr should be 'semi-formal' not 'formal', elena.volkov should be 'formal' not 'semi-formal'. The general rules capture the spirit of most ground truth rules but lack the structured named rules format and miss specific triggers/actions. The system identified 10 general rules vs 8 in ground truth, with some useful additions (metrics, meeting slots, project references) not in ground truth but also missing the explicit 'cc_relevant_people' and 'action_items' rules. The forbidden_phrases match. Contact rules are mostly usable despite tone misclassifications, but the tone errors for internal contacts (Pierre, Camille) and Nicolas/CEO could lead to wrong formality in drafts."
+  },
+  "overall": 68
+}

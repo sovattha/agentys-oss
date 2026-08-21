@@ -1,0 +1,316 @@
+{
+  "timestamp": "20260214_022341",
+  "agents": [
+    "profile",
+    "knowledge",
+    "rules"
+  ],
+  "llm_judge": false,
+  "scores": {
+    "profile": {
+      "completeness": 100,
+      "precision": 100,
+      "usefulness": 100,
+      "overall": 100,
+      "missing": [],
+      "incorrect": []
+    },
+    "knowledge": {
+      "completeness": 0,
+      "precision": 0,
+      "usefulness": 0,
+      "overall": 0,
+      "missing": [
+        "amelie.petit@fournisseur.fr",
+        "david.kim@partnertech.co.kr",
+        "marie.leclerc@clientcorp.com",
+        "john.smith@globaltech.com",
+        "pierre.durand@techcorp.fr",
+        "lucas.bernard@techcorp.fr",
+        "camille.roux@techcorp.fr",
+        "nicolas.moreau@techcorp.fr",
+        "sarah.jones@globaltech.com",
+        "elena.volkov@eupartner.de",
+        "claire.fontaine@clientcorp.com",
+        "ceo@techcorp.fr",
+        "contact@prospect-startup.io"
+      ],
+      "incorrect": []
+    },
+    "rules": {
+      "completeness": 0,
+      "precision": 0,
+      "usefulness": 0,
+      "overall": 0,
+      "missing": [
+        "amelie.petit@fournisseur.fr",
+        "marie.leclerc@clientcorp.com",
+        "john.smith@globaltech.com",
+        "david.kim@partnertech.co.kr",
+        "pierre.durand@techcorp.fr",
+        "lucas.bernard@techcorp.fr",
+        "camille.roux@techcorp.fr",
+        "nicolas.moreau@techcorp.fr",
+        "sarah.jones@globaltech.com",
+        "elena.volkov@eupartner.de",
+        "claire.fontaine@clientcorp.com",
+        "ceo@techcorp.fr",
+        "contact@prospect-startup.io"
+      ],
+      "incorrect": []
+    },
+    "overall": 33
+  },
+  "output": {
+    "profile": {
+      "name": "Sophie Martin",
+      "title": "Chef de projet - Division Digitale",
+      "company": "TechCorp",
+      "email": "sophie.martin@techcorp.fr",
+      "phone": "+33 6 12 34 56 78",
+      "team": "Equipe Digitale",
+      "projects": [
+        {
+          "name": "Projet Alpha",
+          "description": "Development of the Alpha project"
+        },
+        {
+          "name": "Projet Beta",
+          "description": "Development of the Beta project with ClientCorp"
+        }
+      ],
+      "responsibilities": [
+        "Project management",
+        "Team leadership",
+        "Recruitment",
+        "Security and compliance",
+        "Partnership development"
+      ],
+      "skills": [
+        "Project management",
+        "Leadership",
+        "Communication",
+        "Technical expertise (Python, TypeScript, API)",
+        "Security and compliance"
+      ],
+      "tools": [
+        "JIRA",
+        "Asana",
+        "AWS WAF",
+        "GraphQL",
+        "Cypress"
+      ],
+      "partnerships": [
+        {
+          "name": "ClientCorp",
+          "description": "Partner for Projet Beta"
+        },
+        {
+          "name": "GlobalTech",
+          "description": "Partner for API cloud integration"
+        },
+        {
+          "name": "EUPartner GmbH",
+          "description": "Partner for EU market expansion"
+        }
+      ],
+      "metrics": [
+        {
+          "name": "Velocity",
+          "value": "39 points/sprint"
+        },
+        {
+          "name": "Disponibilite prod",
+          "value": "99.7%"
+        }
+      ],
+      "user_email": "sophie.martin@techcorp.fr",
+      "languages": [
+        "fr"
+      ]
+    },
+    "knowledge": {
+      "contacts": {
+        "Sophie Martin": {
+          "title": "Chef de projet - Division Digitale",
+          "company": "TechCorp",
+          "email": "sophie.martin@techcorp.fr",
+          "phone": "+33 6 12 34 56 78"
+        },
+        "Elena Volkov": {
+          "title": "Business Development Director",
+          "company": "EUPartner GmbH",
+          "email": "elena.volkov@eupartner.de",
+          "phone": "+49 89 123 456 78"
+        },
+        "Lucas Bernard": {
+          "title": "Developpeur",
+          "company": "TechCorp",
+          "email": "lucas.bernard@techcorp.fr"
+        },
+        "Camille": {
+          "title": "Security Specialist",
+          "company": "TechCorp",
+          "email": "camille@techcorp.fr"
+        },
+        "Pierre Durand": {
+          "title": "Technical Lead",
+          "company": "TechCorp",
+          "email": "pierre.durand@techcorp.fr"
+        },
+        "Claire Fontaine": {
+          "title": "Chef de projet IT",
+          "company": "ClientCorp SA",
+          "email": "claire.fontaine@clientcorp.com",
+          "phone": "+33 1 45 67 89 10"
+        },
+        "Marie Leclerc": {
+          "company": "ClientCorp"
+        }
+      },
+      "projects": {
+        "Projet Alpha": {
+          "tasks": [
+            "ALPHA-456: Export streaming",
+            "ALPHA-478: WAF setup",
+            "ALPHA-490: GraphQL schema migration",
+            "ALPHA-491: Vuln moyennes audit"
+          ],
+          "team": [
+            "Lucas Bernard",
+            "Camille",
+            "Pierre Durand"
+          ]
+        },
+        "Projet Beta": {
+          "tasks": [],
+          "team": [
+            "Sophie Martin",
+            "Claire Fontaine"
+          ],
+          "client": "ClientCorp SA"
+        }
+      },
+      "tasks": {
+        "ALPHA-456": {
+          "name": "Export streaming",
+          "assignee": "Lucas Bernard"
+        },
+        "ALPHA-478": {
+          "name": "WAF setup",
+          "assignee": "Camille"
+        },
+        "ALPHA-490": {
+          "name": "GraphQL schema migration",
+          "assignee": "Pierre Durand"
+        },
+        "ALPHA-491": {
+          "name": "Vuln moyennes audit",
+          "assignees": [
+            "Camille",
+            "Pierre Durand"
+          ]
+        }
+      },
+      "companies": {
+        "TechCorp": {
+          "contacts": [
+            "Sophie Martin",
+            "Lucas Bernard",
+            "Camille",
+            "Pierre Durand"
+          ],
+          "projects": [
+            "Projet Alpha",
+            "Projet Beta"
+          ]
+        },
+        "EUPartner GmbH": {
+          "contacts": [
+            "Elena Volkov"
+          ]
+        },
+        "ClientCorp SA": {
+          "contacts": [
+            "Claire Fontaine",
+            "Marie Leclerc"
+          ],
+          "projects": [
+            "Projet Beta"
+          ]
+        }
+      },
+      "terminology": {},
+      "frequent_topics": []
+    },
+    "rules": {
+      "contacts": {
+        "Marie Leclerc": {
+          "topics": [
+            "project updates",
+            "ClientCorp"
+          ],
+          "response_time": "within 24 hours"
+        },
+        "Amelie Petit": {
+          "topics": [
+            "contract renewal",
+            "maintenance agreements"
+          ],
+          "response_time": "within 2 business days"
+        },
+        "Thomas Renard": {
+          "topics": [
+            "partnerships",
+            "API integrations"
+          ],
+          "response_time": "within 3 business days"
+        },
+        "David Kim": {
+          "topics": [
+            "technical integration",
+            "testing"
+          ],
+          "response_time": "within 24 hours"
+        },
+        "Elena Volkov": {
+          "topics": [
+            "EU market expansion"
+          ],
+          "response_time": "within 3 business days"
+        },
+        "IT Support TechCorp": {
+          "topics": [
+            "internal IT issues"
+          ],
+          "response_time": "as soon as possible"
+        },
+        "Claire Fontaine": {
+          "topics": [
+            "project coordination",
+            "Beta project"
+          ],
+          "response_time": "within 24 hours"
+        },
+        "Recrutement TechCorp": {
+          "topics": [
+            "job postings",
+            "recruitment"
+          ],
+          "response_time": "within 2 business days"
+        }
+      },
+      "general_patterns": {
+        "introduction": true,
+        "follow_up": true,
+        "meeting_scheduling": true,
+        "project_updates": true,
+        "partnership_collaboration": true,
+        "technical_support": true
+      },
+      "contact_rules": [],
+      "general_rules": [],
+      "forbidden_phrases": []
+    }
+  }
+}

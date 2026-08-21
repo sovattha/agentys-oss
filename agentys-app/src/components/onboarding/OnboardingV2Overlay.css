@@ -1,0 +1,972 @@
+/* ============================================================
+   OnboardingV2Overlay — Premium edition
+   Mini-tour "N → idées → Ctrl+G"
+   ============================================================ */
+
+/* ---------- Backdrop ---------- */
+.ob-v2-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: ob-v2-fade-in 0.32s ease-out;
+}
+
+.ob-v2-backdrop--hero {
+  background:
+    radial-gradient(1200px 700px at 50% 45%, rgba(13, 148, 136, 0.22), transparent 62%),
+    radial-gradient(900px 900px at 80% 120%, rgba(45, 212, 191, 0.14), transparent 65%),
+    radial-gradient(800px 800px at 15% -10%, rgba(99, 102, 241, 0.1), transparent 60%),
+    rgba(5, 11, 19, 0.62);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+}
+
+.ob-v2-backdrop--light {
+  background: rgba(5, 11, 19, 0.35);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+@keyframes ob-v2-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ---------- Ambient orbs ---------- */
+.ob-v2-ambient {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ob-v2-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  will-change: transform;
+}
+
+.ob-v2-orb--a {
+  width: 460px; height: 460px;
+  top: 12%; left: 10%;
+  background: radial-gradient(circle, #14b8a6 0%, transparent 70%);
+  animation: ob-v2-float-a 16s ease-in-out infinite;
+}
+
+.ob-v2-orb--b {
+  width: 520px; height: 520px;
+  bottom: 8%; right: 12%;
+  background: radial-gradient(circle, #0ea5e9 0%, transparent 70%);
+  opacity: 0.38;
+  animation: ob-v2-float-b 20s ease-in-out infinite;
+}
+
+.ob-v2-orb--c {
+  width: 360px; height: 360px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #a78bfa 0%, transparent 70%);
+  opacity: 0.22;
+  animation: ob-v2-float-c 24s ease-in-out infinite;
+}
+
+@keyframes ob-v2-float-a {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(60px, -40px); }
+  66% { transform: translate(-30px, 50px); }
+}
+
+@keyframes ob-v2-float-b {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(-40px, 30px); }
+  66% { transform: translate(50px, -60px); }
+}
+
+@keyframes ob-v2-float-c {
+  0%, 100% { transform: translate(-50%, -50%); }
+  50% { transform: translate(calc(-50% + 40px), calc(-50% - 30px)); }
+}
+
+/* ---------- Premium card ---------- */
+.ob-v2-card {
+  position: relative;
+  z-index: 1;
+  background: var(--surface-primary, #ffffff);
+  color: var(--text-primary, #0f172a);
+  border-radius: 24px;
+  padding: 40px 44px 32px;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  animation: ob-v2-card-in 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ob-v2-card--premium {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.92) 100%),
+    radial-gradient(600px 300px at 50% -10%, rgba(13, 148, 136, 0.12), transparent 60%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(13, 148, 136, 0.05),
+    0 0 0 1px rgba(13, 148, 136, 0.08),
+    0 30px 60px -20px rgba(13, 148, 136, 0.25),
+    0 20px 48px rgba(0, 0, 0, 0.22);
+}
+
+@keyframes ob-v2-card-in {
+  from { opacity: 0; transform: translateY(24px) scale(0.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Subtle shimmer sweep across top edge */
+.ob-v2-card-shimmer {
+  position: absolute;
+  top: 0;
+  left: -30%;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(13, 148, 136, 0.55), transparent);
+  animation: ob-v2-shimmer 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes ob-v2-shimmer {
+  0%, 100% { left: -60%; opacity: 0; }
+  50% { left: 100%; opacity: 1; }
+}
+
+/* ---------- Stagger entrance for card children ---------- */
+.ob-v2-card--premium > *:not(.ob-v2-card-shimmer) {
+  animation: ob-v2-child-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.ob-v2-card--premium > :nth-child(2) { animation-delay: 0.08s; }
+.ob-v2-card--premium > :nth-child(3) { animation-delay: 0.16s; }
+.ob-v2-card--premium > :nth-child(4) { animation-delay: 0.24s; }
+.ob-v2-card--premium > :nth-child(5) { animation-delay: 0.32s; }
+.ob-v2-card--premium > :nth-child(6) { animation-delay: 0.4s; }
+.ob-v2-card--premium > :nth-child(7) { animation-delay: 0.48s; }
+
+@keyframes ob-v2-child-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Logo with glow ---------- */
+.ob-v2-logo-wrap {
+  position: relative;
+  display: inline-flex;
+  margin: 4px 0 18px;
+}
+
+.ob-v2-logo-glow {
+  position: absolute;
+  inset: -18px;
+  background: radial-gradient(circle, rgba(13, 148, 136, 0.55) 0%, rgba(13, 148, 136, 0.1) 45%, transparent 70%);
+  filter: blur(14px);
+  z-index: -1;
+  /* One-shot reveal, then drop to a subtle low-opacity idle breath
+     so the logo doesn't fight for attention once the card is settled. */
+  animation:
+    ob-v2-logo-reveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) both,
+    ob-v2-logo-idle 7s ease-in-out 1.4s infinite;
+}
+
+@keyframes ob-v2-logo-reveal {
+  0%   { opacity: 0; transform: scale(0.55); }
+  40%  { opacity: 1; transform: scale(1.32); }
+  72%  { opacity: 0.65; transform: scale(1.1); }
+  100% { opacity: 0.38; transform: scale(1); }
+}
+
+@keyframes ob-v2-logo-idle {
+  0%, 100% { opacity: 0.32; transform: scale(1); }
+  50%      { opacity: 0.48; transform: scale(1.06); }
+}
+
+/* ---------- Typography ---------- */
+.ob-v2-eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  color: var(--accent-primary, #0d9488);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.ob-v2-welcome .ob-v2-eyebrow {
+  font-size: 13px;
+  letter-spacing: 2.6px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.ob-v2-display {
+  font-family: var(--font-display, 'Newsreader', Georgia, serif);
+  font-size: clamp(28px, 3.6vw, 40px);
+  line-height: 1.08;
+  margin: 0 0 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-primary, #0f172a);
+}
+
+.ob-v2-card h2 {
+  font-size: 26px;
+  line-height: 1.2;
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+
+.ob-v2-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary, #475569);
+  margin: 0 0 26px;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Welcome description — 1 sentence per line, centered */
+.ob-v2-welcome-desc {
+  white-space: pre-line;
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* ---------- Actions ---------- */
+.ob-v2-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.ob-v2-actions--single,
+.ob-v2-actions--skip-only {
+  justify-content: center;
+}
+
+.ob-v2-actions--skip-only {
+  margin-top: 10px;
+}
+
+/* Stacked — primary on top, skip below as discreet link (premium welcome pattern) */
+.ob-v2-actions--stacked {
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.ob-v2-actions--stacked .ob-v2-btn-primary {
+  min-width: 0;
+  padding: 10px 22px;
+  font-size: 13.5px;
+  gap: 8px;
+  border-radius: 11px;
+  letter-spacing: 0.005em;
+}
+
+.ob-v2-actions--stacked .ob-v2-btn-primary svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* Welcome CTA — "Let's go" momentum : halo breathing (box-shadow) + shimmer
+   sweep interne clippé. Même ADN que .w0-btn du Step0Welcome, en pill. */
+.ob-v2-welcome .ob-v2-btn-primary {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 55%),
+    linear-gradient(135deg, #2dd4bf 0%, #14b8a6 55%, #0d9488 100%);
+  animation: ob-v2-welcome-btn-halo 4.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+.ob-v2-welcome .ob-v2-btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.22) 46%,
+    rgba(255, 255, 255, 0.42) 50%,
+    rgba(255, 255, 255, 0.22) 54%,
+    transparent 62%
+  );
+  animation: ob-v2-welcome-btn-shimmer 3.6s ease-in-out infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.ob-v2-welcome .ob-v2-btn-primary > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes ob-v2-welcome-btn-halo {
+  0%, 100% {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.45),
+      inset 0 -4px 10px rgba(13, 148, 136, 0.24),
+      0 10px 22px -6px rgba(13, 148, 136, 0.34),
+      0 0 14px 1px rgba(45, 212, 191, 0.22);
+  }
+  50% {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -4px 10px rgba(13, 148, 136, 0.28),
+      0 14px 28px -6px rgba(13, 148, 136, 0.42),
+      0 0 26px 4px rgba(45, 212, 191, 0.36);
+  }
+}
+
+@keyframes ob-v2-welcome-btn-shimmer {
+  0%   { transform: translateX(-120%); }
+  45%  { transform: translateX(120%); }
+  100% { transform: translateX(120%); }
+}
+
+.ob-v2-actions--stacked .ob-v2-btn-skip {
+  font-size: 12.5px;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+.ob-v2-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, #14b8a6 0%, #0d9488 100%);
+  color: #fff;
+  border: none;
+  padding: 13px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, filter 0.2s ease;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.08),
+    0 8px 22px rgba(13, 148, 136, 0.35);
+  letter-spacing: 0.01em;
+}
+
+.ob-v2-btn-primary svg {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ob-v2-btn-primary:active {
+  transform: translateY(0);
+}
+
+.ob-v2-btn-skip {
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary, #94a3b8);
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+/* ---------- Premium tooltip (shortcutBar / compose / reading) ---------- */
+.ob-v2-tip {
+  position: fixed;
+  z-index: 10002;
+  background: var(--surface-primary, #ffffff);
+  color: var(--text-primary, #0f172a);
+  border-radius: 16px;
+  padding: 18px 22px 16px;
+  max-width: 340px;
+  width: calc(100% - 32px);
+  animation: ob-v2-tip-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(13, 148, 136, 0.15);
+  text-align: left;
+}
+
+.ob-v2-tip--premium {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.94));
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 0 0 1px rgba(13, 148, 136, 0.12),
+    0 18px 50px rgba(13, 148, 136, 0.18),
+    0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes ob-v2-tip-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.ob-v2-tip--anchored {
+  width: auto;
+  max-width: none;
+}
+
+.ob-v2-tip--top-left {
+  /* Anchored to the New Message modal's left edge with a 16px gap, so the
+     tooltip and the modal it points at feel like one composition. The modal
+     uses `left: calc(50% + 24px)` with `transform: translate(-50%, -50%)` and
+     `width: 720px`, so its left edge sits at `calc(50% - 336px)`. We anchor
+     the tooltip's right edge 16px before that. Below 1281px viewport width
+     this calc puts the tooltip off-screen, so the media query below falls
+     back to the centered-below-modal layout. */
+  top: 30vh;
+  left: auto;
+  right: calc(50% + 352px);
+  max-width: 320px;
+}
+
+/* Right-side arrow pointing at the New Message modal (which is centered with
+   left: calc(50% + 24px)). The triangle uses the CSS border trick + a thin
+   drop-shadow that matches the tip's border color for a connected feel. */
+.ob-v2-tip--top-left::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -11px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 11px solid rgba(255, 255, 255, 0.97);
+  filter: drop-shadow(1px 0 0 rgba(13, 148, 136, 0.18));
+  pointer-events: none;
+}
+
+.ob-v2-tip--top-center {
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 440px;
+  animation: ob-v2-tip-drop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes ob-v2-tip-drop {
+  from { opacity: 0; transform: translate(-50%, -12px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.ob-v2-tip--reveal {
+  padding: 14px 18px;
+}
+
+.ob-v2-tip h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  letter-spacing: -0.005em;
+}
+
+.ob-v2-tip-title-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.ob-v2-tip-title-row svg {
+  flex-shrink: 0;
+  color: var(--accent-primary, #0d9488);
+}
+
+.ob-v2-tip p {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary, #475569);
+}
+
+.ob-v2-tip-step {
+  display: inline-block;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: var(--accent-primary, #0d9488);
+  font-weight: 700;
+  margin-bottom: 8px;
+  padding: 3px 8px;
+  background: rgba(13, 148, 136, 0.1);
+  border-radius: 6px;
+}
+
+.ob-v2-tip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+.ob-v2-tip-arrow--down {
+  border-top: 12px solid var(--surface-primary, #ffffff);
+  bottom: -11px;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 2px 3px rgba(13, 148, 136, 0.15));
+}
+
+.ob-v2-tip-arrow--up {
+  border-bottom: 12px solid var(--surface-primary, #ffffff);
+  top: -11px;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 -2px 3px rgba(13, 148, 136, 0.15));
+}
+
+.ob-v2-hint {
+  font-size: 12.5px !important;
+  color: var(--text-tertiary, #94a3b8) !important;
+  margin: 6px 0 10px !important;
+  font-style: italic;
+}
+.ob-v2-hint.ob-v2-hint--alt {
+  margin: -4px 0 10px !important;
+  font-size: 11.5px !important;
+  opacity: 0.75;
+  font-style: normal;
+}
+
+/* ---------- Reading tip — reveal row ---------- */
+.ob-v2-reveal-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.ob-v2-reveal-check {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #14b8a6, #0d9488);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  animation: ob-v2-check-pop 0.55s cubic-bezier(0.16, 1, 0.4, 1.2);
+}
+
+.ob-v2-tip--reveal h4 {
+  margin-bottom: 4px;
+}
+
+.ob-v2-tip--reveal p {
+  margin: 0;
+  font-size: 13px;
+}
+
+@keyframes ob-v2-check-pop {
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ---------- Micro dictation hint ---------- */
+.ob-v2-mic-tip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary, #64748b);
+  padding: 14px 0 6px;
+  margin-top: 14px;
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+  line-height: 1.6;
+}
+
+.ob-v2-mic-icon {
+  color: var(--accent-primary, #0d9488);
+  flex-shrink: 0;
+}
+
+.ob-v2-mic-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---------- 3D keyboard pills ---------- */
+.ob-v2-kbd-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 14px;
+}
+
+.ob-v2-kbd-row--center {
+  justify-content: center;
+  margin: 18px 0;
+}
+
+.ob-v2-kbd-label {
+  font-size: 13px;
+  color: var(--text-secondary, #64748b);
+  font-weight: 500;
+}
+
+.ob-v2-kbd {
+  display: inline-block;
+  padding: 5px 11px;
+  background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+  color: var(--text-primary, #0f172a);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-bottom: 2px solid rgba(100, 116, 139, 0.5);
+  border-radius: 7px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.ob-v2-kbd--lg {
+  padding: 8px 16px;
+  font-size: 17px;
+  min-width: 36px;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.ob-v2-kbd-plus {
+  color: var(--text-tertiary, #94a3b8);
+  font-weight: 600;
+}
+
+/* ---------- Keyboard animations ---------- */
+/* Tap — press-release (N, Ctrl, G) */
+@keyframes ob-v2-kbd-tap {
+  0%, 68%, 100% {
+    transform: translateY(0);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 2px 4px rgba(0, 0, 0, 0.12);
+  }
+  76%, 84% {
+    transform: translateY(2px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.55),
+      0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+/* Hold — press-and-stay (Space, push-to-talk) */
+@keyframes ob-v2-kbd-hold {
+  0%, 10%, 90%, 100% {
+    transform: translateY(0);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 2px 4px rgba(0, 0, 0, 0.12);
+  }
+  24%, 78% {
+    transform: translateY(2px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.55),
+      0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+.ob-v2-kbd--tap {
+  animation: ob-v2-kbd-tap 2.5s ease-in-out infinite;
+}
+
+/* Applied to the second key of a combo (G) so it visually presses slightly after the modifier (Ctrl) */
+.ob-v2-kbd--tap-delayed {
+  animation-delay: 0.18s;
+}
+
+.ob-v2-kbd--hold {
+  animation: ob-v2-kbd-hold 3s ease-in-out infinite;
+}
+
+.ob-v2-kbd--space {
+  padding: 4px 14px;
+  font-size: 12px;
+  margin: 0 4px;
+  vertical-align: -2px;
+  letter-spacing: 0.3px;
+}
+
+/* ---------- Precise spotlight on the N pill ---------- */
+.ob-v2-spotlight {
+  position: fixed;
+  z-index: 10001;
+  pointer-events: none;
+  border-radius: 14px;
+  background: radial-gradient(circle, transparent 55%, rgba(13, 148, 136, 0.15));
+  box-shadow:
+    0 0 0 2px rgba(13, 148, 136, 0.9),
+    0 0 0 6px rgba(13, 148, 136, 0.25),
+    0 0 0 12px rgba(13, 148, 136, 0.1),
+    0 0 40px rgba(13, 148, 136, 0.6);
+  animation: ob-v2-pill-breathe 2.5s ease-in-out infinite;
+  transition: left 0.2s ease, top 0.2s ease, width 0.2s ease, height 0.2s ease;
+}
+
+@keyframes ob-v2-pill-breathe {
+  0%, 100% {
+    box-shadow:
+      0 0 0 2px rgba(13, 148, 136, 0.9),
+      0 0 0 6px rgba(13, 148, 136, 0.25),
+      0 0 0 12px rgba(13, 148, 136, 0.1),
+      0 0 40px rgba(13, 148, 136, 0.55);
+  }
+  50% {
+    box-shadow:
+      0 0 0 3px rgba(13, 148, 136, 1),
+      0 0 0 9px rgba(13, 148, 136, 0.35),
+      0 0 0 18px rgba(13, 148, 136, 0.15),
+      0 0 60px rgba(13, 148, 136, 0.8);
+  }
+}
+
+body[data-onboarding-v2="shortcutBar"] [data-onboarding-target="new-message"] {
+  position: relative;
+  z-index: 10003;
+}
+
+/* ---------- Celebrate — progress dots (3/3 ✓) ---------- */
+.ob-v2-progress-complete {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin: 2px auto 16px;
+}
+
+.ob-v2-progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(13, 148, 136, 0.18);
+  transform: scale(0.8);
+  opacity: 0.5;
+}
+
+.ob-v2-progress-dot--done {
+  animation: ob-v2-dot-light 0.55s cubic-bezier(0.16, 1, 0.4, 1.2) both;
+}
+
+.ob-v2-progress-dot--done:nth-child(1) { animation-delay: 0.25s; }
+.ob-v2-progress-dot--done:nth-child(2) { animation-delay: 0.42s; }
+.ob-v2-progress-dot--done:nth-child(3) { animation-delay: 0.59s; }
+
+@keyframes ob-v2-dot-light {
+  0%   { background: rgba(13, 148, 136, 0.18); transform: scale(0.8); opacity: 0.5; }
+  55%  { background: var(--accent-primary, #0d9488); transform: scale(1.55); opacity: 1; box-shadow: 0 0 14px rgba(13, 148, 136, 0.6); }
+  100% { background: var(--accent-primary, #0d9488); transform: scale(1); opacity: 1; box-shadow: 0 0 0 rgba(13, 148, 136, 0); }
+}
+
+/* ---------- Celebrate — draw-in check ring ---------- */
+.ob-v2-check {
+  color: var(--accent-primary, #0d9488);
+  margin: 4px auto 14px;
+  display: inline-flex;
+}
+
+.ob-v2-check--lg {
+  position: relative;
+}
+
+.ob-v2-check-ring-draw {
+  stroke-dasharray: 183;
+  stroke-dashoffset: 183;
+  animation: ob-v2-ring-draw 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.1s forwards;
+}
+
+.ob-v2-check-path {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: ob-v2-path-draw 0.5s cubic-bezier(0.65, 0, 0.35, 1) 0.9s forwards;
+}
+
+@keyframes ob-v2-ring-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes ob-v2-path-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ---------- Confetti ---------- */
+.ob-v2-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.ob-v2-confetti-bit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: ob-v2-confetti-fly 1.6s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
+}
+
+.ob-v2-confetti-bit--0  { background: #0d9488; --tx: -140px; --ty: -200px; --r: -420deg; animation-delay: 0.15s; }
+.ob-v2-confetti-bit--1  { background: #14b8a6; --tx:  160px; --ty: -180px; --r:  480deg; animation-delay: 0.2s; }
+.ob-v2-confetti-bit--2  { background: #f59e0b; --tx: -220px; --ty:  -80px; --r: -360deg; animation-delay: 0.18s; }
+.ob-v2-confetti-bit--3  { background: #6366f1; --tx:  240px; --ty:  -60px; --r:  300deg; animation-delay: 0.25s; }
+.ob-v2-confetti-bit--4  { background: #ec4899; --tx: -100px; --ty:  220px; --r:  520deg; animation-delay: 0.22s; }
+.ob-v2-confetti-bit--5  { background: #0ea5e9; --tx:  110px; --ty:  240px; --r: -320deg; animation-delay: 0.3s; }
+.ob-v2-confetti-bit--6  { background: #a78bfa; --tx: -260px; --ty:   40px; --r:  400deg; animation-delay: 0.17s; }
+.ob-v2-confetti-bit--7  { background: #fbbf24; --tx:  280px; --ty:   80px; --r: -280deg; animation-delay: 0.28s; }
+.ob-v2-confetti-bit--8  { background: #2dd4bf; --tx:  -60px; --ty: -260px; --r:  360deg; animation-delay: 0.12s; }
+.ob-v2-confetti-bit--9  { background: #f472b6; --tx:   70px; --ty: -280px; --r: -420deg; animation-delay: 0.33s; }
+.ob-v2-confetti-bit--10 { background: #0d9488; --tx: -180px; --ty:  160px; --r:  240deg; animation-delay: 0.4s; }
+.ob-v2-confetti-bit--11 { background: #14b8a6; --tx:  200px; --ty:  140px; --r: -240deg; animation-delay: 0.42s; }
+.ob-v2-confetti-bit--12 { background: #f59e0b; --tx:  -40px; --ty:  300px; --r:  180deg; animation-delay: 0.48s; }
+.ob-v2-confetti-bit--13 { background: #6366f1; --tx:   30px; --ty: -320px; --r: -180deg; animation-delay: 0.08s; }
+
+@keyframes ob-v2-confetti-fly {
+  0%   { transform: translate(-50%, -50%) rotate(0); opacity: 0; }
+  12%  { opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) rotate(var(--r)); opacity: 0; }
+}
+
+/* ---------- Responsive ---------- */
+/* Below 1281px the modal-anchored tooltip can't fit on the left side
+   without overlapping the modal. Fall back to a centered-below-modal
+   layout, which keeps the tooltip readable on common laptop widths
+   (1280×800, 1366×768, etc.). */
+@media (min-width: 601px) and (max-width: 1280px) {
+  .ob-v2-tip--top-left {
+    top: auto;
+    bottom: 120px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    max-width: 360px;
+  }
+  /* Tip is now centered below the modal — the right-pointing arrow no longer makes sense. */
+  .ob-v2-tip--top-left::after {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .ob-v2-card {
+    padding: 32px 24px 24px;
+    border-radius: 20px;
+  }
+
+  .ob-v2-display {
+    font-size: 28px;
+  }
+
+  .ob-v2-tip--top-left {
+    top: auto;
+    bottom: 200px;
+    left: 16px;
+    right: 16px;
+    max-width: none;
+  }
+
+  .ob-v2-tip--mobile {
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 96px);
+  }
+
+  .ob-v2-tip--top-left::after {
+    display: none;
+  }
+
+  .ob-v2-tip--top-center {
+    left: 16px;
+    right: 16px;
+    transform: none;
+    max-width: none;
+    width: auto;
+  }
+
+  .ob-v2-orb--a, .ob-v2-orb--b { width: 300px; height: 300px; }
+}
+
+/* ---------- labelTip icon badge ---------- */
+.ob-v2-label-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: rgba(13, 148, 136, 0.12);
+  color: var(--accent-primary, #0d9488);
+  margin: 4px auto 18px;
+  border: 1px solid rgba(13, 148, 136, 0.2);
+}
+
+/* ---------- labelTip sample badges (shown while labelling is in flight) ---------- */
+.ob-v2-label-sorting {
+  margin: 0 0 14px;
+}
+
+.ob-v2-label-samples {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 18px;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .ob-v2-card,
+  .ob-v2-card-shimmer,
+  .ob-v2-card--premium > *,
+  .ob-v2-tip,
+  .ob-v2-orb,
+  .ob-v2-logo-glow,
+  .ob-v2-spotlight,
+  .ob-v2-check-ring-draw,
+  .ob-v2-check-path,
+  .ob-v2-confetti-bit,
+  .ob-v2-reveal-check,
+  .ob-v2-kbd--tap,
+  .ob-v2-kbd--hold,
+  .ob-v2-progress-dot--done {
+    animation: none !important;
+    transition: none !important;
+  }
+  .ob-v2-progress-dot--done {
+    background: var(--accent-primary, #0d9488) !important;
+    transform: scale(1) !important;
+    opacity: 1 !important;
+  }
+  .ob-v2-check-ring-draw { stroke-dashoffset: 0; }
+  .ob-v2-check-path { stroke-dashoffset: 0; }
+}

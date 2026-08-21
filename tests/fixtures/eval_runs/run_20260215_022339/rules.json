@@ -1,0 +1,131 @@
+{
+  "contact_rules": [
+    {
+      "contact_email": "arjun@heyvibe.io",
+      "tone": "casual",
+      "language": "en",
+      "greeting": "(none)",
+      "closing": "(name only or none)"
+    },
+    {
+      "contact_email": "lea@heyvibe.io",
+      "tone": "casual",
+      "language": "fr",
+      "greeting": "hey léa / léa",
+      "closing": "(name only or none)"
+    },
+    {
+      "contact_email": "tom@heyvibe.io",
+      "tone": "casual",
+      "language": "en",
+      "greeting": "tom",
+      "closing": "(name only or none)"
+    },
+    {
+      "contact_email": "ines@heyvibe.io",
+      "tone": "casual",
+      "language": "fr",
+      "greeting": "inès",
+      "closing": "(name only or none)"
+    },
+    {
+      "contact_email": "marcus@sequoiacap.com",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi Marcus,",
+      "closing": "Priya"
+    },
+    {
+      "contact_email": "jm.tessier@grandecorp.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Jean-Marc,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "claire.beaumont@venturefr.com",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Bonjour Claire,",
+      "closing": "Bien cordialement,"
+    },
+    {
+      "contact_email": "sarah@stationf.co",
+      "tone": "semi-formal",
+      "language": "en",
+      "greeting": "Hi Sarah,",
+      "closing": "Priya"
+    },
+    {
+      "contact_email": "philippe@bancapital.fr",
+      "tone": "formal",
+      "language": "fr",
+      "greeting": "Monsieur Renaud,",
+      "closing": "Cordialement,"
+    }
+  ],
+  "general_rules": [
+    {
+      "name": "code_switching_bilingual",
+      "description": "Mélanger français et anglais dans un même email, surtout en interne avec l'équipe",
+      "trigger": "Communication avec l'équipe interne (même domaine @heyvibe.io)",
+      "action": "Alterner naturellement entre français et anglais dans les phrases, notamment pour les termes techniques (ARR, churn, feature requests) en anglais"
+    },
+    {
+      "name": "tutoiement_equipe",
+      "description": "Utiliser systématiquement le tutoiement avec tous les membres de l'équipe interne",
+      "trigger": "Email vers un contact @heyvibe.io",
+      "action": "Tutoyer (tu/ton/ta) sans exception, quel que soit le niveau hiérarchique"
+    },
+    {
+      "name": "vouvoiement_externes_francophones",
+      "description": "Vouvoyer systématiquement les contacts externes francophones",
+      "trigger": "Email vers un contact externe francophone (partenaires, investisseurs FR, fournisseurs)",
+      "action": "Utiliser le vous et les formules de politesse appropriées"
+    },
+    {
+      "name": "emoji_interne_uniquement",
+      "description": "Utiliser des emojis fréquemment en interne, jamais ou rarement avec les externes formels",
+      "trigger": "Ton casual (équipe interne) vs semi-formal/formal (externes)",
+      "action": "Emojis multiples en interne (🙏🚀🔥✅😏😱), emoji occasionnel acceptable avec investisseurs anglophones (💪🚀), aucun avec contacts francophones formels"
+    },
+    {
+      "name": "signature_selon_formalite",
+      "description": "Adapter la signature au niveau de formalité du contact",
+      "trigger": "Niveau de formalité de l'interlocuteur",
+      "action": "Casual: pas de signature ou juste prénom implicite | Semi-formal: prénom seul (Priya) | Formal: 'Bien cordialement,' ou 'Cordialement,' + prénom complet + titre (Priya Pivot / CEO - HeyVibe)"
+    },
+    {
+      "name": "pas_de_salutation_casual",
+      "description": "Omettre toute salutation formelle en interne, commencer directement par le prénom ou le message",
+      "trigger": "Communication avec l'équipe @heyvibe.io",
+      "action": "Pas de 'Bonjour' ou 'Hi' - soit juste le prénom en début de message, soit attaquer directement le sujet"
+    },
+    {
+      "name": "bullet_points_externes",
+      "description": "Structurer les emails externes avec des listes numérotées ou à puces pour la clarté",
+      "trigger": "Email vers investisseurs ou partenaires externes (Marcus, Claire, Jean-Marc)",
+      "action": "Organiser l'information en bullet points ou listes numérotées, surtout pour les données techniques/financières"
+    },
+    {
+      "name": "minuscules_casual",
+      "description": "Utiliser un style décontracté sans majuscules systématiques en interne",
+      "trigger": "Emails casual à l'équipe",
+      "action": "Pas de majuscule en début de phrase, syntaxe SMS-like acceptable (yo, dude, pls, u), contractions fréquentes"
+    },
+    {
+      "name": "termes_techniques_anglais",
+      "description": "Utiliser systématiquement les termes techniques SaaS/fundraising en anglais, même dans des emails en français",
+      "trigger": "Mention de métriques, produit, ou levée de fonds",
+      "action": "Conserver en anglais: ARR, MRR, churn, beta users, feature requests, board deck, data room, term sheet, trial to paid, NPS, CAC/LTV, burn rate, runway"
+    },
+    {
+      "name": "urgence_delais_courts",
+      "description": "Communiquer avec des délais courts et une attente de réactivité",
+      "trigger": "Demandes à l'équipe interne ou follow-ups externes",
+      "action": "Spécifier des deadlines précises et courtes (avant vendredi, cette semaine, d'ici jeudi, by Feb 13), style orienté action immédiate"
+    }
+  ],
+  "forbidden_phrases": [],
+  "auto_reply_patterns": []
+}

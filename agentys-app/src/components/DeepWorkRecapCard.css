@@ -1,0 +1,64 @@
+/* ============================================================================
+   DEEP WORK RECAP CARD — End-of-slot summary
+   ============================================================================ */
+
+.dw-recap-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 10px;
+  padding: 10px 12px;
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--surface-primary) 92%, transparent) 0%,
+      color-mix(in srgb, var(--surface-primary) 80%, transparent) 100%);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 15%, transparent);
+  border-radius: 12px;
+  cursor: pointer;
+  animation: dwRecapSlideIn 300ms ease-out;
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.dw-recap-card--out {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+@keyframes dwRecapSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dw-recap-icon {
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.dw-recap-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.dw-recap-title {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.dw-recap-stats {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

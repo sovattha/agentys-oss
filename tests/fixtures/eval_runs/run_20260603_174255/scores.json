@@ -1,0 +1,86 @@
+{
+  "profile": {
+    "completeness": 42,
+    "precision": 38,
+    "usefulness": 35,
+    "overall": 38,
+    "missing": [
+      "signature: null (system fabricated a signature object instead)",
+      "tone.uses_emoji: true",
+      "tone.average_response_length: 'short' (system said 'medium')",
+      "tone.greeting_styles.casual_fr: '(no greeting) / {first_name}'",
+      "tone.greeting_styles.semi_formal_fr: 'Bonjour {first_name},'",
+      "tone.closing_styles.semi_formal_fr: 'Bien cordialement, / Priya'",
+      "tone.closing_styles.formal_fr: 'Cordialement, / Priya Pivot'",
+      "addressing: 'mixed' (at top level)"
+    ],
+    "incorrect": [
+      "tone.default_tone: 'semi-formal' should be 'casual'",
+      "tone.addressing: 'tu' (wrong value and wrong location; should be top-level 'mixed')",
+      "tone.greeting_styles.casual_en: 'yo' should be '(no greeting) / Hey {first_name}'",
+      "tone.greeting_styles.formal_fr: 'Bonjour {first_name},' is misclassified (this is semi_formal_fr); actual formal_fr should be 'Monsieur/Madame {last_name},'",
+      "tone.closing_styles.casual_en: should be 'casual' key with '(no closing) / just emoji'",
+      "tone.closing_styles.formal_fr: 'Bien cordialement, Priya Pivot' is wrong (should be 'Cordialement, / Priya Pivot')",
+      "signature: fabricated structured object, should be null",
+      "language_variant: 'fr-FR' fabricated, should be null",
+      "profession: fabricated field not in ground truth",
+      "profession_confirmed: fabricated field not in ground truth"
+    ],
+    "details": "The system correctly identified basic identity fields (user_email, user_name, preferred_name, languages) but made numerous errors on the more critical tone and style fields. The default_tone is wrong ('semi-formal' vs 'casual'). The greeting styles are substantially wrong: casual_en should be '(no greeting) / Hey {first_name}' not 'yo'; the system missed casual_fr and semi_formal_fr entirely; formal_fr is misclassified (system put it under formal_fr but ground truth has it as semi_formal_fr 'Bonjour {first_name},', and the actual formal_fr is 'Monsieur/Madame {last_name},'). Closing styles are also wrong: casual should be '(no closing) / just emoji' not '(no closing or just name)'; semi_formal_fr and formal_fr closings are misattributed. The system incorrectly set signature to a structured object when ground truth is null. The addressing field is 'mixed' in ground truth but the system outputs 'tu' (wrong location and wrong value). The system added fabricated fields (profession, profession_confirmed, language_variant fr-FR) not in ground truth. uses_emoji (true) is missing from output. average_response_length is 'short' in ground truth but 'medium' in output. These errors in tone/greeting/closing would lead to incorrectly toned email drafts."
+  },
+  "knowledge": {
+    "completeness": 58,
+    "precision": 62,
+    "usefulness": 60,
+    "overall": 60,
+    "missing": [
+      "noreply@aws.amazon.com (Amazon Web Services / AWS)",
+      "noreply@calendly.com (Calendly)",
+      "hello@stripe.com (Stripe)",
+      "Title for Arjun Mehta: CTO & Co-fondateur",
+      "Title for Léa Dupont: Head of Product",
+      "Title for Tom Nguyen: Lead Dev",
+      "Title for Inès Belkacem: Customer Success",
+      "Title for Marcus Chen: Partner",
+      "Title for Claire Beaumont: Analyste",
+      "Title for Philippe Renaud: Directeur Associé",
+      "Title for Sarah Liu: Program Manager"
+    ],
+    "incorrect": [
+      "Arjun Mehta: preferred_language should be 'en', not 'mixed'",
+      "Arjun Mehta: interaction_count should be 19, not 20",
+      "Tom Nguyen: preferred_language should be 'en', not 'mixed'",
+      "Tom Nguyen: preferred_tone should be 'casual' (correct) but interaction_count should be 8, not 9",
+      "Inès Belkacem: preferred_language should be 'fr', not 'mixed'",
+      "Jean-Marc Tessier: preferred_tone should be 'semi-formal', not 'formal'",
+      "Philippe Renaud: company should be 'BanCapital', not 'BancaCapital'"
+    ],
+    "details": "The system found 9 of 12 contacts, missing 3 automated/service contacts (AWS, Calendly, Stripe). Among the 9 found contacts, there are several inaccuracies: titles are missing for most contacts (only Jean-Marc Tessier has a title, which is correct), interaction counts are slightly off for Arjun (+1) and Tom (+1), preferred_language is incorrectly set to 'mixed' for Tom (should be 'en') and Inès (should be 'fr'), Jean-Marc Tessier's tone is incorrectly set to 'formal' instead of 'semi-formal', and Philippe Renaud's company is misspelled as 'BancaCapital' instead of 'BanCapital'. The system also adds a 'language_variant' field not present in ground truth, which is harmless but extra. Arjun's preferred_language is marked as 'mixed' instead of 'en'. These errors in tone and language preferences would meaningfully affect email draft quality."
+  },
+  "rules": {
+    "completeness": 72,
+    "precision": 78,
+    "usefulness": 75,
+    "overall": 75,
+    "missing": [
+      "hindi_words_with_cofounder rule (Arjun)",
+      "Inès closing 'merci' variant",
+      "Sarah closing 'Thanks!' variant",
+      "Philippe closing 'CEO - HeyVibe' title",
+      "Explicit 'no_greeting_casual' rule as named pattern",
+      "Explicit 'ultra_short_responses' rule with examples like 'lgtm', 'ship it', '+1'",
+      "Explicit 'startup_jargon' rule with specific terms listed",
+      "Arjun greeting option '(none)' not captured alongside dude/yo"
+    ],
+    "incorrect": [
+      "ines@heyvibe.io language: output says 'mixed', ground truth says 'fr'",
+      "ines@heyvibe.io closing: output says '(none)', ground truth includes 'merci'",
+      "sarah@stationf.co tone: output says 'casual', ground truth says 'semi-formal'",
+      "jm.tessier@grandecorp.fr tone: output says 'formal', ground truth says 'semi-formal'",
+      "General rule on emoji: output says 'sparingly' but ground truth indicates heavy/frequent emoji use across casual and semi-formal emails",
+      "General rule on signature block: output implies full signature block for formal contacts, but ground truth says no formal signature block is ever used"
+    ],
+    "details": "The system found all 9 contacts present in ground truth and captured most key rules. However, several specific details are missing or incorrect. For contact rules: Inès is marked as 'mixed' language but ground truth says 'fr'; Inès closing should include 'merci' but output shows '(none)'; Sarah's tone is marked 'casual' but ground truth says 'semi-formal'; Sarah's closing omits 'Thanks!'; Philippe's closing omits 'CEO - HeyVibe'; JM Tessier's tone is marked 'formal' but ground truth says 'semi-formal'. For general rules: the system captures many correct patterns but misses specific named rules like 'hindi_words_with_cofounder', 'startup_jargon' (partially covered), 'vouvoiement_external_fr' (partially covered), and 'tutoiement_team' (partially covered). The system also incorrectly states emoji are used 'sparingly' in casual emails when ground truth indicates heavy emoji use. The system adds some useful structural rules not in ground truth (action-oriented structure, numbered lists) which are reasonable inferences but not verified. The 'no_signature' rule is partially captured but not explicitly named. Overall the output is largely usable but has several tone/language classification errors that could affect draft quality."
+  },
+  "overall": 58
+}

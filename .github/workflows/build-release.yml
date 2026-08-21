@@ -1,0 +1,121 @@
+name: Build Backend
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Backend release checks
+        run: |
+          python scripts/check_alembic_model_drift.py
+          pytest \
+            tests/db/test_alembic_schema_contract.py \
+            tests/api/test_privacy_api.py \
+            tests/audit_fixes/test_q_13_admin_llm_stats.py \
+            tests/audit_fixes/test_q_17_admin_cost_cap.py \
+            -q
+
+  build-windows:
+    needs: quality-gate
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build exe
+        run: |
+          pyinstaller --onefile --name Agentys-Backend --console `
+            --hidden-import anthropic `
+            --hidden-import openai `
+            --hidden-import flask `
+            --hidden-import flask_socketio `
+            --hidden-import flask_cors `
+            --hidden-import eventlet `
+            --hidden-import dotenv `
+            --hidden-import tiktoken `
+            --hidden-import tiktoken_ext `
+            --hidden-import tiktoken_ext.openai_public `
+            --add-data "knowledge;knowledge" `
+            --add-data "agents;agents" `
+            run_daemon.py
+
+      - name: Create distribution zip
+        run: |
+          mkdir dist\Agentys-Windows
+          copy dist\Agentys-Backend.exe dist\Agentys-Windows\
+          copy .env.example dist\Agentys-Windows\.env.example
+          xcopy knowledge dist\Agentys-Windows\knowledge\ /E /I
+          xcopy agents dist\Agentys-Windows\agents\ /E /I
+          Compress-Archive -Path dist\Agentys-Windows\* -DestinationPath dist\Agentys-Windows-${{ github.ref_name }}.zip
+
+      - name: Wait for release to exist
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Waiting for release ${{ github.ref_name }}..."
+          for i in {1..30}; do
+            if gh release view ${{ github.ref_name }} > /dev/null 2>&1; then
+              echo "Release found!"
+              exit 0
+            fi
+            echo "Attempt $i/30 - Release not ready, waiting 10s..."
+            sleep 10
+          done
+          echo "Creating release..."
+          gh release create ${{ github.ref_name }} --title "Agentys ${{ github.ref_name }}" --draft
+
+      - name: Upload to Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Uploading files to release ${{ github.ref_name }}..."
+          ls -la dist/
+          gh release upload ${{ github.ref_name }} \
+            dist/Agentys-Backend.exe \
+            "dist/Agentys-Windows-${{ github.ref_name }}.zip" \
+            --clobber
+          echo "Upload complete!"
+
+      - name: Upload artifacts (backup)
+        uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: Agentys-Backend-Windows
+          path: |
+            dist/Agentys-Backend.exe
+            dist/Agentys-Windows-*.zip

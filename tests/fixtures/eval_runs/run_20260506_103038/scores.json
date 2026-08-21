@@ -1,0 +1,73 @@
+{
+  "profile": {
+    "completeness": 72,
+    "precision": 78,
+    "usefulness": 70,
+    "overall": 73,
+    "missing": [
+      "uses_emoji: false",
+      "Distinct greeting key 'formal_fr_client' with examples like 'Monsieur le Directeur Général', 'Madame Vernier', 'Madame, Monsieur,'",
+      "Distinct greeting key 'formal_fr_colleague' with examples like 'Monsieur Dumont', 'Chère Madame Fontaine', 'Monsieur Leroux'",
+      "Distinct greeting key 'formal_fr_lawyer' with 'Cher Maître / Chère Maître'",
+      "Closing key 'formal_fr_external' (vs generic 'formal_fr')",
+      "Closing key 'formal_fr_lawyer' (correctly named)",
+      "average_response_length value 'long' (output says 'medium-long')",
+      "Top-level 'addressing' field (moved inside tone in output)"
+    ],
+    "incorrect": [
+      "greeting_styles keys do not match ground truth taxonomy (formal_fr, semi_formal_fr, semi_formal_fr_colleague vs formal_fr_client, formal_fr_colleague, formal_fr_lawyer)",
+      "average_response_length is 'medium-long' instead of 'long'",
+      "'addressing' placed inside 'tone' object instead of top-level field",
+      "Greeting values use placeholder templates ({last_name}) rather than illustrative natural-language examples"
+    ],
+    "details": "The system correctly captures core profile fields (email, name, preferred_name, signature, default_tone, languages, language_variant, addressing). However, several issues reduce quality: (1) The greeting_styles taxonomy differs from ground truth — the system uses generic 'formal_fr'/'semi_formal_fr' keys instead of the more precise 'formal_fr_client', 'formal_fr_colleague', 'formal_fr_lawyer' distinctions, losing important context for different recipient types. (2) The greeting examples are simplified templates with placeholders rather than the richer, context-specific examples in ground truth (e.g., missing 'Madame, Monsieur,' fallback, 'Chère Madame Fontaine,' style). (3) 'uses_emoji: false' is missing from the output. (4) 'average_response_length' is reported as 'medium-long' instead of 'long'. (5) 'addressing' is placed inside 'tone' rather than at the top level. (6) The closing styles are partially correct but use placeholder syntax rather than the natural-language examples from ground truth. Overall the output is usable but less precise and nuanced than the ground truth."
+  },
+  "knowledge": {
+    "completeness": 78,
+    "precision": 62,
+    "usefulness": 60,
+    "overall": 67,
+    "missing": [
+      "type field for all contacts (client/colleague/partner/institution)",
+      "topics for all contacts",
+      "title for Élise Fontaine (Collaboratrice senior)",
+      "title for Nathalie Vernier (Directrice juridique)",
+      "title for Jean-Louis Garnier (Gérant)",
+      "title for Maxime Leroux (Stagiaire)",
+      "title for Philippe Dumont (Associé fondateur)",
+      "honorific 'Maître' for Dominique Perrin",
+      "honorific 'Maître' for Sophie Renard"
+    ],
+    "incorrect": [
+      "preferred_tone for Philippe Dumont: 'semi-formal' should be 'formal'",
+      "preferred_tone for Élise Fontaine: 'semi-formal' should be 'formal'",
+      "preferred_tone for Nathalie Vernier: 'semi-formal' should be 'formal'",
+      "preferred_tone for Jean-Louis Garnier: 'semi-formal' should be 'formal'",
+      "preferred_tone for Maxime Leroux: 'semi-formal' should be 'formal'",
+      "preferred_language for Friedrich Braun: 'en' should be 'fr'",
+      "company for Sophie Renard: 'Office Notarial Renard' should be 'Étude Renard'"
+    ],
+    "details": "The system found all 10 contacts present in the ground truth, which is good for completeness. However, several fields are missing or incorrect. The 'type' field (client/colleague/partner/institution) is entirely absent from all output entries — this is a significant omission as it affects tone and relationship context. Topics are missing for all contacts, which reduces usefulness for email drafting. Several preferred_tone values are wrong: Philippe Dumont, Élise Fontaine, Nathalie Vernier, Jean-Louis Garnier, and Maxime Leroux are all marked 'semi-formal' instead of 'formal'. Friedrich Braun's preferred_language is listed as 'en' instead of 'fr'. Several titles are missing or degraded (e.g., 'Maître Dominique Perrin' simplified to 'Dominique Perrin', titles missing for Fontaine, Vernier, Garnier, Leroux). Sophie Renard's company name is wrong ('Office Notarial Renard' vs 'Étude Renard'). The added 'language_variant' field is a minor hallucination but not harmful."
+  },
+  "rules": {
+    "completeness": 82,
+    "precision": 78,
+    "usefulness": 80,
+    "overall": 80,
+    "missing": [
+      "General rule 'zero_emoji_zero_abreviation' not explicitly captured",
+      "General rule 'maitre_entre_avocats' not explicitly captured as a standalone rule",
+      "Vouvoiement rule scope is narrowed — ground truth says 'all interlocutors including colleagues', output limits to external + superior",
+      "Structured rule format (name, trigger, action) missing from general_rules",
+      "Rule 'signature_avec_disclaimer' mentions confidentiality disclaimer specifically — output only mentions signature"
+    ],
+    "incorrect": [
+      "e.fontaine@dumont-associes.fr tone set to 'semi-formal' instead of 'formal'",
+      "m.leroux@dumont-associes.fr tone set to 'semi-formal' instead of 'formal'",
+      "Closing fields for internal contacts include full signature block appended, which is not part of the closing formula in ground truth",
+      "Vouvoiement rule incorrectly scoped (excludes some colleagues)"
+    ],
+    "details": "The system found all 10 contact rules present in the ground truth, with correct greetings and closings for most contacts. However, two internal contacts (e.fontaine and m.leroux) are incorrectly labeled 'semi-formal' instead of 'formal'. The closings for internal contacts include a full signature block appended (e.g., '/ Marc-Antoine Barreau Avocat au Barreau de Paris Dumont & Associés') which is not part of the ground truth closing field — this conflates the closing formula with the signature. For general rules, the system captures most of the spirit but uses a free-text description format without structured fields (name, trigger, action), making them less machine-usable. The system also adds extra rules (jargon usage, document attachment practices) not in the ground truth, which are plausible but unverified. Key ground truth rules like 'zero_emoji_zero_abreviation', 'maitre_entre_avocats', and 'vouvoiement_systematique' (with full scope including colleagues) are partially captured but not explicitly named or fully specified. The vouvoiement rule in the output limits scope to 'external contacts and hierarchical superior' rather than 'all interlocutors without exception' as stated in ground truth."
+  },
+  "overall": 73
+}

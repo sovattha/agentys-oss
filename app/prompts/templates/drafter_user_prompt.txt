@@ -1,0 +1,4 @@
+EMAIL :
+{email_content}
+
+CONSIGNES : Rédige une réponse à cet email. Réponds uniquement avec le contenu de l'email, sans préambule ni explication.

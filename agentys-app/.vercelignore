@@ -1,0 +1,9 @@
+node_modules
+test-results
+e2e
+src-tauri
+*.spec.ts
+*.test.js
+*.test.tsx
+*.test.ts
+.playwright-mcp

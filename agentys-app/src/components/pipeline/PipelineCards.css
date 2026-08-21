@@ -1,0 +1,437 @@
+/* ============================================================================
+   PIPELINE CARDS — Atelier Neural shared components
+   Used by ReplyComposer (generation banner + disclosure) and PendingDraftDetail
+   ============================================================================ */
+
+/* ============================================================================
+   STAGE FLOW — Horizontal progress during generation
+   ============================================================================ */
+
+.pipe-stage-flow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 14px 20px;
+  margin: 12px 20px;
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, var(--accent-primary-subtle) 0%, transparent 60%),
+    var(--surface-secondary);
+  border: 1px solid var(--accent-primary-glow, rgba(13, 148, 136, 0.12));
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  animation: pipeFlowIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Ambient teal sweep */
+.pipe-stage-flow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--accent-primary-glow, rgba(13, 148, 136, 0.08)) 40%,
+    transparent 80%
+  );
+  animation: pipeSweep 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pipeFlowIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes pipeSweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+/* ── Stage card (individual step in horizontal flow) ─────────────────── */
+
+.pipe-stage-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.pipe-stage-icon-frame {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pipe-stage-label {
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+
+/* ── Pending state ─────────────────────────────────────────────────── */
+
+.pipe-stage-card--pending .pipe-stage-icon-frame {
+  background: color-mix(in srgb, var(--text-muted) 10%, transparent);
+  color: var(--text-muted);
+}
+
+.pipe-stage-card--pending .pipe-stage-label {
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+/* ── Active state ──────────────────────────────────────────────────── */
+
+.pipe-stage-card--active .pipe-stage-icon-frame {
+  background: color-mix(in srgb, var(--accent-primary) 15%, transparent);
+  color: var(--accent-primary);
+  box-shadow: var(--shadow-focus);
+  animation: pipeActivePulse 2s ease-in-out infinite;
+}
+
+.pipe-stage-card--active .pipe-stage-label {
+  color: var(--accent-primary);
+}
+
+@keyframes pipeActivePulse {
+  0%, 100% { box-shadow: var(--shadow-focus); }
+  50%      { box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent-primary) 6%, transparent); }
+}
+
+/* ── Complete state ────────────────────────────────────────────────── */
+
+.pipe-stage-card--complete .pipe-stage-icon-frame {
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  color: var(--accent-primary);
+}
+
+.pipe-stage-card--complete .pipe-stage-label {
+  color: var(--text-secondary);
+}
+
+/* ── Check overlay (green check on completed stages) ─────────────── */
+
+.pipe-stage-check-overlay {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--surface-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pipeCheckPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes pipeCheckPop {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+/* ── Connectors (horizontal lines between stages) ────────────────── */
+
+.pipe-stage-connector {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+  transition: background 0.4s;
+  margin: 0 2px;
+  margin-bottom: 18px; /* align with icon center */
+}
+
+.pipe-stage-connector--pending {
+  background: color-mix(in srgb, var(--text-muted) 15%, transparent);
+}
+
+.pipe-stage-connector--active {
+  background: linear-gradient(90deg, var(--accent-primary), color-mix(in srgb, var(--accent-primary) 40%, transparent));
+}
+
+/* ============================================================================
+   PIPELINE CARDS — Accordion glass-morphism
+   ============================================================================ */
+
+.pipe-card {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-secondary);
+  overflow: hidden;
+  animation: pipeCardIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: box-shadow var(--transition-base);
+}
+
+.pipe-card.expanded,
+.pipe-card[open] {
+  box-shadow: var(--shadow-sm);
+}
+
+@keyframes pipeCardIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Card header (clickable row) ─────────────────────────────────── */
+
+.pipe-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.pipe-card-header--open {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Icon frame — reused for both StageFlow and PipelineCard */
+.pipe-card-icon-frame {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pipe-card-title {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+}
+
+.pipe-card-agent-name {
+  font-size: var(--font-size-2xs, 0.62rem);
+  font-weight: 500;
+  color: var(--text-tertiary);
+}
+
+/* ── Badges ──────────────────────────────────────────────────────── */
+
+.pipe-card-badge {
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  margin-inline-start: auto;
+}
+
+.pipe-card-badge--approved {
+  background: var(--success-bg-subtle);
+  color: var(--success);
+}
+
+.pipe-card-badge--rejected {
+  background: var(--error-bg-subtle);
+  color: var(--error);
+}
+
+.pipe-card-badge--corrected {
+  background: var(--success-bg-subtle);
+  color: var(--success);
+}
+
+.pipe-card-badge--clean {
+  background: color-mix(in srgb, var(--text-muted) 10%, transparent);
+  color: var(--text-muted);
+}
+
+/* ── Chevron ─────────────────────────────────────────────────────── */
+
+.pipe-card-chevron {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  transition: transform 0.25s var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
+  flex-shrink: 0;
+}
+
+.pipe-card-chevron--open {
+  transform: rotate(180deg);
+}
+
+/* If badge is present, chevron is right after badge */
+.pipe-card-badge + .pipe-card-chevron {
+  margin-inline-start: 0;
+}
+
+/* If no badge, chevron takes auto-margin */
+.pipe-card-title + .pipe-card-chevron {
+  margin-inline-start: auto;
+}
+
+/* ── Card content (expandable zone) ──────────────────────────────── */
+
+.pipe-card-content {
+  padding: 0 14px 12px;
+  animation: pipeContentIn 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes pipeContentIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Pre-formatted text blocks inside cards */
+.pipe-card-content pre {
+  margin: 0;
+  padding: 8px 10px;
+  background: var(--surface-tertiary, rgba(0, 0, 0, 0.03));
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  line-height: var(--leading-normal);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 200px;
+  overflow-y: auto;
+  color: var(--text-secondary);
+}
+
+/* ── Connector (vertical gradient line between cards) ────────────── */
+
+.pipe-connector {
+  width: 1.5px;
+  height: 8px;
+  margin: 0 auto;
+  background: linear-gradient(
+    to bottom,
+    var(--accent-primary-glow, rgba(13, 148, 136, 0.25)),
+    color-mix(in srgb, var(--accent-primary) 8%, transparent)
+  );
+  border-radius: 1px;
+}
+
+/* ── Corrections result (reused in both components) ──────────────── */
+
+.pipe-card-corrections {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--success-text);
+  padding: 4px 0;
+}
+
+.pipe-card-corrections svg {
+  flex-shrink: 0;
+}
+
+.pipe-card-no-corrections {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 4px 0;
+}
+
+/* ============================================================================
+   REDUCED MOTION
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .pipe-stage-flow::before { animation: none; display: none; }
+  .pipe-stage-flow { animation: none; opacity: 1; transform: none; }
+  .pipe-stage-card--active .pipe-stage-icon-frame { animation: none; }
+  .pipe-stage-check-overlay { animation: none; transform: scale(1); }
+  .pipe-card { animation: none; opacity: 1; transform: none; }
+  .pipe-card-content { animation: none; opacity: 1; transform: none; }
+}
+
+/* ============================================================================
+   RESPONSIVE — Stack vertical on small screens
+   ============================================================================ */
+
+@media (max-width: 480px) {
+  .pipe-stage-flow {
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 16px;
+    margin: 8px 12px;
+  }
+
+  .pipe-stage-card {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .pipe-stage-connector {
+    width: 2px;
+    height: 12px;
+    margin: 0;
+    margin-bottom: 0;
+  }
+
+  .pipe-stage-connector--active {
+    background: linear-gradient(
+      180deg,
+      var(--accent-primary),
+      color-mix(in srgb, var(--accent-primary) 40%, transparent)
+    );
+  }
+}
+
+/* ── Classification reason ─────────────────────────────────────────────── */
+
+.pipe-classification-reason {
+  font-size: var(--font-size-xs, 0.76rem);
+  color: var(--text-secondary);
+  margin: 6px 0 0;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* ── Correction details list ───────────────────────────────────────────── */
+
+.pipe-correction-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pipe-correction-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-xs, 0.76rem);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.pipe-correction-item svg {
+  color: #10b981;
+  flex-shrink: 0;
+}

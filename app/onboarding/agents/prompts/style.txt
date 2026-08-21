@@ -1,0 +1,57 @@
+LANGUE DE SORTIE : utilise la même langue que la majorité des emails analysés. Les valeurs techniques (clés JSON) restent en anglais.
+
+Analyse les emails ENVOYÉS d'un utilisateur et extrais des règles de réponse par contact.
+
+Extrais :
+
+1. **contact_rules** : Pour chaque PERSONNE RÉELLE à qui l'utilisateur a écrit :
+   - ton : "formal", "semi-formal", ou "casual"
+   - langue : "fr", "en", ou "mixed"
+   - addressing : "tu" | "vous" | null
+     * Pertinent uniquement pour le français. Déduis depuis les pronoms observés ("tu/toi/ton" vs "vous/votre") ou les impératifs ("Peux-tu..." vs "Pouvez-vous...").
+     * null si le contact est en anglais ou sans signal clair.
+   - greeting : salutation(s) observée(s). 2 variantes maximum, séparées par " / ".
+   - closing : UNIQUEMENT la formule de politesse finale (ex : "Cordialement,", "Bien à vous,", ou prénom seul en casual). 2 variantes maximum, séparées par " / ".
+     N'INCLUS JAMAIS le bloc signature (nom, poste, entreprise, téléphone, liens) dans closing : il est capturé séparément par le profil.
+     Casual : prénom seul → "Sophie", parfois rien → "(name only or none)", emoji → "(none) / emoji only"
+
+   IGNORE : listes de distribution (team@, all-*), noreply@, services internes du MÊME domaine (hr@, it-support@, compta@).
+   Un support@ d'un domaine EXTERNE est un vrai contact — inclus-le.
+
+   {{TONE_INFERENCE}}
+
+2. **general_rules** : 6-10 règles basées sur les PATTERNS OBSERVÉS.
+   Une phrase descriptive en français par règle (sujet → action attendue).
+
+   Catégories à explorer :
+   - Registre/formalité : vouvoiement vs tutoiement
+   - Signature : complète vs prénom vs rien
+   - Langue : code-switching, langue par type de contact
+   - Structure : listes, sections d'action
+   - Format : emoji, abréviations, longueur
+   - Brevité : réponses ultra-courtes ("lgtm", "+1"), absence de salutation
+   - Vocabulaire métier : jargon récurrent spécifique au secteur de
+     l'utilisateur (ex: ARR/MRR/PMF en SaaS, "convention de cession" en
+     juridique, "RAG status" en conseil, RGPD/SLA en B2B enterprise).
+     Si tu détectes ≥ 5 termes du même champ lexical professionnel utilisés
+     SANS définition (l'utilisateur les considère comme acquis), produis une
+     règle nommée par champ (ex: "startup_jargon", "legal_jargon",
+     "consulting_jargon") avec ces termes en exemples.
+
+Règles :
+- Emails envoyés UNIQUEMENT (choix réels de l'utilisateur)
+- N'INVENTE PAS de contacts absents des données fournies
+- INTERDIT : pour greeting/closing, ne retourne JAMAIS "Unknown", "Inconnu", "None", "N/A" ni un placeholder descriptif (ex: "Unknown (forwarded content)", "Salut Unknown"). Si aucune salutation/clôture réelle n'est observable (emails transférés, corps vides), OMETS le champ ou utilise le marqueur "(name only or none)".
+
+CRITIQUE : Produis UNIQUEMENT un objet JSON valide. Pas de markdown, pas d'explication.
+
+{
+  "contact_rules": [
+    {"contact_email": "alice@example.com", "tone": "casual", "language": "fr", "addressing": "tu", "greeting": "Salut Alice,", "closing": "Sophie"},
+    {"contact_email": "client@other.com", "tone": "formal", "language": "fr", "addressing": "vous", "greeting": "Bonjour Monsieur Dupont,", "closing": "Cordialement,"}
+  ],
+  "general_rules": [
+    {"description": "Tutoyer l'équipe interne et utiliser les prénoms"}
+  ],
+  "forbidden_phrases": []
+}

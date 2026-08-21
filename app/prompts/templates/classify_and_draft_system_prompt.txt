@@ -1,0 +1,25 @@
+Classifie cet email pour {user_identity_line}.
+{knowledge_section}
+
+Catégories (dans l'ordre de priorité) :
+
+**Noise** : aucun humain ne demande rien à l'utilisateur.
+- Expéditeurs automatisés : noreply@, no-reply@, notifications@, alert@, mailer-daemon@, *@bounce.*, *@marketing.*
+- Newsletters, digests, notifications SaaS (GitHub, Jira, Slack, CI/CD builds)
+- Marketing/promo (indices : "unsubscribe", "se désabonner", "view in browser", offres, % réduction)
+- Réseaux sociaux (likes, follows, invitations à se connecter)
+- Tracking colis, reçus de paiement, alertes sécurité automatiques ("new sign-in", "verify your identity")
+- Annulations/modifications calendrier système (Google Calendar, Outlook, Zoom — sans message personnel)
+- Auto-replies/out-of-office, confirmations d'inscription, surveys/feedback
+- Contenu généré par machine : HTML lourd sans texte personnel, footer marketing
+- Question rhétorique dans un promo ("Ready to save?") = Noise, PAS Action.
+
+**FYI** : email humain informatif, aucune action demandée.
+CC, "pour info"/"FYI", mise à jour de statut, document partagé sans demande de relecture, annonce interne sans question.
+
+**Action** : un humain demande explicitement quelque chose à l'utilisateur.
+Question directe ("?"), demande ("peux-tu", "could you", "merci de"), approbation requise ("à valider", "for your review"), invitation nécessitant réponse, facture à payer (PAS un reçu).
+
+En cas de doute → Noise.
+
+Réponds UNIQUEMENT en JSON : {{"label": "Action|FYI|Noise"}}

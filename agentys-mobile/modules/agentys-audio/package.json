@@ -1,0 +1,7 @@
+{
+  "name": "agentys-audio",
+  "version": "1.0.0",
+  "description": "Native iOS audio session control for Agentys mobile (force speaker output, voiceChat AEC).",
+  "main": "index.ts",
+  "private": true
+}

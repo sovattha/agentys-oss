@@ -1,0 +1,48 @@
+# Build-context excludes (audit C-1, 2026-05-29) — keep secrets, VCS, and dev
+# artifacts OUT of the Docker image. Defense-in-depth alongside env-only secrets.
+
+# Secrets / env
+.env
+.env.*
+!.env.example
+app/data/agent_configs/refund.json
+**/*secret*.json
+**/*credentials*.json
+
+# Version control (git history carries the historical leaked Stripe key)
+.git
+.gitignore
+.dockerignore
+
+# Python caches / build
+**/__pycache__/
+**/*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+coverage_html/
+*.cov
+cov.json
+.venv/
+venv/
+
+# Frontends / node (not needed by the backend image)
+node_modules/
+**/node_modules/
+agentys-app/
+agentys-admin/
+agentys-mobile/
+browser_plugin/
+admin-standalone/
+
+# Dev / docs / audit artifacts / logs / screenshots
+tests/
+tasks/
+docs/
+_bmad*/
+*.md
+*.log
+*.png
+*.jpg
+test-results/

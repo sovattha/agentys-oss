@@ -1,0 +1,70 @@
+{
+  "profile": {
+    "completeness": 72,
+    "precision": 78,
+    "usefulness": 74,
+    "overall": 75,
+    "missing": [
+      "casual_fr greeting style: '{first_name}, / Salut {first_name},'",
+      "casual_fr closing style: '(no closing or just name)'",
+      "uses_emoji: true",
+      "addressing: 'mixed' at top level"
+    ],
+    "incorrect": [
+      "average_response_length: 'medium' (should be 'short')",
+      "closing_styles.semi_formal_fr: 'Bien cordialement,' only (should be 'Cordialement, / Karim')",
+      "addressing placed inside tone as 'vous' instead of top-level 'mixed'"
+    ],
+    "details": "The system correctly identified core profile elements: user email, name, preferred name, signature (name, title, company), default tone, semi-formal and formal greeting styles, languages, and language variant. However, several items are missing or incorrect. The casual greeting and closing styles are absent entirely. The closing styles are incomplete — the system only captured 'Bien cordialement,' for both semi-formal and formal, missing 'Cordialement, / Karim' for semi-formal and '(no closing or just name)' for casual. The 'uses_emoji: true' field is missing, which is relevant for drafting. The 'average_response_length' is incorrectly set to 'medium' instead of 'short'. The 'addressing' field is placed inside tone as 'vous' rather than at the top level as 'mixed', which is a meaningful discrepancy. The system added extra fields ('profession', 'profession_confirmed', 'department') not in ground truth, which are minor additions but not harmful. Overall the output is mostly usable but has notable gaps in casual styles, emoji usage, and a wrong response length."
+  },
+  "knowledge": {
+    "completeness": 72,
+    "precision": 78,
+    "usefulness": 74,
+    "overall": 75,
+    "missing": [
+      "alertes@seloger.com - SeLoger Alertes (interaction_count: 4)",
+      "contact@meilleursagents.com - MeilleursAgents (interaction_count: 2)",
+      "Title for Samira Bensaid: Assistante commerciale",
+      "Title for Julien Roche: Agent immobilier junior",
+      "Title for Jean-Philippe Astier: Directeur des ventes",
+      "Title for Éric Blanchard: Diagnostiqueur immobilier",
+      "Title for Nadia Ferhat: Conseillère Immobilier",
+      "Title for Hugo Martin: Agent immobilier senior",
+      "Title for Stéphane Vernier: Photographe immobilier"
+    ],
+    "incorrect": [
+      "delphine.mercier@gmail.com: preferred_tone should be 'formal', not 'semi-formal'",
+      "famille.lambert@orange.fr: name should be 'M. et Mme Laurent', not 'Famille Laurent'; preferred_tone should be 'formal', not 'semi-formal'",
+      "a.fournier@sfr.fr: preferred_tone should be 'formal', not 'semi-formal'",
+      "p.cassagne@notaire-cassagne.fr: company should be 'Étude Cassagne', not 'Notaire Cassagne'",
+      "nadia.ferhat@bnp-immo.fr: company should be 'BNP Paribas', not 'BNP Paribas Immobilier'",
+      "direction@immoplus-lyon.fr: title should be 'Directrice', not 'Direction'",
+      "photo.vernier@gmail.com: company should be 'Freelance', not null"
+    ],
+    "details": "The system found 14 out of 16 contacts, missing SeLoger Alertes and MeilleursAgents (both automated/service contacts). Most core contact data is present, but several fields have errors: titles are frequently missing (Samira Bensaid, Julien Roche, Jean-Philippe Astier, Éric Blanchard, Nadia Ferhat, Hugo Martin, Stéphane Vernier), tone is wrong for Delphine Mercier (semi-formal vs formal), famille.lambert tone is wrong (semi-formal vs formal), and Anne Fournier tone is wrong (semi-formal vs formal). Company names have minor inaccuracies (Notaire Cassagne vs Étude Cassagne, BNP Paribas Immobilier vs BNP Paribas). The name 'Famille Laurent' vs 'M. et Mme Laurent' is a minor but notable difference. Catherine Vernet's title 'Direction' is a rough approximation of 'Directrice'. The extra 'language_variant' field is harmless. The tone errors for formal contacts could lead to inappropriately casual email drafts."
+  },
+  "rules": {
+    "completeness": 82,
+    "precision": 78,
+    "usefulness": 80,
+    "overall": 80,
+    "missing": [
+      "samira closing: '(no closing or emoji 👍)' — system has 'Merci ! / Karim'",
+      "t.nakamura closing: 'Restant à votre disposition,' alternative missing",
+      "direction@immoplus-lyon.fr greeting: 'Catherine,' alternative missing",
+      "General rule: emoji_equipe_uniquement (emoji restricted to internal team)",
+      "General rule: horaires_etendus (extended working hours 07h-22h)",
+      "General rule: ton_evolutif_prospects (tone evolves from formal to semi-formal)",
+      "General rule: structured_commercial_reports (KPIs/metrics for direction)"
+    ],
+    "incorrect": [
+      "celine.dupuis@laposte.net tone listed as 'formal' — should be 'semi-formal'",
+      "a.fournier closing includes 'À jeudi,' which is not in ground truth",
+      "photo.vernier closing '(none) / emoji only' differs from 'Karim / (no closing)'",
+      "General rules include several fabricated/unverified rules (jargon immobilier, chiffres précis, alternatives, relance proactive) not present in ground truth"
+    ],
+    "details": "The system found all 14 contacts from ground truth and correctly identified tones, languages, and most greetings/closings. General rules are partially covered but reformulated differently — some ground truth rules are missing (emoji_equipe_uniquement, horaires_etendus, ton_evolutif_prospects, structured_commercial_reports as named rules) while the system added several useful but unverified rules (jargon immobilier, chiffres précis, alternatives). Minor inaccuracies exist: samira's closing is slightly off ('Merci ! / Karim' vs '(no closing or emoji 👍)'), photo.vernier closing differs slightly, a.fournier has an extra 'À jeudi,' closing, t.nakamura missing 'Restant à votre disposition,' alternative, celine.dupuis tone listed as 'formal' instead of 'semi-formal', and direction@immoplus-lyon.fr missing 'Catherine,' alternative greeting. The system adds an 'addressing' field (tu/vous) which is a useful addition not in ground truth."
+  },
+  "overall": 77
+}

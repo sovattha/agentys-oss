@@ -1,0 +1,6399 @@
+/* ============================================================================
+   CALENDAR VIEW — "Precision Chronograph"
+   Premium week view inspired by Superhuman + Swiss watchmaking aesthetic.
+   Ultra-precise grid, living time indicator, frosted glass depth.
+   ============================================================================ */
+
+/* ── Base Container ── */
+.calendar-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-base);
+  overflow: hidden;
+  container-type: inline-size;
+  container-name: calendar;
+}
+
+/* ── Header — Superhuman floating toolbar ── */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px var(--space-6);
+  background: var(--surface-primary);
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+  z-index: 10;
+  min-height: 52px;
+}
+
+/* Luminous edge — softer than a hard border */
+.calendar-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent-primary) 12%, transparent) 30%,
+    color-mix(in srgb, var(--accent-primary) 20%, transparent) 50%,
+    color-mix(in srgb, var(--accent-primary) 12%, transparent) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.calendar-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.calendar-nav-btn:active {
+  transform: scale(var(--scale-dramatic));
+}
+
+/* AUJOURD'HUI — accent outlined pill */
+.calendar-today-btn {
+  padding: 0 var(--space-4);
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  color: var(--accent-primary);
+  border-color: color-mix(in srgb, var(--accent-primary) 30%, transparent);
+  letter-spacing: var(--tracking-mega);
+  text-transform: uppercase;
+  transition: all var(--transition-base);
+}
+
+.calendar-today-btn:active {
+  box-shadow: none;
+}
+
+/* Chevron buttons — ghost, minimal */
+.calendar-chevron-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--text-primary, #111827);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.calendar-chevron-btn svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+.calendar-chevron-btn:active {
+  transform: scale(0.9);
+  transition-duration: 0.06s;
+}
+
+/* Month title — display font, commanding */
+.calendar-month-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+  margin-left: 6px;
+  line-height: var(--leading-none);
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+/* Picker wrapper — anchors the button, dropdown is fixed */
+.cal-picker-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Clickable month / year buttons */
+.cal-picker-btn {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0 2px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast);
+  line-height: inherit;
+}
+
+.cal-picker-btn:active {
+  opacity: 0.7;
+}
+
+/* Mini-calendar picker buttons — match .cal-sidebar-mini-title font */
+.cal-sidebar-mini-picker-btn {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  padding: 0;  /* overrides index.css button { padding: 12px 20px } */
+}
+
+/* Shared dropdown shell */
+.cal-picker-dropdown {
+  position: fixed;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg, 0 8px 30px rgba(0,0,0,0.14));
+  z-index: 200;
+  animation: calPickerReveal 0.13s var(--ease-settle, ease-out) both;
+}
+
+@keyframes calPickerReveal {
+  from { opacity: 0; transform: translateY(-4px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Month picker — 3-column grid */
+.cal-month-picker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  padding: 8px;
+  width: 220px;
+}
+
+.cal-picker-month-cell {
+  padding: 7px 4px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: center;
+  transition: background var(--transition-fast);
+}
+
+/* Year picker — scrollable column */
+.cal-year-picker {
+  display: flex;
+  flex-direction: column;
+  max-height: 260px;
+  overflow-y: auto;
+  padding: 4px;
+  width: 100px;
+}
+
+.cal-picker-year-item {
+  padding: 6px 10px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: center;
+  transition: background var(--transition-fast);
+}
+
+/* Active (current) month/year highlight */
+.cal-picker-active {
+  background: var(--accent-primary) !important;
+  color: var(--text-inverse, #fff) !important;
+  font-weight: 700;
+}
+
+/* Right side of header */
+.calendar-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Content Layout — Main + Sidebar ── */
+.calendar-content-row {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.calendar-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* ── Week Container ── */
+.calendar-week-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Week Header — Refined single-line day labels ── */
+.calendar-week-header {
+  display: grid;
+  grid-template-columns: 56px repeat(7, 1fr);
+  background: var(--surface-primary);
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+  z-index: 5;
+  animation: calReveal 0.35s var(--ease-settle) both;
+}
+
+.calendar-week-header-cell {
+  padding: var(--space-2) 0 6px;
+  text-align: center;
+  border-right: 1px solid var(--border-subtle);
+  position: relative;
+  transition: background var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.calendar-week-header-cell:last-child {
+  border-right: none;
+}
+
+/* Today column header */
+.calendar-week-header-cell.is-today {
+  background: color-mix(in srgb, var(--accent-primary) 3%, transparent);
+}
+
+.calendar-week-header-cell.is-today::after {
+  display: none;
+}
+
+/* Weekend cells — subtle dim */
+.calendar-week-header-cell.is-weekend {
+  opacity: 0.7;
+}
+
+/* Day name: "LUN" — small uppercase */
+.calendar-day-name {
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  color: var(--text-tertiary);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  line-height: var(--leading-none);
+}
+
+.calendar-day-name.today {
+  color: var(--accent-primary);
+}
+
+/* Day number: "17" — large, centered.
+   aspect-ratio + min/max lock to a true 36x36 square — same reason as
+   cal-sidebar-mini-day: prevents oval rendering at fractional browser zoom. */
+.calendar-day-number {
+  font-size: var(--font-size-2xl);
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: var(--leading-none);
+  font-variant-numeric: tabular-nums;
+  width: 36px;
+  height: 36px;
+  aspect-ratio: 1 / 1;
+  min-width: 36px;
+  max-width: 36px;
+  min-height: 36px;
+  max-height: 36px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.calendar-week-header-cell.is-weekend .calendar-day-number {
+  color: var(--text-secondary);
+}
+
+/* Timezone abbreviation in time header */
+.calendar-tz-abbr {
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  color: var(--accent-primary-hover);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+/* Time header cell */
+.calendar-time-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-right: 1px solid color-mix(in srgb, var(--accent-primary-hover) 12%, var(--border-subtle));
+  background: color-mix(in srgb, var(--accent-primary-hover) 4%, var(--surface-primary));
+  text-align: center;
+}
+
+/* ── All-day Events — Pill badges ── */
+.calendar-allday-section {
+  display: grid;
+  grid-template-columns: 56px repeat(7, 1fr);
+  border-bottom: 1px solid var(--border-subtle);
+  background: color-mix(in srgb, var(--surface-secondary) 50%, var(--surface-primary));
+}
+
+.calendar-allday-label {
+  padding: 3px var(--space-1);
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  color: var(--text-placeholder);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-allday-cell {
+  position: relative;
+  padding: 2px 3px;
+  border-right: 1px solid color-mix(in srgb, var(--border-subtle) 40%, transparent);
+}
+
+.calendar-allday-cell:last-child {
+  border-right: none;
+}
+
+.calendar-allday-event {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-secondary-hover));
+  color: var(--calendar-allday-text, #fff);
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  margin-bottom: 2px;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Holiday events — warm amber identity, matching TZ2 column */
+.calendar-allday-event.calendar-holiday {
+  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-secondary-hover));
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: var(--shadow-sm);
+}
+
+.calendar-holiday-flag {
+  font-size: var(--font-size-2xs);
+  font-weight: 800;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.22);
+  padding: 1px 5px;
+  border-radius: var(--radius-xs);
+  flex-shrink: 0;
+  line-height: var(--leading-normal);
+}
+
+/* Primary timezone holidays — soft green, own country */
+.calendar-allday-event.calendar-holiday--primary {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: #fff;
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+/* DST (changement d'heure) banner */
+.calendar-allday-event.calendar-dst-banner {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: var(--shadow-sm);
+  color: #fff;
+}
+
+.calendar-dst-label {
+  font-size: var(--font-size-2xs);
+  font-weight: 800;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.22);
+  padding: 1px 5px;
+  border-radius: var(--radius-xs);
+  flex-shrink: 0;
+  line-height: var(--leading-normal);
+}
+
+.calendar-event-icon {
+  flex-shrink: 0;
+  opacity: 0.85;
+  stroke: currentColor;
+  fill: none;
+}
+
+/* ── Week Body — Time grid ── */
+.calendar-week-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 56px repeat(7, 1fr);
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  scroll-behavior: smooth;
+  padding-top: 12px;
+  animation: calReveal 0.4s var(--ease-settle) 0.05s both;
+}
+
+/* Refined scrollbar */
+.calendar-week-body::-webkit-scrollbar {
+  width: 5px;
+}
+.calendar-week-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.calendar-week-body::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--text-tertiary) 15%, transparent);
+  border-radius: var(--radius-full);
+  transition: background var(--transition-base);
+}
+
+/* ── Time Column — Precision numbers ── */
+.calendar-time-column {
+  border-right: 1px solid color-mix(in srgb, var(--accent-primary-hover) 12%, var(--border-subtle));
+  background: color-mix(in srgb, var(--accent-primary-hover) 4%, var(--surface-primary));
+  position: sticky;
+  left: 0;
+  z-index: 3;
+}
+
+.calendar-time-slot {
+  height: 48px;
+  padding: 0;
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-primary-hover);
+  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  transform: translateY(-6px);
+  line-height: var(--leading-none);
+  position: relative;
+}
+
+/* ── Day Columns ── */
+.calendar-day-column {
+  position: relative;
+  border-right: 1px solid var(--border-subtle);
+  min-height: calc(19 * 48px); /* Must match HOUR_COUNT in CalendarView.tsx */
+}
+
+.calendar-day-column:last-child {
+  border-right: none;
+}
+
+/* Today column — subtle vertical glow gradient */
+.calendar-day-column.is-today {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-primary) 3%, transparent) 0%,
+    color-mix(in srgb, var(--accent-primary) 1.5%, transparent) 40%,
+    transparent 100%
+  );
+}
+
+/* Weekend columns — gentle dim */
+.calendar-day-column.is-weekend {
+  background: color-mix(in srgb, var(--surface-secondary) 25%, transparent);
+}
+
+.calendar-day-column.is-weekend.is-today {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-primary) 3%, transparent) 0%,
+    color-mix(in srgb, var(--surface-secondary) 20%, transparent) 100%
+  );
+}
+
+/* Hour slots */
+.calendar-hour-slot {
+  height: 48px;
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+  transition: background var(--transition-fast);
+}
+
+/* Half-hour dotted line */
+.calendar-hour-slot::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--border-subtle) 60%, transparent) 0px,
+    color-mix(in srgb, var(--border-subtle) 60%, transparent) 3px,
+    transparent 3px,
+    transparent 7px
+  );
+}
+
+/* ── Off-hours dimming (before 8h, after 17h) ── */
+.calendar-hour-slot.off-hours {
+  background: var(--surface-primary);
+}
+
+.calendar-time-slot.off-hours {
+  opacity: 0.5;
+}
+
+.calendar-tz2-slot.off-hours {
+  opacity: 0.25;
+}
+
+/* Business hours boundary — soft tinted pill on 8h/17h */
+.calendar-time-slot.work-bound,
+.calendar-tz2-slot.work-bound {
+  opacity: 1 !important;
+}
+
+.calendar-time-slot.work-bound::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 4px;
+  right: 4px;
+  height: 16px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--accent-primary-hover) 10%, transparent);
+  z-index: -1;
+}
+
+.calendar-tz2-slot.work-bound::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 3px;
+  right: 3px;
+  height: 16px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--tz2-color, #d97706) 10%, transparent);
+  z-index: -1;
+}
+
+/* ── FullCalendar event content — delete button on hover ── */
+.cal-event-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 0;
+  gap: 2px;
+}
+
+.cal-event-text {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.cal-event-text .truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cal-event-delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity var(--transition-fast), background var(--transition-fast);
+  padding: 0;
+}
+
+/* ── Short events (≤ 30 min) — compact single-line layout ── */
+/* Class applied via FullCalendar eventClassNames when duration <= 30 min */
+.fc-event--short .fc-event-main {
+  padding: 1px 3px;
+}
+.fc-event--short .cal-event-content {
+  flex-wrap: nowrap;
+  align-items: center;
+  height: 100%;
+}
+.fc-event--short .cal-event-text {
+  font-size: 10px;
+  line-height: 1.2;
+}
+.fc-event--short .cal-event-delete {
+  display: none; /* delete button takes too much space at this height */
+}
+
+/* ── Current Time Indicator — Living, breathing ── */
+.calendar-now-line {
+  position: absolute;
+  left: -1px;
+  right: 0;
+  height: 2px;
+  /* z-index > 1 (events) : la ligne "now" passe AU-DESSUS des blocs événements
+     pour rester visible quand un meeting couvre l'heure courante. */
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Main line — gradient fade.
+   Démarre à left:0 maintenant que le dot est sorti de la colonne today
+   (left:-8px) — sinon la ligne laissait un trou de 8px à gauche. */
+.calendar-now-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-primary) 0%,
+    var(--accent-primary) 60%,
+    color-mix(in srgb, var(--accent-primary) 20%, transparent) 100%
+  );
+  border-radius: 1px;
+}
+
+/* ── Meet link toast (post-create) ──
+   Affiché après création d'un event avec Google Meet — donne un accès rapide
+   au lien pour copier/partager avant d'ouvrir la modal d'event. Auto-dismiss
+   à 10s, dismissible manuellement via le bouton ×. */
+.calendar-meet-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: var(--z-popover, 8000);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px 12px 14px;
+  border-radius: 12px;
+  background: var(--surface-elevated, #ffffff);
+  color: var(--text-primary, #0f172a);
+  border: 1px solid var(--border-color, #e2e8f0);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.10), 0 2px 6px rgba(0, 0, 0, 0.04);
+  /* Declared explicitly (not via inherit) because position:fixed toasts
+     can render before the Instrument Sans webfont swaps in, causing the
+     title to flash in Segoe UI on Windows — visibly off from the rest
+     of the app. Same fallback chain as :root in index.css. */
+  font-family: var(--font-sans, 'Instrument Sans', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  font-size: 13px;
+  max-width: min(520px, calc(100vw - 40px));
+  animation: cal-meet-toast-in 200ms ease-out;
+}
+
+@keyframes cal-meet-toast-in {
+  from { transform: translateY(8px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+
+.calendar-meet-toast__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 12%, transparent);
+  color: var(--accent-primary, #0d9488);
+  flex-shrink: 0;
+}
+
+.calendar-meet-toast__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  overflow: hidden;
+}
+
+.calendar-meet-toast__title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.calendar-meet-toast__url {
+  font-size: 11.5px;
+  color: var(--text-secondary, #64748b);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+.calendar-meet-toast__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.calendar-meet-toast__btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 120ms ease;
+  text-decoration: none;
+  white-space: nowrap;
+  font-family: inherit;
+  line-height: 1;
+}
+
+.calendar-meet-toast__btn:focus-visible {
+  outline: 2px solid var(--accent-primary, #0d9488);
+  outline-offset: 2px;
+}
+
+.calendar-meet-toast__btn--secondary {
+  border: 1px solid var(--border-color, #e2e8f0);
+  background: transparent;
+  color: var(--text-primary, #0f172a);
+}
+
+.calendar-meet-toast__btn--secondary.is-copied {
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 10%, transparent);
+  border-color: color-mix(in srgb, var(--accent-primary, #0d9488) 50%, transparent);
+  color: var(--accent-primary, #0d9488);
+}
+
+.calendar-meet-toast__btn--primary {
+  border: 1px solid var(--accent-primary, #0d9488);
+  background: var(--accent-primary, #0d9488);
+  color: #fff;
+}
+
+.calendar-meet-toast__close {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary, #94a3b8);
+  padding: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 120ms ease;
+  margin-left: 2px;
+}
+
+/* Pulsing dot — the "heartbeat".
+   Positionné HORS de la colonne de today (left négatif) pour ne jamais
+   chevaucher visuellement un event qui commencerait à l'heure courante.
+   Quand today est la première colonne de la semaine, le dot tombe pile
+   sur la time-gutter (style Google Calendar). Pour les autres jours il
+   se loge sur le séparateur vertical entre la veille et today. */
+.calendar-now-line::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: -3px;
+  width: 8px;
+  height: 8px;
+  background: var(--accent-primary);
+  border-radius: var(--radius-full);
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--accent-primary) 15%, transparent),
+    0 0 10px color-mix(in srgb, var(--accent-primary) 30%, transparent);
+  animation: calNowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes calNowPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 3px color-mix(in srgb, var(--accent-primary) 15%, transparent),
+      0 0 12px color-mix(in srgb, var(--accent-primary) 30%, transparent);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow:
+      0 0 0 5px color-mix(in srgb, var(--accent-primary) 8%, transparent),
+      0 0 20px color-mix(in srgb, var(--accent-primary) 20%, transparent);
+    transform: scale(1.15);
+  }
+}
+
+/* ── FullCalendar — enforce min-height for short events ── */
+.fc-timegrid-event {
+  min-height: 36px !important;
+}
+.fc-timegrid-event .fc-event-main {
+  min-height: 36px !important;
+}
+
+/* ── BUG-P2-001 FIX : FullCalendar now-indicator passe DERRIÈRE les blocs événements ──
+   Par défaut FullCalendar applique z-index:4 sur le now-indicator (arrow + line),
+   ce qui fait apparaître le "point vert + ligne horizontale" devant les événements courts
+   et donne l'illusion d'un slider / range input HTML.
+   On les ramène à z-index:0 pour qu'ils passent derrière les fc-timegrid-event (z-index:2+). */
+.fc-timegrid-now-indicator-arrow,
+.fc-timegrid-now-indicator-line {
+  z-index: 0 !important;
+  pointer-events: none;
+}
+
+/* ── Events — Frosted glass cards ── */
+.calendar-event {
+  position: absolute;
+  left: 2px;
+  width: calc(100% - 4px);
+  background: var(--surface-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-1) var(--space-2) var(--space-1) 10px;
+  font-size: var(--font-size-xs);
+  color: var(--text-primary);
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 1;
+  min-height: 48px; /* Évite le rendu "slider" : hauteur minimale = 1 slot = 15 min */
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    background var(--transition-base),
+    opacity var(--transition-base);
+  box-shadow:
+    var(--shadow-card),
+    0 0 0 1px color-mix(in srgb, var(--border-default) 30%, transparent);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Left accent bar — pseudo-element plutôt que border-left (rendering plus propre avec border-radius) */
+.calendar-event::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--event-color, var(--border-default));
+  pointer-events: none;
+}
+
+.calendar-event:active {
+  transform: translateY(0) scale(0.995);
+  transition-duration: 0.08s;
+}
+
+/* ── Dragging state (class added via DOM, not React) ── */
+.calendar-event--dragging {
+  z-index: var(--z-dropdown) !important;
+  cursor: grabbing !important;
+  box-shadow: var(--shadow-xl) !important;
+  opacity: 0.9;
+  /* transform is applied via JS for cross-day dragging — do NOT add transform: none here */
+  /* transition: none is set inline via JS */
+}
+
+.calendar-event:not(.calendar-event--deep-work):not(.calendar-event--work-block) {
+  cursor: grab;
+}
+
+/* Event title row — flex to push delete button right */
+.calendar-event-title {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Delete button — reserve space always, fade in on hover (prevents reflow) */
+.calendar-event-delete-btn {
+  all: unset;
+  display: inline-flex;
+  visibility: visible;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  color: var(--text-tertiary);
+  opacity: 1;
+  transition: opacity var(--transition-fast), color var(--transition-fast);
+}
+
+/* Event color variants */
+.calendar-event[data-color="blue"] {
+  background: color-mix(in srgb, var(--color-blue) 8%, var(--surface-primary));
+  --event-color: var(--color-blue);
+  box-shadow: var(--shadow-card), inset 0 1px 0 color-mix(in srgb, var(--color-blue) 6%, transparent);
+}
+.calendar-event[data-color="red"] {
+  background: color-mix(in srgb, var(--error-hover) 8%, var(--surface-primary));
+  --event-color: var(--error-hover);
+  box-shadow: var(--shadow-card), inset 0 1px 0 color-mix(in srgb, var(--error) 6%, transparent);
+}
+.calendar-event[data-color="amber"] {
+  background: color-mix(in srgb, var(--accent-secondary) 8%, var(--surface-primary));
+  --event-color: var(--accent-secondary);
+  box-shadow: var(--shadow-card), inset 0 1px 0 color-mix(in srgb, var(--accent-secondary) 6%, transparent);
+}
+.calendar-event[data-color="purple"] {
+  background: color-mix(in srgb, var(--color-violet) 8%, var(--surface-primary));
+  --event-color: var(--color-violet);
+  box-shadow: var(--shadow-card), inset 0 1px 0 color-mix(in srgb, var(--color-violet) 6%, transparent);
+}
+.calendar-event[data-color="green"] {
+  background: color-mix(in srgb, var(--success) 8%, var(--surface-primary));
+  --event-color: var(--success);
+  box-shadow: var(--shadow-card), inset 0 1px 0 color-mix(in srgb, var(--success) 6%, transparent);
+}
+
+.calendar-event.tentative {
+  background: color-mix(in srgb, var(--warning) 6%, var(--surface-primary));
+  --event-color: var(--warning);
+}
+
+.calendar-event.tentative::before {
+  /* tentative events: dashed-feel via opacity reduction on the accent bar */
+  opacity: 0.6;
+}
+
+.calendar-event.cancelled {
+  background: var(--surface-tertiary);
+  --event-color: var(--text-placeholder);
+  opacity: 0.5;
+}
+
+.calendar-event.cancelled .calendar-event-title {
+  text-decoration: line-through;
+}
+
+/* Deep Work email check slots — green accent */
+.calendar-event--deep-work {
+  background: color-mix(in srgb, var(--color-emerald) 15%, var(--surface-primary));
+  --event-color: var(--color-emerald);
+  color: color-mix(in srgb, var(--success) 85%, black);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.calendar-event--deep-work .calendar-event-title {
+  display: flex;
+  align-items: center;
+  color: color-mix(in srgb, var(--success) 85%, black);
+}
+
+.calendar-event--deep-work .calendar-event-time {
+  color: var(--success);
+}
+
+/* Personal work blocks — amber accent */
+.calendar-event--work-block {
+  background: color-mix(in srgb, var(--accent-secondary) 12%, var(--surface-primary));
+  --event-color: var(--accent-secondary);
+  color: color-mix(in srgb, var(--accent-secondary-hover) 80%, black);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.calendar-event--work-block .calendar-event-title {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent-secondary-hover) 80%, black);
+  font-weight: 550;
+  font-size: var(--font-size-xs);
+}
+
+.calendar-event--work-block .calendar-event-title svg {
+  flex: 0 0 auto;
+}
+
+.calendar-event--work-block .calendar-event-title-text {
+  min-width: 0;
+  flex: 1 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calendar-event--work-block.av-event-readonly .calendar-event-title {
+  display: block;
+}
+
+.calendar-event-title {
+  font-weight: 600;
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-wide);
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+/* Title text — wraps to 2 lines max, ellipsis on overflow */
+.calendar-event-title-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  min-width: 0;
+  flex: 1 1 0;
+}
+
+/* Compact mode — tighter padding/fonts, title wrap still allowed (2 lines max) */
+.calendar-event--compact {
+  padding: 3px 6px 3px 9px;
+  justify-content: flex-start;
+}
+
+/* Imminent — event starts within 30 min. Subtle pulse + reinforced left border. */
+.calendar-event--imminent {
+  box-shadow: 0 0 0 1px var(--event-color, var(--accent-primary, #0d9488)),
+              0 4px 12px color-mix(in srgb, var(--event-color, var(--accent-primary, #0d9488)) 28%, transparent);
+  animation: calendar-event-imminent-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes calendar-event-imminent-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 1px var(--event-color, var(--accent-primary, #0d9488)),
+                0 4px 12px color-mix(in srgb, var(--event-color, var(--accent-primary, #0d9488)) 28%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 2px var(--event-color, var(--accent-primary, #0d9488)),
+                0 6px 18px color-mix(in srgb, var(--event-color, var(--accent-primary, #0d9488)) 42%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calendar-event--imminent {
+    animation: none;
+  }
+}
+
+.calendar-event--compact .calendar-event-title {
+  font-size: var(--font-size-2xs);
+  line-height: var(--leading-tight);
+}
+
+.calendar-event--compact .calendar-event-time {
+  font-size: var(--font-size-2xs);
+  line-height: var(--leading-tight);
+  margin-top: 1px;
+}
+
+.calendar-event-time {
+  font-size: var(--font-size-2xs);
+  color: var(--text-tertiary);
+  margin-top: 3px;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.8;
+}
+
+.calendar-event-location {
+  font-size: var(--font-size-2xs);
+  color: var(--text-tertiary);
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  opacity: 0.7;
+}
+
+.calendar-event-location::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='currentColor' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/%3E%3C/svg%3E") center / contain no-repeat;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='currentColor' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/%3E%3C/svg%3E") center / contain no-repeat;
+  flex-shrink: 0;
+}
+
+/* ── Empty State — Glass card, serene ── */
+.calendar-empty-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.calendar-empty-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: var(--space-8) var(--space-12);
+  background: color-mix(in srgb, var(--surface-primary) 88%, transparent);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-xl);
+  border: 1px solid color-mix(in srgb, var(--border-subtle) 60%, transparent);
+  box-shadow:
+    var(--shadow-xl),
+    inset 0 1px 0 color-mix(in srgb, var(--surface-primary) 30%, transparent);
+}
+
+.calendar-empty-message svg {
+  color: var(--accent-primary);
+  opacity: 0.25;
+}
+
+.calendar-empty-message p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ── Loading State — Elegant morphing dots ── */
+.calendar-loading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-10);
+}
+
+.calendar-loading-spinner {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--accent-primary);
+  animation: calLoadPulse 1.4s ease-in-out infinite;
+}
+
+.calendar-loading-spinner::before,
+.calendar-loading-spinner::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--accent-primary);
+}
+
+.calendar-loading-spinner::before {
+  left: -16px;
+  animation: calLoadPulse 1.4s ease-in-out -0.3s infinite;
+}
+
+.calendar-loading-spinner::after {
+  left: 16px;
+  animation: calLoadPulse 1.4s ease-in-out 0.3s infinite;
+}
+
+@keyframes calLoadPulse {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.3;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ── Error State ── */
+.calendar-error {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-10);
+  text-align: center;
+}
+
+.calendar-error-icon {
+  color: var(--error);
+  opacity: 0.6;
+  margin-bottom: var(--space-4);
+}
+
+.calendar-error h3 {
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.calendar-error p {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-5) 0;
+}
+
+.calendar-error-btn {
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  border: none;
+  padding: 10px var(--space-6);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.calendar-error-btn:active {
+  transform: translateY(0);
+}
+
+/* ── Placeholder / No Account ── */
+.calendar-placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-10);
+  text-align: center;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.calendar-icon {
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-6);
+  opacity: 0.4;
+}
+
+.calendar-placeholder h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 10px 0;
+}
+
+.calendar-placeholder p {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin: 0 0 28px 0;
+}
+
+.calendar-connect-btn {
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  border: none;
+  padding: var(--space-3) 28px;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-md);
+}
+
+.calendar-connect-btn:active {
+  transform: translateY(0);
+}
+
+/* ── Event Detail Modal — Premium glass panel ── */
+.calendar-event-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--overlay-light);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+  animation: calOverlayIn 0.2s ease-out;
+}
+
+@keyframes calOverlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.calendar-event-modal {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 0;
+  max-width: 460px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-shadow:
+    var(--shadow-2xl),
+    inset 0 1px 0 color-mix(in srgb, var(--surface-primary) 10%, transparent);
+  animation: calModalIn 0.3s var(--ease-settle);
+}
+
+@keyframes calModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(var(--scale-dramatic));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Accent strip at top of modal */
+.calendar-event-modal::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-primary),
+    color-mix(in srgb, var(--accent-primary) 60%, var(--accent-secondary))
+  );
+}
+
+.calendar-event-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--space-5) var(--space-6) 0;
+  margin-bottom: var(--space-4);
+  gap: 12px;
+}
+
+.calendar-event-modal-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: var(--leading-tight);
+}
+
+.calendar-event-modal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.calendar-event-modal-edit-btn {
+  background: none;
+  border: none;
+  color: var(--text-placeholder);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-event-modal-close {
+  background: none;
+  border: none;
+  border-left: 1px solid var(--border-subtle);
+  color: var(--text-placeholder);
+  cursor: pointer;
+  padding: 6px 6px 6px 10px;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  flex-shrink: 0;
+  margin-left: 4px;
+  transition: all var(--transition-fast);
+}
+
+.calendar-event-modal-section {
+  margin: 0 var(--space-6) var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.calendar-event-modal-section:last-child {
+  border-bottom: none;
+  margin-bottom: var(--space-2);
+  padding-bottom: var(--space-5);
+}
+
+.calendar-event-modal-label {
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  color: var(--text-placeholder);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-mega);
+  margin-bottom: 5px;
+}
+
+.calendar-event-modal-value {
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  line-height: var(--leading-normal);
+}
+
+.calendar-event-modal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.calendar-event-modal-meet-link {
+  color: #16a34a;
+}
+
+.calendar-event-modal-email-attendees {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--accent-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+.calendar-event-modal-actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: none !important;
+}
+
+.calendar-event-modal-icon-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+  color: var(--text-secondary);
+}
+
+/* hover color handled by global .icon-btn--delete rule in index.css */
+
+/* Inline delete confirmation (replaces window.confirm which freezes Tauri WebView) */
+.calendar-event-modal-delete-confirm {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.calendar-event-modal-delete-confirm-text {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.icon-btn--delete-confirm {
+  color: var(--color-danger, #ef4444) !important;
+  font-weight: 700;
+}
+
+/* ── Event Label Picker ── */
+.calendar-event-label-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cal-label-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--space-1) 10px var(--space-1) var(--space-2);
+  border-radius: var(--radius-2xl);
+  border: 1.5px solid var(--border-subtle);
+  background: var(--surface-primary);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.cal-label-chip--active {
+  border-color: var(--chip-color);
+  background: color-mix(in srgb, var(--chip-color) 12%, var(--surface-primary));
+  color: var(--text-primary);
+}
+
+.cal-label-chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.cal-label-chip-name {
+  line-height: var(--leading-none);
+}
+
+.cal-label-chip-check {
+  flex-shrink: 0;
+  color: var(--chip-color);
+}
+
+/* ── View Toggle (if used) ── */
+.calendar-view-toggle {
+  display: flex;
+  background: var(--surface-secondary);
+  border-radius: var(--radius-md);
+  padding: 2px;
+  border: 1px solid var(--border-subtle);
+}
+
+.calendar-view-toggle-btn {
+  padding: 5px 14px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-tertiary);
+  border: none;
+  background: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  letter-spacing: var(--tracking-wider);
+}
+
+.calendar-view-toggle-btn.active {
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-xs);
+}
+
+/* ── Entrance Animation ── */
+@keyframes calReveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sidebar-specific reveal: ends with transform:none to avoid creating a
+   containing block for position:fixed children (month/year pickers) */
+@keyframes calSidebarReveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Secondary Timezone — Warm amber identity ── */
+/* Distinct from main accent (teal) — warm amber/coral palette */
+
+.calendar-week-header.has-tz2 {
+  grid-template-columns: 56px 48px repeat(7, 1fr);
+}
+
+.calendar-allday-section.has-tz2 {
+  grid-template-columns: 56px 48px repeat(7, 1fr);
+}
+
+.calendar-week-body.has-tz2 {
+  grid-template-columns: 56px 48px repeat(7, 1fr);
+}
+
+.calendar-tz2-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid color-mix(in srgb, var(--tz2-color, #d97706) 10%, var(--border-subtle));
+  background: color-mix(in srgb, var(--tz2-color, #d97706) 3%, var(--surface-secondary));
+  padding: 0;
+  position: relative;
+  text-align: center;
+}
+
+.calendar-tz2-label {
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  color: var(--tz2-color-dark, #b45309);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.calendar-tz2-remove {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border: none;
+  background: none;
+  color: var(--text-placeholder);
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  padding: 0;
+  transition: all var(--transition-fast);
+  opacity: 1;
+}
+
+.calendar-tz2-allday-spacer {
+  border-right: 1px solid color-mix(in srgb, var(--tz2-color, #d97706) 8%, var(--border-subtle));
+  background: color-mix(in srgb, var(--tz2-color, #d97706) 1.5%, var(--surface-secondary));
+  position: sticky;
+  left: 56px;
+  z-index: 2;
+}
+
+.calendar-tz2-column {
+  border-right: 1px solid color-mix(in srgb, var(--tz2-color, #d97706) 10%, transparent);
+  background: color-mix(in srgb, var(--tz2-color, #d97706) 2%, var(--surface-primary));
+  position: sticky;
+  left: 56px;
+  z-index: 2;
+}
+
+.calendar-tz2-slot {
+  height: 48px;
+  padding: 0;
+  font-size: var(--font-size-2xs);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--tz2-color, #d97706);
+  opacity: 0.4;
+  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  transform: translateY(-6px);
+  line-height: var(--leading-none);
+  position: relative;
+}
+
+/* ── Timezone Picker — Toolbar button ── */
+
+.calendar-tz-picker {
+  position: relative;
+}
+
+.calendar-tz-picker-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+.calendar-tz-picker-btn.has-value {
+  color: var(--tz2-color-dark, #b45309);
+  border-color: color-mix(in srgb, var(--tz2-color, #d97706) 25%, transparent);
+}
+
+.calendar-tz-picker-btn span {
+  letter-spacing: var(--tracking-wider);
+}
+
+.calendar-tz-dropdown {
+  width: 220px;
+  max-height: 360px;
+  overflow-y: auto;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-popover);
+  padding: var(--space-1);
+  animation: calModalIn 0.18s var(--ease-settle);
+}
+
+.calendar-tz-dropdown::-webkit-scrollbar {
+  width: 4px;
+}
+.calendar-tz-dropdown::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--text-tertiary) 12%, transparent);
+  border-radius: var(--radius-full);
+}
+
+.calendar-tz-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 10px;
+  border: none;
+  background: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  text-align: left;
+}
+
+.calendar-tz-option.active {
+  background: color-mix(in srgb, var(--accent-primary) 6%, transparent);
+}
+
+.calendar-tz-option-label {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--text-primary);
+  min-width: 28px;
+  font-variant-numeric: tabular-nums;
+}
+
+.calendar-tz-option-city {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.calendar-tz-option-check {
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+/* Region group headers */
+.calendar-tz-region-header {
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  color: var(--text-placeholder);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  padding: var(--space-2) 10px 3px;
+  margin-top: 2px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* Color picker row */
+.calendar-tz-color-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: var(--space-2) 10px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 2px;
+}
+
+.calendar-tz-color-label {
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
+.calendar-tz-color-swatches {
+  display: flex;
+  gap: 5px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.calendar-tz-color-swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.calendar-tz-color-swatch.active {
+  border-color: var(--text-primary);
+  box-shadow: 0 0 0 2px var(--surface-primary), 0 0 0 3.5px currentColor;
+}
+
+/* ══════════════════════════════════════════════════════
+   SIDEBAR — Mini Calendar + Calendar List
+   ══════════════════════════════════════════════════════ */
+
+.calendar-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  border-left: 1px solid var(--border-subtle);
+  background: var(--surface-primary);
+  overflow-y: auto;
+  padding: var(--space-4) 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: calSidebarReveal 0.4s var(--ease-settle) 0.1s both;
+}
+
+.calendar-sidebar::-webkit-scrollbar {
+  width: 3px;
+}
+.calendar-sidebar::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--text-tertiary) 12%, transparent);
+  border-radius: var(--radius-full);
+}
+
+/* Firefox : pas de ::-webkit-scrollbar — ré-active l'équivalent fin par-dessus
+   le `* { scrollbar-width: none }` global. Scopé hors WebKit/Blink : en
+   Blink >= 121, scrollbar-width/color non-auto désactiveraient le styling
+   ::-webkit-scrollbar ci-dessus. */
+@supports not selector(::-webkit-scrollbar) {
+  .calendar-week-body {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--text-tertiary) 15%, transparent) transparent;
+  }
+  .calendar-tz-dropdown,
+  .calendar-sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--text-tertiary) 12%, transparent) transparent;
+  }
+}
+
+/* ── Mini Calendar ── */
+
+.cal-sidebar-mini-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.cal-sidebar-mini-title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-wide);
+}
+
+.cal-sidebar-mini-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: none;
+  color: var(--text-tertiary);
+  border-radius: var(--radius-sm);
+  padding: 0;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.cal-sidebar-mini-nav svg {
+  display: block;
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+.cal-sidebar-mini-nav:hover,
+.cal-sidebar-mini-nav:focus-visible {
+  color: var(--accent-primary);
+}
+
+.cal-sidebar-mini-nav:active {
+  transform: scale(0.88);
+  transition-duration: 0.06s;
+}
+
+.cal-sidebar-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0;
+}
+
+.cal-sidebar-mini-dow {
+  text-align: center;
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  color: var(--text-placeholder);
+  padding: 2px 0 6px;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+.cal-sidebar-mini-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  /* aspect-ratio + flex-shrink:0 + min/max lock the cell to a true 28x28 square
+     regardless of grid track sizing or browser fractional zoom. Without this,
+     subpixel rounding at non-integer zoom levels can produce a slightly oval
+     circle even though width/height are both set to 28px. */
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+  min-width: 28px;
+  max-width: 28px;
+  min-height: 28px;
+  max-height: 28px;
+  box-sizing: border-box;
+  margin: 1px auto;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text-primary);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-variant-numeric: tabular-nums;
+}
+
+.cal-sidebar-mini-day.out-of-month {
+  color: var(--text-placeholder);
+  opacity: 0.4;
+}
+
+.cal-sidebar-mini-day.is-today {
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  font-weight: 700;
+  border-radius: 50%;
+  box-shadow: var(--shadow-md);
+}
+
+/* ── Calendar List ── */
+
+.cal-sidebar-section-title {
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  color: var(--text-placeholder);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  margin-bottom: var(--space-2);
+}
+
+.cal-sidebar-calendar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.cal-sidebar-calendar-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.cal-sidebar-calendar-email {
+  font-size: var(--font-size-2xs, 11px);
+  font-weight: 400;
+  color: var(--text-tertiary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cal-sidebar-calendar-badge {
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  color: var(--text-placeholder);
+  background: var(--surface-secondary);
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  letter-spacing: var(--tracking-wider);
+}
+
+/* ── Holidays toggle switch ── */
+.cal-sidebar-holidays-toggle {
+  margin-top: var(--space-1);
+  padding-top: 6px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.cal-sidebar-toggle {
+  width: 28px !important;
+  min-width: 28px !important;
+  height: 16px !important;
+  min-height: 16px !important;
+  border-radius: var(--radius-full) !important;
+  border: none !important;
+  background: var(--surface-tertiary);
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--transition-base);
+  padding: 0 !important;
+  align-self: center;
+}
+
+.cal-sidebar-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: var(--surface-primary);
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--transition-base);
+}
+
+.cal-sidebar-toggle.on {
+  background: var(--toggle-color, var(--accent-primary));
+}
+
+.cal-sidebar-toggle.on::after {
+  transform: translateX(12px);
+}
+
+/* ══════════════════════════════════════════════════════
+   QUICK EVENT POPOVER — "Precision Chronograph" Premium
+   Glassmorphism, staggered reveals, signal gradient,
+   duration pills, light-sweep save button.
+   ══════════════════════════════════════════════════════ */
+
+/* ── Overlay — subtle scrim ── */
+/* ══════════════════════════════════════════════════════
+   QUICK EVENT POPOVER — Premium Refined
+   ══════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════════════
+   QUICK EVENT POPOVER — Premium Editorial
+   ══════════════════════════════════════════════════════ */
+
+.qe-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background: rgba(0, 0, 0, 0.08);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  animation: qeFadeIn 0.2s ease-out;
+}
+
+@keyframes qeFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.qe-popover {
+  position: fixed;
+  background: var(--surface-primary);
+  border: 1px solid color-mix(in srgb, var(--border-default) 25%, transparent);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6) var(--space-6) 20px;
+  width: 480px;
+  /* Cap the popover so it never exceeds the visible viewport. At high
+     browser-zoom levels (or on narrow windows), 480px CSS pixels can
+     overrun the right edge after the flip-left fallback in
+     computePopoverPosition lands `left` at 20. Without this cap, child
+     rows like .qe-when-row push their tail content past the viewport
+     and the end time gets clipped ("11 : 00 - 1…" with "2:00" off-screen).
+     Switching `overflow-x` to `clip` instead of `visible` makes sure
+     anything that still escapes (focus rings, suggestion lists with
+     negative offsets) is contained too. */
+  max-width: calc(100vw - 40px);
+  max-width: calc(100dvw - 40px);
+  max-height: calc(100vh - 40px);
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  overflow-x: clip;
+  box-shadow: var(--shadow-modal);
+  z-index: var(--z-popover);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: qeSlideIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+  /* BUG-P001 fix: inserting a position:fixed element triggers a full compositing
+     repaint in Tauri's WebView, causing a white flash on keypress. Promoting this
+     element to its own GPU layer (will-change + backface-visibility) prevents the
+     compositing invalidation from propagating to the main layer. */
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Close button — top right */
+.qe-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  border-radius: 0;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.qe-close-btn:active {
+  transform: scale(var(--scale-dramatic));
+}
+
+/* Scheduler — hour select row */
+.qe-scheduler-hours-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 0;
+  margin-top: -8px;
+}
+
+.qe-scheduler-hour-select {
+  flex: 1;
+  padding: 5px var(--space-2);
+  border: 1px solid color-mix(in srgb, var(--border-default) 40%, transparent);
+  border-radius: var(--radius-md);
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.qe-scheduler-hour-select:focus {
+  border-color: var(--accent-primary);
+}
+
+.qe-scheduler-hour-sep {
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+}
+
+@keyframes qeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(var(--scale-press));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes qeRowReveal {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Project labels — top of popover ──
+   Les pills réutilisent <LabelBadge size="small"/>, source unique de vérité
+   pour le style label à travers l'app (inbox, detail modal, deep focus...).
+   Seul le conteneur et le bouton-déclencheur (tag icon) sont stylés ici. */
+.qe-label-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 0 6px 8px;
+  position: relative;
+}
+
+/* Holder for label-pills + group-suggestions on the same horizontal line.
+   Children's own padding is neutralized so they sit flush; the dropdown on
+   .qe-label-pills still anchors to it (position: relative preserved). */
+.qe-context-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.qe-context-row > .qe-label-pills,
+.qe-context-row > .qe-group-suggestions {
+  padding: 0;
+}
+
+.qe-label-dropdown--pills {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  z-index: 10;
+}
+
+/* ── Title — hero-sized, editorial underline ── */
+.qe-title-row {
+  opacity: 0;
+  animation: qeRowReveal 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--row-delay, 0) * 0.04s + 0.05s);
+}
+
+.qe-title-input {
+  width: 100%; /* Was calc(100% - 32px) — truncated long titles like "Alexandre Simon" (BUG-006 QA 2026-04-10) */
+  border: none !important;
+  background: none !important;
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 0 0 10px 0;
+  outline: none !important;
+  box-shadow: none !important;
+  letter-spacing: var(--tracking-tighter);
+  line-height: var(--leading-tight);
+  font-family: inherit;
+  caret-color: var(--text-secondary);
+}
+
+.qe-title-input:focus,
+.qe-title-input:focus-visible,
+.qe-title-input:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.qe-title-input::placeholder {
+  color: var(--text-placeholder);
+  font-weight: 400;
+  opacity: 0.4;
+}
+
+.qe-title-line {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--border-default) 60%, transparent) 0%,
+    color-mix(in srgb, var(--border-default) 20%, transparent) 100%
+  );
+}
+
+/* ── When row — flat inline date + time ── */
+.qe-when-row {
+  display: flex;
+  align-items: center;
+  /* Allow wrap as a safety net: at high zoom or on a narrowed popover the
+     date + time side may exceed the available width, and `.qe-when-times`
+     uses `white-space: nowrap` so it can't break internally. Wrapping drops
+     the time chunk to a new line instead of clipping it off-screen. */
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+  opacity: 0;
+  animation: qeRowReveal 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--row-delay, 0) * 0.04s + 0.05s);
+}
+
+.qe-when-icon {
+  color: var(--text-tertiary);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.qe-when-date {
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Date field — one bordered box holding the typeable input AND the
+   calendar-picker button (the icon used to float after the field). Boxed
+   like .qe-time-digit so date and times read as one editable family. */
+.qe-date-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 2px 2px 6px;
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  flex-shrink: 0;
+  transition: border-color 0.12s, background 0.12s;
+}
+
+.qe-date-field:focus-within {
+  border-color: var(--accent-primary);
+  background: var(--accent-primary-subtle);
+}
+
+/* Typeable date input — borderless: the box is drawn by .qe-date-field. */
+.qe-when-date--input {
+  /* "YYYY-MM-DD" is exactly 10 chars; trimmed from 11ch so the row leaves
+     more space for the trailing time picker on narrow popovers. */
+  width: 10ch;
+  box-sizing: content-box;
+  padding: 0 2px;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+  outline: none;
+  flex-shrink: 0;
+}
+
+.qe-when-date--input::placeholder {
+  color: var(--text-placeholder);
+}
+
+.qe-when-date-picker-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.qe-when-date-picker-btn:hover {
+  color: var(--text-secondary);
+}
+
+.qe-when-date-picker-btn:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 1px;
+}
+
+.qe-when-time-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-wider);
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+/* ── Custom date picker (portal calendar) ── */
+.qe-dp-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-popover, 9000) + 10);
+}
+
+.qe-date-picker {
+  position: fixed;
+  z-index: calc(var(--z-popover, 9000) + 11);
+  width: 264px;
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle, var(--border-default));
+  border-radius: 16px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+  padding: 10px 14px 14px;
+  animation: modalSlideIn 0.2s var(--ease-settle, ease-out) both;
+}
+
+.qe-dp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.qe-dp-nav {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: var(--text-muted);
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.qe-dp-month {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+
+.qe-dp-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.qe-dp-dow {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 2px 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+}
+
+.qe-dp-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s, transform 0.1s;
+  padding: 0;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.qe-dp-day:active {
+  transform: scale(0.92);
+}
+
+/* Today — filled teal circle (consistent across every calendar surface) */
+.qe-dp-day.today {
+  background: var(--accent-primary);
+  color: var(--text-inverse, #fff) !important;
+  font-weight: 700;
+  border-radius: 50% !important;
+}
+
+.qe-dp-day.today::after {
+  display: none;
+}
+
+.qe-dp-day.selected {
+  background: var(--accent-primary);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(var(--accent-primary-rgb, 0, 0, 0), 0.18);
+}
+
+.qe-dp-day.selected::after {
+  display: none;
+}
+
+.qe-when-times {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-wider);
+  /* Allow this trailing group to shrink when the row gets tight at
+     high zoom levels — combined with `flex-wrap: wrap` on the parent,
+     it either fits inline or drops to a new line. */
+  flex-shrink: 1;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.qe-when-dash {
+  opacity: 0.3;
+  margin: 0 2px;
+}
+
+.qe-time-inputs {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.qe-time-digit {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 2px 4px;
+  /* Sized to "00" with a 4px gutter on each side. Trimmed from 34px so
+     two digits + colon + minute-wrap fit in a narrower row at higher
+     browser-zoom levels. */
+  width: 2.5ch;
+  min-width: 28px;
+  box-sizing: content-box;
+  text-align: center;
+  cursor: ns-resize;
+  transition: border-color 0.12s, background 0.12s;
+  outline: none;
+  flex-shrink: 0;
+}
+
+.qe-time-digit:focus {
+  border-color: var(--accent-primary);
+  background: var(--accent-primary-subtle);
+}
+
+.qe-time-colon {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  opacity: 0.5;
+  padding: 0 1px;
+}
+
+.qe-minute-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.qe-minute-picker {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  right: 50%;
+  transform: translateX(50%);
+  display: flex;
+  gap: 2px;
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle, var(--border-default));
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.04);
+  padding: 4px;
+  z-index: var(--z-dropdown, 100);
+  animation: qeMinuteFade 0.12s ease-out both;
+}
+
+@keyframes qeMinuteFade {
+  from { opacity: 0; transform: translateX(50%) translateY(4px); }
+  to   { opacity: 1; transform: translateX(50%) translateY(0); }
+}
+
+.qe-minute-opt {
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 9px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+
+.qe-minute-opt.active {
+  background: var(--accent-primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Positionnement de la chip "Toute la journée" — le style visuel vient de
+   `.qe-toggle-btn` (partagé avec les autres chips : Lieu, Notes, Étiquette…). */
+/* ── Duration — quick preset chips (the piecewise slider was removed: it
+   duplicated the editable end time in the When row) ── */
+.qe-duration-presets {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  /* Aligns the chips with the date field column: when-icon 14px + row gap 8px. */
+  margin-left: 22px;
+  opacity: 0;
+  animation: qeRowReveal 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--row-delay, 0) * 0.04s + 0.05s);
+}
+
+.qe-duration-preset {
+  font-size: var(--font-size-xs);
+  font-family: inherit;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--border-default) 35%, transparent);
+  border-radius: var(--radius-full);
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+
+.qe-duration-preset:hover {
+  border-color: color-mix(in srgb, var(--accent-primary) 60%, transparent);
+  color: var(--accent-primary);
+}
+
+.qe-duration-preset.active {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: var(--text-inverse);
+  font-weight: 600;
+}
+
+/* Shown when the current duration matches no preset (custom end time,
+   edit mode) so the value stays visible without an active chip. */
+.qe-duration-custom-label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-tertiary);
+  margin-left: 4px;
+}
+
+/* ── Attendees section ── */
+.qe-attendees-section {
+  opacity: 0;
+  animation: qeRowReveal 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--row-delay, 0) * 0.04s + 0.05s);
+}
+
+.qe-add-attendees-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px var(--space-1);
+  border: none;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+  letter-spacing: var(--tracking-wide);
+}
+
+.qe-add-attendees-btn svg {
+  opacity: 0.4;
+  transition: opacity var(--transition-fast);
+}
+
+.qe-attendees-input-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  animation: qeRowReveal 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.qe-attendees-icon {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  margin-top: var(--space-2);
+  opacity: 0.4;
+}
+
+.qe-contact-autocomplete {
+  flex: 1;
+  min-width: 0;
+}
+
+.qe-contact-autocomplete input {
+  width: 100%;
+  border: 1px solid color-mix(in srgb, var(--border-default) 40%, transparent) !important;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--surface-secondary) 60%, transparent);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  padding: 7px 10px;
+  outline: none !important;
+  box-shadow: none !important;
+  font-family: inherit;
+  transition: border-color var(--transition-fast);
+}
+
+.qe-contact-autocomplete input::placeholder {
+  color: var(--text-placeholder);
+  opacity: 0.5;
+}
+
+.qe-contact-autocomplete input:focus,
+.qe-contact-autocomplete input:focus-visible {
+  border-color: var(--text-tertiary) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* ── Footer — save button ── */
+.qe-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 6px;
+  margin-top: 2px;
+  border-top: 1px solid color-mix(in srgb, var(--border-default) 18%, transparent);
+  opacity: 0;
+  animation: qeRowReveal 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--row-delay, 0) * 0.04s + 0.05s);
+}
+
+.qe-keys {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.qe-keys kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 5px;
+  border: 1px solid color-mix(in srgb, var(--border-default) 30%, transparent);
+  border-radius: var(--radius-xs);
+  background: color-mix(in srgb, var(--surface-secondary) 50%, transparent);
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--text-placeholder);
+  line-height: var(--leading-none);
+}
+
+/* Quiet escape hatch next to Save — the corner X shouldn't be the only
+   way out of the form. */
+.qe-cancel-btn {
+  height: 40px;
+  padding: 0 var(--space-4);
+  border: none;
+  border-radius: var(--radius-lg);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  font-family: inherit;
+  letter-spacing: var(--tracking-wide);
+  cursor: pointer;
+  transition: background var(--transition-base), color var(--transition-base);
+}
+
+.qe-cancel-btn:hover:not(:disabled) {
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+}
+
+.qe-cancel-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Save button — accent teal, premium ── */
+.qe-save-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 40px;
+  padding: 0 var(--space-6);
+  border: none;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--accent-primary) 0%, color-mix(in srgb, var(--accent-primary) 85%, color-mix(in srgb, var(--accent-primary) 70%, black)) 100%);
+  color: var(--text-inverse);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  font-family: inherit;
+  box-shadow: var(--shadow-sm);
+}
+
+.qe-save-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(255, 255, 255, 0.18) 42%,
+    rgba(255, 255, 255, 0.08) 49%,
+    transparent 64%
+  );
+  transform: translateX(-120%);
+  transition: none;
+  pointer-events: none;
+}
+
+@keyframes qeLightSweep {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+
+.qe-save-btn:active:not(:disabled) {
+  transform: translateY(0) scale(var(--scale-press));
+  transition-duration: 0.08s;
+}
+
+/* Clearly-disabled state: flat gray, not washed-out teal (the 0.3-opacity
+   teal read as a broken enabled button). `.saving` keeps the teal + spinner. */
+.qe-save-btn:disabled:not(.saving) {
+  background: var(--surface-secondary);
+  color: var(--text-tertiary);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.qe-save-btn svg {
+  position: relative;
+  z-index: 1;
+  opacity: 0.85;
+  transition: transform var(--transition-base);
+}
+
+/* ── Save spinner ── */
+.qe-save-spinner {
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-top-color: var(--text-inverse);
+  border-radius: var(--radius-full);
+  animation: spin 0.6s linear infinite;
+}
+
+.qe-save-btn.saving {
+  pointer-events: none;
+  padding: 0 var(--space-5);
+}
+
+/* ── Hour-slot clickable cursor ── */
+.calendar-hour-slot {
+  cursor: pointer;
+}
+
+/* ══════════════════════════════════════════════════════
+   QUICK EVENT — Participants (always visible)
+   ══════════════════════════════════════════════════════ */
+
+.qe-attendees-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0;
+  opacity: 0;
+  animation: qeRowReveal 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--row-delay, 0) * 0.04s + 0.05s);
+}
+
+/* When at least one chip is present, hide the left silhouette icon — each chip
+   already carries its own avatar (redundant) and hiding gives ~22px back to
+   the wrapping chip list. Placeholder state still shows the icon. */
+.qe-attendees-row--has-chips .qe-attendees-icon {
+  display: none;
+  position: relative;
+  z-index: 10;
+}
+
+.qe-attendees-icon {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  opacity: 0.55;
+}
+
+.qe-attendees-row .qe-contact-autocomplete input {
+  border: none !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-default) 30%, transparent) !important;
+  border-radius: 0 !important;
+  padding: 6px 0 !important;
+  font-size: var(--font-size-sm) !important;
+  background: transparent !important;
+  transition: border-color var(--transition-base);
+}
+
+.qe-attendees-row .qe-contact-autocomplete input::placeholder {
+  color: var(--text-tertiary);
+  opacity: 0.5;
+  font-size: var(--font-size-xs);
+}
+
+.qe-attendees-row .qe-contact-autocomplete input:focus,
+.qe-attendees-row .qe-contact-autocomplete input:focus-visible {
+  border-bottom-color: var(--accent-primary) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Dropdown scoped inside the popover — compact, clean overlay */
+.qe-attendees-row .suggestions-list {
+  max-height: 180px;
+  overflow-y: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in srgb, var(--border-default) 30%, transparent);
+  box-shadow: var(--shadow-lg);
+  margin-top: 6px;
+  left: -22px;
+  right: -24px;
+}
+
+/* ══════════════════════════════════════════════════════
+   QUICK EVENT — Toggle Buttons Row & Fields
+   ══════════════════════════════════════════════════════ */
+
+.qe-toggles-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding-top: 2px;
+  opacity: 0;
+  animation: qeRowReveal 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--row-delay, 0) * 0.04s + 0.05s);
+  position: relative;
+  z-index: 1;
+}
+
+/* `.qe-label-chip-toggle` est visuellement identique à `.qe-toggle-btn` mais
+   porte un nom distinct pour ne pas se confondre avec les toggles optionnels
+   (Lieu/Notes/Rappel/Récurrence/Google Meet/Pièce jointe) — sinon les tests
+   E2E qui utilisent `.qe-toggle-btn`.nth(N) pour cibler un toggle précis
+   voient leurs indices décalés quand la chip Étiquette est rendue. */
+.qe-toggle-btn,
+.qe-label-chip-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid color-mix(in srgb, var(--border-default) 25%, transparent);
+  border-radius: var(--radius-2xl);
+  background: color-mix(in srgb, var(--surface-secondary) 40%, transparent);
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+  letter-spacing: var(--tracking-wide);
+}
+
+.qe-toggle-btn.active,
+.qe-label-chip-toggle.active {
+  border-color: color-mix(in srgb, var(--accent-primary) 40%, transparent);
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 6%, transparent);
+}
+
+/* P2a: inline ✓ on the Google Meet toggle when conference is on, replacing
+   the separate "A Google Meet link will be added" badge that used to live
+   above the footer. The check sits to the right of the label inside the
+   active toggle and inherits its accent-primary color. */
+.qe-toggle-check {
+  flex-shrink: 0;
+  margin-left: 1px;
+  color: currentColor;
+}
+
+/* ── Label picker ── */
+.qe-label-picker-wrapper {
+  position: relative;
+  z-index: 10;
+}
+
+.qe-label-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 10;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 4px;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.qe-label-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border: none;
+  background: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-family: inherit;
+  text-align: left;
+  width: 100%;
+  transition: background 0.1s;
+}
+
+.qe-label-option.selected {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.qe-label-option-check {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.qe-label-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.qe-label-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.qe-label-fav-star {
+  color: #f59e0b;
+  flex-shrink: 0;
+}
+
+/* ── Groupes de contacts suggérés ── */
+.qe-group-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 0 6px 6px;
+  opacity: 0;
+  animation: qeRowReveal 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--row-delay, 0) * 60ms);
+}
+
+.qe-group-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px;
+  border: 1px solid color-mix(in srgb, var(--border-default) 50%, transparent);
+  border-radius: var(--radius-2xl);
+  background: color-mix(in srgb, var(--bg-secondary) 60%, transparent);
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.35;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.qe-group-chip.added {
+  border-color: color-mix(in srgb, var(--color-success, #10b981) 40%, transparent);
+  background: color-mix(in srgb, var(--color-success, #10b981) 8%, transparent);
+  color: var(--color-success, #10b981);
+}
+
+.qe-group-chip-name {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.qe-group-chip-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--text-placeholder) 15%, transparent);
+  font-size: 10px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.qe-group-chip-check {
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+.qe-toggle-btn svg,
+.qe-label-chip-toggle svg {
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.qe-toggle-btn.active svg,
+.qe-label-chip-toggle.active svg {
+  opacity: 0.8;
+}
+
+/* All-day toggle */
+
+/* ── Expandable fields ── */
+.qe-field-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+  animation: qeRowReveal 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.qe-field-row--notes {
+  align-items: flex-start;
+}
+
+.qe-field-row--recurrence {
+  display: block;
+}
+
+.qe-field-icon {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  margin-top: var(--space-2);
+  opacity: 0.4;
+}
+
+.qe-field-input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--border-default) 40%, transparent) !important;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--surface-secondary) 60%, transparent);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  padding: 7px 10px;
+  outline: none !important;
+  box-shadow: none !important;
+  font-family: inherit;
+  transition: border-color var(--transition-fast);
+}
+
+.qe-field-input::placeholder {
+  color: var(--text-placeholder);
+  opacity: 0.5;
+}
+
+.qe-field-input:focus {
+  border-color: var(--text-tertiary) !important;
+}
+
+.qe-field-textarea {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--border-default) 40%, transparent);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--surface-secondary) 60%, transparent);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  padding: 7px 10px;
+  outline: none;
+  box-shadow: none;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 42px;
+  max-height: 100px;
+  line-height: var(--leading-normal);
+  transition: border-color var(--transition-fast);
+}
+
+/* Rich text editor wrapper inside the notes row. The popover anchors to
+   .rte-toolbar, which is itself absolutely positioned within .rte-wrap. */
+.qe-field-rte-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.qe-field-rte-wrap .rte-editor {
+  font-size: var(--font-size-xs);
+  min-height: 150px;
+  max-height: 280px;
+  overflow-y: auto;
+  padding: 12px 14px;
+  line-height: 1.55;
+}
+
+.qe-field-textarea::placeholder {
+  color: var(--text-placeholder);
+  opacity: 0.5;
+}
+
+.qe-field-textarea:focus {
+  border-color: var(--text-tertiary);
+}
+
+.qe-reminder-track {
+  flex: 1;
+  display: flex;
+  background: color-mix(in srgb, var(--surface-secondary) 80%, transparent);
+  border-radius: var(--radius-md);
+  padding: 2px;
+  gap: 2px;
+}
+
+/* Segmented track used by SmartSchedulerPanel (duration + range rows). These
+   inherit the old `.qe-duration-track`/`.qe-duration-seg` sizing that was
+   retired when the duration picker became a slider — kept in a dedicated
+   class so the reminder picker above stays compact. */
+.qe-scheduler-seg-track {
+  display: flex;
+  background: color-mix(in srgb, var(--surface-secondary) 80%, transparent);
+  border-radius: var(--radius-lg);
+  padding: 3px;
+  gap: 4px;
+}
+
+.qe-scheduler-seg {
+  flex: 1;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  letter-spacing: normal;
+  padding: 0 6px;
+  font-family: inherit;
+}
+
+.qe-scheduler-seg.active {
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+.qe-reminder-seg {
+  flex: 1;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-2xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  letter-spacing: normal;
+  padding: 0 6px;
+  font-family: inherit;
+}
+
+.qe-reminder-seg.active {
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Conference badge */
+/* ══════════════════════════════════════════════════════
+   RECURRENCE PICKER
+   ══════════════════════════════════════════════════════ */
+
+.qe-recurrence {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.qe-recurrence-presets {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.qe-recurrence-pill {
+  padding: 5px 12px;
+  border: 1px solid color-mix(in srgb, var(--border-default) 40%, transparent);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.qe-recurrence-pill.active {
+  border-color: color-mix(in srgb, var(--accent-primary) 50%, transparent);
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 8%, transparent);
+  font-weight: 600;
+}
+
+.qe-recurrence-custom {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--surface-secondary) 60%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border-default) 20%, transparent);
+  animation: qeRowReveal 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.qe-recurrence-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.qe-recurrence-label {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.qe-recurrence-number {
+  width: 44px;
+  padding: 3px 6px;
+  border: 1px solid color-mix(in srgb, var(--border-default) 40%, transparent);
+  border-radius: var(--radius-sm);
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-align: center;
+  outline: none;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.qe-recurrence-number:focus {
+  border-color: var(--accent-primary);
+}
+
+.qe-recurrence-freq-pills {
+  display: flex;
+  gap: 2px;
+}
+
+.qe-recurrence-freq-pill {
+  padding: 3px var(--space-2);
+  border: 1px solid color-mix(in srgb, var(--border-default) 30%, transparent);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-2xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.qe-recurrence-freq-pill.active {
+  border-color: color-mix(in srgb, var(--accent-primary) 50%, transparent);
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 6%, transparent);
+  font-weight: 600;
+}
+
+.qe-recurrence-end-pills {
+  display: flex;
+  gap: 2px;
+}
+
+.qe-recurrence-days {
+  display: flex;
+  gap: 3px;
+}
+
+.qe-recurrence-day {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--border-default) 30%, transparent);
+  border-radius: var(--radius-full);
+  background: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+  padding: 0;
+}
+
+.qe-recurrence-day.active {
+  border-color: var(--accent-primary);
+  color: var(--text-inverse);
+  background: var(--accent-primary);
+}
+
+.qe-recurrence-date {
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid color-mix(in srgb, var(--border-default) 40%, transparent);
+  border-radius: var(--radius-sm);
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-size: var(--font-size-xs);
+  outline: none;
+  font-family: inherit;
+}
+
+.qe-recurrence-date:focus {
+  border-color: var(--accent-primary);
+}
+
+/* ══════════════════════════════════════════════════════
+   VIEW SELECTOR — Segmented Control
+   ══════════════════════════════════════════════════════ */
+
+.calendar-view-selector {
+  display: flex;
+  background: color-mix(in srgb, var(--surface-secondary) 80%, transparent);
+  border-radius: var(--radius-md);
+  padding: 2px;
+  border: 1px solid var(--border-subtle);
+  gap: 1px;
+}
+
+.calendar-view-selector-btn {
+  padding: var(--space-1) var(--space-3);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+  letter-spacing: var(--tracking-wide);
+}
+
+.calendar-view-selector-btn.active {
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Close button */
+/* ── Booking link button ──────────────────────────────────── */
+.cal-booking-anchor {
+  position: relative;
+}
+
+.cal-booking-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.cal-booking-popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 320px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 14px;
+  z-index: 200;
+}
+
+.cal-booking-popover-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 10px;
+}
+
+.cal-booking-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  padding: 4px 0;
+}
+
+.cal-booking-scope-msg {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  background: var(--surface-secondary);
+  border-radius: var(--radius-md);
+  padding: 10px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+.cal-booking-scope-msg svg {
+  flex-shrink: 0;
+  color: var(--accent-warning, #f59e0b);
+  margin-top: 1px;
+}
+.cal-booking-scope-msg p { margin: 0; }
+
+.cal-booking-error {
+  font-size: 12px;
+  color: var(--text-danger, #dc2626);
+  margin: 0;
+}
+
+.cal-booking-empty {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cal-booking-empty p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+.cal-booking-create-btn {
+  height: 32px;
+  padding: 0 14px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--accent-primary);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+  align-self: flex-start;
+}
+
+.cal-booking-url-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cal-booking-url-input {
+  flex: 1;
+  height: 30px;
+  padding: 0 8px;
+  font-size: 11px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cal-booking-copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  flex-shrink: 0;
+}
+.cal-booking-open-btn {
+  height: 30px;
+  padding: 0 10px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--accent-primary);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: opacity var(--transition-fast);
+  flex-shrink: 0;
+}
+
+/* ── Close button ───────────────────────────────────────── */
+.calendar-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  padding: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  margin-left: var(--space-1);
+}
+
+/* ══════════════════════════════════════════════════════
+   WEEK NUMBER BADGE
+   ══════════════════════════════════════════════════════ */
+
+.calendar-week-number {
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  color: var(--text-placeholder);
+  background: color-mix(in srgb, var(--surface-secondary) 80%, transparent);
+  padding: 1px 5px;
+  border-radius: var(--radius-xs);
+  letter-spacing: var(--tracking-wider);
+  margin-left: var(--space-2);
+  /* P3-25 (2026-05-17): the pill is now a real <button> — neutralize the UA
+     border + cursor so it still looks like a pill, but advertise hover so
+     keyboard/mouse users notice it's clickable. */
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+.calendar-week-number:hover,
+.calendar-week-number:focus-visible {
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--surface-secondary) 100%, transparent);
+  outline: none;
+}
+.calendar-week-number:focus-visible {
+  box-shadow: 0 0 0 2px var(--accent-primary);
+}
+
+/* ══════════════════════════════════════════════════════
+   TODAY CIRCLE — Accent ring around day number
+   ══════════════════════════════════════════════════════ */
+
+.calendar-day-number--today {
+  background: var(--accent-primary);
+  color: var(--text-inverse) !important;
+  font-weight: 500 !important;
+  border-radius: 50%;
+}
+
+/* ══════════════════════════════════════════════════════
+   EVENT RESIZE HANDLE
+   ══════════════════════════════════════════════════════ */
+
+.calendar-event-resize-handle {
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 14px;
+  cursor: ns-resize;
+  background: transparent;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  transition: background var(--transition-fast);
+  z-index: 5;
+  pointer-events: auto;
+}
+
+.calendar-event-resize-handle--top {
+  top: -3px;
+  bottom: auto;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.calendar-event-resize-handle::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+  background: color-mix(in srgb, var(--text-tertiary) 20%, transparent);
+  opacity: 1;
+  transition: opacity var(--transition-fast);
+}
+
+.calendar-event-resize-handle--top::after {
+  bottom: auto;
+  top: 5px;
+}
+
+/* Sur les événements compacts : masquer UNIQUEMENT la barre visuelle ::after
+   (sinon elle ressemble à un slider range), mais garder la poignée cliquable
+   pour conserver le redimensionnement haut/bas. Poignées rétrécies pour ne
+   pas couvrir tout l'événement (petits events ~24px). */
+.calendar-event--compact .calendar-event-resize-handle::after {
+  display: none;
+}
+.calendar-event--compact .calendar-event-resize-handle {
+  height: 6px;
+}
+
+/* ══════════════════════════════════════════════════════
+   DRAG-TO-CREATE GHOST EVENT
+   ══════════════════════════════════════════════════════ */
+
+.calendar-ghost-event {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  border: 1.5px dashed color-mix(in srgb, var(--accent-primary) 50%, transparent);
+  border-radius: var(--radius-md);
+  pointer-events: none;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-primary);
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+}
+
+/* ══════════════════════════════════════════════════════
+   EVENT TOOLTIP
+   ══════════════════════════════════════════════════════ */
+
+.calendar-event-tooltip {
+  position: fixed;
+  z-index: 900;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  box-shadow: var(--shadow-lg);
+  max-width: 260px;
+  pointer-events: none;
+  animation: qeSlideIn 0.15s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.calendar-event-tooltip-title {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calendar-event-tooltip-time {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.calendar-event-tooltip-location,
+.calendar-event-tooltip-attendees {
+  font-size: var(--font-size-2xs);
+  color: var(--text-tertiary);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ══════════════════════════════════════════════════════
+   EVENT SEARCH INPUT
+   ══════════════════════════════════════════════════════ */
+
+.calendar-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+
+.calendar-search-icon-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.calendar-search-icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.calendar-search-wrapper--expanded .calendar-search-icon-btn {
+  position: absolute;
+  left: 0;
+  pointer-events: none;
+  background: transparent;
+  color: var(--text-placeholder);
+}
+
+.calendar-search-input {
+  height: 30px;
+  width: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: var(--font-size-xs);
+  outline: none;
+  font-family: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transition: width var(--transition-fast), padding var(--transition-fast), opacity var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.calendar-search-wrapper--expanded .calendar-search-input {
+  width: 200px;
+  padding: 0 10px 0 30px;
+  border-color: var(--border-subtle);
+  background: var(--surface-secondary);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.calendar-search-wrapper--expanded .calendar-search-input:focus {
+  border-color: var(--accent-primary);
+  background: var(--surface-primary);
+}
+
+.calendar-search-input::placeholder {
+  color: var(--text-placeholder);
+}
+
+/* ══════════════════════════════════════════════════════
+   EVENT SEARCH RESULTS
+   ══════════════════════════════════════════════════════ */
+
+.calendar-search-results {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 20px 28px;
+  background: var(--surface-primary);
+}
+
+.calendar-search-results-header {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+  padding-left: 4px;
+}
+
+.calendar-search-results-count {
+  font-weight: 600;
+}
+
+.calendar-search-empty {
+  padding: 40px 12px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.calendar-search-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.calendar-search-day-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-search-day-header {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 8px 4px 6px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 4px;
+}
+
+.calendar-search-result-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.calendar-search-result-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.calendar-search-result-time {
+  min-width: 110px;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.calendar-search-result-title {
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+.calendar-search-result-location {
+  color: var(--text-secondary);
+  font-size: var(--font-size-xs);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════════════
+   SMART SCHEDULER PANEL
+   ══════════════════════════════════════════════════════ */
+
+.qe-scheduler {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.qe-scheduler-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qe-scheduler-back {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.qe-scheduler-title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.qe-scheduler-participants {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.qe-scheduler-participant {
+  font-size: var(--font-size-2xs);
+  font-weight: 500;
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 8%, transparent);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-lg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+.qe-scheduler-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.qe-scheduler-toggle-row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qe-scheduler-label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: var(--tracking-wide);
+}
+
+.qe-scheduler-error {
+  font-size: var(--font-size-xs);
+  color: var(--color-error, #e53e3e);
+  text-align: center;
+  padding: var(--space-1) 0;
+}
+
+.qe-scheduler-results {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 320px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+/* Slot count chip in the header — appears once results arrive. */
+.qe-scheduler-count {
+  margin-left: auto;
+  font-size: var(--font-size-2xs);
+  font-weight: 500;
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Searching status banner — shown above skeleton rows. */
+.qe-scheduler-status {
+  font-size: var(--font-size-2xs);
+  color: var(--text-tertiary);
+  padding: 2px 4px 4px;
+}
+
+/* Skeleton row — placeholder while the backend search runs. */
+.qe-scheduler-skeleton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: var(--space-2) 10px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: none;
+}
+
+.qe-scheduler-skeleton-bar {
+  height: 10px;
+  border-radius: 5px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--text-placeholder) 18%, transparent),
+    color-mix(in srgb, var(--text-placeholder) 35%, transparent),
+    color-mix(in srgb, var(--text-placeholder) 18%, transparent)
+  );
+  background-size: 200% 100%;
+  animation: qeSkeletonShimmer 1.4s ease-in-out infinite;
+  flex: 1;
+}
+
+.qe-scheduler-skeleton-bar--narrow {
+  flex: 0 0 64px;
+}
+
+@keyframes qeSkeletonShimmer {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* Day group — one block per calendar day with a sticky-ish header. */
+.qe-scheduler-day-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.qe-scheduler-day-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-tertiary);
+  padding: 6px 4px 4px;
+  background: linear-gradient(
+    to bottom,
+    var(--surface-primary) 0%,
+    var(--surface-primary) 70%,
+    transparent 100%
+  );
+}
+
+/* Earliest pill — only on the very first slot row. */
+.qe-scheduler-earliest-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  padding: 2px 6px;
+  border-radius: var(--radius-full, 999px);
+  white-space: nowrap;
+}
+
+.qe-scheduler-slot.is-earliest {
+  border-color: color-mix(in srgb, var(--accent-primary) 35%, transparent);
+  background: color-mix(in srgb, var(--accent-primary) 4%, transparent);
+}
+
+/* Empty state with one-click range extension. */
+.qe-scheduler-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: var(--space-4) var(--space-2);
+}
+
+.qe-scheduler-empty-text {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+.qe-scheduler-empty-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border: 1.5px solid color-mix(in srgb, var(--accent-primary) 40%, transparent);
+  border-radius: var(--radius-full, 999px);
+  background: color-mix(in srgb, var(--accent-primary) 5%, transparent);
+  color: var(--accent-primary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all var(--transition-fast);
+}
+
+.qe-scheduler-empty {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  text-align: center;
+  padding: var(--space-3) 0;
+}
+
+.qe-scheduler-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+  font-family: inherit;
+}
+
+/* Main row inside the slot card: pill (if earliest) + time + chevron. */
+.qe-scheduler-slot-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Attendees footer: stacked avatar bubbles + "All N can attend" status.
+   Only rendered when attendees.length > 0 — purely visual confirmation
+   that the suggested slot works for every invited participant (Gmail and
+   Outlook alike, since the backend has already intersected everyone's
+   freebusy before returning the slot). */
+.qe-scheduler-slot-attendees {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 4px;
+  border-top: 1px dashed color-mix(in srgb, var(--border-subtle) 60%, transparent);
+}
+
+.qe-scheduler-slot-avatars {
+  display: flex;
+  align-items: center;
+}
+
+/* Overlapping stacked bubbles — first one flush, subsequent ones tucked
+   under by 6px with a ring matching the card background. */
+.qe-scheduler-slot-avatars .avatar {
+  width: 22px;
+  height: 22px;
+  font-size: 10px;
+  margin-left: -6px;
+  box-shadow: 0 0 0 1.5px var(--surface-primary);
+}
+
+.qe-scheduler-slot-avatars .avatar:first-child {
+  margin-left: 0;
+}
+
+.qe-scheduler-slot-avatars-overflow {
+  margin-left: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.qe-scheduler-slot-status {
+  font-size: var(--font-size-2xs);
+  color: var(--text-secondary);
+  flex: 1;
+  font-weight: 500;
+}
+
+.qe-scheduler-slot.is-earliest .qe-scheduler-slot-status {
+  color: var(--accent-primary);
+}
+
+/* ===========================================================================
+   View toggle — Cards / Timeline
+   =========================================================================== */
+.qe-scheduler-view-toggle {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  background: color-mix(in srgb, var(--surface-secondary) 80%, transparent);
+  border-radius: var(--radius-lg);
+  margin: 2px 0;
+}
+
+.qe-scheduler-view-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 8px;
+  border: none;
+  background: none;
+  border-radius: var(--radius-md);
+  color: var(--text-tertiary);
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.qe-scheduler-view-tab.active {
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+.qe-scheduler-results.is-hidden {
+  display: none;
+}
+
+/* ===========================================================================
+   Per-attendee timeline grid (Outlook scheduling-assistant equivalent)
+   =========================================================================== */
+.qe-scheduler-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 2px 0;
+}
+
+/* Day navigator ─ left/right arrows around the visible day label. */
+.qe-scheduler-timeline-daynav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 2px 0 4px;
+}
+
+.qe-scheduler-timeline-daynav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.qe-scheduler-timeline-daynav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.qe-scheduler-timeline-daylabel {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-primary);
+  text-transform: capitalize;
+  min-width: 130px;
+  text-align: center;
+}
+
+/* Hour axis — sits above the attendee rows and aligns with the track area
+   via .qe-scheduler-timeline-axis-spacer (same width as the row name col). */
+.qe-scheduler-timeline-axis {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+  padding-bottom: 2px;
+}
+
+.qe-scheduler-timeline-axis-spacer {
+  flex: 0 0 90px;
+}
+
+.qe-scheduler-timeline-axis-ticks {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.qe-scheduler-timeline-tick {
+  white-space: nowrap;
+}
+
+/* Attendee rows container. */
+.qe-scheduler-timeline-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.qe-scheduler-timeline-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 26px;
+}
+
+/* Row header: avatar + email (truncated). 90px column matches the axis spacer. */
+.qe-scheduler-timeline-row-name {
+  flex: 0 0 90px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.qe-scheduler-timeline-row-email {
+  font-size: 11px;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The track: relative-positioned container for absolute busy blocks. */
+.qe-scheduler-timeline-track {
+  flex: 1;
+  position: relative;
+  height: 22px;
+  background: color-mix(in srgb, var(--surface-secondary) 60%, transparent);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+/* Background hour grid lines — subtle vertical separators. */
+.qe-scheduler-timeline-track-hour {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-right: 1px dashed color-mix(in srgb, var(--border-subtle) 80%, transparent);
+  pointer-events: none;
+}
+
+/* Busy blocks. Status-specific patterns:
+   - busy: solid accent (default — Google blocks always land here)
+   - tentative: diagonal stripe pattern (Outlook only)
+   - oof: solid muted red/purple (Outlook only) */
+.qe-scheduler-timeline-block {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 2px;
+  pointer-events: auto;
+}
+
+.qe-scheduler-timeline-block.is-busy {
+  background: color-mix(in srgb, var(--accent-primary) 70%, transparent);
+}
+
+.qe-scheduler-timeline-block.is-tentative {
+  background: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--accent-primary) 50%, transparent),
+    color-mix(in srgb, var(--accent-primary) 50%, transparent) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 35%, transparent);
+}
+
+.qe-scheduler-timeline-block.is-oof {
+  background: color-mix(in srgb, var(--color-error, #c43d2c) 55%, transparent);
+}
+
+/* Hovered-slot vertical bar — Outlook's pink selection overlay. Spans the
+   single row it lives in; we render one per attendee row when a slot is
+   hovered in the available rail. */
+.qe-scheduler-timeline-selection {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  background: color-mix(in srgb, var(--accent-primary) 18%, transparent);
+  border-left: 2px solid var(--accent-primary);
+  border-right: 2px solid var(--accent-primary);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Available-slots rail at the bottom: the actual click targets. */
+.qe-scheduler-timeline-available {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 26px;
+  margin-top: 4px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.qe-scheduler-timeline-available-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.qe-scheduler-timeline-slot {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 4px;
+  border: 1.5px solid color-mix(in srgb, var(--accent-primary) 45%, transparent);
+  background: color-mix(in srgb, var(--accent-primary) 14%, transparent);
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent-primary);
+  font-variant-numeric: tabular-nums;
+  transition: all var(--transition-fast);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.qe-scheduler-timeline-slot.is-earliest {
+  border-color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 30%, transparent);
+}
+
+.qe-scheduler-timeline-empty {
+  font-size: var(--font-size-2xs);
+  color: var(--text-tertiary);
+  text-align: center;
+  padding: 4px;
+  width: 100%;
+}
+
+/* ===========================================================================
+   Timeline-modal: promotes the timeline grid into a roomy centered overlay
+   so it has space to breathe (the inline popover is ~360px wide).
+   Portals to document.body via <SchedulerTimelineModal>.
+   =========================================================================== */
+.scheduler-timeline-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  /* QuickEventPopover stacks at z-index 8000–9000 — must sit ABOVE that
+     so the modal is not hidden behind the parent popover. */
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  animation: schedulerModalFadeIn 140ms ease-out;
+}
+
+@keyframes schedulerModalFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.scheduler-timeline-modal {
+  width: 100%;
+  max-width: 920px;
+  max-height: 88vh;
+  background: var(--surface-primary);
+  border-radius: var(--radius-xl, 16px);
+  box-shadow: var(--shadow-2xl);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: schedulerModalPop 180ms cubic-bezier(0.32, 0.72, 0.32, 1.1);
+}
+
+@keyframes schedulerModalPop {
+  from { opacity: 0; transform: translateY(8px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.scheduler-timeline-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.scheduler-timeline-modal-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.scheduler-timeline-modal-title {
+  margin: 0;
+  font-size: var(--font-size-base, 14px);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Attendee chip row under the modal title — same visual language as the
+   cards-view attendee bubbles. */
+.scheduler-timeline-modal-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.scheduler-timeline-modal-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px 3px 3px;
+  border-radius: 999px;
+  background: var(--surface-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  max-width: 280px;
+}
+
+.scheduler-timeline-modal-chip .avatar {
+  width: 20px;
+  height: 20px;
+  font-size: 9px;
+}
+
+.scheduler-timeline-modal-chip-email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Close button — uses an inline `×` glyph (not an SVG) so it's bulletproof
+   against currentColor inheritance and CSS resets that previously left the
+   icon invisible against the modal surface on Clarity. */
+.scheduler-timeline-modal-close {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #1f2937;
+  border: 1px solid var(--border-default, #d1d5db);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-secondary, #f5f4f1);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.scheduler-timeline-modal-close-glyph {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+  color: inherit;
+  display: block;
+  /* Slight visual nudge: the unicode `×` sits a hair below baseline */
+  transform: translateY(-1px);
+}
+
+.scheduler-timeline-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Inside the modal the timeline track gets significantly more space —
+   widen tracks, taller rows so blocks/labels read at a glance. */
+.scheduler-timeline-modal-body .qe-scheduler-timeline-track {
+  height: 30px;
+}
+
+.scheduler-timeline-modal-body .qe-scheduler-timeline-row {
+  min-height: 34px;
+}
+
+.scheduler-timeline-modal-body .qe-scheduler-timeline-row-name {
+  flex: 0 0 160px;
+}
+
+.scheduler-timeline-modal-body .qe-scheduler-timeline-axis-spacer {
+  flex: 0 0 160px;
+}
+
+.scheduler-timeline-modal-body .qe-scheduler-timeline-row-email {
+  font-size: 12px;
+}
+
+.scheduler-timeline-modal-body .qe-scheduler-timeline-tick {
+  font-size: 11px;
+}
+
+.scheduler-timeline-modal-body .qe-scheduler-timeline-daylabel {
+  font-size: var(--font-size-sm, 13px);
+  min-width: 180px;
+}
+
+.scheduler-timeline-modal-body .qe-scheduler-timeline-slot {
+  font-size: 11px;
+  padding: 0 6px;
+}
+
+/* Mobile / narrow viewports: stretch modal to full screen */
+@media (max-width: 720px) {
+  .scheduler-timeline-modal-backdrop {
+    padding: 0;
+  }
+  .scheduler-timeline-modal {
+    max-width: 100%;
+    max-height: 100vh;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
+
+.qe-scheduler-slot-date {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-primary);
+  min-width: 72px;
+  text-transform: capitalize;
+}
+
+.qe-scheduler-slot-time {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  flex: 1;
+}
+
+.qe-scheduler-slot-arrow {
+  color: var(--text-placeholder);
+  flex-shrink: 0;
+  transition: color var(--transition-fast);
+}
+
+/* ── Slot action buttons in attendees field ── */
+
+/* ── Slot options row: notice + work hours ── */
+.qe-slot-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 100%;
+  margin-top: 2px;
+}
+
+.qe-slot-notice {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qe-slot-notice-label {
+  font-size: var(--font-size-2xs);
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: var(--tracking-wider);
+}
+
+.qe-slot-notice-track {
+  display: flex;
+  background: color-mix(in srgb, var(--surface-secondary) 80%, transparent);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+  gap: 1px;
+}
+
+.qe-slot-notice-seg {
+  padding: 3px var(--space-2);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-2xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+  line-height: var(--leading-tight);
+}
+
+.qe-slot-notice-seg.active {
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+.qe-slot-workhours {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: var(--font-size-2xs);
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: var(--tracking-wide);
+}
+
+.qe-workhours-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: color-mix(in srgb, var(--surface-secondary) 60%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border-primary) 40%, transparent);
+  border-radius: var(--radius-xs);
+  padding: 1px var(--space-1);
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: inherit;
+  line-height: var(--leading-normal);
+  min-width: 0;
+}
+
+.qe-workhours-select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.qe-workhours-sep {
+  color: var(--text-placeholder);
+  font-weight: 400;
+}
+
+.qe-workhours-days {
+  color: var(--text-placeholder);
+  margin-left: 2px;
+}
+
+.qe-slot-actions {
+  display: flex;
+  gap: 6px;
+  flex: 0 0 100%;
+  margin-top: var(--space-1);
+}
+
+.qe-slot-asap-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex: 1;
+  padding: 7px 10px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.qe-slot-asap-btn:active:not(:disabled) {
+  transform: scale(var(--scale-press));
+}
+
+.qe-slot-asap-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.qe-slot-asap-btn .qe-save-spinner {
+  border-color: rgba(255, 255, 255, 0.25);
+  border-top-color: var(--text-inverse);
+}
+
+.qe-slot-browse-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex: 1;
+  padding: 7px 10px;
+  border: 1.5px solid color-mix(in srgb, var(--accent-primary) 35%, transparent);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--accent-primary) 4%, transparent);
+  color: var(--accent-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.qe-slot-browse-btn:active {
+  transform: scale(var(--scale-press));
+}
+
+.qe-slot-confirm {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--success) 8%, transparent);
+  color: var(--success);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  animation: qeRowReveal 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.qe-slot-error {
+  width: 100%;
+  font-size: var(--font-size-2xs);
+  color: var(--color-error, #e53e3e);
+  text-align: center;
+  padding: 2px 0;
+  animation: qeRowReveal 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ASAP confirmation toast */
+.qe-asap-confirm-toast {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding: 10px var(--space-3);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 8%, var(--surface-primary, #fff));
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #0d9488) 25%, transparent);
+  animation: qeRowReveal 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.qe-asap-confirm-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-primary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+.qe-asap-confirm-info svg {
+  color: var(--accent-primary, #0d9488);
+  flex-shrink: 0;
+}
+
+.qe-asap-confirm-label {
+  flex: 1;
+}
+
+.qe-asap-confirm-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.qe-asap-confirm-btn {
+  flex: 1;
+  padding: 6px 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--accent-primary, #0d9488);
+  color: var(--text-inverse);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.qe-asap-cancel-btn {
+  flex: 1;
+  padding: 6px 0;
+  border: 1px solid var(--border-default, #e2e8f0);
+  border-radius: var(--radius-sm);
+  background: var(--surface-primary, #fff);
+  color: var(--text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.qe-asap-propose-email-btn {
+  width: 100%;
+  padding: 6px 0;
+  margin-top: 4px;
+  border: 1px solid var(--accent-primary, #0d9488);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--accent-primary, #0d9488);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+/* ===========================================================================
+   Multi-day timeline grid (.qe-tl-*)
+   Outlook scheduling-assistant style — up to 5 days side-by-side.
+   =========================================================================== */
+.qe-tl {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Header row: day columns with weekday + date */
+.qe-tl-header,
+.qe-tl-axis {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.qe-tl-row-name-spacer {
+  flex: 0 0 160px;
+}
+
+/* Prev/Next nav cluster in the header spacer — pages through day windows
+   when daysWithSlots > maxDays. */
+.qe-tl-nav-cluster {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  padding-right: 4px;
+}
+
+.qe-tl-nav-btn {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid var(--border-default, #d1d5db);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--surface-secondary, #f5f4f1);
+  color: #1f2937;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.qe-tl-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.qe-tl-days {
+  flex: 1;
+  display: flex;
+  gap: 8px;
+}
+
+.qe-tl-day-header {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 6px 4px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+}
+
+.qe-tl-day-header.is-today {
+  background: color-mix(in srgb, var(--accent-primary) 8%, transparent);
+  border-color: color-mix(in srgb, var(--accent-primary) 25%, transparent);
+}
+
+.qe-tl-day-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.qe-tl-day-header.is-today .qe-tl-day-title {
+  color: var(--accent-primary);
+}
+
+.qe-tl-day-date {
+  font-size: 10px;
+  color: var(--text-tertiary);
+}
+
+/* Hour axis under each day's header */
+.qe-tl-day-axis {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+  font-size: 10px;
+  color: var(--text-tertiary);
+}
+
+.qe-tl-tick {
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+}
+.qe-tl-tick:last-child {
+  flex: 0 0 auto;
+}
+
+/* Per-attendee rows */
+.qe-tl-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.qe-tl-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 32px;
+}
+
+.qe-tl-row-name {
+  flex: 0 0 160px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.qe-tl-row-email {
+  font-size: 12px;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Per-day track inside an attendee row. Each day is its own positioning
+   context so busy blocks live at percentages of THIS day, not the whole
+   multi-day span. */
+.qe-tl-day-track {
+  flex: 1;
+  position: relative;
+  height: 26px;
+  background: color-mix(in srgb, var(--surface-secondary) 70%, transparent);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.qe-tl-day-track.is-today {
+  background: color-mix(in srgb, var(--accent-primary) 4%, var(--surface-secondary) 70%);
+}
+
+.qe-tl-day-track.is-rail {
+  background: color-mix(in srgb, var(--surface-secondary) 40%, transparent);
+}
+
+/* Background hour grid */
+.qe-tl-grid-cell {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-right: 1px dashed color-mix(in srgb, var(--border-subtle) 70%, transparent);
+  pointer-events: none;
+}
+
+/* Busy blocks — status-coloured rectangles. */
+.qe-tl-block {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  border-radius: 3px;
+  pointer-events: auto;
+}
+
+.qe-tl-block.is-busy {
+  background: color-mix(in srgb, var(--accent-primary) 78%, transparent);
+}
+
+.qe-tl-block.is-tentative {
+  background: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--accent-primary) 60%, transparent),
+    color-mix(in srgb, var(--accent-primary) 60%, transparent) 4px,
+    transparent 4px,
+    transparent 9px
+  );
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 40%, transparent);
+}
+
+.qe-tl-block.is-oof {
+  background: color-mix(in srgb, var(--color-error, #c43d2c) 65%, transparent);
+}
+
+/* Hovered-slot vertical bar — paints across all attendee rows. */
+.qe-tl-selection {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  background: color-mix(in srgb, var(--accent-primary) 22%, transparent);
+  border-left: 2px solid var(--accent-primary);
+  border-right: 2px solid var(--accent-primary);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* "Now" indicator on today's column. */
+.qe-tl-now-line {
+  position: absolute;
+  top: -100vh;
+  bottom: -100vh;
+  width: 0;
+  border-left: 1.5px solid var(--accent-primary);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Bottom rail: available-slots row stretches full track width. */
+.qe-tl-available-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 32px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.qe-tl-available-label {
+  flex: 0 0 160px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Available-slot pill — click target. */
+.qe-tl-slot {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  border: 1.5px solid color-mix(in srgb, var(--accent-primary) 50%, transparent);
+  background: color-mix(in srgb, var(--accent-primary) 15%, transparent);
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-primary);
+  font-variant-numeric: tabular-nums;
+  transition: all var(--transition-fast);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.qe-tl-slot.is-earliest {
+  border-color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 30%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-primary) 40%, transparent);
+}
+
+.qe-tl-slot-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.qe-tl-slot-sep {
+  opacity: 0.6;
+  margin: 0 1px;
+}
+
+/* Legend at the bottom of the modal — explains the colour palette. */
+.qe-tl-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border-subtle);
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.qe-tl-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qe-tl-legend-swatch {
+  width: 14px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.qe-tl-legend-swatch.is-busy {
+  background: color-mix(in srgb, var(--accent-primary) 78%, transparent);
+}
+
+.qe-tl-legend-swatch.is-tentative {
+  background: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--accent-primary) 60%, transparent),
+    color-mix(in srgb, var(--accent-primary) 60%, transparent) 3px,
+    transparent 3px,
+    transparent 6px
+  );
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 40%, transparent);
+}
+
+.qe-tl-legend-swatch.is-oof {
+  background: color-mix(in srgb, var(--color-error, #c43d2c) 65%, transparent);
+}
+
+/* "No shared calendar" indicator on the attendee row name — small ? badge
+   when an attendee returns zero busy blocks despite other attendees having
+   data (likely permissions issue, not actual emptiness). */
+.qe-tl-no-data {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: 50%;
+  margin-left: 4px;
+  cursor: help;
+}
+
+/* Floating cursor-tracked tooltip — used for busy block hover. */
+.qe-tl-tooltip {
+  position: fixed;
+  z-index: 10001;
+  pointer-events: none;
+  padding: 6px 10px;
+  background: #1f2937;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: var(--radius-sm, 6px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===========================================================================
+   PickATimePicker — full-screen "everyone-free" slot picker.
+   Cream + teal palette per design handoff (design_handoff_pick_a_time).
+   Hardcoded values for design fidelity; the picker is its own visual island
+   that floats above the parent popover.
+   =========================================================================== */
+.pat-overlay {
+  position: fixed;
+  inset: 0;
+  /* QuickEventPopover sits at z-index 1100; SchedulerTimelineModal at 10000.
+     Picker needs to sit at the top of the stack. */
+  z-index: 11000;
+  background: #faf8f3;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  animation: patFadeIn 160ms ease-out;
+  font-family: var(--font-base, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  color: #0c0a09;
+}
+
+@keyframes patFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.pat-shell {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: #faf8f3;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────── */
+.pat-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 24px;
+  background: #faf8f3;
+  border-bottom: 1px solid rgba(15, 15, 20, 0.07);
+  flex-shrink: 0;
+}
+
+.pat-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.pat-header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Today / Prev / Next — mirror CalendarView's .calendar-today-btn /
+   .calendar-chevron-btn so the picker chrome matches the Calendar tab. */
+.pat-today-btn {
+  height: 32px;
+  padding: 0 var(--space-4);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 30%, transparent);
+  border-radius: var(--radius-md);
+  color: var(--accent-primary);
+  font-family: inherit;
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-mega);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.pat-nav-cluster {
+  display: flex;
+  gap: 2px;
+}
+
+.pat-nav-btn {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Ensure the chevron SVG renders inside the ghost button — defensive rule
+   mirrors .calendar-chevron-btn svg in this same file (the picker had the
+   same invisible-glyph bug before this was added). */
+.pat-nav-btn svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+.pat-month-group {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-left: 6px;
+  min-width: 0;
+}
+
+.pat-month-label {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-none);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.pat-week-pill {
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  color: var(--text-placeholder);
+  background: color-mix(in srgb, var(--surface-secondary) 80%, transparent);
+  padding: 1px 5px;
+  border-radius: var(--radius-xs);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* "Find a slot · everyone free" subtitle — sits next to the attendees
+   pill in the top-right area (moved here from the old .pat-toolbar). */
+.pat-find-label {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  color: #78716c;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pat-duration-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+/* Attendees pill — read-only stack of avatars + count, sits in the header
+   next to the X close. Duration moved out to the floating dock at the bottom. */
+.pat-attendees-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px 4px 8px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 15, 20, 0.07);
+  border-radius: 999px;
+  font-family: inherit;
+  color: inherit;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 1px 2px rgba(15, 15, 20, 0.04);
+}
+
+/* ── Duration menu (opens ABOVE the dock's duration chip on click) ──── */
+.pat-duration-menu {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  z-index: 5;
+  min-width: 244px;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 15, 20, 0.1);
+  border-radius: 10px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 8px 22px -4px rgba(15, 15, 20, 0.18),
+    0 2px 6px rgba(15, 15, 20, 0.08);
+  animation: patMenuOpen 120ms ease-out;
+}
+
+@keyframes patMenuOpen {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pat-duration-menu-label {
+  font-size: 10px;
+  color: #78716c;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 2px 2px 8px;
+}
+
+.pat-duration-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.pat-duration-opt {
+  padding: 7px 10px;
+  background: #fbf9f3;
+  border: 1px solid rgba(15, 15, 20, 0.06);
+  border-radius: 6px;
+  color: #44403c;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.pat-duration-opt:focus-visible {
+  outline: 2px solid #0d9488;
+  outline-offset: 2px;
+}
+
+.pat-duration-opt.is-active {
+  background: linear-gradient(180deg, #14b8a6 0%, #0f766e 100%);
+  border-color: #0f766e;
+  color: #ffffff;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.25) inset,
+    0 2px 6px -2px rgba(13, 148, 136, 0.4);
+}
+
+.pat-attendees-meta {
+  font-size: 10px;
+  color: #78716c;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.pat-attendees-stack {
+  display: flex;
+  align-items: center;
+}
+
+.pat-av-wrap {
+  display: inline-flex;
+}
+
+.pat-av-wrap .avatar {
+  width: 22px;
+  height: 22px;
+  font-size: 10px;
+  box-shadow: 0 0 0 2px #ffffff;
+}
+
+.pat-av-overflow {
+  margin-left: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #78716c;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Close X — ghost, no border, no shadow. Mirrors .calendar-close-btn /
+   .qe-close-btn so the close affordance reads identically across the app. */
+.pat-close-btn {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 0;
+}
+
+.pat-close-btn svg {
+  display: block;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+/* ── Grid ───────────────────────────────────────────────────────────── */
+.pat-grid-wrap {
+  flex: 1;
+  overflow: auto;
+  padding: 20px 24px 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.pat-error {
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #b91c1c;
+  font-size: 12px;
+  text-align: center;
+}
+
+.pat-empty-hint {
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: var(--surface-2, #f8fafc);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  border-radius: 8px;
+  color: var(--text-secondary, #64748b);
+  font-size: 12px;
+  text-align: center;
+}
+
+.pat-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 12px;
+  min-height: 0;
+}
+
+.pat-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: #fdfcf9;
+  border: 1px solid rgba(15, 15, 20, 0.05);
+  border-radius: 12px;
+  padding: 10px 14px 14px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 1px 2px rgba(15, 15, 20, 0.03),
+    0 6px 18px -14px rgba(15, 15, 20, 0.18);
+  overflow: hidden;
+}
+
+.pat-col.is-weekend {
+  opacity: 0.5;
+}
+
+/* When Saturday hosts the empty-week jump-forward arrow, restore full
+   opacity so the affordance doesn't inherit the weekend dim. The
+   weekend numeral colour already reads softer than weekdays, so the
+   column still feels weekend-y. */
+.pat-col.is-weekend.has-jump {
+  opacity: 1;
+}
+
+.pat-col-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(15, 15, 20, 0.05);
+  flex-shrink: 0;
+}
+
+/* Day header — uses the same tokens as CalendarView's .calendar-day-name
+   so the column heads in this picker are typographically identical to the
+   user's main Calendar tab. */
+.pat-col-dow {
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  color: var(--text-tertiary);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  line-height: var(--leading-none);
+}
+
+.pat-col-dow.is-today {
+  color: var(--accent-primary);
+}
+
+/* Day number — matches .calendar-day-number (size, weight, today pill). */
+.pat-col-num {
+  width: 36px;
+  height: 36px;
+  aspect-ratio: 1 / 1;
+  min-width: 36px;
+  max-width: 36px;
+  min-height: 36px;
+  max-height: 36px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: 400;
+  line-height: var(--leading-none);
+  font-variant-numeric: tabular-nums;
+}
+
+.pat-col-num.is-today {
+  background: var(--accent-primary);
+  color: #ffffff;
+}
+
+.pat-slot-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  overflow-y: auto;
+  /* `scrollbar-gutter: stable both-edges` reserves the scrollbar's track
+     symmetrically (left + right). Without this, the WebKit scrollbar slides
+     over the chip's right edge on Windows and the chips look "cut" against
+     the column border; `both-edges` keeps the chip visually centered whether
+     the list scrolls or not. */
+  scrollbar-gutter: stable both-edges;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(15, 15, 20, 0.15) transparent;
+}
+
+.pat-slot-list::-webkit-scrollbar { width: 6px; }
+.pat-slot-list::-webkit-scrollbar-thumb {
+  background: rgba(15, 15, 20, 0.15);
+  border-radius: 3px;
+}
+
+.pat-slot-none {
+  padding: 24px 0;
+  text-align: center;
+  font-size: 10px;
+  color: #a8a29e;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Empty-week jump arrow — circular filled-teal pill that pushes the
+   visible window forward a week. Visual treatment mirrors EmailDetailModal's
+   .scroll-down-pill (filled teal surface + white glyph + glow) so the
+   "jump forward" affordance reads identically across the app. */
+.pat-slot-jump {
+  align-self: center;
+  /* `margin: auto 0` centers the button vertically inside the flex column
+     so it sits at the mid-height of the day column rather than crowding
+     the top under the date header. */
+  margin: auto 0;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid var(--accent-primary, #0d9488);
+  border-radius: 50%;
+  background: var(--accent-primary, #0d9488);
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(13, 148, 136, 0.25), 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, background 0.15s;
+  animation: patJumpFadeIn 0.22s ease-out;
+}
+
+.pat-slot-jump svg {
+  display: block;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+/* Hover lift — exception to the no-hover audit, mirrors
+   .scroll-down-pill so the picker's empty-week arrow feels alive on
+   targeting rather than reading as inert chrome. */
+.pat-slot-jump:hover {
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 88%, #000);
+  box-shadow: 0 6px 28px rgba(13, 148, 136, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
+  border-color: color-mix(in srgb, var(--accent-primary, #0d9488) 88%, #000);
+}
+
+/* Bounce the chevron rightwards on hover — mirrors df2PillBounce on the
+   jump-to-draft pill but oriented horizontally for the "next" direction. */
+.pat-slot-jump:hover svg {
+  animation: patJumpBounce 1.6s ease infinite;
+}
+
+.pat-slot-jump:active {
+  transform: scale(0.94);
+}
+
+@keyframes patJumpFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes patJumpBounce {
+  0%, 60%, 100% { transform: translateX(0); }
+  30%           { transform: translateX(2px); }
+}
+
+.pat-slot-skeletons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pat-slot-skel {
+  height: 34px;
+  border-radius: 9px;
+  background: linear-gradient(
+    90deg,
+    rgba(15, 15, 20, 0.04),
+    rgba(15, 15, 20, 0.08),
+    rgba(15, 15, 20, 0.04)
+  );
+  background-size: 200% 100%;
+  animation: patSkelShimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes patSkelShimmer {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* Slot chip — tactile 4-layer shadow per handoff.
+   `box-sizing: border-box` + `width: 100%` keep the chip inside the column's
+   inner padding (the slot-list is a flex column, so width: 100% stretches
+   to the parent and the border/padding stay accounted for). */
+.pat-chip {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 40px;
+  padding: 12px 12px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f5ef 100%);
+  border: 1px solid rgba(15, 15, 20, 0.08);
+  border-radius: 9px;
+  cursor: pointer;
+  color: #0c0a09;
+  font-family: inherit;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 -1px 0 rgba(15, 15, 20, 0.04) inset,
+    0 1px 2px rgba(15, 15, 20, 0.04),
+    0 2px 4px -2px rgba(15, 15, 20, 0.05);
+  transition: transform 0.06s ease-out, opacity 0.18s, box-shadow 0.12s;
+}
+
+.pat-chip:active {
+  box-shadow: 0 1px 2px rgba(15, 15, 20, 0.1) inset;
+  transform: translateY(0.5px);
+}
+
+/* Focus halo trimmed from a 6px outer ring to 3px so the highlight stays
+   inside the column's 12px inner padding and never visually overflows. */
+.pat-chip.is-focused {
+  border-color: #0d9488;
+  box-shadow:
+    0 0 0 2px #0d9488,
+    0 0 0 3px rgba(13, 148, 136, 0.16),
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 -1px 0 rgba(15, 15, 20, 0.04) inset,
+    0 4px 10px -3px rgba(13, 148, 136, 0.25);
+}
+
+.pat-chip.is-focused .pat-chip-time {
+  font-weight: 500;
+}
+
+/* Best slot — warm amber inflection. Star sits at the right of the chip;
+   when the slot is also focused, the teal ring wraps the warm background
+   so "best + selected" reads as the combined state. */
+.pat-chip.is-best {
+  background: linear-gradient(180deg, #fffbf3 0%, #fdf3df 100%);
+  border-color: rgba(180, 83, 9, 0.28);
+}
+
+.pat-chip-best {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #b45309;
+  flex-shrink: 0;
+}
+
+.pat-chip-time {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ── Floating dock — Superhuman-style pill pinned at the bottom of the
+   picker, mirroring AvailabilityPicker's .av-dock so the picker and the
+   "Insert Free Time" view share an identical action bar. */
+.pat-dock-floating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px 16px;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.pat-dock-hint {
+  background: rgba(15, 23, 42, 0.92);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  animation: patDockHintIn 220ms ease-out;
+}
+
+@keyframes patDockHintIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pat-dock {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px 8px 8px;
+  border-radius: 9999px;
+  background: var(--surface-primary, #fff);
+  border: 1px solid var(--border-default, #e2e8f0);
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.10),
+    0 2px 6px rgba(0, 0, 0, 0.06);
+  pointer-events: auto;
+}
+
+.pat-dock-duration {
+  appearance: none;
+  border: 1px solid var(--border-default, #e2e8f0);
+  background: var(--surface-primary, #fff);
+  color: var(--text-primary, #0f172a);
+  padding: 7px 14px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: inherit;
+  transition: all 120ms ease;
+}
+
+.pat-dock-duration[aria-expanded="true"] {
+  border-color: color-mix(in srgb, var(--accent-primary, #0d9488) 40%, var(--border-default));
+}
+
+.pat-dock-tz {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary, #64748b);
+  padding: 5px 10px;
+  border-radius: 9999px;
+  background: var(--surface-primary, #fff);
+  border: 1px solid var(--border-default, #e2e8f0);
+  font-variant-numeric: tabular-nums;
+}
+
+.pat-dock-selected {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary, #0f172a);
+  padding: 5px 12px;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--accent-primary, #0d9488) 10%, transparent);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pat-dock-cancel {
+  appearance: none;
+  border: 1px solid var(--border-default, #e2e8f0);
+  background: var(--surface-primary, #fff);
+  color: var(--text-primary, #0f172a);
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 120ms ease;
+}
+
+.pat-dock-insert {
+  appearance: none;
+  border: 1px solid var(--accent-primary, #0d9488);
+  background: var(--accent-primary, #0d9488);
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 120ms ease;
+}
+
+.pat-dock-insert:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Match AvailabilityPicker: while the picker is open, hide the global
+   shortcuts ribbon — it leaks under the dock and confuses the surface. */
+body:has(.pat-overlay) .shortcuts-ribbon {
+  display: none !important;
+}
+
+/* ── Inline top-3 suggestions in QuickEventPopover ──────────────────── */
+.qe-slot-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+  /* Stretch to the full width of the parent `.qe-field-row` flex container.
+     Without this the wrapper shrinks to content, leaving an empty gap on the
+     right of the grid (3 chips clustered against the left). */
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+.qe-slot-suggestions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Compact 3-column grid of suggestion cards. The popover's content width
+   is ~370-380px (420px outer - 2x 20px padding), so 3 cards at 1fr each
+   land at ~120px wide — enough to fit "May 18th" / "8h00 - 9h00" on two
+   stacked lines. Skeleton loaders share the same grid. */
+.qe-slot-suggestions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+/* Each card is a two-line column: day on top (text-secondary, small),
+   time on bottom (text-primary, semibold). The earliest-bolt and
+   selected-check live in the top-right corner via absolute positioning so
+   all cards share the same height regardless of badge presence. */
+.qe-slot-suggestion {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 7px 8px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--transition-fast);
+  min-width: 0;
+}
+
+.qe-slot-suggestion:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 1px;
+}
+
+.qe-slot-suggestion.is-earliest {
+  border-color: color-mix(in srgb, var(--accent-primary) 35%, transparent);
+  background: color-mix(in srgb, var(--accent-primary) 4%, transparent);
+}
+
+.qe-slot-suggestion.selected {
+  border-color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+}
+
+.qe-slot-suggestion.selected .qe-slot-suggestion-day,
+.qe-slot-suggestion.selected .qe-slot-suggestion-time {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.qe-slot-suggestion-corner {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.qe-slot-suggestion-corner--bolt {
+  opacity: 0.85;
+}
+
+.qe-slot-suggestion-day {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  /* Reserve space so a corner indicator (5px+11px+5px = 21px) never
+     overlaps the day label even on the narrowest cards. */
+  padding-right: 16px;
+}
+
+.qe-slot-suggestion-time {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.qe-slot-suggestions-empty {
+  padding: 6px 8px;
+  font-size: var(--font-size-2xs);
+  color: var(--text-tertiary);
+  text-align: center;
+  font-style: italic;
+}
+
+.qe-slot-suggestion-skel {
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--text-placeholder) 14%, transparent),
+    color-mix(in srgb, var(--text-placeholder) 28%, transparent),
+    color-mix(in srgb, var(--text-placeholder) 14%, transparent)
+  );
+  background-size: 200% 100%;
+  animation: qeSkeletonShimmer 1.4s ease-in-out infinite;
+}
+
+.qe-slot-browse-link {
+  align-self: stretch;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 12px;
+  background: transparent;
+  border: 1px dashed color-mix(in srgb, var(--accent-primary) 35%, transparent);
+  border-radius: var(--radius-md);
+  color: var(--accent-primary);
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.qe-slot-browse-link:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 1px;
+}

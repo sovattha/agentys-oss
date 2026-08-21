@@ -1,0 +1,23 @@
+{
+  "button_label": "Insert availability",
+  "button_title": "Insert booking link or free times into your reply",
+  "mode_link_only": "Insert booking link",
+  "mode_free_times": "Insert free times",
+  "mode_free_times_and_link": "Insert free times + booking link",
+  "mode_link_missing_badge": "No link",
+  "no_booking_link_warning": "Add a booking link in Settings → Productivity first.",
+
+  "picker_title": "Pick the times you want to offer",
+  "picker_hint": "Click empty time to add a slot. Click × to remove.",
+  "select_times_hint": "Select times to insert in your reply.",
+  "selected_count_one": "{{count}} time selected",
+  "selected_count_other": "{{count}} times selected",
+  "insert": "Insert",
+
+  "duration_minutes_one": "{{count}} min",
+  "duration_minutes_other": "{{count}} mins",
+
+  "busy_unnamed": "Busy",
+  "emails_check": "Emails",
+  "personal_work": "Personal work"
+}

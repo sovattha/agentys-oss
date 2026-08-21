@@ -1,0 +1,264 @@
+/* ============================================================================
+   FOLLOWUP DATE PICKER
+   ============================================================================ */
+
+.followup-picker {
+  position: fixed;
+  z-index: var(--z-top);
+  min-width: 220px;
+  max-width: 280px;
+  background: var(--surface-base);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 6px 0;
+  animation: modalSlideIn 0.25s var(--ease-settle) both;
+}
+
+.followup-picker.closing {
+  animation: modalSlideOut 0.18s var(--ease-clarity) both;
+  pointer-events: none;
+}
+
+.followup-picker-title {
+  padding: 8px 14px 6px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+}
+
+.followup-picker-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 14px;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.1s;
+}
+
+.followup-picker-option.smart {
+  background: color-mix(in srgb, var(--accent-primary-subtle) 50%, transparent);
+  border-left: 2px solid var(--accent-primary);
+}
+
+.followup-picker-icon {
+  font-size: var(--font-size-base);
+  flex-shrink: 0;
+  width: 18px;
+  text-align: center;
+}
+
+.followup-picker-label {
+  flex: 1;
+  font-weight: 500;
+}
+
+.followup-picker-badge {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--accent-primary);
+  background: var(--accent-primary-subtle);
+  padding: 1px 8px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.followup-picker-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 4px 0;
+}
+
+.followup-picker-calendar-trigger {
+  color: var(--accent-primary);
+}
+
+/* ── Calendar ── */
+.followup-picker-calendar {
+  padding: 8px 10px 10px;
+  min-width: 220px;
+}
+
+.followup-cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.followup-cal-nav {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+  transition: background-color 0.1s, color 0.1s;
+}
+
+.followup-cal-month {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+
+.followup-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.followup-cal-dow {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 2px 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.followup-cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.1s, color 0.1s;
+  padding: 0;
+  font-family: inherit;
+}
+
+/* Today — filled teal circle (consistent across every calendar surface) */
+.followup-cal-day.today {
+  background: var(--accent-primary);
+  color: var(--text-inverse, #fff) !important;
+  font-weight: 700;
+  border-radius: 50% !important;
+}
+
+.followup-cal-day.today::after {
+  display: none;
+}
+
+.followup-cal-day.selected {
+  background: var(--accent-primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.followup-cal-day.selected::after {
+  display: none;
+}
+
+.followup-cal-day.past {
+  color: var(--text-disabled, var(--text-muted));
+  opacity: 0.35;
+  cursor: default;
+}
+
+.followup-cal-footer {
+  border-top: 1px solid var(--border-subtle, rgba(0, 0, 0, 0.06));
+  margin-top: 2px;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.followup-cal-time-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.followup-cal-time-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.followup-cal-time-input {
+  width: 96px;
+  padding: 5px 8px;
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  text-align: center;
+  transition: border-color 0.12s, background 0.12s;
+  outline: none;
+}
+
+.followup-cal-time-input:focus {
+  border-color: var(--accent-primary);
+  background: var(--accent-primary-subtle);
+}
+
+.followup-cal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.followup-cal-back {
+  background: none;
+  border: none;
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 2px;
+  font-family: inherit;
+  transition: color 0.1s;
+}
+
+.followup-cal-confirm {
+  flex: 1;
+  background: var(--accent-primary);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 9px 16px;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.followup-cal-confirm:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.followup-cal-confirm:not(:disabled):active {
+  transform: scale(0.98);
+}
+
+/* Toggle + date chip styles are in PendingDraftDetail.css */

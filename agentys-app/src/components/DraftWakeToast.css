@@ -1,0 +1,179 @@
+/* DraftWakeToast — bottom-right floating toast announcing woken follow-up
+   drafts. Visual recipe mirrors MeetingImminentBanner so the two surfaces
+   feel like a matched pair, but positioned at the OPPOSITE corner so a
+   simultaneous meeting+draft wake-up never collides. */
+
+.draft-wake-toast {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: calc(var(--z-overlay, 9000) + 9);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--surface-elevated, #ffffff);
+  color: var(--text-primary, #0f172a);
+  border: 1px solid var(--border-color, #e2e8f0);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+  font-size: 13px;
+  max-width: min(560px, calc(100vw - 32px));
+  animation: draft-wake-toast-slide-in 200ms ease-out;
+}
+
+@keyframes draft-wake-toast-slide-in {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.draft-wake-toast__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-primary, #0d9488);
+  flex-shrink: 0;
+}
+
+.draft-wake-toast__text {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  overflow: hidden;
+}
+
+/* Protect the recipient name: wrap to at most two lines instead of cutting
+   it off mid-name. The subject (below) is the element that ellipsizes. */
+.draft-wake-toast__text > strong {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+/* Secondary line: "{subject} · no reply for Nd". The subject ellipsizes so
+   the "no reply" signal — the reason the nudge fired — always stays visible. */
+.draft-wake-toast__meta {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  min-width: 0;
+  font-size: 11px;
+  color: var(--text-secondary, #64748b);
+}
+
+.draft-wake-toast__subject {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.draft-wake-toast__sep {
+  flex: 0 0 auto;
+}
+
+.draft-wake-toast__noreply {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.draft-wake-toast__error {
+  font-size: 11px;
+  color: var(--danger, #dc2626);
+}
+
+.draft-wake-toast__actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.draft-wake-toast__btn {
+  appearance: none;
+  border: 1px solid var(--border-color, #e2e8f0);
+  background: var(--surface-secondary, #f8fafc);
+  color: var(--text-primary, #0f172a);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.draft-wake-toast__btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.draft-wake-toast__btn--primary {
+  background: var(--accent-primary, #0d9488);
+  border-color: var(--accent-primary, #0d9488);
+  color: #fff;
+}
+
+.draft-wake-toast__btn--ghost {
+  padding: 6px;
+  border-color: transparent;
+  background: transparent;
+  color: var(--text-secondary, #64748b);
+}
+
+.draft-wake-toast__btn--menu {
+  gap: 3px;
+}
+
+/* Per-draft "Snooze ▾" menu. Opens upward (toast is pinned to the bottom
+   edge) and right-aligned to its trigger. */
+.draft-wake-toast__snooze {
+  position: relative;
+  display: inline-flex;
+}
+
+.draft-wake-toast__snooze-menu {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  right: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 124px;
+  padding: 4px;
+  background: var(--surface-elevated, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.draft-wake-toast__snooze-item {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-primary, #0f172a);
+  text-align: left;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.draft-wake-toast__snooze-item:focus-visible {
+  outline: 2px solid var(--accent-primary, #0d9488);
+  outline-offset: -2px;
+}

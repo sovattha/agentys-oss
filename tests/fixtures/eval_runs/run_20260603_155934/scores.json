@@ -1,0 +1,64 @@
+{
+  "profile": {
+    "completeness": 72,
+    "precision": 68,
+    "usefulness": 65,
+    "overall": 68,
+    "missing": [
+      "tone.uses_emoji: false",
+      "tone.greeting_styles.casual_en: '[Name],'",
+      "tone.closing_styles.casual_en: 'Cheers, / J.'",
+      "addressing: null (top-level field)"
+    ],
+    "incorrect": [
+      "tone.default_tone: 'formal' should be 'semi-formal'",
+      "language_variant: 'en-GB' should be 'en-US'",
+      "tone.closing_styles.semi_formal_en: 'Cheers,' should be 'Best,'"
+    ],
+    "details": "The system captured most core profile fields correctly (email, name, preferred_name, signature, languages, average_response_length). However, several issues reduce quality: (1) default_tone is 'formal' instead of 'semi-formal' — a meaningful error that would affect email drafting tone; (2) language_variant is 'en-GB' instead of 'en-US' — could affect spelling/phrasing choices; (3) closing_styles are partially wrong: semi_formal_en should be 'Best,' not 'Cheers,' (Cheers belongs to casual_en), and casual_en closing is entirely missing; (4) greeting_styles missing casual_en '[Name],'; (5) uses_emoji field is absent; (6) extra fields added (profession, profession_confirmed) that are not in ground truth but are low-harm additions."
+  },
+  "knowledge": {
+    "completeness": 52,
+    "precision": 58,
+    "usefulness": 45,
+    "overall": 52,
+    "missing": [
+      "noreply@outlook.com (Microsoft Outlook automated contact)",
+      "notifications@slack.com (Slack automated contact)",
+      "calendar@strategyco.com (StrategyCo Calendar automated contact)",
+      "relationship type field for all contacts",
+      "topics field for all contacts",
+      "titles for most contacts (Anika Patel, Ben Crawford, Emma Phillips, Isabelle Moreau, Jennifer Walsh, Wei Lin, Klaus Weber, Takeshi Yamamoto, David Chen, Richard Hayes)"
+    ],
+    "incorrect": [
+      "Anika Patel preferred_tone: 'semi-formal' should be 'casual'",
+      "Ben Crawford preferred_tone: 'semi-formal' should be 'casual'",
+      "Jennifer Walsh preferred_tone: 'formal' should be 'semi-formal'",
+      "Wei Lin preferred_tone: 'semi-formal' should be 'casual'",
+      "David Chen preferred_tone: 'semi-formal' should be 'casual'",
+      "Michael Torres title: 'CFO' should be 'Chief Financial Officer'"
+    ],
+    "details": "The system identified 11 of 14 contacts correctly by email/name, missing 3 automated contacts entirely (noreply@outlook.com, notifications@slack.com, calendar@strategyco.com). For the contacts it did find, it omitted relationship types (manager, direct_report, client, colleague, partner, prospect, automated) entirely — a critical field for email drafting. Titles are mostly missing (only Michael Torres has a title, abbreviated as 'CFO' rather than 'Chief Financial Officer'). Topics are completely absent across all contacts. Tone is incorrect for several contacts: Anika Patel should be 'casual' not 'semi-formal'; Ben Crawford should be 'casual' not 'semi-formal'; Jennifer Walsh should be 'semi-formal' not 'formal'; Wei Lin should be 'casual' not 'semi-formal'; David Chen should be 'casual' not 'semi-formal'. The system added a 'language_variant' field not present in ground truth, which is a minor addition but not harmful. Interaction counts are all correct. The missing automated contacts and absent relationship types significantly reduce usefulness for email drafting, as tone calibration depends heavily on relationship type."
+  },
+  "rules": {
+    "completeness": 72,
+    "precision": 78,
+    "usefulness": 74,
+    "overall": 75,
+    "missing": [
+      "semi_formal_partner rule: Richard Hayes should be 'semi-formal' tone, not 'casual'",
+      "consultant_frameworks general rule (McKinsey 7S, RACI, 2x2 prioritisation)",
+      "Named/structured general rules with 'name', 'trigger', 'action' fields",
+      "Closing for r.hayes should reference 'Cheers, J.' not just 'Cheers, / J.'"
+    ],
+    "incorrect": [
+      "r.hayes@strategyco.com tone listed as 'casual' instead of 'semi-formal'",
+      "a.patel@strategyco.com closing includes 'Well done' — fabricated, not a closing convention",
+      "General rules lack structured format (name, trigger, action) making them less actionable",
+      "General rule about 'Administrative/support staff' framing for Emma Phillips is a hallucination not present in ground truth",
+      "General rule about 'ultra-brief travel requests' is fabricated"
+    ],
+    "details": "The system correctly identified all 11 contact rules with correct emails, tones, languages, greetings, and closings in most cases. However, Richard Hayes is misclassified as 'casual' instead of 'semi-formal', which is a meaningful distinction. The closing for a.patel includes 'Well done' which is not a closing convention but a fabricated phrase. General rules are present but structured as free-text descriptions rather than named, structured rules with triggers and actions, making them less machine-usable. The system captured the spirit of most rules (formal clients, casual colleagues, full signature external, no signature internal, structured updates, action items) but missed the explicit 'semi_formal_partner' rule distinction and the 'consultant_frameworks' rule entirely. The general rules also introduce some hallucinated specifics (e.g., 'Administrative/support staff' framing for Emma, 'ultra-brief' travel requests, 'coaching language' rule) that aren't grounded in the ground truth."
+  },
+  "overall": 65
+}

@@ -1,0 +1,597 @@
+.draft-editor {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  background: var(--surface-primary);
+  overflow: visible;
+}
+
+/* Recovery notification */
+.recovery-notification {
+  padding: 8px 12px;
+  background: var(--success-bg, color-mix(in srgb, var(--success) 12%, var(--surface-primary)));
+  color: var(--success);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.draft-editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-default);
+  background: var(--surface-secondary);
+}
+
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.toolbar-right {
+  margin-inline-start: auto;
+}
+
+.toolbar-separator {
+  width: 1px;
+  height: 20px;
+  margin: 0 8px;
+  background: var(--border-default);
+}
+
+.de-font-select {
+  height: 28px;
+  padding: 0 4px;
+  border: 1px solid color-mix(in srgb, var(--border-default) 50%, transparent);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 11px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--transition-base);
+}
+
+.de-font-select:focus {
+  border-color: var(--accent-primary, #0d9488);
+}
+
+.de-font-size-select {
+  width: 48px;
+}
+
+.toolbar-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.toolbar-button.active {
+  background: var(--accent-primary);
+  color: var(--surface-primary);
+  border-color: var(--accent-primary-hover);
+}
+
+.toolbar-button:focus {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 1px;
+}
+
+.draft-editor-wrapper {
+  position: relative;
+}
+
+/* Bubble menu (floating selection toolbar) */
+.bubble-menu {
+  position: fixed;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 6px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+  pointer-events: all;
+}
+
+.bubble-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.bubble-btn.active {
+  background: var(--accent-primary);
+  color: var(--surface-primary);
+}
+
+.bubble-separator {
+  width: 1px;
+  height: 16px;
+  margin: 0 2px;
+  background: var(--border-default);
+}
+
+.bubble-sep {
+  width: 1px;
+  height: 16px;
+  margin: 0 2px;
+  background: var(--border-default);
+  flex-shrink: 0;
+}
+
+/* ── Color picker ─────────────────────────────────────────────────────────── */
+
+.bubble-color-wrap {
+  position: relative;
+}
+
+.bubble-color-btn {
+  width: 28px;
+  padding: 0;
+}
+
+.bubble-color-popover {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  padding: 6px 8px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+  z-index: 10000;
+}
+
+.bubble-color-dot {
+  width: 18px;
+  height: 18px;
+  min-height: 0;
+  padding: 0;
+  border: 2px solid rgba(0,0,0,0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s, border-color 0.1s;
+}
+
+.link-toolbar-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.link-input-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: var(--z-dropdown, 100);
+  display: flex;
+  gap: 4px;
+  padding: 8px;
+  margin-top: 4px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  box-shadow: var(--shadow-md);
+}
+
+.link-input {
+  width: 200px;
+  padding: 6px 10px;
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  font-size: var(--font-size-sm);
+}
+
+.link-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+}
+
+.link-submit {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  background: var(--accent-primary);
+  color: var(--surface-primary);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+}
+
+.link-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* TipTap Editor Content */
+.draft-editor-content {
+  min-height: 200px;
+  padding: 16px;
+  outline: none;
+  /* Explicit body-text color so the editor matches the displayed email body
+     (.email-body-content / iframe, both --text-primary). Without it the typed
+     text inherited a different shade per surface: the New-message composer is
+     portaled to <body> (→ black) while the reply/draft editors sit under .app
+     (→ --text-secondary). Per-character colors from the bubble menu are inline
+     styles and still override this base. */
+  color: var(--text-primary);
+}
+
+/* Voice dictation — Claude-style block cursor.
+   Rendered as a ProseMirror widget decoration (see dictationCursor.ts), pinned
+   to the spot where dictation started so it doesn't drift as streamed text
+   advances the caret. The native thin caret is hidden so only this block shows;
+   it breathes (grows/shrinks) in place. */
+.draft-editor.dictating .draft-editor-content {
+  caret-color: transparent;
+}
+
+.dictation-cursor {
+  /* Hidden by default; only shown while actively recording (see the
+     `.recording` rule below). It disappears the instant transcription starts
+     so the "Transcription…" status can take over without the block lingering. */
+  display: none;
+  width: 0.55em;
+  height: 1.1em;
+  margin: 0 1px -0.18em;
+  vertical-align: text-bottom;
+  border-radius: 2px;
+  /* Hardcoded teal (not var(--accent-primary)) so the block can never render
+     invisibly if that variable resolves to a light/empty value in some theme. */
+  background: #0d9488;
+  box-shadow: 0 0 8px 1px rgba(45, 212, 191, 0.6);
+  /* Breathe (grow/shrink) in place. The block's document position is pinned by
+     the plugin (see dictationCursor.ts), so this scale only changes its SIZE —
+     it can't drift. Anchored at the baseline so it stays seated on the line. */
+  transform-origin: center bottom;
+  animation: dictation-cursor-breathe 1.15s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Show the block only while actively recording. The pin still persists through
+   transcription (so the transcript lands at the right spot), but the block
+   itself vanishes the moment recording stops and "Transcription…" appears. */
+.draft-editor.recording .dictation-cursor {
+  display: inline-block;
+}
+
+@keyframes dictation-cursor-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(0.6); }
+}
+
+/* Intentionally NOT suppressed under prefers-reduced-motion: the user explicitly
+   wants this cursor to breathe while dictating. It's a small, in-place pulse on
+   an ephemeral cursor shown only during active dictation, and the user's
+   environment has reduced-motion enabled — which was silently killing it. */
+
+/* The compose editor strips chrome from every descendant via
+   `.nm-editor-borderless * { background: transparent; box-shadow: none;
+   border-radius: 0 } !important`, which erases this cursor's fill, glow and
+   rounding — making it invisible. Re-assert them with higher specificity +
+   !important so the block actually shows in the borderless compose editor.
+   (The reply editor isn't borderless; this rule is harmless there.) */
+.draft-editor .dictation-cursor {
+  background: #0d9488 !important;
+  box-shadow: 0 0 8px 1px rgba(45, 212, 191, 0.6) !important;
+  border-radius: 2px !important;
+}
+
+/* When inside reply composer, editor fits content (signature follows immediately) */
+.reply-composer-editor .draft-editor .tiptap {
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.reply-composer-editor .draft-editor-content {
+  min-height: 80px;
+}
+
+.draft-editor-content p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Signature block — compact line spacing matching editor */
+/* !important override needed: Gmail-sourced signatures have inline margin styles */
+.draft-editor-content .agentys-signature p,
+.draft-editor-content .agentys-signature div {
+  margin: 0 !important;
+  line-height: 1.4;
+}
+
+.draft-editor-content .agentys-signature p + p,
+.draft-editor-content .agentys-signature div + div {
+  margin-top: 4px !important;
+}
+
+/* Suppress stray <br> tags inside signature that create extra blank lines */
+.draft-editor-content .agentys-signature br {
+  display: none;
+}
+
+.draft-editor-content strong {
+  font-weight: 600;
+}
+
+.draft-editor-content em,
+.draft-editor-content i {
+  font-style: italic !important;
+}
+
+.draft-editor-content s {
+  text-decoration: line-through;
+}
+
+.draft-editor-content ul {
+  list-style-type: disc;
+  padding-left: 2.5em;
+  margin: 0 0 1em 0;
+  /* Ensure list nodes inherit the editor wrapper's font-family / size.
+     Without this, inserted HTML (e.g. availability bullets from
+     formatAvailability) can render in a different face when the UA
+     stylesheet's defaults sneak through the cascade. */
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.draft-editor-content ul li {
+  margin-bottom: 0.25em;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.draft-editor-content ul li p {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* Same defensive inheritance for ordered lists. */
+.draft-editor-content ol,
+.draft-editor-content ol li,
+.draft-editor-content ol li p {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.draft-link {
+  color: var(--accent-primary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Inline images */
+.draft-editor-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 4px 0;
+  cursor: default;
+}
+
+/* Annotatable image NodeView */
+.de-image-node {
+  position: relative;
+  display: inline-block;
+}
+
+.de-image-inline {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 4px 0;
+  display: block;
+}
+
+.de-image-edit-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 5px 12px;
+  min-height: 0;
+  border: none;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 1;
+  transition: opacity 0.2s, background 0.15s, transform 0.15s;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Resize handle — bottom-right corner with visible grip dots */
+.de-image-resize-handle {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 20px;
+  height: 20px;
+  cursor: nwse-resize;
+  opacity: 1;
+  transition: opacity 0.15s;
+  border-radius: 0 0 6px 0;
+  /* 3 diagonal dots pattern */
+  background:
+    radial-gradient(circle, var(--accent-primary, #0d9488) 1.5px, transparent 1.5px) 12px 12px / 5px 5px no-repeat,
+    radial-gradient(circle, var(--accent-primary, #0d9488) 1.5px, transparent 1.5px) 7px 12px / 5px 5px no-repeat,
+    radial-gradient(circle, var(--accent-primary, #0d9488) 1.5px, transparent 1.5px) 12px 7px / 5px 5px no-repeat,
+    radial-gradient(circle, color-mix(in srgb, var(--accent-primary, #0d9488) 50%, transparent) 1.5px, transparent 1.5px) 2px 12px / 5px 5px no-repeat,
+    radial-gradient(circle, color-mix(in srgb, var(--accent-primary, #0d9488) 50%, transparent) 1.5px, transparent 1.5px) 7px 7px / 5px 5px no-repeat,
+    radial-gradient(circle, color-mix(in srgb, var(--accent-primary, #0d9488) 50%, transparent) 1.5px, transparent 1.5px) 12px 2px / 5px 5px no-repeat;
+}
+
+/* Corner indicators — visible on hover to hint resizability */
+.de-image-node::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  pointer-events: none;
+  transition: border-color 0.15s;
+}
+
+/* Placeholder */
+.draft-editor-content.is-editor-empty:first-child::before,
+.draft-editor-content p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--text-muted);
+  pointer-events: none;
+  height: 0;
+}
+
+/* Focus state */
+.ProseMirror-focused {
+  outline: none;
+}
+
+/* Footer */
+.draft-editor-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 12px;
+  border-top: 1px solid var(--border-default);
+  background: var(--surface-secondary);
+}
+
+.word-count {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
+.change-indicator {
+  font-size: var(--font-size-xs);
+  color: var(--warning);
+  background: var(--warning-bg, color-mix(in srgb, var(--warning) 12%, var(--surface-primary)));
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-right: auto;
+}
+
+/* Disabled button state */
+.toolbar-button.disabled,
+.toolbar-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Show changes highlighting */
+.draft-editor.show-changes .draft-editor-content {
+  background: color-mix(in srgb, var(--warning) 8%, var(--surface-primary));
+}
+
+/* Preview mode */
+.draft-preview-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.draft-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--surface-secondary);
+  border-bottom: 1px solid var(--border-default);
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+}
+
+.draft-preview-content {
+  min-height: 200px;
+  padding: 16px;
+  line-height: var(--leading-relaxed);
+  background: var(--surface-secondary);
+}
+
+.draft-preview-content p {
+  margin: 0;
+}
+
+.draft-preview-content p + p {
+  margin-top: 4px;
+}
+
+.draft-preview-content strong {
+  font-weight: 600;
+}
+
+.draft-preview-content em {
+  font-style: italic;
+}
+
+.draft-preview-content a {
+  color: var(--accent-primary);
+  text-decoration: underline;
+}
+
+/* Force light mode - no dark mode override */
+.draft-editor {
+  --bg-secondary: var(--surface-primary);
+  --bg-tertiary: var(--surface-secondary);
+  --bg-hover: var(--surface-secondary);
+  --border-color: var(--border-default);
+  /* `--text-primary: var(--text-primary)` used to live here but a custom
+     property that references itself is a cycle → it resolves to invalid/empty,
+     which silently broke every `var(--text-primary)` inside the editor (the
+     body-text color among them). Omitting it lets the value inherit from :root
+     normally, which is what "keep it unchanged" was meant to do. */
+  --text-secondary: var(--text-tertiary);
+  --text-muted: var(--text-muted);
+  --preview-bg: var(--surface-secondary);
+  --success-bg: color-mix(in srgb, var(--success) 15%, var(--surface-primary));
+  --success-text: var(--success);
+  --warning-bg: color-mix(in srgb, var(--warning) 12%, var(--surface-primary));
+  --warning-text: var(--warning);
+  --change-highlight: color-mix(in srgb, var(--warning) 8%, transparent);
+}

@@ -1,0 +1,117 @@
+/* QuickActionsModal — plain overlay portal, sidesteps Radix's
+ * pointer-down-outside detector which collides with autocomplete portals
+ * inside the QuickStepsManager body.
+ *
+ * The overlay sits below var(--z-top, 9999) so the autocomplete's
+ * portaled suggestion list (which itself uses var(--z-top)) renders ON
+ * TOP and stays clickable.
+ */
+
+.quick-actions-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 6vh 16px;
+  z-index: 1000;
+  animation: quick-actions-fade 0.15s ease-out;
+}
+
+@keyframes quick-actions-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.quick-actions-modal {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-primary, #ffffff);
+  color: var(--text-primary, #111827);
+  border-radius: 14px;
+  box-shadow:
+    0 24px 48px -12px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  animation: quick-actions-rise 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Top accent bar — picks up the brand color, mirrors LabelEditor */
+.quick-actions-modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-primary, #0d9488);
+  border-radius: 14px 14px 0 0;
+  z-index: 2;
+}
+
+@keyframes quick-actions-rise {
+  from { transform: translateY(12px) scale(0.97); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.quick-actions-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-default, rgba(0, 0, 0, 0.1)) 50%, transparent);
+  flex-shrink: 0;
+}
+
+.quick-actions-modal-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary, #111827);
+  text-align: left;
+}
+
+.quick-actions-modal-close {
+  margin-left: auto;
+}
+
+.quick-actions-modal-back,
+.quick-actions-modal-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-secondary, #374151);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.quick-actions-modal-body {
+  padding: 18px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Inside the modal we drop the panel card chrome — the modal itself is
+ * the card. The QuickStepsManager <section> keeps its inner spacing. */
+.quick-actions-modal-body .quicksteps-panel {
+  padding: 0;
+  background: transparent;
+  border: none;
+  margin: 0;
+  backdrop-filter: none;
+}

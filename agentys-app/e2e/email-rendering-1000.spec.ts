@@ -131,7 +131,7 @@ const SIGNATURES = [
         <p style="margin:3px 0;font-size:13px;color:#059669;font-weight:600">Vice-Président, Développement des affaires</p>
         <p style="margin:3px 0;font-size:12px;color:#6b7280">Hydro-Québec International</p>
         <p style="margin:3px 0;font-size:12px;color:#6b7280">75, boul. René-Lévesque Ouest, Montréal, QC H2Z 1A4</p>
-        <p style="margin:3px 0;font-size:12px;color:#6b7280">Bureau : +1 514 289-2211 poste 4567</p>
+        <p style="margin:3px 0;font-size:12px;color:#6b7280">Bureau : +1 514 555-0177 poste 4567</p>
         <p style="margin:5px 0">
           <a href="#" style="text-decoration:none;margin-right:8px">🔗 LinkedIn</a>
           <a href="#" style="text-decoration:none">🌐 Site web</a>

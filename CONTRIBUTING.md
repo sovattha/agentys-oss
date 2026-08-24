@@ -84,7 +84,19 @@ Outlook / IMAP), and what you expected instead.
 
 Do not open a public issue for a vulnerability. See [SECURITY.md](SECURITY.md).
 
-## License
+## License and the CLA
 
-By contributing, you agree that your contributions are licensed under the
-AGPL-3.0-or-later, the same license as the project.
+Agentys is released under the AGPL-3.0-or-later, and your contributions are
+published under that same license.
+
+Before your first pull request is merged, you will be asked to accept the
+[Contributor License Agreement](CLA.md). It takes one click.
+
+**You keep the copyright on what you write.** The CLA grants the maintainers a
+broad license to distribute your contribution — including under commercial
+terms alongside the AGPL. That is what funds the project: organisations who
+cannot accept the AGPL's source-sharing obligation can buy a separate license,
+while Agentys stays free software for everyone else.
+
+If you would rather not sign, open an issue describing the change instead: a
+maintainer can implement it independently.

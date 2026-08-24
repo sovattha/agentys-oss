@@ -251,8 +251,8 @@ export const mockEmailDetails: Record<string, EmailDetail> = {
   // Email with CID inline image in signature (tests CID resolution fix)
   'email-cid': {
     id: 'email-cid',
-    sender: 'carol.migneault@litostrojhydro.ca',
-    sender_name: 'Carol Migneault',
+    sender: 'camille.tremblay@hydrotech.example',
+    sender_name: 'Camille Tremblay',
     subject: 'Contrat de service — révision 3',
     received_at: hoursAgo(2),
     has_attachments: false,
@@ -263,13 +263,13 @@ export const mockEmailDetails: Record<string, EmailDetail> = {
       <p>Veuillez trouver ci-joint la révision 3 du contrat de service.</p>
       <p>Cordialement,</p>
       <div class="signature">
-        <p>Carol Migneault</p>
-        <p>Cell : 514-231-2010 | Courriel : carol.migneault@litostrojhydro.ca</p>
-        <p>5025 boul. Lapinière, bureau 100, Brossard, QC, J4Z 0N5, Canada</p>
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Litostrojhydro logo" width="200" />
+        <p>Camille Tremblay</p>
+        <p>Cell : 514-555-0142 | Courriel : camille.tremblay@hydrotech.example</p>
+        <p>1200 rue de l'Exemple, bureau 100, Montréal, QC, H0H 0H0, Canada</p>
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Hydrotech logo" width="200" />
       </div>
     </div>`,
-    body: 'Bonjour, Veuillez trouver ci-joint la révision 3 du contrat de service. Cordialement, Carol Migneault',
+    body: 'Bonjour, Veuillez trouver ci-joint la révision 3 du contrat de service. Cordialement, Camille Tremblay',
     to: ['vous@example.com'],
     cc: [],
   },

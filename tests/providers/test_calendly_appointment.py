@@ -21,7 +21,7 @@ CALENDLY_FR_HTML = """
   <h1>PULSA | Madérothérapie 90 min ✧ 160$</h1>
   <p>Rituel corporel de madérothérapie soutenant le drainage.</p>
   <p>Lieu: 10 rue Principale Nord, Sutton, J0E 2K0</p>
-  <p>Numéro de téléphone: +1 514-581-2265</p>
+  <p>Numéro de téléphone: +1 514-555-0188</p>
   <p>Souhaitez-vous apporter des modifications à cet événement?</p>
   <p>Annuler: https://calendly.com/cancellations/d334b94a-9496-4c36-8807-61a7a15b368d</p>
   <p>Replanifier: https://calendly.com/reschedulings/d334b94a-9496-4c36-8807-61a7a15b368d</p>

@@ -1,0 +1,21 @@
+Agentys
+Copyright (C) 2026 Sovattha Sok
+Copyright (C) 2026 Alexandre Sauvageau
+
+This product is licensed under the GNU Affero General Public License v3.0
+or later (AGPL-3.0-or-later). See the LICENSE file for the full text.
+
+Contributions are accepted under the Contributor License Agreement described
+in CLA.md, which allows the copyright holders above to offer Agentys under
+alternative commercial terms in addition to the AGPL.
+
+This product bundles third-party dependencies distributed under their own
+licenses, predominantly MIT, Apache-2.0 and BSD. Two categories carry weak
+copyleft and remain governed by their own terms:
+
+  - LGPL-3.0-only: psycopg, psycopg-binary, python-telegram-bot
+  - MPL-2.0:       bidict, certifi, hypothesis, pyttsx3, tqdm
+
+Neither imposes its terms on Agentys itself: both are file- or library-scoped
+copyleft, and the packages are used unmodified as dynamically imported
+libraries.

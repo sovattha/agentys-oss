@@ -194,3 +194,13 @@ to its users. See [LICENSE](LICENSE) for the full text.
 
 "Agentys" and its logo are not covered by the AGPL grant; please use your own name
 and branding for redistributed builds.
+
+### Commercial licensing
+
+The AGPL requires anyone running a modified Agentys as a network service to
+publish their modifications. If that does not work for your organisation, a
+commercial license is available that lifts the source-sharing obligation.
+Contact the maintainers at the address in [SECURITY.md](SECURITY.md).
+
+This dual-licensing is possible because contributors accept the
+[CLA](CLA.md), which keeps the copyright consolidated with the maintainers.

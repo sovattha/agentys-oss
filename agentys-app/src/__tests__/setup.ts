@@ -1,3 +1,15 @@
+/*
+ * Agentys — voice-first email assistant.
+ * Copyright (C) 2026 Sovattha Sok and Alexandre Sauvageau
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version. See the LICENSE file for details.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
+
 // Keep this import: it is the only path that augments `Assertion<HTMLElement>`
 // with the jest-dom matcher types — without it, every `.toBeInTheDocument()` /
 // `.toHaveClass()` call type-errors. The runtime `expect.extend(matchers)` it

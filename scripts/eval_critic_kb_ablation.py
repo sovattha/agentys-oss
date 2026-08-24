@@ -466,7 +466,7 @@ def main() -> int:
             print(f"  Signal/noise (Δ/σ)    : {summary['signal_to_noise_ratio']}")
         if "avg_elapsed_delta_s" in summary:
             print(f"  Avg elapsed delta (s) : {summary['avg_elapsed_delta_s']:+.3f}  (with_kb − without_kb)")
-        print(f"  Per-criterion delta (signal) | pooled std (noise):")
+        print("  Per-criterion delta (signal) | pooled std (noise):")
         for k, v in sorted(summary["avg_delta_per_criterion"].items(), key=lambda kv: -kv[1]):
             sigma = summary.get("avg_pooled_std_per_criterion", {}).get(k, "-")
             sigma_str = f"{sigma:5.2f}" if isinstance(sigma, (int, float)) else "  -  "

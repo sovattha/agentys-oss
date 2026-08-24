@@ -45,7 +45,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -159,7 +158,7 @@ def _print_case(idx: int, total: int, case: dict, email: Optional[dict]) -> None
         sender = email.get("from", "?")
         subject = email.get("subject", "")
         body = (email.get("body") or email.get("content") or "")[:1500]
-        print(f"\n--- INCOMING EMAIL ---")
+        print("\n--- INCOMING EMAIL ---")
         print(f"From:    {sender}")
         print(f"Subject: {subject}")
         print()
@@ -170,7 +169,7 @@ def _print_case(idx: int, total: int, case: dict, email: Optional[dict]) -> None
         print(f"\n--- (no source email indexed for case_id={case['case_id']}) ---")
         print(f"Subject: {case.get('subject', '')}")
     print()
-    print(f"--- AI DRAFT ---")
+    print("--- AI DRAFT ---")
     print(case.get("draft", "(empty)"))
     print()
     print("=" * 78)

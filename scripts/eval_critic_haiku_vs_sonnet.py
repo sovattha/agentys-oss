@@ -52,7 +52,7 @@ import statistics
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass
 from pathlib import Path
 
 _REPO = Path(__file__).resolve().parent.parent

@@ -194,14 +194,14 @@ def main(account_id: int):
 
     print("\n## Matrice de confusion (actuel → attendu)")
     labels = ["Action", "FYI", "Noise", "Unlabeled"]
-    print(f"{'':12s}" + "".join(f"{l[:9]:>10s}" for l in labels))
+    print(f"{'':12s}" + "".join(f"{lbl[:9]:>10s}" for lbl in labels))
     for actual in labels:
         row = [f"{confusion[actual][exp]:10d}" for exp in labels]
         print(f"{actual:12s}" + "".join(row))
 
     # Top mismatches
     sorted_mismatches = sorted(mismatches_by_sender.items(), key=lambda kv: -kv[1]["count"])
-    print(f"\n## Top 25 mismatches par (label actuel → attendu, domaine)")
+    print("\n## Top 25 mismatches par (label actuel → attendu, domaine)")
     for key, info in sorted_mismatches[:25]:
         print(f"\n{key}  [{info['count']}x]")
         for s in info["samples"][:2]:

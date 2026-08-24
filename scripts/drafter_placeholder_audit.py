@@ -150,7 +150,7 @@ def main() -> int:
         return 1
 
     payload = json.loads(_LABELS_FILE.read_text(encoding="utf-8"))
-    labels = [l for l in payload.get("labels", []) if l.get("verdict") in ("good", "bad")]
+    labels = [lbl for lbl in payload.get("labels", []) if lbl.get("verdict") in ("good", "bad")]
     if args.limit:
         labels = labels[:args.limit]
 
@@ -163,9 +163,9 @@ def main() -> int:
     t_start = time.time()
     with ThreadPoolExecutor(max_workers=args.parallel) as ex:
         futures = {
-            ex.submit(_generate_one, client, kb, l["persona"], l["case_id"],
-                      email_index.get((l["persona"], l["case_id"]), {})): l
-            for l in labels
+            ex.submit(_generate_one, client, kb, lbl["persona"], lbl["case_id"],
+                      email_index.get((lbl["persona"], lbl["case_id"]), {})): lbl
+            for lbl in labels
         }
         for fut in as_completed(futures):
             s = fut.result()

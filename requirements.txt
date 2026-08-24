@@ -10,7 +10,7 @@ python-dotenv>=1.2.2,<2.0
 requests>=2.34.2,<3.0
 pyyaml>=6.0,<7.0
 psutil>=7.2.2,<8.0
-python-dateutil>=2.8.0,<3.0
+python-dateutil>=2.9.0.post0,<3.0
 
 # Database
 sqlalchemy>=2.0.49,<3.0

@@ -3288,7 +3288,7 @@ __metadata:
     expo-web-browser: "npm:~15.0.10"
     i18next: "npm:^26.3.1"
     jest: "npm:^29.7.0"
-    jest-expo: "npm:^56.0.5"
+    jest-expo: "npm:^57.0.4"
     react: "npm:19.2.7"
     react-i18next: "npm:^17.0.8"
     react-native: "npm:0.86.0"
@@ -5991,9 +5991,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-expo@npm:^56.0.5":
-  version: 56.0.5
-  resolution: "jest-expo@npm:56.0.5"
+"jest-expo@npm:^57.0.4":
+  version: 57.0.4
+  resolution: "jest-expo@npm:57.0.4"
   dependencies:
     "@jest/create-cache-key-function": "npm:^29.2.1"
     "@jest/globals": "npm:^29.2.1"
@@ -6008,7 +6008,7 @@ __metadata:
     server-only: "npm:^0.0.1"
     stacktrace-js: "npm:^2.0.2"
   peerDependencies:
-    "@react-native/jest-preset": ^0.85.0
+    "@react-native/jest-preset": ^0.86.2
     expo: "*"
     react-native: "*"
     react-server-dom-webpack: ~19.0.4 || ~19.1.5 || ~19.2.4
@@ -6019,7 +6019,7 @@ __metadata:
       optional: true
   bin:
     jest: bin/jest.js
-  checksum: 10c0/c8cb78dba53d46ec89f3b94ce2d5f3343f9b96a209a4d3410369b62397a26a5c70bc3e59efcb4e89451ec0c4fb7cc5a86420d3d3c4f5c714facbbe5389ba3a31
+  checksum: 10c0/293b8a8ae4a77c30124d185ffb69a8a8c39df635d9c89585ff77c63fd827dd4bf53d47e78616ef37042da4531fb28a01e090c278c88268c39bbd1e769961ba9d
   languageName: node
   linkType: hard
 

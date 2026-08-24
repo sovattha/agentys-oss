@@ -19,7 +19,7 @@
     "@expo-google-fonts/inter": "^0.4.2",
     "@expo-google-fonts/jetbrains-mono": "^0.4.1",
     "@expo/vector-icons": "^15.0.3",
-    "@sentry/react-native": "^8.19.0",
+    "@sentry/react-native": "^8.23.0",
     "expo": "~54.0.35",
     "expo-av": "~16.0.8",
     "expo-crypto": "~56.0.4",

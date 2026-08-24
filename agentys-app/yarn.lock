@@ -2852,15 +2852,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extension-link@npm:^3.23.4":
-  version: 3.23.4
-  resolution: "@tiptap/extension-link@npm:3.23.4"
+"@tiptap/extension-link@npm:^3.30.2":
+  version: 3.30.2
+  resolution: "@tiptap/extension-link@npm:3.30.2"
   dependencies:
     linkifyjs: "npm:^4.3.3"
   peerDependencies:
-    "@tiptap/core": 3.23.4
-    "@tiptap/pm": 3.23.4
-  checksum: 10c0/c5205041894245d98cc1f1d1fc81748edc19ca8e05481e1f1b152fceaba255534d2aa872bd81062963e678e1cf40250515db58d2a975100f17fa34539a5c59cf
+    "@tiptap/core": 3.30.2
+    "@tiptap/pm": 3.30.2
+  checksum: 10c0/bb279b0bb67781d03c512f44aabccfb6e3233fe2bc7a733bbfafdb02c3fb8a4ddf941f7a521424e8036729eaf6c0c2d37f89ae285a8698eec52cf575aa2b2318
   languageName: node
   linkType: hard
 
@@ -3492,7 +3492,7 @@ __metadata:
     "@testing-library/user-event": "npm:^14.6.1"
     "@tiptap/extension-color": "npm:^3.22.1"
     "@tiptap/extension-image": "npm:^3.22.2"
-    "@tiptap/extension-link": "npm:^3.23.4"
+    "@tiptap/extension-link": "npm:^3.30.2"
     "@tiptap/extension-text-style": "npm:~3.22.5"
     "@tiptap/pm": "npm:^3.22.3"
     "@tiptap/react": "npm:^3.19.0"

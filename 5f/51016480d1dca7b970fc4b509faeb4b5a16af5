@@ -1,0 +1,2239 @@
+CLA.md
+  s_f617c5d3ca4eb1::t_0dee4d535e912c 1-95
+CONTRIBUTING.md
+  s_f617c5d3ca4eb1::t_e7d9137d1a7708 87,89-102
+NOTICE
+  s_f617c5d3ca4eb1::t_5a8be24f6de887 1-21
+README.md
+  s_f617c5d3ca4eb1::t_61a37eb67a8a39 197-206
+agentys-app/e2e/email-rendering-1000.spec.ts
+  s_f617c5d3ca4eb1::t_00fea8962c29fe 134
+agentys-app/e2e/support/fixtures/mock-data.ts
+  s_f617c5d3ca4eb1::t_04ecc4528c0fbd 254-255,266-269,272
+agentys-app/src/App.tsx
+  s_f617c5d3ca4eb1::t_d08f966ddf0574 1-12
+agentys-app/src/__tests__/AccountManager.test.tsx
+  s_f617c5d3ca4eb1::t_bf6df5fdf51d53 1-12
+agentys-app/src/__tests__/App.oauthCallbackRoute.test.ts
+  s_f617c5d3ca4eb1::t_93e11d384eb960 1-12
+agentys-app/src/__tests__/AutostartToggle.test.tsx
+  s_f617c5d3ca4eb1::t_d11ff6e02bd7d7 1-12
+agentys-app/src/__tests__/BeforeAfterComparison.test.tsx
+  s_f617c5d3ca4eb1::t_b04bb901e2b65c 1-12
+agentys-app/src/__tests__/CalendarView.deleteEventToast.test.ts
+  s_f617c5d3ca4eb1::t_469d5b19956e44 1-12
+agentys-app/src/__tests__/CommandPalette.test.tsx
+  s_f617c5d3ca4eb1::t_3dc9231a272326 1-12
+agentys-app/src/__tests__/CommandPaletteContainer.test.tsx
+  s_f617c5d3ca4eb1::t_ac0cb460aeba62 1-12
+agentys-app/src/__tests__/ContactGroupsManager.deleteToast.test.tsx
+  s_f617c5d3ca4eb1::t_93ce8312435b96 1-12
+agentys-app/src/__tests__/EmailDetailModal.appointment.test.tsx
+  s_f617c5d3ca4eb1::t_98f3e2d7aff132 1-12
+agentys-app/src/__tests__/EmailDetailModal.iframe-img-upgrade.test.tsx
+  s_f617c5d3ca4eb1::t_618680a5bc0f57 1-12
+agentys-app/src/__tests__/EmailDetailModal.rsvp-toast.audit-fix.test.ts
+  s_f617c5d3ca4eb1::t_d5b97fd863d473 1-12
+agentys-app/src/__tests__/EmailList.syncing.test.ts
+  s_f617c5d3ca4eb1::t_7eb56a22b4d1cd 1-12
+agentys-app/src/__tests__/EmailList.test.tsx
+  s_f617c5d3ca4eb1::t_9d9f09b116d678 1-12
+agentys-app/src/__tests__/ErrorBoundary.test.tsx
+  s_f617c5d3ca4eb1::t_4b4084fefa62a1 1-12
+agentys-app/src/__tests__/FirstLaunchWizard.test.tsx
+  s_f617c5d3ca4eb1::t_5e513596bcddc1 1-12
+agentys-app/src/__tests__/FollowupSuggestions.acceptFailureToast.test.tsx
+  s_f617c5d3ca4eb1::t_2060a82a372592 1-12
+agentys-app/src/__tests__/MyStyle.test.tsx
+  s_f617c5d3ca4eb1::t_dc15b2417824fe 1-12
+agentys-app/src/__tests__/OAuthCallback.humanize.test.ts
+  s_f617c5d3ca4eb1::t_3e995a26e52b3e 1-12
+agentys-app/src/__tests__/QuickEventPopover.test.tsx
+  s_f617c5d3ca4eb1::t_53114433168200 1-12
+agentys-app/src/__tests__/ReferralPanel.test.tsx
+  s_f617c5d3ca4eb1::t_0425d80707102a 1-12
+agentys-app/src/__tests__/Settings.test.tsx
+  s_f617c5d3ca4eb1::t_75d5b83d628025 1-12
+agentys-app/src/__tests__/SettingsEmbeddedQuickStepToggleFailureFeedback.test.tsx
+  s_f617c5d3ca4eb1::t_4a1944e98fb601 1-12
+agentys-app/src/__tests__/Sidebar.test.tsx
+  s_f617c5d3ca4eb1::t_a5570d7705cafa 1-12
+agentys-app/src/__tests__/Step4SmartOrg.partialCreateToast.test.ts
+  s_f617c5d3ca4eb1::t_f00d802745c963 1-12
+agentys-app/src/__tests__/SwipeableEmailItem.test.tsx
+  s_f617c5d3ca4eb1::t_194e3b16c2b0f9 1-12
+agentys-app/src/__tests__/Tooltip.test.tsx
+  s_f617c5d3ca4eb1::t_0854937ea58e28 1-12
+agentys-app/src/__tests__/TrainingPage.savoirSyncToast.test.tsx
+  s_f617c5d3ca4eb1::t_15f7fc80228534 1-12
+agentys-app/src/__tests__/api.test.ts
+  s_f617c5d3ca4eb1::t_cad22382fe2f35 1-12
+agentys-app/src/__tests__/authToken.test.ts
+  s_f617c5d3ca4eb1::t_0b06843b89e3f4 1-12
+agentys-app/src/__tests__/clearUserData.test.ts
+  s_f617c5d3ca4eb1::t_223c91a88feed7 1-12
+agentys-app/src/__tests__/contextualAgents.test.ts
+  s_f617c5d3ca4eb1::t_d9f7555732574f 1-12
+agentys-app/src/__tests__/crossChannelRules.test.ts
+  s_f617c5d3ca4eb1::t_b4d6425e05b3e7 1-12
+agentys-app/src/__tests__/detectDateFromBody.test.ts
+  s_f617c5d3ca4eb1::t_97a6cdb6f3650c 1-12
+agentys-app/src/__tests__/draftReminder.test.ts
+  s_f617c5d3ca4eb1::t_b17cfbd32e52a6 1-12
+agentys-app/src/__tests__/draftWakeStore.test.ts
+  s_f617c5d3ca4eb1::t_70f8a413c2c812 1-12
+agentys-app/src/__tests__/emails.api.test.ts
+  s_f617c5d3ca4eb1::t_60d85baba9e0d6 1-12
+agentys-app/src/__tests__/errorMessages.test.ts
+  s_f617c5d3ca4eb1::t_26821216de545d 1-12
+agentys-app/src/__tests__/fetchVipLabelSenders.test.ts
+  s_f617c5d3ca4eb1::t_03ce368a53267d 1-12
+agentys-app/src/__tests__/followupDetect.test.ts
+  s_f617c5d3ca4eb1::t_297a8a1788a7f4 1-12
+agentys-app/src/__tests__/handleAuthResponse.test.ts
+  s_f617c5d3ca4eb1::t_064ba295c9ae61 1-12
+agentys-app/src/__tests__/i18n.lazy.test.ts
+  s_f617c5d3ca4eb1::t_2e7e19293808d3 1-12
+agentys-app/src/__tests__/instrument.test.ts
+  s_f617c5d3ca4eb1::t_82aca14304c6d3 1-12
+agentys-app/src/__tests__/meetingReminders.test.ts
+  s_f617c5d3ca4eb1::t_2d727c48fd8914 1-12
+agentys-app/src/__tests__/monthlySummaryService.test.ts
+  s_f617c5d3ca4eb1::t_8b7af6192d2b00 1-12
+agentys-app/src/__tests__/notifications.test.ts
+  s_f617c5d3ca4eb1::t_895d5e95e4d265 1-12
+agentys-app/src/__tests__/oauth.test.ts
+  s_f617c5d3ca4eb1::t_e704a1ed4d554b 1-12
+agentys-app/src/__tests__/oauthRecovery.test.ts
+  s_f617c5d3ca4eb1::t_247e50a1ee5319 1-12
+agentys-app/src/__tests__/pendingDraftDetailReminderDispatch.test.ts
+  s_f617c5d3ca4eb1::t_a5842406f2b10f 1-12
+agentys-app/src/__tests__/productionCsp.test.ts
+  s_f617c5d3ca4eb1::t_1961bd175a13db 1-12
+agentys-app/src/__tests__/referralService.test.ts
+  s_f617c5d3ca4eb1::t_ab40c9c786ab1c 1-12
+agentys-app/src/__tests__/referralServiceAmbassador.test.ts
+  s_f617c5d3ca4eb1::t_24322bd1637567 1-12
+agentys-app/src/__tests__/regression-portal-fixes.test.tsx
+  s_f617c5d3ca4eb1::t_71111de4d4b045 1-12
+agentys-app/src/__tests__/setActiveAccountId.abort.test.ts
+  s_f617c5d3ca4eb1::t_3f677004b8dcd4 1-12
+agentys-app/src/__tests__/settings-auth.contract.test.ts
+  s_f617c5d3ca4eb1::t_7db04652adbbd2 1-12
+agentys-app/src/__tests__/setup.ts
+  s_f617c5d3ca4eb1::t_4dae3a259aee52 1-12
+agentys-app/src/__tests__/snoozedRowPickerRescheduleFailure.test.ts
+  s_f617c5d3ca4eb1::t_217b47d2b79fde 1-12
+agentys-app/src/__tests__/useAuth.test.ts
+  s_f617c5d3ca4eb1::t_4ec385b43b042a 1-12
+agentys-app/src/__tests__/useAutoReplySetting.audit-fix.test.tsx
+  s_f617c5d3ca4eb1::t_5c6f3d18083c7f 1-12
+agentys-app/src/__tests__/useDraftWakeToasts.test.tsx
+  s_f617c5d3ca4eb1::t_bb5c9b1d9a8d6f 1-12
+agentys-app/src/__tests__/useOAuth.disconnect.test.ts
+  s_f617c5d3ca4eb1::t_d385353d8800a5 1-12
+agentys-app/src/__tests__/useOAuth.redirectUri.test.ts
+  s_f617c5d3ca4eb1::t_8d0e6880ac090a 1-12
+agentys-app/src/__tests__/useSnoozeDismissDeleteReminder.test.ts
+  s_f617c5d3ca4eb1::t_3ff7559a982ec2 1-12
+agentys-app/src/__tests__/useUnviewedDraftCount.test.tsx
+  s_f617c5d3ca4eb1::t_374ec4087310a6 1-12
+agentys-app/src/__tests__/websocket.test.ts
+  s_f617c5d3ca4eb1::t_1c50457adbcf1f 1-12
+agentys-app/src/__tests__/workHours.test.ts
+  s_f617c5d3ca4eb1::t_f30eaa180ba40f 1-12
+agentys-app/src/api/accounts.test.ts
+  s_f617c5d3ca4eb1::t_7ff5939f01b921 1-12
+agentys-app/src/api/accounts.ts
+  s_f617c5d3ca4eb1::t_b9d3de961607dd 1-12
+agentys-app/src/api/cache.ts
+  s_f617c5d3ca4eb1::t_cbd64f23039051 1-12
+agentys-app/src/api/emailBodyCache.test.ts
+  s_f617c5d3ca4eb1::t_1ecc3bd4e6d52f 1-12
+agentys-app/src/api/emailBodyCache.ts
+  s_f617c5d3ca4eb1::t_195c9d99641371 1-12
+agentys-app/src/api/emails.ts
+  s_f617c5d3ca4eb1::t_8a9658e6200208 1-12
+agentys-app/src/api/labels.ts
+  s_f617c5d3ca4eb1::t_95658530aaed5a 1-12
+agentys-app/src/api/learning.test.ts
+  s_f617c5d3ca4eb1::t_c668835db2e4e1 1-12
+agentys-app/src/api/learning.ts
+  s_f617c5d3ca4eb1::t_1d734228180377 1-12
+agentys-app/src/api/settings.ts
+  s_f617c5d3ca4eb1::t_4db42e9bf7bb21 1-12
+agentys-app/src/api/snippets.ts
+  s_f617c5d3ca4eb1::t_ae069722fecfd7 1-12
+agentys-app/src/components/AIProgressBar.tsx
+  s_f617c5d3ca4eb1::t_f2c92c52735770 1-12
+agentys-app/src/components/AccountApprovalCard.tsx
+  s_f617c5d3ca4eb1::t_c19d9120e45feb 1-12
+agentys-app/src/components/AccountManager.tsx
+  s_f617c5d3ca4eb1::t_288f5072172b1b 1-12
+agentys-app/src/components/ActivityIndicator.tsx
+  s_f617c5d3ca4eb1::t_dbc0996af4c6b8 1-12
+agentys-app/src/components/ActivityPopover.tsx
+  s_f617c5d3ca4eb1::t_b8facc39037226 1-12
+agentys-app/src/components/AriaLiveAnnouncer.tsx
+  s_f617c5d3ca4eb1::t_eb7bbb31836d5f 1-12
+agentys-app/src/components/AttachmentReminderModal.tsx
+  s_f617c5d3ca4eb1::t_6a4c3cc521e21e 1-12
+agentys-app/src/components/AutoReplyModal.prefill.test.tsx
+  s_f617c5d3ca4eb1::t_403eaffb3aec7b 1-12
+agentys-app/src/components/AutoReplyModal.tsx
+  s_f617c5d3ca4eb1::t_d4a7e3d0d620b1 1-12
+agentys-app/src/components/AutostartToggle.tsx
+  s_f617c5d3ca4eb1::t_d74647daf07aa1 1-12
+agentys-app/src/components/Avatar.test.ts
+  s_f617c5d3ca4eb1::t_799ca6103a3c81 1-12
+agentys-app/src/components/Avatar.test.tsx
+  s_f617c5d3ca4eb1::t_2b4359865e4e6d 1-12
+agentys-app/src/components/Avatar.tsx
+  s_f617c5d3ca4eb1::t_4c11f63bc911b2 1-12
+agentys-app/src/components/BeforeAfterComparison.tsx
+  s_f617c5d3ca4eb1::t_e281f456ded1e0 1-12
+agentys-app/src/components/BookingLinkPanel.tsx
+  s_f617c5d3ca4eb1::t_5eca5eab40c721 1-12
+agentys-app/src/components/Calendar/PickATimePicker.tsx
+  s_f617c5d3ca4eb1::t_8ff4b61221ddce 1-12
+agentys-app/src/components/Calendar/QuickEventPopover.tsx
+  s_f617c5d3ca4eb1::t_6ffcae74006a21 1-12
+agentys-app/src/components/Calendar/RecurrencePicker.tsx
+  s_f617c5d3ca4eb1::t_7580529642740e 1-12
+agentys-app/src/components/CalendarSidebar.tsx
+  s_f617c5d3ca4eb1::t_b9bcac468995d0 1-12
+agentys-app/src/components/CalendarView.tsx
+  s_f617c5d3ca4eb1::t_aff96f23f154af 1-12
+agentys-app/src/components/CleanInboxModal.tsx
+  s_f617c5d3ca4eb1::t_8cdbb779578208 1-12
+agentys-app/src/components/CommandPalette.tsx
+  s_f617c5d3ca4eb1::t_b944bc973126b5 1-12
+agentys-app/src/components/CommandPaletteContainer.tsx
+  s_f617c5d3ca4eb1::t_aea1cd468b8274 1-12
+agentys-app/src/components/ConfirmationDialog.tsx
+  s_f617c5d3ca4eb1::t_baf3c738ad0b01 1-12
+agentys-app/src/components/ConnectGmailButton.tsx
+  s_f617c5d3ca4eb1::t_ed42ad81c0c631 1-12
+agentys-app/src/components/ConnectOutlookButton.tsx
+  s_f617c5d3ca4eb1::t_b8dd44e2c9e6e7 1-12
+agentys-app/src/components/ConnectionBanner.test.tsx
+  s_f617c5d3ca4eb1::t_9300f479387db5 1-12
+agentys-app/src/components/ConnectionBanner.tsx
+  s_f617c5d3ca4eb1::t_0450b1a4dbef3c 1-12
+agentys-app/src/components/ContactAvatar.tsx
+  s_f617c5d3ca4eb1::t_06857d047d4735 1-12
+agentys-app/src/components/ContactStyleEditor.test.tsx
+  s_f617c5d3ca4eb1::t_e9f00c08620766 1-12
+agentys-app/src/components/ContactStyleEditor.tsx
+  s_f617c5d3ca4eb1::t_94e21362b11474 1-12
+agentys-app/src/components/DeepWorkOverlay.tsx
+  s_f617c5d3ca4eb1::t_8fa72943ffe753 1-12
+agentys-app/src/components/DeepWorkPanel.tsx
+  s_f617c5d3ca4eb1::t_21fd6e239510f3 1-12
+agentys-app/src/components/DeepWorkRecapCard.tsx
+  s_f617c5d3ca4eb1::t_4023f06462d3c1 1-12
+agentys-app/src/components/DraftComparisonView.test.tsx
+  s_f617c5d3ca4eb1::t_1d564fac69d6d7 1-12
+agentys-app/src/components/DraftComparisonView.tsx
+  s_f617c5d3ca4eb1::t_26946ea2a0f095 1-12
+agentys-app/src/components/DraftEditor.dictating.integration.test.tsx
+  s_f617c5d3ca4eb1::t_ec9b0366d171f4 1-12
+agentys-app/src/components/DraftEditor.dictation.test.ts
+  s_f617c5d3ca4eb1::t_9e0a778c0e666c 1-12
+agentys-app/src/components/DraftEditor.test.tsx
+  s_f617c5d3ca4eb1::t_9ad82357faecaf 1-12
+agentys-app/src/components/DraftEditor.tsx
+  s_f617c5d3ca4eb1::t_fcbc20316db0e8 1-12
+agentys-app/src/components/DraftVersionHistory.test.tsx
+  s_f617c5d3ca4eb1::t_425930158a496c 1-12
+agentys-app/src/components/DraftVersionHistory.tsx
+  s_f617c5d3ca4eb1::t_f6d7d2b8592ada 1-12
+agentys-app/src/components/DraftWakeToast.test.tsx
+  s_f617c5d3ca4eb1::t_b660c62ae9f4a1 1-12
+agentys-app/src/components/DraftWakeToast.tsx
+  s_f617c5d3ca4eb1::t_2384eb2be82335 1-12
+agentys-app/src/components/EmailDetailModal.test.tsx
+  s_f617c5d3ca4eb1::t_fa0b3fe4760367 1-12
+agentys-app/src/components/EmailDetailModal.tsx
+  s_f617c5d3ca4eb1::t_f862eebac2efb5 1-12
+agentys-app/src/components/EmailList.tsx
+  s_f617c5d3ca4eb1::t_0250e2482673bb 1-12
+agentys-app/src/components/EmailListEmpty.tsx
+  s_f617c5d3ca4eb1::t_01bc0e8415ae43 1-12
+agentys-app/src/components/EmailListHeader.tsx
+  s_f617c5d3ca4eb1::t_03075d0e376780 1-12
+agentys-app/src/components/EmptyState.tsx
+  s_f617c5d3ca4eb1::t_fbc6c2553534f0 1-12
+agentys-app/src/components/ErrorBoundary.tsx
+  s_f617c5d3ca4eb1::t_af48b3d0b72553 1-12
+agentys-app/src/components/FileDropOverlay.tsx
+  s_f617c5d3ca4eb1::t_77ab5fe494db48 1-12
+agentys-app/src/components/FollowupDatePicker.tsx
+  s_f617c5d3ca4eb1::t_26b0736be13c44 1-12
+agentys-app/src/components/FollowupSuggestions.tsx
+  s_f617c5d3ca4eb1::t_3ee17bbbc573f6 1-12
+agentys-app/src/components/FormatSection.tsx
+  s_f617c5d3ca4eb1::t_61e2a59e312e46 1-12
+agentys-app/src/components/GlobalToastHost.tsx
+  s_f617c5d3ca4eb1::t_1ee286fa4c8abc 1-12
+agentys-app/src/components/GreetingInput.test.tsx
+  s_f617c5d3ca4eb1::t_193848651f712a 1-12
+agentys-app/src/components/GreetingInput.tsx
+  s_f617c5d3ca4eb1::t_7bebbd5c0f3a5b 1-12
+agentys-app/src/components/GuidedTour.tsx
+  s_f617c5d3ca4eb1::t_eaa4df6bde2d71 1-12
+agentys-app/src/components/ImageAnnotator.focus.test.tsx
+  s_f617c5d3ca4eb1::t_13b6acb9f021ae 1-12
+agentys-app/src/components/ImageAnnotator.tsx
+  s_f617c5d3ca4eb1::t_c7a913d05ffe8e 1-12
+agentys-app/src/components/InlineRule.tsx
+  s_f617c5d3ca4eb1::t_ce778d191a291c 1-12
+agentys-app/src/components/KnowledgeSuggestionToast.tsx
+  s_f617c5d3ca4eb1::t_64a0edc19f0281 1-12
+agentys-app/src/components/LanguageSelector.tsx
+  s_f617c5d3ca4eb1::t_d698058f780068 1-12
+agentys-app/src/components/LearningDashboard.tsx
+  s_f617c5d3ca4eb1::t_1ca450afd7fadd 1-12
+agentys-app/src/components/LimitReachedBanner.tsx
+  s_f617c5d3ca4eb1::t_996971dde6e4d5 1-12
+agentys-app/src/components/LocalePickers.test.tsx
+  s_f617c5d3ca4eb1::t_ff46d2b1939c5e 1-12
+agentys-app/src/components/LocalePickers.tsx
+  s_f617c5d3ca4eb1::t_36b0453d16e65b 1-12
+agentys-app/src/components/LoginPage.tsx
+  s_f617c5d3ca4eb1::t_3175f5095f2142 1-12
+agentys-app/src/components/MeetingImminentBanner.tsx
+  s_f617c5d3ca4eb1::t_bf618dbde7f9a8 1-12
+agentys-app/src/components/MeetingRemindersPanel.tsx
+  s_f617c5d3ca4eb1::t_f96fcc4cc5b90f 1-12
+agentys-app/src/components/MilestoneToast.tsx
+  s_f617c5d3ca4eb1::t_448785c9c6948b 1-12
+agentys-app/src/components/MonthlyRecapPage.tsx
+  s_f617c5d3ca4eb1::t_0ac25e84942432 1-12
+agentys-app/src/components/MyStyle.tsx
+  s_f617c5d3ca4eb1::t_86b4f16e2c2fdb 1-12
+agentys-app/src/components/NewslettersModal.tsx
+  s_f617c5d3ca4eb1::t_598d1da4dc4bdb 1-12
+agentys-app/src/components/OAuthCallback.test.tsx
+  s_f617c5d3ca4eb1::t_cf332d0156aa46 1-12
+agentys-app/src/components/OAuthCallback.tsx
+  s_f617c5d3ca4eb1::t_6ef5dff54f4790 1-12
+agentys-app/src/components/OAuthTroubleshootingPanel.tsx
+  s_f617c5d3ca4eb1::t_d421d0b33c93c3 1-12
+agentys-app/src/components/PendingDraftDetail.test.tsx
+  s_f617c5d3ca4eb1::t_f13de76913da03 1-12
+agentys-app/src/components/PendingDraftDetail.tsx
+  s_f617c5d3ca4eb1::t_a03e2f294ebc4a 1-12
+agentys-app/src/components/PendingDraftList.pinned.test.tsx
+  s_f617c5d3ca4eb1::t_cdde85fcee0c1e 1-12
+agentys-app/src/components/PendingDraftList.tsx
+  s_f617c5d3ca4eb1::t_c33324009c1b0b 1-12
+agentys-app/src/components/PillarAutoLabel.tsx
+  s_f617c5d3ca4eb1::t_8ef3ebceb98670 1-12
+agentys-app/src/components/PillarAutoLabelReadOnly.tsx
+  s_f617c5d3ca4eb1::t_b84caeee88a728 1-12
+agentys-app/src/components/PillarNav.test.tsx
+  s_f617c5d3ca4eb1::t_46f659d03872d1 1-12
+agentys-app/src/components/PillarNav.tsx
+  s_f617c5d3ca4eb1::t_3daab262c68aed 1-12
+agentys-app/src/components/PillarProfil.tsx
+  s_f617c5d3ca4eb1::t_69a281ca74f18e 1-12
+agentys-app/src/components/PillarProfilReadOnly.tsx
+  s_f617c5d3ca4eb1::t_40bb8462769897 1-12
+agentys-app/src/components/PillarSavoir.tsx
+  s_f617c5d3ca4eb1::t_310359ef55b8d7 1-12
+agentys-app/src/components/PillarStyle.tsx
+  s_f617c5d3ca4eb1::t_d699bdec7ab5f3 1-12
+agentys-app/src/components/PillarStyleReadOnly.test.tsx
+  s_f617c5d3ca4eb1::t_608a21ffe433ec 1-12
+agentys-app/src/components/PillarStyleReadOnly.tsx
+  s_f617c5d3ca4eb1::t_60309f2b8e3591 1-12
+agentys-app/src/components/PlanStatusBanner.tsx
+  s_f617c5d3ca4eb1::t_0f9cf16356967b 1-12
+agentys-app/src/components/QuickStepsBar.tsx
+  s_f617c5d3ca4eb1::t_839474c3ac719e 1-12
+agentys-app/src/components/QuickStepsListHotkeys.tsx
+  s_f617c5d3ca4eb1::t_9d4a63a587975e 1-12
+agentys-app/src/components/QuickStepsPalette.tsx
+  s_f617c5d3ca4eb1::t_848f1cb7676f6d 1-12
+agentys-app/src/components/RecapBanner.tsx
+  s_f617c5d3ca4eb1::t_ec95ef49aeafcf 1-12
+agentys-app/src/components/ReferralPanel.tsx
+  s_f617c5d3ca4eb1::t_80f4dd73583f17 1-12
+agentys-app/src/components/RegenerateModal.test.tsx
+  s_f617c5d3ca4eb1::t_05e422017011c1 1-12
+agentys-app/src/components/RegenerateModal.tsx
+  s_f617c5d3ca4eb1::t_efde6b8cb2bb17 1-12
+agentys-app/src/components/ScheduledDetail.tsx
+  s_f617c5d3ca4eb1::t_8e428cfe4be3de 1-12
+agentys-app/src/components/SendConfirmationModal.test.tsx
+  s_f617c5d3ca4eb1::t_c2aef5832e170b 1-12
+agentys-app/src/components/SendConfirmationModal.tsx
+  s_f617c5d3ca4eb1::t_59822fbb9c853e 1-12
+agentys-app/src/components/Settings.tsx
+  s_f617c5d3ca4eb1::t_4545c6ead82008 1-12
+agentys-app/src/components/ShortcutsHelpPanel.test.tsx
+  s_f617c5d3ca4eb1::t_75f4ecafca6f08 1-12
+agentys-app/src/components/ShortcutsHelpPanel.tsx
+  s_f617c5d3ca4eb1::t_a1e70e68961af7 1-12
+agentys-app/src/components/Sidebar.tsx
+  s_f617c5d3ca4eb1::t_03f372f40f168d 1-12
+agentys-app/src/components/SignatureModal.dismiss.test.tsx
+  s_f617c5d3ca4eb1::t_c0a5cf587da2b4 1-12
+agentys-app/src/components/SignatureModal.library.test.tsx
+  s_f617c5d3ca4eb1::t_ecd2db65c3acc8 1-12
+agentys-app/src/components/SignatureModal.tsx
+  s_f617c5d3ca4eb1::t_30bed48ddfd06f 1-12
+agentys-app/src/components/SmartReply.tsx
+  s_f617c5d3ca4eb1::t_9bbe9342c95374 1-12
+agentys-app/src/components/SnoozeDropdown.tsx
+  s_f617c5d3ca4eb1::t_dc06d696b5cdac 1-12
+agentys-app/src/components/SnoozedView.tsx
+  s_f617c5d3ca4eb1::t_314ee95a9473e5 1-12
+agentys-app/src/components/StyleObservedFromOutbox.tsx
+  s_f617c5d3ca4eb1::t_f2744ce90530a2 1-12
+agentys-app/src/components/StyleSettingsSection.test.tsx
+  s_f617c5d3ca4eb1::t_b19ca109100986 1-12
+agentys-app/src/components/StyleSettingsSection.tsx
+  s_f617c5d3ca4eb1::t_ba99c5eef576d4 1-12
+agentys-app/src/components/SwipeableEmailItem.tsx
+  s_f617c5d3ca4eb1::t_396b26fe97b34c 1-12
+agentys-app/src/components/ThinkingIndicator.tsx
+  s_f617c5d3ca4eb1::t_40a542130f3b3f 1-12
+agentys-app/src/components/TimezoneUtils.tsx
+  s_f617c5d3ca4eb1::t_380265e2b27980 1-12
+agentys-app/src/components/Toast.test.tsx
+  s_f617c5d3ca4eb1::t_5b8a1c14025e31 1-12
+agentys-app/src/components/Toast.tsx
+  s_f617c5d3ca4eb1::t_573d72b622cf47 1-12
+agentys-app/src/components/Tooltip.test.tsx
+  s_f617c5d3ca4eb1::t_5d106666b955fa 1-12
+agentys-app/src/components/Tooltip.tsx
+  s_f617c5d3ca4eb1::t_d7f9eea612e062 1-12
+agentys-app/src/components/TrainingFooter.tsx
+  s_f617c5d3ca4eb1::t_fc5fa07420a775 1-12
+agentys-app/src/components/TrainingPage.tsx
+  s_f617c5d3ca4eb1::t_03da9ec5579538 1-12
+agentys-app/src/components/UpdateBell.tsx
+  s_f617c5d3ca4eb1::t_b5668c7c9e5168 1-12
+agentys-app/src/components/ZoomIndicator.tsx
+  s_f617c5d3ca4eb1::t_73822a64cd4c82 1-12
+agentys-app/src/components/__tests__/EmojiMarkerChip.test.tsx
+  s_f617c5d3ca4eb1::t_47cfaaff411163 1-12
+agentys-app/src/components/__tests__/getBodySnippet.test.ts
+  s_f617c5d3ca4eb1::t_c3ddd17346e5af 1-12
+agentys-app/src/components/__tests__/no-auto-send-safety.test.tsx
+  s_f617c5d3ca4eb1::t_3c1132e0f0617b 1-12
+agentys-app/src/components/attachments/AttachmentPreview.f01f02.test.tsx
+  s_f617c5d3ca4eb1::t_e976ba8d5c6748 1-12
+agentys-app/src/components/attachments/AttachmentPreviewModal.tsx
+  s_f617c5d3ca4eb1::t_a8825d8a0ce3cb 1-12
+agentys-app/src/components/attachments/ReceivedAttachments.tsx
+  s_f617c5d3ca4eb1::t_5ad8de4bfc60b2 1-12
+agentys-app/src/components/availability/AvailabilityPicker.tsx
+  s_f617c5d3ca4eb1::t_257fef1eada8d6 1-12
+agentys-app/src/components/availability/InsertAvailabilityButton.tsx
+  s_f617c5d3ca4eb1::t_d06c745f7ab379 1-12
+agentys-app/src/components/brand/TriangleLogo.tsx
+  s_f617c5d3ca4eb1::t_19767cb676f5a1 1-12
+agentys-app/src/components/compose/AICommandMenu.tsx
+  s_f617c5d3ca4eb1::t_020fd449b84235 1-12
+agentys-app/src/components/compose/AttachmentCard.tsx
+  s_f617c5d3ca4eb1::t_eba7153b2b621f 1-12
+agentys-app/src/components/compose/ComposeEmailButton.test.tsx
+  s_f617c5d3ca4eb1::t_3b6c046bbcc280 1-12
+agentys-app/src/components/compose/ComposeEmailButton.tsx
+  s_f617c5d3ca4eb1::t_519d25cd7303a1 1-12
+agentys-app/src/components/compose/ComposeEmailForm.test.tsx
+  s_f617c5d3ca4eb1::t_b1cc01bdc006d2 1-12
+agentys-app/src/components/compose/ComposeEmailForm.tsx
+  s_f617c5d3ca4eb1::t_a94d81897e5576 1-12
+agentys-app/src/components/compose/ComposeEmailModal.tsx
+  s_f617c5d3ca4eb1::t_037ee50eddea38 1-12
+agentys-app/src/components/compose/ContactAutocomplete.test.tsx
+  s_f617c5d3ca4eb1::t_3db6f9cfcff9ba 1-12
+agentys-app/src/components/compose/ContactAutocomplete.tsx
+  s_f617c5d3ca4eb1::t_4bb492e0749cac 1-12
+agentys-app/src/components/compose/MicPermissionDialog.tsx
+  s_f617c5d3ca4eb1::t_f41d92de479909 1-12
+agentys-app/src/components/compose/NewMessageModal.tsx
+  s_f617c5d3ca4eb1::t_2d542921ce9a2d 1-12
+agentys-app/src/components/compose/RecordingWaveform.tsx
+  s_f617c5d3ca4eb1::t_3b79082f23a8e3 1-12
+agentys-app/src/components/compose/SchedulePicker.tsx
+  s_f617c5d3ca4eb1::t_e595ca4402ae79 1-12
+agentys-app/src/components/compose/SendButtonSplit.tsx
+  s_f617c5d3ca4eb1::t_113b814b45612a 1-12
+agentys-app/src/components/compose/SurgicalEditBar.tsx
+  s_f617c5d3ca4eb1::t_27ef075cbf4e4c 1-12
+agentys-app/src/components/compose/VoiceLanguageBadge.tsx
+  s_f617c5d3ca4eb1::t_d5f1f41710de9b 1-12
+agentys-app/src/components/compose/__tests__/AICommandMenu.busy.test.tsx
+  s_f617c5d3ca4eb1::t_2a2353d25daf5a 1-12
+agentys-app/src/components/compose/__tests__/AICommandMenu.lock.test.tsx
+  s_f617c5d3ca4eb1::t_aea95dffea8078 1-12
+agentys-app/src/components/compose/__tests__/aiCommandStorage.test.ts
+  s_f617c5d3ca4eb1::t_9d521cf2a3e62d 1-12
+agentys-app/src/components/compose/aiCommandStorage.ts
+  s_f617c5d3ca4eb1::t_1c3e4f725077f6 1-12
+agentys-app/src/components/compose/index.ts
+  s_f617c5d3ca4eb1::t_577cf08635bffd 1-12
+agentys-app/src/components/deepWorkTimeline.test.ts
+  s_f617c5d3ca4eb1::t_1b5b2bf01cf7b0 1-12
+agentys-app/src/components/deepWorkTimeline.ts
+  s_f617c5d3ca4eb1::t_542d6786e37966 1-12
+agentys-app/src/components/dictationCursor.test.ts
+  s_f617c5d3ca4eb1::t_3595ba458caa5f 1-12
+agentys-app/src/components/dictationCursor.ts
+  s_f617c5d3ca4eb1::t_195c2f5fd936f2 1-12
+agentys-app/src/components/draftBackupUtils.ts
+  s_f617c5d3ca4eb1::t_ec2b2d00187dbb 1-12
+agentys-app/src/components/icons/ActionIcons.tsx
+  s_f617c5d3ca4eb1::t_188fbcfe56abad 1-12
+agentys-app/src/components/icons/AgentysIcons.tsx
+  s_f617c5d3ca4eb1::t_e24e6a9e01b514 1-12
+agentys-app/src/components/labels/LabelBadge.tsx
+  s_f617c5d3ca4eb1::t_83fc4cfc3897b6 1-12
+agentys-app/src/components/labels/LabelEditor.partialRules.test.tsx
+  s_f617c5d3ca4eb1::t_726bfff01c7c22 1-12
+agentys-app/src/components/labels/LabelEditor.tsx
+  s_f617c5d3ca4eb1::t_034c46e08eef20 1-12
+agentys-app/src/components/labels/LabelLibrary.tsx
+  s_f617c5d3ca4eb1::t_51f0a4f908fcc8 1-12
+agentys-app/src/components/labels/LabelQuickPicker.tsx
+  s_f617c5d3ca4eb1::t_53057044f50e8f 1-12
+agentys-app/src/components/labels/index.ts
+  s_f617c5d3ca4eb1::t_e56602e11f90fa 1-12
+agentys-app/src/components/localePickerLabels.ts
+  s_f617c5d3ca4eb1::t_cfcee549d83476 1-12
+agentys-app/src/components/onboarding/DiscoveryFeed.test.tsx
+  s_f617c5d3ca4eb1::t_c2804d4c199340 1-12
+agentys-app/src/components/onboarding/DiscoveryFeed.tsx
+  s_f617c5d3ca4eb1::t_4d808f1a3732e2 1-12
+agentys-app/src/components/onboarding/FaqSourceStep.tsx
+  s_f617c5d3ca4eb1::t_0a944b5b7cc1f5 1-12
+agentys-app/src/components/onboarding/LearningInsights.test.tsx
+  s_f617c5d3ca4eb1::t_f9a6fcd0c95a86 1-12
+agentys-app/src/components/onboarding/LearningInsights.tsx
+  s_f617c5d3ca4eb1::t_415eb1a1a88c34 1-12
+agentys-app/src/components/onboarding/LearningProgressScreen.test.tsx
+  s_f617c5d3ca4eb1::t_0fbee39f002da8 1-12
+agentys-app/src/components/onboarding/LearningProgressScreen.tsx
+  s_f617c5d3ca4eb1::t_00a9c13fc06a69 1-12
+agentys-app/src/components/onboarding/OnboardingContainer.tsx
+  s_f617c5d3ca4eb1::t_f595cbccbc98ac 1-12
+agentys-app/src/components/onboarding/OnboardingLanguageSwitch.tsx
+  s_f617c5d3ca4eb1::t_c3ec8073924996 1-12
+agentys-app/src/components/onboarding/OnboardingV2Overlay.tsx
+  s_f617c5d3ca4eb1::t_57b71c40a4fcc5 1-12
+agentys-app/src/components/onboarding/PremiumOnboarding.tsx
+  s_f617c5d3ca4eb1::t_4dbe01020f8465 1-12
+agentys-app/src/components/onboarding/ScanNarrator.tsx
+  s_f617c5d3ca4eb1::t_555c8accbe58de 1-12
+agentys-app/src/components/onboarding/index.ts
+  s_f617c5d3ca4eb1::t_017fcbbf41a624 1-12
+agentys-app/src/components/onboarding/steps/FinalScorecard.test.tsx
+  s_f617c5d3ca4eb1::t_dc587a431b311b 1-12
+agentys-app/src/components/onboarding/steps/FinalScorecard.tsx
+  s_f617c5d3ca4eb1::t_24d06455a86e24 1-12
+agentys-app/src/components/onboarding/steps/Step0Welcome.tsx
+  s_f617c5d3ca4eb1::t_3dfc71682db001 1-12
+agentys-app/src/components/onboarding/steps/Step1Connect.tsx
+  s_f617c5d3ca4eb1::t_2786c6494ae2c2 1-12
+agentys-app/src/components/onboarding/steps/Step3TrainAI.skip.test.tsx
+  s_f617c5d3ca4eb1::t_0c66e922390746 1-12
+agentys-app/src/components/onboarding/steps/Step3TrainAI.tsx
+  s_f617c5d3ca4eb1::t_abe0139fc7339d 1-12
+agentys-app/src/components/onboarding/steps/Step4SmartOrg.test.tsx
+  s_f617c5d3ca4eb1::t_70cc842683f42c 1-12
+agentys-app/src/components/onboarding/steps/Step4SmartOrg.tsx
+  s_f617c5d3ca4eb1::t_b9a38ae0962ccd 1-12
+agentys-app/src/components/onboarding/useOnboardingWizard.test.ts
+  s_f617c5d3ca4eb1::t_8c6fcb563ea51e 1-12
+agentys-app/src/components/onboarding/useOnboardingWizard.ts
+  s_f617c5d3ca4eb1::t_d524d4e42047f0 1-12
+agentys-app/src/components/pipeline/AIProcessButton.tsx
+  s_f617c5d3ca4eb1::t_a0343bd51611e8 1-12
+agentys-app/src/components/pipeline/AgentAvatar.tsx
+  s_f617c5d3ca4eb1::t_760635946bb211 1-12
+agentys-app/src/components/pipeline/MemoryTracePanel.tsx
+  s_f617c5d3ca4eb1::t_bb57c01b497fb4 1-12
+agentys-app/src/components/pipeline/PipelineCards.tsx
+  s_f617c5d3ca4eb1::t_39d3442d7bf5e2 1-12
+agentys-app/src/components/pipeline/PipelineDisclosure.tsx
+  s_f617c5d3ca4eb1::t_46f868af994241 1-12
+agentys-app/src/components/pipeline/PipelineSummary.tsx
+  s_f617c5d3ca4eb1::t_07a0bd43a7d5f1 1-12
+agentys-app/src/components/pipeline/ScoreRing.tsx
+  s_f617c5d3ca4eb1::t_94aa1a3e1f6d5e 1-12
+agentys-app/src/components/pipeline/ThoughtStream.test.tsx
+  s_f617c5d3ca4eb1::t_6838ef0b629117 1-12
+agentys-app/src/components/pipeline/ThoughtStream.tsx
+  s_f617c5d3ca4eb1::t_1b292e15f19524 1-12
+agentys-app/src/components/pipeline/pipelineInfo.ts
+  s_f617c5d3ca4eb1::t_516aa68611abb4 1-12
+agentys-app/src/components/reply/AIPromptInput.tsx
+  s_f617c5d3ca4eb1::t_940620e3d87387 1-12
+agentys-app/src/components/reply/ReplyComposer.tsx
+  s_f617c5d3ca4eb1::t_b90a754cec7dc1 1-12
+agentys-app/src/components/reply/draftPolling.test.ts
+  s_f617c5d3ca4eb1::t_6a603095311388 1-12
+agentys-app/src/components/reply/draftPolling.ts
+  s_f617c5d3ca4eb1::t_35b11280586caa 1-12
+agentys-app/src/components/reply/index.ts
+  s_f617c5d3ca4eb1::t_0a07ddee3147cc 1-12
+agentys-app/src/components/reply/replyRecipient.test.ts
+  s_f617c5d3ca4eb1::t_f0e6653d40eb8b 1-12
+agentys-app/src/components/reply/replyRecipient.ts
+  s_f617c5d3ca4eb1::t_782dd08e02c289 1-12
+agentys-app/src/components/search/SaveSearchModal.tsx
+  s_f617c5d3ca4eb1::t_1beeddaec42afe 1-12
+agentys-app/src/components/search/SearchChip.tsx
+  s_f617c5d3ca4eb1::t_22c61cfa01bd0a 1-12
+agentys-app/src/components/search/SearchSuggestionsDropdown.tsx
+  s_f617c5d3ca4eb1::t_80ce602df8763b 1-12
+agentys-app/src/components/search/SmartSearchBar.test.tsx
+  s_f617c5d3ca4eb1::t_5de5fcda4891ed 1-12
+agentys-app/src/components/search/SmartSearchBar.tsx
+  s_f617c5d3ca4eb1::t_8dc28cca1ac59d 1-12
+agentys-app/src/components/settings/BackgroundTasksModal.tsx
+  s_f617c5d3ca4eb1::t_1eebb4c204be58 1-12
+agentys-app/src/components/settings/BulkActionsPanel.tsx
+  s_f617c5d3ca4eb1::t_33645a8f7a2b56 1-12
+agentys-app/src/components/settings/ContactGroupsManager.test.tsx
+  s_f617c5d3ca4eb1::t_4dd4d4b06992a0 1-12
+agentys-app/src/components/settings/ContactGroupsManager.tsx
+  s_f617c5d3ca4eb1::t_928f58f57c9bd8 1-12
+agentys-app/src/components/settings/QuickActionsModal.tsx
+  s_f617c5d3ca4eb1::t_71b2d6cd3e9043 1-12
+agentys-app/src/components/settings/QuickStepsManager.tsx
+  s_f617c5d3ca4eb1::t_12d29e728bd35d 1-12
+agentys-app/src/components/settings/SttKeytermsManager.test.tsx
+  s_f617c5d3ca4eb1::t_08b90701973b64 1-12
+agentys-app/src/components/settings/SttKeytermsManager.tsx
+  s_f617c5d3ca4eb1::t_074c6bf2b9c9cc 1-12
+agentys-app/src/components/settings/SttKeytermsModal.tsx
+  s_f617c5d3ca4eb1::t_5e688209072a42 1-12
+agentys-app/src/components/settings/__tests__/MarkWithEmojiForm.test.tsx
+  s_f617c5d3ca4eb1::t_9c947f5108a17c 1-12
+agentys-app/src/components/settings/__tests__/QuickStepEditor.autoDefault.test.tsx
+  s_f617c5d3ca4eb1::t_2a3df6fedcce3a 1-12
+agentys-app/src/components/settings/__tests__/QuickStepEditor.followupRelocalize.test.tsx
+  s_f617c5d3ca4eb1::t_e724536e5adfcf 1-12
+agentys-app/src/components/settings/__tests__/QuickStepEditor.i18n.test.tsx
+  s_f617c5d3ca4eb1::t_8534a8df75e973 1-12
+agentys-app/src/components/settings/__tests__/QuickStepEditor.reorderHandle.test.tsx
+  s_f617c5d3ca4eb1::t_8405afcf574981 1-12
+agentys-app/src/components/snippets/ShareSnippetDialog.tsx
+  s_f617c5d3ca4eb1::t_93a6e1845eb1e1 1-12
+agentys-app/src/components/snippets/SnippetEditor.tsx
+  s_f617c5d3ca4eb1::t_635a711aeecf73 1-12
+agentys-app/src/components/snippets/SnippetLibrary.tsx
+  s_f617c5d3ca4eb1::t_75cb300edd754a 1-12
+agentys-app/src/components/snippets/SnippetSelector.preview.test.tsx
+  s_f617c5d3ca4eb1::t_18aea3451348b6 1-12
+agentys-app/src/components/snippets/SnippetSelector.tsx
+  s_f617c5d3ca4eb1::t_e2fe9dfc7f49b2 1-12
+agentys-app/src/components/snippets/SnippetSharesList.tsx
+  s_f617c5d3ca4eb1::t_61fe4bf44cf673 1-12
+agentys-app/src/components/snippets/index.ts
+  s_f617c5d3ca4eb1::t_cc2d774c193082 1-12
+agentys-app/src/components/specialties/ApprentissagesModal.tsx
+  s_f617c5d3ca4eb1::t_7f4968cec3cb60 1-12
+agentys-app/src/components/specialties/SpecialtiesSection.tsx
+  s_f617c5d3ca4eb1::t_418e566e11be3f 1-12
+agentys-app/src/components/specialty/SpecialtyBadge.tsx
+  s_f617c5d3ca4eb1::t_bbf102611e680a 1-12
+agentys-app/src/components/support/SupportChat.tsx
+  s_f617c5d3ca4eb1::t_2d5c8885d425d0 1-12
+agentys-app/src/components/support/SupportForm.tsx
+  s_f617c5d3ca4eb1::t_412054c9b21706 1-12
+agentys-app/src/components/support/SupportHelpSection.tsx
+  s_f617c5d3ca4eb1::t_7c344fc0a64cd7 1-12
+agentys-app/src/components/support/SupportPanel.test.tsx
+  s_f617c5d3ca4eb1::t_da0e5fb6a20e1c 1-12
+agentys-app/src/components/support/SupportPanel.tsx
+  s_f617c5d3ca4eb1::t_02a29a4e2e5f28 1-12
+agentys-app/src/components/support/chatEngine.test.ts
+  s_f617c5d3ca4eb1::t_4dbcfc1011947f 1-12
+agentys-app/src/components/support/chatEngine.ts
+  s_f617c5d3ca4eb1::t_cda7f2cc29694a 1-12
+agentys-app/src/components/support/supportEmail.test.ts
+  s_f617c5d3ca4eb1::t_18864bb1df1e2a 1-12
+agentys-app/src/components/support/supportEmail.ts
+  s_f617c5d3ca4eb1::t_6c2bfddb0fcaec 1-12
+agentys-app/src/components/ui/FrenchDatePicker.tsx
+  s_f617c5d3ca4eb1::t_fcc4e29406472c 1-12
+agentys-app/src/components/ui/GhostAddCard.tsx
+  s_f617c5d3ca4eb1::t_b82f0dede0ec11 1-12
+agentys-app/src/components/ui/GhostAddRow.tsx
+  s_f617c5d3ca4eb1::t_acb77886349885 1-12
+agentys-app/src/components/ui/RichTextEditor.tsx
+  s_f617c5d3ca4eb1::t_caf071f065deba 1-12
+agentys-app/src/components/ui/SignatureFooter.tsx
+  s_f617c5d3ca4eb1::t_c153269f8e330c 1-12
+agentys-app/src/components/ui/button.tsx
+  s_f617c5d3ca4eb1::t_245f6446b621c9 1-12
+agentys-app/src/components/ui/dialog.tsx
+  s_f617c5d3ca4eb1::t_f5ac84436aaa9f 1-12
+agentys-app/src/config.ts
+  s_f617c5d3ca4eb1::t_722ca39e8ceb29 1-12
+agentys-app/src/config/agentPersonas.ts
+  s_f617c5d3ca4eb1::t_b90ddb91f7cf2b 1-12
+agentys-app/src/contexts/LabelsContext.tsx
+  s_f617c5d3ca4eb1::t_f15080d34f0748 1-12
+agentys-app/src/freezeWatchdog.ts
+  s_f617c5d3ca4eb1::t_1362c61fc24c91 1-12
+agentys-app/src/hooks/__tests__/createSettingHook.test.tsx
+  s_f617c5d3ca4eb1::t_8d3ba658c25d2e 1-12
+agentys-app/src/hooks/__tests__/useLabels.test.tsx
+  s_f617c5d3ca4eb1::t_5ccbcfd8a1ad8a 1-12
+agentys-app/src/hooks/createSettingHook.ts
+  s_f617c5d3ca4eb1::t_38288203279ba2 1-12
+agentys-app/src/hooks/useAccountSignature.test.tsx
+  s_f617c5d3ca4eb1::t_804d0853b63e0d 1-12
+agentys-app/src/hooks/useAccountSignature.ts
+  s_f617c5d3ca4eb1::t_731530228e0dc4 1-12
+agentys-app/src/hooks/useActiveAccountId.ts
+  s_f617c5d3ca4eb1::t_09bf6332725fa6 1-12
+agentys-app/src/hooks/useActiveSpecialties.ts
+  s_f617c5d3ca4eb1::t_42e74d88b417f5 1-12
+agentys-app/src/hooks/useActivityMonitor.test.ts
+  s_f617c5d3ca4eb1::t_3c86f793463d6e 1-12
+agentys-app/src/hooks/useActivityMonitor.ts
+  s_f617c5d3ca4eb1::t_c87664d7f02f33 1-12
+agentys-app/src/hooks/useAnimatedUnmount.ts
+  s_f617c5d3ca4eb1::t_b4ca6389a3de6d 1-12
+agentys-app/src/hooks/useAppShortcuts.test.ts
+  s_f617c5d3ca4eb1::t_862e25d40f01c1 1-12
+agentys-app/src/hooks/useAppShortcuts.ts
+  s_f617c5d3ca4eb1::t_5776a82527f684 1-12
+agentys-app/src/hooks/useAuth.ts
+  s_f617c5d3ca4eb1::t_bc12b809d60b12 1-12
+agentys-app/src/hooks/useAutoDeleteNoiseSetting.ts
+  s_f617c5d3ca4eb1::t_91f3bc78037aef 1-12
+agentys-app/src/hooks/useAutoEmptySpamSetting.ts
+  s_f617c5d3ca4eb1::t_47d7fecf5bb7c2 1-12
+agentys-app/src/hooks/useAutoEmptyTrashSetting.ts
+  s_f617c5d3ca4eb1::t_cd3baf315929e8 1-12
+agentys-app/src/hooks/useAutoReminderOnCommitment.ts
+  s_f617c5d3ca4eb1::t_13db80ab452880 1-12
+agentys-app/src/hooks/useAutoReplySetting.ts
+  s_f617c5d3ca4eb1::t_4ffcc563939953 1-12
+agentys-app/src/hooks/useAutoSave.test.ts
+  s_f617c5d3ca4eb1::t_caa7613bcd3819 1-12
+agentys-app/src/hooks/useAutoSave.ts
+  s_f617c5d3ca4eb1::t_efa9eb57b2d9e1 1-12
+agentys-app/src/hooks/useBackendConnection.test.tsx
+  s_f617c5d3ca4eb1::t_f3baf053264ad8 1-12
+agentys-app/src/hooks/useBackendConnection.ts
+  s_f617c5d3ca4eb1::t_fcde9c6446a408 1-12
+agentys-app/src/hooks/useBatchScheduleSetting.ts
+  s_f617c5d3ca4eb1::t_90038e770d2ef4 1-12
+agentys-app/src/hooks/useBookingUrlSetting.ts
+  s_f617c5d3ca4eb1::t_be26ad63490d79 1-12
+agentys-app/src/hooks/useBulkActionCount.ts
+  s_f617c5d3ca4eb1::t_d76679cbd962c1 1-12
+agentys-app/src/hooks/useBulkJobs.ts
+  s_f617c5d3ca4eb1::t_039436a8aca05f 1-12
+agentys-app/src/hooks/useComposeFontPrefs.ts
+  s_f617c5d3ca4eb1::t_b4ef3cb0ca41b8 1-12
+agentys-app/src/hooks/useConnectionHealth.test.tsx
+  s_f617c5d3ca4eb1::t_5eace6385c79de 1-12
+agentys-app/src/hooks/useConnectionHealth.ts
+  s_f617c5d3ca4eb1::t_568a95a3e8edcb 1-12
+agentys-app/src/hooks/useContactAvatar.ts
+  s_f617c5d3ca4eb1::t_d039d5a9c3ad2d 1-12
+agentys-app/src/hooks/useContactGroups.ts
+  s_f617c5d3ca4eb1::t_297d609a1c7ccb 1-12
+agentys-app/src/hooks/useContactLanguage.ts
+  s_f617c5d3ca4eb1::t_739b8bcc2c5a03 1-12
+agentys-app/src/hooks/useContactLanguages.ts
+  s_f617c5d3ca4eb1::t_1156ddf6039d73 1-12
+agentys-app/src/hooks/useCurrentAccountId.ts
+  s_f617c5d3ca4eb1::t_d18b106ec149de 1-12
+agentys-app/src/hooks/useDeepWorkSetting.ts
+  s_f617c5d3ca4eb1::t_96dba41ffe578a 1-12
+agentys-app/src/hooks/useDeepWorkTimer.test.ts
+  s_f617c5d3ca4eb1::t_2620f54e92406f 1-12
+agentys-app/src/hooks/useDeepWorkTimer.ts
+  s_f617c5d3ca4eb1::t_e4823f9e57c969 1-12
+agentys-app/src/hooks/useDraftController.ts
+  s_f617c5d3ca4eb1::t_751557a9b4498f 1-12
+agentys-app/src/hooks/useDraftStream.ts
+  s_f617c5d3ca4eb1::t_3ff0908bee7abc 1-12
+agentys-app/src/hooks/useDraftWakeToasts.ts
+  s_f617c5d3ca4eb1::t_ef1dd562e575d7 1-12
+agentys-app/src/hooks/useEmailDetailController.ts
+  s_f617c5d3ca4eb1::t_0864af27b0df3f 1-12
+agentys-app/src/hooks/useEmailViewMode.ts
+  s_f617c5d3ca4eb1::t_215be98506182f 1-12
+agentys-app/src/hooks/useFileDrop.ts
+  s_f617c5d3ca4eb1::t_5c783698110df5 1-12
+agentys-app/src/hooks/useFocusTrap.ts
+  s_f617c5d3ca4eb1::t_3129bb6f0b9af1 1-12
+agentys-app/src/hooks/useFollowupNudgeCount.ts
+  s_f617c5d3ca4eb1::t_c8538291fc6509 1-12
+agentys-app/src/hooks/useGmailAuth.ts
+  s_f617c5d3ca4eb1::t_401c7bdb3c32d1 1-12
+agentys-app/src/hooks/useGuidedTour.ts
+  s_f617c5d3ca4eb1::t_fa86a4e0488806 1-12
+agentys-app/src/hooks/useHideNoiseSetting.ts
+  s_f617c5d3ca4eb1::t_87f4de1ad73bba 1-12
+agentys-app/src/hooks/useInlineImage.ts
+  s_f617c5d3ca4eb1::t_8cba15335e8988 1-12
+agentys-app/src/hooks/useLabels.ts
+  s_f617c5d3ca4eb1::t_99581edd865f45 1-12
+agentys-app/src/hooks/useLearningDashboard.ts
+  s_f617c5d3ca4eb1::t_cb31d8b98f902d 1-12
+agentys-app/src/hooks/useLearningProgress.ts
+  s_f617c5d3ca4eb1::t_57218dded2b4ac 1-12
+agentys-app/src/hooks/useMeetingReminderSettings.ts
+  s_f617c5d3ca4eb1::t_96978d3e6a3296 1-12
+agentys-app/src/hooks/useMeetingReminders.ts
+  s_f617c5d3ca4eb1::t_d1462b5ef67b51 1-12
+agentys-app/src/hooks/useMilestones.ts
+  s_f617c5d3ca4eb1::t_b0307181ee1370 1-12
+agentys-app/src/hooks/useModals.ts
+  s_f617c5d3ca4eb1::t_89c7609c07ba4b 1-12
+agentys-app/src/hooks/useNavigationController.test.ts
+  s_f617c5d3ca4eb1::t_2d3e91c77acfda 1-12
+agentys-app/src/hooks/useNavigationController.ts
+  s_f617c5d3ca4eb1::t_7aa3d34cfc8ea8 1-12
+agentys-app/src/hooks/useOAuth.ts
+  s_f617c5d3ca4eb1::t_afc2a8541a7ab9 1-12
+agentys-app/src/hooks/useOnboardingState.ts
+  s_f617c5d3ca4eb1::t_eca57262a95cd4 1-12
+agentys-app/src/hooks/useOnboardingV2.ts
+  s_f617c5d3ca4eb1::t_d1f0130e7347b2 1-12
+agentys-app/src/hooks/useOptimisticMutation.test.ts
+  s_f617c5d3ca4eb1::t_d37b6729f35364 1-12
+agentys-app/src/hooks/useOptimisticMutation.ts
+  s_f617c5d3ca4eb1::t_a97422b81d0289 1-12
+agentys-app/src/hooks/useOutlookAuth.ts
+  s_f617c5d3ca4eb1::t_ffe6606b69fbf4 1-12
+agentys-app/src/hooks/usePendingSends.test.ts
+  s_f617c5d3ca4eb1::t_7215265a6ca89f 1-12
+agentys-app/src/hooks/usePendingSends.ts
+  s_f617c5d3ca4eb1::t_f26c258d2aaed3 1-12
+agentys-app/src/hooks/usePinned.test.ts
+  s_f617c5d3ca4eb1::t_26a3ceeac25e87 1-12
+agentys-app/src/hooks/usePinned.ts
+  s_f617c5d3ca4eb1::t_cc96df24adda3e 1-12
+agentys-app/src/hooks/useQuickStepRunner.test.ts
+  s_f617c5d3ca4eb1::t_a24c8f04f76e45 1-12
+agentys-app/src/hooks/useQuickStepRunner.ts
+  s_f617c5d3ca4eb1::t_e719d577fb636a 1-12
+agentys-app/src/hooks/useQuickSteps.ts
+  s_f617c5d3ca4eb1::t_0b4d7accbae1f9 1-12
+agentys-app/src/hooks/useResizePanel.ts
+  s_f617c5d3ca4eb1::t_5e9436a11eafea 1-12
+agentys-app/src/hooks/useSavedSearches.ts
+  s_f617c5d3ca4eb1::t_719d1a471b963d 1-12
+agentys-app/src/hooks/useScheduledEmails.ts
+  s_f617c5d3ca4eb1::t_87e7c19f42260d 1-12
+agentys-app/src/hooks/useSettingsCache.ts
+  s_f617c5d3ca4eb1::t_a49e99510a1fd4 1-12
+agentys-app/src/hooks/useShortcutsStore.test.ts
+  s_f617c5d3ca4eb1::t_0519bfa36c3b0f 1-12
+agentys-app/src/hooks/useShortcutsStore.ts
+  s_f617c5d3ca4eb1::t_459a03cb9ce854 1-12
+agentys-app/src/hooks/useSignatureLibrary.ts
+  s_f617c5d3ca4eb1::t_1c0e60bf129d8e 1-12
+agentys-app/src/hooks/useSnippets.ts
+  s_f617c5d3ca4eb1::t_b621066c8f8162 1-12
+agentys-app/src/hooks/useSnooze.test.ts
+  s_f617c5d3ca4eb1::t_fe693fb215e496 1-12
+agentys-app/src/hooks/useSnooze.ts
+  s_f617c5d3ca4eb1::t_a602ff29af1314 1-12
+agentys-app/src/hooks/useTheme.test.ts
+  s_f617c5d3ca4eb1::t_22b6439b9a1f13 1-12
+agentys-app/src/hooks/useTheme.ts
+  s_f617c5d3ca4eb1::t_93f14d5fec5080 1-12
+agentys-app/src/hooks/useTooltipSettings.test.tsx
+  s_f617c5d3ca4eb1::t_bb43aeaa504227 1-12
+agentys-app/src/hooks/useTooltipSettings.tsx
+  s_f617c5d3ca4eb1::t_72393aa26ab2b9 1-12
+agentys-app/src/hooks/useTrayBadge.ts
+  s_f617c5d3ca4eb1::t_c5997bb47236d1 1-12
+agentys-app/src/hooks/useTrayMenu.test.ts
+  s_f617c5d3ca4eb1::t_b44a43575127a6 1-12
+agentys-app/src/hooks/useTrayMenu.ts
+  s_f617c5d3ca4eb1::t_6545d7cb9d1616 1-12
+agentys-app/src/hooks/useUISounds.ts
+  s_f617c5d3ca4eb1::t_937ab7deaa7c9d 1-12
+agentys-app/src/hooks/useUndoSendSetting.ts
+  s_f617c5d3ca4eb1::t_1a6aa76d2b7a50 1-12
+agentys-app/src/hooks/useUnviewedDraftCount.ts
+  s_f617c5d3ca4eb1::t_0aab0c891a42dc 1-12
+agentys-app/src/hooks/useUpdateChecker.ts
+  s_f617c5d3ca4eb1::t_9f0aec7eb56768 1-12
+agentys-app/src/hooks/useVoiceDictationAccess.test.ts
+  s_f617c5d3ca4eb1::t_3cf903ee24e745 1-12
+agentys-app/src/hooks/useVoiceDictationAccess.ts
+  s_f617c5d3ca4eb1::t_0b23cbc4d11544 1-12
+agentys-app/src/hooks/useVoiceLanguage.test.ts
+  s_f617c5d3ca4eb1::t_5c1529d775493e 1-12
+agentys-app/src/hooks/useVoiceLanguage.ts
+  s_f617c5d3ca4eb1::t_c9d418a1bba064 1-12
+agentys-app/src/hooks/useWebSocketSync.test.tsx
+  s_f617c5d3ca4eb1::t_979e19dd2580ee 1-12
+agentys-app/src/hooks/useWebSocketSync.ts
+  s_f617c5d3ca4eb1::t_eb6f0c9aaf65aa 1-12
+agentys-app/src/hooks/useWhisperRecording.fallback.test.ts
+  s_f617c5d3ca4eb1::t_54b474866ffe69 1-12
+agentys-app/src/hooks/useWhisperRecording.mime.test.ts
+  s_f617c5d3ca4eb1::t_b96d1d78bb9fd7 1-12
+agentys-app/src/hooks/useWhisperRecording.ptt.test.tsx
+  s_f617c5d3ca4eb1::t_6436de44df2115 1-12
+agentys-app/src/hooks/useWhisperRecording.ts
+  s_f617c5d3ca4eb1::t_523d5490447848 1-12
+agentys-app/src/hooks/useZoom.ts
+  s_f617c5d3ca4eb1::t_25f8b8ea02fadd 1-12
+agentys-app/src/i18n/index.ts
+  s_f617c5d3ca4eb1::t_fef9939e16269a 1-12
+agentys-app/src/instrument.test.ts
+  s_f617c5d3ca4eb1::t_f2913be7964dcf 1-12
+agentys-app/src/instrument.ts
+  s_f617c5d3ca4eb1::t_6d6a91505aba90 1-12
+agentys-app/src/lib/__tests__/canonicalAccountId.test.ts
+  s_f617c5d3ca4eb1::t_8c48babbd98927 1-12
+agentys-app/src/lib/__tests__/queryFoundation.test.tsx
+  s_f617c5d3ca4eb1::t_5e40b170651a0e 1-12
+agentys-app/src/lib/accountIdMap.test.ts
+  s_f617c5d3ca4eb1::t_0f87540dd0bbe4 1-12
+agentys-app/src/lib/accountIdMap.ts
+  s_f617c5d3ca4eb1::t_95d75069d34643 1-12
+agentys-app/src/lib/appEvents.ts
+  s_f617c5d3ca4eb1::t_45bf317bb30311 1-12
+agentys-app/src/lib/canonicalAccountId.ts
+  s_f617c5d3ca4eb1::t_894b196921a9e2 1-12
+agentys-app/src/lib/currentAccountId.ts
+  s_f617c5d3ca4eb1::t_74d9d3da21018a 1-12
+agentys-app/src/lib/emailThreads.test.ts
+  s_f617c5d3ca4eb1::t_3e8b5c96600f91 1-12
+agentys-app/src/lib/emailThreads.ts
+  s_f617c5d3ca4eb1::t_1758fb127999b6 1-12
+agentys-app/src/lib/handleEmailPatchFailure.test.ts
+  s_f617c5d3ca4eb1::t_d8f4e981217d3e 1-12
+agentys-app/src/lib/handleEmailPatchFailure.ts
+  s_f617c5d3ca4eb1::t_f93f58a9318efb 1-12
+agentys-app/src/lib/labelCounts.test.ts
+  s_f617c5d3ca4eb1::t_4ea49b99ee5786 1-12
+agentys-app/src/lib/labelCounts.ts
+  s_f617c5d3ca4eb1::t_56fe71b023d45b 1-12
+agentys-app/src/lib/oauthProblemGuidance.test.ts
+  s_f617c5d3ca4eb1::t_b8581d8434b25d 1-12
+agentys-app/src/lib/oauthProblemGuidance.ts
+  s_f617c5d3ca4eb1::t_db321002d83cb1 1-12
+agentys-app/src/lib/queryClient.ts
+  s_f617c5d3ca4eb1::t_bc11f33cf3e070 1-12
+agentys-app/src/lib/queryKeys.ts
+  s_f617c5d3ca4eb1::t_7fa5933a7d526e 1-12
+agentys-app/src/lib/storageKeys.ts
+  s_f617c5d3ca4eb1::t_cd09d31342a552 1-12
+agentys-app/src/lib/utils.ts
+  s_f617c5d3ca4eb1::t_3b054e7509f6ed 1-12
+agentys-app/src/lib/webSocketInvalidator.ts
+  s_f617c5d3ca4eb1::t_79dffeab3d0181 1-12
+agentys-app/src/main.tsx
+  s_f617c5d3ca4eb1::t_32d4e7757e33c2 1-12
+agentys-app/src/services/__tests__/draftStorage.test.ts
+  s_f617c5d3ca4eb1::t_5e253f0b0e3fa5 1-12
+agentys-app/src/services/api.ts
+  s_f617c5d3ca4eb1::t_fbe1a0498a8e51 1-12
+agentys-app/src/services/authToken.ts
+  s_f617c5d3ca4eb1::t_852de2c907b69a 1-12
+agentys-app/src/services/bootstrapCache.ts
+  s_f617c5d3ca4eb1::t_29c561d6fd25af 1-12
+agentys-app/src/services/clearUserData.ts
+  s_f617c5d3ca4eb1::t_017905ded1485f 1-12
+agentys-app/src/services/crossChannelRules.ts
+  s_f617c5d3ca4eb1::t_35e6b0f18c563c 1-12
+agentys-app/src/services/draftReminder.ts
+  s_f617c5d3ca4eb1::t_0eee368ebb0d76 1-12
+agentys-app/src/services/draftStorage.ts
+  s_f617c5d3ca4eb1::t_a527c253415f1c 1-12
+agentys-app/src/services/draftWakeStore.ts
+  s_f617c5d3ca4eb1::t_ffef399ca30a67 1-12
+agentys-app/src/services/errorMessages.ts
+  s_f617c5d3ca4eb1::t_bb71bf7d01fd69 1-12
+agentys-app/src/services/meetingReminderStore.ts
+  s_f617c5d3ca4eb1::t_7cc9c2250e9d46 1-12
+agentys-app/src/services/micPermission.ts
+  s_f617c5d3ca4eb1::t_dacd03588c1af8 1-12
+agentys-app/src/services/notifications.ts
+  s_f617c5d3ca4eb1::t_ff1d09175bb234 1-12
+agentys-app/src/services/oauth.ts
+  s_f617c5d3ca4eb1::t_977bb9e3b94494 1-12
+agentys-app/src/services/oauthErrors.ts
+  s_f617c5d3ca4eb1::t_edeae7d01649ae 1-12
+agentys-app/src/services/oauthReadiness.ts
+  s_f617c5d3ca4eb1::t_3fd1754bebad78 1-12
+agentys-app/src/services/oauthRecovery.ts
+  s_f617c5d3ca4eb1::t_6b01e3bbfe1e7a 1-12
+agentys-app/src/services/specialties.ts
+  s_f617c5d3ca4eb1::t_84dc03efdf8827 1-12
+agentys-app/src/services/stt.ts
+  s_f617c5d3ca4eb1::t_1935bbbbe3e58d 1-12
+agentys-app/src/services/subscription.test.ts
+  s_f617c5d3ca4eb1::t_1089dc25966058 1-12
+agentys-app/src/services/subscription.ts
+  s_f617c5d3ca4eb1::t_29c39690842849 1-12
+agentys-app/src/services/tokenStorage.ts
+  s_f617c5d3ca4eb1::t_f9de17649243bf 1-12
+agentys-app/src/services/uiSounds.ts
+  s_f617c5d3ca4eb1::t_d64ae14572b79f 1-12
+agentys-app/src/services/websocket.contract.test.ts
+  s_f617c5d3ca4eb1::t_5bd256d314453c 1-12
+agentys-app/src/services/websocket.ts
+  s_f617c5d3ca4eb1::t_e5e66f2f180ca1 1-12
+agentys-app/src/services/workHours.ts
+  s_f617c5d3ca4eb1::t_e4cd4b3091a8c1 1-12
+agentys-app/src/types/activity.ts
+  s_f617c5d3ca4eb1::t_390fb549711597 1-12
+agentys-app/src/types/agent.ts
+  s_f617c5d3ca4eb1::t_7e8e79a4c677b6 1-12
+agentys-app/src/types/approval.test.ts
+  s_f617c5d3ca4eb1::t_298edc98dbf648 1-12
+agentys-app/src/types/approval.ts
+  s_f617c5d3ca4eb1::t_e863002e94649d 1-12
+agentys-app/src/types/bulkJob.ts
+  s_f617c5d3ca4eb1::t_4ce5cf5bc08431 1-12
+agentys-app/src/types/email.ts
+  s_f617c5d3ca4eb1::t_7e7190422f000f 1-12
+agentys-app/src/types/labels.ts
+  s_f617c5d3ca4eb1::t_612ad3182f9822 1-12
+agentys-app/src/types/onboarding.ts
+  s_f617c5d3ca4eb1::t_0c88ca118c001e 1-12
+agentys-app/src/types/quickStep.ts
+  s_f617c5d3ca4eb1::t_0c9e8e0e70d9c9 1-12
+agentys-app/src/types/shortcuts.test.ts
+  s_f617c5d3ca4eb1::t_af0252d6360f9f 1-12
+agentys-app/src/types/shortcuts.ts
+  s_f617c5d3ca4eb1::t_ccebca671c4a7c 1-12
+agentys-app/src/types/snippets.ts
+  s_f617c5d3ca4eb1::t_c6395dcd08e2ca 1-12
+agentys-app/src/types/specialty.ts
+  s_f617c5d3ca4eb1::t_1729d2a6997d95 1-12
+agentys-app/src/types/training.test.ts
+  s_f617c5d3ca4eb1::t_7c1d1e3dff2b7e 1-12
+agentys-app/src/types/training.ts
+  s_f617c5d3ca4eb1::t_1aea2e6d4a9808 1-12
+agentys-app/src/utils/__tests__/absenceDates.test.ts
+  s_f617c5d3ca4eb1::t_1dd192648f391f 1-12
+agentys-app/src/utils/__tests__/downloadAttachment.test.ts
+  s_f617c5d3ca4eb1::t_fd5a973a8f000b 1-12
+agentys-app/src/utils/__tests__/placeholderChips.test.ts
+  s_f617c5d3ca4eb1::t_70ba6b893acf23 1-12
+agentys-app/src/utils/absenceDates.ts
+  s_f617c5d3ca4eb1::t_37ef7744386dea 1-12
+agentys-app/src/utils/attachmentDetector.ts
+  s_f617c5d3ca4eb1::t_af9646771a91c2 1-12
+agentys-app/src/utils/autoReplySuggestion.test.ts
+  s_f617c5d3ca4eb1::t_0df0a6672196b0 1-12
+agentys-app/src/utils/autoReplySuggestion.ts
+  s_f617c5d3ca4eb1::t_3542665d41b879 1-12
+agentys-app/src/utils/availabilityFormatter.test.ts
+  s_f617c5d3ca4eb1::t_922162de3b724c 1-12
+agentys-app/src/utils/availabilityFormatter.ts
+  s_f617c5d3ca4eb1::t_2c89aecf38a6f1 1-12
+agentys-app/src/utils/clipboard.ts
+  s_f617c5d3ca4eb1::t_decc2b664b1d9f 1-12
+agentys-app/src/utils/contextualAgents.ts
+  s_f617c5d3ca4eb1::t_c7b2f790fab87d 1-12
+agentys-app/src/utils/dateFormat.test.ts
+  s_f617c5d3ca4eb1::t_9c8e3af15068f6 1-12
+agentys-app/src/utils/dateFormat.ts
+  s_f617c5d3ca4eb1::t_bba5573b67b475 1-12
+agentys-app/src/utils/downloadAttachment.test.ts
+  s_f617c5d3ca4eb1::t_c4b69410604c5b 1-12
+agentys-app/src/utils/downloadAttachment.ts
+  s_f617c5d3ca4eb1::t_1e3d298d997022 1-12
+agentys-app/src/utils/draftBody.test.ts
+  s_f617c5d3ca4eb1::t_47d592f29627ca 1-12
+agentys-app/src/utils/draftBody.ts
+  s_f617c5d3ca4eb1::t_9b46ed94c686b0 1-12
+agentys-app/src/utils/draftBodyFormat.test.ts
+  s_f617c5d3ca4eb1::t_0ef1eeea67ebe6 1-12
+agentys-app/src/utils/draftBodyFormat.ts
+  s_f617c5d3ca4eb1::t_4db662beb3350a 1-12
+agentys-app/src/utils/emailContent.test.ts
+  s_f617c5d3ca4eb1::t_206173c20fba52 1-12
+agentys-app/src/utils/emailContent.ts
+  s_f617c5d3ca4eb1::t_b7003f3ca881ee 1-12
+agentys-app/src/utils/emailSyncInProgress.test.ts
+  s_f617c5d3ca4eb1::t_ac3b68c6af69b2 1-12
+agentys-app/src/utils/emailSyncInProgress.ts
+  s_f617c5d3ca4eb1::t_8c3e3ce702a597 1-12
+agentys-app/src/utils/escapeOwner.test.ts
+  s_f617c5d3ca4eb1::t_4299bda570b142 1-12
+agentys-app/src/utils/escapeOwner.ts
+  s_f617c5d3ca4eb1::t_8e4eb3f7966731 1-12
+agentys-app/src/utils/eventLabelOverrides.test.ts
+  s_f617c5d3ca4eb1::t_93879e81a5c18d 1-12
+agentys-app/src/utils/eventLabelOverrides.ts
+  s_f617c5d3ca4eb1::t_5c06ae169f1014 1-12
+agentys-app/src/utils/exportEmailPdf.ts
+  s_f617c5d3ca4eb1::t_9d27e556e3a446 1-12
+agentys-app/src/utils/formatPreview.test.ts
+  s_f617c5d3ca4eb1::t_0fc3c884beb942 1-12
+agentys-app/src/utils/formatPreview.ts
+  s_f617c5d3ca4eb1::t_c8664dd1beb333 1-12
+agentys-app/src/utils/holidayDedup.test.ts
+  s_f617c5d3ca4eb1::t_a7b2cec8d079fe 1-12
+agentys-app/src/utils/holidayDedup.ts
+  s_f617c5d3ca4eb1::t_4cdac785d79551 1-12
+agentys-app/src/utils/keyboard.test.ts
+  s_f617c5d3ca4eb1::t_52d99eff36e869 1-12
+agentys-app/src/utils/keyboard.ts
+  s_f617c5d3ca4eb1::t_88f5553e7bfe39 1-12
+agentys-app/src/utils/lazyWithRetry.ts
+  s_f617c5d3ca4eb1::t_41f80b737f8110 1-12
+agentys-app/src/utils/meetingVideoLink.ts
+  s_f617c5d3ca4eb1::t_0ee312f5f78c5f 1-12
+agentys-app/src/utils/modalOpenFlag.ts
+  s_f617c5d3ca4eb1::t_26aad790a958b6 1-12
+agentys-app/src/utils/openUrl.ts
+  s_f617c5d3ca4eb1::t_53a5c3702c7d6a 1-12
+agentys-app/src/utils/placeholderChips.ts
+  s_f617c5d3ca4eb1::t_54eed4b32a601a 1-12
+agentys-app/src/utils/planBanner.test.ts
+  s_f617c5d3ca4eb1::t_b304e2f8a23586 1-12
+agentys-app/src/utils/planBanner.ts
+  s_f617c5d3ca4eb1::t_93c8a902ce2401 1-12
+agentys-app/src/utils/preserveInlineImages.test.ts
+  s_f617c5d3ca4eb1::t_dddc5c8b8f6570 1-12
+agentys-app/src/utils/preserveInlineImages.ts
+  s_f617c5d3ca4eb1::t_d90f0babed9ecc 1-12
+agentys-app/src/utils/ruleText.ts
+  s_f617c5d3ca4eb1::t_a005854d1dc4ca 1-12
+agentys-app/src/utils/savoirSync.ts
+  s_f617c5d3ca4eb1::t_b81a7f4fd05d08 1-12
+agentys-app/src/utils/slash-commands.ts
+  s_f617c5d3ca4eb1::t_c8547b6fe72cf7 1-12
+agentys-app/src/utils/snippetInsertion.test.ts
+  s_f617c5d3ca4eb1::t_d068b995638cc3 1-12
+agentys-app/src/utils/snippetInsertion.tiptap.test.ts
+  s_f617c5d3ca4eb1::t_26205fbf43c83a 1-12
+agentys-app/src/utils/snippetInsertion.ts
+  s_f617c5d3ca4eb1::t_717697d9c71a67 1-12
+agentys-app/src/utils/uuid.ts
+  s_f617c5d3ca4eb1::t_ec81feafb2f15b 1-12
+agentys-app/src/vite-env.d.ts
+  s_f617c5d3ca4eb1::t_1b208c9f37780a 1-12
+agentys-mobile/app/_layout.tsx
+  s_f617c5d3ca4eb1::t_eea2c9e06ef333 1-12
+agentys-mobile/app/auth-callback.tsx
+  s_f617c5d3ca4eb1::t_9ded053859f2d6 1-12
+agentys-mobile/app/compose.tsx
+  s_f617c5d3ca4eb1::t_c6c9965eb69c2c 1-12
+agentys-mobile/app/diagnostic.tsx
+  s_f617c5d3ca4eb1::t_3e28488b7b66b9 1-12
+agentys-mobile/app/guide.tsx
+  s_f617c5d3ca4eb1::t_2fb5671a855058 1-12
+agentys-mobile/app/index.tsx
+  s_f617c5d3ca4eb1::t_02ed308670c50b 1-12
+agentys-mobile/app/login.tsx
+  s_f617c5d3ca4eb1::t_2c58bda347bbcb 1-12
+agentys-mobile/app/settings.tsx
+  s_f617c5d3ca4eb1::t_3e9b207850c43a 1-12
+agentys-mobile/src/components/AgentysLogo.tsx
+  s_f617c5d3ca4eb1::t_ae4ec8e9e6e6d0 1-12
+agentys-mobile/src/components/AuthGuard.tsx
+  s_f617c5d3ca4eb1::t_da087017c55a8c 1-12
+agentys-mobile/src/components/BreathingTriangle.tsx
+  s_f617c5d3ca4eb1::t_227d3bf51ea4de 1-12
+agentys-mobile/src/components/CategoryCard.tsx
+  s_f617c5d3ca4eb1::t_acf53d00d2b102 1-12
+agentys-mobile/src/components/DrivePlayer.tsx
+  s_f617c5d3ca4eb1::t_03fd66e0ab540a 1-12
+agentys-mobile/src/components/EmptyState.tsx
+  s_f617c5d3ca4eb1::t_cc3b3f2fc0182f 1-12
+agentys-mobile/src/components/Greeting.tsx
+  s_f617c5d3ca4eb1::t_b313c7ea42f378 1-12
+agentys-mobile/src/components/OnboardingTour.tsx
+  s_f617c5d3ca4eb1::t_bf205d2f75e517 1-12
+agentys-mobile/src/components/PulsingDot.tsx
+  s_f617c5d3ca4eb1::t_dc3e013bc3cc65 1-12
+agentys-mobile/src/components/SessionSummary.tsx
+  s_f617c5d3ca4eb1::t_5dc8f5be73c4fc 1-12
+agentys-mobile/src/components/SpeakerChip.tsx
+  s_f617c5d3ca4eb1::t_8aa8b88f35a149 1-12
+agentys-mobile/src/components/ToastHost.tsx
+  s_f617c5d3ca4eb1::t_14e738487eaf72 1-12
+agentys-mobile/src/components/VoiceCloneModal.tsx
+  s_f617c5d3ca4eb1::t_44ff87940de926 1-12
+agentys-mobile/src/components/VoicePicker.tsx
+  s_f617c5d3ca4eb1::t_deefdaea6dbc72 1-12
+agentys-mobile/src/components/VoiceVisualizer.tsx
+  s_f617c5d3ca4eb1::t_11320e3e4fbdb3 1-12
+agentys-mobile/src/components/ribbons-engine.ts
+  s_f617c5d3ca4eb1::t_87656f9172f022 1-12
+agentys-mobile/src/config.ts
+  s_f617c5d3ca4eb1::t_ad7f8b1dc2924c 1-12
+agentys-mobile/src/hooks/driveReducer.ts
+  s_f617c5d3ca4eb1::t_a9ae82bcb93c7d 1-12
+agentys-mobile/src/hooks/useApi.ts
+  s_f617c5d3ca4eb1::t_27b01927a29b4c 1-12
+agentys-mobile/src/hooks/useAudio.ts
+  s_f617c5d3ca4eb1::t_6127d94290ff8b 1-12
+agentys-mobile/src/hooks/useAudioLevelEnvelope.ts
+  s_f617c5d3ca4eb1::t_eee151d5ec12d4 1-12
+agentys-mobile/src/hooks/useAuth.ts
+  s_f617c5d3ca4eb1::t_0741f51ae9521c 1-12
+agentys-mobile/src/hooks/useDeepgramDirect.ts
+  s_f617c5d3ca4eb1::t_2df8e238d3ae3a 1-12
+agentys-mobile/src/hooks/useDraftFlow.ts
+  s_f617c5d3ca4eb1::t_1926a9c128f111 1-12
+agentys-mobile/src/hooks/useDriveMode.ts
+  s_f617c5d3ca4eb1::t_bd5d1710eaac1a 1-12
+agentys-mobile/src/hooks/useDriveSession.ts
+  s_f617c5d3ca4eb1::t_d3b0f4405e6d89 1-12
+agentys-mobile/src/hooks/useDriveVoiceIO.ts
+  s_f617c5d3ca4eb1::t_daab5d1a71752c 1-12
+agentys-mobile/src/hooks/useEarcons.ts
+  s_f617c5d3ca4eb1::t_69618795c219cc 1-12
+agentys-mobile/src/hooks/useLabelFilters.ts
+  s_f617c5d3ca4eb1::t_fb8432a7d34921 1-12
+agentys-mobile/src/hooks/useLanguageSync.ts
+  s_f617c5d3ca4eb1::t_6ec0ed8128a0c8 1-12
+agentys-mobile/src/hooks/useMicLevel.ts
+  s_f617c5d3ca4eb1::t_2fdf1be5f17104 1-12
+agentys-mobile/src/hooks/useOutboxFlush.ts
+  s_f617c5d3ca4eb1::t_0e43086e47dfc0 1-12
+agentys-mobile/src/hooks/useStreamingStt.ts
+  s_f617c5d3ca4eb1::t_97b22e0c0da0d9 1-12
+agentys-mobile/src/hooks/useTts.ts
+  s_f617c5d3ca4eb1::t_1fafd2f4bdeb16 1-12
+agentys-mobile/src/hooks/useVoiceDictation.ts
+  s_f617c5d3ca4eb1::t_95df31e3e47080 1-12
+agentys-mobile/src/hooks/useVoiceRouter.ts
+  s_f617c5d3ca4eb1::t_69a642c98b44b5 1-12
+agentys-mobile/src/hooks/useVoiceSettings.ts
+  s_f617c5d3ca4eb1::t_29dda1425f51da 1-12
+agentys-mobile/src/hooks/useWatchdog.ts
+  s_f617c5d3ca4eb1::t_1484c21ab7346e 1-12
+agentys-mobile/src/hooks/useWebSocket.ts
+  s_f617c5d3ca4eb1::t_d9c635ca679c0e 1-12
+agentys-mobile/src/i18n/index.ts
+  s_f617c5d3ca4eb1::t_49fbe78f360e0a 1-12
+agentys-mobile/src/lib/audioMode.ts
+  s_f617c5d3ca4eb1::t_a6587b7f52b76d 1-12
+agentys-mobile/src/lib/driveCommands.ts
+  s_f617c5d3ca4eb1::t_3212e1e9ec7959 1-12
+agentys-mobile/src/lib/errors.ts
+  s_f617c5d3ca4eb1::t_ba5176748964ec 1-12
+agentys-mobile/src/lib/eventLog.ts
+  s_f617c5d3ca4eb1::t_caf406fb7990c2 1-12
+agentys-mobile/src/lib/frenchNumbers.ts
+  s_f617c5d3ca4eb1::t_a07793513764ce 1-12
+agentys-mobile/src/lib/pendingActions.ts
+  s_f617c5d3ca4eb1::t_e6d685e5b43f06 1-12
+agentys-mobile/src/lib/sendQueue.ts
+  s_f617c5d3ca4eb1::t_91ff7a0397379c 1-12
+agentys-mobile/src/lib/speechRecognitionShim.ts
+  s_f617c5d3ca4eb1::t_36ca25ad590523 1-12
+agentys-mobile/src/lib/toast.ts
+  s_f617c5d3ca4eb1::t_3e47dc7c4e8f60 1-12
+agentys-mobile/src/lib/ttsChunks.ts
+  s_f617c5d3ca4eb1::t_b0b0499169ce7b 1-12
+agentys-mobile/src/lib/vadFloor.ts
+  s_f617c5d3ca4eb1::t_3f6136cab74f36 1-12
+agentys-mobile/src/lib/voice-commands.ts
+  s_f617c5d3ca4eb1::t_b3e234a48e5c3d 1-12
+agentys-mobile/src/lib/voiceMetrics.ts
+  s_f617c5d3ca4eb1::t_0c59d2a3272a51 1-12
+agentys-mobile/src/services/api.ts
+  s_f617c5d3ca4eb1::t_04c21a3a54141e 1-12
+agentys-mobile/src/services/auth.ts
+  s_f617c5d3ca4eb1::t_5f67221c582dad 1-12
+agentys-mobile/src/services/tts.ts
+  s_f617c5d3ca4eb1::t_cb9b7a47f32550 1-12
+agentys-mobile/src/services/websocket.ts
+  s_f617c5d3ca4eb1::t_73c24eac83b1d3 1-12
+agentys-mobile/src/theme.ts
+  s_f617c5d3ca4eb1::t_0a315f023deeb5 1-12
+agentys-mobile/src/types/index.ts
+  s_f617c5d3ca4eb1::t_03de6d00b60c3b 1-12
+app/_fixture_capture.py
+  s_f617c5d3ca4eb1::t_adcd536a240085 1-10
+app/account_agent.py
+  s_f617c5d3ca4eb1::t_88f715dc815e30 1-10
+app/account_identity.py
+  s_f617c5d3ca4eb1::t_00868e50d6664a 1-10
+app/adapters/elevenlabs_adapter.py
+  s_f617c5d3ca4eb1::t_eb9f5f0518e819 1-10
+app/adapters/llm/claude_batch_adapter.py
+  s_f617c5d3ca4eb1::t_aa105b7849e95e 1-10
+app/api/admin.py
+  s_f617c5d3ca4eb1::t_28ff7b8ec4b3c3 1-10
+app/api/ambassador.py
+  s_f617c5d3ca4eb1::t_5d0ef0c170a384 1-10
+app/api/auth.py
+  s_f617c5d3ca4eb1::t_82337c603d7d17 1-10
+app/api/billing.py
+  s_f617c5d3ca4eb1::t_794ea6a48d6cae 1-10
+app/api/bootstrap.py
+  s_f617c5d3ca4eb1::t_31eb4ae852eca2 1-10
+app/api/discord.py
+  s_f617c5d3ca4eb1::t_a32bc46d8f97d4 1-10
+app/api/gmail_push.py
+  s_f617c5d3ca4eb1::t_ed8cba6f4fabf5 1-10
+app/api/gunicorn_app.py
+  s_f617c5d3ca4eb1::t_b62e556ad7aa30 1-10
+app/api/privacy.py
+  s_f617c5d3ca4eb1::t_e7684ded8dd554 1-10
+app/api/routes_reset.py
+  s_f617c5d3ca4eb1::t_100af2c8a713a2 1-10
+app/api/routes_selftest.py
+  s_f617c5d3ca4eb1::t_97fdc2ad521d6b 1-10
+app/api/stt_stream.py
+  s_f617c5d3ca4eb1::t_61acd827475cf5 1-10
+app/api/telegram.py
+  s_f617c5d3ca4eb1::t_984560664ee77e 1-10
+app/api/tts.py
+  s_f617c5d3ca4eb1::t_0820fac8625a60 1-10
+app/api/utils/__init__.py
+  s_f617c5d3ca4eb1::t_caa203aa720226 1-9
+app/api/utils/bulk_validation.py
+  s_f617c5d3ca4eb1::t_02a9b001b51092 1-10
+app/api/voice_session.py
+  s_f617c5d3ca4eb1::t_0024c9051b96d3 1-10
+app/application/anonymize_content.py
+  s_f617c5d3ca4eb1::t_fdc68dd804226c 1-10
+app/application/draft_worker_job.py
+  s_f617c5d3ca4eb1::t_9d49e8e6609c18 1-10
+app/application/dto/__init__.py
+  s_f617c5d3ca4eb1::t_43eca2df916983 1-10
+app/application/dto/draft_context.py
+  s_f617c5d3ca4eb1::t_9bb74ba7b39cae 1-10
+app/application/dto/draft_result.py
+  s_f617c5d3ca4eb1::t_7474720b8dcc32 1-10
+app/application/restore_content.py
+  s_f617c5d3ca4eb1::t_0851a7560e9cf6 1-10
+app/application/services/__init__.py
+  s_f617c5d3ca4eb1::t_33d10867256254 1-10
+app/application/services/_compose_path.py
+  s_f617c5d3ca4eb1::t_6509d647baa074 1-10
+app/application/services/draft_service.py
+  s_f617c5d3ca4eb1::t_0c270bb219b5cb 1-10
+app/batch_queue.py
+  s_f617c5d3ca4eb1::t_d37fc1412a6915 1-10
+app/billing/__init__.py
+  s_f617c5d3ca4eb1::t_1664dd280f3d3a 1-10
+app/billing/ambassador.py
+  s_f617c5d3ca4eb1::t_a621897d45f39f 1-10
+app/billing/attach_usage_price_cli.py
+  s_f617c5d3ca4eb1::t_baefdab2714134 1-10
+app/billing/entitlements.py
+  s_f617c5d3ca4eb1::t_6a4eaa85500626 1-10
+app/billing/stripe_sync.py
+  s_f617c5d3ca4eb1::t_4cef508dfac563 1-10
+app/billing/usage_metering.py
+  s_f617c5d3ca4eb1::t_f34cea3a0db3aa 1-10
+app/billing/usage_sync_cli.py
+  s_f617c5d3ca4eb1::t_94babe0dd00e19 1-10
+app/contact_summary_privacy.py
+  s_f617c5d3ca4eb1::t_9f385a20185a27 1-10
+app/db/__init__.py
+  s_f617c5d3ca4eb1::t_21251556a71a60 1-10
+app/db/database.py
+  s_f617c5d3ca4eb1::t_ac75909ba32931 1-10
+app/db/maintenance.py
+  s_f617c5d3ca4eb1::t_adc980b6b4857b 1-10
+app/db/migrations/env.py
+  s_f617c5d3ca4eb1::t_142dc657df419b 1-10
+app/db/migrations/versions/20260118_000001_initial_schema.py
+  s_f617c5d3ca4eb1::t_d548f8784cc4e4 1-10
+app/db/migrations/versions/20260205_000001_add_signature_columns.py
+  s_f617c5d3ca4eb1::t_b3f12dc5f567b3 1-10
+app/db/migrations/versions/20260206_000001_add_history_id_column.py
+  s_f617c5d3ca4eb1::t_d3176e07326447 1-10
+app/db/migrations/versions/20260214_000001_add_onboarding_results.py
+  s_f617c5d3ca4eb1::t_7a0bca47567cf4 1-10
+app/db/migrations/versions/20260216_000001_add_categories_json.py
+  s_f617c5d3ca4eb1::t_c0422f4f0f36f7 1-10
+app/db/migrations/versions/20260226_000001_add_signature_user_modified.py
+  s_f617c5d3ca4eb1::t_5e19d0b509c947 1-10
+app/db/migrations/versions/20260227_000001_add_email_labels_table.py
+  s_f617c5d3ca4eb1::t_7dce68b2b2d42d 1-10
+app/db/migrations/versions/20260312_000001_add_user_id_to_accounts.py
+  s_f617c5d3ca4eb1::t_e5a92aa12e2dd7 1-10
+app/db/migrations/versions/20260323_000001_fix_email_id_unique_constraint.py
+  s_f617c5d3ca4eb1::t_c32276b6baf912 1-10
+app/db/migrations/versions/20260324_000001_add_settings_json_to_accounts.py
+  s_f617c5d3ca4eb1::t_4ef909854538e0 1-10
+app/db/migrations/versions/20260413_000001_cascade_account_fks.py
+  s_f617c5d3ca4eb1::t_e391245ffb6213 1-10
+app/db/migrations/versions/20260414_000001_add_contact_summary.py
+  s_f617c5d3ca4eb1::t_d831e3bdb584d6 1-10
+app/db/migrations/versions/20260415_000001_add_account_id_to_draft_history.py
+  s_f617c5d3ca4eb1::t_4e55eed0ad4f4c 1-10
+app/db/migrations/versions/20260416_000001_add_gmail_watch_columns.py
+  s_f617c5d3ca4eb1::t_97bd114c7bbcac 1-10
+app/db/migrations/versions/20260416_000002_add_draft_edit_events.py
+  s_f617c5d3ca4eb1::t_fbe250304ccb3c 1-10
+app/db/migrations/versions/20260416_000003_add_recipient_profiles.py
+  s_f617c5d3ca4eb1::t_3bd3e2fa7f3a62 1-10
+app/db/migrations/versions/20260427_000001_faq_log_account_fk.py
+  s_f617c5d3ca4eb1::t_16fbdd60f84d56 1-10
+app/db/migrations/versions/20260501_000001_add_avatar_url_to_accounts.py
+  s_f617c5d3ca4eb1::t_18984cfdc4679c 1-10
+app/db/migrations/versions/20260504_000001_add_bulk_jobs.py
+  s_f617c5d3ca4eb1::t_03e4ebf16c7f79 1-10
+app/db/migrations/versions/20260504_000002_add_raw_headers_to_emails.py
+  s_f617c5d3ca4eb1::t_b1d79672beb608 1-10
+app/db/migrations/versions/20260505_000001_add_draft_feedback.py
+  s_f617c5d3ca4eb1::t_035135b9509166 1-10
+app/db/migrations/versions/20260506_000001_add_account_id_to_extracted_tasks.py
+  s_f617c5d3ca4eb1::t_85c6bc1c26bba0 1-10
+app/db/migrations/versions/20260506_000001_add_quick_steps_to_accounts.py
+  s_f617c5d3ca4eb1::t_aad8487ca34c9d 1-10
+app/db/migrations/versions/20260506_000001_add_token_usage_log.py
+  s_f617c5d3ca4eb1::t_2821caf2166b0b 1-10
+app/db/migrations/versions/20260507_000001_add_pinned_email_ids.py
+  s_f617c5d3ca4eb1::t_e11d6f522d4c3e 1-10
+app/db/migrations/versions/20260507_000001_merge_021_heads.py
+  s_f617c5d3ca4eb1::t_7e9e77bd97fb6f 1-10
+app/db/migrations/versions/20260507_000002_add_quick_step_executions.py
+  s_f617c5d3ca4eb1::t_657f8efd425ec1 1-10
+app/db/migrations/versions/20260507_000003_add_quick_step_audit_log.py
+  s_f617c5d3ca4eb1::t_8b7ada6b2bd23a 1-10
+app/db/migrations/versions/20260507_000004_merge_audit_log_and_pinned.py
+  s_f617c5d3ca4eb1::t_a4213f34b33b03 1-10
+app/db/migrations/versions/20260513_000001_add_sync_jobs.py
+  s_f617c5d3ca4eb1::t_400a34f5731c01 1-10
+app/db/migrations/versions/20260514_000001_add_email_deadline_and_marker.py
+  s_f617c5d3ca4eb1::t_b031d31e76dc23 1-10
+app/db/migrations/versions/20260514_000002_add_sync_job_leases.py
+  s_f617c5d3ca4eb1::t_0ff88aabead958 1-10
+app/db/migrations/versions/20260514_000003_add_provider_quota_windows.py
+  s_f617c5d3ca4eb1::t_274e99e3158d6f 1-10
+app/db/migrations/versions/20260515_000001_purge_email_content_cache.py
+  s_f617c5d3ca4eb1::t_34ccf19c8bfea6 1-10
+app/db/migrations/versions/20260520_000001_extend_token_usage_log_context.py
+  s_f617c5d3ca4eb1::t_3b404d7dcb37f4 1-10
+app/db/migrations/versions/20260530_000001_schema_contract.py
+  s_f617c5d3ca4eb1::t_9149c0a86214b0 1-10
+app/db/migrations/versions/20260530_000002_add_legal_consents.py
+  s_f617c5d3ca4eb1::t_d9749c89be885a 1-10
+app/db/migrations/versions/20260602_000001_add_billing_tables.py
+  s_f617c5d3ca4eb1::t_eff824f21fc4c1 1-10
+app/db/migrations/versions/20260609_000001_add_usage_billing_flag.py
+  s_f617c5d3ca4eb1::t_a40303d9f99d97 1-10
+app/db/migrations/versions/20260609_000001_backfill_haiku45_token_costs.py
+  s_f617c5d3ca4eb1::t_2b2cad1868da34 1-10
+app/db/migrations/versions/20260609_000002_add_dictation_usage_log.py
+  s_f617c5d3ca4eb1::t_a6b0d4acadff75 1-10
+app/db/migrations/versions/20260609_000002_add_stripe_usage_metering.py
+  s_f617c5d3ca4eb1::t_abd853e74eab3f 1-10
+app/db/migrations/versions/20260610_000001_repair_usage_billing_flag.py
+  s_f617c5d3ca4eb1::t_564f671d01e948 1-10
+app/db/migrations/versions/20260611_000001_widen_last_history_id.py
+  s_f617c5d3ca4eb1::t_9fb75639729f26 1-10
+app/db/migrations/versions/20260612_000001_add_contact_groups.py
+  s_f617c5d3ca4eb1::t_e19bb56aa46caf 1-10
+app/db/migrations/versions/20260612_000002_add_snippets.py
+  s_f617c5d3ca4eb1::t_db1581bf270113 1-10
+app/db/migrations/versions/20260612_000003_add_followups.py
+  s_f617c5d3ca4eb1::t_46054d7f7b16a4 1-10
+app/db/migrations/versions/20260612_000004_add_calendar_suggestions.py
+  s_f617c5d3ca4eb1::t_14a91efbb62883 1-10
+app/db/migrations/versions/20260612_000005_add_scheduled_emails.py
+  s_f617c5d3ca4eb1::t_b513f7df8a46c4 1-10
+app/db/migrations/versions/20260612_000006_add_batch_queue.py
+  s_f617c5d3ca4eb1::t_16ffdcf1ba97bc 1-10
+app/db/migrations/versions/20260612_000007_add_commitments.py
+  s_f617c5d3ca4eb1::t_c8b6167caee04d 1-10
+app/db/migrations/versions/20260618_000001_add_ambassador_program.py
+  s_f617c5d3ca4eb1::t_ca14153e5eae95 1-10
+app/db/models/__init__.py
+  s_f617c5d3ca4eb1::t_7fc5eb67a4951d 1-10
+app/db/models/account.py
+  s_f617c5d3ca4eb1::t_d21253a7145b2a 1-10
+app/db/models/base.py
+  s_f617c5d3ca4eb1::t_dffe49fc704be4 1-10
+app/db/models/billing.py
+  s_f617c5d3ca4eb1::t_06fbc300c099c7 1-10
+app/db/models/bulk_job.py
+  s_f617c5d3ca4eb1::t_f9d6eb3b171173 1-10
+app/db/models/contact.py
+  s_f617c5d3ca4eb1::t_bd0ef687332bf5 1-10
+app/db/models/dictation_usage_log.py
+  s_f617c5d3ca4eb1::t_3919587d482830 1-10
+app/db/models/draft.py
+  s_f617c5d3ca4eb1::t_ae1edc84bb100b 1-10
+app/db/models/draft_edit_event.py
+  s_f617c5d3ca4eb1::t_766daa45b6ea23 1-10
+app/db/models/email.py
+  s_f617c5d3ca4eb1::t_fa52f05d3b70b2 1-10
+app/db/models/email_label_record.py
+  s_f617c5d3ca4eb1::t_2d934ba500953f 1-10
+app/db/models/faq_agent_log.py
+  s_f617c5d3ca4eb1::t_54e8c967d0f068 1-10
+app/db/models/knowledge_entry.py
+  s_f617c5d3ca4eb1::t_7583272b38c54f 1-10
+app/db/models/legal_consent.py
+  s_f617c5d3ca4eb1::t_1d0d9d6edccc61 1-10
+app/db/models/onboarding_result.py
+  s_f617c5d3ca4eb1::t_f503263e683d1b 1-10
+app/db/models/provider_quota_window.py
+  s_f617c5d3ca4eb1::t_73db0da5ccc5e4 1-10
+app/db/models/quick_step_audit_log.py
+  s_f617c5d3ca4eb1::t_88c22925b94393 1-10
+app/db/models/quick_step_execution.py
+  s_f617c5d3ca4eb1::t_9c4d74e097df89 1-10
+app/db/models/recipient_profile.py
+  s_f617c5d3ca4eb1::t_1e38a14d88a920 1-10
+app/db/models/sync_job.py
+  s_f617c5d3ca4eb1::t_8de2f2910317be 1-10
+app/db/repositories/__init__.py
+  s_f617c5d3ca4eb1::t_cfc646e6648515 1-10
+app/db/repositories/account_repository.py
+  s_f617c5d3ca4eb1::t_49ad0635bc717a 1-10
+app/db/repositories/base.py
+  s_f617c5d3ca4eb1::t_528d2751cfe0ce 1-10
+app/db/repositories/contact_repository.py
+  s_f617c5d3ca4eb1::t_c1028ab5494998 1-10
+app/db/repositories/draft_edit_event_repository.py
+  s_f617c5d3ca4eb1::t_535b472ecc12b9 1-10
+app/db/repositories/draft_repository.py
+  s_f617c5d3ca4eb1::t_772cab68a23e14 1-10
+app/db/repositories/email_repository.py
+  s_f617c5d3ca4eb1::t_a0d4af039bfb6b 1-10
+app/db/repositories/faq_log_repository.py
+  s_f617c5d3ca4eb1::t_4f968e6d92d2e3 1-10
+app/db/repositories/knowledge_repository.py
+  s_f617c5d3ca4eb1::t_19ec7886660748 1-10
+app/db/repositories/onboarding_repository.py
+  s_f617c5d3ca4eb1::t_41069ef83760b0 1-10
+app/db/repositories/recipient_profile_repository.py
+  s_f617c5d3ca4eb1::t_e54c26dde8949d 1-10
+app/db/types/__init__.py
+  s_f617c5d3ca4eb1::t_91acb8096f9215 1-10
+app/db/types/encrypted.py
+  s_f617c5d3ca4eb1::t_45952bb1248109 1-10
+app/domain/entities/anonymization.py
+  s_f617c5d3ca4eb1::t_2d4645e501d506 1-10
+app/domain/entities/anonymized_result.py
+  s_f617c5d3ca4eb1::t_72b5a9d3e6cf97 1-10
+app/domain/entities/communication_channel.py
+  s_f617c5d3ca4eb1::t_31764d7be607ea 1-10
+app/domain/entities/context_analysis.py
+  s_f617c5d3ca4eb1::t_573a7189f448e9 1-10
+app/domain/entities/critique.py
+  s_f617c5d3ca4eb1::t_7af94271b74c0b 1-10
+app/domain/entities/draft_edit_event.py
+  s_f617c5d3ca4eb1::t_80881081afa6f8 1-10
+app/domain/entities/draft_generation.py
+  s_f617c5d3ca4eb1::t_df23d882ba7b1e 1-10
+app/domain/entities/orchestration.py
+  s_f617c5d3ca4eb1::t_a968de49bb7a55 1-10
+app/domain/entities/recipient_profile.py
+  s_f617c5d3ca4eb1::t_13a5cd42a08493 1-10
+app/domain/entities/self_critique.py
+  s_f617c5d3ca4eb1::t_99cb0a33a5259b 1-10
+app/domain/ports/communication_channel_port.py
+  s_f617c5d3ca4eb1::t_3206cf27f4d4d1 1-10
+app/domain/ports/cryptographer_port.py
+  s_f617c5d3ca4eb1::t_44ea4de18f93a6 1-10
+app/domain/ports/encryption_port.py
+  s_f617c5d3ca4eb1::t_356018d92116d8 1-10
+app/domain/services/anonymizer_service.py
+  s_f617c5d3ca4eb1::t_31330f4be8f0fe 1-10
+app/draft_privacy.py
+  s_f617c5d3ca4eb1::t_8a68d6bdd71194 1-10
+app/draft_quality_tracker.py
+  s_f617c5d3ca4eb1::t_e831c4443aea96 1-10
+app/email_content_storage.py
+  s_f617c5d3ca4eb1::t_b6e1955bebc992 1-10
+app/faq_agent.py
+  s_f617c5d3ca4eb1::t_34bd01fd984951 1-10
+app/history.py
+  s_f617c5d3ca4eb1::t_a8e15926c1db27 1-10
+app/infrastructure/adapters/communication_channel_adapter.py
+  s_f617c5d3ca4eb1::t_3200127bf79896 1-10
+app/infrastructure/adapters/cryptographer_adapter.py
+  s_f617c5d3ca4eb1::t_0478c44c8e810a 1-10
+app/infrastructure/adapters/encryption_adapter.py
+  s_f617c5d3ca4eb1::t_80f68fb3d4c47d 1-10
+app/infrastructure/adapters/sqlite_learning_store.py
+  s_f617c5d3ca4eb1::t_4f5331b68ceb1a 1-10
+app/infrastructure/api_usage_probe.py
+  s_f617c5d3ca4eb1::t_9f066d09e56feb 1-10
+app/infrastructure/draft_job_queue.py
+  s_f617c5d3ca4eb1::t_32e09d7fdef06f 1-10
+app/infrastructure/entitlement_gate.py
+  s_f617c5d3ca4eb1::t_8b87074c59ad5b 1-10
+app/infrastructure/redis_config.py
+  s_f617c5d3ca4eb1::t_b7c1b5e792b3df 1-10
+app/infrastructure/thread_pool.py
+  s_f617c5d3ca4eb1::t_dcc876ca5d94ac 1-10
+app/infrastructure/tts_cache.py
+  s_f617c5d3ca4eb1::t_4e20b251120114 1-10
+app/integrations/__init__.py
+  s_f617c5d3ca4eb1::t_87aaf21bfd8e38 1-9
+app/integrations/account_provider_factory.py
+  s_f617c5d3ca4eb1::t_bb7e7cbcd64b5f 1-10
+app/integrations/custom_api_client.py
+  s_f617c5d3ca4eb1::t_527ce8adf918b0 1-10
+app/integrations/shopify_client.py
+  s_f617c5d3ca4eb1::t_8bf5b9197470b6 1-10
+app/integrations/wordpress_client.py
+  s_f617c5d3ca4eb1::t_95d6f83e3aad1a 1-10
+app/interfaces/account_provider.py
+  s_f617c5d3ca4eb1::t_1ce38b00de15a2 1-10
+app/jargon_detection.py
+  s_f617c5d3ca4eb1::t_2a270bcbbb78af 1-10
+app/onboarding/agents/prompts/__init__.py
+  s_f617c5d3ca4eb1::t_c0cbc1cfcacd58 1-10
+app/prompts/frameworks.py
+  s_f617c5d3ca4eb1::t_140b6f0a672232 1-10
+app/prompts/savoir_extractor.py
+  s_f617c5d3ca4eb1::t_226c9a5b01a970 1-10
+app/prompts/self_critique.py
+  s_f617c5d3ca4eb1::t_5793df195efc2d 1-10
+app/prompts/thread_activity.py
+  s_f617c5d3ca4eb1::t_19f71aca3f3746 1-10
+app/prompts/triggers.py
+  s_f617c5d3ca4eb1::t_4f37524e3656f3 1-10
+app/self_critique_agent.py
+  s_f617c5d3ca4eb1::t_44c106e0c51ded 1-10
+app/services/__init__.py
+  s_f617c5d3ca4eb1::t_bd1d091bd1d2f2 1-10
+app/services/auto_reply.py
+  s_f617c5d3ca4eb1::t_9da90508f6c676 1-10
+app/services/bulk_jobs/__init__.py
+  s_f617c5d3ca4eb1::t_0034d04bb2c596 1-10
+app/services/bulk_jobs/rate_limiter.py
+  s_f617c5d3ca4eb1::t_32992732bc66a5 1-10
+app/services/bulk_jobs/repository.py
+  s_f617c5d3ca4eb1::t_7395b0a265726f 1-10
+app/services/bulk_jobs/scheduler.py
+  s_f617c5d3ca4eb1::t_ae5340dc5a6314 1-10
+app/services/bulk_jobs/worker.py
+  s_f617c5d3ca4eb1::t_eb89abaa9a34a2 1-10
+app/services/contact_formality.py
+  s_f617c5d3ca4eb1::t_6eda66242ac81f 1-10
+app/services/deliverability_service.py
+  s_f617c5d3ca4eb1::t_ac2d228cadea6f 1-10
+app/services/edit_analyzer_service.py
+  s_f617c5d3ca4eb1::t_d709e8e276995c 1-10
+app/services/email_metadata.py
+  s_f617c5d3ca4eb1::t_030e41198ccd15 1-10
+app/services/gmail_watch_scheduler.py
+  s_f617c5d3ca4eb1::t_2a5e59cd9de4c5 1-10
+app/services/privacy_retention.py
+  s_f617c5d3ca4eb1::t_164f04897f420d 1-10
+app/services/recap_scheduler.py
+  s_f617c5d3ca4eb1::t_f22b3dd2b85b76 1-10
+app/services/recap_service.py
+  s_f617c5d3ca4eb1::t_e85f698e5d64dd 1-10
+app/services/recap_tracker.py
+  s_f617c5d3ca4eb1::t_af4283e5690845 1-10
+app/services/sync_jobs.py
+  s_f617c5d3ca4eb1::t_0278f5e81b3998 1-10
+app/services/sync_service.py
+  s_f617c5d3ca4eb1::t_befe00960487e0 1-10
+app/smart_routing.py
+  s_f617c5d3ca4eb1::t_b8aff4b792a1a1 1-10
+app/workers/__init__.py
+  s_f617c5d3ca4eb1::t_271d989d50506d 1-10
+app/workers/draft_worker.py
+  s_f617c5d3ca4eb1::t_8e57842d919d7c 1-10
+scripts/analyze_critic_vs_ground_truth.py
+  s_f617c5d3ca4eb1::t_4e021a76c9a22e 2-11
+scripts/anonymize_fixtures.py
+  s_f617c5d3ca4eb1::t_fbc3631686bc97 2-11
+scripts/apply_ner_annotations.py
+  s_f617c5d3ca4eb1::t_ac252930a863df 2-11
+scripts/audit_email_content_retention.py
+  s_f617c5d3ca4eb1::t_7d7b1c1a983535 2-11
+scripts/audit_inbox_labels.py
+  s_f617c5d3ca4eb1::t_200b9e6dd43718 1-10
+scripts/backfill_email_labels.py
+  s_f617c5d3ca4eb1::t_eb0de4b7b9259e 1-10
+scripts/backfill_recap_quality_account_ids.py
+  s_f617c5d3ca4eb1::t_33bcce64e6f4db 2-11
+scripts/benchmark_spacy_ner.py
+  s_f617c5d3ca4eb1::t_d867fe154f473a 2-11
+scripts/check_alembic_model_drift.py
+  s_f617c5d3ca4eb1::t_f65ae6e5eddb31 2-11
+scripts/check_unlabeled.py
+  s_f617c5d3ca4eb1::t_4f3c0aafbd1fa8 1-10
+scripts/ci_backend_shard.py
+  s_f617c5d3ca4eb1::t_a5f0533aacf277 2-11
+scripts/db_invariants_sentinel.py
+  s_f617c5d3ca4eb1::t_cf2c9f5ba7a3bc 2-11
+scripts/debug_cache_haiku.py
+  s_f617c5d3ca4eb1::t_57e3a64a422919 2-11
+scripts/debug_cache_haiku2.py
+  s_f617c5d3ca4eb1::t_d5e16b80c1e26f 2-11
+scripts/debug_seo_audit.py
+  s_f617c5d3ca4eb1::t_5beb54403a5105 1-10
+scripts/drafter_placeholder_audit.py
+  s_f617c5d3ca4eb1::t_3c60cbb0dcff72 2-11
+scripts/encrypt_existing_oauth_tokens.py
+  s_f617c5d3ca4eb1::t_20ffcf2b14fb3e 2-11
+scripts/espion_recap_dry_run.py
+  s_f617c5d3ca4eb1::t_0a4497f93af093 1-10
+scripts/espion_recap_telegram.py
+  s_f617c5d3ca4eb1::t_bd42f551ea61f2 1-10
+scripts/eval_critic_haiku_vs_sonnet.py
+  s_f617c5d3ca4eb1::t_293404822115cd 2-11
+scripts/eval_dataset.py
+  s_f617c5d3ca4eb1::t_1c90c5740a2d33 1-10
+scripts/eval_drafting.py
+  s_f617c5d3ca4eb1::t_4a3b2b8ad28e0b 2-11
+scripts/eval_gate_rule_sweep.py
+  s_f617c5d3ca4eb1::t_ccb7ffc040e012 2-11
+scripts/eval_label_corrections.py
+  s_f617c5d3ca4eb1::t_d19c6b59658695 1-10
+scripts/eval_onboarding.py
+  s_f617c5d3ca4eb1::t_20e7fb21865ccc 2-11
+scripts/eval_replay_deployed_gate.py
+  s_f617c5d3ca4eb1::t_4fceea9e13e869 2-11
+scripts/eval_self_critique.py
+  s_f617c5d3ca4eb1::t_00607202b6dae2 2-11
+scripts/eval_self_critique_via_claude_pipe.py
+  s_f617c5d3ca4eb1::t_afb545ec63f852 2-11
+scripts/eval_specialty_refine.py
+  s_f617c5d3ca4eb1::t_5a5e33d74b725a 2-11
+scripts/eval_vocab_mirroring.py
+  s_f617c5d3ca4eb1::t_bc41111bf41d2e 1-10
+scripts/forum_gate_issue.py
+  s_f617c5d3ca4eb1::t_88a26e115b9436 1-10
+scripts/label_drafts_for_ground_truth.py
+  s_f617c5d3ca4eb1::t_9f9543db8d3d20 2-11
+scripts/lint_account_scoping.py
+  s_f617c5d3ca4eb1::t_a9a8ed9c17cc40 2-11
+scripts/load_test_mocked.py
+  s_f617c5d3ca4eb1::t_b3704319e7a6ab 2-11
+scripts/load_test_railway_mock.py
+  s_f617c5d3ca4eb1::t_7128b81d2fcc98 2-11
+scripts/migrate_agent_prompts.py
+  s_f617c5d3ca4eb1::t_d66c80e6811109 2-11
+scripts/migrate_draft_corrections.py
+  s_f617c5d3ca4eb1::t_301ba097f3a72a 2-11
+scripts/migrate_label_store.py
+  s_f617c5d3ca4eb1::t_7cab1b8762eae6 2-11
+scripts/migrate_memoire_to_db.py
+  s_f617c5d3ca4eb1::t_b2ee0e87a71556 2-11
+scripts/migrate_sqlite_to_postgres.py
+  s_f617c5d3ca4eb1::t_a1b3b7461e5ef7 2-11
+scripts/pipeline_baseline.py
+  s_f617c5d3ca4eb1::t_1adbf3cb3371d1 2-11
+scripts/pre-push-test-gate.py
+  s_f617c5d3ca4eb1::t_d5dd03da9ef07d 2-11
+scripts/prepare_ner_benchmark.py
+  s_f617c5d3ca4eb1::t_76513bc01fc7ae 2-11
+scripts/probe_prod_contacts.py
+  s_f617c5d3ca4eb1::t_d98ac88ce026a6 1-10
+scripts/railway_entrypoint.py
+  s_f617c5d3ca4eb1::t_e91a18a887e314 1-10
+scripts/reclassify_inbox.py
+  s_f617c5d3ca4eb1::t_567a9a0fef47b2 1-10
+scripts/regenerate_ground_truths.py
+  s_f617c5d3ca4eb1::t_471e666299cdf9 2-11
+scripts/repro_reviens_moi.py
+  s_f617c5d3ca4eb1::t_07cf4e8d81ec54 2-11
+scripts/run_daily_standup.py
+  s_f617c5d3ca4eb1::t_c82b75be618fa8 1-10
+scripts/run_privacy_retention.py
+  s_f617c5d3ca4eb1::t_3eb7727ceb0664 2-11
+scripts/seed_blog_topics_2026-04-28.py
+  s_f617c5d3ca4eb1::t_8720b83b870b41 1-10
+scripts/stripe_attach_usage_price.py
+  s_f617c5d3ca4eb1::t_7698ee09168f37 2-11
+scripts/sync_stripe_usage.py
+  s_f617c5d3ca4eb1::t_5b657402fc90e1 2-11
+scripts/validate_agent_capabilities.py
+  s_f617c5d3ca4eb1::t_59010981c92c98 2-11
+scripts/wipe-prod-data.py
+  s_f617c5d3ca4eb1::t_83d5cef8730ec3 1-10
+tests/adapters/__init__.py
+  s_f617c5d3ca4eb1::t_a479d6d20f4ef5 1-9
+tests/agents/__init__.py
+  s_f617c5d3ca4eb1::t_d3f13fe6ef17c0 1-9
+tests/agents/test_critic_integration.py
+  s_f617c5d3ca4eb1::t_81156b1d1932c7 1-10
+tests/agents/test_drafter_rate_limiting.py
+  s_f617c5d3ca4eb1::t_9dc18c273ff5f5 1-10
+tests/agents/test_drafter_streaming.py
+  s_f617c5d3ca4eb1::t_c478f8b5174235 1-10
+tests/agents/test_drafter_with_context.py
+  s_f617c5d3ca4eb1::t_a61649df8b04fc 1-10
+tests/api/conftest.py
+  s_f617c5d3ca4eb1::t_aca4a84ba0858a 1-10
+tests/api/test_account_scope.py
+  s_f617c5d3ca4eb1::t_af55e8ad205d25 1-10
+tests/api/test_admin_ops_overview.py
+  s_f617c5d3ca4eb1::t_7d853f963a3ddb 1-10
+tests/api/test_admin_users_from_accounts.py
+  s_f617c5d3ca4eb1::t_99b8cd8378b537 1-10
+tests/api/test_ambassador_routes.py
+  s_f617c5d3ca4eb1::t_f611a7cfbea76a 1-10
+tests/api/test_billing_entitlements.py
+  s_f617c5d3ca4eb1::t_87eee2069b2b6b 1-10
+tests/api/test_bootstrap.py
+  s_f617c5d3ca4eb1::t_8079d214c5680e 1-10
+tests/api/test_calendar_passive_unavailable.py
+  s_f617c5d3ca4eb1::t_a5c9b7528209b1 1-10
+tests/api/test_contact_avatar_route.py
+  s_f617c5d3ca4eb1::t_f781a3aa7dbf22 1-10
+tests/api/test_contact_language_endpoint.py
+  s_f617c5d3ca4eb1::t_a2c855de76c0c0 1-10
+tests/api/test_contacts_autocomplete_style_profiles.py
+  s_f617c5d3ca4eb1::t_458c2fc1be6ddc 1-10
+tests/api/test_draft_job_backpressure.py
+  s_f617c5d3ca4eb1::t_dc5fa0c9a29ede 1-10
+tests/api/test_draft_queue_capacity.py
+  s_f617c5d3ca4eb1::t_37b81bb0e4883a 1-10
+tests/api/test_email_body_fetch_loop_guard.py
+  s_f617c5d3ca4eb1::t_15829a39064e79 1-10
+tests/api/test_email_detail_cache_keys.py
+  s_f617c5d3ca4eb1::t_1e8496b1dd8a42 1-10
+tests/api/test_email_detail_rate_limit.py
+  s_f617c5d3ca4eb1::t_5b804e8944c474 1-10
+tests/api/test_load_mock_rate_limit.py
+  s_f617c5d3ca4eb1::t_87199edfeba6d6 1-10
+tests/api/test_noise_cleanup_bounce_failure.py
+  s_f617c5d3ca4eb1::t_109c2b16128ead 1-10
+tests/api/test_privacy_api.py
+  s_f617c5d3ca4eb1::t_d4876b7edb73ca 1-10
+tests/api/test_transcribe_deepgram_deadline.py
+  s_f617c5d3ca4eb1::t_da2fc9aa5cf237 1-10
+tests/api/test_tts.py
+  s_f617c5d3ca4eb1::t_6273101b8eebec 1-10
+tests/api/test_websocket_account_isolation.py
+  s_f617c5d3ca4eb1::t_5db6f19f889a78 1-10
+tests/api/test_websocket_critique.py
+  s_f617c5d3ca4eb1::t_78ef8cd02a5622 1-10
+tests/api/test_websocket_draft.py
+  s_f617c5d3ca4eb1::t_c1c8c10bcf2b51 1-10
+tests/application/services/test_compose_path_regen.py
+  s_f617c5d3ca4eb1::t_1115103450b2df 1-10
+tests/application/services/test_draft_service.py
+  s_f617c5d3ca4eb1::t_bd636b013a8b7e 1-10
+tests/application/services/test_draft_service_compose.py
+  s_f617c5d3ca4eb1::t_744775b9030c9b 1-10
+tests/application/test_label_1000_emails.py
+  s_f617c5d3ca4eb1::t_f38c21bab6adce 1-10
+tests/application/test_label_auto_classification_e2e.py
+  s_f617c5d3ca4eb1::t_c0e689037c2cca 1-10
+tests/application/test_label_blind_spots.py
+  s_f617c5d3ca4eb1::t_c26708998f7b08 1-10
+tests/application/test_label_classification_noise.py
+  s_f617c5d3ca4eb1::t_593ed91f526369 1-10
+tests/application/test_label_deep_blind_spots.py
+  s_f617c5d3ca4eb1::t_f31dc88c546321 1-10
+tests/application/test_label_noise_action_1000.py
+  s_f617c5d3ca4eb1::t_3e18c477131830 1-10
+tests/application/test_label_pattern_improvements.py
+  s_f617c5d3ca4eb1::t_076d42d10fa3bd 1-10
+tests/application/test_promo_fix.py
+  s_f617c5d3ca4eb1::t_61695028f43d1d 1-10
+tests/audit_fixes/__init__.py
+  s_f617c5d3ca4eb1::t_c6127b49160563 1-9
+tests/audit_fixes/_admin_helpers.py
+  s_f617c5d3ca4eb1::t_0b128d98c552a6 1-10
+tests/audit_fixes/test_2026_04_28_force_propagation.py
+  s_f617c5d3ca4eb1::t_9ce97b8413f2ff 1-10
+tests/audit_fixes/test_2026_05_13_account_provider_isolation.py
+  s_f617c5d3ca4eb1::t_950f6477ca07e0 1-10
+tests/audit_fixes/test_attachments_download_audit_2026_06_10.py
+  s_f617c5d3ca4eb1::t_6a20c2899e7f28 1-10
+tests/audit_fixes/test_audit_2026_04_27.py
+  s_f617c5d3ca4eb1::t_5d3da6e75f0c84 1-10
+tests/audit_fixes/test_audit_2026_04_28_concurrency.py
+  s_f617c5d3ca4eb1::t_35995bbfb3037d 1-10
+tests/audit_fixes/test_audit_2026_04_28_migration.py
+  s_f617c5d3ca4eb1::t_fe98f33b99edf0 1-10
+tests/audit_fixes/test_audit_2026_04_28_oauth.py
+  s_f617c5d3ca4eb1::t_66a69d0f4e9d40 1-10
+tests/audit_fixes/test_audit_2026_05_17_batch4_regressions.py
+  s_f617c5d3ca4eb1::t_82a74c52e82110 1-10
+tests/audit_fixes/test_audit_2026_05_18_batch5_regressions.py
+  s_f617c5d3ca4eb1::t_3138c69f443df1 1-10
+tests/audit_fixes/test_c5_batch_routing.py
+  s_f617c5d3ca4eb1::t_1df0818a999eb4 1-10
+tests/audit_fixes/test_deep_audit_2026_06_02.py
+  s_f617c5d3ca4eb1::t_d97b932cf41d74 1-10
+tests/audit_fixes/test_draft_greeting_profile_contamination.py
+  s_f617c5d3ca4eb1::t_792e96358b9c26 1-10
+tests/audit_fixes/test_draft_observability.py
+  s_f617c5d3ca4eb1::t_368dbf6e1a2fa6 1-10
+tests/audit_fixes/test_enforce_closing_body_preservation.py
+  s_f617c5d3ca4eb1::t_748e56739e080e 1-10
+tests/audit_fixes/test_ensure_starts_with_greeting_no_duplicate.py
+  s_f617c5d3ca4eb1::t_6b4dab693344aa 1-10
+tests/audit_fixes/test_is_canonical_greeting.py
+  s_f617c5d3ca4eb1::t_f6c5dacbdd528b 1-10
+tests/audit_fixes/test_issue_592_greetings_and_closings.py
+  s_f617c5d3ca4eb1::t_9f9c32ab1ef7e9 1-10
+tests/audit_fixes/test_m3_dashboard_scoping.py
+  s_f617c5d3ca4eb1::t_be50e66ab774d9 1-10
+tests/audit_fixes/test_p1a4_auth_backoff_ttl.py
+  s_f617c5d3ca4eb1::t_d3325437efb751 1-10
+tests/audit_fixes/test_p1a5_outlook_429_retry.py
+  s_f617c5d3ca4eb1::t_4b045bf83e8699 1-10
+tests/audit_fixes/test_p2_gmail_watch_renewal.py
+  s_f617c5d3ca4eb1::t_90e09888cdf83a 1-10
+tests/audit_fixes/test_pipeline_strip_a_confirmer_variants.py
+  s_f617c5d3ca4eb1::t_20b7d8bda1c1c2 1-10
+tests/audit_fixes/test_post_audit_residuals.py
+  s_f617c5d3ca4eb1::t_fb9aae0d59a882 1-10
+tests/audit_fixes/test_process_streaming_complete_uses_user_notes.py
+  s_f617c5d3ca4eb1::t_4a2a94935f22cc 1-10
+tests/audit_fixes/test_sauvageau_contact_overrides.py
+  s_f617c5d3ca4eb1::t_dee85fa32e92a1 1-10
+tests/audit_fixes/test_scrub_grounds_user_context.py
+  s_f617c5d3ca4eb1::t_29beaf67a0a973 1-10
+tests/audit_fixes/test_stress_findings_2026_05_13.py
+  s_f617c5d3ca4eb1::t_d1a2b91940dda3 1-10
+tests/billing/test_ambassador_admin.py
+  s_f617c5d3ca4eb1::t_fdc78f51c1b9ce 1-10
+tests/billing/test_ambassador_migration.py
+  s_f617c5d3ca4eb1::t_68de293e9ee560 1-10
+tests/billing/test_ambassador_models.py
+  s_f617c5d3ca4eb1::t_63786ad1f341fd 1-10
+tests/billing/test_ambassador_service.py
+  s_f617c5d3ca4eb1::t_d8328b0797684c 1-10
+tests/billing/test_ambassador_webhook.py
+  s_f617c5d3ca4eb1::t_e5e842ce434d83 1-10
+tests/billing/test_ambassador_webhook_integration.py
+  s_f617c5d3ca4eb1::t_c6047187b9ce1b 1-10
+tests/billing/test_checkout_promotion_codes.py
+  s_f617c5d3ca4eb1::t_f1eae34888583f 1-10
+tests/billing/test_usage_metering.py
+  s_f617c5d3ca4eb1::t_65247e0d8ca562 1-10
+tests/db/__init__.py
+  s_f617c5d3ca4eb1::t_78857821fc8278 1-10
+tests/db/_fixtures.py
+  s_f617c5d3ca4eb1::t_3690db2b8a415e 1-10
+tests/db/test_alembic_schema_contract.py
+  s_f617c5d3ca4eb1::t_ee862ddcd3a7c4 1-10
+tests/db/test_database.py
+  s_f617c5d3ca4eb1::t_05cbefa6987fe9 1-10
+tests/db/test_draft_edit_event_repository.py
+  s_f617c5d3ca4eb1::t_930ec834cd7efc 1-10
+tests/db/test_email_content_purge_migration.py
+  s_f617c5d3ca4eb1::t_521fa86bf45eae 1-10
+tests/db/test_email_repository_batch_fetch.py
+  s_f617c5d3ca4eb1::t_99d78eeafd8434 1-10
+tests/db/test_email_repository_dedupe.py
+  s_f617c5d3ca4eb1::t_7ad4ac1e1a5a91 1-10
+tests/db/test_encrypted_type.py
+  s_f617c5d3ca4eb1::t_9266010cf16af0 1-10
+tests/db/test_haiku45_cost_backfill_migration.py
+  s_f617c5d3ca4eb1::t_2eefe309efbb7b 1-10
+tests/db/test_load_mode_prod_guard.py
+  s_f617c5d3ca4eb1::t_bbe8c63d87a57f 1-10
+tests/db/test_models.py
+  s_f617c5d3ca4eb1::t_e3034b17bb0550 1-10
+tests/db/test_onboarding_recovery.py
+  s_f617c5d3ca4eb1::t_a6b124c45a9c02 1-10
+tests/db/test_onboarding_watchdog.py
+  s_f617c5d3ca4eb1::t_eb713f3d5123d1 1-10
+tests/db/test_recipient_profile_repository.py
+  s_f617c5d3ca4eb1::t_2c32fe0babb15f 1-10
+tests/db/test_repositories.py
+  s_f617c5d3ca4eb1::t_fdcac2739065a5 1-10
+tests/db/test_thread_counts.py
+  s_f617c5d3ca4eb1::t_956e1e33853aa3 1-10
+tests/domain/entities/test_classification_entity.py
+  s_f617c5d3ca4eb1::t_f25a442a5cb95a 1-10
+tests/domain/entities/test_communication_channel.py
+  s_f617c5d3ca4eb1::t_112f0f4086029b 1-10
+tests/domain/entities/test_context_analysis.py
+  s_f617c5d3ca4eb1::t_b680da12dcfd95 1-10
+tests/domain/entities/test_critique.py
+  s_f617c5d3ca4eb1::t_1325ba0c783caf 1-10
+tests/domain/entities/test_draft_entity.py
+  s_f617c5d3ca4eb1::t_ed90451a1a7f66 1-10
+tests/domain/entities/test_draft_generation.py
+  s_f617c5d3ca4eb1::t_7c5671fbc9694a 1-10
+tests/domain/entities/test_intent_classification.py
+  s_f617c5d3ca4eb1::t_25bf44abf4e1c7 1-10
+tests/domain/entities/test_orchestration.py
+  s_f617c5d3ca4eb1::t_dd9c03a588d463 1-10
+tests/domain/ports/test_communication_channel_port.py
+  s_f617c5d3ca4eb1::t_2ef33b80b9d569 1-10
+tests/fixtures/__init__.py
+  s_f617c5d3ca4eb1::t_d35e06f78e44f6 1-9
+tests/infrastructure/adapters/test_communication_channel_adapter.py
+  s_f617c5d3ca4eb1::t_17e9dec9eb7e2f 1-10
+tests/infrastructure/adapters/test_cryptographer_adapter.py
+  s_f617c5d3ca4eb1::t_bee1598d87f760 1-10
+tests/infrastructure/adapters/test_draft_history_isolation.py
+  s_f617c5d3ca4eb1::t_447fc4d2abd7f7 1-10
+tests/infrastructure/adapters/test_learning_pattern_store_privacy.py
+  s_f617c5d3ca4eb1::t_bf527dda8bd703 1-10
+tests/infrastructure/test_api_usage_probe.py
+  s_f617c5d3ca4eb1::t_13ced4fe6eb1f8 1-10
+tests/infrastructure/test_container_writing_style_profile.py
+  s_f617c5d3ca4eb1::t_2db7cc5a41f126 1-10
+tests/infrastructure/test_database_usage_migrations.py
+  s_f617c5d3ca4eb1::t_7904bcd31449da 1-10
+tests/infrastructure/test_draft_job_queue.py
+  s_f617c5d3ca4eb1::t_bfdfa38e694ffb 1-10
+tests/infrastructure/test_mock_llm_adapter.py
+  s_f617c5d3ca4eb1::t_07800088b2ff31 1-10
+tests/infrastructure/test_pending_draft_store_audit_2026_04_25.py
+  s_f617c5d3ca4eb1::t_a4368e9d43642b 1-10
+tests/infrastructure/test_pending_draft_store_path.py
+  s_f617c5d3ca4eb1::t_bf04146656c77d 1-10
+tests/infrastructure/test_thread_pool_usage_context.py
+  s_f617c5d3ca4eb1::t_ed439a69942675 1-10
+tests/integration/__init__.py
+  s_f617c5d3ca4eb1::t_64998ddd48c572 1-9
+tests/integration/conftest.py
+  s_f617c5d3ca4eb1::t_461fa28ca2cf75 1-10
+tests/integration/test_api_integration_e2e.py
+  s_f617c5d3ca4eb1::t_d57ac74541f9fe 1-10
+tests/load/__init__.py
+  s_f617c5d3ca4eb1::t_57cb5f12f3965a 1-9
+tests/load/load_account_pool.py
+  s_f617c5d3ca4eb1::t_03592cb9256923 1-10
+tests/load/load_rate_gate.py
+  s_f617c5d3ca4eb1::t_81eac4247a34ab 1-10
+tests/load/locustfile.py
+  s_f617c5d3ca4eb1::t_a7e82f74cb73d0 1-10
+tests/load/test_load_account_reporting.py
+  s_f617c5d3ca4eb1::t_ff4b1a4c8a9551 1-10
+tests/load/test_locustfile_rate_gate.py
+  s_f617c5d3ca4eb1::t_a190aea7efa763 1-10
+tests/load/test_railway_mock_runner.py
+  s_f617c5d3ca4eb1::t_d251b251b75fd5 1-10
+tests/prompts/__init__.py
+  s_f617c5d3ca4eb1::t_09fc0a83b203df 1-9
+tests/prompts/test_drafter_disc_wiring.py
+  s_f617c5d3ca4eb1::t_9da50229cf911f 1-10
+tests/prompts/test_frameworks.py
+  s_f617c5d3ca4eb1::t_7b24e624538411 1-10
+tests/prompts/test_ia_enhancement_block.py
+  s_f617c5d3ca4eb1::t_3d979df281b85e 1-10
+tests/prompts/test_knowledge_tenant_isolation.py
+  s_f617c5d3ca4eb1::t_bf1c19843b2281 1-10
+tests/prompts/test_profession_context.py
+  s_f617c5d3ca4eb1::t_7e2896d0d4bdd7 1-10
+tests/prompts/test_savoir_extractor.py
+  s_f617c5d3ca4eb1::t_39bd408b6f7439 1-10
+tests/prompts/test_thread_activity.py
+  s_f617c5d3ca4eb1::t_be952e25d962dc 1-10
+tests/prompts/test_triggers.py
+  s_f617c5d3ca4eb1::t_5dc5b89700ff4e 1-10
+tests/providers/test_calendly_appointment.py
+  s_f617c5d3ca4eb1::t_9daa7428501c6a 24
+tests/providers/test_mock_load_provider.py
+  s_f617c5d3ca4eb1::t_41ebb1ae869bc0 1-10
+tests/quicksteps/__init__.py
+  s_f617c5d3ca4eb1::t_76b9f522ae66e1 1-9
+tests/scripts/conftest.py
+  s_f617c5d3ca4eb1::t_77825c88ed98af 1-10
+tests/scripts/test_audit_email_content_retention.py
+  s_f617c5d3ca4eb1::t_94d43251d6697b 1-10
+tests/scripts/test_ci_backend_shard.py
+  s_f617c5d3ca4eb1::t_441789ccb3bd6a 1-10
+tests/scripts/test_encrypt_existing_oauth_tokens.py
+  s_f617c5d3ca4eb1::t_09ee7894570785 1-10
+tests/scripts/test_migrate_sqlite_to_postgres.py
+  s_f617c5d3ca4eb1::t_5300f72267abe1 1-10
+tests/scripts/test_railway_entrypoint.py
+  s_f617c5d3ca4eb1::t_71b46a609cf2f0 1-10
+tests/services/test_contact_formality.py
+  s_f617c5d3ca4eb1::t_484ef0dcba7bfd 1-10
+tests/services/test_contact_summary_privacy.py
+  s_f617c5d3ca4eb1::t_c3d664bc8a8502 1-10
+tests/services/test_db_maintenance.py
+  s_f617c5d3ca4eb1::t_f16d249362acd1 1-10
+tests/services/test_deliverability_service.py
+  s_f617c5d3ca4eb1::t_4ed1bf7cbef88d 1-10
+tests/services/test_edit_analyzer_service.py
+  s_f617c5d3ca4eb1::t_6b6f257fbd364c 1-10
+tests/services/test_email_metadata.py
+  s_f617c5d3ca4eb1::t_8b4070dce14cb5 1-10
+tests/services/test_privacy_retention.py
+  s_f617c5d3ca4eb1::t_69dbf6c579ae09 1-10
+tests/services/test_search_e2e.py
+  s_f617c5d3ca4eb1::t_402ab3df8cf97c 1-10
+tests/smoke/__init__.py
+  s_f617c5d3ca4eb1::t_faf4b5d8034056 1-9
+tests/smoke/test_imports.py
+  s_f617c5d3ca4eb1::t_05deb52171d0b4 1-10
+tests/smoke/test_ws_selftest.py
+  s_f617c5d3ca4eb1::t_42a07d6326efba 1-10
+tests/test_anonymize_content.py
+  s_f617c5d3ca4eb1::t_a2c72b64c90c72 1-10
+tests/test_anonymize_fixtures.py
+  s_f617c5d3ca4eb1::t_99bf7b891e58cc 1-10
+tests/test_anonymized_result.py
+  s_f617c5d3ca4eb1::t_4b2a4b917b81eb 1-10
+tests/test_anonymizer_service.py
+  s_f617c5d3ca4eb1::t_d9379f51c69cf5 1-10
+tests/test_api_analytics.py
+  s_f617c5d3ca4eb1::t_ee1b217df41217 1-10
+tests/test_api_create_draft.py
+  s_f617c5d3ca4eb1::t_f36f78bf3a2099 1-10
+tests/test_api_discord.py
+  s_f617c5d3ca4eb1::t_15ecadfd834bba 1-10
+tests/test_api_drafts_complete.py
+  s_f617c5d3ca4eb1::t_fd557abfa1af46 1-10
+tests/test_api_drafts_detect.py
+  s_f617c5d3ca4eb1::t_c9600f32d7aa59 1-10
+tests/test_api_email_thread.py
+  s_f617c5d3ca4eb1::t_fafb2542154a81 1-10
+tests/test_api_generate_preview.py
+  s_f617c5d3ca4eb1::t_04b14f722673de 1-10
+tests/test_api_get_email.py
+  s_f617c5d3ca4eb1::t_cbbfef5399a6d3 1-10
+tests/test_api_get_email_by_id.py
+  s_f617c5d3ca4eb1::t_70cfaf17dcdf92 1-10
+tests/test_api_mark_read.py
+  s_f617c5d3ca4eb1::t_190f1c00181479 1-10
+tests/test_api_process_email_cached_body.py
+  s_f617c5d3ca4eb1::t_9f76f6625729d5 1-10
+tests/test_api_process_email_instructions.py
+  s_f617c5d3ca4eb1::t_56e99022ccaacd 1-10
+tests/test_api_routes_draft_edit.py
+  s_f617c5d3ca4eb1::t_7f47867cd78132 1-10
+tests/test_api_routes_learning.py
+  s_f617c5d3ca4eb1::t_ef45da5dd285ee 1-10
+tests/test_api_send.py
+  s_f617c5d3ca4eb1::t_1ec5187736019f 1-10
+tests/test_api_sent_detail_fallback.py
+  s_f617c5d3ca4eb1::t_48ecbf1e0cb60a 1-10
+tests/test_api_skip_email.py
+  s_f617c5d3ca4eb1::t_99765c97d98b4f 1-10
+tests/test_api_telegram.py
+  s_f617c5d3ca4eb1::t_7deb6b34413af4 1-10
+tests/test_audit_fix_mark_read_provider_synced.py
+  s_f617c5d3ca4eb1::t_0470c33a1ad5a9 1-10
+tests/test_backend_resilience.py
+  s_f617c5d3ca4eb1::t_45b86f7b41a021 1-10
+tests/test_batch_queue.py
+  s_f617c5d3ca4eb1::t_068e2f11a0c702 1-10
+tests/test_communication_channel.py
+  s_f617c5d3ca4eb1::t_c10961e0bb1387 1-10
+tests/test_cryptographer_agent.py
+  s_f617c5d3ca4eb1::t_bd6a8d36f31030 1-10
+tests/test_cryptographer_port.py
+  s_f617c5d3ca4eb1::t_1f18987c602dba 1-10
+tests/test_daemon_anonymization_tdd.py
+  s_f617c5d3ca4eb1::t_40ef558466a448 1-10
+tests/test_daemon_correction_learning.py
+  s_f617c5d3ca4eb1::t_6317c13511a5f1 1-10
+tests/test_daemon_edge_cases_additional.py
+  s_f617c5d3ca4eb1::t_813d02a38d18e6 1-10
+tests/test_daemon_edge_cases_mocked_factory.py
+  s_f617c5d3ca4eb1::t_0d36f9a5923a3e 1-10
+tests/test_daemon_edge_cases_null_empty.py
+  s_f617c5d3ca4eb1::t_fb105d53889e0f 1-10
+tests/test_data_standard_tier.py
+  s_f617c5d3ca4eb1::t_c902ee3f22f840 1-10
+tests/test_draft_cleanup.py
+  s_f617c5d3ca4eb1::t_5c80221c05e1df 1-10
+tests/test_draft_generation_entities.py
+  s_f617c5d3ca4eb1::t_ffd297174fd686 1-10
+tests/test_draft_learning_paths.py
+  s_f617c5d3ca4eb1::t_2da4581f7c67ae 1-10
+tests/test_draft_learning_unit.py
+  s_f617c5d3ca4eb1::t_a71273005ea568 1-10
+tests/test_draft_quality_tracker.py
+  s_f617c5d3ca4eb1::t_7f3ed6ea92df4e 1-10
+tests/test_draft_quality_tracker_unit.py
+  s_f617c5d3ca4eb1::t_d225f23bceca91 1-10
+tests/test_e2e_audit.py
+  s_f617c5d3ca4eb1::t_415abbc0e90167 1-10
+tests/test_email_labels.py
+  s_f617c5d3ca4eb1::t_57ddb3e6b1f814 1-10
+tests/test_encryption_port.py
+  s_f617c5d3ca4eb1::t_8852a400e3086a 1-10
+tests/test_faq_agent.py
+  s_f617c5d3ca4eb1::t_0d2d72bb5e1793 1-10
+tests/test_faq_fusion.py
+  s_f617c5d3ca4eb1::t_d32a40b861cc2f 1-10
+tests/test_faq_scoring_e2e.py
+  s_f617c5d3ca4eb1::t_d56b585a15e41a 1-10
+tests/test_fixture_capture.py
+  s_f617c5d3ca4eb1::t_071cd0176e654a 1-10
+tests/test_gmail_push.py
+  s_f617c5d3ca4eb1::t_9ef82c7f86fd05 1-10
+tests/test_gmail_retry_delay.py
+  s_f617c5d3ca4eb1::t_e874bedbf5daec 1-10
+tests/test_learning_all_by_label.py
+  s_f617c5d3ca4eb1::t_9f6ae81457357a 1-10
+tests/test_multi_accounts_defensive_load.py
+  s_f617c5d3ca4eb1::t_f230623a213b3f 1-10
+tests/test_no_auto_send_safety.py
+  s_f617c5d3ca4eb1::t_69b2bddc159015 1-10
+tests/test_onboarding/__init__.py
+  s_f617c5d3ca4eb1::t_7b708b3519d4a9 1-9
+tests/test_onboarding/test_greeting_formality_order.py
+  s_f617c5d3ca4eb1::t_47658afffb44c6 1-10
+tests/test_onboarding/test_refresh.py
+  s_f617c5d3ca4eb1::t_88911fecc7cd90 1-10
+tests/test_onboarding/test_refresh_session_lifecycle.py
+  s_f617c5d3ca4eb1::t_38cef9d022b371 1-10
+tests/test_onboarding/test_sync_wait_resilience.py
+  s_f617c5d3ca4eb1::t_dc5e8f44a1d2bc 1-10
+tests/test_orchestration_entities.py
+  s_f617c5d3ca4eb1::t_7bfd3efe4be93e 1-10
+tests/test_outlook_adapter_mojibake.py
+  s_f617c5d3ca4eb1::t_16b13cf559cb4b 1-10
+tests/test_passive_pattern_detection.py
+  s_f617c5d3ca4eb1::t_88dda868ef5c8a 1-10
+tests/test_pipeline_baseline.py
+  s_f617c5d3ca4eb1::t_accc11ebc281ae 1-10
+tests/test_refine_text_malformed_opening.py
+  s_f617c5d3ca4eb1::t_53eb642059c4de 1-10
+tests/test_refine_text_placeholder_leak.py
+  s_f617c5d3ca4eb1::t_2dd5ce15d0297e 1-10
+tests/test_safety_guardrails.py
+  s_f617c5d3ca4eb1::t_65b56a4bc22914 1-10
+tests/test_scheduled_email_scheduler.py
+  s_f617c5d3ca4eb1::t_63e90aac599530 1-10
+tests/test_scheduled_email_store.py
+  s_f617c5d3ca4eb1::t_186df029d8767b 1-10
+tests/test_second_brain.py
+  s_f617c5d3ca4eb1::t_ac6aa509d254a1 1-10
+tests/test_self_critique_agent.py
+  s_f617c5d3ca4eb1::t_f431f862d32179 1-10
+tests/test_sender_spoofing.py
+  s_f617c5d3ca4eb1::t_37f977ed025cc7 1-10
+tests/test_sentry_before_send.py
+  s_f617c5d3ca4eb1::t_f374c057d7a51d 1-10
+tests/test_setup_menu.py
+  s_f617c5d3ca4eb1::t_5f1117c46ad739 1-10
+tests/test_signature.py
+  s_f617c5d3ca4eb1::t_22e469064cf66d 1-10
+tests/test_smart_routing_cache_path.py
+  s_f617c5d3ca4eb1::t_5f64bbe60a366d 1-10
+tests/test_smart_routing_unit.py
+  s_f617c5d3ca4eb1::t_d5812d96c6e0df 1-10
+tests/test_speed_optimizations.py
+  s_f617c5d3ca4eb1::t_7db6594eaef635 1-10
+tests/test_sync_jobs.py
+  s_f617c5d3ca4eb1::t_30f7c446b10562 1-10
+tests/test_unified_email_analyzer.py
+  s_f617c5d3ca4eb1::t_cc241da7ef616a 1-10
+tests/workers/test_draft_worker.py
+  s_f617c5d3ca4eb1::t_e6c708de25ec3e 1-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "5f51016480d1dca7b970fc4b509faeb4b5a16af5",
+  "prompts": {},
+  "sessions": {
+    "s_f617c5d3ca4eb1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "52e49bd2-6dc6-48e3-8ed5-16a733f90c11",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Sovattha Sok <github@soks.fr>"
+    }
+  }
+}

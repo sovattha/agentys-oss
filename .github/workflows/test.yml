@@ -153,7 +153,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Setup Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: '3.11'
           cache: 'pip'
@@ -217,7 +217,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Setup Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: '3.11'
           cache: 'pip'
@@ -398,7 +398,7 @@ jobs:
       # `python run_api.py` en dev. Sans Python, le proxy Vite `/api/*`
       # et `/socket.io/*` part en ECONNREFUSED → tests bloquent >>6h.
       - name: Setup Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: '3.11'
           cache: 'pip'

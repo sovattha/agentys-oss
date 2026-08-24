@@ -44,7 +44,7 @@
     "socket.io-client": "4.8.3"
   },
   "devDependencies": {
-    "@react-native/jest-preset": "^0.86.0",
+    "@react-native/jest-preset": "^0.87.0",
     "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react-native": "^13.3.3",
     "@types/jest": "^29.5.0",

@@ -184,6 +184,12 @@ and [SECURITY.md](SECURITY.md) for reporting vulnerabilities privately.
 
 ---
 
+## Contributors
+
+- Alexandre Sauvageau
+
+---
+
 ## License
 
 Agentys is released under the **GNU Affero General Public License v3.0 or later**.
